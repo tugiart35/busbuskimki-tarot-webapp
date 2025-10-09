@@ -1,0 +1,16 @@
+--- a/src/features/tarot-cards/components/CardStory.tsx
++++ b/src/features/tarot-cards/components/CardStory.tsx
+@@ -44,10 +44,10 @@
+                   <span className='text-white font-bold'>🏛️</span>
+                 </div>
+                 <h4 className='text-xl font-bold text-gray-900'>
+-                 ( {locale === 'tr'
++                  {locale === 'tr'
+                     ? 'Tarihsel Köken'
+                     : locale === 'en'
+                       ? 'Historical Origin'
+-                      : 'Istorijsko Poreklo'})
++                      : 'Istorijsko Poreklo'}
+                 </h4>
+               </div>
+

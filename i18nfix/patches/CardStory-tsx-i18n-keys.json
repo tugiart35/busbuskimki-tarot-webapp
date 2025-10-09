@@ -1,0 +1,50 @@
+{
+  "description": "CardStory.tsx için gerekli i18n key'leri - messages/tr.json, messages/en.json ve messages/sr.json dosyalarına eklenmelidir",
+  "keys": {
+    "cards.story.sectionSubtitle": {
+      "tr": "Bu kartın kökeni, mitolojisi ve tarihsel anlamı",
+      "en": "The origin, mythology and historical meaning of this card",
+      "sr": "Poreklo, mitologija i istorijsko značenje ove karte"
+    },
+    "cards.story.historicalOriginTitle": {
+      "tr": "Tarihsel Köken",
+      "en": "Historical Origin",
+      "sr": "Istorijsko Poreklo"
+    },
+    "cards.story.historicalOriginDesc": {
+      "tr": "Bu kartın tarihsel gelişimi ve kökeni hakkında bilgiler",
+      "en": "Information about the historical development and origin of this card",
+      "sr": "Informacije o istorijskom razvoju i poreklu ove karte"
+    },
+    "cards.story.mysticalMeaningTitle": {
+      "tr": "Mistik Anlam",
+      "en": "Mystical Meaning",
+      "sr": "Mističko Značenje"
+    },
+    "cards.story.mysticalMeaningDesc": {
+      "tr": "Kartın mistik ve ruhsal boyutları",
+      "en": "The mystical and spiritual dimensions of the card",
+      "sr": "Mističke i duhovne dimenzije karte"
+    },
+    "cards.story.culturalSignificanceTitle": {
+      "tr": "Kültürel Önem",
+      "en": "Cultural Significance",
+      "sr": "Kulturni Značaj"
+    },
+    "cards.story.culturalSignificanceDesc": {
+      "tr": "Bu kartın farklı kültürlerdeki yeri ve önemi",
+      "en": "The place and importance of this card in different cultures",
+      "sr": "Mesto i važnost ove karte u različitim kulturama"
+    }
+  },
+  "manual_steps": [
+    "1. messages/tr.json dosyasını aç",
+    "2. 'cards' objesi yoksa oluştur",
+    "3. 'cards.story' objesi altına yukarıdaki TR key'leri ekle",
+    "4. Aynı işlemi messages/en.json için EN değerleri ile yap",
+    "5. Aynı işlemi messages/sr.json için SR değerleri ile yap",
+    "6. JSON syntax'ını doğrula (virgüller vs.)",
+    "7. npm run build ile kontrol et"
+  ]
+}
+

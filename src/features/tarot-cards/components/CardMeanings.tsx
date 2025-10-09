@@ -9,24 +9,24 @@ export function CardMeanings({ content, locale }: CardMeaningsProps) {
   const interpretations = [
     {
       title: locale === 'tr' ? 'Aşk' : locale === 'en' ? 'Love' : 'Ljubav',
-      content: content.loveInterpretation,
+      content: content.meanings.upright.love,
       icon: '💕',
     },
     {
       title:
         locale === 'tr' ? 'Kariyer' : locale === 'en' ? 'Career' : 'Karijera',
-      content: content.careerInterpretation,
+      content: content.meanings.upright.career,
       icon: '💼',
     },
     {
       title: locale === 'tr' ? 'Para' : locale === 'en' ? 'Money' : 'Novac',
-      content: content.moneyInterpretation,
+      content: content.meanings.upright.money,
       icon: '💰',
     },
     {
       title:
         locale === 'tr' ? 'Ruhsal' : locale === 'en' ? 'Spiritual' : 'Duhovno',
-      content: content.spiritualInterpretation,
+      content: content.meanings.upright.spiritual,
       icon: '🕊️',
     },
   ];
@@ -69,7 +69,7 @@ export function CardMeanings({ content, locale }: CardMeaningsProps) {
               </h3>
             </div>
             <p className='text-gray-700 leading-relaxed'>
-              {content.uprightMeaning}
+              {content.meanings.upright.general}
             </p>
           </div>
 
@@ -88,7 +88,7 @@ export function CardMeanings({ content, locale }: CardMeaningsProps) {
               </h3>
             </div>
             <p className='text-gray-700 leading-relaxed'>
-              {content.reversedMeaning}
+              {content.meanings.reversed.general}
             </p>
           </div>
         </div>
@@ -126,7 +126,7 @@ export function CardMeanings({ content, locale }: CardMeaningsProps) {
                   : 'O Ovoj Karti'}
             </h3>
             <p className='text-gray-700 leading-relaxed text-lg'>
-              {content.story}
+              {content.context.mythology}
             </p>
           </div>
         </div>

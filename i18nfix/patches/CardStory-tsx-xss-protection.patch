@@ -1,0 +1,27 @@
+--- a/src/features/tarot-cards/components/CardStory.tsx
++++ b/src/features/tarot-cards/components/CardStory.tsx
+@@ -1,4 +1,5 @@
+ import { CardContent } from '@/types/tarot-cards';
+ import { useTranslations } from 'next-intl';
++import DOMPurify from 'isomorphic-dompurify';
+ 
+ interface CardStoryProps {
+@@ -30,7 +31,12 @@
+           {/* Story Content */}
+           <div className='prose prose-lg prose-gray max-w-none'>
+             <div className='bg-gradient-to-r from-purple-100 to-indigo-100 rounded-lg p-6 mb-6'>
+-              <p className='text-gray-800 leading-relaxed text-lg'>
+-                {content.story}
+-              </p>
++              {typeof content.story === 'string' ? (
++                <div 
++                  className='text-gray-800 leading-relaxed text-lg'
++                  dangerouslySetInnerHTML={{ 
++                    __html: DOMPurify.sanitize(content.story, { ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'u'] }) 
++                  }}
++                />
++              ) : (
++                <p className='text-gray-800 leading-relaxed text-lg'>{String(content.story)}</p>
++              )}
+             </div>
+

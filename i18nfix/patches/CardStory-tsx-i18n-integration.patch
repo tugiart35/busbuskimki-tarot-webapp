@@ -1,0 +1,88 @@
+--- a/src/features/tarot-cards/components/CardStory.tsx
++++ b/src/features/tarot-cards/components/CardStory.tsx
+@@ -1,9 +1,12 @@
+ import { CardContent } from '@/types/tarot-cards';
++import { useTranslations } from 'next-intl';
+ 
+ interface CardStoryProps {
+   content: CardContent;
+   locale: 'tr' | 'en' | 'sr';
+ }
+ 
+ export function CardStory({ content, locale }: CardStoryProps) {
++  const t = useTranslations('cards.story');
++
+   return (
+     <section className='py-16 px-4 bg-gradient-to-br from-indigo-50 to-purple-50'>
+@@ -19,11 +22,7 @@
+               {content.story.title}
+             </h3>
+             <p className='text-lg text-gray-600'>
+-              {locale === 'tr'
+-                ? 'Bu kartın kökeni, mitolojisi ve tarihsel anlamı'
+-                : locale === 'en'
+-                  ? 'The origin, mythology and historical meaning of this card'
+-                  : 'Poreklo, mitologija i istorijsko značenje ove karte'}
++              {t('sectionSubtitle')}
+             </p>
+           </div>
+ 
+@@ -45,10 +44,7 @@
+                 </div>
+                 <h4 className='text-xl font-bold text-gray-900'>
+                   {locale === 'tr'
+-                    ? 'Tarihsel Köken'
+-                    : locale === 'en'
+-                      ? 'Historical Origin'
+-                      : 'Istorijsko Poreklo'}
++                  {t('historicalOriginTitle')}
+                 </h4>
+               </div>
+               <p className='text-gray-700'>
+-                {locale === 'tr'
+-                  ? 'Bu kartın tarihsel gelişimi ve kökeni hakkında bilgiler'
+-                  : locale === 'en'
+-                    ? 'Information about the historical development and origin of this card'
+-                    : 'Informacije o istorijskom razvoju i poreklu ove karte'}
++                {t('historicalOriginDesc')}
+               </p>
+@@ -67,10 +59,7 @@
+                 </div>
+                 <h4 className='text-xl font-bold text-gray-900'>
+-                  {locale === 'tr'
+-                    ? 'Mistik Anlam'
+-                    : locale === 'en'
+-                      ? 'Mystical Meaning'
+-                      : 'Mističko Značenje'}
++                  {t('mysticalMeaningTitle')}
+                 </h4>
+               </div>
+               <p className='text-gray-700'>
+-                {locale === 'tr'
+-                  ? 'Kartın mistik ve ruhsal boyutları'
+-                  : locale === 'en'
+-                    ? 'The mystical and spiritual dimensions of the card'
+-                    : 'Mističke i duhovne dimenzije karte'}
++                {t('mysticalMeaningDesc')}
+               </p>
+@@ -90,10 +75,7 @@
+               </div>
+               <h4 className='text-xl font-bold text-gray-900'>
+-                {locale === 'tr'
+-                  ? 'Kültürel Önem'
+-                  : locale === 'en'
+-                    ? 'Cultural Significance'
+-                    : 'Kulturni Značaj'}
++                {t('culturalSignificanceTitle')}
+               </h4>
+             </div>
+             <p className='text-gray-700'>
+-              {locale === 'tr'
+-                ? 'Bu kartın farklı kültürlerdeki yeri ve önemi'
+-                : locale === 'en'
+-                  ? 'The place and importance of this card in different cultures'
+-                  : 'Mesto i važnost ove karte u različitim kulturama'}
++              {t('culturalSignificanceDesc')}
+             </p>
+           </div>
+

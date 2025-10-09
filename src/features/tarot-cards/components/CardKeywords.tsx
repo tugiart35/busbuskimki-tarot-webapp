@@ -11,11 +11,7 @@ export function CardKeywords({ content, locale }: CardKeywordsProps) {
       <div className='max-w-4xl mx-auto'>
         <div className='text-center mb-8'>
           <h3 className='text-2xl font-bold text-gray-900 mb-4'>
-            {locale === 'tr'
-              ? 'Anahtar Kelimeler'
-              : locale === 'en'
-                ? 'Keywords'
-                : 'Ključne Reči'}
+            {content.keywords.keywords_title}
           </h3>
           <p className='text-gray-600'>
             {locale === 'tr'
@@ -26,13 +22,13 @@ export function CardKeywords({ content, locale }: CardKeywordsProps) {
           </p>
         </div>
 
-        <div className='flex flex-wrap justify-center gap-3'>
-          {content.keywords.map((keyword, index) => (
+        <div className='flex flex-wrap justify-center gap-3 mb-8'>
+          {content.keywords.keywords_message.split(',').map((keyword, index) => (
             <span
               key={index}
               className='bg-gradient-to-r from-purple-500 to-blue-500 text-white px-4 py-2 rounded-full text-sm font-medium shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105'
             >
-              {keyword}
+              {keyword.trim()}
             </span>
           ))}
         </div>
@@ -44,18 +40,10 @@ export function CardKeywords({ content, locale }: CardKeywordsProps) {
               <span className='text-white font-bold'>+</span>
             </div>
             <h4 className='font-semibold text-gray-900 mb-2'>
-              {locale === 'tr'
-                ? 'Pozitif Enerjiler'
-                : locale === 'en'
-                  ? 'Positive Energies'
-                  : 'Pozitivne Energije'}
+              {content.keywords.positive_title}
             </h4>
             <p className='text-sm text-gray-600'>
-              {locale === 'tr'
-                ? 'Kartın olumlu yönlerini temsil eden kelimeler'
-                : locale === 'en'
-                  ? 'Words representing the positive aspects of the card'
-                  : 'Reči koje predstavljaju pozitivne aspekte karte'}
+              {content.keywords.positive_message}
             </p>
           </div>
 
@@ -64,18 +52,10 @@ export function CardKeywords({ content, locale }: CardKeywordsProps) {
               <span className='text-white font-bold'>⚖️</span>
             </div>
             <h4 className='font-semibold text-gray-900 mb-2'>
-              {locale === 'tr'
-                ? 'Denge'
-                : locale === 'en'
-                  ? 'Balance'
-                  : 'Ravnoteža'}
+              {content.keywords.balance_title}
             </h4>
             <p className='text-sm text-gray-600'>
-              {locale === 'tr'
-                ? 'Kartın denge ve uyum yönlerini gösteren kelimeler'
-                : locale === 'en'
-                  ? 'Words showing the balance and harmony aspects of the card'
-                  : 'Reči koje pokazuju aspekte ravnoteže i harmonije karte'}
+              {content.keywords.balance_message}
             </p>
           </div>
 
@@ -84,18 +64,10 @@ export function CardKeywords({ content, locale }: CardKeywordsProps) {
               <span className='text-white font-bold'>🔮</span>
             </div>
             <h4 className='font-semibold text-gray-900 mb-2'>
-              {locale === 'tr'
-                ? 'Ruhsal Yön'
-                : locale === 'en'
-                  ? 'Spiritual Aspect'
-                  : 'Duhovni Aspekt'}
+              {content.keywords.soul_title}
             </h4>
             <p className='text-sm text-gray-600'>
-              {locale === 'tr'
-                ? 'Kartın ruhsal ve mistik yönlerini ifade eden kelimeler'
-                : locale === 'en'
-                  ? 'Words expressing the spiritual and mystical aspects of the card'
-                  : 'Reči koje izražavaju duhovne i mistične aspekte karte'}
+              {content.keywords.soul_message}
             </p>
           </div>
         </div>

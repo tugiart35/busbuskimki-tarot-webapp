@@ -16,11 +16,7 @@ export function CardStory({ content, locale }: CardStoryProps) {
               <span className='text-3xl'>📖</span>
             </div>
             <h3 className='text-3xl font-bold text-gray-900 mb-4'>
-              {locale === 'tr'
-                ? 'Kartın Hikayesi'
-                : locale === 'en'
-                  ? 'Card Story'
-                  : 'Priča Karte'}
+              {content.story.title}
             </h3>
             <p className='text-lg text-gray-600'>
               {locale === 'tr'
@@ -34,8 +30,11 @@ export function CardStory({ content, locale }: CardStoryProps) {
           {/* Story Content */}
           <div className='prose prose-lg prose-gray max-w-none'>
             <div className='bg-gradient-to-r from-purple-100 to-indigo-100 rounded-lg p-6 mb-6'>
-              <p className='text-gray-800 leading-relaxed text-lg'>
-                {content.story}
+              <p className='text-gray-800 leading-relaxed text-lg mb-4'>
+                {content.story.description}
+              </p>
+              <p className='text-gray-700 leading-relaxed'>
+                {content.story.history}
               </p>
             </div>
           </div>
@@ -48,19 +47,11 @@ export function CardStory({ content, locale }: CardStoryProps) {
                   <span className='text-white font-bold'>🏛️</span>
                 </div>
                 <h4 className='text-xl font-bold text-gray-900'>
-                  {locale === 'tr'
-                    ? 'Tarihsel Köken'
-                    : locale === 'en'
-                      ? 'Historical Origin'
-                      : 'Istorijsko Poreklo'}
+                  {content.story.historytitle}
                 </h4>
               </div>
               <p className='text-gray-700'>
-                {locale === 'tr'
-                  ? 'Bu kartın tarihsel gelişimi ve kökeni hakkında bilgiler'
-                  : locale === 'en'
-                    ? 'Information about the historical development and origin of this card'
-                    : 'Informacije o istorijskom razvoju i poreklu ove karte'}
+                {content.story.history_message}
               </p>
             </div>
 
@@ -70,19 +61,11 @@ export function CardStory({ content, locale }: CardStoryProps) {
                   <span className='text-white font-bold'>🔮</span>
                 </div>
                 <h4 className='text-xl font-bold text-gray-900'>
-                  {locale === 'tr'
-                    ? 'Mistik Anlam'
-                    : locale === 'en'
-                      ? 'Mystical Meaning'
-                      : 'Mističko Značenje'}
+                  {content.story.mystic_title}
                 </h4>
               </div>
               <p className='text-gray-700'>
-                {locale === 'tr'
-                  ? 'Kartın mistik ve ruhsal boyutları'
-                  : locale === 'en'
-                    ? 'The mystical and spiritual dimensions of the card'
-                    : 'Mističke i duhovne dimenzije karte'}
+                {content.story.mystic_message}
               </p>
             </div>
           </div>
@@ -94,19 +77,11 @@ export function CardStory({ content, locale }: CardStoryProps) {
                 <span className='text-white font-bold'>🌍</span>
               </div>
               <h4 className='text-xl font-bold text-gray-900'>
-                {locale === 'tr'
-                  ? 'Kültürel Önem'
-                  : locale === 'en'
-                    ? 'Cultural Significance'
-                    : 'Kulturni Značaj'}
+                {content.story.cultural_title}
               </h4>
             </div>
             <p className='text-gray-700'>
-              {locale === 'tr'
-                ? 'Bu kartın farklı kültürlerdeki yeri ve önemi'
-                : locale === 'en'
-                  ? 'The place and importance of this card in different cultures'
-                  : 'Mesto i važnost ove karte u različitim kulturama'}
+              {content.story.cultural_message}
             </p>
           </div>
         </div>

@@ -60,18 +60,18 @@ export function CardHero({ card, content, locale }: CardHeroProps) {
             {/* Card Description */}
             <div className='prose prose-lg prose-invert max-w-none'>
               <p className='text-lg leading-relaxed'>
-                {content.uprightMeaning.substring(0, 200)}...
+                {content.short_description}
               </p>
             </div>
 
             {/* Card Keywords */}
             <div className='flex flex-wrap gap-2'>
-              {content.keywords.slice(0, 6).map((keyword, index) => (
+              {content.keywords.keywords_message.split(',').slice(0, 6).map((keyword, index) => (
                 <span
                   key={index}
                   className='bg-white/20 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium'
                 >
-                  {keyword}
+                  {keyword.trim()}
                 </span>
               ))}
             </div>
