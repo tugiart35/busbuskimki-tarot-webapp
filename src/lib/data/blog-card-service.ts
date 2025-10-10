@@ -48,6 +48,24 @@ interface BlogCardData {
     soul_title: string;
     soul_message: string;
   };
+  associations?: {
+    title: string;
+    astrology: string;
+    numerology: string;
+    element: string;
+    chakra: string;
+  };
+  card_combinations?: {
+    title: string;
+    combinations: Array<{
+      card: string;
+      meaning: string;
+    }>;
+  };
+  affirmations?: {
+    title: string;
+    affirmation_list: string[];
+  };
   cta: {
     main: string;
     micro: string;

@@ -45,52 +45,33 @@ export const languages = [
   { code: 'sr', name: 'Srpski', flag: '🇷🇸' },
 ];
 
-// SEO-friendly URL mapping'leri
-const getSeoFriendlyPath = (locale: string, path: string): string => {
-  const mappings = {
-    tr: {
-      '/': '/anasayfa',
-      '/tarotokumasi': '/tarot-okuma',
-      '/tarot-okuma': '/tarot-okuma',
-      '/tarot-reading': '/tarot-okuma', // İngilizce'den geçiş için
-      '/tarot-citanje': '/tarot-okuma', // Sırpça'dan geçiş için
-      '/numeroloji': '/numeroloji',
-      '/kartlar': '/kartlar',
-      '/dashboard': '/panel',
-      '/auth': '/giris',
-    },
-    en: {
-      '/': '/home',
-      '/tarotokumasi': '/tarot-reading',
-      '/tarot-reading': '/tarot-reading',
-      '/tarot-okuma': '/tarot-reading', // Türkçe'den geçiş için
-      '/tarot-citanje': '/tarot-reading', // Sırpça'dan geçiş için
-      '/numeroloji': '/numerology',
-      '/numerology': '/numerology',
-      '/cards': '/cards',
-      '/dashboard': '/dashboard',
-      '/auth': '/login',
-    },
-    sr: {
-      '/': '/pocetna',
-      '/tarotokumasi': '/tarot-citanje',
-      '/tarot-citanje': '/tarot-citanje',
-      '/tarot-okuma': '/tarot-citanje', // Türkçe'den geçiş için
-      '/tarot-reading': '/tarot-citanje', // İngilizce'den geçiş için
-      '/numeroloji': '/numerologija',
-      '/numerologija': '/numerologija',
-      '/numerology': '/numerologija',
-      '/kartice': '/kartice',
-      '/dashboard': '/panel',
-      '/auth': '/prijava',
-    },
+// Path normalization - tüm diller için aynı path kullan
+const normalizePathForLocale = (path: string): string => {
+  const pathMappings: Record<string, string> = {
+    // Tarot okuma sayfaları
+    '/tarot-okuma': '/tarotokumasi',
+    '/tarot-reading': '/tarotokumasi',
+    '/tarot-citanje': '/tarotokumasi',
+    
+    // Numeroloji sayfaları
+    '/numerology': '/numeroloji',
+    '/numerologija': '/numeroloji',
+    
+    // Dashboard sayfaları
+    '/panel': '/dashboard',
+    
+    // Auth sayfaları
+    '/giris': '/auth',
+    '/login': '/auth',
+    '/prijava': '/auth',
+    
+    // Ana sayfa
+    '/anasayfa': '/',
+    '/home': '/',
+    '/pocetna': '/',
   };
 
-  const mapping = mappings[locale as keyof typeof mappings];
-  if (mapping && path in mapping) {
-    return mapping[path as keyof typeof mapping];
-  }
-  return path;
+  return pathMappings[path] || path;
 };
 
 // Navigasyon öğelerini oluştur - auth durumuna göre dinamik
@@ -177,7 +158,7 @@ export function useNavigation() {
     [currentLocale]
   );
 
-  // Dil değiştirme fonksiyonu - SEO-friendly URL mapping ile
+  // Dil değiştirme fonksiyonu
   const handleLanguageChange = (locale: string) => {
     try {
       // Mevcut path'i locale olmadan al
@@ -190,14 +171,11 @@ export function useNavigation() {
         pathWithoutLocale = '/';
       }
 
-      // SEO-friendly path mapping uygula
-      const seoFriendlyPath = getSeoFriendlyPath(locale, pathWithoutLocale);
+      // Path'i normalize et - tüm diller için aynı path kullan
+      const normalizedPath = normalizePathForLocale(pathWithoutLocale);
 
-      // Yeni path oluştur - SEO-friendly URL kullan
-      const newPath =
-        seoFriendlyPath === '/'
-          ? `/${locale}${getSeoFriendlyPath(locale, '/')}`
-          : `/${locale}${seoFriendlyPath}`;
+      // Yeni path oluştur
+      const newPath = `/${locale}${normalizedPath}`;
 
       // Cookie'yi güncelle
       document.cookie = `NEXT_LOCALE=${locale}; path=/; max-age=31536000; SameSite=Lax`;
@@ -206,7 +184,7 @@ export function useNavigation() {
       router.push(newPath);
     } catch (error) {
       // Fallback - ana sayfaya yönlendir
-      const fallbackPath = `/${locale}${getSeoFriendlyPath(locale, '/')}`;
+      const fallbackPath = `/${locale}`;
       router.push(fallbackPath);
     }
   };

@@ -16,6 +16,8 @@ Bağlı Dosyalar:
 
 */
 
+'use client';
+
 import { TarotCard } from '@/types/tarot';
 
 export interface MoneyPosition1Meaning {
@@ -1173,9 +1175,21 @@ export const getI18nPosition1Meaning = (
     position: originalMeaning.position,
     upright: i18nUpright || originalMeaning.upright,
     reversed: i18nReversed || originalMeaning.reversed,
-    keywords: i18nKeywords
-      ? JSON.parse(i18nKeywords)
-      : originalMeaning.keywords,
+    keywords: (() => {
+      if (!i18nKeywords) {
+        return originalMeaning.keywords;
+      }
+      try {
+        const parsed = JSON.parse(i18nKeywords);
+        if (Array.isArray(parsed)) {
+          return parsed;
+        }
+        return originalMeaning.keywords;
+      } catch (error) {
+        console.error(`[Money Position 1] Failed to parse keywords for ${cardName}:`, error);
+        return originalMeaning.keywords;
+      }
+    })(),
     context: i18nContext || originalMeaning.context,
     group: i18nGroup || originalMeaning.group,
   };

@@ -1,3 +1,5 @@
+'use client';
+
 /*
 info:
 ---
@@ -120,6 +122,94 @@ export const marriagePositions = {
     question: 'Evlilik potansiyelinizi ve evlenme şansınızı gösterir.',
   },
 };
+
+/**
+ * Evlilik açılımında belirli bir kartın belirli pozisyondaki anlamını döndürür (i18n destekli)
+ * @param cardName - Kart ismi (İngilizce)
+ * @param position - Pozisyon numarası (1-10)
+ * @param t - Translation fonksiyonu
+ * @returns Pozisyon özel anlam veya null
+ */
+export function getI18nMarriageMeaningByCardAndPosition(
+  cardName: string,
+  position: number,
+  t: (_key: string) => string
+): MarriagePositionMeaning | null {
+  // Pozisyon anlamları array'ini al
+  let positionMeanings: MarriagePositionMeaning[] = [];
+  switch (position) {
+    case 1:
+      positionMeanings = position1Meanings;
+      break;
+    case 2:
+      positionMeanings = position2Meanings;
+      break;
+    case 3:
+      positionMeanings = position3Meanings;
+      break;
+    case 4:
+      positionMeanings = position4Meanings;
+      break;
+    case 5:
+      positionMeanings = position5Meanings;
+      break;
+    case 6:
+      positionMeanings = position6Meanings;
+      break;
+    case 7:
+      positionMeanings = position7Meanings;
+      break;
+    case 8:
+      positionMeanings = position8Meanings;
+      break;
+    case 9:
+      positionMeanings = position9Meanings;
+      break;
+    case 10:
+      positionMeanings = position10Meanings;
+      break;
+    default:
+      return null;
+  }
+
+  const originalMeaning = positionMeanings.find(m => m.card === cardName);
+  if (!originalMeaning) {
+    return null;
+  }
+
+  const cardKey = cardName
+    .toLowerCase()
+    .replace(/\s+/g, '')
+    .replace(/[^a-z0-9]/g, '');
+
+  const i18nUpright = t(`marriage.meanings.${cardKey}.position${position}.upright`);
+  const i18nReversed = t(`marriage.meanings.${cardKey}.position${position}.reversed`);
+  const i18nKeywords = t(`marriage.meanings.${cardKey}.position${position}.keywords`);
+  const i18nContext = t(`marriage.meanings.${cardKey}.position${position}.context`);
+
+  return {
+    ...originalMeaning,
+    upright: i18nUpright || originalMeaning.upright,
+    reversed: i18nReversed || originalMeaning.reversed,
+    keywords: (() => {
+      if (!i18nKeywords) {
+        return originalMeaning.keywords;
+      }
+      try {
+        const parsed = JSON.parse(i18nKeywords);
+        if (Array.isArray(parsed)) {
+          return parsed;
+        }
+        return originalMeaning.keywords;
+      } catch (error) {
+        console.error(`[Marriage Position ${position}] Failed to parse keywords for ${cardName}:`, error);
+        return originalMeaning.keywords;
+      }
+    })(),
+    context: i18nContext || originalMeaning.context,
+  };
+}
+
 /**
  * Evlilik açılımında belirli bir kartın belirli pozisyondaki anlamını döndürür
  * @param card - Tarot kartı

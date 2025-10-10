@@ -20,7 +20,7 @@ const path = require('path');
 // BURASI ÖZELLEŞTİRİLECEK
 // ═══════════════════════════════════════════════════════════
 
-const SPREAD_NAME = 'money';           // 'love', 'career', 'money', vb.
+const SPREAD_NAME = 'money';           // 'money', 'career', 'money', vb.
 const POSITION_NUMBER = 1;            // 1, 2, 3, 4, vb.
 const FILE_NAME = 'position-1-mevcut-finansal-durum.ts';  // position dosyasının adı
 const ARRAY_NAME = `position${POSITION_NUMBER}Meanings`;  // position2Meanings, vb.
@@ -28,7 +28,7 @@ const TYPE_NAME = `MoneyPosition1Meaning`;  // LovePosition1Meaning, vb.
 
 // ═══════════════════════════════════════════════════════════
 
-console.log('=' . repeat(70));
+console.log('='.repeat(70));
 console.log(`🔮 ${SPREAD_NAME.toUpperCase()} POSITION-${POSITION_NUMBER} TÜRKÇE EXTRACTION`);
 console.log('='.repeat(70));
 

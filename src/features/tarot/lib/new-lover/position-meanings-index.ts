@@ -1,3 +1,5 @@
+'use client';
+
 /*
 info:
 ---
@@ -97,6 +99,61 @@ export const NEW_LOVER_POSITION_MEANINGS: Record<
   '5': position5Meanings,
   '6': position6Meanings,
 };
+
+/**
+ * Yeni Bir Sevgili açılımında belirli bir kartın belirli pozisyondaki anlamını döndürür (i18n destekli)
+ * @param cardName - Kart ismi (İngilizce)
+ * @param position - Pozisyon numarası (1-6)
+ * @param t - Translation fonksiyonu
+ * @returns Pozisyon özel anlam veya null
+ */
+export function getI18nNewLoverMeaningByCardAndPosition(
+  cardName: string,
+  position: number,
+  t: (_key: string) => string
+): NewLoverPositionMeaning | null {
+  const positionMeanings = NEW_LOVER_POSITION_MEANINGS[position];
+  if (!positionMeanings) {
+    return null;
+  }
+
+  const originalMeaning = positionMeanings.find(m => m.card === cardName);
+  if (!originalMeaning) {
+    return null;
+  }
+
+  const cardKey = cardName
+    .toLowerCase()
+    .replace(/\s+/g, '')
+    .replace(/[^a-z0-9]/g, '');
+
+  const i18nUpright = t(`new-lover.meanings.${cardKey}.position${position}.upright`);
+  const i18nReversed = t(`new-lover.meanings.${cardKey}.position${position}.reversed`);
+  const i18nKeywords = t(`new-lover.meanings.${cardKey}.position${position}.keywords`);
+  const i18nContext = t(`new-lover.meanings.${cardKey}.position${position}.context`);
+
+  return {
+    ...originalMeaning,
+    upright: i18nUpright || originalMeaning.upright,
+    reversed: i18nReversed || originalMeaning.reversed,
+    keywords: (() => {
+      if (!i18nKeywords) {
+        return originalMeaning.keywords;
+      }
+      try {
+        const parsed = JSON.parse(i18nKeywords);
+        if (Array.isArray(parsed)) {
+          return parsed;
+        }
+        return originalMeaning.keywords;
+      } catch (error) {
+        console.error(`[New-Lover Position ${position}] Failed to parse keywords for ${cardName}:`, error);
+        return originalMeaning.keywords;
+      }
+    })(),
+    context: i18nContext || originalMeaning.context,
+  };
+}
 
 /**
  * Yeni Bir Sevgili açılımında belirli bir kartın belirli pozisyondaki anlamını döndürür
@@ -360,6 +417,65 @@ export const getNewLoverStatistics = () => {
 
 // Varsayılan export
 const newLoverExports = {
+  getI18nNewLoverMeaningByCardAndPosition,
+  getNewLoverMeaningByCardAndPosition,
+  getNewLoverMeaningByCardNameAndPosition,
+  getNewLoverPositionMeanings,
+  getNewLoverMeaningsByCard,
+  getAllNewLoverMeanings,
+  allNewLoverPositionMeanings,
+  newLoverPositions,
+  getPositionInfo,
+  getAllPositions,
+  getNewLoverMeaningsByGroup,
+  getNewLoverMeaningsByPositionAndGroup,
+  searchNewLoverMeaningsByCardName,
+  searchNewLoverMeaningsByKeyword,
+  getNewLoverStatistics,
+  // Eski fonksiyonlar (geriye uyumluluk için)
+  getNewLoverCardMeaning: (
+    card: TarotCard | null,
+    position: number,
+    isReversed: boolean
+  ) => {
+    if (!card) {
+      return '';
+    }
+
+    const meaning = getNewLoverMeaningByCardAndPosition(
+      card,
+      position,
+      isReversed
+    );
+    return meaning ? (isReversed ? meaning.reversed : meaning.upright) : '';
+  },
+};
+
+export default newLoverExports;
+
+    Kupalar: allNewLoverPositionMeanings.filter(m => m.group === 'Kupalar')
+      .length,
+    Kılıçlar: allNewLoverPositionMeanings.filter(m => m.group === 'Kılıçlar')
+      .length,
+    Asalar: allNewLoverPositionMeanings.filter(m => m.group === 'Asalar')
+      .length,
+    Tılsımlar: allNewLoverPositionMeanings.filter(m => m.group === 'Tılsımlar')
+      .length,
+  };
+
+  return {
+    totalCards,
+    totalPositions,
+    cardsPerPosition,
+    groupStats,
+    positions: Object.keys(newLoverPositions).length,
+    groups: ['Majör Arkana', 'Kupalar', 'Kılıçlar', 'Asalar', 'Tılsımlar'],
+  };
+};
+
+// Varsayılan export
+const newLoverExports = {
+  getI18nNewLoverMeaningByCardAndPosition,
   getNewLoverMeaningByCardAndPosition,
   getNewLoverMeaningByCardNameAndPosition,
   getNewLoverPositionMeanings,

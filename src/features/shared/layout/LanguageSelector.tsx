@@ -33,92 +33,110 @@ export function LanguageSelector({
 
   // Dil değiştirme fonksiyonu
   const handleLanguageChange = (newLocale: string) => {
-    let pathWithoutLocale = pathname;
+    try {
+      let pathWithoutLocale = pathname;
 
-    if (pathname.startsWith(`/${locale}/`)) {
-      pathWithoutLocale = pathname.substring(`/${locale}`.length);
-    } else if (pathname === `/${locale}`) {
-      pathWithoutLocale = '/';
-    }
-
-    const seoFriendlyMappings = {
-      tr: {
-        '/': '/anasayfa',
-        '/anasayfa': '/anasayfa',
-        '/home': '/anasayfa',
-        '/pocetna': '/anasayfa',
-        '/tarotokumasi': '/tarot-okuma',
-        '/tarot-okuma': '/tarot-okuma',
-        '/tarot-reading': '/tarot-okuma', // İngilizce'den geçiş için
-        '/tarot-citanje': '/tarot-okuma', // Sırpça'dan geçiş için
-        '/numeroloji': '/numeroloji',
-        '/numerology': '/numeroloji',
-        '/numerologija': '/numeroloji',
-        '/dashboard': '/panel',
-        '/panel': '/panel',
-        '/auth': '/giris',
-        '/giris': '/giris',
-        '/login': '/giris',
-        '/prijava': '/giris',
-      },
-      en: {
-        '/': '/home',
-        '/home': '/home',
-        '/anasayfa': '/home',
-        '/pocetna': '/home',
-        '/tarotokumasi': '/tarot-reading',
-        '/tarot-reading': '/tarot-reading',
-        '/tarot-okuma': '/tarot-reading', // Türkçe'den geçiş için
-        '/tarot-citanje': '/tarot-reading', // Sırpça'dan geçiş için
-        '/numeroloji': '/numerology',
-        '/numerology': '/numerology',
-        '/numerologija': '/numerology',
-        '/dashboard': '/dashboard',
-        '/panel': '/dashboard',
-        '/auth': '/login',
-        '/login': '/login',
-        '/giris': '/login',
-        '/prijava': '/login',
-      },
-      sr: {
-        '/': '/pocetna',
-        '/pocetna': '/pocetna',
-        '/anasayfa': '/pocetna',
-        '/home': '/pocetna',
-        '/tarotokumasi': '/tarot-citanje',
-        '/tarot-citanje': '/tarot-citanje',
-        '/tarot-okuma': '/tarot-citanje', // Türkçe'den geçiş için
-        '/tarot-reading': '/tarot-citanje', // İngilizce'den geçiş için
-        '/numeroloji': '/numerologija',
-        '/numerologija': '/numerologija',
-        '/numerology': '/numerologija',
-        '/dashboard': '/panel',
-        '/panel': '/panel',
-        '/auth': '/prijava',
-        '/prijava': '/prijava',
-        '/giris': '/prijava',
-        '/login': '/prijava',
-      },
-    };
-
-    const getSeoFriendlyPath = (locale: string, path: string): string => {
-      const mapping =
-        seoFriendlyMappings[locale as keyof typeof seoFriendlyMappings];
-      if (mapping && path in mapping) {
-        return mapping[path as keyof typeof mapping];
+      // Mevcut locale'i path'ten temizle
+      if (pathname.startsWith(`/${locale}/`)) {
+        pathWithoutLocale = pathname.substring(`/${locale}`.length);
+      } else if (pathname === `/${locale}`) {
+        pathWithoutLocale = '/';
       }
-      return path;
-    };
 
-    const seoFriendlyPath = getSeoFriendlyPath(newLocale, pathWithoutLocale);
-    const newPath =
-      seoFriendlyPath === '/'
-        ? `/${newLocale}${getSeoFriendlyPath(newLocale, '/')}`
-        : `/${newLocale}${seoFriendlyPath}`;
+      // Middleware ile uyumlu basit path mapping
+      // Ana sayfa için özel path kullanmıyoruz
+      let targetPath = pathWithoutLocale;
 
-    document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000; SameSite=Lax`;
-    router.push(newPath);
-    setIsOpen(false);
+      // Özel sayfalar için mapping
+      const pathMappings: Record<string, Record<string, string>> = {
+        '/tarotokumasi': {
+          tr: '/tarotokumasi',
+          en: '/tarotokumasi',
+          sr: '/tarotokumasi',
+        },
+        '/tarot-okuma': {
+          tr: '/tarotokumasi',
+          en: '/tarotokumasi',
+          sr: '/tarotokumasi',
+        },
+        '/tarot-reading': {
+          tr: '/tarotokumasi',
+          en: '/tarotokumasi',
+          sr: '/tarotokumasi',
+        },
+        '/tarot-citanje': {
+          tr: '/tarotokumasi',
+          en: '/tarotokumasi',
+          sr: '/tarotokumasi',
+        },
+        '/numeroloji': {
+          tr: '/numeroloji',
+          en: '/numeroloji',
+          sr: '/numeroloji',
+        },
+        '/numerology': {
+          tr: '/numeroloji',
+          en: '/numeroloji',
+          sr: '/numeroloji',
+        },
+        '/numerologija': {
+          tr: '/numeroloji',
+          en: '/numeroloji',
+          sr: '/numeroloji',
+        },
+        '/dashboard': {
+          tr: '/dashboard',
+          en: '/dashboard',
+          sr: '/dashboard',
+        },
+        '/panel': {
+          tr: '/dashboard',
+          en: '/dashboard',
+          sr: '/dashboard',
+        },
+        '/auth': {
+          tr: '/auth',
+          en: '/auth',
+          sr: '/auth',
+        },
+        '/giris': {
+          tr: '/auth',
+          en: '/auth',
+          sr: '/auth',
+        },
+        '/login': {
+          tr: '/auth',
+          en: '/auth',
+          sr: '/auth',
+        },
+        '/prijava': {
+          tr: '/auth',
+          en: '/auth',
+          sr: '/auth',
+        },
+      };
+
+      // Path'i normalize et
+      const mapping = pathMappings[pathWithoutLocale];
+      if (mapping?.[newLocale]) {
+        targetPath = mapping[newLocale];
+      }
+
+      // Yeni path oluştur
+      const newPath = `/${newLocale}${targetPath}`;
+
+      // Cookie'yi güncelle
+      document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000; SameSite=Lax`;
+
+      // Router ile yönlendir
+      router.push(newPath);
+      setIsOpen(false);
+    } catch (error) {
+      // Hata durumunda ana sayfaya yönlendir
+      const fallbackPath = `/${newLocale}`;
+      router.push(fallbackPath);
+      setIsOpen(false);
+    }
   };
 
   if (!mounted) {

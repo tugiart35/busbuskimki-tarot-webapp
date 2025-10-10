@@ -6,6 +6,11 @@ interface CardStoryProps {
 }
 
 export function CardStory({ content, locale }: CardStoryProps) {
+  // Don't render if story data is missing
+  if (!content.story?.title) {
+    return null;
+  }
+
   return (
     <section className='py-16 px-4 bg-gradient-to-br from-indigo-50 to-purple-50'>
       <div className='max-w-4xl mx-auto'>

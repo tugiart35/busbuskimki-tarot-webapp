@@ -20,15 +20,15 @@ const path = require('path');
 // BURASI ÖZELLEŞTİRİLECEK
 // ═══════════════════════════════════════════════════════════
 
-const SPREAD_NAME = 'money';           // 'love', 'career', 'money', vb.
+const SPREAD_NAME = 'money';           // 'money', 'career', 'money', vb.
 const POSITION_NUMBER = 8;            // 1, 2, 3, 4, vb.
 const FILE_NAME = 'position-8-para-kazanma-yetenekleri.ts';  // position dosyasının adı
-const ARRAY_NAME = `position${POSITION_NUMBER}Meanings`;  // position2Meanings, vb.
-const TYPE_NAME = `MoneyPositionMeaning`;  // LovePosition1Meaning, vb.
+const ARRAY_NAME = `position${POSITION_NUMBER}meanings`;  // position8meanings (küçük), vb.
+const TYPE_NAME = `MoneyPosition8meaning`;  // moneyPosition1Meaning, vb.
 
 // ═══════════════════════════════════════════════════════════
 
-console.log('=' . repeat(70));
+console.log('='.repeat(70));
 console.log(`🔮 ${SPREAD_NAME.toUpperCase()} POSITION-${POSITION_NUMBER} TÜRKÇE EXTRACTION`);
 console.log('='.repeat(70));
 

@@ -3,38 +3,43 @@
 import type { TarotCard } from '@/types/tarot';
 import { createTarotReadingComponent } from '@/features/tarot/shared/components';
 import { createMarriageConfig } from '@/features/tarot/shared/config';
-import { getMarriageMeaningByCardAndPosition } from '@/features/tarot/lib/marriage/position-meanings-index';
+import { getI18nMarriageMeaningByCardAndPosition } from '@/features/tarot/lib/marriage/position-meanings-index';
+import { useTranslations } from '@/hooks/useTranslations';
 
-const MarriageReading = createTarotReadingComponent({
-  getConfig: () => createMarriageConfig(),
-  interpretationEmoji: '💍',
-  readingType: 'MARRIAGE_DETAILED', // Marriage için reading type belirt
-  getCardMeaning: (
-    card: TarotCard | null,
-    position: number,
-    isReversed: boolean
-  ) => {
-    if (!card) {
-      return '';
-    }
+export default function MarriageReading(props: any) {
+  const { t } = useTranslations(); // Hook component içinde
 
-    const meaning = getMarriageMeaningByCardAndPosition(
-      card,
-      position,
-      isReversed
-    );
+  const TarotComponent = createTarotReadingComponent({
+    getConfig: () => createMarriageConfig(),
+    interpretationEmoji: '💒',
+    readingType: 'MARRIAGE_SPREAD_DETAILED',
+    getCardMeaning: (
+      card: TarotCard | null,
+      position: number,
+      isReversed: boolean
+    ) => {
+      if (!card) {
+        return '';
+      }
 
-    if (!meaning) {
-      return isReversed ? card.meaningTr.reversed : card.meaningTr.upright;
-    }
+      const meaning = getI18nMarriageMeaningByCardAndPosition(
+        card.name,
+        position,
+        t
+      );
 
-    // Context bilgisini de içeren obje döndür
-    return {
-      interpretation: isReversed ? meaning.reversed : meaning.upright,
-      context: meaning.context,
-      keywords: meaning.keywords || [],
-    };
-  },
-});
+      if (!meaning) {
+        return isReversed ? card.meaningTr.reversed : card.meaningTr.upright;
+      }
 
-export default MarriageReading;
+      const interpretation = isReversed ? meaning.reversed : meaning.upright;
+      return {
+        interpretation,
+        context: meaning.context || '',
+        keywords: meaning.keywords || [],
+      };
+    },
+  });
+
+  return <TarotComponent {...props} />;
+}

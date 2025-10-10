@@ -22,7 +22,7 @@ const path = require('path');
 
 const SPREAD_NAME = 'marriage';           // 'love', 'career', 'money', vb.
 const POSITION_NUMBER = 9;            // 1, 2, 3, 4, vb.
-const FILE_NAME = 'position-8-anlasabilecek-miyim.ts';  // position dosyasının adı
+const FILE_NAME = 'position-9-benim-icin-nasil-bir-es-uygundur.ts';  // position dosyasının adı
 const ARRAY_NAME = `position${POSITION_NUMBER}Meanings`;  // position2Meanings, vb.
 const TYPE_NAME = `MarriagePositionMeaning`;  // LovePosition1Meaning, vb.
 

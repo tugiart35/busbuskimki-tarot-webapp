@@ -6,6 +6,11 @@ interface CardMeaningsProps {
 }
 
 export function CardMeanings({ content, locale }: CardMeaningsProps) {
+  // Don't render if meanings data is missing
+  if (!content.meanings?.upright?.general) {
+    return null;
+  }
+
   const interpretations = [
     {
       title: locale === 'tr' ? 'Aşk' : locale === 'en' ? 'Love' : 'Ljubav',

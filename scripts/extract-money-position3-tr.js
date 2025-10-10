@@ -28,7 +28,7 @@ const TYPE_NAME = `Moneyposition3Meaning`;  // LovePosition1Meaning, vb.
 
 // ═══════════════════════════════════════════════════════════
 
-console.log('=' . repeat(70));
+console.log('='.repeat(70));
 console.log(`🔮 ${SPREAD_NAME.toUpperCase()} POSITION-${POSITION_NUMBER} TÜRKÇE EXTRACTION`);
 console.log('='.repeat(70));
 

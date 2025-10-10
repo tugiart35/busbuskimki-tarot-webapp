@@ -52,7 +52,7 @@ def translate_keywords(keywords, target_lang):
 
 def main():
     print("=" * 70)
-    print(f"🔮 LOVE POSITION-2 GOOGLE TRANSLATE ÇEVİRİ ARACI")
+    print(f"🔮 MONEY POSITION-{POSITION_NUM} GOOGLE TRANSLATE ÇEVİRİ ARACI")
     print("=" * 70)
     
     # Türkçe dosyayı oku
@@ -71,7 +71,7 @@ def main():
     en_data = {SPREAD_KEY: {"meanings": {}}}
     sr_data = {SPREAD_KEY: {"meanings": {}}}
     
-    # Position-2 kartlarını çevir
+    # Position kartlarını çevir
     print(f"\n🃏 Position-{POSITION_NUM} kart anlamları çeviriliyor (78 kart)...")
     print("⏱️  Tahmini süre: 30-45 dakika")
     print("🔤 Sırpça: Latin alfabesi")
@@ -205,7 +205,7 @@ def main():
     print(f"\n📁 Dosyalar:")
     print(f"  - messages/en.json")
     print(f"  - messages/sr.json")
-    print("\n🎉 Position-2 çevirileri başarıyla tamamlandı!")
+    print(f"\n🎉 Position-{POSITION_NUM} çevirileri başarıyla tamamlandı!")
     print("=" * 70)
 
 if __name__ == '__main__':

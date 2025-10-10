@@ -25,9 +25,11 @@ Bağlı Dosyalar:
 
 */
 
+'use client';
+
 import { TarotCard } from '@/types/tarot';
 import { getCardNameMappingSync } from '@/features/tarot/lib/love/card-name-mapping';
-import { position1Meanings } from './position-1-mevcut-finansal-durum';
+import { position1Meanings, getI18nPosition1Meaning } from './position-1-mevcut-finansal-durum';
 import { position2Meanings } from './position-2-para-akisi';
 import { position3Meanings } from './position-3-finansal-engeller';
 import { position4Meanings } from './position-4-firsatlar';
@@ -376,6 +378,28 @@ export const getMoneyStatistics = () => {
   };
 };
 
+/**
+ * i18n destekli: Kart adına ve pozisyona göre anlam döndür
+ * @param cardName - Kart adı (İngilizce)
+ * @param position - Pozisyon numarası (1-8)
+ * @param t - next-intl translate fonksiyonu
+ * @returns i18n destekli anlam veya null
+ */
+export function getI18nMeaningByCardAndPosition(
+  cardName: string,
+  position: number,
+  t: (key: string) => string
+): any {
+  // Şu an sadece position 1 için i18n desteği var
+  if (position === 1) {
+    return getI18nPosition1Meaning(cardName, t);
+  }
+
+  // Diğer pozisyonlar için fallback
+  const positionMeanings = MONEY_POSITION_MEANINGS[position.toString()] || [];
+  return positionMeanings.find(m => m.card === cardName) || null;
+}
+
 // Varsayılan export
 const moneyExports = {
   getMoneyMeaningByCardAndPosition,
@@ -392,6 +416,7 @@ const moneyExports = {
   searchMoneyMeaningsByCardName,
   searchMoneyMeaningsByKeyword,
   getMoneyStatistics,
+  getI18nMeaningByCardAndPosition,
   // Eski fonksiyonlar (geriye uyumluluk için)
   getMoneyCardMeaning: (
     card: TarotCard,
