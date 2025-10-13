@@ -436,7 +436,7 @@ export default function BaseReadingTypeSelector({
             {detailedCredits.creditStatus.hasEnoughCredits &&
               writtenCredits.creditStatus.hasEnoughCredits && (
                 <span className='text-green-400'>
-                  ✅ Tüm okuma türleri için yeterli kredi mevcut
+                  ✅ {t('reading.messages.allCreditsEnough')}
                 </span>
               )}
           </div>

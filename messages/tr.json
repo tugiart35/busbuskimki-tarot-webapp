@@ -16195,6 +16195,7 @@
     },
     "messages": {
       "adminRequired": "Ses okuma için yetersiz kredi",
+      "allCreditsEnough": "Tüm kredileriniz yeterli",
       "buyCredits": "Kredi Satın Al",
       "cardsLocked": "Kartlar Kilitli",
       "creditsRequired": "kredi gerekli",

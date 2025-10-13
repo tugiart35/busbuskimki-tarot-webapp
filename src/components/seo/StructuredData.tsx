@@ -23,9 +23,8 @@ Geliştirme ve öneriler:
 - Rich snippets optimization
 - Search engine visibility enhancement
 - Performance optimization
+- Server-side rendering for SEO optimization
 */
-
-'use client';
 
 import { APP_INFO } from '@/lib/config/app-config';
 

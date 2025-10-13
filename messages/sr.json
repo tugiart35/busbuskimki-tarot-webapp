@@ -16403,6 +16403,7 @@
     },
     "messages": {
       "adminRequired": "Nedovoljan kredit za čitanje zvuka",
+      "allCreditsEnough": "Imate dovoljno kredita",
       "buyCredits": "Kupite kredite",
       "cardsLocked": "Kartice su zaključane",
       "creditsRequired": "potreban kredit",

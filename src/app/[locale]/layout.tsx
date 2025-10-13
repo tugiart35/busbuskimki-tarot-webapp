@@ -3,7 +3,16 @@ import {
   generateHomepageMetadata,
   generateHomepageStructuredData,
 } from '@/lib/seo/page-seo-generator';
-import { LocaleLayoutClient } from './LocaleLayoutClient';
+import dynamic from 'next/dynamic';
+
+// Dynamically import client component to avoid webpack module loading issues
+const LocaleLayoutClient = dynamic(
+  () =>
+    import('./LocaleLayoutClient').then(mod => mod.LocaleLayoutClient),
+  {
+    ssr: true,
+  }
+);
 
 interface LocaleLayoutProps {
   children: React.ReactNode;

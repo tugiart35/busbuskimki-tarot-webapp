@@ -66,8 +66,8 @@ export default function WelcomeSection({
               {t('dashboard.membershipDuration', 'Mistik yolculuğunuz')}{' '}
               {profile?.created_at
                 ? getMemberSince(profile.created_at)
-                : t('common.new', 'yeni')}{' '}
-              süredir devam ediyor
+                : t('common.new')}{' '}
+              {t('dashboard.membershipDuration', 'süredir devam ediyor')}
             </p>
             {/* E-posta adresi */}
             {user?.email && (

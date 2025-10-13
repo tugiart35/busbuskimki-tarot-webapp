@@ -16195,6 +16195,7 @@
     },
     "messages": {
       "adminRequired": "Insufficient credit for audio reading",
+      "allCreditsEnough": "You have enough credits",
       "buyCredits": "Buy Credit",
       "cardsLocked": "The cards are locked.",
       "creditsRequired": "loan required",
