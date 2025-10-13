@@ -40,7 +40,7 @@ Kullanım durumu:
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { supabase } from '@/lib/supabase/client';
 import { useAuth } from '@/hooks/auth/useAuth';
 import { useTranslations } from '@/hooks/useTranslations';
@@ -121,10 +121,10 @@ export default function StatisticsPage() {
   const isAuthenticated = !!user;
   const { t } = useTranslations();
   const router = useRouter();
+  const pathname = usePathname();
 
   // Pathname'den locale'i çıkar
-  const pathname = window.location.pathname;
-  const locale = pathname.split('/')[1] || 'tr';
+  const locale = pathname?.split('/')[1] || 'tr';
 
   const [userStats, setUserStats] = useState<UserStats | null>(null);
   const [numerologyInsights, setNumerologyInsights] =
@@ -160,7 +160,9 @@ export default function StatisticsPage() {
         .order('created_at', { ascending: false });
 
       if (error) {
-        console.error('Error fetching readings:', error);
+        if (process.env.NODE_ENV === 'development') {
+          console.error('Error fetching readings:', error);
+        }
         return;
       }
 
@@ -414,7 +416,9 @@ export default function StatisticsPage() {
         longestStreak,
       });
     } catch (error) {
-      console.error('Error fetching user stats:', error);
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Error fetching user stats:', error);
+      }
     } finally {
       setLoading(false);
     }
@@ -498,7 +502,9 @@ export default function StatisticsPage() {
         setNumerologyInsights(null);
       }
     } catch (error) {
-      console.error('Error fetching numerology insights:', error);
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Error fetching numerology insights:', error);
+      }
       setNumerologyInsights(null);
     }
   };

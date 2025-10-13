@@ -123,20 +123,33 @@ class EmailService {
         attachments: emailData.attachments,
       };
 
-      console.log('Sending email to:', emailData.to);
-      console.log('Mail options:', {
-        from: mailOptions.from,
-        to: mailOptions.to,
-        subject: mailOptions.subject,
-        hasHtml: !!mailOptions.html,
-        hasAttachments: !!mailOptions.attachments,
-      });
+      // Only log in development environment
+      if (process.env.NODE_ENV === 'development') {
+        console.log('Sending email to:', emailData.to);
+        console.log('Mail options:', {
+          from: mailOptions.from,
+          to: mailOptions.to,
+          subject: mailOptions.subject,
+          hasHtml: !!mailOptions.html,
+          hasAttachments: !!mailOptions.attachments,
+        });
+      }
 
       const result = await this.transporter.sendMail(mailOptions);
-      console.log('Email sent successfully:', result.messageId);
+      
+      // Only log success in development
+      if (process.env.NODE_ENV === 'development') {
+        console.log('Email sent successfully:', result.messageId);
+      }
+      
       return true;
     } catch (error) {
-      console.error('Email sending failed:', error);
+      // Always log errors (but sanitize in production)
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Email sending failed:', error);
+      } else {
+        console.error('Email sending failed - check logs for details');
+      }
       return false;
     }
   }

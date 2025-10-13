@@ -20,6 +20,36 @@ const nextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256],
   },
 
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY',
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'origin-when-cross-origin',
+          },
+          {
+            key: 'X-XSS-Protection',
+            value: '1; mode=block',
+          },
+          {
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=()',
+          },
+        ],
+      },
+    ];
+  },
+
   async rewrites() {
     return [
       // Turkish SEO-friendly URLs
@@ -39,6 +69,10 @@ const nextConfig = {
         source: '/tr/panel',
         destination: '/tr/dashboard',
       },
+      {
+        source: '/tr/panel/:path*',
+        destination: '/tr/dashboard/:path*',
+      },
 
       // English SEO-friendly URLs
       {
@@ -56,6 +90,14 @@ const nextConfig = {
       {
         source: '/en/login',
         destination: '/en/auth',
+      },
+      {
+        source: '/en/panel',
+        destination: '/en/dashboard',
+      },
+      {
+        source: '/en/panel/:path*',
+        destination: '/en/dashboard/:path*',
       },
 
       // Serbian SEO-friendly URLs
@@ -78,6 +120,10 @@ const nextConfig = {
       {
         source: '/sr/panel',
         destination: '/sr/dashboard',
+      },
+      {
+        source: '/sr/panel/:path*',
+        destination: '/sr/dashboard/:path*',
       },
     ];
   },

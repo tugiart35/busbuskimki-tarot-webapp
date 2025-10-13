@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { supabase } from '@/lib/supabase/client';
 import { useAuth } from '@/hooks/auth/useAuth';
 import { useTranslations } from '@/hooks/useTranslations';
@@ -26,10 +26,10 @@ export default function SettingsPage() {
   const { user, loading: authLoading } = useAuth();
   const { t } = useTranslations();
   const router = useRouter();
+  const pathname = usePathname();
 
   // Pathname'den locale'i çıkar
-  const pathname = window.location.pathname;
-  const locale = pathname.split('/')[1] || 'tr';
+  const locale = pathname?.split('/')[1] || 'tr';
 
   const [notifications, setNotifications] = useState<NotificationSettings>({
     reading_completed: true,
@@ -83,7 +83,9 @@ export default function SettingsPage() {
 
       setLoading(false);
     } catch (error) {
-      console.error('Error fetching user settings:', error);
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Error fetching user settings:', error);
+      }
       setLoading(false);
     }
   };
@@ -125,7 +127,9 @@ export default function SettingsPage() {
         confirmPassword: '',
       });
     } catch (error) {
-      console.error('Error updating password:', error);
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Error updating password:', error);
+      }
       alert(
         t('settings.passwordUpdateError', 'Şifre güncellenirken hata oluştu.')
       );
@@ -168,7 +172,9 @@ export default function SettingsPage() {
         t('settings.dataExportedSuccess', 'Verileriniz başarıyla indirildi!')
       );
     } catch (error) {
-      console.error('Error exporting data:', error);
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Error exporting data:', error);
+      }
       alert(
         t('settings.dataExportError', 'Veri indirme sırasında hata oluştu.')
       );
@@ -210,7 +216,9 @@ export default function SettingsPage() {
       );
       window.location.href = '/';
     } catch (error) {
-      console.error('Error deleting account:', error);
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Error deleting account:', error);
+      }
       alert(t('settings.accountDeleteError', 'Hesap silinirken hata oluştu.'));
     }
   };
