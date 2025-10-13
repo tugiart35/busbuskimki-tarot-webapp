@@ -118,12 +118,185 @@
     "bu-ay-daha": "Ciljeve možete da pređete čitajući više ovog meseca",
     "daha-ekonomik-okuma": "Možete isprobati ekonomičnije tipove čitanja",
     "kredi-kullaniminiz-verimli": "Vaša upotreba kredita izgleda efikasno",
-    "memberSince": "Postati član",
+    "memberSince": "Datum članstva",
     "readings": "Očitavanja",
     "expert": "Stručnjak",
     "intermediate": "U sredini",
     "beginner": "Početak",
-    "signOut": "Odjaviti se"
+    "signOut": "Odjaviti se",
+    "accountSettings": "Podešavanja naloga",
+    "admin": "administrator",
+    "backToDashboard": "Povratak na kontrolnu tablu",
+    "buy": "Kupiti",
+    "buyCredits": "Kupite kredite",
+    "cancel": "Otkazati",
+    "completedReadings": "čitanje završeno",
+    "creditAlert": "Nizak kreditni bilans",
+    "creditAlertMessage": "Kupite kredite za čitanje više",
+    "creditBalance": "Kreditni bilans",
+    "creditHistory": {
+      "allTime": "Sva vremena",
+      "allTransactions": "Sve transakcije",
+      "bonus": "Bonus",
+      "bonuses": "Bonusi",
+      "buyCredits": "Kupite kredite",
+      "completed": "završen",
+      "credits": "kredit",
+      "csvAmount": "Iznos",
+      "csvDate": "Istorija",
+      "csvDescription": "Objašnjenje",
+      "csvType": "Lek",
+      "currentBalance": "Trenutni balans",
+      "description": "Pratite svoju kreditnu knjigu, istoriju upotrebe i transakcije",
+      "downloadCSV": "Preuzmi CSV",
+      "error": "Došlo je do greške prilikom učitavanja kreditne istorije",
+      "last1Year": "Poslednja 1 godina",
+      "last30Days": "Poslednjih 30 dana",
+      "last7Days": "Poslednjih 7 dana",
+      "loading": "🔮 Učitavanje kreditne istorije ...",
+      "noTransactions": "Još nema transakcija",
+      "purchase": "Kupovina",
+      "purchases": "Akvizicije",
+      "refund": "Vratiti se",
+      "refunds": "Povraćaj novca",
+      "startWithFirstPurchase": "Započnite davanjem prvog kreditnog kupovine",
+      "title": "Kreditna istorija",
+      "totalPurchased": "Ukupno kupljeno",
+      "totalRefunded": "Ukupno povraćaja novca",
+      "totalUsed": "Ukupno korišćeno",
+      "transactionsFound": "{count} işlem bulundu",
+      "usage": "Upotreba"
+    },
+    "detailedStatistics": "Detaljna statistika",
+    "discoverLevel": "Ponesite prvo čitanje i otkrijte svoj nivo!",
+    "displayName": "Prikaz ime",
+    "downloadReading": "Preuzmite čitanje",
+    "editProfile": "Edit Profile",
+    "email": "E-mail",
+    "free": "Slobodan",
+    "immediateAccess": "Trenutni pristup",
+    "keepGoing": "Odlično vam ide! Samo napred!",
+    "last30Days": "Poslednjih 30 dana",
+    "membershipDuration": "Trajanje članstva",
+    "moreReadings": "Ima više čitanja",
+    "mysticJourney": "Napredujete na svom mističnom putovanju!",
+    "mysticLevel": "Mistični nivo",
+    "new": "Nov",
+    "noReadingsYet": "Još nema čitanje. Započnite čitanje da biste imali svoje prvo mistično iskustvo i otkrili tajne svoje sudbine.",
+    "packages": {
+      "addedToAccount": "dodato na vaš nalog.",
+      "bonus": "bonus",
+      "bonusCredits": "Bonus krediti",
+      "bonusCreditsDesc": "Zaradite dodatni kredit na velikim paketima",
+      "buyNow": "Kupiti",
+      "credits": "kredit",
+      "currentBalance": "Vaš trenutni balans",
+      "description": "Kupite kreditne kredite koje su vam potrebne za očitanja Tarot",
+      "faq": "Često postavljana pitanja",
+      "faq1Answer": "Vaši krediti važe za godinu dana od dana kupovine.",
+      "faq1Question": "Koliko dugo su zajmovi validni?",
+      "faq2Answer": "Možete dobiti povrat novca za neiskorišćene kredite u roku od 7 dana.",
+      "faq2Question": "Šta je politika povratka?",
+      "faq3Answer": "Prihvaćene su kreditne kartice, debitne kartice i digitalni novčanici.",
+      "faq3Question": "Koji su načini plaćanja prihvaćeni?",
+      "faq4Answer": "10% bonus kredit dat je u popularnom paketu i 20% bonus kredita u premium paketu.",
+      "faq4Question": "Kako se izračunavaju bonus krediti?",
+      "feature10Bonus": "%10 bonus kredi",
+      "feature10Readings": "10+ detaljnih čitanja tarota",
+      "feature20Bonus": "%20 bonus kredi",
+      "feature2Readings": "1-2 detaljna čitanja tarota",
+      "feature30Days": "30 dana validnost",
+      "feature5Readings": "5-6 Detaljna čitanja Tarota",
+      "feature60Days": "60 dana validnost",
+      "feature7Days": "7 dana validnost",
+      "featureCareer": "čitanje u karijeri",
+      "featureGeneral": "opšte čitanje",
+      "featureLove": "Ljubavna ekspanzija",
+      "featureNumerology": "Analiza numerologije",
+      "featurePriority": "Prioritetna podrška",
+      "instantActivation": "Odmah aktivan",
+      "instantActivationDesc": "Vaši krediti se odmah dodaju na vaš račun",
+      "loading": "🔮 Učitavanje kreditnih paketa ...",
+      "mostPopular": "Najpopularniji",
+      "noPackages": "Još nema aktivnih paketa. Molimo vas da se proverite kasnije.",
+      "pageTitle": "Kreditni paketi",
+      "processing": "Obrada ...",
+      "profileError": "Neuspešno učitavanje informacija o profilu",
+      "purchaseError": "Došlo je do greške prilikom kupovine paketa. Pokušajte ponovo.",
+      "purchaseSuccess": "uspešno kupljeno!",
+      "purchased": "nabavljen",
+      "securePayment": "Sigurna uplata",
+      "securePaymentDesc": "Sva plaćanja su zaštićena SSL enkripcijom",
+      "title": "Kreditni paketi"
+    },
+    "popular": "Popularan",
+    "processing": "Obrada ...",
+    "profile": "Profil",
+    "quickAccess": "Brz pristup",
+    "quickActions": "Brze transakcije",
+    "readingHistory": "Istorija za čitanje",
+    "readingsPage": {
+      "allTime": "Sva vremena",
+      "allTypes": "Svi žanrovi",
+      "careerType": "Čitanje u karijeri",
+      "clearFilters": "Jasni filteri",
+      "credits": "kredit",
+      "detailModal": {
+        "adminNotes": "Napomene o administratorima",
+        "close": "Zatvoriti",
+        "creditCost": "Kreditni trošak",
+        "download": "Preuzeti",
+        "drawnCards": "CARDS CARTN",
+        "interpretation": "Tumačenje",
+        "readingDate": "Datum čitanja",
+        "status": "Situacija",
+        "statusCompleted": "završen",
+        "statusPending": "Na čekanju",
+        "statusReviewed": "Pregledan",
+        "yourQuestion": "Pitati"
+      },
+      "download": "Preuzeti",
+      "generalReadings": "Opšta čitanja",
+      "generalType": "Opšte čitanje",
+      "lastMonth": "Poslednjih 1 mesec",
+      "lastWeek": "Poslednja 1 nedelja",
+      "lastYear": "Poslednja 1 godina",
+      "loadMore": "Opteretiti više",
+      "loading": "Učitavanje ...",
+      "loveReadings": "Ljubavna čitanja",
+      "loveType": "Ljubavno čitanje",
+      "noReadings": "Još nema čitanje",
+      "noReadingsDesc": "Da li ste spremni da imate svoje prvo mistično iskustvo?",
+      "numerologyType": "Numerologija",
+      "searchPlaceholder": "Potražite čitanje ...",
+      "startFirstReading": "Pokrenite prvo čitanje",
+      "subtitle": "Sva vaša mistična iskustva",
+      "title": "Moja čitanja",
+      "totalCredits": "Ukupni kredit",
+      "totalReadings": "Totalno čitanje",
+      "view": "Pregledan"
+    },
+    "recentReadings": "Nedavna čitanja",
+    "recentTransactions": "Nedavne transakcije",
+    "role": "Uloga",
+    "saveChanges": "Spremite promene",
+    "settings": "Podešavanja",
+    "startFirstReading": "Započnite moje prvo čitanje",
+    "statistics": "Statistika",
+    "thisWeek": "Ove nedelje",
+    "title": "komandna tabla",
+    "today": "Danas",
+    "todayReadings": "Današnja čitanja",
+    "totalReadings": "Totalno čitanje",
+    "user": "Korisnik",
+    "userId": "Korisnički ID",
+    "userInfo": "Informacije o korisniku",
+    "userLevel": "Korisnički nivo",
+    "viewAll": "Pogledajte sve",
+    "viewAllReadings": "Pogledajte sva očitavanja",
+    "viewReading": "Pogledati čitanje",
+    "welcome": "Dobrodošli",
+    "welcomeMessage": "Dobrodošli na svoje mistično putovanje!"
   },
   "accessibility": {
     "goToPage": "idi na stranicu",
@@ -262,7 +435,29 @@
       "surnameRequired": "Potrebno je prezime",
       "userAlreadyExists": "Ova adresa e-pošte je već registrovana",
       "validating": "🔍 Provera ...",
-      "waiting": "⏳ Čekanje ..."
+      "waiting": "⏳ Čekanje ...",
+      "nameTooShort": "Ime mora imati najmanje 2 karaktera",
+      "surnameTooShort": "Prezime mora imati najmanje 2 karaktera",
+      "signingIn": "Prijavljivanje...",
+      "loginSuccess": "Prijava uspešna!",
+      "emailConfirmationRequired": "Morate potvrditi svoju email adresu",
+      "signingUp": "Registracija...",
+      "registerSuccess": "Registracija uspešna! Dobrodošli!",
+      "rateLimitExceeded": "Previše pokušaja. Molimo pokušajte kasnije.",
+      "googleLogin": "Prijavi se sa Google",
+      "googleRegister": "Registruj se sa Google",
+      "sendingEmail": "Slanje email-a...",
+      "resendEmail": "Pošalji ponovo email",
+      "passwordResetDescription": "Unesite svoju email adresu i poslaćemo vam link za resetovanje lozinke.",
+      "retryAfter": "pokušajte ponovo nakon sekundi",
+      "genderSelect": "Izaberite pol",
+      "loginButton": "Prijavi se",
+      "registerButton": "Registruj se",
+      "passwordResetTitle": "Zaboravljena lozinka",
+      "sendEmail": "Pošalji email",
+      "emailConfirmationTitle": "Potvrda email-a",
+      "switchToRegister": "Nemate nalog? Registrujte se",
+      "switchToLogin": "Već imate nalog? Prijavite se"
     },
     "permissions": {
       "accessDenied": "Niste ovlašćeni da pristupite ovoj stranici",
@@ -316,7 +511,10 @@
       "twoFactorRequired": "Potrebna je dve faktorske autentifikacije"
     },
     "signIn": "Prijaviti se",
-    "signOut": "Odjaviti se"
+    "signOut": "Odjaviti se",
+    "messages": {
+      "loginRequired": "Morate biti prijavljeni za ovu radnju"
+    }
   },
   "cardGroups": {
     "cups": "trofeji",
@@ -19207,6 +19405,14 @@
       "mobile": "Mobilna navigacija",
       "openMenu": "otvoren meni",
       "closeMenu": "Zatvori meni"
+    },
+    "languageSelector": {
+      "languageOptions": "Jezičke opcije",
+      "openMenu": "Meni za odabir na otvorenom jeziku",
+      "selectLanguage": "Izaberite jezik"
+    },
+    "menu": {
+      "goToPage": "idi na stranicu"
     }
   },
   "newLover": {
@@ -20059,17 +20265,25 @@
     "preparing": "Vaše mistično iskustvo se priprema ...",
     "problemSolvingReading": "Progrevanje problema",
     "problemSolvingSpread": "Rešavanje problema",
-    "relationshipAnalysisReading": "Ekspanzija analize odnosa",
+    "relationshipAnalysisReading": "Analiza stanja",
     "relationshipAnalysisSpread": "Raspored analize odnosa",
     "searchPlaceholder": "Potražite čitanje ...",
     "situationAnalysisReading": "Objašnjenje analize stanja",
-    "situationAnalysisSpread": "Raspored analize stanja",
+    "situationAnalysisSpread": "Objašnjenje analize stanja",
     "startFirstReading": "Pokrenite prvo čitanje",
     "threeCardReading": "3 Čitanje kartica",
     "threeCardSpread": "3 kartica se širila",
     "totalCredits": "Ukupni kredit",
     "totalReadings": "Totalno čitanje",
-    "view": "Pregledan"
+    "view": "Pregledan",
+    "marriageReading": "Otvaranje braka",
+    "readingSaveError": "Došlo je do greške prilikom čuvanja čitanja.",
+    "readingSavedSuccess": "Vaše čitanje je uspešno sačuvano!",
+    "saveReadingSuccess": "Zabeležen za čitanje",
+    "newLoverReading": "Čitanje nove ljubavi",
+    "relationshipProblemsReading": "Čitanje problema u vezi",
+    "tarotReading": "Tarot čitanje",
+    "moneyReading": "Čitanje novca i finansija"
   },
   "relationshipAnalysis": {
     "data": {
@@ -20747,7 +20961,19 @@
     "title": "Statistika i uvid",
     "totalCreditsSpent": "Ukupni potrošeni krediti",
     "totalReadings": "Totalno čitanje",
-    "vsLastMonth": "vs prošlog meseca"
+    "vsLastMonth": "vs prošlog meseca",
+    "readingHabits": "Navike čitanja",
+    "trendAnalysis": "Analiza trenda",
+    "readingTypes": "Tipovi čitanja",
+    "monthlyTrend": "Mesečni trend",
+    "weeklyActivity": "Nedeljne aktivnosti",
+    "personalCycles": "Lični ciklusi",
+    "lifePinnacles": "Životni vrhunci",
+    "lifeChallenges": "Životni izazovi",
+    "activityPatterns": "Obrasci aktivnosti",
+    "achievementsGoals": "Postignuća i ciljevi",
+    "readingTypesDistribution": "Distribucija tipova čitanja",
+    "personalInsights": "Lični uvidi"
   },
   "system": {
     "comprehensive": "Sveobuhvatan",
@@ -21576,12 +21802,15 @@
   "profile": {
     "personalInfo": "Lične informacije",
     "firstName": "Naziv",
-    "title": "Informacije o profilu",
+    "title": "Profil",
     "lastName": "Prezime",
     "lastNamePlaceholder": "Unesite svoje prezime",
     "fullName": "Puno ime",
     "fullNamePlaceholder": "Unesite svoje puno ime",
-    "birthDate": "Datum rođenja"
+    "birthDate": "Datum rođenja",
+    "updateError": "Greška u ažuriranju profila",
+    "noName": "Ime nije navedeno",
+    "firstNamePlaceholder": "Unesite svoje ime"
   },
   "blog": {
     "title": "Vodič za tarot kartice",
@@ -64407,5 +64636,765 @@
         }
       }
     }
+  },
+  "common": {
+    "back": "Nazad",
+    "buy": "Kupiti",
+    "cancel": "Otkazati",
+    "clear": "čist",
+    "close": "Zatvoriti",
+    "confirm": "Potvrditi",
+    "continue": "Nastavljati",
+    "copy": "kopija",
+    "credits": "kredit",
+    "delete": "Izbrisati",
+    "download": "Preuzeti",
+    "edit": "Urediti",
+    "error": "Greška",
+    "filter": "Filter",
+    "finish": "završiti",
+    "free": "Slobodan",
+    "immediateAccess": "Trenutni pristup",
+    "info": "Informacije",
+    "loading": "Učitavanje ...",
+    "locale": "en-tr",
+    "new": "Nov",
+    "next": "Napred",
+    "no": "Ne",
+    "ok": "U redu",
+    "open": "Gladan",
+    "pause": "pauza",
+    "popular": "Popularan",
+    "previous": "Bivši",
+    "processing": "Obrada ...",
+    "progress": "Napredak",
+    "refresh": "Osvežiti",
+    "reset": "resetovati",
+    "resume": "Nastavljati",
+    "reversed": "Nasuprot",
+    "save": "Sačuvati",
+    "search": "Tražiti",
+    "select": "Odabrati",
+    "selectAll": "Izaberite sve",
+    "share": "Udeo",
+    "sort": "Sortirati",
+    "start": "početi",
+    "stop": "prestati",
+    "submit": "Pošalji",
+    "success": "Uspešan",
+    "today": "Danas",
+    "upload": "Upload",
+    "upright": "Ravno",
+    "view": "Pregledan",
+    "viewAll": "Pogledajte sve",
+    "warning": "Upozorenje",
+    "yes": "Da",
+    "cups": "Šolje",
+    "pentacles": "pentaklovi",
+    "swords": "Mačevi",
+    "wands": "Štapić",
+    "three": "Tri",
+    "four": "Četvoro",
+    "five": "Pet",
+    "seven": "Koji voli",
+    "eight": "osam",
+    "nine": "Baka",
+    "page": "Stranica",
+    "knight": "Vitez",
+    "queen": "kraljica",
+    "king": "Kralj",
+    "kupalar": "trofeji",
+    "tilsimlar": "talismani",
+    "kiliclar": "mačevi",
+    "asalar": "štapić",
+    "kupovi": "Kupovi",
+    "pentakli": "pentacle",
+    "ucretsiz-tarot-okumasi": "Nacrtajte svoje kartice sa besplatnim čitanjem Tarota",
+    "draw-your-own": "Nacrtajte svoje kartice sa besplatnim čitanjem Tarota",
+    "kisilik": "Ličnost",
+    "olgunluk": "Zrelost",
+    "personality": "Ličnost",
+    "maturity": "Zrelost",
+    "compatibility": "Kompatibilnost",
+    "zrelost": "Zrelost",
+    "kompatibilnost": "Kompatibilnost",
+    "busbuskimki": "Busbuskimki",
+    "article": "član",
+    "person": "osoba",
+    "organization": "organizacija",
+    "home": "Dom",
+    "numeroloji": "Numerologija",
+    "numerology": "Numerologija",
+    "numerologija": "numerologija",
+    "thing": "Stvar",
+    "yakinda": "Ubrzo",
+    "secim-yapin": "Dajte svoj izbor",
+    "hizmetlerimiz": "Naše usluge",
+    "ozelliklerimiz": "Naše karakteristike",
+    "istatistiklerimiz": "Naše statistike",
+    "panel": "Panel",
+    "giris": "Ulaz",
+    "email-confirmation-callback": "Poziv za potvrdu e-pošte",
+    "email-confirmation-successful": "Potvrda e-pošte je uspela",
+    "email-confirmation-error": "Greška potvrde putem e-pošte",
+    "email-confirmation-exception": "Izuzetak potvrde e-pošte",
+    "guvenli-giris-yapin": "Prijavite se sigurno ili kreirajte novi nalog",
+    "sifreler-eslesmiyor": "Lozinke se ne podudaraju",
+    "sifre-guncelleme-hatasi": "Greška ažuriranja lozinke",
+    "sifre-sifirlama-hatasi": "Greška resetovanja lozinke",
+    "yeni-sifrenizi-girin": "Unesite svoju novu lozinku",
+    "sifrenizi-tekrar-girin": "Ponovna lozinka",
+    "dashboard": "komandna tabla",
+    "okuma-verisi": "Podaci o čitanju",
+    "kullanici-email-adresi": "Korisnička adresa e-pošte",
+    "email-basariyla-gonderildi": "E-pošta je uspešno poslata",
+    "email-gonderimi-basarisiz": "Slanje e-pošte nije uspelo",
+    "bilinmeyen-hata": "nepoznata greška",
+    "gecerli-bir-email": "Unesite važeću adresu e-pošte",
+    "email-gonderilemedi": "E-pošta nije mogla biti poslata",
+    "rate-limit-exceeded": "Prekoračena granica stopa",
+    "cache": "Keš",
+    "fallback": "pakovanje",
+    "internal-server-error": "Greška interne servera",
+    "doviz-kuru-alinirken": "Došlo je do greške prilikom dobijanja kursa",
+    "para-birimi-donusumunde": "Greška u konverziji valuta",
+    "unknown": "nepoznat",
+    "security-check-failed": "Bezbednosna provera nije uspela",
+    "missing-signature": "Nedostaje potpis",
+    "bilinmiyor": "nepoznat",
+    "payment-failure-notification": "Obaveštenje o zaštiti plaćanja CENTIFIKACIJA CENTIRANjA",
+    "payment-not-successful": "Plaćanje nije uspešno",
+    "payment-already-processed": "Plaćanje je već prerađeno",
+    "package-not-found": "Paket nije pronađen",
+    "user-profile-not": "Korisnički profil nije pronađen",
+    "failed-to-update": "Ažuriranje kreditnog bilansa nije uspelo",
+    "payment-notification-email": "E-pošta obaveštenja o plaćanju uspešno poslata",
+    "payment-processed-successfully": "Plaćanje uspešno obrađeno",
+    "no-meaning": "Bez značenja",
+    "sesli": "Audio",
+    "yazili": "Napisano",
+    "basit": "Jednostavan",
+    "strength": "Snaga",
+    "justice": "Pravda",
+    "death": "smrt",
+    "temperance": "Temperatura",
+    "judgement": "presuda",
+    "kariyerimde-degistiremedigim-taraflar": "Delovi moje karijere koje se ne mogu promeniti",
+    "kariyerimde-yardimci-olacak": "Koje će mi promene pomoći u karijeri?",
+    "gecmisimdeki-hangi-engeller": "Koje prepreke u mojoj prošlosti",
+    "sonuc-ne-olacak": "Šta će biti rezultat",
+    "dilek-karti": "karata",
+    "beyaz-atli-prens": "Princ Šarmantan",
+    "cinsel-dileklerin-gerceklesmesi": "Seksualne želje se ostvaruju",
+    "kirli-konusma": "prljav razgovor",
+    "tek-gecelik-iliski": "Stand za jednu noć",
+    "hakkinda-soru-sordugun": "Osoba o kojoj pitate",
+    "fiziksel-ve-cinsel": "Vaša fizička i seksualna veza",
+    "duygusal-ve-ruhsal": "Vaša emocionalna i duhovna veza",
+    "iliskinin-uzun-vadeli": "Dugoročni ishod odnosa",
+    "temel-anlam": "osnovno značenje",
+    "ters-anlam": "obrnuti značenje",
+    "saving": "Snimanje ..."
+  },
+  "footer": {
+    "about": {
+      "title": "O nama",
+      "description": "Kao Busbuskimki, nudimo profesionalne usluge za čitanje i numerološke analize. U svakom aspektu vašeg života možete dobiti u svakom aspektu vašeg života, uputstva u karijeri, svakodnevnim vodstvom i detaljnim analizama numerologije."
+    },
+    "quickAccess": {
+      "title": "Brz pristup",
+      "tarotReading": "Tarot se širi",
+      "numerology": "Analiza numerologije",
+      "loveReading": "Ljubavna ekspanzija",
+      "careerReading": "Širenje u karijeri"
+    },
+    "legal": {
+      "title": "Pravni",
+      "privacyPolicy": "Politika privatnosti",
+      "termsOfUse": "Uslovi korišćenja",
+      "kvkkDisclosure": "KVKK rasveta",
+      "cookiePolicy": "Politika kolačića",
+      "disclaimer": "Odricanje",
+      "refundPolicy": "Politika povrata novca",
+      "accessibility": "Politika pristupačnosti",
+      "childPrivacy": "Dečija politika privatnosti",
+      "copyrightPolicy": "Politika autorskih prava",
+      "paymentTerms": "Uslovi plaćanja",
+      "securityPolicy": "Sigurnosna politika",
+      "about": "O nama",
+      "contact": "Komunikacija"
+    },
+    "legalPages": {
+      "accessibility": {
+        "title": "Politika pristupačnosti",
+        "subtitle": "Posvećenost pristupačnosti korisnicima sa invaliditetom",
+        "content": "Platforma Tarot-Numerologije posvećena je da se pridržava standarda pristupačnosti tako da svi korisnici mogu da primaju jednaku uslugu. Naša veb stranica je podržana funkcijama kao što su kompatibilnost čitača ekrana, visoka kontrasta i navigacija tastature.",
+        "contact": "Možete da pošaljete svoje sugestije i prigovore na pristupačnost {e-mail}."
+      },
+      "childPrivacy": {
+        "title": "Dečija politika privatnosti",
+        "subtitle": "Privatnost korisnika mlađa od 13 godina",
+        "content": "Platforma TAROT-NUMEROLOGIJA ne svesno prikuplja lične podatke od dece mlađih od 13 godina. Dozvola roditelja je potrebna za korisnike mlađih od 13 godina da koriste naše usluge. Roditelji mogu zatražiti brisanje podataka svog deteta.",
+        "contact": "Ako verujete da su bez dozvole prikupljeni lični podaci deteta, kontaktirajte {email}. Podaci će se izbrisati nakon neophodnog pregleda."
+      },
+      "refundPolicy": {
+        "title": "Politika povrata novca",
+        "subtitle": "Vratite uslove za digitalne usluge",
+        "content": "Digitalne usluge (analiza, konsultantska, kreditna itd.) Ponuđena na platformi Tarot-Numerologije su trenutni i personalizovani sadržaj. Stoga neće biti dat povrat novca nakon što je usluga pružena.",
+        "contact": "Međutim, u slučajevima kao što je tehnička greška, usluga se uopšte ne pruža ili pogrešna uplata možete zatražiti povrat kontaktiranja {email}. Svaki zahtev se preispituje pojedinačno, a povraćaj novca koji se smatra da je potrebno u roku od 7 radnih dana.",
+        "policyTitle": "Politika povrata novca",
+        "noRefund": "Nepovratno",
+        "refundPossible": "Povratak je moguće",
+        "processingTimes": "Vremena obrade",
+        "processingContent": "Povraćaj novca koji se smatraju odgovarajućim će se napraviti u roku od 7 radnih dana. Svaki zahtev se preispituje na individualnoj osnovi.",
+        "exceptions": "Izuzetak",
+        "exception1": "Nema povrata zbog greške ili nezadovoljstva korisnika.",
+        "exception2": "Povrat novca je moguć u slučaju da usluga uopšte nije data ili u slučaju tehničkog kvara."
+      },
+      "cookiePolicy": {
+        "title": "Politika kolačića",
+        "subtitle": "Upotreba i podešavanja kolačića",
+        "content": "Ova veb lokacija koristi kolačiće za poboljšanje korisničkog iskustva i analizira performanse lokacije. Kolačići su podeljeni u dve kategorije: Tehnički kolačići, koji su neophodni da veb lokacija funkcioniše pravilno i funkcionalni kolačići, koji sećaju korisničke postavke.",
+        "whatIsCookie": "Šta je kolačić?",
+        "types": "Vrste kolačića",
+        "technical": "Tehnički kolačići: Potreban je funkcionalnost sajta",
+        "functional": "Funkcionalni kolačići: pamće se korisničke postavke",
+        "analytics": "Analitički kolačići: Analizira upotrebu veb lokacije",
+        "preferences": "Podešavanja kolačića",
+        "manage": "Možete da koristite svoje podešavanja pregledača da biste upravljali preferencijama kolačića."
+      },
+      "copyrightPolicy": {
+        "title": "Politika autorskih prava",
+        "subtitle": "Prava i upotreba intelektualne svojine",
+        "content": "Sav sadržaj (tekst, slike, grafike, kod, dizajn itd.) Na ovoj veb stranici je zaštita autorskih prava. Sadržaj se može koristiti samo za lične, ne-komercijalne svrhe.",
+        "rights": "Vlasnik autorskih prava",
+        "owner": "Sav sadržaj pripada Platformi Busbuskimki.",
+        "usage": "Uslovi korišćenja",
+        "personal": "Sadržaj je dozvoljen samo za ličnu upotrebu",
+        "commercial": "Pismeno odobrenje je potrebno za komercijalnu upotrebu",
+        "attribution": "Obavezno je odrediti izvor"
+      },
+      "disclaimer": {
+        "title": "Odricanje",
+        "subtitle": "Obim i ograničenja usluge",
+        "content": "Usluge Tarota i Numerologije koje se nude na ovoj platformi samo su za potrebe zabave i nisu zamena za savet u stvarnom životu. Naše usluge ne pružaju profesionalne medicinske, pravne ili finansijske savete.",
+        "serviceScope": "Obim usluge",
+        "limitations": "Ograničenja",
+        "entertainment": "Usluge su za zabavne svrhe",
+        "notAdvice": "Ne savet o stvarnom životu",
+        "personal": "Ne bi trebalo da utiče na vaše lične odluke",
+        "professional": "Nije zamena za profesionalne savete"
+      },
+      "kvkkDisclosure": {
+        "title": "KVKK Tekst za pojašnjenje",
+        "subtitle": "Zaštita ličnih podataka",
+        "content": "Ovaj tekst pojašnjenja pripremljen je u okviru Zakona o zaštiti ličnih podataka br. 6698 (KVKK). Vaši lični podaci se obrađuju samo u određene svrhe i u okviru zakonske granice.",
+        "dataProtection": "Zaštita podataka",
+        "dataController": "Kontroler podataka",
+        "controller": "Busbuskimki platforma",
+        "purposes": "Obrada u svrhu prerade",
+        "purpose1": "Odnosi za pružanje usluga i odnosi sa klijentima",
+        "purpose2": "Ispunjavanje zakonskih obaveza",
+        "purpose3": "Komunikacija i informacije",
+        "rights": "Vaša prava",
+        "right1": "Pristup vašim ličnim podacima",
+        "right2": "Ispravka i brisanje",
+        "right3": "Prigovor na transakciju",
+        "right4": "Prenosivost podataka"
+      },
+      "paymentTerms": {
+        "title": "Uslovi plaćanja",
+        "subtitle": "Načini plaćanja i uslovi plaćanja",
+        "content": "Na našoj platformi koriste se sigurni načini plaćanja. Sva plaćanja su zaštićena SSL enkripcijom i obrađuje se provajderima na trećim stranama.",
+        "methods": "Načini plaćanja",
+        "creditCard": "Kreditna kartica",
+        "debitCard": "Bankovna kartica",
+        "digitalWallet": "Digitalni novčanik",
+        "security": "Sigurnost",
+        "ssl": "Zaštićen SSL enkripcijom",
+        "pci": "U skladu je sa PCI DSS standardima",
+        "secure": "Sigurna platna infrastruktura"
+      },
+      "securityPolicy": {
+        "title": "Sigurnosna politika",
+        "subtitle": "Mere bezbednosti i zaštite podataka",
+        "content": "Naša platforma implementira najveći sigurnosni standardi kako bi se osigurala sigurnost korisnika korisnika. Svi podaci su šifrovani i čuvani na sigurnim serverima.",
+        "measures": "Mere predostrožnosti",
+        "encryption": "Šifrovanje podataka",
+        "access": "kontrola pristupa",
+        "monitoring": "Kontinuirano nadgledanje",
+        "backup": "Redovna rezervna kopija",
+        "compliance": "Pravno usaglašavanje"
+      },
+      "privacyPolicy": {
+        "title": "Politika privatnosti",
+        "subtitle": "Zaštita ličnih podataka je prioritet za nas. Ova politika objašnjava kako se vaši podaci sakupljaju, obrađuju i zaštićeni.",
+        "lastUpdated": "Poslednje ažuriranje: 8. jula 2025",
+        "montenegroCompliant": "Crna Gora PDPL kompatibilan",
+        "sections": {
+          "introduction": {
+            "title": "1. Uvod",
+            "content": "\"Platforma\" u ovoj politici naziva se vvv.busbuskimki.com, koja nudi usluge tarota i numerologije. Ova politika privatnosti objašnjava naše lične prakse za obradu podataka u skladu sa odredbama Zakona o zaštiti ličnih podataka (PDPL) u Crnoj Gori."
+          },
+          "scope": {
+            "title": "2 Obim primene",
+            "content": "PDPL se odnosi na sve domaće i strane organizacije koje posluju u Crnoj Gori i kompanijama koje prikupljaju podatke putem elektronskih ili ručnih sistema za obradu podataka."
+          },
+          "dataCollection": {
+            "title": "3. Prikupljeni podaci i osetljive kategorije",
+            "personalData": {
+              "title": "Lični podaci",
+              "content": "Ime, prezime, e-pošta, IP adresa, podaci kolačića itd."
+            },
+            "sensitiveData": {
+              "title": "Osetljivi podaci",
+              "content": "Posebne kategorije kao što su datum rođenja, zdravstveno stanje. Obrada ovih kategorija moguća je samo sa eksplicitnim saglasnošću ili pravnim izuzecima."
+            }
+          },
+          "processingConditions": {
+            "title": "4. Uslovi obrade",
+            "content": "Naše aktivnosti za obradu podataka zasnivaju se na:",
+            "conditions": "Izvršeno je bez oslanjanja na bilo koji razlog osim svoje pravne svrhe, poput informisanog izričitog saglasnosti, ispunjenja ugovora ili zakonskih obaveza ili vitalnih interesa.",
+            "additionalSecurity": "Dodatna sigurnost: Takođe se strogo pridržavamo principima minimiziranja podataka, namenskim ograničenjem, preciznosti podataka i ograničenje roka zadržavanja."
+          },
+          "dataController": {
+            "title": "5. Registracija i DPO kontroler podataka",
+            "registration": "Platforma je registrovana kao kontrolor podataka sa Crnogorskom Agencijom za zaštitu podataka (AZLP); Za naše baze podataka izvršene su odvojene aplikacije.",
+            "dpo": "Kada je broj naših zaposlenih 10 ili više, postaviće se DPO (službenik za zaštitu podataka). U trenutnoj situaciji planirano je sastanak u skladu sa našim obavezama."
+          },
+          "security": {
+            "title": "6 Tehnička i organizaciona sigurnost",
+            "encryption": {
+              "title": "šifrovanje",
+              "content": "Kontrola pristupa i seču i sistem sistema"
+            },
+            "training": {
+              "title": "Obrazovanje",
+              "content": "Obuka zaposlenih i politike privatnosti"
+            },
+            "audit": {
+              "title": "Kontrola",
+              "content": "Redovne interne revizije se sprovode"
+            }
+          },
+          "dataBreach": {
+            "title": "7. Postupak obaveštenja o kršenju podataka",
+            "seventyTwoHour": {
+              "title": "Pravilo za 72 sata",
+              "content": "U slučaju bilo kakvih prekršaja podataka, obaveštavamo AZLP u roku od 72 sata."
+            },
+            "userNotification": {
+              "title": "Informacije o korisniku",
+              "content": "Ako kršenje utiče na prava korisnika, relevantni korisnici će takođe biti obavešteni odmah."
+            }
+          },
+          "userRights": {
+            "title": "8. Korisnička prava",
+            "content": "Prema Crnoj Gori PDPL, korisnici imaju sledeća prava:",
+            "basicRights": {
+              "title": "Osnovna prava",
+              "rights": "Pristup ličnim podacima, korekciji i brisanju, prigovor na obradu"
+            },
+            "advancedRights": {
+              "title": "Napredna prava",
+              "rights": "Zahtev za ograničavanje obrade, prigovor na automatizovane procese odluka, prenosivost podataka"
+            },
+            "application": "Primena: vaše aplikacije možete poslati na info@tarotnumeroloji.com sa dokumentima za verifikaciju identiteta."
+          },
+          "internationalTransfers": {
+            "title": "9. Međunarodni transferi podataka",
+            "azlpApproval": {
+              "title": "AZLP odobrenje",
+              "content": "Odobrenje AZLP se dobija pre prenosa podataka izvan Crne Gore."
+            },
+            "exceptions": {
+              "title": "Izuzetak",
+              "content": "Zemlje EU / EEA, treće zemlje koje je EU smatrala dovoljnim putem, izražavaju pismenu saglasnost korisnika."
+            }
+          },
+          "dataRetention": {
+            "title": "10. Period zadržavanja podataka i uništavanje podataka",
+            "content": "Lični podaci se čuvaju samo onoliko dugo koliko je potrebno u svrhu obrade; Kada istekne period, to je anonimni ili sigurno uništen."
+          },
+          "cookies": {
+            "title": "11. Kolačići i direktni marketing",
+            "cookiePreferences": {
+              "title": "Podešavanja kolačića",
+              "content": "Postavke kolačića korisnika se uzimaju u obzir."
+            },
+            "information": {
+              "title": "Da se ​​informiše",
+              "content": "Jasne informacije se pružaju o upotrebi kolačića i dat je pravo na objekt."
+            }
+          },
+          "changes": {
+            "title": "12. Promene",
+            "content": "Ova politika se periodično ažurira u skladu sa regulatornim ili operativnim zahtevima. Najistaknutija verzija će uvek biti objavljena na vvv.tarotnumeroloji.com."
+          },
+          "contact": {
+            "title": "13. Kontakt informacije",
+            "email": {
+              "title": "E-mail",
+              "address": "info@busbuskimki.com"
+            },
+            "address": {
+              "title": "Adresa",
+              "location": "Podgorica, Crna Gora"
+            },
+            "dataController": {
+              "title": "Kontroler podataka",
+              "name": "Busbuskimki konsultantska i digitalna agencija doo",
+              "registration": "Registracija: AZLP"
+            }
+          }
+        }
+      },
+      "termsOfUse": {
+        "title": "Uslovi korišćenja",
+        "subtitle": "Ovi uslovi objašnjavaju pravila koju morate da sledite i vaša prava kada koristite našu platformu.",
+        "lastUpdated": "Poslednje ažuriranje: 8. jula 2025",
+        "montenegroCompliant": "Crna Gora PDPL kompatibilan",
+        "sections": {
+          "general": {
+            "title": "1. Opšte",
+            "content": "Ovi \"Uslovi korišćenja\" (\"uslovi\") regulišu uslove korišćenja svih sadržaja, usluga i aplikacija na vvv.busbuskimki.com (\"sajt\"). Koristeći veb lokaciju smatrate da ste prihvatili ove uslove."
+          },
+          "serviceDescription": {
+            "title": "2 Opis usluge",
+            "content": "Sajt nudi profesionalni sadržaj u oblastima kao što su usluge čitanja Tarot i Numerologije, individualne analize i konsultacije. Sve usluge se sprovode u skladu sa zakonodavstvom i PDPL-om Crne Gore."
+          },
+          "usageConditions": {
+            "title": "3. Uslovi korišćenja i usaglašenosti",
+            "usagePurpose": {
+              "title": "Nameravana upotreba",
+              "content": "Sadržaj sajta može se koristiti samo za lične, nekomercijalne i zakoničke svrhe."
+            },
+            "intellectualProperty": {
+              "title": "Intelektualno vlasništvo",
+              "content": "Sva relevantna prava intelektualne svojine (tekst, slike, grafiku, kod) pripadaju sajtu."
+            },
+            "usageRules": {
+              "title": "Uslovi korišćenja",
+              "content": "Korisnik se slaže da će lokaciju koristiti na građanski, pošteni i zakonit način."
+            }
+          },
+          "registration": {
+            "title": "4. Registracija, sigurnost računa i obrada podataka",
+            "accountSecurity": {
+              "title": "Sigurnost naloga",
+              "content": "Neke usluge mogu da zahtevaju registraciju i kreiranje računa. Informacije o računu moraju se čuvati poverljivi."
+            },
+            "dataProcessing": {
+              "title": "Obrada podataka",
+              "content": "Vaši lični podaci se obrađuju i štite u skladu sa odredbama PDPL-a."
+            }
+          },
+          "disclaimer": {
+            "title": "5. Odricanje od odgovornosti i ograničenja odgovornosti",
+            "content": "Sajt nudi usluge Tarota i Numerologije za zabavne svrhe. Ove usluge nisu zamjena za savet u stvarnom životu i ne pružaju profesionalni medicinski, pravni ili finansijski savet."
+          },
+          "contact": {
+            "title": "6 Komunikacija",
+            "content": "Za vaša pitanja možete nas kontaktirati na info@busbuskimki.com."
+          }
+        }
+      }
+    },
+    "contact": {
+      "title": "Komunikacija",
+      "email": "info@busbuskimki.com",
+      "phone": "+382 (67) 010176",
+      "address": "Podgorica, Crna Gora"
+    },
+    "payment": {
+      "title": "Načini plaćanja",
+      "securePayment": "Sigurna uplata"
+    },
+    "social": {
+      "title": "Društveni mediji"
+    },
+    "copyright": {
+      "text": "Sva prava zadržana.",
+      "disclaimer": "Ova veb lokacija je za potrebe za zabave i nije zamena za stvarne životne savete."
+    }
+  },
+  "legalPages": {
+    "accessibility": {
+      "title": "Politika pristupačnosti",
+      "subtitle": "Posvećenost pristupačnosti korisnicima sa invaliditetom",
+      "content": "Platforma Tarot-Numerologije posvećena je da se pridržava standarda pristupačnosti tako da svi korisnici mogu da primaju jednaku uslugu. Naša veb stranica je podržana funkcijama kao što su kompatibilnost čitača ekrana, visoka kontrasta i navigacija tastature.",
+      "contact": "Možete da pošaljete svoje sugestije i prigovore na pristupačnost {e-mail}."
+    },
+    "childPrivacy": {
+      "title": "Dečija politika privatnosti",
+      "subtitle": "Privatnost korisnika mlađa od 13 godina",
+      "content": "Platforma TAROT-NUMEROLOGIJA ne svesno prikuplja lične podatke od dece mlađih od 13 godina. Dozvola roditelja je potrebna za korisnike mlađih od 13 godina da koriste naše usluge. Roditelji mogu zatražiti brisanje podataka svog deteta.",
+      "contact": "Ako verujete da su bez dozvole prikupljeni lični podaci deteta, kontaktirajte {email}. Podaci će se izbrisati nakon neophodnog pregleda."
+    },
+    "refundPolicy": {
+      "title": "Politika povrata novca",
+      "subtitle": "Vratite uslove za digitalne usluge",
+      "content": "Digitalne usluge (analiza, konsultantska, kreditna itd.) Ponuđena na platformi Tarot-Numerologije su trenutni i personalizovani sadržaj. Stoga neće biti dat povrat novca nakon što je usluga pružena.",
+      "contact": "Međutim, u slučajevima kao što je tehnička greška, usluga se uopšte ne pruža ili pogrešna uplata možete zatražiti povrat kontaktiranja {email}. Svaki zahtev se preispituje pojedinačno, a povraćaj novca koji se smatra da je potrebno u roku od 7 radnih dana.",
+      "policyTitle": "Politika povrata novca",
+      "noRefund": "Nepovratno",
+      "refundPossible": "Povratak je moguće",
+      "processingTimes": "Vremena obrade",
+      "processingContent": "Povraćaj novca koji se smatraju odgovarajućim će se napraviti u roku od 7 radnih dana. Svaki zahtev se preispituje na individualnoj osnovi.",
+      "exceptions": "Izuzetak",
+      "exception1": "Nema povrata zbog greške ili nezadovoljstva korisnika.",
+      "exception2": "Povrat novca je moguć u slučaju da usluga uopšte nije data ili u slučaju tehničkog kvara."
+    },
+    "cookiePolicy": {
+      "title": "Politika kolačića",
+      "subtitle": "Upotreba i podešavanja kolačića",
+      "content": "Ova veb lokacija koristi kolačiće za poboljšanje korisničkog iskustva i analizira performanse lokacije. Kolačići su podeljeni u dve kategorije: Tehnički kolačići, koji su neophodni da veb lokacija funkcioniše pravilno i funkcionalni kolačići, koji sećaju korisničke postavke.",
+      "whatIsCookie": "Šta je kolačić?",
+      "types": "Vrste kolačića",
+      "technical": "Tehnički kolačići: Potreban je funkcionalnost sajta",
+      "functional": "Funkcionalni kolačići: pamće se korisničke postavke",
+      "analytics": "Analitički kolačići: Analizira upotrebu veb lokacije",
+      "preferences": "Podešavanja kolačića",
+      "manage": "Možete da koristite svoje podešavanja pregledača da biste upravljali preferencijama kolačića."
+    },
+    "copyrightPolicy": {
+      "title": "Politika autorskih prava",
+      "subtitle": "Prava i upotreba intelektualne svojine",
+      "content": "Sav sadržaj (tekst, slike, grafike, kod, dizajn itd.) Na ovoj veb stranici je zaštita autorskih prava. Sadržaj se može koristiti samo za lične, ne-komercijalne svrhe.",
+      "rights": "Vlasnik autorskih prava",
+      "owner": "Sav sadržaj pripada Platformi Busbuskimki.",
+      "usage": "Uslovi korišćenja",
+      "personal": "Sadržaj je dozvoljen samo za ličnu upotrebu",
+      "commercial": "Pismeno odobrenje je potrebno za komercijalnu upotrebu",
+      "attribution": "Obavezno je odrediti izvor"
+    },
+    "disclaimer": {
+      "title": "Odricanje",
+      "subtitle": "Obim i ograničenja usluge",
+      "content": "Usluge Tarota i Numerologije koje se nude na ovoj platformi samo su za potrebe zabave i nisu zamena za savet u stvarnom životu. Naše usluge ne pružaju profesionalne medicinske, pravne ili finansijske savete.",
+      "serviceScope": "Obim usluge",
+      "limitations": "Ograničenja",
+      "entertainment": "Usluge su za zabavne svrhe",
+      "notAdvice": "Ne savet o stvarnom životu",
+      "personal": "Ne bi trebalo da utiče na vaše lične odluke",
+      "professional": "Nije zamena za profesionalne savete"
+    },
+    "kvkkDisclosure": {
+      "title": "KVKK Tekst za pojašnjenje",
+      "subtitle": "Zaštita ličnih podataka",
+      "content": "Ovaj tekst pojašnjenja pripremljen je u okviru Zakona o zaštiti ličnih podataka br. 6698 (KVKK). Vaši lični podaci se obrađuju samo u određene svrhe i u okviru zakonske granice.",
+      "dataProtection": "Zaštita podataka",
+      "dataController": "Kontroler podataka",
+      "controller": "Busbuskimki platforma",
+      "purposes": "Obrada u svrhu prerade",
+      "purpose1": "Odnosi za pružanje usluga i odnosi sa klijentima",
+      "purpose2": "Ispunjavanje zakonskih obaveza",
+      "purpose3": "Komunikacija i informacije",
+      "rights": "Vaša prava",
+      "right1": "Pristup vašim ličnim podacima",
+      "right2": "Ispravka i brisanje",
+      "right3": "Prigovor na transakciju",
+      "right4": "Prenosivost podataka"
+    },
+    "paymentTerms": {
+      "title": "Uslovi plaćanja",
+      "subtitle": "Načini plaćanja i uslovi plaćanja",
+      "content": "Na našoj platformi koriste se sigurni načini plaćanja. Sva plaćanja su zaštićena SSL enkripcijom i obrađuje se provajderima na trećim stranama.",
+      "methods": "Načini plaćanja",
+      "creditCard": "Kreditna kartica",
+      "debitCard": "Bankovna kartica",
+      "digitalWallet": "Digitalni novčanik",
+      "security": "Sigurnost",
+      "ssl": "Zaštićen SSL enkripcijom",
+      "pci": "U skladu je sa PCI DSS standardima",
+      "secure": "Sigurna platna infrastruktura"
+    },
+    "securityPolicy": {
+      "title": "Sigurnosna politika",
+      "subtitle": "Mere bezbednosti i zaštite podataka",
+      "content": "Naša platforma implementira najveći sigurnosni standardi kako bi se osigurala sigurnost korisnika korisnika. Svi podaci su šifrovani i čuvani na sigurnim serverima.",
+      "measures": "Mere predostrožnosti",
+      "encryption": "Šifrovanje podataka",
+      "access": "kontrola pristupa",
+      "monitoring": "Kontinuirano nadgledanje",
+      "backup": "Redovna rezervna kopija",
+      "compliance": "Pravno usaglašavanje"
+    },
+    "privacyPolicy": {
+      "title": "Politika privatnosti",
+      "subtitle": "Zaštita ličnih podataka je prioritet za nas. Ova politika objašnjava kako se vaši podaci sakupljaju, obrađuju i zaštićeni.",
+      "lastUpdated": "Poslednje ažuriranje: 8. jula 2025",
+      "montenegroCompliant": "Crna Gora PDPL kompatibilan",
+      "sections": {
+        "introduction": {
+          "title": "1. Uvod",
+          "content": "\"Platforma\" u ovoj politici naziva se vvv.busbuskimki.com, koja nudi usluge tarota i numerologije. Ova politika privatnosti objašnjava naše lične prakse za obradu podataka u skladu sa odredbama Zakona o zaštiti ličnih podataka (PDPL) u Crnoj Gori."
+        },
+        "scope": {
+          "title": "2 Obim primene",
+          "content": "PDPL se odnosi na sve domaće i strane organizacije koje posluju u Crnoj Gori i kompanijama koje prikupljaju podatke putem elektronskih ili ručnih sistema za obradu podataka."
+        },
+        "dataCollection": {
+          "title": "3. Prikupljeni podaci i osetljive kategorije",
+          "personalData": {
+            "title": "Lični podaci",
+            "content": "Ime, prezime, e-pošta, IP adresa, podaci kolačića itd."
+          },
+          "sensitiveData": {
+            "title": "Osetljivi podaci",
+            "content": "Posebne kategorije kao što su datum rođenja, zdravstveno stanje. Obrada ovih kategorija moguća je samo sa eksplicitnim saglasnošću ili pravnim izuzecima."
+          }
+        },
+        "processingConditions": {
+          "title": "4. Uslovi obrade",
+          "content": "Naše aktivnosti za obradu podataka zasnivaju se na:",
+          "conditions": "Izvršeno je bez oslanjanja na bilo koji razlog osim svoje pravne svrhe, poput informisanog izričitog saglasnosti, ispunjenja ugovora ili zakonskih obaveza ili vitalnih interesa.",
+          "additionalSecurity": "Dodatna sigurnost: Takođe se strogo pridržavamo principima minimiziranja podataka, namenskim ograničenjem, preciznosti podataka i ograničenje roka zadržavanja."
+        },
+        "dataController": {
+          "title": "5. Registracija i DPO kontroler podataka",
+          "registration": "Platforma je registrovana kao kontrolor podataka sa Crnogorskom Agencijom za zaštitu podataka (AZLP); Za naše baze podataka izvršene su odvojene aplikacije.",
+          "dpo": "Kada je broj naših zaposlenih 10 ili više, postaviće se DPO (službenik za zaštitu podataka). U trenutnoj situaciji planirano je sastanak u skladu sa našim obavezama."
+        },
+        "security": {
+          "title": "6 Tehnička i organizaciona sigurnost",
+          "encryption": {
+            "title": "šifrovanje",
+            "content": "Kontrola pristupa i seču i sistem sistema"
+          },
+          "training": {
+            "title": "Obrazovanje",
+            "content": "Obuka zaposlenih i politike privatnosti"
+          },
+          "audit": {
+            "title": "Kontrola",
+            "content": "Redovne interne revizije se sprovode"
+          }
+        },
+        "dataBreach": {
+          "title": "7. Postupak obaveštenja o kršenju podataka",
+          "seventyTwoHour": {
+            "title": "Pravilo za 72 sata",
+            "content": "U slučaju bilo kakvih prekršaja podataka, obaveštavamo AZLP u roku od 72 sata."
+          },
+          "userNotification": {
+            "title": "Informacije o korisniku",
+            "content": "Ako kršenje utiče na prava korisnika, relevantni korisnici će takođe biti obavešteni odmah."
+          }
+        },
+        "userRights": {
+          "title": "8. Korisnička prava",
+          "content": "Prema Crnoj Gori PDPL, korisnici imaju sledeća prava:",
+          "basicRights": {
+            "title": "Osnovna prava",
+            "rights": "Pristup ličnim podacima, korekciji i brisanju, prigovor na obradu"
+          },
+          "advancedRights": {
+            "title": "Napredna prava",
+            "rights": "Zahtev za ograničavanje obrade, prigovor na automatizovane procese odluka, prenosivost podataka"
+          },
+          "application": "Primena: vaše aplikacije možete poslati na info@tarotnumeroloji.com sa dokumentima za verifikaciju identiteta."
+        },
+        "internationalTransfers": {
+          "title": "9. Međunarodni transferi podataka",
+          "azlpApproval": {
+            "title": "AZLP odobrenje",
+            "content": "Odobrenje AZLP se dobija pre prenosa podataka izvan Crne Gore."
+          },
+          "exceptions": {
+            "title": "Izuzetak",
+            "content": "Zemlje EU / EEA, treće zemlje koje je EU smatrala dovoljnim putem, izražavaju pismenu saglasnost korisnika."
+          }
+        },
+        "dataRetention": {
+          "title": "10. Period zadržavanja podataka i uništavanje podataka",
+          "content": "Lični podaci se čuvaju samo onoliko dugo koliko je potrebno u svrhu obrade; Kada istekne period, to je anonimni ili sigurno uništen."
+        },
+        "cookies": {
+          "title": "11. Kolačići i direktni marketing",
+          "cookiePreferences": {
+            "title": "Podešavanja kolačića",
+            "content": "Postavke kolačića korisnika se uzimaju u obzir."
+          },
+          "information": {
+            "title": "Da se ​​informiše",
+            "content": "Jasne informacije se pružaju o upotrebi kolačića i dat je pravo na objekt."
+          }
+        },
+        "changes": {
+          "title": "12. Promene",
+          "content": "Ova politika se periodično ažurira u skladu sa regulatornim ili operativnim zahtevima. Najistaknutija verzija će uvek biti objavljena na vvv.tarotnumeroloji.com."
+        },
+        "contact": {
+          "title": "13. Kontakt informacije",
+          "email": {
+            "title": "E-mail",
+            "address": "info@busbuskimki.com"
+          },
+          "address": {
+            "title": "Adresa",
+            "location": "Podgorica, Crna Gora"
+          },
+          "dataController": {
+            "title": "Kontroler podataka",
+            "name": "Busbuskimki konsultantska i digitalna agencija doo",
+            "registration": "Registracija: AZLP"
+          }
+        }
+      }
+    },
+    "termsOfUse": {
+      "title": "Uslovi korišćenja",
+      "subtitle": "Ovi uslovi objašnjavaju pravila koju morate da sledite i vaša prava kada koristite našu platformu.",
+      "lastUpdated": "Poslednje ažuriranje: 8. jula 2025",
+      "montenegroCompliant": "Crna Gora PDPL kompatibilan",
+      "sections": {
+        "general": {
+          "title": "1. Opšte",
+          "content": "Ovi \"Uslovi korišćenja\" (\"uslovi\") regulišu uslove korišćenja svih sadržaja, usluga i aplikacija na vvv.busbuskimki.com (\"sajt\"). Koristeći veb lokaciju smatrate da ste prihvatili ove uslove."
+        },
+        "serviceDescription": {
+          "title": "2 Opis usluge",
+          "content": "Sajt nudi profesionalni sadržaj u oblastima kao što su usluge čitanja Tarot i Numerologije, individualne analize i konsultacije. Sve usluge se sprovode u skladu sa zakonodavstvom i PDPL-om Crne Gore."
+        },
+        "usageConditions": {
+          "title": "3. Uslovi korišćenja i usaglašenosti",
+          "usagePurpose": {
+            "title": "Nameravana upotreba",
+            "content": "Sadržaj sajta može se koristiti samo za lične, nekomercijalne i zakoničke svrhe."
+          },
+          "intellectualProperty": {
+            "title": "Intelektualno vlasništvo",
+            "content": "Sva relevantna prava intelektualne svojine (tekst, slike, grafiku, kod) pripadaju sajtu."
+          },
+          "usageRules": {
+            "title": "Uslovi korišćenja",
+            "content": "Korisnik se slaže da će lokaciju koristiti na građanski, pošteni i zakonit način."
+          }
+        },
+        "registration": {
+          "title": "4. Registracija, sigurnost računa i obrada podataka",
+          "accountSecurity": {
+            "title": "Sigurnost naloga",
+            "content": "Neke usluge mogu da zahtevaju registraciju i kreiranje računa. Informacije o računu moraju se čuvati poverljivi."
+          },
+          "dataProcessing": {
+            "title": "Obrada podataka",
+            "content": "Vaši lični podaci se obrađuju i štite u skladu sa odredbama PDPL-a."
+          }
+        },
+        "disclaimer": {
+          "title": "5. Odricanje od odgovornosti i ograničenja odgovornosti",
+          "content": "Sajt nudi usluge Tarota i Numerologije za zabavne svrhe. Ove usluge nisu zamjena za savet u stvarnom životu i ne pružaju profesionalni medicinski, pravni ili finansijski savet."
+        },
+        "contact": {
+          "title": "6 Komunikacija",
+          "content": "Za vaša pitanja možete nas kontaktirati na info@busbuskimki.com."
+        }
+      }
+    }
+  },
+  "password": {
+    "rules": "Lozinka mora imati najmanje 6 karaktera i sadržati jedno veliko slovo, jedno malo slovo i jedan broj"
   }
 }

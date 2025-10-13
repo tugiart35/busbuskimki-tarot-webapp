@@ -118,12 +118,185 @@
     "bu-ay-daha": "You can exceed your goals by reading more this month",
     "daha-ekonomik-okuma": "You can try more economical reading types",
     "kredi-kullaniminiz-verimli": "Your credit usage looks efficient",
-    "memberSince": "Become a member",
+    "memberSince": "Membership Date",
     "readings": "Readings",
     "expert": "Expert",
     "intermediate": "Middle",
     "beginner": "Beginning",
-    "signOut": "Sign Out"
+    "signOut": "Sign Out",
+    "accountSettings": "Account Settings",
+    "admin": "admin",
+    "backToDashboard": "Return to Dashboard",
+    "buy": "To buy",
+    "buyCredits": "Buy Credits",
+    "cancel": "Cancel",
+    "completedReadings": "reading completed",
+    "creditAlert": "Low Credit Balance",
+    "creditAlertMessage": "Buy credits to read more",
+    "creditBalance": "Credit Balance",
+    "creditHistory": {
+      "allTime": "All Times",
+      "allTransactions": "All Transactions",
+      "bonus": "Bonus",
+      "bonuses": "Bonuses",
+      "buyCredits": "Buy Credits",
+      "completed": "completed",
+      "credits": "credit",
+      "csvAmount": "Amount",
+      "csvDate": "History",
+      "csvDescription": "Explanation",
+      "csvType": "Medicine",
+      "currentBalance": "Current Balance",
+      "description": "Track your credit purchase, usage and transaction history",
+      "downloadCSV": "Download CSV",
+      "error": "An error occurred while loading credit history",
+      "last1Year": "Last 1 Year",
+      "last30Days": "Last 30 Days",
+      "last7Days": "Last 7 Days",
+      "loading": "🔮 Loading credit history…",
+      "noTransactions": "No transactions yet",
+      "purchase": "Purchasing",
+      "purchases": "Acquisitions",
+      "refund": "Return",
+      "refunds": "Refunds",
+      "startWithFirstPurchase": "Start by making your first credit purchase",
+      "title": "Credit history",
+      "totalPurchased": "Total Purchased",
+      "totalRefunded": "Total Refund",
+      "totalUsed": "Total Used",
+      "transactionsFound": "{count} işlem bulundu",
+      "usage": "Uses"
+    },
+    "detailedStatistics": "Detailed Statistics",
+    "discoverLevel": "Take your first reading and discover your level!",
+    "displayName": "Display Name",
+    "downloadReading": "Download Reading",
+    "editProfile": "Edit Profile",
+    "email": "Email",
+    "free": "Free",
+    "immediateAccess": "Instant Access",
+    "keepGoing": "You are doing great! Go ahead!",
+    "last30Days": "Last 30 days",
+    "membershipDuration": "Membership Duration",
+    "moreReadings": "There is more reading",
+    "mysticJourney": "You are progressing on your mystical journey!",
+    "mysticLevel": "Mystic Level",
+    "new": "New",
+    "noReadingsYet": "No reading yet. Start a reading to have your first mystical experience and discover the secrets of your destiny.",
+    "packages": {
+      "addedToAccount": "added to your account.",
+      "bonus": "bonus",
+      "bonusCredits": "Bonus Credits",
+      "bonusCreditsDesc": "Earn extra credit on large packages",
+      "buyNow": "Buy",
+      "credits": "credit",
+      "currentBalance": "Your Current Balance",
+      "description": "Buy the credits you need for your tarot readings",
+      "faq": "Frequently Asked Questions",
+      "faq1Answer": "Your credits are valid for 1 year from the date of purchase.",
+      "faq1Question": "How long are the loans valid?",
+      "faq2Answer": "You can get a refund for unused credits within 7 days.",
+      "faq2Question": "What is the return policy?",
+      "faq3Answer": "Credit cards, debit cards and digital wallets are accepted.",
+      "faq3Question": "What payment methods are accepted?",
+      "faq4Answer": "10% bonus credit is given in the Popular package and 20% bonus credit in the Premium package.",
+      "faq4Question": "How are bonus credits calculated?",
+      "feature10Bonus": "%10 bonus kredi",
+      "feature10Readings": "10+ detailed tarot readings",
+      "feature20Bonus": "%20 bonus kredi",
+      "feature2Readings": "1-2 detailed tarot readings",
+      "feature30Days": "30 days validity",
+      "feature5Readings": "5-6 detailed tarot readings",
+      "feature60Days": "60 days validity",
+      "feature7Days": "7 days validity",
+      "featureCareer": "career reading",
+      "featureGeneral": "general reading",
+      "featureLove": "love expansion",
+      "featureNumerology": "Numerology analysis",
+      "featurePriority": "Priority support",
+      "instantActivation": "Instantly Active",
+      "instantActivationDesc": "Your credits are added to your account immediately",
+      "loading": "🔮 Loading credit packages…",
+      "mostPopular": "Most Popular",
+      "noPackages": "There are no active packages yet. Please check back later.",
+      "pageTitle": "Credit Packages",
+      "processing": "Processing…",
+      "profileError": "Failed to load profile information",
+      "purchaseError": "An error occurred while purchasing the package. Please try again.",
+      "purchaseSuccess": "successfully purchased!",
+      "purchased": "purchased",
+      "securePayment": "Secure Payment",
+      "securePaymentDesc": "All payments are protected by SSL encryption",
+      "title": "Credit Packages"
+    },
+    "popular": "Popular",
+    "processing": "Processing…",
+    "profile": "Profile",
+    "quickAccess": "Quick Access",
+    "quickActions": "Quick Transactions",
+    "readingHistory": "Reading History",
+    "readingsPage": {
+      "allTime": "All Times",
+      "allTypes": "All Genres",
+      "careerType": "Career Reading",
+      "clearFilters": "Clear Filters",
+      "credits": "credit",
+      "detailModal": {
+        "adminNotes": "Admin Notes",
+        "close": "Close",
+        "creditCost": "Credit Cost",
+        "download": "Download",
+        "drawnCards": "Cards Drawn",
+        "interpretation": "Interpretation",
+        "readingDate": "Reading Date",
+        "status": "Situation",
+        "statusCompleted": "completed",
+        "statusPending": "Pending",
+        "statusReviewed": "Reviewed",
+        "yourQuestion": "Ask"
+      },
+      "download": "Download",
+      "generalReadings": "General Readings",
+      "generalType": "General Reading",
+      "lastMonth": "Last 1 Month",
+      "lastWeek": "Last 1 Week",
+      "lastYear": "Last 1 Year",
+      "loadMore": "Load More",
+      "loading": "Loading…",
+      "loveReadings": "Love Readings",
+      "loveType": "Love Reading",
+      "noReadings": "No Reading Yet",
+      "noReadingsDesc": "Are you ready to have your first mystical experience?",
+      "numerologyType": "Numerology",
+      "searchPlaceholder": "Search for reading…",
+      "startFirstReading": "Start First Reading",
+      "subtitle": "All your mystical experiences",
+      "title": "My readings",
+      "totalCredits": "Total Credit",
+      "totalReadings": "Total Reading",
+      "view": "View"
+    },
+    "recentReadings": "Recent Readings",
+    "recentTransactions": "Recent Transactions",
+    "role": "Role",
+    "saveChanges": "Save Changes",
+    "settings": "Settings",
+    "startFirstReading": "Start My First Read",
+    "statistics": "Statistics",
+    "thisWeek": "This week",
+    "title": "dashboard",
+    "today": "Today",
+    "todayReadings": "Today's Readings",
+    "totalReadings": "Total Reading",
+    "user": "User",
+    "userId": "User ID",
+    "userInfo": "User Information",
+    "userLevel": "User Level",
+    "viewAll": "view all",
+    "viewAllReadings": "View all readings",
+    "viewReading": "View Reading",
+    "welcome": "Welcome",
+    "welcomeMessage": "Welcome to Your Mystical Journey!"
   },
   "accessibility": {
     "goToPage": "go to page",
@@ -262,7 +435,29 @@
       "surnameRequired": "Surname required",
       "userAlreadyExists": "This email address is already registered",
       "validating": "🔍 Verifying…",
-      "waiting": "⏳ Waiting…"
+      "waiting": "⏳ Waiting…",
+      "nameTooShort": "Name must be at least 2 characters",
+      "surnameTooShort": "Surname must be at least 2 characters",
+      "signingIn": "Signing in...",
+      "loginSuccess": "Login successful!",
+      "emailConfirmationRequired": "You need to confirm your email address",
+      "signingUp": "Signing up...",
+      "registerSuccess": "Registration successful! Welcome!",
+      "rateLimitExceeded": "Too many attempts. Please try again later.",
+      "googleLogin": "Sign in with Google",
+      "googleRegister": "Sign up with Google",
+      "sendingEmail": "Sending email...",
+      "resendEmail": "Resend Email",
+      "passwordResetDescription": "Enter your email address and we'll send you a password reset link.",
+      "retryAfter": "try again after seconds",
+      "genderSelect": "Select Gender",
+      "loginButton": "Sign In",
+      "registerButton": "Sign Up",
+      "passwordResetTitle": "Forgot Password",
+      "sendEmail": "Send Email",
+      "emailConfirmationTitle": "Email Confirmation",
+      "switchToRegister": "Don't have an account? Sign up",
+      "switchToLogin": "Already have an account? Sign in"
     },
     "permissions": {
       "accessDenied": "You are not authorized to access this page",
@@ -316,7 +511,10 @@
       "twoFactorRequired": "Two-factor authentication required"
     },
     "signIn": "Login",
-    "signOut": "Sign Out"
+    "signOut": "Sign Out",
+    "messages": {
+      "loginRequired": "You need to be logged in for this action"
+    }
   },
   "cardGroups": {
     "cups": "trophies",
@@ -19207,6 +19405,14 @@
       "mobile": "Mobile Navigation",
       "openMenu": "open menu",
       "closeMenu": "close menu"
+    },
+    "languageSelector": {
+      "languageOptions": "Language options",
+      "openMenu": "Open language selector menu",
+      "selectLanguage": "choose your language"
+    },
+    "menu": {
+      "goToPage": "go to page"
     }
   },
   "newLover": {
@@ -19867,9 +20073,9 @@
     "loadMore": "Load More",
     "loading": "Loading Readings",
     "loveReading": "The Reading of Love",
-    "loveReadingDetailed": "Love Express - Voice Read",
+    "loveReadingDetailed": "Love Explanation - Detailed Reading Aloud",
     "loveReadingSimple": "Love - Simple Reading",
-    "loveReadingWritten": "Love - Reading Written",
+    "loveReadingWritten": "Love Expansion - Written Reading",
     "loveReadings": "Love Readings",
     "loveSpread": "Love Spreads",
     "myReadings": "My readings",
@@ -19881,17 +20087,25 @@
     "preparing": "Your mystical experience is being prepared...",
     "problemSolvingReading": "Problem Solving Explanation",
     "problemSolvingSpread": "Problem-solving Expedition",
-    "relationshipAnalysisReading": "Relationship Analysis Explanation",
+    "relationshipAnalysisReading": "Situation Analysis",
     "relationshipAnalysisSpread": "Relation Analysis Spread",
     "searchPlaceholder": "Search for reading...",
-    "situationAnalysisReading": "State Analysis Explanation",
-    "situationAnalysisSpread": "Status Analysis Spread",
+    "situationAnalysisReading": "Situation Analysis Explanation",
+    "situationAnalysisSpread": "Situation Analysis Explanation",
     "startFirstReading": "Start First Reading",
     "threeCardReading": "3 Card Reading",
     "threeCardSpread": "3 Card Spreading",
     "totalCredits": "Total Credit",
     "totalReadings": "Total Reading",
-    "view": "View"
+    "view": "View",
+    "marriageReading": "Marriage Expansion",
+    "readingSaveError": "An error occurred while saving the reading.",
+    "readingSavedSuccess": "Your reading has been successfully saved!",
+    "saveReadingSuccess": "Reading recorded",
+    "newLoverReading": "New Love Reading",
+    "relationshipProblemsReading": "Relationship Problems Reading",
+    "tarotReading": "Tarot Reading",
+    "moneyReading": "Money and Finance Reading"
   },
   "relationshipAnalysis": {
     "data": {
@@ -20569,7 +20783,19 @@
     "title": "Statistics & Introductions",
     "totalCreditsSpent": "Total Spended Loan",
     "totalReadings": "Total Reading",
-    "vsLastMonth": "Blah, blah, blah. Last month."
+    "vsLastMonth": "Blah, blah, blah. Last month.",
+    "readingHabits": "Reading Habits",
+    "trendAnalysis": "Trend Analysis",
+    "readingTypes": "Reading Types",
+    "monthlyTrend": "Monthly Trend",
+    "weeklyActivity": "Weekly Activity",
+    "personalCycles": "Personal Cycles",
+    "lifePinnacles": "Life Pinnacles",
+    "lifeChallenges": "Life Challenges",
+    "activityPatterns": "Activity Patterns",
+    "achievementsGoals": "Achievements and Goals",
+    "readingTypesDistribution": "Reading Types Distribution",
+    "personalInsights": "Personal Insights"
   },
   "system": {
     "comprehensive": "Comprehensive",
@@ -21653,12 +21879,15 @@
   "profile": {
     "personalInfo": "Personal Information",
     "firstName": "Name",
-    "title": "Profile Information",
-    "lastName": "Last name",
+    "title": "Profile",
+    "lastName": "Surname",
     "lastNamePlaceholder": "Enter your last name",
     "fullName": "Full Name",
     "fullNamePlaceholder": "Enter your full name",
-    "birthDate": "Date of Birth"
+    "birthDate": "Date of birth",
+    "updateError": "Profile update error",
+    "noName": "Name not specified",
+    "firstNamePlaceholder": "Enter your name"
   },
   "blog": {
     "title": "Tarot Card Guide",
@@ -64486,5 +64715,765 @@
         }
       }
     }
+  },
+  "common": {
+    "back": "Back",
+    "buy": "Buy",
+    "cancel": "Cancel",
+    "clear": "clear",
+    "close": "Close",
+    "confirm": "Confirm",
+    "continue": "Continue",
+    "copy": "copy",
+    "credits": "credit",
+    "delete": "Delete",
+    "download": "Download",
+    "edit": "Edit",
+    "error": "Mistake",
+    "filter": "Filter",
+    "finish": "finish",
+    "free": "Free",
+    "immediateAccess": "Instant Access",
+    "info": "Information",
+    "loading": "Loading…",
+    "locale": "en-TR",
+    "new": "New",
+    "next": "Forward",
+    "no": "No",
+    "ok": "Ok",
+    "open": "Hungry",
+    "pause": "pause",
+    "popular": "Popular",
+    "previous": "Former",
+    "processing": "Processing…",
+    "progress": "Progress",
+    "refresh": "Refresh",
+    "reset": "reset",
+    "resume": "Continue",
+    "reversed": "Opposite",
+    "save": "Save",
+    "search": "Search",
+    "select": "Select",
+    "selectAll": "Select All",
+    "share": "Share",
+    "sort": "Sort by",
+    "start": "start",
+    "stop": "stop",
+    "submit": "Send",
+    "success": "Successful",
+    "today": "Today",
+    "upload": "Upload",
+    "upright": "Straight",
+    "view": "View",
+    "viewAll": "view all",
+    "warning": "Warning",
+    "yes": "Yes",
+    "cups": "Cups",
+    "pentacles": "Pentacles",
+    "swords": "Swords",
+    "wands": "Wands",
+    "three": "Three",
+    "four": "Four",
+    "five": "Five",
+    "seven": "Seven",
+    "eight": "Eight",
+    "nine": "Grandma",
+    "page": "Page",
+    "knight": "Knight",
+    "queen": "Queen",
+    "king": "King",
+    "kupalar": "Cups",
+    "tilsimlar": "Charms",
+    "kiliclar": "Swords",
+    "asalar": "Wands",
+    "kupovi": "Kupovi",
+    "pentakli": "Pentakli",
+    "ucretsiz-tarot-okumasi": "Draw your own cards with free tarot readings",
+    "draw-your-own": "Draw your own cards with free tarot reading",
+    "kisilik": "Personality",
+    "olgunluk": "Maturity",
+    "personality": "Personality",
+    "maturity": "Maturity",
+    "compatibility": "Compatibility",
+    "zrelost": "Zrelost",
+    "kompatibilnost": "Compatibilnost",
+    "busbuskimki": "♪ I'm in love with you ♪",
+    "article": "Article",
+    "person": "Person",
+    "organization": "Organization",
+    "home": "Home",
+    "numeroloji": "Numerology",
+    "numerology": "Numerology",
+    "numerologija": "Numerologija",
+    "thing": "Thing",
+    "yakinda": "Soon.",
+    "secim-yapin": "Choose",
+    "hizmetlerimiz": "Our services",
+    "ozelliklerimiz": "Properties",
+    "istatistiklerimiz": "Statistics",
+    "panel": "Panel",
+    "giris": "Introduction",
+    "email-confirmation-callback": "Email confirmation callback",
+    "email-confirmation-successful": "Email confirmation success",
+    "email-confirmation-error": "Email confirmation error",
+    "email-confirmation-exception": "Email confirmation exception",
+    "guvenli-giris-yapin": "Make safe entry or create new account",
+    "sifreler-eslesmiyor": "Passwords don't match.",
+    "sifre-guncelleme-hatasi": "Password update error",
+    "sifre-sifirlama-hatasi": "Password reset error",
+    "yeni-sifrenizi-girin": "Enter your new password",
+    "sifrenizi-tekrar-girin": "Reenter your password",
+    "dashboard": "Dashboard",
+    "okuma-verisi": "Reading data",
+    "kullanici-email-adresi": "User email address",
+    "email-basariyla-gonderildi": "Email sent successfully",
+    "email-gonderimi-basarisiz": "Email sending failed",
+    "bilinmeyen-hata": "Unknown error",
+    "gecerli-bir-email": "Enter a valid email address",
+    "email-gonderilemedi": "Could not send email",
+    "rate-limit-exceeded": "Rate limit Exceeded",
+    "cache": "Cashe",
+    "fallback": "Fallback",
+    "internal-server-error": "Internet server error",
+    "doviz-kuru-alinirken": "Error retrieving exchange rate",
+    "para-birimi-donusumunde": "Error in currency transformation",
+    "unknown": "Unknown",
+    "security-check-failed": "Security check failed",
+    "missing-signature": "Missing signature",
+    "bilinmiyor": "Unknown",
+    "payment-failure-notification": "Payment failed",
+    "payment-not-successful": "Payment not successful",
+    "payment-already-processed": "Payment already processed",
+    "package-not-found": "Package not found",
+    "user-profile-not": "User profile not found",
+    "failed-to-update": "Failed to update credit ballance",
+    "payment-notification-email": "Payment notification e-mail sent successfully",
+    "payment-processed-successfully": "Payment processd successfully",
+    "no-meaning": "No meaning",
+    "sesli": "Audio",
+    "yazili": "Written",
+    "basit": "Simple",
+    "strength": "Strength",
+    "justice": "Justice",
+    "death": "Death",
+    "temperance": "Temperance",
+    "judgement": "Judgement",
+    "kariyerimde-degistiremedigim-taraflar": "Parts of my career I can't change",
+    "kariyerimde-yardimci-olacak": "What changes will help my career",
+    "gecmisimdeki-hangi-engeller": "What obstacles in my past",
+    "sonuc-ne-olacak": "What will be the result?",
+    "dilek-karti": "Wishcard",
+    "beyaz-atli-prens": "Prince Charming",
+    "cinsel-dileklerin-gerceklesmesi": "The fulfillment of sexual wishes",
+    "kirli-konusma": "Dirty talk.",
+    "tek-gecelik-iliski": "A one-night stand.",
+    "hakkinda-soru-sordugun": "The person you're asking about.",
+    "fiziksel-ve-cinsel": "Your physical and sexual connection",
+    "duygusal-ve-ruhsal": "Your emotional and spiritual connection",
+    "iliskinin-uzun-vadeli": "The long-term result of the relationship",
+    "temel-anlam": "Basic meaning",
+    "ters-anlam": "Inverse meaning",
+    "saving": "Saving..."
+  },
+  "footer": {
+    "about": {
+      "title": "About Us",
+      "description": "As a psychologist, we offer professional tarot reading and numerology analysis services, where you can receive guidance in all aspects of your life through love guidance, career guidance, daily guidance and detailed numerology analysis."
+    },
+    "quickAccess": {
+      "title": "Quick Access",
+      "tarotReading": "Tarot Angle",
+      "numerology": "Numerology Analysis",
+      "loveReading": "The Opening of Love",
+      "careerReading": "Career Development"
+    },
+    "legal": {
+      "title": "Legal",
+      "privacyPolicy": "Privacy Policy",
+      "termsOfUse": "Conditions of Use",
+      "kvkkDisclosure": "KVKK Enlightenment",
+      "cookiePolicy": "Cookie Policy",
+      "disclaimer": "Responsibility Rejected",
+      "refundPolicy": "Payback Policy",
+      "accessibility": "Accessibility Policy",
+      "childPrivacy": "Children's Stealth Policy",
+      "copyrightPolicy": "Copyright Policy",
+      "paymentTerms": "Payment Conditions",
+      "securityPolicy": "Security Policy",
+      "about": "About Us",
+      "contact": "Communication"
+    },
+    "legalPages": {
+      "accessibility": {
+        "title": "Accessibility Policy",
+        "subtitle": "A commitment to accessibility for disabled users",
+        "content": "The Tarot-Numerology platform pledges to comply with accessibility standards so that all users can receive equal service. Our website is supported by features such as web site, screen reader compatibility, high contrast and keyboards.",
+        "contact": "You can deliver your proposals and complaints regarding accessibility to the address {email}."
+      },
+      "childPrivacy": {
+        "title": "Children's Stealth Policy",
+        "subtitle": "Under 13-year-old users' privacy",
+        "content": "The Tarot-Numerology platform does not deliberately collect personal data from children under 13 years of age. Parents' permission is required to use our services. Parents can request that their children's data be deleted.",
+        "contact": "If you think a child has been collected without permission, please refer to the address {email}. The data will be deleted after the examination."
+      },
+      "refundPolicy": {
+        "title": "Payback Policy",
+        "subtitle": "Return conditions for digital services",
+        "content": "The digital services offered on the Tarot-Numerology platform (analysis, counselling, credit, etc.) are immediately available and personal content. Therefore, no refunds are paid after service is offered.",
+        "contact": "However, in cases such as a technical error, the service cannot be presented at all or accidentally paid, you can apply for extradition by applying to the address {email}. Each request is examined individually and appropriate returns are carried out within seven working days.",
+        "policyTitle": "Payback Policy",
+        "noRefund": "Unrefundable",
+        "refundPossible": "Returnable",
+        "processingTimes": "Processes",
+        "processingContent": "Refundable returns are carried out within seven work days, each request is examined individually.",
+        "exceptions": "Exceptions",
+        "exception1": "No return is made due to user error or dissatisfaction.",
+        "exception2": "It is possible to return the service in case it is not available or in case of technical failure."
+      },
+      "cookiePolicy": {
+        "title": "Cookie Policy",
+        "subtitle": "Cookie use and preferences",
+        "content": "This website uses snacks to develop user experience and analyze site performance. Cookies are divided into two categories, including technical cookies and functional snacks that remember user preferences, which are needed to function properly on the website.",
+        "whatIsCookie": "What's Nuts?",
+        "types": "Nuts",
+        "technical": "Technical Cookies: The site is mandatory for functionality",
+        "functional": "Functional Cookies: Remembers user preferences",
+        "analytics": "Analytic Cookies: Analytic analyzes site use",
+        "preferences": "Cookie Preferences",
+        "manage": "You can use your browser settings to manage your cookie preferences."
+      },
+      "copyrightPolicy": {
+        "title": "Copyright Policy",
+        "subtitle": "Rights and use of intellectual property",
+        "content": "All content on this website is protected by copyright (the text, visual, graphic, code, design, etc.). The content can only be used for personal, non-commercial purposes.",
+        "rights": "Copyright Owner",
+        "owner": "All content belongs to the Shredder platform.",
+        "usage": "Use Conditions",
+        "personal": "The content is only allowed for personal use",
+        "commercial": "A written permit for commercial use is required",
+        "attribution": "Sources are required to be specified"
+      },
+      "disclaimer": {
+        "title": "Responsibility Rejected",
+        "subtitle": "Service coverage and restrictions",
+        "content": "The tarot and numerology services presented on this platform are for entertainment and do not replace real life advice. Our services do not provide professional medical, legal or financial advice.",
+        "serviceScope": "Service Containment",
+        "limitations": "Limits",
+        "entertainment": "Services are for entertainment",
+        "notAdvice": "It's not real-life advice.",
+        "personal": "It shouldn't affect your personal decisions",
+        "professional": "Professional counseling does not apply."
+      },
+      "kvkkDisclosure": {
+        "title": "KVKK Lighting Text",
+        "subtitle": "Protection of personal data",
+        "content": "This illumination text is prepared under the Protection of Personal Data Act 6698 (KVKK). Your personal data is processed only within the specified objectives and legal limits.",
+        "dataProtection": "Data Protection",
+        "dataController": "Data Manager",
+        "controller": "Advantage platform",
+        "purposes": "Purposes for Processing",
+        "purpose1": "Service presentation and customer relations",
+        "purpose2": "Compliance of legal obligations",
+        "purpose3": "Communication and information",
+        "rights": "Your rights",
+        "right1": "Access to your personal data",
+        "right2": "Correction and delete",
+        "right3": "Objection to action",
+        "right4": "Data transport"
+      },
+      "paymentTerms": {
+        "title": "Payment Conditions",
+        "subtitle": "Payment methods and conditions",
+        "content": "On our platform, safe payment methods are used. All payments are covered by SSL encryption and run through third party payment providers.",
+        "methods": "Payment Methods",
+        "creditCard": "Credit Card",
+        "debitCard": "Bank Card",
+        "digitalWallet": "Digital Wallet",
+        "security": "Security",
+        "ssl": "Protected by SSL encryption",
+        "pci": "Fitting PCI DSS standards",
+        "secure": "Safe payment infrastructure"
+      },
+      "securityPolicy": {
+        "title": "Security Policy",
+        "subtitle": "Data security and protection measures",
+        "content": "Our platform applies the highest security standards to ensure the safety of user data. All data is encrypted and stored in secure servers.",
+        "measures": "Security Precautions",
+        "encryption": "Data encryption",
+        "access": "Access check",
+        "monitoring": "Constant monitoring",
+        "backup": "Regular backup",
+        "compliance": "Legal compatibility"
+      },
+      "privacyPolicy": {
+        "title": "Secrecy Policy",
+        "subtitle": "The preservation of your personal data is a priority for us, which explains how your data is collected, processed and protected.",
+        "lastUpdated": "Last Update: July 8, 2025",
+        "montenegroCompliant": "Montenegro PDPL Compatible",
+        "sections": {
+          "introduction": {
+            "title": "Entrance 1",
+            "content": "It is referred to as \"Platform,\" \"Tarot and Numerology services,\" www.busbuskimki.com.com. It explains our personal data processing practices in accordance with Law on Personal Data Protection (PDPL) provisions in Montenegro."
+          },
+          "scope": {
+            "title": "Application Containment 2.",
+            "content": "PDPL is applied to all domestic and foreign organisations operating in Montenegro, companies collecting data through electronic or manual data processing systems."
+          },
+          "dataCollection": {
+            "title": "Third Gathered Data & Sensitive Categories",
+            "personalData": {
+              "title": "Personal Data",
+              "content": "Name, last name, email, IP address, snack data, etc."
+            },
+            "sensitiveData": {
+              "title": "Sensitive Data",
+              "content": "The birth date is special categories, such as health care, and the processing of these categories is only possible with open consent or legal exceptions."
+            }
+          },
+          "processingConditions": {
+            "title": "Process 4 Conditions",
+            "content": "Our data processing activities are based on:",
+            "conditions": "The fulfillment of enlightened open consent, contract or legal obligations is carried out on no basis other than the legal purpose of life interests.",
+            "additionalSecurity": "Additional Security: We also closely follow the principles of data minimization, purpose limiting, data accuracy and storage time limiting."
+          },
+          "dataController": {
+            "title": "Data Responsibility Record 5 & DPO",
+            "registration": "The platform is registered as data manager for the Montenegrin Data Protection Agency (AZLP); separate applications have been made for our databases.",
+            "dpo": "When our number of employees is 10 and more, the DPO will be appointed. In the current case, the appointment is scheduled to be in accordance with our obligations."
+          },
+          "security": {
+            "title": "6th Technical and Organised Security",
+            "encryption": {
+              "title": "Decrypt",
+              "content": "Access control and system log"
+            },
+            "training": {
+              "title": "Education",
+              "content": "Working education and confidentiality policies"
+            },
+            "audit": {
+              "title": "Control",
+              "content": "Regular internal audits are being implemented"
+            }
+          },
+          "dataBreach": {
+            "title": "7th Data Disintegration Protocol (Breach)",
+            "seventyTwoHour": {
+              "title": "72 Hours Rule",
+              "content": "In case of any data breach, we're reporting to AZLP within 72 hours."
+            },
+            "userNotification": {
+              "title": "User Information",
+              "content": "If the breach affects the rights of user data, the relevant users will be notified immediately."
+            }
+          },
+          "userRights": {
+            "title": "User Rights 8",
+            "content": "Under the scope of the Montenegrin PDPL, users have the following rights:",
+            "basicRights": {
+              "title": "Basic Rights",
+              "rights": "Access to personal data, correction and delete, processing objection"
+            },
+            "advancedRights": {
+              "title": "Advanced Rights",
+              "rights": "Request for restrictions on processing, objection to auto-determination processes, transport of data"
+            },
+            "application": "Application: You can submit your applications to info@tarotnumerology.com with confirmation documents."
+          },
+          "internationalTransfers": {
+            "title": "9 International Data Transfers",
+            "azlpApproval": {
+              "title": "AZLP Approved",
+              "content": "AZLP approval is being approved before data transfer from outside Montenegro."
+            },
+            "exceptions": {
+              "title": "Exceptions",
+              "content": "EU/AEA countries, third countries, considered sufficient by the EU, are the user's explicit consent."
+            }
+          },
+          "dataRetention": {
+            "title": "Data Hide Time and Extermination",
+            "content": "Personal data is stored only for the duration of its purposes; when the time is over, it is anonymously or safely destroyed."
+          },
+          "cookies": {
+            "title": "11 Cookies and Direct Marketing",
+            "cookiePreferences": {
+              "title": "Cookie Preferences",
+              "content": "Users' snack preferences are considered."
+            },
+            "information": {
+              "title": "Information",
+              "content": "Clear information on the use of snacks is provided, and the right to appeal is granted."
+            }
+          },
+          "changes": {
+            "title": "12th Changes",
+            "content": "This policy is periodically updated in terms of regulatory or functional requirements. The most recent version will always be published at www.tarotumerology.com."
+          },
+          "contact": {
+            "title": "13 Communication Information",
+            "email": {
+              "title": "Email",
+              "address": "@busbusbuskimki.com"
+            },
+            "address": {
+              "title": "Address",
+              "location": "Podgorica, Montenegro"
+            },
+            "dataController": {
+              "title": "Data Manager",
+              "name": "BUSBUSKI CONSULTANCY AND DIGITAL AGENCY DOO",
+              "registration": "Recording: AZLP"
+            }
+          }
+        }
+      },
+      "termsOfUse": {
+        "title": "Conditions of Use",
+        "subtitle": "These conditions explain the rules and rights you must follow when you use our platform.",
+        "lastUpdated": "Last Update: July 8, 2025",
+        "montenegroCompliant": "Montenegro PDPL Compatible",
+        "sections": {
+          "general": {
+            "title": "1st General",
+            "content": "The content on www.busbuskimki.com (\"Site\") regulates the use of services and applications. You have accepted these conditions using Site."
+          },
+          "serviceDescription": {
+            "title": "Servicescription 2",
+            "content": "The site provides professional content in areas such as tarot and numerology reading services, individual analysis and counselling. All services are conducted in accordance with Montenegro legislation and PDPL."
+          },
+          "usageConditions": {
+            "title": "3rd Use Conditions and Harmony",
+            "usagePurpose": {
+              "title": "Purpose of Use",
+              "content": "The content of the site can only be used for personal, commercial, and legal purposes."
+            },
+            "intellectualProperty": {
+              "title": "Fiction Property",
+              "content": "All relevant intellectual property rights (text, visual, graphic, code) belong to Site."
+            },
+            "usageRules": {
+              "title": "Rules of Use",
+              "content": "The user agrees to use the site in a civilized, honest and legal manner."
+            }
+          },
+          "registration": {
+            "title": "Log 4, Account Safety and Data Processing",
+            "accountSecurity": {
+              "title": "Account Safety",
+              "content": "Some services may need to create records and accounts. Account information must be kept confidential."
+            },
+            "dataProcessing": {
+              "title": "Data Processing",
+              "content": "Your personal data is processed and preserved in accordance with PDPL provisions."
+            }
+          },
+          "disclaimer": {
+            "title": "Responsibility 5 Reddi and Restrictions",
+            "content": "The site provides tarot and numerology services for entertainment, which do not replace real-life advice and provide professional medical, legal or financial advice."
+          },
+          "contact": {
+            "title": "Communication 6",
+            "content": "For your questions, you can contact us at info@busbusbuskimki.com."
+          }
+        }
+      }
+    },
+    "contact": {
+      "title": "Communication",
+      "email": "@busbusbuskimki.com",
+      "phone": "+382 (67) 010176",
+      "address": "Podgorica, Montenegro"
+    },
+    "payment": {
+      "title": "Payment Methods",
+      "securePayment": "Safe payment"
+    },
+    "social": {
+      "title": "Social Media"
+    },
+    "copyright": {
+      "text": "All rights reserved.",
+      "disclaimer": "This site is entertainment and does not replace real life advice."
+    }
+  },
+  "legalPages": {
+    "accessibility": {
+      "title": "Accessibility Policy",
+      "subtitle": "A commitment to accessibility for disabled users",
+      "content": "The Tarot-Numerology platform pledges to comply with accessibility standards so that all users can receive equal service. Our website is supported by features such as web site, screen reader compatibility, high contrast and keyboards.",
+      "contact": "You can deliver your proposals and complaints regarding accessibility to the address {email}."
+    },
+    "childPrivacy": {
+      "title": "Children's Stealth Policy",
+      "subtitle": "Under 13-year-old users' privacy",
+      "content": "The Tarot-Numerology platform does not deliberately collect personal data from children under 13 years of age. Parents' permission is required to use our services. Parents can request that their children's data be deleted.",
+      "contact": "If you think a child has been collected without permission, please refer to the address {email}. The data will be deleted after the examination."
+    },
+    "refundPolicy": {
+      "title": "Payback Policy",
+      "subtitle": "Return conditions for digital services",
+      "content": "The digital services offered on the Tarot-Numerology platform (analysis, counselling, credit, etc.) are immediately available and personal content. Therefore, no refunds are paid after service is offered.",
+      "contact": "However, in cases such as a technical error, the service cannot be presented at all or accidentally paid, you can apply for extradition by applying to the address {email}. Each request is examined individually and appropriate returns are carried out within seven working days.",
+      "policyTitle": "Payback Policy",
+      "noRefund": "Unrefundable",
+      "refundPossible": "Returnable",
+      "processingTimes": "Processes",
+      "processingContent": "Refundable returns are carried out within seven work days, each request is examined individually.",
+      "exceptions": "Exceptions",
+      "exception1": "No return is made due to user error or dissatisfaction.",
+      "exception2": "It is possible to return the service in case it is not available or in case of technical failure."
+    },
+    "cookiePolicy": {
+      "title": "Cookie Policy",
+      "subtitle": "Cookie use and preferences",
+      "content": "This website uses snacks to develop user experience and analyze site performance. Cookies are divided into two categories, including technical cookies and functional snacks that remember user preferences, which are needed to function properly on the website.",
+      "whatIsCookie": "What's Nuts?",
+      "types": "Nuts",
+      "technical": "Technical Cookies: The site is mandatory for functionality",
+      "functional": "Functional Cookies: Remembers user preferences",
+      "analytics": "Analytic Cookies: Analytic analyzes site use",
+      "preferences": "Cookie Preferences",
+      "manage": "You can use your browser settings to manage your cookie preferences."
+    },
+    "copyrightPolicy": {
+      "title": "Copyright Policy",
+      "subtitle": "Rights and use of intellectual property",
+      "content": "All content on this website is protected by copyright (the text, visual, graphic, code, design, etc.). The content can only be used for personal, non-commercial purposes.",
+      "rights": "Copyright Owner",
+      "owner": "All content belongs to the Shredder platform.",
+      "usage": "Use Conditions",
+      "personal": "The content is only allowed for personal use",
+      "commercial": "A written permit for commercial use is required",
+      "attribution": "Sources are required to be specified"
+    },
+    "disclaimer": {
+      "title": "Responsibility Rejected",
+      "subtitle": "Service coverage and restrictions",
+      "content": "The tarot and numerology services presented on this platform are for entertainment and do not replace real life advice. Our services do not provide professional medical, legal or financial advice.",
+      "serviceScope": "Service Containment",
+      "limitations": "Limits",
+      "entertainment": "Services are for entertainment",
+      "notAdvice": "It's not real-life advice.",
+      "personal": "It shouldn't affect your personal decisions",
+      "professional": "Professional counseling does not apply."
+    },
+    "kvkkDisclosure": {
+      "title": "KVKK Lighting Text",
+      "subtitle": "Protection of personal data",
+      "content": "This illumination text is prepared under the Protection of Personal Data Act 6698 (KVKK). Your personal data is processed only within the specified objectives and legal limits.",
+      "dataProtection": "Data Protection",
+      "dataController": "Data Manager",
+      "controller": "Advantage platform",
+      "purposes": "Purposes for Processing",
+      "purpose1": "Service presentation and customer relations",
+      "purpose2": "Compliance of legal obligations",
+      "purpose3": "Communication and information",
+      "rights": "Your rights",
+      "right1": "Access to your personal data",
+      "right2": "Correction and delete",
+      "right3": "Objection to action",
+      "right4": "Data transport"
+    },
+    "paymentTerms": {
+      "title": "Payment Conditions",
+      "subtitle": "Payment methods and conditions",
+      "content": "On our platform, safe payment methods are used. All payments are covered by SSL encryption and run through third party payment providers.",
+      "methods": "Payment Methods",
+      "creditCard": "Credit Card",
+      "debitCard": "Bank Card",
+      "digitalWallet": "Digital Wallet",
+      "security": "Security",
+      "ssl": "Protected by SSL encryption",
+      "pci": "Fitting PCI DSS standards",
+      "secure": "Safe payment infrastructure"
+    },
+    "securityPolicy": {
+      "title": "Security Policy",
+      "subtitle": "Data security and protection measures",
+      "content": "Our platform applies the highest security standards to ensure the safety of user data. All data is encrypted and stored in secure servers.",
+      "measures": "Security Precautions",
+      "encryption": "Data encryption",
+      "access": "Access check",
+      "monitoring": "Constant monitoring",
+      "backup": "Regular backup",
+      "compliance": "Legal compatibility"
+    },
+    "privacyPolicy": {
+      "title": "Secrecy Policy",
+      "subtitle": "The preservation of your personal data is a priority for us, which explains how your data is collected, processed and protected.",
+      "lastUpdated": "Last Update: July 8, 2025",
+      "montenegroCompliant": "Montenegro PDPL Compatible",
+      "sections": {
+        "introduction": {
+          "title": "Entrance 1",
+          "content": "It is referred to as \"Platform,\" \"Tarot and Numerology services,\" www.busbuskimki.com.com. It explains our personal data processing practices in accordance with Law on Personal Data Protection (PDPL) provisions in Montenegro."
+        },
+        "scope": {
+          "title": "Application Containment 2.",
+          "content": "PDPL is applied to all domestic and foreign organisations operating in Montenegro, companies collecting data through electronic or manual data processing systems."
+        },
+        "dataCollection": {
+          "title": "Third Gathered Data & Sensitive Categories",
+          "personalData": {
+            "title": "Personal Data",
+            "content": "Name, last name, email, IP address, snack data, etc."
+          },
+          "sensitiveData": {
+            "title": "Sensitive Data",
+            "content": "The birth date is special categories, such as health care, and the processing of these categories is only possible with open consent or legal exceptions."
+          }
+        },
+        "processingConditions": {
+          "title": "Process 4 Conditions",
+          "content": "Our data processing activities are based on:",
+          "conditions": "The fulfillment of enlightened open consent, contract or legal obligations is carried out on no basis other than the legal purpose of life interests.",
+          "additionalSecurity": "Additional Security: We also closely follow the principles of data minimization, purpose limiting, data accuracy and storage time limiting."
+        },
+        "dataController": {
+          "title": "Data Responsibility Record 5 & DPO",
+          "registration": "The platform is registered as data manager for the Montenegrin Data Protection Agency (AZLP); separate applications have been made for our databases.",
+          "dpo": "When our number of employees is 10 and more, the DPO will be appointed. In the current case, the appointment is scheduled to be in accordance with our obligations."
+        },
+        "security": {
+          "title": "6th Technical and Organised Security",
+          "encryption": {
+            "title": "Decrypt",
+            "content": "Access control and system log"
+          },
+          "training": {
+            "title": "Education",
+            "content": "Working education and confidentiality policies"
+          },
+          "audit": {
+            "title": "Control",
+            "content": "Regular internal audits are being implemented"
+          }
+        },
+        "dataBreach": {
+          "title": "7th Data Disintegration Protocol (Breach)",
+          "seventyTwoHour": {
+            "title": "72 Hours Rule",
+            "content": "In case of any data breach, we're reporting to AZLP within 72 hours."
+          },
+          "userNotification": {
+            "title": "User Information",
+            "content": "If the breach affects the rights of user data, the relevant users will be notified immediately."
+          }
+        },
+        "userRights": {
+          "title": "User Rights 8",
+          "content": "Under the scope of the Montenegrin PDPL, users have the following rights:",
+          "basicRights": {
+            "title": "Basic Rights",
+            "rights": "Access to personal data, correction and delete, processing objection"
+          },
+          "advancedRights": {
+            "title": "Advanced Rights",
+            "rights": "Request for restrictions on processing, objection to auto-determination processes, transport of data"
+          },
+          "application": "Application: You can submit your applications to info@tarotnumerology.com with confirmation documents."
+        },
+        "internationalTransfers": {
+          "title": "9 International Data Transfers",
+          "azlpApproval": {
+            "title": "AZLP Approved",
+            "content": "AZLP approval is being approved before data transfer from outside Montenegro."
+          },
+          "exceptions": {
+            "title": "Exceptions",
+            "content": "EU/AEA countries, third countries, considered sufficient by the EU, are the user's explicit consent."
+          }
+        },
+        "dataRetention": {
+          "title": "Data Hide Time and Extermination",
+          "content": "Personal data is stored only for the duration of its purposes; when the time is over, it is anonymously or safely destroyed."
+        },
+        "cookies": {
+          "title": "11 Cookies and Direct Marketing",
+          "cookiePreferences": {
+            "title": "Cookie Preferences",
+            "content": "Users' snack preferences are considered."
+          },
+          "information": {
+            "title": "Information",
+            "content": "Clear information on the use of snacks is provided, and the right to appeal is granted."
+          }
+        },
+        "changes": {
+          "title": "12th Changes",
+          "content": "This policy is periodically updated in terms of regulatory or functional requirements. The most recent version will always be published at www.tarotumerology.com."
+        },
+        "contact": {
+          "title": "13 Communication Information",
+          "email": {
+            "title": "Email",
+            "address": "@busbusbuskimki.com"
+          },
+          "address": {
+            "title": "Address",
+            "location": "Podgorica, Montenegro"
+          },
+          "dataController": {
+            "title": "Data Manager",
+            "name": "BUSBUSKI CONSULTANCY AND DIGITAL AGENCY DOO",
+            "registration": "Recording: AZLP"
+          }
+        }
+      }
+    },
+    "termsOfUse": {
+      "title": "Conditions of Use",
+      "subtitle": "These conditions explain the rules and rights you must follow when you use our platform.",
+      "lastUpdated": "Last Update: July 8, 2025",
+      "montenegroCompliant": "Montenegro PDPL Compatible",
+      "sections": {
+        "general": {
+          "title": "1st General",
+          "content": "The content on www.busbuskimki.com (\"Site\") regulates the use of services and applications. You have accepted these conditions using Site."
+        },
+        "serviceDescription": {
+          "title": "Servicescription 2",
+          "content": "The site provides professional content in areas such as tarot and numerology reading services, individual analysis and counselling. All services are conducted in accordance with Montenegro legislation and PDPL."
+        },
+        "usageConditions": {
+          "title": "3rd Use Conditions and Harmony",
+          "usagePurpose": {
+            "title": "Purpose of Use",
+            "content": "The content of the site can only be used for personal, commercial, and legal purposes."
+          },
+          "intellectualProperty": {
+            "title": "Fiction Property",
+            "content": "All relevant intellectual property rights (text, visual, graphic, code) belong to Site."
+          },
+          "usageRules": {
+            "title": "Rules of Use",
+            "content": "The user agrees to use the site in a civilized, honest and legal manner."
+          }
+        },
+        "registration": {
+          "title": "Log 4, Account Safety and Data Processing",
+          "accountSecurity": {
+            "title": "Account Safety",
+            "content": "Some services may need to create records and accounts. Account information must be kept confidential."
+          },
+          "dataProcessing": {
+            "title": "Data Processing",
+            "content": "Your personal data is processed and preserved in accordance with PDPL provisions."
+          }
+        },
+        "disclaimer": {
+          "title": "Responsibility 5 Reddi and Restrictions",
+          "content": "The site provides tarot and numerology services for entertainment, which do not replace real-life advice and provide professional medical, legal or financial advice."
+        },
+        "contact": {
+          "title": "Communication 6",
+          "content": "For your questions, you can contact us at info@busbusbuskimki.com."
+        }
+      }
+    }
+  },
+  "password": {
+    "rules": "Password must be at least 6 characters and contain one uppercase letter, one lowercase letter, and one number"
   }
 }
