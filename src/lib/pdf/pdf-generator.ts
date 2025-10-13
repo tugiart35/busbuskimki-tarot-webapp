@@ -74,7 +74,10 @@ class PDFGeneratorService {
       const htmlContent = this.generateModalStyleHTML(readingData);
 
       // HTML'i sayfaya yükle
-      await page.setContent(htmlContent, { waitUntil: 'networkidle0' });
+      await page.setContent(htmlContent, {
+        waitUntil: 'domcontentloaded',
+        timeout: 60000,
+      });
 
       // PDF oluştur - Tek sayfa, kart fotoğrafları ile
       const pdfBuffer = await page.pdf({
@@ -96,7 +99,7 @@ class PDFGeneratorService {
 
       return Buffer.from(pdfBuffer);
     } catch (error) {
-      console.error('PDF generation failed:', error);
+      // console.error('PDF generation failed:', error);
       throw new Error('PDF oluşturulamadı');
     }
   }
@@ -450,32 +453,53 @@ class PDFGeneratorService {
         const positionTitle = positionTitles[index] || `position ${index + 1}`;
         const cardImageUrl = this.getCardImageUrl(card.id, card.isReversed);
 
-        // Yorum metnini bul
+        // Kart anlamını çıkar - basit yaklaşım
+        let meaning = '';
+
+        // Interpretation metninden kart anlamını çıkar
         const interpretation = readingData.interpretation || '';
         const lines = interpretation.split('\n');
+
+        // Kart bölümünü bul
         const cardSection = lines.find(
           line =>
             line.includes(`${index + 1}.`) &&
             line.includes(card.nameTr || card.name)
         );
 
-        let meaning = '';
         if (cardSection) {
           const sectionIndex = lines.findIndex(line => line === cardSection);
           const meaningLines = [];
-          for (let i = sectionIndex + 2; i < lines.length; i++) {
+
+          // Kart açıklamasını topla
+          for (let i = sectionIndex + 1; i < lines.length; i++) {
             const currentLine = lines[i];
+
+            // [object Object] kontrolü - bu satırı atla
+            if (currentLine?.includes('[object Object]')) {
+              continue;
+            }
+
+            // Durma koşulları
             if (
               !currentLine ||
               currentLine.trim() === '' ||
               currentLine.match(/^\*\*\d+\./) ||
-              currentLine.includes('**Aşk Hayatı Özeti**')
+              currentLine.includes('**Aşk Hayatı Özeti**') ||
+              currentLine.includes('💫 **tarotPage')
             ) {
               break;
             }
+
             meaningLines.push(currentLine.trim());
           }
+
           meaning = meaningLines.join(' ').trim();
+        }
+
+        // Son kontrol - anlam bulunamadıysa varsayılan mesaj
+        if (!meaning || meaning === '[object Object]' || meaning.length < 10) {
+          meaning = `Bu pozisyon için ${card.nameTr || card.name} kartı çekilmiştir.`;
         }
 
         return `
@@ -523,7 +547,10 @@ class PDFGeneratorService {
       const htmlContent = this.generateNumerologyHTML(numerologyData, userData);
 
       // HTML'i sayfaya yükle
-      await page.setContent(htmlContent, { waitUntil: 'networkidle0' });
+      await page.setContent(htmlContent, {
+        waitUntil: 'domcontentloaded',
+        timeout: 60000,
+      });
 
       // PDF oluştur
       const pdfBuffer = await page.pdf({
@@ -545,7 +572,7 @@ class PDFGeneratorService {
 
       return Buffer.from(pdfBuffer);
     } catch (error) {
-      console.error('Numerology PDF generation failed:', error);
+      // console.error('Numerology PDF generation failed:', error);
       throw new Error('Numeroloji PDF oluşturulamadı');
     }
   }

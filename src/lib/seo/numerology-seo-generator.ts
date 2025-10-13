@@ -198,6 +198,7 @@ export function generateNumerologyPageMetadata(locale: string): Metadata {
     alternates: {
       canonical: `${baseUrl}${data!.canonicalPath}`,
       languages: {
+        'x-default': `${baseUrl}/tr/numeroloji`,
         tr: `${baseUrl}/tr/numeroloji`,
         en: `${baseUrl}/en/numerology`,
         sr: `${baseUrl}/sr/numerologija`,

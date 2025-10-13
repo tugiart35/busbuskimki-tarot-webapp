@@ -154,6 +154,7 @@ export function generateTarotPageMetadata(locale: string): Metadata {
     alternates: {
       canonical: `${baseUrl}${data.canonicalPath}`,
       languages: {
+        'x-default': `${baseUrl}/tr/tarot-okumasi`,
         tr: `${baseUrl}/tr/tarot-okumasi`,
         en: `${baseUrl}/en/tarot-reading`,
         sr: `${baseUrl}/sr/tarot-čitaje`,

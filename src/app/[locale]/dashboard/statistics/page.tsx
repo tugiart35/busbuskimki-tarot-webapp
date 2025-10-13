@@ -248,7 +248,7 @@ export default function StatisticsPage() {
 
       const favoriteSpread =
         Object.entries(spreadCounts).sort(([, a], [, b]) => b - a)[0]?.[0] ||
-        'Henüz yok';
+        t('statistics.notYet');
 
       // En aktif gün
       const dayCounts: Record<string, number> = {};
@@ -261,7 +261,7 @@ export default function StatisticsPage() {
 
       const mostActiveDay =
         Object.entries(dayCounts).sort(([, a], [, b]) => b - a)[0]?.[0] ||
-        'Henüz yok';
+        t('statistics.notYet');
 
       // Kredi hesaplamaları
       const totalCreditsSpent = allReadings.reduce(
@@ -336,13 +336,13 @@ export default function StatisticsPage() {
       // Haftalık veri analizi (son 7 gün)
       const weeklyData = [];
       const dayNames = [
-        'Pazartesi',
-        'Salı',
-        'Çarşamba',
-        'Perşembe',
-        'Cuma',
-        'Cumartesi',
-        'Pazar',
+        t('statistics.dayNames.monday'),
+        t('statistics.dayNames.tuesday'),
+        t('statistics.dayNames.wednesday'),
+        t('statistics.dayNames.thursday'),
+        t('statistics.dayNames.friday'),
+        t('statistics.dayNames.saturday'),
+        t('statistics.dayNames.sunday'),
       ];
 
       for (let i = 6; i >= 0; i--) {
@@ -360,7 +360,7 @@ export default function StatisticsPage() {
 
         const dayIndex = dayStart.getDay() === 0 ? 6 : dayStart.getDay() - 1;
         weeklyData.push({
-          day: dayNames[dayIndex] || 'Bilinmeyen',
+          day: dayNames[dayIndex] || t('statistics.notYet'),
           readings: dayReadings.length,
         });
       }
@@ -732,24 +732,24 @@ export default function StatisticsPage() {
                 <div className='space-y-4'>
                   <div className='flex justify-between items-center p-3 bg-white/5 rounded-lg'>
                     <span className='text-lavender text-sm'>
-                      En Çok Kullanılan Dizilim:
+                      {t('statistics.mostUsedSpread')}:
                     </span>
                     <span className='text-white font-semibold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent'>
                       {userStats.favoriteSpread}
                     </span>
                   </div>
                   <div className='flex justify-between items-center p-3 bg-white/5 rounded-lg'>
-                    <span className='text-lavender text-sm'>En Aktif Gün:</span>
+                    <span className='text-lavender text-sm'>{t('statistics.mostActiveDay')}:</span>
                     <span className='text-white font-semibold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent'>
                       {userStats.mostActiveDay}
                     </span>
                   </div>
                   <div className='flex justify-between items-center p-3 bg-white/5 rounded-lg'>
                     <span className='text-lavender text-sm'>
-                      Aylık Ortalama:
+                      {t('statistics.average')}:
                     </span>
                     <span className='text-white font-semibold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent'>
-                      {userStats.averagePerMonth.toFixed(1)} okuma
+                      {userStats.averagePerMonth.toFixed(1)} {t('statistics.perReading')}
                     </span>
                   </div>
                 </div>
@@ -765,7 +765,7 @@ export default function StatisticsPage() {
                 <div className='space-y-4'>
                   <div className='flex justify-between items-center p-3 bg-white/5 rounded-lg'>
                     <span className='text-lavender text-sm'>
-                      Bu Ay vs Geçen Ay:
+                      {t('statistics.monthVsMonth')}:
                     </span>
                     <span
                       className={`font-semibold flex items-center space-x-1 ${userStats.thisMonth > userStats.lastMonth ? 'text-green-400' : 'text-orange-400'}`}
@@ -777,14 +777,14 @@ export default function StatisticsPage() {
                       </span>
                       <span>
                         {userStats.thisMonth > userStats.lastMonth
-                          ? 'Artış'
-                          : 'Azalış'}
+                          ? t('statistics.increase')
+                          : t('statistics.decrease')}
                       </span>
                     </span>
                   </div>
                   <div className='flex justify-between items-center p-3 bg-white/5 rounded-lg'>
                     <span className='text-lavender text-sm'>
-                      Kredi Verimliliği:
+                      {t('statistics.creditEfficiency')}:
                     </span>
                     <span
                       className={`font-semibold flex items-center space-x-1 ${
@@ -804,17 +804,17 @@ export default function StatisticsPage() {
                       </span>
                       <span>
                         {userStats.averagePerReading <= 5
-                          ? 'Yüksek'
+                          ? t('statistics.high')
                           : userStats.averagePerReading <= 8
-                            ? 'Orta'
-                            : 'Düşük'}
+                            ? t('statistics.medium')
+                            : t('statistics.low')}
                       </span>
                     </span>
                   </div>
                   <div className='flex justify-between items-center p-3 bg-white/5 rounded-lg'>
-                    <span className='text-lavender text-sm'>Günlük Seri:</span>
+                    <span className='text-lavender text-sm'>{t('statistics.dailyStreak')}:</span>
                     <span className='text-white font-semibold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent flex items-center space-x-1'>
-                      <span>{userStats.streakDays} gün</span>
+                      <span>{userStats.streakDays} {t('statistics.days')}</span>
                       <span>🔥</span>
                     </span>
                   </div>

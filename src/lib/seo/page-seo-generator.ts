@@ -137,6 +137,7 @@ export function generateHomepageMetadata(locale: string): Metadata {
 
   // Hreflang URL'leri
   const hreflangUrls = {
+    'x-default': `${baseUrl}/tr/anasayfa`,
     tr: `${baseUrl}/tr/anasayfa`,
     en: `${baseUrl}/en/home`,
     sr: `${baseUrl}/sr/pocetna`,

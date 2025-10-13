@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { supabase } from '@/lib/supabase/client';
 import { useAuth } from '@/hooks/auth/useAuth';
 import {
@@ -36,10 +36,10 @@ interface CreditStats {
 export default function CreditsPage() {
   const { user, loading: authLoading } = useAuth();
   const router = useRouter();
+  const pathname = usePathname();
 
   // Pathname'den locale'i çıkar
-  const pathname = window.location.pathname;
-  const locale = pathname.split('/')[1] || 'tr';
+  const locale = pathname?.split('/')[1] || 'tr';
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [stats, setStats] = useState<CreditStats | null>(null);
   const [loading, setLoading] = useState(true);
@@ -146,7 +146,7 @@ export default function CreditsPage() {
         });
       }
     } catch (error) {
-      setError('Kredi geçmişi yüklenirken bir hata oluştu');
+      setError(t('dashboard.creditHistory.error'));
       // Hata durumunda boş liste göster
       setTransactions([]);
       setStats({
@@ -255,12 +255,12 @@ export default function CreditsPage() {
 
   const exportTransactions = () => {
     const csvContent = [
-      ['Tarih', 'Tip', 'Miktar', 'Açıklama'],
-      ...transactions.map(t => [
-        formatDate(t.created_at),
-        getTransactionLabel(t),
-        t.delta_credits.toString(),
-        t.reason,
+      [t('dashboard.creditHistory.csvDate'), t('dashboard.creditHistory.csvType'), t('dashboard.creditHistory.csvAmount'), t('dashboard.creditHistory.csvDescription')],
+      ...transactions.map(transaction => [
+        formatDate(transaction.created_at),
+        getTransactionLabel(transaction),
+        transaction.delta_credits.toString(),
+        transaction.reason,
       ]),
     ]
       .map(row => row.join(','))
@@ -308,7 +308,7 @@ export default function CreditsPage() {
             href='/dashboard'
             className='text-text-mystic hover:text-gold transition-colors'
           >
-            ← Dashboard'a Dön
+            ← {t('dashboard.backToDashboard')}
           </a>
         </div>
       </header>
@@ -405,13 +405,13 @@ export default function CreditsPage() {
               className='btn btn-primary flex items-center space-x-2'
             >
               <Download className='h-4 w-4' />
-              <span>CSV İndir</span>
+              <span>{t('dashboard.creditHistory.downloadCSV')}</span>
             </button>
           </div>
 
           {/* Results Count */}
           <div className='text-sm text-text-mystic'>
-            {transactions.length} işlem bulundu
+            {t('dashboard.creditHistory.transactionsFound', { count: transactions.length })}
           </div>
         </div>
 
@@ -476,13 +476,13 @@ export default function CreditsPage() {
           <div className='text-center py-16'>
             <Coins className='h-16 w-16 text-text-muted mx-auto mb-4' />
             <h3 className='text-xl font-semibold text-text-celestial mb-2'>
-              Henüz işlem bulunmuyor
+              {t('dashboard.creditHistory.noTransactions')}
             </h3>
             <p className='text-text-mystic mb-6'>
-              İlk kredi satın alımınızı yaparak başlayın
+              {t('dashboard.creditHistory.startWithFirstPurchase')}
             </p>
             <a href='/packages' className='btn btn-primary'>
-              Kredi Satın Al
+              {t('dashboard.creditHistory.buyCredits')}
             </a>
           </div>
         )}
@@ -490,7 +490,7 @@ export default function CreditsPage() {
         {/* Navigation */}
         <div className='mt-12 text-center'>
           <a href='/dashboard' className='btn btn-primary'>
-            Dashboard'a Dön
+            {t('dashboard.backToDashboard')}
           </a>
         </div>
       </main>

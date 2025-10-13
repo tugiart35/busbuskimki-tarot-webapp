@@ -17,6 +17,7 @@ const urlMappings: Record<string, string> = {
   '/en/tarot-okuma': '/en/tarotokumasi', // Türkçe'den geçiş için
   '/en/numerology': '/en/numeroloji',
   '/en/login': '/en/auth',
+  '/en/panel': '/en/dashboard',
 
   // Serbian
   '/sr/pocetna': '/sr',

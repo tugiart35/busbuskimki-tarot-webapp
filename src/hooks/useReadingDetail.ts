@@ -60,18 +60,20 @@ export interface ReadingDetailResult {
   filePrefix: string;
 }
 
-const CONFIG_FACTORIES: Record<NormalizedTarotReadingType, () => TarotConfig> =
-  {
-    love: createLoveConfig,
-    newLover: createNewLoverConfig,
-    career: createCareerConfig,
-    money: createMoneyConfig,
-    problemSolving: createProblemSolvingConfig,
-    marriage: createMarriageConfig,
-    situationAnalysis: createSituationAnalysisConfig,
-    relationshipAnalysis: createRelationshipAnalysisConfig,
-    relationshipProblems: createRelationshipProblemsConfig,
-  };
+const CONFIG_FACTORIES: Record<
+  NormalizedTarotReadingType,
+  (_t?: (_key: string) => string) => TarotConfig
+> = {
+  love: createLoveConfig,
+  newLover: createNewLoverConfig,
+  career: createCareerConfig,
+  money: createMoneyConfig,
+  problemSolving: createProblemSolvingConfig,
+  marriage: createMarriageConfig,
+  situationAnalysis: createSituationAnalysisConfig,
+  relationshipAnalysis: createRelationshipAnalysisConfig,
+  relationshipProblems: createRelationshipProblemsConfig,
+};
 
 const TYPE_PRESENTATION: Record<NormalizedTarotReadingType, { icon: string }> =
   {
@@ -231,10 +233,10 @@ export function useReadingDetail(
       return null;
     }
     const factory = CONFIG_FACTORIES[normalizedType];
-    const configResult = factory ? factory() : null;
+    const configResult = factory ? factory(t) : null;
 
     return configResult;
-  }, [normalizedType]);
+  }, [normalizedType, t]);
 
   const theme: TarotTheme = config?.theme ?? 'purple';
   const icon =

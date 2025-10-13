@@ -72,7 +72,7 @@ export const defaultMetadata: Metadata = {
       'Profesyonel tarot okuması ve numeroloji analizi ile geleceğinizi keşfedin. Aşk, kariyer ve yaşam sorularınıza mistik cevaplar bulun.',
     images: [
       {
-        url: '/images/og-image.jpg',
+        url: '/api/og?title=Büşbüşkimki&subtitle=Profesyonel Tarot Okuması ve Numeroloji Analizi&locale=tr',
         width: 1200,
         height: 630,
         alt: 'Büşbüşkimki - Mistik Tarot ve Numeroloji',
@@ -84,11 +84,12 @@ export const defaultMetadata: Metadata = {
     title: 'Büşbüşkimki - Profesyonel Tarot Okuması ve Numeroloji Analizi',
     description:
       'Profesyonel tarot okuması ve numeroloji analizi ile geleceğinizi keşfedin.',
-    images: ['/images/twitter-card.jpg'],
+    images: ['/api/og?title=Büşbüşkimki&subtitle=Profesyonel Tarot Okuması ve Numeroloji Analizi&locale=tr'],
   },
   alternates: {
     canonical: 'https://busbuskimki.com',
     languages: {
+      'x-default': 'https://busbuskimki.com/tr',
       'tr-TR': 'https://busbuskimki.com/tr',
       'en-US': 'https://busbuskimki.com/en',
       'sr-RS': 'https://busbuskimki.com/sr',
@@ -97,8 +98,8 @@ export const defaultMetadata: Metadata = {
   category: 'Spirituality',
   classification: 'Mystical Services',
   other: {
-    'google-site-verification': 'your-google-verification-code',
-    'msvalidate.01': 'your-bing-verification-code',
+    'google-site-verification': process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || '',
+    'msvalidate.01': process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION || '',
   },
 };
 

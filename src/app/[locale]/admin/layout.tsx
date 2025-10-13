@@ -7,6 +7,7 @@ import { logAdminAction } from '@/lib/logger';
 import { logAdminAction as auditLogAdminAction } from '@/lib/audit-logger';
 import { AdminAuthProvider, useAdminAuth } from '@/providers/AdminAuthProvider';
 import AdminGuard from '@/components/admin/AdminGuard';
+import { useTranslations } from '@/hooks/useTranslations';
 import {
   LayoutDashboard,
   Users,
@@ -26,66 +27,67 @@ import {
   TrendingUp,
 } from 'lucide-react';
 
-// Navigation items - locale dinamik olarak eklenecek
-const getNavigation = (locale: string) => [
-  {
-    name: 'Dashboard',
-    href: `/${locale}/admin`,
-    icon: LayoutDashboard,
-    gradient: 'from-blue-500 to-purple-600',
-    description: 'Genel bakış ve istatistikler',
-  },
-  {
-    name: 'Kullanıcılar',
-    href: `/${locale}/admin/users`,
-    icon: Users,
-    gradient: 'from-green-500 to-emerald-600',
-    description: 'Kullanıcı yönetimi ve detayları',
-  },
-  {
-    name: 'Okumalar',
-    href: `/${locale}/admin/readings`,
-    icon: BarChart3,
-    gradient: 'from-indigo-500 to-purple-600',
-    description: 'Tarot okumaları ve analizler',
-  },
-  {
-    name: 'Paketler',
-    href: `/${locale}/admin/packages`,
-    icon: Package,
-    gradient: 'from-orange-500 to-red-600',
-    description: 'Kredi paketleri ve fiyatlar',
-  },
-  {
-    name: 'Siparişler',
-    href: `/${locale}/admin/orders`,
-    icon: CreditCard,
-    gradient: 'from-purple-500 to-pink-600',
-    description: 'Sipariş takibi ve ödemeler',
-  },
-  {
-    name: 'İstatistikler',
-    href: `/${locale}/admin/analytics`,
-    icon: TrendingUp,
-    gradient: 'from-cyan-500 to-blue-600',
-    description: 'Detaylı analitik raporlar',
-  },
-  {
-    name: 'Ayarlar',
-    href: `/${locale}/admin/settings`,
-    icon: Settings,
-    gradient: 'from-gray-500 to-slate-600',
-    description: 'Sistem ayarları ve güvenlik',
-  },
-];
-
 function AdminLayoutContent({ children }: { children: React.ReactNode }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [notifications] = useState(3);
   const pathname = usePathname();
+  const { t } = useTranslations();
 
   // Pathname'den locale'i çıkar
   const locale = pathname.split('/')[1] || 'tr';
+
+  // Navigation items - t fonksiyonu ile
+  const getNavigation = (locale: string) => [
+    {
+      name: 'Dashboard',
+      href: `/${locale}/admin`,
+      icon: LayoutDashboard,
+      gradient: 'from-blue-500 to-purple-600',
+      description: t('admin.navigation.dashboard.description'),
+    },
+    {
+      name: 'Kullanıcılar',
+      href: `/${locale}/admin/users`,
+      icon: Users,
+      gradient: 'from-green-500 to-emerald-600',
+      description: t('admin.navigation.users.description'),
+    },
+    {
+      name: 'Okumalar',
+      href: `/${locale}/admin/readings`,
+      icon: BarChart3,
+      gradient: 'from-indigo-500 to-purple-600',
+      description: 'Tarot okumaları ve analizler',
+    },
+    {
+      name: 'Paketler',
+      href: `/${locale}/admin/packages`,
+      icon: Package,
+      gradient: 'from-orange-500 to-red-600',
+      description: 'Kredi paketleri ve fiyatlar',
+    },
+    {
+      name: t('admin.navigation.orders.name'),
+      href: `/${locale}/admin/orders`,
+      icon: CreditCard,
+      gradient: 'from-purple-500 to-pink-600',
+      description: t('admin.navigation.orders.description'),
+    },
+    {
+      name: t('admin.navigation.analytics.name'),
+      href: `/${locale}/admin/analytics`,
+      icon: TrendingUp,
+      gradient: 'from-cyan-500 to-blue-600',
+      description: 'Detaylı analitik raporlar',
+    },
+    {
+      name: 'Ayarlar',
+      href: `/${locale}/admin/settings`,
+      icon: Settings,
+      gradient: 'from-gray-500 to-slate-600',
+      description: t('admin.navigation.settings.description'),
+    },
+  ];
 
   // Admin auth - global provider'dan al
   const { admin, logoutAdmin } = useAdminAuth();
@@ -268,7 +270,7 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
                       className='flex items-center justify-center p-2 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded-lg transition-all duration-200 hover:scale-105 text-sm touch-target'
                     >
                       <LogOut className='h-4 w-4 mr-1' />
-                      <span>Çıkış</span>
+                      <span>{t('admin.layout.logout')}</span>
                     </button>
                   </div>
                 </div>
@@ -371,7 +373,7 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
                     className='flex items-center justify-center p-2 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded-lg transition-all duration-200 hover:scale-105 text-sm'
                   >
                     <LogOut className='h-4 w-4 mr-1' />
-                    <span>Çıkış</span>
+                    <span>{t('admin.layout.logout')}</span>
                   </button>
                 </div>
               </div>
@@ -389,7 +391,7 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
                   </div>
                   <div className='flex justify-between'>
                     <span className='text-slate-400'>Database:</span>
-                    <span className='text-green-400'>🟢 Bağlı</span>
+                    <span className='text-green-400'>🟢 {t('admin.layout.databaseConnected')}</span>
                   </div>
                   <div className='flex justify-between'>
                     <span className='text-slate-400'>Uptime:</span>
@@ -417,7 +419,7 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
                     </h1>
                     <p className='text-slate-400'>
                       {getNavigation(locale).find(n => n.href === pathname)
-                        ?.description || 'Yönetim paneli'}
+                        ?.description || t('admin.layout.adminPanel')}
                     </p>
                   </div>
                 </div>
@@ -433,7 +435,7 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
                   </button>
 
                   <div className='bg-mystical-900/50 backdrop-blur-sm border border-mystical-700/50 rounded-xl p-3'>
-                    <div className='text-sm text-slate-400'>Son Güncelleme</div>
+                    <div className='text-sm text-slate-400'>{t('admin.layout.lastUpdate')}</div>
                     <div className='text-white font-medium'>
                       {new Date().toLocaleTimeString('tr-TR')}
                     </div>
@@ -461,17 +463,19 @@ export default function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
+
   // Admin sayfalarında Footer'ı gizle - sadece admin sayfalarında
   useEffect(() => {
     const footer = document.querySelector('footer');
-    if (footer && window.location.pathname.includes('/admin')) {
+    if (footer && pathname?.includes('/admin')) {
       footer.style.display = 'none';
       footer.style.visibility = 'hidden';
       footer.style.opacity = '0';
       footer.style.height = '0';
       footer.style.overflow = 'hidden';
     }
-  }, []);
+  }, [pathname]);
 
   return (
     <AdminAuthProvider>

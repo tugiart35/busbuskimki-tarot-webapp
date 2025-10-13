@@ -152,6 +152,7 @@ export function generateAuthPageMetadata(locale: string): Metadata {
     alternates: {
       canonical: `${baseUrl}${data!.canonicalPath}`,
       languages: {
+        'x-default': `${baseUrl}/tr/giris`,
         tr: `${baseUrl}/tr/giris`,
         en: `${baseUrl}/en/login`,
         sr: `${baseUrl}/sr/prijava`,

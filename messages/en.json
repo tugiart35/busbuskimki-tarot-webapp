@@ -311,6 +311,30 @@
       "positionRequired": "You must add at least one position",
       "spreadSaveError": "An error occurred while saving the lineup"
     },
+    "layout": {
+      "adminPanel": "Admin panel",
+      "databaseConnected": "Connected",
+      "lastUpdate": "Last Update",
+      "logout": "Log out"
+    },
+    "navigation": {
+      "analytics": {
+        "name": "Analytics"
+      },
+      "dashboard": {
+        "description": "Overview and statistics"
+      },
+      "orders": {
+        "description": "Order tracking and payments",
+        "name": "Orders"
+      },
+      "settings": {
+        "description": "System settings and security"
+      },
+      "users": {
+        "description": "User management and details"
+      }
+    },
     "success": {
       "profileUpdated": "Profile updated successfully!"
     }
@@ -19960,6 +19984,7 @@
     },
     "messages": {
       "adminRequired": "Insufficient credit for audio reading",
+      "allTypesAvailable": "Sufficient credits available for all reading types",
       "buyCredits": "Buy Credit",
       "cardsLocked": "The cards are locked.",
       "creditsRequired": "loan required",
@@ -19967,11 +19992,16 @@
       "detailedSelected": "Voice reading selected",
       "goToCredits": "Go to Credit Page",
       "insufficientCredits": "Insufficient loan",
+      "insufficientCreditsDetail": "Insufficient credits ({count} credits required)",
+      "loginRequired": "Please log in",
       "noSelection": "Select a reading type",
       "selectReadingTypeFirst": "To select cards, you must first select a reading type.",
       "simpleDescription": "Short-written comment",
       "simpleSelected": "Short reading selected",
+      "voiceAndWrittenLoginRequired": "Log in for voice and written readings",
+      "voiceReadingCreditsRequired": "Voice reading: {count} credits required",
       "writtenDescription": "Details written comment",
+      "writtenReadingCreditsRequired": "Written reading: {count} credits required",
       "writtenRequired": "Insufficient credit for written reading",
       "writtenSelected": "Written reading selected"
     },
@@ -20748,33 +20778,62 @@
     }
   },
   "statistics": {
+    "achievementsGoals": "Achievements and Goals",
     "activeStreak": "Active series",
+    "activityPatterns": "Activity Patterns",
     "average": "Average",
     "backToDashboard": "Return to Dashboard",
     "birthDate": "Date of Birth",
     "birthdayNumber": "Birthday",
     "calculating": "Calculating statistics...",
     "creditCost": "Credit cost",
+    "creditEfficiency": "Credit Efficiency",
     "dailyStreak": "Log Series",
+    "dayNames": {
+      "friday": "Friday",
+      "monday": "Monday",
+      "saturday": "Saturday",
+      "sunday": "Sunday",
+      "thursday": "Thursday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday"
+    },
     "days": "days",
+    "decrease": "Decrease",
     "expressionDestiny": "Statement/Date",
     "fullNameRecommended": "Full last name is recommended for numerology calculations",
+    "high": "High",
+    "increase": "Increase",
     "insightsDesc": "Deep analysis of your numerological guidance and reading habits",
     "insightsTitle": "Your Mystic Intuitions",
+    "lifeChallenges": "Life Challenges",
     "lifePath": "The Path of Life",
+    "lifePinnacles": "Life Pinnacles",
     "longest": "Longest",
+    "low": "Low",
     "masterNumber": "Master Number",
     "maturity": "Maturity",
+    "medium": "Medium",
+    "monthVsMonth": "This Month vs Last Month",
+    "monthlyTrend": "Monthly Trend",
+    "mostActiveDay": "Most Active Day",
     "mostExpensiveReading": "Most Expensive Reading",
+    "mostUsedSpread": "Most Used Spread",
     "name": "Name",
     "notSpecified": "Unspecified",
+    "notYet": "Not yet",
     "numerology": "Numerology",
     "numerologyProfile": "Numerology Profile",
     "overview": "General View",
     "patterns": "Patterns",
     "perReading": "reading",
     "personality": "Personality",
+    "personalCycles": "Personal Cycles",
+    "personalInsights": "Personal Insights",
     "premiumReading": "Premium reading",
+    "readingHabits": "Reading Habits",
+    "readingTypes": "Reading Types",
+    "readingTypesDistribution": "Reading Types Distribution",
     "refresh": "Refresh",
     "soulUrge": "Spirit Desire",
     "subtitle": "Follow your progress on your mystical journey.",
@@ -20783,19 +20842,9 @@
     "title": "Statistics & Introductions",
     "totalCreditsSpent": "Total Spended Loan",
     "totalReadings": "Total Reading",
-    "vsLastMonth": "Blah, blah, blah. Last month.",
-    "readingHabits": "Reading Habits",
     "trendAnalysis": "Trend Analysis",
-    "readingTypes": "Reading Types",
-    "monthlyTrend": "Monthly Trend",
-    "weeklyActivity": "Weekly Activity",
-    "personalCycles": "Personal Cycles",
-    "lifePinnacles": "Life Pinnacles",
-    "lifeChallenges": "Life Challenges",
-    "activityPatterns": "Activity Patterns",
-    "achievementsGoals": "Achievements and Goals",
-    "readingTypesDistribution": "Reading Types Distribution",
-    "personalInsights": "Personal Insights"
+    "vsLastMonth": "Blah, blah, blah. Last month.",
+    "weeklyActivity": "Weekly Activity"
   },
   "system": {
     "comprehensive": "Comprehensive",

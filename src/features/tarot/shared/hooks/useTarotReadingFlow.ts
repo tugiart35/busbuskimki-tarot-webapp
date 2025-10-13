@@ -163,14 +163,14 @@ export function useTarotReadingFlow({
 
   // Reading Type Selection Handler
   const handleReadingTypeSelect = useCallback(
-    async (type: string) => {
+    (type: string) => {
+      // Reading type'ı önce set et
+      tarotReading.setSelectedReadingType(type);
+      
       // Eğer DETAILED veya WRITTEN seçildiyse bilgilendirme modal'ını göster
       if (type === READING_TYPES.DETAILED || type === READING_TYPES.WRITTEN) {
         formState.setModalStates(prev => ({ ...prev, showInfoModal: true }));
       }
-
-      // Reading type'ı set et
-      tarotReading.setSelectedReadingType(type);
     },
     [formState, tarotReading]
   );

@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { BaseCardPosition, BaseCardRenderer } from '@/features/shared/ui';
 import { TarotCard } from '@/types/tarot';
 import { useTranslations } from '@/hooks/useTranslations';
@@ -160,11 +161,16 @@ export default function BaseTarotCanvas({
           className={`absolute inset-0 ${getGradientOverlay(config.theme)} backdrop-blur-[2px]`}
           style={{ zIndex: 1 }}
         />
-        <img
+        <Image
           src={config.backgroundImage}
           alt={config.backgroundAlt}
-          className='absolute inset-0 w-full h-full object-cover object-center opacity-60'
-          loading='lazy'
+          fill
+          className='object-cover object-center opacity-60'
+          priority={false}
+          quality={75}
+          sizes='(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw'
+          placeholder='blur'
+          blurDataURL='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=='
           style={{ zIndex: 0 }}
         />
         <div

@@ -27,6 +27,19 @@ export class CardSEO {
     const publishedDate = card.createdAt?.toISOString() || new Date('2025-01-01').toISOString();
     const modifiedDate = card.updatedAt?.toISOString() || publishedDate;
     
+    // Card name for OG image
+    const cardName = locale === 'tr' 
+      ? card.turkishName 
+      : locale === 'en' 
+        ? card.englishName 
+        : card.serbianName;
+    
+    // Determine card type (major or minor arcana)
+    const cardType = card.number <= 21 ? 'major' : 'minor';
+    
+    // Dynamic OG image URL
+    const ogImageUrl = `/api/og/card?name=${encodeURIComponent(cardName)}&type=${cardType}&locale=${locale}`;
+    
     return {
       title: seo.metaTitle,
       description: seo.metaDescription,
@@ -42,10 +55,10 @@ export class CardSEO {
         siteName: 'Büşbüşkimki Tarot ve Numeroloji', // ✅ DÜZELTİLDİ
         images: [
           {
-            url: seo.ogImage,
+            url: ogImageUrl,
             width: 1200,
             height: 630,
-            alt: `${card.turkishName || card.englishName} tarot kartı`, // ✅ EKLE
+            alt: `${cardName} tarot kartı`, // ✅ EKLE
           },
         ],
         locale: locale === 'tr' ? 'tr_TR' : locale === 'en' ? 'en_US' : 'sr_RS',
@@ -58,7 +71,7 @@ export class CardSEO {
         card: 'summary_large_image',
         title: seo.metaTitle,
         description: seo.metaDescription,
-        images: [seo.twitterImage],
+        images: [ogImageUrl],
         site: '@busbuskimki', // ✅ EKLE: Twitter handle'ınız
         creator: '@busbuskimki', // ✅ EKLE
       },
@@ -75,11 +88,12 @@ export class CardSEO {
       },
       alternates: {
         canonical: seo.canonicalUrl,
-        languages: {
-          tr: `${baseUrl}/tr/kartlar/${card.slug?.tr || card.slug}`,
-          en: `${baseUrl}/en/cards/${card.slug?.en || card.slug}`,
-          sr: `${baseUrl}/sr/kartice/${card.slug?.sr || card.slug}`,
-        },
+      languages: {
+        'x-default': `${baseUrl}/en/cards/${card.slug?.en || card.slug}`,
+        tr: `${baseUrl}/tr/kartlar/${card.slug?.tr || card.slug}`,
+        en: `${baseUrl}/en/cards/${card.slug?.en || card.slug}`,
+        sr: `${baseUrl}/sr/kartice/${card.slug?.sr || card.slug}`,
+      },
       },
     };
   }

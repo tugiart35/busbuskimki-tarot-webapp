@@ -311,6 +311,30 @@
       "positionRequired": "Morate dodati barem jednu poziciju",
       "spreadSaveError": "Došlo je do greške prilikom čuvanja postavke"
     },
+    "layout": {
+      "adminPanel": "Admin panel",
+      "databaseConnected": "Povezano",
+      "lastUpdate": "Poslednje ažuriranje",
+      "logout": "Odjava"
+    },
+    "navigation": {
+      "analytics": {
+        "name": "Analitika"
+      },
+      "dashboard": {
+        "description": "Pregled i statistika"
+      },
+      "orders": {
+        "description": "Praćenje narudžbina i plaćanja",
+        "name": "Narudžbine"
+      },
+      "settings": {
+        "description": "Sistemska podešavanja i bezbednost"
+      },
+      "users": {
+        "description": "Upravljanje korisnicima i detalji"
+      }
+    },
     "success": {
       "profileUpdated": "Profil je uspešno ažuriran!"
     }
@@ -20138,6 +20162,7 @@
     },
     "messages": {
       "adminRequired": "Nedovoljan kredit za čitanje zvuka",
+      "allTypesAvailable": "Dovoljno kredita dostupno za sve tipove čitanja",
       "buyCredits": "Kupite kredite",
       "cardsLocked": "Kartice su zaključane",
       "creditsRequired": "potreban kredit",
@@ -20145,11 +20170,16 @@
       "detailedSelected": "Pročitajte odabrano naglas",
       "goToCredits": "Idite na stranicu za kredit",
       "insufficientCredits": "Nedovoljan kredit",
+      "insufficientCreditsDetail": "Nedovoljan kredit ({count} kredita potrebno)",
+      "loginRequired": "Molimo prijavite se",
       "noSelection": "Izaberite vrstu čitanja",
       "selectReadingTypeFirst": "Da biste odabrali kartice, prvo morate da odaberete vrstu čitanja.",
       "simpleDescription": "Kratak pisani komentar",
       "simpleSelected": "Odabrano kratko čitanje",
+      "voiceAndWrittenLoginRequired": "Prijavite se za glasovna i pisana čitanja",
+      "voiceReadingCreditsRequired": "Glasovno čitanje: {count} kredita potrebno",
       "writtenDescription": "Detaljan pisani komentar",
+      "writtenReadingCreditsRequired": "Pisano čitanje: {count} kredita potrebno",
       "writtenRequired": "Nedovoljan kredit za pismeno čitanje",
       "writtenSelected": "Pismeno je izabrano čitanje"
     },
@@ -20926,33 +20956,62 @@
     }
   },
   "statistics": {
+    "achievementsGoals": "Postignuća i ciljevi",
     "activeStreak": "Aktivna serija",
+    "activityPatterns": "Obrasci aktivnosti",
     "average": "Prosek",
     "backToDashboard": "Povratak na kontrolnu tablu",
     "birthDate": "Datum rođenja",
     "birthdayNumber": "Rođendan",
     "calculating": "Statistika se izračunava ...",
     "creditCost": "Kreditni trošak",
+    "creditEfficiency": "Efikasnost kredita",
     "dailyStreak": "Dnevna serija",
+    "dayNames": {
+      "friday": "Petak",
+      "monday": "Ponedeljak",
+      "saturday": "Subota",
+      "sunday": "Nedelja",
+      "thursday": "Četvrtak",
+      "tuesday": "Utorak",
+      "wednesday": "Sreda"
+    },
     "days": "dan",
+    "decrease": "Smanjenje",
     "expressionDestiny": "Emote / Fate",
     "fullNameRecommended": "Puno ime i prezime preporučuju se za računanje Numerologije",
+    "high": "Visok",
+    "increase": "Povećanje",
     "insightsDesc": "Dubinska analiza vaših numeričkih smernica i navika čitanja",
     "insightsTitle": "Vaši mistični uvidi",
+    "lifeChallenges": "Životni izazovi",
     "lifePath": "Životni put",
+    "lifePinnacles": "Životni vrhunci",
     "longest": "najduže",
+    "low": "Nizak",
     "masterNumber": "Master problem",
     "maturity": "Zrelost",
+    "medium": "Srednji",
+    "monthVsMonth": "Ovog meseca vs prošlog meseca",
+    "monthlyTrend": "Mesečni trend",
+    "mostActiveDay": "Najaktivniji dan",
     "mostExpensiveReading": "Najskuplje čitanje",
+    "mostUsedSpread": "Najkorišćeniji raspored",
     "name": "Naziv",
     "notSpecified": "Neodređen",
+    "notYet": "Još ne",
     "numerology": "Numerologija",
     "numerologyProfile": "Numerološki profil",
     "overview": "Pregled",
     "patterns": "uzorak",
     "perReading": "čitanje",
     "personality": "Ličnost",
+    "personalCycles": "Lični ciklusi",
+    "personalInsights": "Lični uvidi",
     "premiumReading": "premium čitanje",
+    "readingHabits": "Navike čitanja",
+    "readingTypes": "Tipovi čitanja",
+    "readingTypesDistribution": "Distribucija tipova čitanja",
     "refresh": "Osvežiti",
     "soulUrge": "Duša",
     "subtitle": "Pratite svoj napredak na svom mističnom putovanju",
@@ -20961,19 +21020,9 @@
     "title": "Statistika i uvid",
     "totalCreditsSpent": "Ukupni potrošeni krediti",
     "totalReadings": "Totalno čitanje",
-    "vsLastMonth": "vs prošlog meseca",
-    "readingHabits": "Navike čitanja",
     "trendAnalysis": "Analiza trenda",
-    "readingTypes": "Tipovi čitanja",
-    "monthlyTrend": "Mesečni trend",
-    "weeklyActivity": "Nedeljne aktivnosti",
-    "personalCycles": "Lični ciklusi",
-    "lifePinnacles": "Životni vrhunci",
-    "lifeChallenges": "Životni izazovi",
-    "activityPatterns": "Obrasci aktivnosti",
-    "achievementsGoals": "Postignuća i ciljevi",
-    "readingTypesDistribution": "Distribucija tipova čitanja",
-    "personalInsights": "Lični uvidi"
+    "vsLastMonth": "vs prošlog meseca",
+    "weeklyActivity": "Nedeljne aktivnosti"
   },
   "system": {
     "comprehensive": "Sveobuhvatan",

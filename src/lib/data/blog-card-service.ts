@@ -1,5 +1,7 @@
-// Blog Card Service - Reads from tr.json blog section
+// Blog Card Service - Reads from locale-specific JSON blog section
 import trMessages from '../../../messages/tr.json';
+import enMessages from '../../../messages/en.json';
+import srMessages from '../../../messages/sr.json';
 
 interface BlogCardData {
   name: string;
@@ -80,23 +82,27 @@ interface BlogCards {
 }
 
 export class BlogCardService {
-  private static getBlogCards(): BlogCards {
-    return (trMessages as any).blog.cards;
+  private static getBlogCards(locale: 'tr' | 'en' | 'sr'): BlogCards {
+    const messages = {
+      tr: trMessages,
+      en: enMessages,
+      sr: srMessages
+    };
+    return (messages[locale] as any).blog.cards;
   }
 
-  static getCardById(id: string): BlogCardData | null {
-    const cards = this.getBlogCards();
+  static getCardById(id: string, locale: 'tr' | 'en' | 'sr'): BlogCardData | null {
+    const cards = this.getBlogCards(locale);
     return cards[id] || null;
   }
 
   static getCardBySlug(
     slug: string,
-    _locale: 'tr' | 'en' | 'sr'
+    locale: 'tr' | 'en' | 'sr'
   ): BlogCardData | null {
-    const cards = this.getBlogCards();
+    const cards = this.getBlogCards(locale);
 
-    // For now, only Turkish content is available in blog data
-    // Map English and Serbian slugs to Turkish cards
+    // Map all locale-specific slugs to card IDs
     const slugMapping: { [key: string]: string } = {
       // English slugs
       'the-fool': 'the-fool',
@@ -370,13 +376,13 @@ export class BlogCardService {
     return null;
   }
 
-  static getAllCards(): BlogCardData[] {
-    const cards = this.getBlogCards();
+  static getAllCards(locale: 'tr' | 'en' | 'sr'): BlogCardData[] {
+    const cards = this.getBlogCards(locale);
     return Object.values(cards);
   }
 
-  static getRelatedCards(cardId: string, limit: number = 4): BlogCardData[] {
-    const cards = this.getBlogCards();
+  static getRelatedCards(cardId: string, locale: 'tr' | 'en' | 'sr', limit: number = 4): BlogCardData[] {
+    const cards = this.getBlogCards(locale);
     const currentCard = cards[cardId];
 
     if (!currentCard || !currentCard.related_cards) {

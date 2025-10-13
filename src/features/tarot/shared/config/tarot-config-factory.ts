@@ -698,6 +698,8 @@ export function createCareerConfig(t?: (key: string) => string): TarotConfig {
     readingType: 'CAREER_SPREAD',
     supabaseReadingType: 'career', // Veritabanında mevcut enum değeri
     creditKeyPrefix: 'CAREER_SPREAD',
+    backgroundImage: '/new-lover.png',
+    backgroundAlt: 'Career Tarot Reading background',
     ...(t && { t }),
   });
 }
@@ -719,6 +721,8 @@ export function createLoveConfig(t?: (key: string) => string): TarotConfig {
     readingType: 'LOVE_SPREAD',
     supabaseReadingType: 'love', // Veritabanında mevcut enum değeri
     creditKeyPrefix: 'LOVE_SPREAD',
+    backgroundImage: '/new-lover.png',
+    backgroundAlt: 'Love Tarot Reading background',
     ...(t && { t }),
   });
 }
@@ -740,6 +744,8 @@ export function createMoneyConfig(t?: (key: string) => string): TarotConfig {
     readingType: 'MONEY_SPREAD',
     supabaseReadingType: 'money', // Veritabanında mevcut enum değeri
     creditKeyPrefix: 'MONEY_SPREAD',
+    backgroundImage: '/new-lover.png',
+    backgroundAlt: 'Money Tarot Reading background',
     ...(t && { t }),
   });
 }
@@ -762,6 +768,8 @@ export function createProblemSolvingConfig(t?: (key: string) => string): TarotCo
     readingType: 'PROBLEM_SOLVING_SPREAD',
     supabaseReadingType: 'problem-solving', // Veritabanında mevcut enum değeri
     creditKeyPrefix: 'PROBLEM_SOLVING',
+    backgroundImage: '/new-lover.png',
+    backgroundAlt: 'Problem Solving Tarot Reading background',
     ...(t && { t }),
   });
 }
@@ -783,6 +791,8 @@ export function createMarriageConfig(t?: (key: string) => string): TarotConfig {
     readingType: 'MARRIAGE_SPREAD',
     supabaseReadingType: 'marriage', // Veritabanında mevcut enum değeri
     creditKeyPrefix: 'MARRIAGE',
+    backgroundImage: '/new-lover.png',
+    backgroundAlt: 'Marriage Tarot Reading background',
     ...(t && { t }),
   });
 }
@@ -804,6 +814,8 @@ export function createRelationshipAnalysisConfig(t?: (key: string) => string): T
     readingType: 'RELATIONSHIP_ANALYSIS_SPREAD',
     supabaseReadingType: 'relationship-analysis', // Veritabanında mevcut enum değeri
     creditKeyPrefix: 'RELATIONSHIP_ANALYSIS',
+    backgroundImage: '/new-lover.png',
+    backgroundAlt: 'Relationship Analysis Tarot Reading background',
     ...(t && { t }),
   });
 }
@@ -825,6 +837,8 @@ export function createRelationshipProblemsConfig(t?: (key: string) => string): T
     readingType: 'RELATIONSHIP_PROBLEMS_SPREAD',
     supabaseReadingType: 'relationship-problems', // Veritabanında mevcut enum değeri
     creditKeyPrefix: 'RELATIONSHIP_PROBLEMS',
+    backgroundImage: '/new-lover.png',
+    backgroundAlt: 'Relationship Problems Tarot Reading background',
     ...(t && { t }),
   });
 }
@@ -846,6 +860,8 @@ export function createNewLoverConfig(t?: (key: string) => string): TarotConfig {
     readingType: 'NEW_LOVER_SPREAD',
     supabaseReadingType: 'new-lover', // Veritabanında mevcut enum değeri
     creditKeyPrefix: 'NEW_LOVER',
+    backgroundImage: '/new-lover.png',
+    backgroundAlt: 'New Lover Tarot Reading background',
     ...(t && { t }),
   });
 }
@@ -868,6 +884,8 @@ export function createSituationAnalysisConfig(t?: (key: string) => string): Taro
     readingType: 'SITUATION_ANALYSIS_SPREAD',
     supabaseReadingType: 'situation-analysis', // Veritabanında mevcut enum değeri
     creditKeyPrefix: 'SITUATION_ANALYSIS',
+    backgroundImage: '/new-lover.png',
+    backgroundAlt: 'Situation Analysis Tarot Reading background',
     ...(t && { t }),
   });
 }

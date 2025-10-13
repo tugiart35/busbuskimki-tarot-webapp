@@ -311,6 +311,30 @@
       "positionRequired": "En az bir pozisyon eklemelisiniz",
       "spreadSaveError": "Dizilim kaydedilirken hata oluştu"
     },
+    "layout": {
+      "adminPanel": "Yönetim paneli",
+      "databaseConnected": "Bağlı",
+      "lastUpdate": "Son Güncelleme",
+      "logout": "Çıkış"
+    },
+    "navigation": {
+      "analytics": {
+        "name": "İstatistikler"
+      },
+      "dashboard": {
+        "description": "Genel bakış ve istatistikler"
+      },
+      "orders": {
+        "description": "Sipariş takibi ve ödemeler",
+        "name": "Siparişler"
+      },
+      "settings": {
+        "description": "Sistem ayarları ve güvenlik"
+      },
+      "users": {
+        "description": "Kullanıcı yönetimi ve detayları"
+      }
+    },
     "success": {
       "profileUpdated": "Profil başarıyla güncellendi!"
     }
@@ -19960,6 +19984,7 @@
     },
     "messages": {
       "adminRequired": "Ses okuma için yetersiz kredi",
+      "allTypesAvailable": "Tüm okuma türleri için yeterli kredi mevcut",
       "buyCredits": "Kredi Satın Al",
       "cardsLocked": "Kartlar Kilitli",
       "creditsRequired": "kredi gerekli",
@@ -19967,11 +19992,16 @@
       "detailedSelected": "Sesli okuma seçildi",
       "goToCredits": "Kredi Sayfasına Git",
       "insufficientCredits": "Yetersiz kredi",
+      "insufficientCreditsDetail": "Yetersiz kredi ({count} kredi gerekli)",
+      "loginRequired": "Giriş yapın",
       "noSelection": "Bir okuma türü seçin",
       "selectReadingTypeFirst": "Kartları seçmek için önce bir okuma tipi seçmelisiniz.",
       "simpleDescription": "Kısa yazılı yorum",
       "simpleSelected": "Kısa okuma seçildi",
+      "voiceAndWrittenLoginRequired": "Sesli ve yazılı okumalar için giriş yapın",
+      "voiceReadingCreditsRequired": "Sesli okuma: {count} kredi gerekli",
       "writtenDescription": "Detaylı yazılı yorum",
+      "writtenReadingCreditsRequired": "Yazılı okuma: {count} kredi gerekli",
       "writtenRequired": "Yazılı okuma için yetersiz kredi",
       "writtenSelected": "Yazılı okuma seçildi"
     },
@@ -20748,33 +20778,62 @@
     }
   },
   "statistics": {
+    "achievementsGoals": "Başarılar ve Hedefler",
     "activeStreak": "Aktif seri",
+    "activityPatterns": "Aktivite Desenleri",
     "average": "Ortalama",
     "backToDashboard": "Dashboard'a Dön",
     "birthDate": "Doğum Tarihi",
     "birthdayNumber": "Doğum Günü",
     "calculating": "İstatistikler hesaplanıyor…",
     "creditCost": "Kredi maliyeti",
+    "creditEfficiency": "Kredi Verimliliği",
     "dailyStreak": "Günlük Seri",
+    "dayNames": {
+      "friday": "Cuma",
+      "monday": "Pazartesi",
+      "saturday": "Cumartesi",
+      "sunday": "Pazar",
+      "thursday": "Perşembe",
+      "tuesday": "Salı",
+      "wednesday": "Çarşamba"
+    },
     "days": "gün",
+    "decrease": "Azalış",
     "expressionDestiny": "İfade/Kader",
     "fullNameRecommended": "Numeroloji hesaplamaları için tam isim soyisim önerilir",
+    "high": "Yüksek",
+    "increase": "Artış",
     "insightsDesc": "Numerolojik rehberliğiniz ve okuma alışkanlıklarınızla ilgili derinlemesine analiz",
     "insightsTitle": "Mistik İçgörüleriniz",
+    "lifeChallenges": "Hayat Zorlukları",
     "lifePath": "Yaşam Yolu",
+    "lifePinnacles": "Hayat Zirveleri",
     "longest": "En uzun",
+    "low": "Düşük",
     "masterNumber": "Master Sayı",
     "maturity": "Olgunluk",
+    "medium": "Orta",
+    "monthVsMonth": "Bu Ay vs Geçen Ay",
+    "monthlyTrend": "Aylık Trend",
+    "mostActiveDay": "En Aktif Gün",
     "mostExpensiveReading": "En Pahalı Okuma",
+    "mostUsedSpread": "En Çok Kullanılan Dizilim",
     "name": "İsim",
     "notSpecified": "Belirtilmemiş",
+    "notYet": "Henüz yok",
     "numerology": "Numeroloji",
     "numerologyProfile": "Numeroloji Profili",
     "overview": "Genel Bakış",
     "patterns": "Desenler",
     "perReading": "okuma",
     "personality": "Kişilik",
+    "personalCycles": "Kişisel Döngüler",
+    "personalInsights": "Kişisel İçgörüler",
     "premiumReading": "Premium okuma",
+    "readingHabits": "Okuma Alışkanlıkları",
+    "readingTypes": "Okuma Türleri",
+    "readingTypesDistribution": "Okuma Türleri Dağılımı",
     "refresh": "Yenile",
     "soulUrge": "Ruh Arzusu",
     "subtitle": "Mistik yolculuğunuzda ilerlemenizi takip edin",
@@ -20783,19 +20842,9 @@
     "title": "İstatistikler & İçgörüler",
     "totalCreditsSpent": "Toplam Harcanan Kredi",
     "totalReadings": "Toplam Okuma",
-    "vsLastMonth": "vs geçen ay",
-    "readingHabits": "Okuma Alışkanlıkları",
     "trendAnalysis": "Trend Analizi",
-    "readingTypes": "Okuma Türleri",
-    "monthlyTrend": "Aylık Trend",
-    "weeklyActivity": "Haftalık Aktivite",
-    "personalCycles": "Kişisel Döngüler",
-    "lifePinnacles": "Hayat Zirveleri",
-    "lifeChallenges": "Hayat Zorlukları",
-    "activityPatterns": "Aktivite Desenleri",
-    "achievementsGoals": "Başarılar ve Hedefler",
-    "readingTypesDistribution": "Okuma Türleri Dağılımı",
-    "personalInsights": "Kişisel İçgörüler"
+    "vsLastMonth": "vs geçen ay",
+    "weeklyActivity": "Haftalık Aktivite"
   },
   "system": {
     "comprehensive": "Kapsamlı",

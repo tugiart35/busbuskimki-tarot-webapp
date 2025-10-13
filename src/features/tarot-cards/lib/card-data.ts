@@ -1093,7 +1093,7 @@ export class CardData {
   ): CardPageData {
     // Get the actual card ID from the blog card data
     const cardId = this.getCardIdFromSlug(slug, locale);
-    const relatedCards = BlogCardService.getRelatedCards(cardId, 4);
+    const relatedCards = BlogCardService.getRelatedCards(cardId, locale, 4);
 
     const mappedCard = {
       id: slug,
@@ -1328,7 +1328,7 @@ export class CardData {
 
   // Get cards by locale with filters
   static async getCardsByLocale(
-    _locale: 'tr' | 'en' | 'sr',
+    locale: 'tr' | 'en' | 'sr',
     options: {
       arcanaType?: 'major' | 'minor';
       suit?: 'cups' | 'swords' | 'wands' | 'pentacles';
@@ -1337,7 +1337,7 @@ export class CardData {
     } = {}
   ) {
     try {
-      const cards = BlogCardService.getAllCards();
+      const cards = BlogCardService.getAllCards(locale);
       return {
         cards: cards.slice(
           options.offset || 0,
@@ -1358,7 +1358,7 @@ export class CardData {
     limit: number = 4
   ) {
     try {
-      return BlogCardService.getRelatedCards(cardId, limit);
+      return BlogCardService.getRelatedCards(cardId, _locale, limit);
     } catch (error) {
       logger.error('Error in getRelatedCards', error);
       return [];

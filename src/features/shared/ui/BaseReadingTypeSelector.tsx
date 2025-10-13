@@ -108,7 +108,7 @@ export default function BaseReadingTypeSelector({
   selectedType,
   onTypeSelect,
   onCreditInfoClick: _onCreditInfoClick,
-  onReadingTypeSelected,
+  onReadingTypeSelected: _onReadingTypeSelected,
   readingTypes,
   creditStatus: _creditStatus, // Prop olarak kullan
   theme = 'default',
@@ -217,10 +217,6 @@ export default function BaseReadingTypeSelector({
     if (type === readingTypes.DETAILED || type === readingTypes.WRITTEN) {
       // Kullanıcı giriş yapmamışsa butonları devre dışı bırak
       if (!isAuthenticated) {
-        // Kullanıcıya giriş yapması gerektiğini bildir
-        console.warn(
-          'Kullanıcı giriş yapmamış - sesli/yazılı okuma için giriş gerekli'
-        );
         return;
       }
 
@@ -230,9 +226,6 @@ export default function BaseReadingTypeSelector({
         !detailedCredits.creditStatus.hasEnoughCredits
       ) {
         // Kredi yetersiz - kredi bilgi modalını aç
-        console.warn(
-          `Yetersiz kredi - ${detailedCredits.creditStatus.requiredCredits} kredi gerekli`
-        );
         if (_onCreditInfoClick) {
           _onCreditInfoClick();
         }
@@ -244,9 +237,6 @@ export default function BaseReadingTypeSelector({
         !writtenCredits.creditStatus.hasEnoughCredits
       ) {
         // Kredi yetersiz - kredi bilgi modalını aç
-        console.warn(
-          `Yetersiz kredi - ${writtenCredits.creditStatus.requiredCredits} kredi gerekli`
-        );
         if (_onCreditInfoClick) {
           _onCreditInfoClick();
         }
@@ -254,20 +244,10 @@ export default function BaseReadingTypeSelector({
       }
 
       // Kredi yeterli - okuma türünü seç ve akışa devam et
-      console.log(`${type} okuma tipi seçildi - kredi yeterli`);
       onTypeSelect(type);
-      // Okuma tipi seçildiğinde parent bileşene bildir
-      if (onReadingTypeSelected) {
-        onReadingTypeSelected();
-      }
     } else {
       // Basit okuma için direkt seç
-      console.log('Basit okuma seçildi');
       onTypeSelect(type);
-      // Okuma tipi seçildiğinde parent bileşene bildir
-      if (onReadingTypeSelected) {
-        onReadingTypeSelected();
-      }
     }
   };
 
@@ -282,13 +262,7 @@ export default function BaseReadingTypeSelector({
       >
         {/* Basit Okuma - Her zaman açık */}
         <button
-          onClick={() => {
-            onTypeSelect(readingTypes.SIMPLE);
-            // Okuma tipi seçildiğinde parent bileşene bildir
-            if (onReadingTypeSelected) {
-              onReadingTypeSelected();
-            }
-          }}
+          onClick={() => onTypeSelect(readingTypes.SIMPLE)}
           disabled={disabled}
           className={`px-2 sm:px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all duration-150 focus:outline-none focus:ring-2 ${currentTheme.simpleButton.focus} disabled:opacity-50 disabled:cursor-not-allowed
             ${
@@ -327,10 +301,10 @@ export default function BaseReadingTypeSelector({
             }`}
           title={
             !isAuthenticated
-              ? 'Giriş yapın'
+              ? t('reading.messages.loginRequired')
               : !detailedCredits.creditStatus.hasEnoughCredits
-                ? `Yetersiz kredi (${detailedCredits.creditStatus.requiredCredits} kredi gerekli)`
-                : `${defaultDetailedText} - ${t('reading.messages.detailedDescription')} (${detailedCredits.creditStatus.requiredCredits} kredi)`
+                ? t('reading.messages.insufficientCreditsDetail', { count: detailedCredits.creditStatus.requiredCredits })
+                : `${defaultDetailedText} - ${t('reading.messages.detailedDescription')} (${detailedCredits.creditStatus.requiredCredits} ${t('reading.messages.creditsRequired')})`
           }
         >
           <span className='flex items-center space-x-1'>
@@ -370,10 +344,10 @@ export default function BaseReadingTypeSelector({
             }`}
           title={
             !isAuthenticated
-              ? 'Giriş yapın'
+              ? t('reading.messages.loginRequired')
               : !writtenCredits.creditStatus.hasEnoughCredits
-                ? `Yetersiz kredi (${writtenCredits.creditStatus.requiredCredits} kredi gerekli)`
-                : `${defaultWrittenText} - ${t('reading.messages.writtenDescription')} (${writtenCredits.creditStatus.requiredCredits} kredi)`
+                ? t('reading.messages.insufficientCreditsDetail', { count: writtenCredits.creditStatus.requiredCredits })
+                : `${defaultWrittenText} - ${t('reading.messages.writtenDescription')} (${writtenCredits.creditStatus.requiredCredits} ${t('reading.messages.creditsRequired')})`
           }
         >
           <span className='flex items-center space-x-1'>
@@ -416,27 +390,25 @@ export default function BaseReadingTypeSelector({
         )}
         {!isAuthenticated && (
           <span className={`text-xs ${currentTheme.messages.adminRequired}`}>
-            🔒 Sesli ve yazılı okumalar için giriş yapın
+            🔒 {t('reading.messages.voiceAndWrittenLoginRequired')}
           </span>
         )}
         {isAuthenticated && (
           <div className='flex flex-col gap-1 text-xs'>
             {!detailedCredits.creditStatus.hasEnoughCredits && (
               <span className={`${currentTheme.messages.adminRequired}`}>
-                💳 Sesli okuma: {detailedCredits.creditStatus.requiredCredits}{' '}
-                kredi gerekli
+                💳 {t('reading.messages.voiceReadingCreditsRequired', { count: detailedCredits.creditStatus.requiredCredits })}
               </span>
             )}
             {!writtenCredits.creditStatus.hasEnoughCredits && (
               <span className={`${currentTheme.messages.adminRequired}`}>
-                💳 Yazılı okuma: {writtenCredits.creditStatus.requiredCredits}{' '}
-                kredi gerekli
+                💳 {t('reading.messages.writtenReadingCreditsRequired', { count: writtenCredits.creditStatus.requiredCredits })}
               </span>
             )}
             {detailedCredits.creditStatus.hasEnoughCredits &&
               writtenCredits.creditStatus.hasEnoughCredits && (
                 <span className='text-green-400'>
-                  ✅ Tüm okuma türleri için yeterli kredi mevcut
+                  ✅ {t('reading.messages.allTypesAvailable')}
                 </span>
               )}
           </div>
