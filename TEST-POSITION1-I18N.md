@@ -3,6 +3,7 @@
 ## ✅ Veriler Hazır!
 
 **78 kart** için **3 dilde** çeviriler hazır:
+
 - 🇹🇷 Türkçe
 - 🇬🇧 İngilizce
 - 🇷🇸 Sırpça
@@ -14,11 +15,13 @@
 ### Yöntem 1: Manuel Test (Tarayıcıda)
 
 1. **Uygulamayı başlatın:**
+
    ```bash
    npm run dev
    ```
 
 2. **Tarayıcıda açın:**
+
    ```
    http://localhost:3111
    ```
@@ -75,6 +78,7 @@ python3 -c "import json; data = json.load(open('messages/sr.json')); print('SR:'
 ```
 
 **Beklenen çıktı:**
+
 ```
 TR: 78
 EN: 78
@@ -110,6 +114,7 @@ print('🇷🇸 SR:', magician_sr['upright'][:80])
 Position-1 için i18n destekli 78 kart:
 
 ### Majör Arkana (22 kart)
+
 1. thefool - The Fool / Joker / Будала
 2. themagician - The Magician / Büyücü / Мађионичар
 3. thehighpriestess - The High Priestess / Yüksek Rahibe / Висока свештеница
@@ -134,21 +139,21 @@ Position-1 için i18n destekli 78 kart:
 22. theworld - The World / Dünya / Свет
 
 ### Kupalar (14 kart)
+
 23. aceofcups - Ace of Cups
-24. twoofcups - Two of Cups
-... (14 kart)
+24. twoofcups - Two of Cups ... (14 kart)
 
 ### Kılıçlar (14 kart)
-37. aceofswords - Ace of Swords
-... (14 kart)
+
+37. aceofswords - Ace of Swords ... (14 kart)
 
 ### Asalar (14 kart)
-51. aceofwands - Ace of Wands
-... (14 kart)
+
+51. aceofwands - Ace of Wands ... (14 kart)
 
 ### Tılsımlar (14 kart)
-65. aceofpentacles - Ace of Pentacles
-... (14 kart)
+
+65. aceofpentacles - Ace of Pentacles ... (14 kart)
 
 **TOPLAM: 78 KART × 3 DİL = 234 TAM ÇEVİRİ**
 
@@ -157,6 +162,7 @@ Position-1 için i18n destekli 78 kart:
 ## ✅ Doğrulama Kontrolleri
 
 ### 1. Veri Bütünlüğü
+
 ```bash
 # Her dilde aynı sayıda kart var mı?
 python3 -c "
@@ -166,7 +172,7 @@ en = json.load(open('messages/en.json'))['love']['meanings']
 sr = json.load(open('messages/sr.json'))['love']['meanings']
 
 print('✓ TR:', len(tr), 'kart')
-print('✓ EN:', len(en), 'kart')  
+print('✓ EN:', len(en), 'kart')
 print('✓ SR:', len(sr), 'kart')
 print()
 print('Aynı mı?', len(tr) == len(en) == len(sr) == 78)
@@ -174,6 +180,7 @@ print('Aynı mı?', len(tr) == len(en) == len(sr) == 78)
 ```
 
 ### 2. Çeviri Kalitesi
+
 Rastgele bir kartı kontrol edin:
 
 ```bash
@@ -196,6 +203,7 @@ print('SR upright:', sr['love']['meanings'][card]['position1']['upright'][:60])
 ```
 
 ### 3. cardGroups Kontrolü
+
 ```bash
 python3 -c "
 import json
@@ -217,16 +225,19 @@ print('SR cardGroups:', sr['love']['cardGroups'])
 
 ### "i18n anahtarı gösterilmiyor" Hatası
 
-**Belirti:** Ekranda `love.meanings.thefool.position1.upright` şeklinde anahtar görünüyor
+**Belirti:** Ekranda `love.meanings.thefool.position1.upright` şeklinde anahtar
+görünüyor
 
 **Çözüm:**
+
 1. Dev server'ı yeniden başlatın: `npm run dev`
 2. Tarayıcı cache'ini temizleyin (Ctrl+Shift+R veya Cmd+Shift+R)
-3. messages/*.json dosyalarının doğru yüklendiğini kontrol edin
+3. messages/\*.json dosyalarının doğru yüklendiğini kontrol edin
 
 ### "Çeviriler görünmüyor" Hatası
 
 **Çözüm:**
+
 ```bash
 # i18n-helper.ts dosyasının doğru çalıştığını kontrol et
 grep -n "useLoveTranslations" src/features/tarot/lib/love/i18n-helper.ts
@@ -257,4 +268,3 @@ Uygulamayı açtığınızda:
 **Hazırlayan:** AI Asistan  
 **Tarih:** 2025-10-08  
 **Durum:** ✅ Test Edilebilir
-

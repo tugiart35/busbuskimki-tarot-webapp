@@ -69,11 +69,7 @@
             "answer": "Jak je u kreativnosti, razvoju vida, intuitivne svesti i procese donošenja odluka."
           }
         ],
-        "related_cards": [
-          "mesec",
-          "osam šoljica",
-          "Ace-Cups"
-        ],
+        "related_cards": ["mesec", "osam šoljica", "Ace-Cups"],
         "imageUrl": "/cards/rvs/vii-cups.vebp"
       },
       "eight-of-cups": {
@@ -173,11 +169,7 @@
             "answer": "Snažno je u svesnim pauzama u odnosima, promene u karijeri, ponovno utvrđivanje životnog pravca i duhovnih transformacijskih procesa."
           }
         ],
-        "related_cards": [
-          "sedam šoljica",
-          "devet šoljica",
-          "pustinjak"
-        ],
+        "related_cards": ["sedam šoljica", "devet šoljica", "pustinjak"],
         "imageUrl": "/cards/rvs / viii-cups.vebp"
       },
       "nine-of-cups": {
@@ -277,11 +269,7 @@
             "answer": "To je snažno tokom perioda uspeha, zahvalnosti, obilja i emocionalnog ispunjenja. Sjaji u trenucima kada se manifestuju želje."
           }
         ],
-        "related_cards": [
-          "osam šoljica",
-          "deset šoljica",
-          "sunce"
-        ],
+        "related_cards": ["osam šoljica", "deset šoljica", "sunce"],
         "imageUrl": "/cards/rvs/ik-cups.vebp"
       },
       "ten-of-cups": {
@@ -381,11 +369,7 @@
             "answer": "Jak je u porodičnim odnosima, braku, dugoročnim obveznicama i potragu za duhovnom integritetom."
           }
         ],
-        "related_cards": [
-          "devet šoljica",
-          "ljubitelji",
-          "sunce"
-        ],
+        "related_cards": ["devet šoljica", "ljubitelji", "sunce"],
         "imageUrl": "/cards/rvs/k-cups.vebp"
       },
       "page-of-cups": {
@@ -485,11 +469,7 @@
             "answer": "Tokom perioda novih emocionalnih početaka, radna dela, kreativna inspiracija i prijemčivost na ljubazne vesti."
           }
         ],
-        "related_cards": [
-          "Stranice-of-pentacles",
-          "kraljica šoljica",
-          "vitez"
-        ],
+        "related_cards": ["Stranice-of-pentacles", "kraljica šoljica", "vitez"],
         "imageUrl": "/cards/rvs / page-cups.vebp"
       },
       "knight-of-cups": {
@@ -589,11 +569,7 @@
             "answer": "Jak je u romantičnim predlozima, kreativnim projektima, emocionalnim putovanjima i inspirisanim počecima."
           }
         ],
-        "related_cards": [
-          "Page-of-of Cups",
-          "kraljica šoljica",
-          "ljubitelji"
-        ],
+        "related_cards": ["Page-of-of Cups", "kraljica šoljica", "ljubitelji"],
         "imageUrl": "/cards/rvs/knight-cups.vebp"
       },
       "queen-of-cups": {
@@ -693,11 +669,7 @@
             "answer": "Moćan je u emocionalnim smernicama, kreativnim projektima, odnosima i situacijama koje zahtevaju empatiju i saosećanje."
           }
         ],
-        "related_cards": [
-          "vitez",
-          "Page-of-of Cups",
-          "ljubitelji"
-        ],
+        "related_cards": ["vitez", "Page-of-of Cups", "ljubitelji"],
         "imageUrl": "/cards/rvs/kueen-cups.vebp"
       },
       "king-of-cups": {
@@ -797,11 +769,7 @@
             "answer": "Moćan je za emocionalne smernice, liderstvo, situacije koje zahtevaju empatiju i teške odluke."
           }
         ],
-        "related_cards": [
-          "kraljica šoljica",
-          "vitez",
-          "karita"
-        ],
+        "related_cards": ["kraljica šoljica", "vitez", "karita"],
         "imageUrl": "/cards/rvs/king-cups.vebp"
       },
       "ace-of-swords": {

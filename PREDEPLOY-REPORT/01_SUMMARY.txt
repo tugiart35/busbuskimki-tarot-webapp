@@ -1,0 +1,152 @@
+================================================================================
+PREDEPLOY RAPORU - TaraTarot Projesi
+Tarih: 2025-10-13
+================================================================================
+
+GENEL DURUM: ❌ DEPLOY'A HAZIR DEĞİL
+================================================================================
+
+Proje build başarısız oldu ve kritik TypeScript hataları mevcut.
+
+--------------------------------------------------------------------------------
+1. TYPECHECK SONUÇLARI
+--------------------------------------------------------------------------------
+Durum: ❌ BAŞARISIZ (Exit Code: 1)
+Log Dosyası: PREDEPLOY-REPORT/01_typecheck.txt
+
+Toplam Hata Sayısı: ~48 TypeScript hatası
+
+Kritik Hatalar:
+
+A) Test Dosyaları (Jest Matcher Tipleri):
+   - src/features/shared/layout/__tests__/BottomNavigation.test.tsx
+     * toBeInTheDocument ve toHaveAttribute matcher'ları tanınmıyor
+     * Jest type definition sorunu (@testing-library/jest-dom)
+
+B) Position Meanings Index Dosyaları:
+   - src/features/tarot/lib/relationship-analysis/position-meanings-index.ts (4 hata)
+   - src/features/tarot/lib/relationship-problems/position-meanings-index.ts (9 hata)
+   - src/features/tarot/lib/situation-analysis/position-meanings-index.ts (7 hata)
+   * Hata: 'undefined' değeri 'null' tipine atanamıyor
+   * Sorun: undefined değerler dönen fonksiyonlar ama null bekleniyor
+
+C) Tarot Config Factory:
+   - src/features/tarot/shared/config/tarot-config-factory.ts (9 hata)
+   * Hata: 't' property'si ((key: string) => string) | undefined
+   * exactOptionalPropertyTypes uyumluluk sorunu
+   * Kullanılmayan import: useTranslations (line 13)
+
+D) Test Dosyalarındaki Diğer Hatalar:
+   - Hook testleri: gender tipi uyumsuzluğu (string vs enum)
+   - Auth service testleri: eksik property'ler (confirmPassword, name, surname, etc.)
+   - Auth validation testleri: undefined kontrol sorunları
+   - Shopier security testleri: NODE_ENV read-only property'ye yazma
+
+--------------------------------------------------------------------------------
+2. LINT SONUÇLARI (ESLint)
+--------------------------------------------------------------------------------
+Durum: ⚠️ UYARILAR VAR (Exit Code: 0)
+Log Dosyası: PREDEPLOY-REPORT/01_lint.txt
+
+Toplam Satır: 7179 satır lint çıktısı
+
+Tekrarlayan Sorunlar:
+- prettier/prettier formatı uyumsuzlukları (çift tırnak vs tek tırnak)
+- Script dosyalarındaki (add-missing-cards.js vb.) format sorunları
+- JSON syntax hataları (virgül eksiklikleri, format sorunları)
+
+Not: Lint geçti (exit code 0) ancak çok sayıda uyarı mevcut.
+
+--------------------------------------------------------------------------------
+3. BUILD SONUÇLARI
+--------------------------------------------------------------------------------
+Durum: ❌ BAŞARISIZ (Exit Code: 1)
+Log Dosyası: PREDEPLOY-REPORT/01_build.txt
+
+Next.js Version: 15.5.4
+Compile Durumu: ✓ Başarılı (17.0s)
+Linting: Atlandı
+Type Check: ❌ BAŞARISIZ
+
+Kritik Build Hatası:
+./src/features/tarot/lib/relationship-analysis/position-meanings-index.ts:423:7
+Type error: Type 'RelationshipAnalysisPositionMeaning | undefined' is not 
+assignable to type 'RelationshipAnalysisPositionMeaning | null'.
+
+Build worker exit code: 1
+
+--------------------------------------------------------------------------------
+4. ÖNCELIKLI DÜZELTME GEREKENLER
+--------------------------------------------------------------------------------
+
+YÜKSEK ÖNCELİK (Build'i Engelleyen):
+1. Position meanings index dosyalarındaki undefined/null tip uyumsuzlukları
+   - 20 fonksiyonu düzeltilmeli (undefined yerine null veya undefined | null)
+   
+2. Tarot config factory'deki 't' property undefined/type uyumsuzluğu
+   - exactOptionalPropertyTypes için düzeltme gerekli
+   - Kullanılmayan useTranslations import'u kaldırılmalı
+
+ORTA ÖNCELİK (Test Altyapısı):
+3. Jest type definitions (@testing-library/jest-dom)
+   - jest.setup.js veya tsconfig dosyasında type eklemesi gerekli
+
+4. Auth test dosyalarındaki tip uyumsuzlukları
+   - Gender enum değerleri düzeltilmeli
+   - Eksik property'ler eklenmeli
+
+DÜŞÜK ÖNCELİK (Kod Kalitesi):
+5. Prettier formatı sorunları (7000+ satır)
+   - npm run format komutuyla düzeltilebilir
+
+6. Kullanılmayan değişkenler ve import'lar
+   - Kod temizliği için
+
+--------------------------------------------------------------------------------
+5. ÖNERİLEN DÜZELTME ADIMLARI
+--------------------------------------------------------------------------------
+
+1. Adım: Position Meanings Index Düzeltmeleri
+   - getPosition*MeaningByCardName fonksiyonlarının return tiplerini düzelt
+   - undefined yerine null dön veya return tipini undefined | null yap
+
+2. Adım: Tarot Config Factory Düzeltmesi
+   - 't' parametresini optional yap veya her zaman tanımlı hale getir
+   - useTranslations import'unu kaldır
+
+3. Adım: Jest Type Definitions
+   - @testing-library/jest-dom'u jest.setup.js'e import et
+   - tsconfig.json'da types array'ine "@testing-library/jest-dom" ekle
+
+4. Adım: Test Dosyalarını Düzelt
+   - Gender enum değerlerini kullan
+   - Eksik property'leri ekle
+   - NODE_ENV atamalarını kaldır
+
+5. Adım: Format Düzeltme
+   - npm run format çalıştır
+   - Prettier konfigürasyonunu kontrol et
+
+6. Adım: Build Tekrar Dene
+   - npm run build
+
+--------------------------------------------------------------------------------
+6. DOSYA KONUMLARI
+--------------------------------------------------------------------------------
+
+Düzeltilmesi Gereken Ana Dosyalar:
+✗ src/features/tarot/lib/relationship-analysis/position-meanings-index.ts
+✗ src/features/tarot/lib/relationship-problems/position-meanings-index.ts
+✗ src/features/tarot/lib/situation-analysis/position-meanings-index.ts
+✗ src/features/tarot/shared/config/tarot-config-factory.ts
+⚠ jest.setup.js veya tsconfig.json
+⚠ src/hooks/auth/__tests__/useAuth.test.ts
+⚠ src/lib/auth/__tests__/auth-service.test.ts
+
+================================================================================
+SONUÇ: Projenin deploy edilebilmesi için önce yukarıdaki TypeScript hatalarının
+düzeltilmesi gerekiyor. Build başarılı olmadan deploy yapılamaz.
+
+Tahmini Düzeltme Süresi: 30-60 dakika
+================================================================================
+

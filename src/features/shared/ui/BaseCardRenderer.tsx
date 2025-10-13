@@ -51,6 +51,7 @@ import React, { memo } from 'react';
 import type { TarotCard } from '@/features/tarot/lib/a-tarot-helpers';
 import type { CardTheme, CardMode, CardSize } from '@/types/ui';
 import { validateImageSrc } from '@/utils/security';
+import Image from 'next/image';
 
 export interface BaseCardRendererProps {
   // Kart bilgileri
@@ -223,17 +224,13 @@ const BaseCardRenderer = memo(function BaseCardRenderer({
     }
 
     return (
-      <div className='relative w-full h-full'>
-        <img
+      <div className={`relative w-full h-full ${isReversed ? 'rotate-180' : ''}`}>
+        <Image
           src={imageSrc}
           alt={card?.nameTr || 'Tarot Kartı'}
-          className={`w-full h-full object-cover transition-transform duration-500 ${
-            isReversed ? 'rotate-180' : ''
-          }`}
-          onError={e => {
-            // Fallback olarak arka plan rengi göster
-            e.currentTarget.style.display = 'none';
-          }}
+          fill
+          className="object-cover transition-transform duration-500"
+          sizes="(max-width: 640px) 80px, (max-width: 768px) 96px, (max-width: 1024px) 112px, 128px"
         />
       </div>
     );

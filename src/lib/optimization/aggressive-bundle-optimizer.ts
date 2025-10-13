@@ -19,10 +19,9 @@ export const dynamicImports = {
     framerMotion: () => import('framer-motion'),
   },
 
-  // Browser automation - sadece gerektiğinde yükle
-  automation: {
-    puppeteer: () => import('puppeteer'),
-  },
+  // Browser automation - ONLY for server-side use, NOT for client
+  // Puppeteer should NEVER be in client bundle - it's 100MB+
+  // Use server-side API routes for PDF generation instead
 
   // Supabase - sadece gerektiğinde yükle
   database: {

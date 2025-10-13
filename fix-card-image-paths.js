@@ -16,21 +16,21 @@ const correctImagePaths = {
   'the-hierophant': '/cards/rws/V-Hierophant.webp',
   'the-lovers': '/cards/rws/VI-Lovers.webp',
   'the-chariot': '/cards/rws/VII-Chariot.webp',
-  'strength': '/cards/rws/VIII-Strength.webp',
+  strength: '/cards/rws/VIII-Strength.webp',
   'the-hermit': '/cards/rws/IX-Hermit.webp',
   'the-wheel-of-fortune': '/cards/rws/X-WheelOfFortune.webp',
-  'justice': '/cards/rws/XI-Justice.webp',
+  justice: '/cards/rws/XI-Justice.webp',
   'the-hanged-man': '/cards/rws/XII-HangedMan.webp',
-  'death': '/cards/rws/XIII-Death.webp',
-  'temperance': '/cards/rws/XIV-Temperance.webp',
+  death: '/cards/rws/XIII-Death.webp',
+  temperance: '/cards/rws/XIV-Temperance.webp',
   'the-devil': '/cards/rws/XV-Devil.webp',
   'the-tower': '/cards/rws/XVI-Tower.webp',
   'the-star': '/cards/rws/XVII-Star.webp',
   'the-moon': '/cards/rws/XVIII-Moon.webp',
   'the-sun': '/cards/rws/XIX-Sun.webp',
-  'judgment': '/cards/rws/XX-Judgement.webp',
+  judgment: '/cards/rws/XX-Judgement.webp',
   'the-world': '/cards/rws/XXI-World.webp',
-  
+
   // Wands - Asa
   'ace-of-wands': '/cards/rws/Ace-Wands.webp',
   'two-of-wands': '/cards/rws/II-Wands.webp',
@@ -46,7 +46,7 @@ const correctImagePaths = {
   'knight-of-wands': '/cards/rws/Knight-Wands.webp',
   'queen-of-wands': '/cards/rws/Queen-Wands.webp',
   'king-of-wands': '/cards/rws/King-Wands.webp',
-  
+
   // Pentacles - Yıldız/Madeni
   'ace-of-pentacles': '/cards/rws/Ace-Pentacles.webp',
   'two-of-pentacles': '/cards/rws/II-Pentacles.webp',
@@ -62,7 +62,7 @@ const correctImagePaths = {
   'knight-of-pentacles': '/cards/rws/Knight-Pentacles.webp',
   'queen-of-pentacles': '/cards/rws/Queen-Pentacles.webp',
   'king-of-pentacles': '/cards/rws/King-Pentacles.webp',
-  
+
   // Cups - Kupa
   'ace-of-cups': '/cards/rws/Ace-Cups.webp',
   'two-of-cups': '/cards/rws/II-Cups.webp',
@@ -78,7 +78,7 @@ const correctImagePaths = {
   'knight-of-cups': '/cards/rws/Knight-Cups.webp',
   'queen-of-cups': '/cards/rws/Queen-Cups.webp',
   'king-of-cups': '/cards/rws/King-Cups.webp',
-  
+
   // Swords - Kılıç
   'ace-of-swords': '/cards/rws/Ace-Swords.webp',
   'two-of-swords': '/cards/rws/II-Swords.webp',
@@ -104,14 +104,14 @@ Object.keys(trData.blog.cards).forEach(cardKey => {
   if (correctImagePaths[cardKey]) {
     const oldPath = trData.blog.cards[cardKey].imageUrl;
     const newPath = correctImagePaths[cardKey];
-    
+
     if (oldPath !== newPath) {
       trData.blog.cards[cardKey].imageUrl = newPath;
       changeCount++;
       changes.push({
         card: cardKey,
         old: oldPath,
-        new: newPath
+        new: newPath,
       });
       console.log(`✓ ${cardKey}: ${oldPath || '(yok)'} → ${newPath}`);
     }
@@ -126,4 +126,3 @@ console.log(`\n✅ ${changeCount} kart resim yolu düzeltildi.`);
 // Değişiklikleri kaydet
 fs.writeFileSync('image-path-changes.json', JSON.stringify(changes, null, 2));
 console.log('Değişiklik raporu: image-path-changes.json');
-

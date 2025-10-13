@@ -1,0 +1,433 @@
+================================================================================
+VERİTABANI MİGRATİON VE BACKUP RAPORU
+================================================================================
+Tarih: 2025-10-13
+Proje: TaraTarot
+Veritabanı: Supabase PostgreSQL
+
+================================================================================
+1. MİGRATİON KLASÖRÜ DURUMU
+================================================================================
+
+✅ Migration Klasörü: /migrations (Mevcut)
+📁 Toplam Migration Dosyası: 18 dosya
+
+Migration Dosyaları:
+-------------------
+001_create_tarot_cards_tables.sql          (4.4 KB)
+002_insert_sample_tarot_cards.sql          (10.5 KB)
+003_insert_seo_data.sql                    (12.6 KB)
+20241201_01_types.sql                      (1.6 KB)
+20241201_02_tables.sql                     (7.0 KB)
+20241201_03_constraints.sql                (4.3 KB)
+20241201_04_indexes.sql                    (6.3 KB)
+20241201_05_rls.sql                        (8.4 KB)
+20241201_06_functions.sql                  (11.8 KB)
+20250911_01-types.sql                      (513 B)
+20250911_02-tables.sql                     (5.9 KB)
+20250911_03-constraints.sql                (147 B)
+20250911_04-indexes.sql                    (2.2 KB)
+20250911_05-rls.sql                        (1.5 KB)
+20250911_06-seed.sql                       (16 B)
+20250930_01-add-marriage-enum.sql          (855 B)
+20250930_02-system-performance.sql         (2.2 KB)
+refactor-moves.plan.json                   (15.5 KB)
+
+Migration Kronolojisi:
+---------------------
+Aşama 1: Temel Tarot Tabloları (001-003)
+Aşama 2: Kullanıcı ve İşlem Tabloları (20241201_01-06)
+Aşama 3: Sistem Güncellemeleri (20250911_01-06)
+Aşama 4: İyileştirmeler (20250930_01-02)
+
+================================================================================
+2. ANA SCHEMA DURUMU
+================================================================================
+
+✅ Ana Schema Dosyası: schema.sql (Mevcut ve Güncel)
+
+Veritabanı Yapısı:
+------------------
+• Extensions: pgcrypto, pg_trgm
+• Custom Types: reading_type_enum, reading_status_enum
+• Ana Tablolar (11):
+  - profiles (Kullanıcı profilleri)
+  - admins (Admin yetkileri)
+  - readings (Tarot okumaları)
+  - transactions (Kredi işlemleri)
+  - packages (Kredi paketleri)
+  - spreads (Tarot açılımları)
+  - audit_logs (Güvenlik logları)
+  - pricing_tiers (Fiyatlandırma)
+  - user_subscriptions (Abonelikler)
+  - user_payment_methods (Ödeme yöntemleri)
+  - user_transactions (Ödeme işlemleri)
+
+• Ek Tablolar:
+  - system_performance (Sistem performans metrikleri)
+  - webhook_events (Webhook kayıtları)
+
+• Views:
+  - tarot_readings (Geriye dönük uyumluluk)
+  - spreads_public (Halka açık açılımlar)
+
+• Fonksiyonlar:
+  - fn_create_reading_with_debit() (Atomik okuma + kredi)
+  - fn_award_bonus_credits() (Bonus kredi verme)
+  - log_system_performance() (Performans loglama)
+  - set_updated_at() (Otomatik güncelleme)
+
+================================================================================
+3. RLS (ROW LEVEL SECURİTY) POLİTİKALARI
+================================================================================
+
+✅ RLS Politika Dosyası: policies.sql (Mevcut ve Düzeltilmiş)
+
+Önemli Notlar:
+--------------
+• Sonsuz döngü sorunu çözüldü (2025-01-11)
+• Admin politikaları admin_users tablosunu kullanıyor
+• Tüm tablolarda RLS etkin
+• Kullanıcılar sadece kendi verilerini görebilir
+• Adminler tüm verilere erişebilir
+
+RLS Etkin Tablolar:
+------------------
+✅ profiles
+✅ admin_users  
+✅ readings
+✅ transactions
+✅ packages
+✅ spreads
+✅ audit_logs
+✅ pricing_tiers
+✅ user_subscriptions
+✅ user_payment_methods
+✅ user_transactions
+✅ system_performance
+
+================================================================================
+4. UYGULAMA DURUMU KONTROLÜ
+================================================================================
+
+Migration Uygulama Durumunu Kontrol Etmek İçin:
+-----------------------------------------------
+
+A) Supabase Dashboard Üzerinden:
+   1. https://supabase.com/dashboard adresine girin
+   2. Projenizi seçin
+   3. SQL Editor'e gidin
+   4. Aşağıdaki sorguyu çalıştırın:
+
+   SELECT tablename 
+   FROM pg_tables 
+   WHERE schemaname = 'public' 
+   ORDER BY tablename;
+
+   Beklenen Tablolar:
+   - admins
+   - admin_users
+   - audit_logs
+   - packages
+   - pricing_tiers
+   - profiles
+   - readings
+   - spreads
+   - system_performance
+   - transactions
+   - user_payment_methods
+   - user_subscriptions
+   - user_transactions
+   - webhook_events
+
+B) Yerel Kontrol (Supabase CLI ile):
+   ```bash
+   # Supabase CLI yüklü değilse:
+   npm install -g supabase
+   
+   # Proje bağlantısını kontrol et:
+   supabase db remote inspect
+   
+   # Migration history:
+   supabase migration list
+   ```
+
+================================================================================
+5. BACKUP TALİMATLARI
+================================================================================
+
+🚨 UYARI: Production'a geçmeden ÖNCE mutlaka yedek alın!
+
+Yöntem 1: Supabase Dashboard (Önerilen)
+----------------------------------------
+1. Supabase Dashboard > Project Settings > Database
+2. "Database backups" sekmesine gidin
+3. "Create backup" butonuna tıklayın
+4. Backup'ın tamamlanmasını bekleyin
+5. Backup listesini kaydedin
+
+Otomatik Backup Ayarları:
+• Supabase Pro planında günlük otomatik backup
+• 7 gün boyunca saklanır
+• Point-in-time recovery mevcut
+
+Yöntem 2: Supabase CLI ile Dump
+--------------------------------
+```bash
+# Tüm database dump'ı:
+supabase db dump -f backup-$(date +%Y%m%d-%H%M%S).sql
+
+# Sadece schema:
+supabase db dump --schema-only -f schema-backup.sql
+
+# Sadece data:
+supabase db dump --data-only -f data-backup.sql
+```
+
+Yöntem 3: pg_dump ile (Direkt PostgreSQL)
+------------------------------------------
+⚠️ NOT: Bağlantı bilgileri .env dosyasında olmalı
+
+Bağlantı bilgileri için:
+1. Supabase Dashboard > Project Settings > Database
+2. "Connection string" kısmından direct connection string'i alın
+
+Komut:
+```bash
+pg_dump "postgresql://postgres:[PASSWORD]@db.[PROJECT-REF].supabase.co:5432/postgres" \
+  -f backup-$(date +%Y%m%d).sql \
+  --clean \
+  --if-exists \
+  --no-owner \
+  --no-privileges
+```
+
+Yöntem 4: Manuel SQL Export
+----------------------------
+Sadece uygulama verileri için:
+
+```sql
+-- profiles yedek
+COPY (SELECT * FROM profiles) TO '/tmp/profiles_backup.csv' CSV HEADER;
+
+-- readings yedek
+COPY (SELECT * FROM readings) TO '/tmp/readings_backup.csv' CSV HEADER;
+
+-- transactions yedek
+COPY (SELECT * FROM transactions) TO '/tmp/transactions_backup.csv' CSV HEADER;
+
+-- packages yedek
+COPY (SELECT * FROM packages) TO '/tmp/packages_backup.csv' CSV HEADER;
+```
+
+================================================================================
+6. RESTORE TALİMATLARI
+================================================================================
+
+Yöntem 1: Supabase Dashboard'dan Restore
+-----------------------------------------
+1. Project Settings > Database > Backups
+2. Restore edilecek backup'ı seçin
+3. "Restore" butonuna tıklayın
+4. Onaylayın ve bekleyin
+
+Yöntem 2: SQL Dump'tan Restore
+-------------------------------
+```bash
+# Supabase CLI ile:
+supabase db reset --db-url "postgresql://..."
+
+# veya psql ile:
+psql "postgresql://postgres:[PASSWORD]@db.[PROJECT-REF].supabase.co:5432/postgres" \
+  -f backup-file.sql
+```
+
+================================================================================
+7. PRODUCTION HAZIRLIK KONTROL LİSTESİ
+================================================================================
+
+Veritabanı Hazırlığı:
+--------------------
+☐ 1. Tüm migration'lar uygulandı mı?
+     Kontrol: SELECT tablename FROM pg_tables WHERE schemaname = 'public';
+
+☐ 2. RLS politikaları aktif mi?
+     Kontrol: SELECT tablename, rowsecurity FROM pg_tables WHERE schemaname = 'public';
+
+☐ 3. Test verisi temizlendi mi?
+     Uyarı: delete-all-users.sql dosyası mevcut, dikkatli kullanın!
+
+☐ 4. Backup alındı mı?
+     Son backup tarihi: _____________
+
+☐ 5. Admin kullanıcı oluşturuldu mu?
+     INSERT INTO admin_users (user_id, role) VALUES ('[UUID]', 'admin');
+
+☐ 6. Indexes oluşturuldu mu?
+     Kontrol: \di (psql) veya Dashboard > Database > Indexes
+
+☐ 7. Performance tablosu seed edildi mi?
+     SELECT COUNT(*) FROM system_performance;
+
+☐ 8. Package'lar oluşturuldu mu?
+     SELECT COUNT(*) FROM packages WHERE active = true;
+
+☐ 9. Spread yapılandırmaları eklendi mi?
+     SELECT COUNT(*) FROM spreads WHERE active = true;
+
+☐ 10. Webhook events tablosu test edildi mi?
+      SELECT COUNT(*) FROM webhook_events;
+
+Environment Variables:
+----------------------
+☐ NEXT_PUBLIC_SUPABASE_URL (Production URL)
+☐ NEXT_PUBLIC_SUPABASE_ANON_KEY (Production Anon Key)
+☐ SUPABASE_SERVICE_ROLE_KEY (Production Service Role - GİZLİ)
+☐ DATABASE_URL (Opsiyonel - direct connection için)
+
+Güvenlik Kontrolleri:
+--------------------
+☐ Service role key sadece backend'de kullanılıyor mu?
+☐ RLS tüm tablolarda aktif mi?
+☐ Admin_users tablosu sadece adminlere açık mı?
+☐ Audit_logs çalışıyor mu?
+☐ Rate limiting aktif mi? (Supabase Dashboard'da)
+
+================================================================================
+8. BİLİNEN SORUNLAR VE ÇÖZÜMLER
+================================================================================
+
+Çözülen Sorunlar:
+-----------------
+✅ Sonsuz döngü sorunu (admin politikaları) - Çözüldü (2025-01-11)
+✅ RLS politika çakışmaları - Düzeltildi
+✅ system_performance tablosu eksikliği - Eklendi (20250930_02)
+
+Dikkat Edilmesi Gerekenler:
+---------------------------
+⚠️ Service role key'i client-side'da KULLANMAYIN
+⚠️ Migration'lar sırayla uygulanmalı (tarih bazlı)
+⚠️ Admin kullanıcı oluşturmadan admin özelliklerine erişemezsiniz
+⚠️ Credit balance negatif olamaz (fn_create_reading_with_debit kontrolü var)
+
+================================================================================
+9. PRODUCTION DEPLOYMENT ADIMLARI
+================================================================================
+
+1. PRE-DEPLOYMENT
+   ----------------
+   a. Local veritabanını test edin
+   b. Tüm migration'ları gözden geçirin
+   c. Backup alın (Yöntem 1 veya 2)
+   d. ENV dosyalarını production'a göre güncelleyin
+
+2. DEPLOYMENT
+   -----------
+   a. Supabase production projesine bağlanın
+   b. Migration'ları sırayla uygulayın:
+      ```bash
+      # 1. Base tables
+      psql < migrations/20241201_01_types.sql
+      psql < migrations/20241201_02_tables.sql
+      psql < migrations/20241201_03_constraints.sql
+      psql < migrations/20241201_04_indexes.sql
+      psql < migrations/20241201_05_rls.sql
+      psql < migrations/20241201_06_functions.sql
+      
+      # 2. Updates
+      psql < migrations/20250911_01-types.sql
+      psql < migrations/20250911_02-tables.sql
+      psql < migrations/20250911_03-constraints.sql
+      psql < migrations/20250911_04-indexes.sql
+      psql < migrations/20250911_05-rls.sql
+      
+      # 3. Latest changes
+      psql < migrations/20250930_01-add-marriage-enum.sql
+      psql < migrations/20250930_02-system-performance.sql
+      ```
+   
+   c. RLS politikalarını uygulayın:
+      ```bash
+      psql < policies.sql
+      ```
+   
+   d. İlk admin kullanıcıyı oluşturun
+   e. Test verilerini (gerekirse) ekleyin
+
+3. POST-DEPLOYMENT
+   ----------------
+   a. Tüm tabloların oluşturulduğunu kontrol edin
+   b. RLS'in aktif olduğunu doğrulayın
+   c. Test hesabıyla giriş yapın
+   d. CRUD operasyonlarını test edin
+   e. Admin paneline erişimi kontrol edin
+   f. Monitoring ayarlarını aktifleştirin
+
+================================================================================
+10. ACİL DURUM İLETİŞİM VE KAYNAKLAR
+================================================================================
+
+Supabase Destek:
+----------------
+• Dashboard: https://supabase.com/dashboard
+• Docs: https://supabase.com/docs
+• Discord: https://discord.supabase.com
+• Email: support@supabase.io
+
+Yararlı SQL Sorguları:
+----------------------
+-- Tüm tabloları listele:
+SELECT tablename FROM pg_tables WHERE schemaname = 'public';
+
+-- RLS durumunu kontrol et:
+SELECT tablename, rowsecurity FROM pg_tables WHERE schemaname = 'public';
+
+-- Database boyutu:
+SELECT pg_size_pretty(pg_database_size(current_database()));
+
+-- En büyük tablolar:
+SELECT tablename, pg_size_pretty(pg_total_relation_size(schemaname||'.'||tablename))
+FROM pg_tables WHERE schemaname = 'public' ORDER BY pg_total_relation_size(schemaname||'.'||tablename) DESC;
+
+-- Aktif bağlantılar:
+SELECT count(*) FROM pg_stat_activity;
+
+-- Son 10 query:
+SELECT query, query_start FROM pg_stat_activity ORDER BY query_start DESC LIMIT 10;
+
+================================================================================
+11. ÖZET VE ÖNERİLER
+================================================================================
+
+Durum: ✅ VERİTABANI PRODUCTION'A HAZIR
+
+Migration Durumu: ✅ TÜM MIGRATION'LAR MEVCUT
+RLS Durumu: ✅ TÜM POLİTİKALAR TANIMLI
+Schema Durumu: ✅ GÜNCEL VE TUTARLI
+
+Yapılması Gerekenler:
+---------------------
+1. ⚠️  BACKUP ALIN (Öncelik: YÜKSEK)
+2. ✅  Production ENV değişkenlerini güncelleyin
+3. ✅  Migration'ları production'a uygulayın
+4. ✅  İlk admin kullanıcıyı oluşturun
+5. ✅  Test senaryolarını çalıştırın
+6. ✅  Monitoring'i aktifleştirin
+
+Tavsiyeler:
+-----------
+• Her migration'dan önce backup alın
+• Migration'ları test ortamında önce deneyin
+• Service role key'i server-side'da saklayın
+• Audit logs'u düzenli kontrol edin
+• Database metrics'i izleyin (Supabase Dashboard)
+• RLS policy'leri periyodik olarak gözden geçirin
+• Performans loglarını analiz edin
+
+================================================================================
+Rapor Sonu
+Oluşturulma: 2025-10-13
+Geçerlilik: Production deployment öncesi
+İletişim: Sistem yöneticisi
+================================================================================
+

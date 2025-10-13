@@ -1,0 +1,111 @@
+═══════════════════════════════════════════════════════════════════════════
+ACCESSIBILITY & CONTRAST AUDIT REPORT
+═══════════════════════════════════════════════════════════════════════════
+Standard: WCAG 2.0 Level AA
+Tool: Lighthouse (Chrome DevTools)
+Date: 2025-10-13
+Pages Tested: 4
+
+═══════════════════════════════════════════════════════════════════════════
+EXECUTIVE SUMMARY
+═══════════════════════════════════════════════════════════════════════════
+
+Home Page: 84/100 ⚠ WARNING
+Auth Page: 84/100 ⚠ WARNING
+Reading Page: 85/100 ⚠ WARNING
+Card Detail Page: 82/100 ⚠ WARNING
+
+Average Score: 84/100 ⚠ NEEDS IMPROVEMENT
+
+═══════════════════════════════════════════════════════════════════════════
+DETAILED ISSUES BY CATEGORY
+═══════════════════════════════════════════════════════════════════════════
+
+🔴 CRITICAL ISSUES (WCAG AA Violations)
+───────────────────────────────────────────────────────────────────────────────
+
+Issue: `[role]`s are not contained by their required parent element
+Audit ID: aria-required-parent
+Description: Some ARIA child roles must be contained by specific parent roles to properly perform their intended accessibility functions. [Learn more about ARIA roles and required parent element](https://dequeuniversity.com/rules/axe/4.11/aria-required-parent).
+Affected Pages: Home Page, Auth Page, Reading Page, Card Detail Page
+Total Instances: 20
+───────────────────────────────────────────────────────────────────────────────
+
+Issue: Elements with visible text labels do not have matching accessible names.
+Audit ID: label-content-name-mismatch
+Description: Visible text labels that do not match the accessible name can result in a confusing experience for screen reader users. [Learn more about accessible names](https://dequeuniversity.com/rules/axe/4.11/label-content-name-mismatch).
+Affected Pages: Home Page, Auth Page, Reading Page, Card Detail Page
+Total Instances: 4
+───────────────────────────────────────────────────────────────────────────────
+
+Issue: Heading elements are not in a sequentially-descending order
+Audit ID: heading-order
+Description: Properly ordered headings that do not skip levels convey the semantic structure of the page, making it easier to navigate and understand when using assistive technologies. [Learn more about heading order](https://dequeuniversity.com/rules/axe/4.11/heading-order).
+Affected Pages: Auth Page
+Total Instances: 1
+───────────────────────────────────────────────────────────────────────────────
+
+Issue: Background and foreground colors do not have a sufficient contrast ratio.
+Audit ID: color-contrast
+Description: Low-contrast text is difficult or impossible for many users to read. [Learn how to provide sufficient color contrast](https://dequeuniversity.com/rules/axe/4.11/color-contrast).
+Affected Pages: Card Detail Page
+Total Instances: 2
+───────────────────────────────────────────────────────────────────────────────
+
+
+⚠️  WARNING ISSUES (Best Practices)
+───────────────────────────────────────────────────────────────────────────────
+
+Issue: Links do not have a discernible name
+Audit ID: link-name
+Description: Link text (and alternate text for images, when used as links) that is discernible, unique, and focusable improves the navigation experience for screen reader users. [Learn how to make links accessible](https://dequeuniversity.com/rules/axe/4.11/link-name).
+Affected Pages: Home Page, Auth Page, Reading Page, Card Detail Page
+Total Instances: 15
+───────────────────────────────────────────────────────────────────────────────
+
+Issue: `[user-scalable="no"]` is used in the `<meta name="viewport">` element or the `[maximum-scale]` attribute is less than 5.
+Audit ID: meta-viewport
+Description: Disabling zooming is problematic for users with low vision who rely on screen magnification to properly see the contents of a web page. [Learn more about the viewport meta tag](https://dequeuniversity.com/rules/axe/4.11/meta-viewport).
+Affected Pages: Home Page, Auth Page, Reading Page, Card Detail Page
+Total Instances: 8
+───────────────────────────────────────────────────────────────────────────────
+
+
+═══════════════════════════════════════════════════════════════════════════
+WCAG 2.0 AA COMPLIANCE CHECK
+═══════════════════════════════════════════════════════════════════════════
+
+✗ Color Contrast: FAILED
+✗ Text Alternatives: FAILED
+✓ Keyboard Navigation: PASSED
+✓ Focus Management: PASSED
+✗ ARIA Implementation: FAILED
+✗ Document Structure: FAILED
+✓ Language Declaration: PASSED
+✓ Page Titles: PASSED
+
+═══════════════════════════════════════════════════════════════════════════
+RECOMMENDATIONS
+═══════════════════════════════════════════════════════════════════════════
+
+Priority 1 - Critical Issues:
+1. Fix all color contrast issues to meet WCAG AA standards (4.5:1 for normal text)
+2. Add proper ARIA labels and attributes to interactive elements
+3. Ensure all images have descriptive alt text
+4. Fix document structure (headings, landmarks, language)
+
+Priority 2 - Improvements:
+1. Review and improve keyboard navigation flow
+2. Ensure focus indicators are visible and meet contrast requirements
+3. Add skip navigation links for screen readers
+4. Test with actual screen readers (NVDA, JAWS, VoiceOver)
+
+Testing Tools:
+- Manual testing with screen readers recommended
+- Use axe DevTools browser extension for real-time testing
+- Test with keyboard-only navigation
+- Verify with users who rely on assistive technologies
+
+═══════════════════════════════════════════════════════════════════════════
+END OF REPORT
+═══════════════════════════════════════════════════════════════════════════

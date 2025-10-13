@@ -486,10 +486,7 @@
     "cups": [
       null,
       {
-        "keywords": [
-          "lova",
-          "osećanja"
-        ],
+        "keywords": ["lova", "osećanja"],
         "meaning": {
           "reversed": "Samopouzdanje, potisnuti emocije",
           "upright": "Novi odnosi, saosećanje"
@@ -497,10 +494,7 @@
         "name": "Ace od peći"
       },
       {
-        "keywords": [
-          "partnerstvo",
-          "lova"
-        ],
+        "keywords": ["partnerstvo", "lova"],
         "meaning": {
           "reversed": "Samopouzdanje, razdvajanje",
           "upright": "Partnerstvo, međusobna atrakcija"
@@ -508,10 +502,7 @@
         "name": "Par goleta"
       },
       {
-        "keywords": [
-          "proslava",
-          "prijateljstvo"
-        ],
+        "keywords": ["proslava", "prijateljstvo"],
         "meaning": {
           "reversed": "Nezavisnost, kreativni blokovi",
           "upright": "Proslava, prijateljstvo"
@@ -519,10 +510,7 @@
         "name": "Trio Chalices"
       },
       {
-        "keywords": [
-          "meditacija",
-          "misao"
-        ],
+        "keywords": ["meditacija", "misao"],
         "meaning": {
           "reversed": "povlačenje, povlačenje",
           "upright": "meditacija, misli"
@@ -530,10 +518,7 @@
         "name": "Kvartet kalisa"
       },
       {
-        "keywords": [
-          "žaliti",
-          "razočaranje"
-        ],
+        "keywords": ["žaliti", "razočaranje"],
         "meaning": {
           "reversed": "Samoprosičnost, napredak",
           "upright": "žaljenje, razočaranje"
@@ -541,10 +526,7 @@
         "name": "Kvintet kalisa"
       },
       {
-        "keywords": [
-          "nostalgija",
-          "detinjstvo"
-        ],
+        "keywords": ["nostalgija", "detinjstvo"],
         "meaning": {
           "reversed": "Ne živite u prošlosti, oprostite",
           "upright": "Sećanja u detinjstvu, nevinost"
@@ -552,10 +534,7 @@
         "name": "Šest pećih"
       },
       {
-        "keywords": [
-          "prilika",
-          "izbori"
-        ],
+        "keywords": ["prilika", "izbori"],
         "meaning": {
           "reversed": "Lične vrednosti, preplavljena",
           "upright": "Mogućnosti, izbori"
@@ -563,10 +542,7 @@
         "name": "Sedam šoljica"
       },
       {
-        "keywords": [
-          "razočaranje",
-          "ne napuštajte"
-        ],
+        "keywords": ["razočaranje", "ne napuštajte"],
         "meaning": {
           "reversed": "Pokušaj ponovo, neodlučnost",
           "upright": "razočaranje, napuštanje"
@@ -574,10 +550,7 @@
         "name": "Osam šoljica"
       },
       {
-        "keywords": [
-          "zadovoljstvo",
-          "zadovoljstvo"
-        ],
+        "keywords": ["zadovoljstvo", "zadovoljstvo"],
         "meaning": {
           "reversed": "Unutrašnja sreća, nezadovoljstvo",
           "upright": "zadovoljstvo, zadovoljstvo"
@@ -585,10 +558,7 @@
         "name": "Devet šoljica"
       },
       {
-        "keywords": [
-          "božanska ljubav",
-          "raport"
-        ],
+        "keywords": ["božanska ljubav", "raport"],
         "meaning": {
           "reversed": "Isključenje, teški odnosi",
           "upright": "Božanska ljubav, harmonija"
@@ -598,10 +568,7 @@
     ],
     "majorArcana": [
       {
-        "keywords": [
-          "Novi početnici",
-          "nevinost"
-        ],
+        "keywords": ["Novi početnici", "nevinost"],
         "meaning": {
           "reversed": "nepažnja, zloupotreba",
           "upright": "Novi počeci, nevinost, spontanost"
@@ -609,10 +576,7 @@
         "name": "Lud"
       },
       {
-        "keywords": [
-          "manifestacija",
-          "snaga"
-        ],
+        "keywords": ["manifestacija", "snaga"],
         "meaning": {
           "reversed": "Manipulacija, loše planiranje",
           "upright": "Manifestacija, snalažljivost, snaga"
@@ -620,10 +584,7 @@
         "name": "Čarobnjak"
       },
       {
-        "keywords": [
-          "intuicija",
-          "misterija"
-        ],
+        "keywords": ["intuicija", "misterija"],
         "meaning": {
           "reversed": "Tajne, isključenje od intuicije",
           "upright": "Intuicija, sveti znanje, božanska ženstvenost"
@@ -631,10 +592,7 @@
         "name": "Visoki sveštenik"
       },
       {
-        "keywords": [
-          "ženstvenost",
-          "lepota"
-        ],
+        "keywords": ["ženstvenost", "lepota"],
         "meaning": {
           "reversed": "Kreativni blok, ovisnost",
           "upright": "Ženstvenost, lepota, priroda"
@@ -642,10 +600,7 @@
         "name": "Kamat"
       },
       {
-        "keywords": [
-          "vlast",
-          "struktura"
-        ],
+        "keywords": ["vlast", "struktura"],
         "meaning": {
           "reversed": "Dominacija, prekomerna kontrola",
           "upright": "Autoritet, institucionalizam, struktura"
@@ -653,10 +608,7 @@
         "name": "Car"
       },
       {
-        "keywords": [
-          "tradicija",
-          "raport"
-        ],
+        "keywords": ["tradicija", "raport"],
         "meaning": {
           "reversed": "Lična uverenja, sloboda",
           "upright": "Duhovna mudrost, verska uverenja"
@@ -664,10 +616,7 @@
         "name": "Sveti"
       },
       {
-        "keywords": [
-          "lova",
-          "raport"
-        ],
+        "keywords": ["lova", "raport"],
         "meaning": {
           "reversed": "samoljublje, nesklad",
           "upright": "Ljubav, harmonija, odnosi"
@@ -675,10 +624,7 @@
         "name": "ljubavnici"
       },
       {
-        "keywords": [
-          "kontrola",
-          "volja"
-        ],
+        "keywords": ["kontrola", "volja"],
         "meaning": {
           "reversed": "Samodisciplina, opozicija",
           "upright": "Kontrola, volja, uspeh"
@@ -686,10 +632,7 @@
         "name": "Kočija"
       },
       {
-        "keywords": [
-          "snaga",
-          "hrabrost"
-        ],
+        "keywords": ["snaga", "hrabrost"],
         "meaning": {
           "reversed": "Samopouzdanje, nedostatak samopouzdanja",
           "upright": "Snaga, hrabrost, uvjeravanje"
@@ -697,10 +640,7 @@
         "name": "Snaga"
       },
       {
-        "keywords": [
-          "introspekcija",
-          "potraga"
-        ],
+        "keywords": ["introspekcija", "potraga"],
         "meaning": {
           "reversed": "Izolacija, usamljenost",
           "upright": "Traženje duše, introspekcija"
@@ -708,10 +648,7 @@
         "name": "Usamljen"
       },
       {
-        "keywords": [
-          "šansa",
-          "mešovit"
-        ],
+        "keywords": ["šansa", "mešovit"],
         "meaning": {
           "reversed": "Loša sreća, nedostatak kontrole",
           "upright": "Sretno, karme, životni ciklusi"
@@ -719,10 +656,7 @@
         "name": "Točak sudbine"
       },
       {
-        "keywords": [
-          "pravda",
-          "kapital"
-        ],
+        "keywords": ["pravda", "kapital"],
         "meaning": {
           "reversed": "Nepravda, nedostatak odgovornosti",
           "upright": "Pravda, pravičnost, istina"
@@ -730,10 +664,7 @@
         "name": "Pravda"
       },
       {
-        "keywords": [
-          "predaja",
-          "žrtvovati"
-        ],
+        "keywords": ["predaja", "žrtvovati"],
         "meaning": {
           "reversed": "Kašnjenja, otpornost, distrakcija",
           "upright": "predaja, napuštanje, žrtva"
@@ -741,10 +672,7 @@
         "name": "Vešeni čovek"
       },
       {
-        "keywords": [
-          "transformacija",
-          "završetak"
-        ],
+        "keywords": ["transformacija", "završetak"],
         "meaning": {
           "reversed": "Otpornost na promenu, unutrašnje prečišćavanje",
           "upright": "Završeci, transformacija, tranzicija"
@@ -752,10 +680,7 @@
         "name": "Smrt"
       },
       {
-        "keywords": [
-          "ravnoteža",
-          "temperatura"
-        ],
+        "keywords": ["ravnoteža", "temperatura"],
         "meaning": {
           "reversed": "Neravnoteža, višak, samoizlečenje",
           "upright": "Ravnoteža, umerenost, strpljenje"
@@ -763,10 +688,7 @@
         "name": "Temperatura"
       },
       {
-        "keywords": [
-          "zavisnost",
-          "materijalizam"
-        ],
+        "keywords": ["zavisnost", "materijalizam"],
         "meaning": {
           "reversed": "Prepuštanje ograničavajućim uverenjima, odvajanje",
           "upright": "Ovisnost, strast, materijalizam"
@@ -774,10 +696,7 @@
         "name": "Vrag"
       },
       {
-        "keywords": [
-          "iznenadna promena",
-          "zbrka"
-        ],
+        "keywords": ["iznenadna promena", "zbrka"],
         "meaning": {
           "reversed": "Lična transformacija, strah od promene",
           "upright": "Iznenadna promena, konfuzija, haos"
@@ -785,10 +704,7 @@
         "name": "Toranj"
       },
       {
-        "keywords": [
-          "nadati se",
-          "verovanje"
-        ],
+        "keywords": ["nadati se", "verovanje"],
         "meaning": {
           "reversed": "Nedostatak vere, očaja, isključenje",
           "upright": "Nada, vera, svrha, obnavljanje"
@@ -796,10 +712,7 @@
         "name": "Zvezda"
       },
       {
-        "keywords": [
-          "iluzija",
-          "strah"
-        ],
+        "keywords": ["iluzija", "strah"],
         "meaning": {
           "reversed": "Puštanje straha, potisnuta emocija",
           "upright": "Iluzija, strah, anksioznost, podsvesni"
@@ -807,10 +720,7 @@
         "name": "Mesec"
       },
       {
-        "keywords": [
-          "pozitivnost",
-          "zabava"
-        ],
+        "keywords": ["pozitivnost", "zabava"],
         "meaning": {
           "reversed": "Unutrašnje dete, depresija",
           "upright": "Pozitivnost, zabava, toplina, uspeh"
@@ -818,10 +728,7 @@
         "name": "Sunce"
       },
       {
-        "keywords": [
-          "presuda",
-          "ponovno rođenje"
-        ],
+        "keywords": ["presuda", "ponovno rođenje"],
         "meaning": {
           "reversed": "Samo-sumnja, unutrašnji kritičar",
           "upright": "Presuda, ponovno rođenje, unutrašnji poziv"
@@ -829,10 +736,7 @@
         "name": "Sud"
       },
       {
-        "keywords": [
-          "završetak",
-          "integracija"
-        ],
+        "keywords": ["završetak", "integracija"],
         "meaning": {
           "reversed": "Tražim lično zatvaranje, prečicu",
           "upright": "Završetak, integracija, uspeh"
@@ -843,10 +747,7 @@
     "pentacles": [
       null,
       {
-        "keywords": [
-          "prilika",
-          "manifestacija"
-        ],
+        "keywords": ["prilika", "manifestacija"],
         "meaning": {
           "reversed": "Propuštena prilika, nedostatak planiranja",
           "upright": "Nova prilika, manifestacija"
@@ -854,10 +755,7 @@
         "name": "Ace of Goldes"
       },
       {
-        "keywords": [
-          "prioriteti",
-          "raport"
-        ],
+        "keywords": ["prioriteti", "raport"],
         "meaning": {
           "reversed": "Prepoznavanje, neorganizacija",
           "upright": "Više prioriteta, harmonija"
@@ -865,10 +763,7 @@
         "name": "Zlatni duo"
       },
       {
-        "keywords": [
-          "partnerstvo",
-          "učenje"
-        ],
+        "keywords": ["partnerstvo", "učenje"],
         "meaning": {
           "reversed": "Nekompatibilnost, rad sama",
           "upright": "Saradnja, učenje"
@@ -876,10 +771,7 @@
         "name": "Zlatni trio"
       },
       {
-        "keywords": [
-          "akumulacija",
-          "sigurnost"
-        ],
+        "keywords": ["akumulacija", "sigurnost"],
         "meaning": {
           "reversed": "Prekomerna potrošnja, velikodušnost",
           "upright": "Štedeći novac, sigurnost"
@@ -887,10 +779,7 @@
         "name": "Zlatni kvartet"
       },
       {
-        "keywords": [
-          "gubitak",
-          "izolacija"
-        ],
+        "keywords": ["gubitak", "izolacija"],
         "meaning": {
           "reversed": "Oporavak od gubitka, duhovno siromaštvo",
           "upright": "Finansijski gubitak, izolacija"
@@ -898,10 +787,7 @@
         "name": "Zlatni kvintet"
       },
       {
-        "keywords": [
-          "ne daj",
-          "deljenje"
-        ],
+        "keywords": ["ne daj", "deljenje"],
         "meaning": {
           "reversed": "Samo-nega, neizmireni dugovi",
           "upright": "Davanje, deljenje bogatstva"
@@ -909,10 +795,7 @@
         "name": "Zlato šest"
       },
       {
-        "keywords": [
-          "upornost",
-          "investicija"
-        ],
+        "keywords": ["upornost", "investicija"],
         "meaning": {
           "reversed": "Nedostatak dugoročne vizije, nestrpljenje",
           "upright": "Upornost, investicija"
@@ -920,10 +803,7 @@
         "name": "Sedam zlata"
       },
       {
-        "keywords": [
-          "savladav",
-          "veština"
-        ],
+        "keywords": ["savladav", "veština"],
         "meaning": {
           "reversed": "Perfekcionizam, nedostatak posvećenosti",
           "upright": "Masteri, razvoj veština"
@@ -931,10 +811,7 @@
         "name": "Zlatni osam"
       },
       {
-        "keywords": [
-          "dosta",
-          "nezavisnost"
-        ],
+        "keywords": ["dosta", "nezavisnost"],
         "meaning": {
           "reversed": "Samo-vredno, pretešća",
           "upright": "Obilje, finansijska nezavisnost"
@@ -942,10 +819,7 @@
         "name": "Devet zlata"
       },
       {
-        "keywords": [
-          "bogatstvo",
-          "porodica"
-        ],
+        "keywords": ["bogatstvo", "porodica"],
         "meaning": {
           "reversed": "Finansijski neuspeh, mračna strana bogatstva",
           "upright": "Bogatstvo, porodica, dugoročni uspeh"

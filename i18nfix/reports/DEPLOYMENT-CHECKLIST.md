@@ -421,15 +421,15 @@ vercel logs --prod
 
 **Pre-Deployment:**
 
-- [ ] Developer: **********\_********** Date: **\_**
-- [ ] QA: **********\_********** Date: **\_**
-- [ ] Product Owner: **********\_********** Date: **\_**
+- [ ] Developer: ****\*\*****\_****\*\***** Date: **\_**
+- [ ] QA: ****\*\*****\_****\*\***** Date: **\_**
+- [ ] Product Owner: ****\*\*****\_****\*\***** Date: **\_**
 
 **Post-Deployment:**
 
-- [ ] Deployment successful: **********\_********** Date: **\_**
-- [ ] Monitoring active: **********\_********** Date: **\_**
-- [ ] No critical errors: **********\_********** Date: **\_**
+- [ ] Deployment successful: ****\*\*****\_****\*\***** Date: **\_**
+- [ ] Monitoring active: ****\*\*****\_****\*\***** Date: **\_**
+- [ ] No critical errors: ****\*\*****\_****\*\***** Date: **\_**
 
 ---
 

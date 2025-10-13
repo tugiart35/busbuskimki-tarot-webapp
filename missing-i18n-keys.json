@@ -1300,12 +1300,7 @@
       },
       {
         "key": "home.services.numerology.features",
-        "value": [
-          "Yaşam Yolu",
-          "İfade Sayısı",
-          "Ruhsal Arzu",
-          "Günlük Sayı"
-        ]
+        "value": ["Yaşam Yolu", "İfade Sayısı", "Ruhsal Arzu", "Günlük Sayı"]
       },
       {
         "key": "home.services.numerology.title",
@@ -1321,12 +1316,7 @@
       },
       {
         "key": "home.services.tarot.features",
-        "value": [
-          "Aşk Açılımı",
-          "Kariyer Rehberliği",
-          "Günlük Rehberlik",
-          "Detaylı Yorumlama"
-        ]
+        "value": ["Aşk Açılımı", "Kariyer Rehberliği", "Günlük Rehberlik", "Detaylı Yorumlama"]
       },
       {
         "key": "home.services.tarot.title",
@@ -1430,12 +1420,7 @@
       },
       {
         "key": "homepage.services.numerology.features",
-        "value": [
-          "Yaşam Yolu",
-          "İfade Sayısı",
-          "Ruhsal Arzu",
-          "Günlük Sayı"
-        ]
+        "value": ["Yaşam Yolu", "İfade Sayısı", "Ruhsal Arzu", "Günlük Sayı"]
       },
       {
         "key": "homepage.services.numerology.title",
@@ -1451,12 +1436,7 @@
       },
       {
         "key": "homepage.services.tarot.features",
-        "value": [
-          "Aşk Açılımı",
-          "Kariyer Rehberliği",
-          "Günlük Rehberlik",
-          "Detaylı Yorumlama"
-        ]
+        "value": ["Aşk Açılımı", "Kariyer Rehberliği", "Günlük Rehberlik", "Detaylı Yorumlama"]
       },
       {
         "key": "homepage.services.tarot.title",
@@ -1660,13 +1640,7 @@
       },
       {
         "key": "love.meanings.thefool.position4.keywords",
-        "value": [
-          "yeni başlangıç",
-          "belirsiz gelecek",
-          "risk almak",
-          "özgürlük",
-          "beklenmedik yol"
-        ]
+        "value": ["yeni başlangıç", "belirsiz gelecek", "risk almak", "özgürlük", "beklenmedik yol"]
       },
       {
         "key": "love.meanings.thefool.position4.context",
@@ -1682,13 +1656,7 @@
       },
       {
         "key": "love.meanings.themagician.position4.keywords",
-        "value": [
-          "birlikte yaratma",
-          "güçlü gelecek",
-          "potansiyel",
-          "irade",
-          "başarı"
-        ]
+        "value": ["birlikte yaratma", "güçlü gelecek", "potansiyel", "irade", "başarı"]
       },
       {
         "key": "love.meanings.themagician.position4.context",
@@ -1704,13 +1672,7 @@
       },
       {
         "key": "love.meanings.thehighpriestess.position4.keywords",
-        "value": [
-          "gizemli gelecek",
-          "belirsizlik",
-          "sezgisel bağ",
-          "saklı potansiyel",
-          "zaman"
-        ]
+        "value": ["gizemli gelecek", "belirsizlik", "sezgisel bağ", "saklı potansiyel", "zaman"]
       },
       {
         "key": "love.meanings.thehighpriestess.position4.context",
@@ -1726,13 +1688,7 @@
       },
       {
         "key": "love.meanings.theempress.position4.keywords",
-        "value": [
-          "bereket",
-          "büyüme",
-          "evlilik",
-          "doğurganlık",
-          "kalıcı sevgi"
-        ]
+        "value": ["bereket", "büyüme", "evlilik", "doğurganlık", "kalıcı sevgi"]
       },
       {
         "key": "love.meanings.theempress.position4.context",
@@ -1748,13 +1704,7 @@
       },
       {
         "key": "love.meanings.theemperor.position4.keywords",
-        "value": [
-          "kalıcı ilişki",
-          "istikrar",
-          "güvenlik",
-          "evlilik",
-          "sağlam yapı"
-        ]
+        "value": ["kalıcı ilişki", "istikrar", "güvenlik", "evlilik", "sağlam yapı"]
       },
       {
         "key": "love.meanings.theemperor.position4.context",
@@ -1770,13 +1720,7 @@
       },
       {
         "key": "love.meanings.thehierophant.position4.keywords",
-        "value": [
-          "evlilik",
-          "geleneksel bağlılık",
-          "ortak inançlar",
-          "toplumsal onay",
-          "uzun süreli birliktelik"
-        ]
+        "value": ["evlilik", "geleneksel bağlılık", "ortak inançlar", "toplumsal onay", "uzun süreli birliktelik"]
       },
       {
         "key": "love.meanings.thehierophant.position4.context",
@@ -1792,13 +1736,7 @@
       },
       {
         "key": "love.meanings.thelovers.position4.keywords",
-        "value": [
-          "ruh eşi",
-          "kalıcı aşk",
-          "uyumlu ortaklık",
-          "mutluluk",
-          "doğru seçim"
-        ]
+        "value": ["ruh eşi", "kalıcı aşk", "uyumlu ortaklık", "mutluluk", "doğru seçim"]
       },
       {
         "key": "love.meanings.thelovers.position4.context",
@@ -1814,13 +1752,7 @@
       },
       {
         "key": "love.meanings.thechariot.position4.keywords",
-        "value": [
-          "ortak zafer",
-          "başarı",
-          "hedeflere ulaşma",
-          "güçlü birliktelik",
-          "ilerleme"
-        ]
+        "value": ["ortak zafer", "başarı", "hedeflere ulaşma", "güçlü birliktelik", "ilerleme"]
       },
       {
         "key": "love.meanings.thechariot.position4.context",
@@ -1836,13 +1768,7 @@
       },
       {
         "key": "love.meanings.strength.position4.keywords",
-        "value": [
-          "dayanıklı bağ",
-          "şefkat",
-          "sabır",
-          "karşılıklı kabul",
-          "içsel güç"
-        ]
+        "value": ["dayanıklı bağ", "şefkat", "sabır", "karşılıklı kabul", "içsel güç"]
       },
       {
         "key": "love.meanings.strength.position4.context",
@@ -1858,13 +1784,7 @@
       },
       {
         "key": "love.meanings.thehermit.position4.keywords",
-        "value": [
-          "ayrılık",
-          "kişisel yolculuk",
-          "yalnızlık",
-          "içe dönüş",
-          "büyüme"
-        ]
+        "value": ["ayrılık", "kişisel yolculuk", "yalnızlık", "içe dönüş", "büyüme"]
       },
       {
         "key": "love.meanings.thehermit.position4.context",
@@ -1880,13 +1800,7 @@
       },
       {
         "key": "love.meanings.thewheeloffortune.position4.keywords",
-        "value": [
-          "kader",
-          "dönüm noktası",
-          "şans",
-          "yeni döngü",
-          "karmik sonuç"
-        ]
+        "value": ["kader", "dönüm noktası", "şans", "yeni döngü", "karmik sonuç"]
       },
       {
         "key": "love.meanings.thewheeloffortune.position4.context",
@@ -1902,13 +1816,7 @@
       },
       {
         "key": "love.meanings.justice.position4.keywords",
-        "value": [
-          "adalet",
-          "denge",
-          "resmiyet",
-          "sebep-sonuç",
-          "hak edilen sonuç"
-        ]
+        "value": ["adalet", "denge", "resmiyet", "sebep-sonuç", "hak edilen sonuç"]
       },
       {
         "key": "love.meanings.justice.position4.context",
@@ -1924,13 +1832,7 @@
       },
       {
         "key": "love.meanings.thehangedman.position4.keywords",
-        "value": [
-          "belirsizlik",
-          "duraklama",
-          "fedakarlık",
-          "çıkmaz",
-          "bekleyiş"
-        ]
+        "value": ["belirsizlik", "duraklama", "fedakarlık", "çıkmaz", "bekleyiş"]
       },
       {
         "key": "love.meanings.thehangedman.position4.context",
@@ -1946,13 +1848,7 @@
       },
       {
         "key": "love.meanings.death.position4.keywords",
-        "value": [
-          "kaçınılmaz son",
-          "dönüşüm",
-          "bitiş",
-          "yeniden doğuş",
-          "vazgeçiş"
-        ]
+        "value": ["kaçınılmaz son", "dönüşüm", "bitiş", "yeniden doğuş", "vazgeçiş"]
       },
       {
         "key": "love.meanings.death.position4.context",
@@ -1968,13 +1864,7 @@
       },
       {
         "key": "love.meanings.temperance.position4.keywords",
-        "value": [
-          "denge",
-          "uyum",
-          "huzur",
-          "uzun süreli ortaklık",
-          "şifa"
-        ]
+        "value": ["denge", "uyum", "huzur", "uzun süreli ortaklık", "şifa"]
       },
       {
         "key": "love.meanings.temperance.position4.context",
@@ -1990,13 +1880,7 @@
       },
       {
         "key": "love.meanings.thedevil.position4.keywords",
-        "value": [
-          "toksik ilişki",
-          "bağımlılık",
-          "takıntı",
-          "karmik bağ",
-          "kopamama"
-        ]
+        "value": ["toksik ilişki", "bağımlılık", "takıntı", "karmik bağ", "kopamama"]
       },
       {
         "key": "love.meanings.thedevil.position4.context",
@@ -2012,13 +1896,7 @@
       },
       {
         "key": "love.meanings.thetower.position4.keywords",
-        "value": [
-          "ani ayrılık",
-          "yıkım",
-          "kriz",
-          "beklenmedik son",
-          "yüzleşme"
-        ]
+        "value": ["ani ayrılık", "yıkım", "kriz", "beklenmedik son", "yüzleşme"]
       },
       {
         "key": "love.meanings.thetower.position4.context",
@@ -2034,13 +1912,7 @@
       },
       {
         "key": "love.meanings.thestar.position4.keywords",
-        "value": [
-          "umutlu gelecek",
-          "şifa",
-          "mutluluk",
-          "ilham",
-          "huzur"
-        ]
+        "value": ["umutlu gelecek", "şifa", "mutluluk", "ilham", "huzur"]
       },
       {
         "key": "love.meanings.thestar.position4.context",
@@ -2056,13 +1928,7 @@
       },
       {
         "key": "love.meanings.themoon.position4.keywords",
-        "value": [
-          "belirsiz gelecek",
-          "yanılsama",
-          "korkular",
-          "aldatma",
-          "güvensizlik"
-        ]
+        "value": ["belirsiz gelecek", "yanılsama", "korkular", "aldatma", "güvensizlik"]
       },
       {
         "key": "love.meanings.themoon.position4.context",
@@ -2078,13 +1944,7 @@
       },
       {
         "key": "love.meanings.thesun.position4.keywords",
-        "value": [
-          "büyük mutluluk",
-          "başarı",
-          "neşe",
-          "açıklık",
-          "tatmin edici gelecek"
-        ]
+        "value": ["büyük mutluluk", "başarı", "neşe", "açıklık", "tatmin edici gelecek"]
       },
       {
         "key": "love.meanings.thesun.position4.context",
@@ -2100,13 +1960,7 @@
       },
       {
         "key": "love.meanings.judgement.position4.keywords",
-        "value": [
-          "ikinci şans",
-          "uyanış",
-          "affetme",
-          "hesaplaşma",
-          "yeniden doğuş"
-        ]
+        "value": ["ikinci şans", "uyanış", "affetme", "hesaplaşma", "yeniden doğuş"]
       },
       {
         "key": "love.meanings.judgement.position4.context",
@@ -2122,13 +1976,7 @@
       },
       {
         "key": "love.meanings.theworld.position4.keywords",
-        "value": [
-          "tamamlanma",
-          "başarı",
-          "mutluluk",
-          "bütünlük",
-          "döngünün sonu"
-        ]
+        "value": ["tamamlanma", "başarı", "mutluluk", "bütünlük", "döngünün sonu"]
       },
       {
         "key": "love.meanings.theworld.position4.context",
@@ -2144,13 +1992,7 @@
       },
       {
         "key": "love.meanings.aceofcups.position4.keywords",
-        "value": [
-          "gerçek aşk",
-          "duygusal başlangıç",
-          "mutluluk",
-          "şefkat",
-          "yeni ilişki"
-        ]
+        "value": ["gerçek aşk", "duygusal başlangıç", "mutluluk", "şefkat", "yeni ilişki"]
       },
       {
         "key": "love.meanings.aceofcups.position4.context",
@@ -2166,13 +2008,7 @@
       },
       {
         "key": "love.meanings.twoofcups.position4.keywords",
-        "value": [
-          "uyumlu ortaklık",
-          "evlilik",
-          "ruh eşi",
-          "karşılıklı sevgi",
-          "bağlılık"
-        ]
+        "value": ["uyumlu ortaklık", "evlilik", "ruh eşi", "karşılıklı sevgi", "bağlılık"]
       },
       {
         "key": "love.meanings.twoofcups.position4.context",
@@ -2188,13 +2024,7 @@
       },
       {
         "key": "love.meanings.threeofcups.position4.keywords",
-        "value": [
-          "mutlu kutlama",
-          "evlilik",
-          "nişan",
-          "sosyal uyum",
-          "arkadaşça aşk"
-        ]
+        "value": ["mutlu kutlama", "evlilik", "nişan", "sosyal uyum", "arkadaşça aşk"]
       },
       {
         "key": "love.meanings.threeofcups.position4.context",
@@ -2210,13 +2040,7 @@
       },
       {
         "key": "love.meanings.fourofcups.position4.keywords",
-        "value": [
-          "durgunluk",
-          "tatminsizlik",
-          "ilgisizlik",
-          "kaçırılan fırsat",
-          "ayrılık potansiyeli"
-        ]
+        "value": ["durgunluk", "tatminsizlik", "ilgisizlik", "kaçırılan fırsat", "ayrılık potansiyeli"]
       },
       {
         "key": "love.meanings.fourofcups.position4.context",
@@ -2232,13 +2056,7 @@
       },
       {
         "key": "love.meanings.fiveofcups.position4.keywords",
-        "value": [
-          "kayıp",
-          "pişmanlık",
-          "keder",
-          "hayal kırıklığı",
-          "üzücü son"
-        ]
+        "value": ["kayıp", "pişmanlık", "keder", "hayal kırıklığı", "üzücü son"]
       },
       {
         "key": "love.meanings.fiveofcups.position4.context",
@@ -2254,13 +2072,7 @@
       },
       {
         "key": "love.meanings.sixofcups.position4.keywords",
-        "value": [
-          "geçmişin canlanması",
-          "mutlu anılar",
-          "güvenli sevgi",
-          "masumiyet",
-          "kalıcı bağ"
-        ]
+        "value": ["geçmişin canlanması", "mutlu anılar", "güvenli sevgi", "masumiyet", "kalıcı bağ"]
       },
       {
         "key": "love.meanings.sixofcups.position4.context",
@@ -2276,13 +2088,7 @@
       },
       {
         "key": "love.meanings.sevenofcups.position4.keywords",
-        "value": [
-          "kararsızlık",
-          "kafa karışıklığı",
-          "yanılsama",
-          "seçenekler",
-          "belirsiz sonuç"
-        ]
+        "value": ["kararsızlık", "kafa karışıklığı", "yanılsama", "seçenekler", "belirsiz sonuç"]
       },
       {
         "key": "love.meanings.sevenofcups.position4.context",
@@ -2298,13 +2104,7 @@
       },
       {
         "key": "love.meanings.eightofcups.position4.keywords",
-        "value": [
-          "ayrılık",
-          "terk etme",
-          "yeni arayış",
-          "tatminsizlik",
-          "yol ayrımı"
-        ]
+        "value": ["ayrılık", "terk etme", "yeni arayış", "tatminsizlik", "yol ayrımı"]
       },
       {
         "key": "love.meanings.eightofcups.position4.context",
@@ -2320,13 +2120,7 @@
       },
       {
         "key": "love.meanings.nineofcups.position4.keywords",
-        "value": [
-          "dileklerin kabulü",
-          "mutluluk",
-          "duygusal tatmin",
-          "keyif",
-          "başarı"
-        ]
+        "value": ["dileklerin kabulü", "mutluluk", "duygusal tatmin", "keyif", "başarı"]
       },
       {
         "key": "love.meanings.nineofcups.position4.context",
@@ -2342,13 +2136,7 @@
       },
       {
         "key": "love.meanings.tenofcups.position4.keywords",
-        "value": [
-          "kalıcı mutluluk",
-          "aile",
-          "uyum",
-          "duygusal doyum",
-          "mutlu son"
-        ]
+        "value": ["kalıcı mutluluk", "aile", "uyum", "duygusal doyum", "mutlu son"]
       },
       {
         "key": "love.meanings.tenofcups.position4.context",
@@ -2364,13 +2152,7 @@
       },
       {
         "key": "love.meanings.pageofcups.position4.keywords",
-        "value": [
-          "romantik gelişme",
-          "iyi haber",
-          "yaratıcılık",
-          "hassasiyet",
-          "nişan"
-        ]
+        "value": ["romantik gelişme", "iyi haber", "yaratıcılık", "hassasiyet", "nişan"]
       },
       {
         "key": "love.meanings.pageofcups.position4.context",
@@ -2386,13 +2168,7 @@
       },
       {
         "key": "love.meanings.knightofcups.position4.keywords",
-        "value": [
-          "evlilik teklifi",
-          "romantizm",
-          "ideal aşk",
-          "gerçekleşen hayaller",
-          "bağlılık"
-        ]
+        "value": ["evlilik teklifi", "romantizm", "ideal aşk", "gerçekleşen hayaller", "bağlılık"]
       },
       {
         "key": "love.meanings.knightofcups.position4.context",
@@ -2408,13 +2184,7 @@
       },
       {
         "key": "love.meanings.queenofcups.position4.keywords",
-        "value": [
-          "koşulsuz sevgi",
-          "empati",
-          "şefkat",
-          "kalıcı mutluluk",
-          "sezgisel bağ"
-        ]
+        "value": ["koşulsuz sevgi", "empati", "şefkat", "kalıcı mutluluk", "sezgisel bağ"]
       },
       {
         "key": "love.meanings.queenofcups.position4.context",
@@ -2430,13 +2200,7 @@
       },
       {
         "key": "love.meanings.kingofcups.position4.keywords",
-        "value": [
-          "duygusal olgunluk",
-          "istikrarlı aşk",
-          "kalıcı bağlılık",
-          "bilgelik",
-          "şefkat"
-        ]
+        "value": ["duygusal olgunluk", "istikrarlı aşk", "kalıcı bağlılık", "bilgelik", "şefkat"]
       },
       {
         "key": "love.meanings.kingofcups.position4.context",
@@ -2452,13 +2216,7 @@
       },
       {
         "key": "love.meanings.aceofswords.position4.keywords",
-        "value": [
-          "net sonuç",
-          "gerçek",
-          "karar",
-          "dürüstlük",
-          "aydınlanma"
-        ]
+        "value": ["net sonuç", "gerçek", "karar", "dürüstlük", "aydınlanma"]
       },
       {
         "key": "love.meanings.aceofswords.position4.context",
@@ -2474,13 +2232,7 @@
       },
       {
         "key": "love.meanings.twoofswords.position4.keywords",
-        "value": [
-          "çıkmaz",
-          "kararsızlık",
-          "belirsizlik",
-          "sonuçsuzluk",
-          "ateşkes"
-        ]
+        "value": ["çıkmaz", "kararsızlık", "belirsizlik", "sonuçsuzluk", "ateşkes"]
       },
       {
         "key": "love.meanings.twoofswords.position4.context",
@@ -2496,13 +2248,7 @@
       },
       {
         "key": "love.meanings.threeofswords.position4.keywords",
-        "value": [
-          "ayrılık",
-          "kalp kırıklığı",
-          "keder",
-          "acı",
-          "ihanet"
-        ]
+        "value": ["ayrılık", "kalp kırıklığı", "keder", "acı", "ihanet"]
       },
       {
         "key": "love.meanings.threeofswords.position4.context",
@@ -2518,13 +2264,7 @@
       },
       {
         "key": "love.meanings.fourofswords.position4.keywords",
-        "value": [
-          "duraklama",
-          "mola",
-          "geçici ayrılık",
-          "dinlenme",
-          "iyileşme süreci"
-        ]
+        "value": ["duraklama", "mola", "geçici ayrılık", "dinlenme", "iyileşme süreci"]
       },
       {
         "key": "love.meanings.fourofswords.position4.context",
@@ -2540,13 +2280,7 @@
       },
       {
         "key": "love.meanings.fiveofswords.position4.keywords",
-        "value": [
-          "düşmanca ayrılık",
-          "çatışma",
-          "yenilgi",
-          "pişmanlık",
-          "kayıp"
-        ]
+        "value": ["düşmanca ayrılık", "çatışma", "yenilgi", "pişmanlık", "kayıp"]
       },
       {
         "key": "love.meanings.fiveofswords.position4.context",
@@ -2562,13 +2296,7 @@
       },
       {
         "key": "love.meanings.sixofswords.position4.keywords",
-        "value": [
-          "huzurlu gelecek",
-          "iyileşme",
-          "geçiş",
-          "sorunları aşma",
-          "sakinlik"
-        ]
+        "value": ["huzurlu gelecek", "iyileşme", "geçiş", "sorunları aşma", "sakinlik"]
       },
       {
         "key": "love.meanings.sixofswords.position4.context",
@@ -2584,13 +2312,7 @@
       },
       {
         "key": "love.meanings.sevenofswords.position4.keywords",
-        "value": [
-          "aldatma",
-          "ayrılık",
-          "güvensizlik",
-          "sırlar",
-          "dürüstlük eksikliği"
-        ]
+        "value": ["aldatma", "ayrılık", "güvensizlik", "sırlar", "dürüstlük eksikliği"]
       },
       {
         "key": "love.meanings.sevenofswords.position4.context",
@@ -2606,13 +2328,7 @@
       },
       {
         "key": "love.meanings.eightofswords.position4.keywords",
-        "value": [
-          "kapana kısılma",
-          "çaresizlik",
-          "kısıtlayıcı ilişki",
-          "korku",
-          "özgürleşme ihtiyacı"
-        ]
+        "value": ["kapana kısılma", "çaresizlik", "kısıtlayıcı ilişki", "korku", "özgürleşme ihtiyacı"]
       },
       {
         "key": "love.meanings.eightofswords.position4.context",
@@ -2628,13 +2344,7 @@
       },
       {
         "key": "love.meanings.nineofswords.position4.keywords",
-        "value": [
-          "endişe",
-          "korku",
-          "zihinsel acı",
-          "kabus",
-          "suçluluk"
-        ]
+        "value": ["endişe", "korku", "zihinsel acı", "kabus", "suçluluk"]
       },
       {
         "key": "love.meanings.nineofswords.position4.context",
@@ -2650,13 +2360,7 @@
       },
       {
         "key": "love.meanings.tenofswords.position4.keywords",
-        "value": [
-          "kesin son",
-          "ihanet",
-          "acı",
-          "çöküş",
-          "yenilgi"
-        ]
+        "value": ["kesin son", "ihanet", "acı", "çöküş", "yenilgi"]
       },
       {
         "key": "love.meanings.tenofswords.position4.context",
@@ -2672,13 +2376,7 @@
       },
       {
         "key": "love.meanings.pageofswords.position4.keywords",
-        "value": [
-          "sürekli tartışma",
-          "iletişim sorunları",
-          "anlaşmazlık",
-          "sorgulama",
-          "net olmayan gelecek"
-        ]
+        "value": ["sürekli tartışma", "iletişim sorunları", "anlaşmazlık", "sorgulama", "net olmayan gelecek"]
       },
       {
         "key": "love.meanings.pageofswords.position4.context",
@@ -2694,13 +2392,7 @@
       },
       {
         "key": "love.meanings.knightofswords.position4.keywords",
-        "value": [
-          "ani ayrılık",
-          "hızlı son",
-          "düşüncesizlik",
-          "kavga",
-          "kopuş"
-        ]
+        "value": ["ani ayrılık", "hızlı son", "düşüncesizlik", "kavga", "kopuş"]
       },
       {
         "key": "love.meanings.knightofswords.position4.context",
@@ -2716,13 +2408,7 @@
       },
       {
         "key": "love.meanings.queenofswords.position4.keywords",
-        "value": [
-          "mantıklı ayrılık",
-          "bağımsızlık",
-          "net karar",
-          "dürüst son",
-          "mesafe"
-        ]
+        "value": ["mantıklı ayrılık", "bağımsızlık", "net karar", "dürüst son", "mesafe"]
       },
       {
         "key": "love.meanings.queenofswords.position4.context",
@@ -2738,13 +2424,7 @@
       },
       {
         "key": "love.meanings.kingofswords.position4.keywords",
-        "value": [
-          "adil sonuç",
-          "mantıklı karar",
-          "entelektüel ortaklık",
-          "dürüstlük",
-          "otorite"
-        ]
+        "value": ["adil sonuç", "mantıklı karar", "entelektüel ortaklık", "dürüstlük", "otorite"]
       },
       {
         "key": "love.meanings.kingofswords.position4.context",
@@ -2760,13 +2440,7 @@
       },
       {
         "key": "love.meanings.aceofwands.position4.keywords",
-        "value": [
-          "yeni başlangıç",
-          "tutkulu gelecek",
-          "macera",
-          "yaratıcılık",
-          "enerji"
-        ]
+        "value": ["yeni başlangıç", "tutkulu gelecek", "macera", "yaratıcılık", "enerji"]
       },
       {
         "key": "love.meanings.aceofwands.position4.context",
@@ -2782,13 +2456,7 @@
       },
       {
         "key": "love.meanings.twoofwands.position4.keywords",
-        "value": [
-          "ortak gelecek",
-          "planlama",
-          "başarılı ortaklık",
-          "vizyon",
-          "ilerleme"
-        ]
+        "value": ["ortak gelecek", "planlama", "başarılı ortaklık", "vizyon", "ilerleme"]
       },
       {
         "key": "love.meanings.twoofwands.position4.context",
@@ -2804,13 +2472,7 @@
       },
       {
         "key": "love.meanings.threeofwands.position4.keywords",
-        "value": [
-          "başarılı gelecek",
-          "genişleme",
-          "beklentilerin karşılanması",
-          "büyüme",
-          "umut"
-        ]
+        "value": ["başarılı gelecek", "genişleme", "beklentilerin karşılanması", "büyüme", "umut"]
       },
       {
         "key": "love.meanings.threeofwands.position4.context",
@@ -2826,13 +2488,7 @@
       },
       {
         "key": "love.meanings.fourofwands.position4.keywords",
-        "value": [
-          "evlilik",
-          "mutlu yuva",
-          "istikrar",
-          "kutlama",
-          "kalıcı mutluluk"
-        ]
+        "value": ["evlilik", "mutlu yuva", "istikrar", "kutlama", "kalıcı mutluluk"]
       },
       {
         "key": "love.meanings.fourofwands.position4.context",
@@ -2848,13 +2504,7 @@
       },
       {
         "key": "love.meanings.fiveofwands.position4.keywords",
-        "value": [
-          "sürekli çatışma",
-          "rekabet",
-          "uyumsuzluk",
-          "yorucu ilişki",
-          "gerilim"
-        ]
+        "value": ["sürekli çatışma", "rekabet", "uyumsuzluk", "yorucu ilişki", "gerilim"]
       },
       {
         "key": "love.meanings.fiveofwands.position4.context",
@@ -2870,13 +2520,7 @@
       },
       {
         "key": "love.meanings.sixofwands.position4.keywords",
-        "value": [
-          "ortak zafer",
-          "başarı",
-          "takdir",
-          "mutlu son",
-          "özgüven"
-        ]
+        "value": ["ortak zafer", "başarı", "takdir", "mutlu son", "özgüven"]
       },
       {
         "key": "love.meanings.sixofwands.position4.context",
@@ -2892,13 +2536,7 @@
       },
       {
         "key": "love.meanings.sevenofwands.position4.keywords",
-        "value": [
-          "sürekli mücadele",
-          "savunma",
-          "meydan okuma",
-          "dayanıklılık",
-          "zorlu gelecek"
-        ]
+        "value": ["sürekli mücadele", "savunma", "meydan okuma", "dayanıklılık", "zorlu gelecek"]
       },
       {
         "key": "love.meanings.sevenofwands.position4.context",
@@ -2914,13 +2552,7 @@
       },
       {
         "key": "love.meanings.eightofwands.position4.keywords",
-        "value": [
-          "hızlı gelişmeler",
-          "heyecanlı gelecek",
-          "ilerleme",
-          "iyi haberler",
-          "evlilik teklifi"
-        ]
+        "value": ["hızlı gelişmeler", "heyecanlı gelecek", "ilerleme", "iyi haberler", "evlilik teklifi"]
       },
       {
         "key": "love.meanings.eightofwands.position4.context",
@@ -2936,13 +2568,7 @@
       },
       {
         "key": "love.meanings.nineofwands.position4.keywords",
-        "value": [
-          "dayanıklılık",
-          "kalıcı bağ",
-          "güvensizlik",
-          "yorucu ilişki",
-          "vazgeçmeme"
-        ]
+        "value": ["dayanıklılık", "kalıcı bağ", "güvensizlik", "yorucu ilişki", "vazgeçmeme"]
       },
       {
         "key": "love.meanings.nineofwands.position4.context",
@@ -2958,13 +2584,7 @@
       },
       {
         "key": "love.meanings.tenofwands.position4.keywords",
-        "value": [
-          "ağır yük",
-          "sorumluluk",
-          "tükenmişlik",
-          "baskı",
-          "yorucu son"
-        ]
+        "value": ["ağır yük", "sorumluluk", "tükenmişlik", "baskı", "yorucu son"]
       },
       {
         "key": "love.meanings.tenofwands.position4.context",
@@ -2980,13 +2600,7 @@
       },
       {
         "key": "love.meanings.pageofwands.position4.keywords",
-        "value": [
-          "yeni maceralar",
-          "keşif",
-          "eğlence",
-          "dinamik ilişki",
-          "heves"
-        ]
+        "value": ["yeni maceralar", "keşif", "eğlence", "dinamik ilişki", "heves"]
       },
       {
         "key": "love.meanings.pageofwands.position4.context",
@@ -3002,13 +2616,7 @@
       },
       {
         "key": "love.meanings.knightofwands.position4.keywords",
-        "value": [
-          "tutkulu ama istikrarsız",
-          "ani ilişki",
-          "bağlanma korkusu",
-          "macera",
-          "hızlı son"
-        ]
+        "value": ["tutkulu ama istikrarsız", "ani ilişki", "bağlanma korkusu", "macera", "hızlı son"]
       },
       {
         "key": "love.meanings.knightofwands.position4.context",
@@ -3024,13 +2632,7 @@
       },
       {
         "key": "love.meanings.queenofwands.position4.keywords",
-        "value": [
-          "başarılı çift",
-          "özgüven",
-          "sosyal hayat",
-          "yaratıcılık",
-          "ilham"
-        ]
+        "value": ["başarılı çift", "özgüven", "sosyal hayat", "yaratıcılık", "ilham"]
       },
       {
         "key": "love.meanings.queenofwands.position4.context",
@@ -3046,13 +2648,7 @@
       },
       {
         "key": "love.meanings.kingofwands.position4.keywords",
-        "value": [
-          "güçlü ortaklık",
-          "liderlik",
-          "başarı",
-          "ortak vizyon",
-          "imparatorluk"
-        ]
+        "value": ["güçlü ortaklık", "liderlik", "başarı", "ortak vizyon", "imparatorluk"]
       },
       {
         "key": "love.meanings.kingofwands.position4.context",
@@ -3068,13 +2664,7 @@
       },
       {
         "key": "love.meanings.aceofpentacles.position4.keywords",
-        "value": [
-          "somut başlangıç",
-          "kalıcı ilişki",
-          "güven",
-          "refah",
-          "fırsat"
-        ]
+        "value": ["somut başlangıç", "kalıcı ilişki", "güven", "refah", "fırsat"]
       },
       {
         "key": "love.meanings.aceofpentacles.position4.context",
@@ -3090,13 +2680,7 @@
       },
       {
         "key": "love.meanings.twoofpentacles.position4.keywords",
-        "value": [
-          "denge",
-          "uyum",
-          "esneklik",
-          "devamlılık",
-          "inişler ve çıkışlar"
-        ]
+        "value": ["denge", "uyum", "esneklik", "devamlılık", "inişler ve çıkışlar"]
       },
       {
         "key": "love.meanings.twoofpentacles.position4.context",
@@ -3112,13 +2696,7 @@
       },
       {
         "key": "love.meanings.threeofpentacles.position4.keywords",
-        "value": [
-          "başarılı ortaklık",
-          "birlikte inşa etme",
-          "takım çalışması",
-          "saygı",
-          "kalıcı eser"
-        ]
+        "value": ["başarılı ortaklık", "birlikte inşa etme", "takım çalışması", "saygı", "kalıcı eser"]
       },
       {
         "key": "love.meanings.threeofpentacles.position4.context",
@@ -3134,13 +2712,7 @@
       },
       {
         "key": "love.meanings.fourofpentacles.position4.keywords",
-        "value": [
-          "durağanlık",
-          "istikrar",
-          "kontrol",
-          "değişime kapalılık",
-          "güvenlik"
-        ]
+        "value": ["durağanlık", "istikrar", "kontrol", "değişime kapalılık", "güvenlik"]
       },
       {
         "key": "love.meanings.fourofpentacles.position4.context",
@@ -3156,13 +2728,7 @@
       },
       {
         "key": "love.meanings.fiveofpentacles.position4.keywords",
-        "value": [
-          "zor zamanlar",
-          "maddi sıkıntı",
-          "yalnızlık",
-          "kriz",
-          "dayanışma veya ayrılık"
-        ]
+        "value": ["zor zamanlar", "maddi sıkıntı", "yalnızlık", "kriz", "dayanışma veya ayrılık"]
       },
       {
         "key": "love.meanings.fiveofpentacles.position4.context",
@@ -3178,13 +2744,7 @@
       },
       {
         "key": "love.meanings.sixofpentacles.position4.keywords",
-        "value": [
-          "dengeli ortaklık",
-          "cömertlik",
-          "karşılıklı destek",
-          "adalet",
-          "refah"
-        ]
+        "value": ["dengeli ortaklık", "cömertlik", "karşılıklı destek", "adalet", "refah"]
       },
       {
         "key": "love.meanings.sixofpentacles.position4.context",
@@ -3200,13 +2760,7 @@
       },
       {
         "key": "love.meanings.sevenofpentacles.position4.keywords",
-        "value": [
-          "emeğin karşılığı",
-          "sabır",
-          "kalıcı büyüme",
-          "yatırım",
-          "hasat zamanı"
-        ]
+        "value": ["emeğin karşılığı", "sabır", "kalıcı büyüme", "yatırım", "hasat zamanı"]
       },
       {
         "key": "love.meanings.sevenofpentacles.position4.context",
@@ -3222,13 +2776,7 @@
       },
       {
         "key": "love.meanings.eightofpentacles.position4.keywords",
-        "value": [
-          "adanmışlık",
-          "sürekli çaba",
-          "gelişen ilişki",
-          "ustalık",
-          "özen"
-        ]
+        "value": ["adanmışlık", "sürekli çaba", "gelişen ilişki", "ustalık", "özen"]
       },
       {
         "key": "love.meanings.eightofpentacles.position4.context",
@@ -3244,13 +2792,7 @@
       },
       {
         "key": "love.meanings.nineofpentacles.position4.keywords",
-        "value": [
-          "bağımsız ilişki",
-          "refah",
-          "olgunluk",
-          "lüks",
-          "kendine yetme"
-        ]
+        "value": ["bağımsız ilişki", "refah", "olgunluk", "lüks", "kendine yetme"]
       },
       {
         "key": "love.meanings.nineofpentacles.position4.context",
@@ -3266,13 +2808,7 @@
       },
       {
         "key": "love.meanings.tenofpentacles.position4.keywords",
-        "value": [
-          "kalıcı aile",
-          "zenginlik",
-          "güvenlik",
-          "miras",
-          "istikrar"
-        ]
+        "value": ["kalıcı aile", "zenginlik", "güvenlik", "miras", "istikrar"]
       },
       {
         "key": "love.meanings.tenofpentacles.position4.context",
@@ -3288,13 +2824,7 @@
       },
       {
         "key": "love.meanings.pageofpentacles.position4.keywords",
-        "value": [
-          "umut vadeden gelecek",
-          "sağlam temel",
-          "büyüme",
-          "öğrenme",
-          "fırsat"
-        ]
+        "value": ["umut vadeden gelecek", "sağlam temel", "büyüme", "öğrenme", "fırsat"]
       },
       {
         "key": "love.meanings.pageofpentacles.position4.context",
@@ -3310,13 +2840,7 @@
       },
       {
         "key": "love.meanings.knightofpentacles.position4.keywords",
-        "value": [
-          "ömür boyu bağlılık",
-          "sadakat",
-          "güvenilirlik",
-          "istikrar",
-          "sabır"
-        ]
+        "value": ["ömür boyu bağlılık", "sadakat", "güvenilirlik", "istikrar", "sabır"]
       },
       {
         "key": "love.meanings.knightofpentacles.position4.context",
@@ -3332,13 +2856,7 @@
       },
       {
         "key": "love.meanings.queenofpentacles.position4.keywords",
-        "value": [
-          "güvenli yuva",
-          "besleyici ortaklık",
-          "konfor",
-          "cömertlik",
-          "istikrar"
-        ]
+        "value": ["güvenli yuva", "besleyici ortaklık", "konfor", "cömertlik", "istikrar"]
       },
       {
         "key": "love.meanings.queenofpentacles.position4.context",
@@ -3354,13 +2872,7 @@
       },
       {
         "key": "love.meanings.kingofpentacles.position4.keywords",
-        "value": [
-          "başarılı imparatorluk",
-          "zenginlik",
-          "istikrar",
-          "güvenlik",
-          "kalıcı başarı"
-        ]
+        "value": ["başarılı imparatorluk", "zenginlik", "istikrar", "güvenlik", "kalıcı başarı"]
       },
       {
         "key": "love.meanings.kingofpentacles.position4.context",
@@ -4817,11 +4329,7 @@
       },
       {
         "key": "blog.cards.the-fool.related_cards",
-        "value": [
-          "the-magician",
-          "the-sun",
-          "the-tower"
-        ]
+        "value": ["the-magician", "the-sun", "the-tower"]
       },
       {
         "key": "blog.cards.the-fool.imageUrl",
@@ -4889,18 +4397,11 @@
       },
       {
         "key": "blog.cards.the-high-priestess.faq",
-        "value": [
-          "Başrahibe hangi durumlarda olumlu çıkar?",
-          "Sezgimi nasıl güçlendiririm?"
-        ]
+        "value": ["Başrahibe hangi durumlarda olumlu çıkar?", "Sezgimi nasıl güçlendiririm?"]
       },
       {
         "key": "blog.cards.the-high-priestess.related_cards",
-        "value": [
-          "the-moon",
-          "the-hermit",
-          "the-empress"
-        ]
+        "value": ["the-moon", "the-hermit", "the-empress"]
       },
       {
         "key": "blog.cards.the-high-priestess.imageUrl",
@@ -4968,18 +4469,11 @@
       },
       {
         "key": "blog.cards.the-magician.faq",
-        "value": [
-          "Büyücü kartı ne zaman çıkar?",
-          "Yaratıcı gücümü nasıl kullanırım?"
-        ]
+        "value": ["Büyücü kartı ne zaman çıkar?", "Yaratıcı gücümü nasıl kullanırım?"]
       },
       {
         "key": "blog.cards.the-magician.related_cards",
-        "value": [
-          "the-fool",
-          "the-emperor",
-          "the-star"
-        ]
+        "value": ["the-fool", "the-emperor", "the-star"]
       },
       {
         "key": "blog.cards.the-magician.imageUrl",
@@ -5055,11 +4549,7 @@
       },
       {
         "key": "blog.cards.the-empress.related_cards",
-        "value": [
-          "the-emperor",
-          "the-hierophant",
-          "the-star"
-        ]
+        "value": ["the-emperor", "the-hierophant", "the-star"]
       },
       {
         "key": "blog.cards.the-empress.imageUrl",
@@ -5135,11 +4625,7 @@
       },
       {
         "key": "blog.cards.the-emperor.related_cards",
-        "value": [
-          "the-empress",
-          "the-hierophant",
-          "the-justice"
-        ]
+        "value": ["the-empress", "the-hierophant", "the-justice"]
       },
       {
         "key": "blog.cards.the-emperor.imageUrl",
@@ -5215,11 +4701,7 @@
       },
       {
         "key": "blog.cards.the-hierophant.related_cards",
-        "value": [
-          "the-emperor",
-          "the-lovers",
-          "the-justice"
-        ]
+        "value": ["the-emperor", "the-lovers", "the-justice"]
       },
       {
         "key": "blog.cards.the-hierophant.imageUrl",
@@ -5287,19 +4769,11 @@
       },
       {
         "key": "blog.cards.the-lovers.faq",
-        "value": [
-          "Aşıklar kartı ne anlama gelir?",
-          "Aşk hayatımda ne değişecek?",
-          "Önemli seçimler nasıl yapılır?"
-        ]
+        "value": ["Aşıklar kartı ne anlama gelir?", "Aşk hayatımda ne değişecek?", "Önemli seçimler nasıl yapılır?"]
       },
       {
         "key": "blog.cards.the-lovers.related_cards",
-        "value": [
-          "the-hierophant",
-          "the-chariot",
-          "the-temperance"
-        ]
+        "value": ["the-hierophant", "the-chariot", "the-temperance"]
       },
       {
         "key": "blog.cards.the-lovers.imageUrl",
@@ -5375,11 +4849,7 @@
       },
       {
         "key": "blog.cards.the-chariot.related_cards",
-        "value": [
-          "the-lovers",
-          "strength",
-          "the-emperor"
-        ]
+        "value": ["the-lovers", "strength", "the-emperor"]
       },
       {
         "key": "blog.cards.the-chariot.imageUrl",
@@ -5447,19 +4917,11 @@
       },
       {
         "key": "blog.cards.strength.faq",
-        "value": [
-          "Güç kartı ne anlama gelir?",
-          "İçsel gücümü nasıl geliştiririm?",
-          "Sabrımı nasıl güçlendiririm?"
-        ]
+        "value": ["Güç kartı ne anlama gelir?", "İçsel gücümü nasıl geliştiririm?", "Sabrımı nasıl güçlendiririm?"]
       },
       {
         "key": "blog.cards.strength.related_cards",
-        "value": [
-          "the-chariot",
-          "the-hermit",
-          "temperance"
-        ]
+        "value": ["the-chariot", "the-hermit", "temperance"]
       },
       {
         "key": "blog.cards.strength.imageUrl",
@@ -5535,11 +4997,7 @@
       },
       {
         "key": "blog.cards.the-hermit.related_cards",
-        "value": [
-          "strength",
-          "the-moon",
-          "the-star"
-        ]
+        "value": ["strength", "the-moon", "the-star"]
       },
       {
         "key": "blog.cards.the-hermit.imageUrl",
@@ -5615,11 +5073,7 @@
       },
       {
         "key": "blog.cards.wheel-of-fortune.related_cards",
-        "value": [
-          "the-hermit",
-          "justice",
-          "the-sun"
-        ]
+        "value": ["the-hermit", "justice", "the-sun"]
       },
       {
         "key": "blog.cards.wheel-of-fortune.imageUrl",
@@ -5695,11 +5149,7 @@
       },
       {
         "key": "blog.cards.justice.related_cards",
-        "value": [
-          "wheel-of-fortune",
-          "the-hanged-man",
-          "temperance"
-        ]
+        "value": ["wheel-of-fortune", "the-hanged-man", "temperance"]
       },
       {
         "key": "blog.cards.justice.imageUrl",
@@ -5775,11 +5225,7 @@
       },
       {
         "key": "blog.cards.the-hanged-man.related_cards",
-        "value": [
-          "justice",
-          "death",
-          "temperance"
-        ]
+        "value": ["justice", "death", "temperance"]
       },
       {
         "key": "blog.cards.the-hanged-man.imageUrl",
@@ -5855,11 +5301,7 @@
       },
       {
         "key": "blog.cards.death.related_cards",
-        "value": [
-          "the-hanged-man",
-          "temperance",
-          "the-tower"
-        ]
+        "value": ["the-hanged-man", "temperance", "the-tower"]
       },
       {
         "key": "blog.cards.death.imageUrl",
@@ -5935,11 +5377,7 @@
       },
       {
         "key": "blog.cards.temperance.related_cards",
-        "value": [
-          "death",
-          "the-devil",
-          "the-star"
-        ]
+        "value": ["death", "the-devil", "the-star"]
       },
       {
         "key": "blog.cards.temperance.imageUrl",
@@ -6015,11 +5453,7 @@
       },
       {
         "key": "blog.cards.the-devil.related_cards",
-        "value": [
-          "temperance",
-          "the-tower",
-          "the-moon"
-        ]
+        "value": ["temperance", "the-tower", "the-moon"]
       },
       {
         "key": "blog.cards.the-devil.imageUrl",
@@ -6095,11 +5529,7 @@
       },
       {
         "key": "blog.cards.the-tower.related_cards",
-        "value": [
-          "the-devil",
-          "the-star",
-          "the-moon"
-        ]
+        "value": ["the-devil", "the-star", "the-moon"]
       },
       {
         "key": "blog.cards.the-tower.imageUrl",
@@ -6167,19 +5597,11 @@
       },
       {
         "key": "blog.cards.the-star.faq",
-        "value": [
-          "Yıldız kartı ne anlama gelir?",
-          "Umutumu nasıl güçlendiririm?",
-          "Ruhsal rehberliği nasıl bulurum?"
-        ]
+        "value": ["Yıldız kartı ne anlama gelir?", "Umutumu nasıl güçlendiririm?", "Ruhsal rehberliği nasıl bulurum?"]
       },
       {
         "key": "blog.cards.the-star.related_cards",
-        "value": [
-          "the-tower",
-          "the-moon",
-          "the-sun"
-        ]
+        "value": ["the-tower", "the-moon", "the-sun"]
       },
       {
         "key": "blog.cards.the-star.imageUrl",
@@ -6247,19 +5669,11 @@
       },
       {
         "key": "blog.cards.the-moon.faq",
-        "value": [
-          "Ay kartı ne anlama gelir?",
-          "Sezgimi nasıl güçlendiririm?",
-          "Bilinçaltımı nasıl anlarım?"
-        ]
+        "value": ["Ay kartı ne anlama gelir?", "Sezgimi nasıl güçlendiririm?", "Bilinçaltımı nasıl anlarım?"]
       },
       {
         "key": "blog.cards.the-moon.related_cards",
-        "value": [
-          "the-star",
-          "the-sun",
-          "the-hermit"
-        ]
+        "value": ["the-star", "the-sun", "the-hermit"]
       },
       {
         "key": "blog.cards.the-moon.imageUrl",
@@ -6327,19 +5741,11 @@
       },
       {
         "key": "blog.cards.the-sun.faq",
-        "value": [
-          "Güneş kartı ne anlama gelir?",
-          "Neşemi nasıl güçlendiririm?",
-          "Başarıyı nasıl yakalarım?"
-        ]
+        "value": ["Güneş kartı ne anlama gelir?", "Neşemi nasıl güçlendiririm?", "Başarıyı nasıl yakalarım?"]
       },
       {
         "key": "blog.cards.the-sun.related_cards",
-        "value": [
-          "the-moon",
-          "judgement",
-          "the-world"
-        ]
+        "value": ["the-moon", "judgement", "the-world"]
       },
       {
         "key": "blog.cards.the-sun.imageUrl",
@@ -6415,11 +5821,7 @@
       },
       {
         "key": "blog.cards.judgement.related_cards",
-        "value": [
-          "the-sun",
-          "the-world",
-          "the-fool"
-        ]
+        "value": ["the-sun", "the-world", "the-fool"]
       },
       {
         "key": "blog.cards.judgement.imageUrl",
@@ -6487,19 +5889,11 @@
       },
       {
         "key": "blog.cards.the-world.faq",
-        "value": [
-          "Dünya kartı ne anlama gelir?",
-          "Hedeflerimi nasıl tamamlarım?",
-          "Başarıyı nasıl sürdürürüm?"
-        ]
+        "value": ["Dünya kartı ne anlama gelir?", "Hedeflerimi nasıl tamamlarım?", "Başarıyı nasıl sürdürürüm?"]
       },
       {
         "key": "blog.cards.the-world.related_cards",
-        "value": [
-          "judgement",
-          "the-fool",
-          "the-magician"
-        ]
+        "value": ["judgement", "the-fool", "the-magician"]
       },
       {
         "key": "blog.cards.the-world.imageUrl",
@@ -6575,11 +5969,7 @@
       },
       {
         "key": "blog.cards.ace-of-cups.related_cards",
-        "value": [
-          "two-of-cups",
-          "the-lovers",
-          "the-star"
-        ]
+        "value": ["two-of-cups", "the-lovers", "the-star"]
       },
       {
         "key": "blog.cards.ace-of-cups.imageUrl",
@@ -6655,11 +6045,7 @@
       },
       {
         "key": "blog.cards.two-of-cups.related_cards",
-        "value": [
-          "ace-of-cups",
-          "three-of-cups",
-          "the-lovers"
-        ]
+        "value": ["ace-of-cups", "three-of-cups", "the-lovers"]
       },
       {
         "key": "blog.cards.two-of-cups.imageUrl",
@@ -6735,11 +6121,7 @@
       },
       {
         "key": "blog.cards.three-of-cups.related_cards",
-        "value": [
-          "two-of-cups",
-          "four-of-cups",
-          "the-sun"
-        ]
+        "value": ["two-of-cups", "four-of-cups", "the-sun"]
       },
       {
         "key": "blog.cards.three-of-cups.imageUrl",
@@ -6815,11 +6197,7 @@
       },
       {
         "key": "blog.cards.four-of-cups.related_cards",
-        "value": [
-          "three-of-cups",
-          "five-of-cups",
-          "the-moon"
-        ]
+        "value": ["three-of-cups", "five-of-cups", "the-moon"]
       },
       {
         "key": "blog.cards.four-of-cups.imageUrl",
@@ -6895,11 +6273,7 @@
       },
       {
         "key": "blog.cards.five-of-cups.related_cards",
-        "value": [
-          "four-of-cups",
-          "six-of-cups",
-          "the-tower"
-        ]
+        "value": ["four-of-cups", "six-of-cups", "the-tower"]
       },
       {
         "key": "blog.cards.five-of-cups.imageUrl",
@@ -6975,11 +6349,7 @@
       },
       {
         "key": "blog.cards.six-of-cups.related_cards",
-        "value": [
-          "five-of-cups",
-          "seven-of-cups",
-          "the-moon"
-        ]
+        "value": ["five-of-cups", "seven-of-cups", "the-moon"]
       },
       {
         "key": "blog.cards.six-of-cups.imageUrl",
@@ -7055,11 +6425,7 @@
       },
       {
         "key": "blog.cards.seven-of-cups.related_cards",
-        "value": [
-          "six-of-cups",
-          "eight-of-cups",
-          "the-star"
-        ]
+        "value": ["six-of-cups", "eight-of-cups", "the-star"]
       },
       {
         "key": "blog.cards.seven-of-cups.imageUrl",
@@ -7135,11 +6501,7 @@
       },
       {
         "key": "blog.cards.eight-of-cups.related_cards",
-        "value": [
-          "seven-of-cups",
-          "nine-of-cups",
-          "the-hermit"
-        ]
+        "value": ["seven-of-cups", "nine-of-cups", "the-hermit"]
       },
       {
         "key": "blog.cards.eight-of-cups.imageUrl",
@@ -7215,11 +6577,7 @@
       },
       {
         "key": "blog.cards.nine-of-cups.related_cards",
-        "value": [
-          "eight-of-cups",
-          "ten-of-cups",
-          "the-sun"
-        ]
+        "value": ["eight-of-cups", "ten-of-cups", "the-sun"]
       },
       {
         "key": "blog.cards.nine-of-cups.imageUrl",
@@ -7295,11 +6653,7 @@
       },
       {
         "key": "blog.cards.ten-of-cups.related_cards",
-        "value": [
-          "nine-of-cups",
-          "page-of-cups",
-          "the-world"
-        ]
+        "value": ["nine-of-cups", "page-of-cups", "the-world"]
       },
       {
         "key": "blog.cards.ten-of-cups.imageUrl",
@@ -7375,11 +6729,7 @@
       },
       {
         "key": "blog.cards.page-of-cups.related_cards",
-        "value": [
-          "ten-of-cups",
-          "knight-of-cups",
-          "the-fool"
-        ]
+        "value": ["ten-of-cups", "knight-of-cups", "the-fool"]
       },
       {
         "key": "blog.cards.page-of-cups.imageUrl",
@@ -7455,11 +6805,7 @@
       },
       {
         "key": "blog.cards.knight-of-cups.related_cards",
-        "value": [
-          "page-of-cups",
-          "queen-of-cups",
-          "the-lovers"
-        ]
+        "value": ["page-of-cups", "queen-of-cups", "the-lovers"]
       },
       {
         "key": "blog.cards.knight-of-cups.imageUrl",
@@ -7535,11 +6881,7 @@
       },
       {
         "key": "blog.cards.queen-of-cups.related_cards",
-        "value": [
-          "knight-of-cups",
-          "king-of-cups",
-          "the-high-priestess"
-        ]
+        "value": ["knight-of-cups", "king-of-cups", "the-high-priestess"]
       },
       {
         "key": "blog.cards.queen-of-cups.imageUrl",
@@ -7615,11 +6957,7 @@
       },
       {
         "key": "blog.cards.king-of-cups.related_cards",
-        "value": [
-          "queen-of-cups",
-          "ace-of-cups",
-          "temperance"
-        ]
+        "value": ["queen-of-cups", "ace-of-cups", "temperance"]
       },
       {
         "key": "blog.cards.king-of-cups.imageUrl",
@@ -7695,11 +7033,7 @@
       },
       {
         "key": "blog.cards.ace-of-swords.related_cards",
-        "value": [
-          "two-of-swords",
-          "justice",
-          "the-magician"
-        ]
+        "value": ["two-of-swords", "justice", "the-magician"]
       },
       {
         "key": "blog.cards.ace-of-swords.imageUrl",
@@ -7775,11 +7109,7 @@
       },
       {
         "key": "blog.cards.two-of-swords.related_cards",
-        "value": [
-          "ace-of-swords",
-          "three-of-swords",
-          "the-hanged-man"
-        ]
+        "value": ["ace-of-swords", "three-of-swords", "the-hanged-man"]
       },
       {
         "key": "blog.cards.two-of-swords.imageUrl",
@@ -7855,11 +7185,7 @@
       },
       {
         "key": "blog.cards.three-of-swords.related_cards",
-        "value": [
-          "two-of-swords",
-          "four-of-swords",
-          "the-tower"
-        ]
+        "value": ["two-of-swords", "four-of-swords", "the-tower"]
       },
       {
         "key": "blog.cards.three-of-swords.imageUrl",
@@ -7935,11 +7261,7 @@
       },
       {
         "key": "blog.cards.four-of-swords.related_cards",
-        "value": [
-          "three-of-swords",
-          "five-of-swords",
-          "the-hermit"
-        ]
+        "value": ["three-of-swords", "five-of-swords", "the-hermit"]
       },
       {
         "key": "blog.cards.four-of-swords.imageUrl",
@@ -8015,11 +7337,7 @@
       },
       {
         "key": "blog.cards.five-of-swords.related_cards",
-        "value": [
-          "four-of-swords",
-          "six-of-swords",
-          "the-tower"
-        ]
+        "value": ["four-of-swords", "six-of-swords", "the-tower"]
       },
       {
         "key": "blog.cards.five-of-swords.imageUrl",
@@ -8095,11 +7413,7 @@
       },
       {
         "key": "blog.cards.six-of-swords.related_cards",
-        "value": [
-          "five-of-swords",
-          "seven-of-swords",
-          "temperance"
-        ]
+        "value": ["five-of-swords", "seven-of-swords", "temperance"]
       },
       {
         "key": "blog.cards.six-of-swords.imageUrl",
@@ -8175,11 +7489,7 @@
       },
       {
         "key": "blog.cards.seven-of-swords.related_cards",
-        "value": [
-          "six-of-swords",
-          "eight-of-swords",
-          "the-moon"
-        ]
+        "value": ["six-of-swords", "eight-of-swords", "the-moon"]
       },
       {
         "key": "blog.cards.seven-of-swords.imageUrl",
@@ -8255,11 +7565,7 @@
       },
       {
         "key": "blog.cards.eight-of-swords.related_cards",
-        "value": [
-          "seven-of-swords",
-          "nine-of-swords",
-          "the-star"
-        ]
+        "value": ["seven-of-swords", "nine-of-swords", "the-star"]
       },
       {
         "key": "blog.cards.eight-of-swords.imageUrl",
@@ -8335,11 +7641,7 @@
       },
       {
         "key": "blog.cards.nine-of-swords.related_cards",
-        "value": [
-          "eight-of-swords",
-          "ten-of-swords",
-          "the-moon"
-        ]
+        "value": ["eight-of-swords", "ten-of-swords", "the-moon"]
       },
       {
         "key": "blog.cards.nine-of-swords.imageUrl",
@@ -8415,11 +7717,7 @@
       },
       {
         "key": "blog.cards.ten-of-swords.related_cards",
-        "value": [
-          "nine-of-swords",
-          "page-of-swords",
-          "death"
-        ]
+        "value": ["nine-of-swords", "page-of-swords", "death"]
       },
       {
         "key": "blog.cards.ten-of-swords.imageUrl",
@@ -8495,11 +7793,7 @@
       },
       {
         "key": "blog.cards.page-of-swords.related_cards",
-        "value": [
-          "ten-of-swords",
-          "knight-of-swords",
-          "the-fool"
-        ]
+        "value": ["ten-of-swords", "knight-of-swords", "the-fool"]
       },
       {
         "key": "blog.cards.page-of-swords.imageUrl",
@@ -8575,11 +7869,7 @@
       },
       {
         "key": "blog.cards.knight-of-swords.related_cards",
-        "value": [
-          "page-of-swords",
-          "queen-of-swords",
-          "the-chariot"
-        ]
+        "value": ["page-of-swords", "queen-of-swords", "the-chariot"]
       },
       {
         "key": "blog.cards.knight-of-swords.imageUrl",
@@ -8655,11 +7945,7 @@
       },
       {
         "key": "blog.cards.queen-of-swords.related_cards",
-        "value": [
-          "knight-of-swords",
-          "king-of-swords",
-          "justice"
-        ]
+        "value": ["knight-of-swords", "king-of-swords", "justice"]
       },
       {
         "key": "blog.cards.queen-of-swords.imageUrl",
@@ -8735,11 +8021,7 @@
       },
       {
         "key": "blog.cards.king-of-swords.related_cards",
-        "value": [
-          "queen-of-swords",
-          "ace-of-swords",
-          "the-emperor"
-        ]
+        "value": ["queen-of-swords", "ace-of-swords", "the-emperor"]
       },
       {
         "key": "blog.cards.king-of-swords.imageUrl",
@@ -8815,11 +8097,7 @@
       },
       {
         "key": "blog.cards.ace-of-wands.related_cards",
-        "value": [
-          "two-of-wands",
-          "the-magician",
-          "the-sun"
-        ]
+        "value": ["two-of-wands", "the-magician", "the-sun"]
       },
       {
         "key": "blog.cards.ace-of-wands.imageUrl",
@@ -8895,11 +8173,7 @@
       },
       {
         "key": "blog.cards.two-of-wands.related_cards",
-        "value": [
-          "ace-of-wands",
-          "three-of-wands",
-          "the-emperor"
-        ]
+        "value": ["ace-of-wands", "three-of-wands", "the-emperor"]
       },
       {
         "key": "blog.cards.two-of-wands.imageUrl",
@@ -8975,11 +8249,7 @@
       },
       {
         "key": "blog.cards.three-of-wands.related_cards",
-        "value": [
-          "two-of-wands",
-          "four-of-wands",
-          "the-empress"
-        ]
+        "value": ["two-of-wands", "four-of-wands", "the-empress"]
       },
       {
         "key": "blog.cards.three-of-wands.imageUrl",
@@ -9055,11 +8325,7 @@
       },
       {
         "key": "blog.cards.four-of-wands.related_cards",
-        "value": [
-          "three-of-wands",
-          "five-of-wands",
-          "the-sun"
-        ]
+        "value": ["three-of-wands", "five-of-wands", "the-sun"]
       },
       {
         "key": "blog.cards.four-of-wands.imageUrl",
@@ -9135,11 +8401,7 @@
       },
       {
         "key": "blog.cards.five-of-wands.related_cards",
-        "value": [
-          "four-of-wands",
-          "six-of-wands",
-          "the-tower"
-        ]
+        "value": ["four-of-wands", "six-of-wands", "the-tower"]
       },
       {
         "key": "blog.cards.five-of-wands.imageUrl",
@@ -9207,19 +8469,11 @@
       },
       {
         "key": "blog.cards.six-of-wands.faq",
-        "value": [
-          "Asalar Altılı kartı ne anlama gelir?",
-          "Zaferimi nasıl sürdürürüm?",
-          "Başarımı nasıl korurum?"
-        ]
+        "value": ["Asalar Altılı kartı ne anlama gelir?", "Zaferimi nasıl sürdürürüm?", "Başarımı nasıl korurum?"]
       },
       {
         "key": "blog.cards.six-of-wands.related_cards",
-        "value": [
-          "five-of-wands",
-          "seven-of-wands",
-          "the-sun"
-        ]
+        "value": ["five-of-wands", "seven-of-wands", "the-sun"]
       },
       {
         "key": "blog.cards.six-of-wands.imageUrl",
@@ -9295,11 +8549,7 @@
       },
       {
         "key": "blog.cards.seven-of-wands.related_cards",
-        "value": [
-          "six-of-wands",
-          "eight-of-wands",
-          "the-chariot"
-        ]
+        "value": ["six-of-wands", "eight-of-wands", "the-chariot"]
       },
       {
         "key": "blog.cards.seven-of-wands.imageUrl",
@@ -9375,11 +8625,7 @@
       },
       {
         "key": "blog.cards.eight-of-wands.related_cards",
-        "value": [
-          "seven-of-wands",
-          "nine-of-wands",
-          "temperance"
-        ]
+        "value": ["seven-of-wands", "nine-of-wands", "temperance"]
       },
       {
         "key": "blog.cards.eight-of-wands.imageUrl",
@@ -9455,11 +8701,7 @@
       },
       {
         "key": "blog.cards.nine-of-wands.related_cards",
-        "value": [
-          "eight-of-wands",
-          "ten-of-wands",
-          "strength"
-        ]
+        "value": ["eight-of-wands", "ten-of-wands", "strength"]
       },
       {
         "key": "blog.cards.nine-of-wands.imageUrl",
@@ -9535,11 +8777,7 @@
       },
       {
         "key": "blog.cards.ten-of-wands.related_cards",
-        "value": [
-          "nine-of-wands",
-          "page-of-wands",
-          "the-hanged-man"
-        ]
+        "value": ["nine-of-wands", "page-of-wands", "the-hanged-man"]
       },
       {
         "key": "blog.cards.ten-of-wands.imageUrl",
@@ -9615,11 +8853,7 @@
       },
       {
         "key": "blog.cards.page-of-wands.related_cards",
-        "value": [
-          "ten-of-wands",
-          "knight-of-wands",
-          "the-fool"
-        ]
+        "value": ["ten-of-wands", "knight-of-wands", "the-fool"]
       },
       {
         "key": "blog.cards.page-of-wands.imageUrl",
@@ -9695,11 +8929,7 @@
       },
       {
         "key": "blog.cards.knight-of-wands.related_cards",
-        "value": [
-          "page-of-wands",
-          "queen-of-wands",
-          "the-chariot"
-        ]
+        "value": ["page-of-wands", "queen-of-wands", "the-chariot"]
       },
       {
         "key": "blog.cards.knight-of-wands.imageUrl",
@@ -9775,11 +9005,7 @@
       },
       {
         "key": "blog.cards.queen-of-wands.related_cards",
-        "value": [
-          "knight-of-wands",
-          "king-of-wands",
-          "the-sun"
-        ]
+        "value": ["knight-of-wands", "king-of-wands", "the-sun"]
       },
       {
         "key": "blog.cards.queen-of-wands.imageUrl",
@@ -9855,11 +9081,7 @@
       },
       {
         "key": "blog.cards.king-of-wands.related_cards",
-        "value": [
-          "queen-of-wands",
-          "ace-of-wands",
-          "the-magician"
-        ]
+        "value": ["queen-of-wands", "ace-of-wands", "the-magician"]
       },
       {
         "key": "blog.cards.king-of-wands.imageUrl",
@@ -9935,11 +9157,7 @@
       },
       {
         "key": "blog.cards.ace-of-pentacles.related_cards",
-        "value": [
-          "two-of-pentacles",
-          "the-empress",
-          "the-world"
-        ]
+        "value": ["two-of-pentacles", "the-empress", "the-world"]
       },
       {
         "key": "blog.cards.ace-of-pentacles.imageUrl",
@@ -10007,19 +9225,11 @@
       },
       {
         "key": "blog.cards.two-of-pentacles.faq",
-        "value": [
-          "Yıldızlar İkili kartı ne anlama gelir?",
-          "Dengemi nasıl korurum?",
-          "Esnekliğimi nasıl geliştiririm?"
-        ]
+        "value": ["Yıldızlar İkili kartı ne anlama gelir?", "Dengemi nasıl korurum?", "Esnekliğimi nasıl geliştiririm?"]
       },
       {
         "key": "blog.cards.two-of-pentacles.related_cards",
-        "value": [
-          "ace-of-pentacles",
-          "three-of-pentacles",
-          "temperance"
-        ]
+        "value": ["ace-of-pentacles", "three-of-pentacles", "temperance"]
       },
       {
         "key": "blog.cards.two-of-pentacles.imageUrl",
@@ -10095,11 +9305,7 @@
       },
       {
         "key": "blog.cards.three-of-pentacles.related_cards",
-        "value": [
-          "two-of-pentacles",
-          "four-of-pentacles",
-          "the-empress"
-        ]
+        "value": ["two-of-pentacles", "four-of-pentacles", "the-empress"]
       },
       {
         "key": "blog.cards.three-of-pentacles.imageUrl",
@@ -10167,19 +9373,11 @@
       },
       {
         "key": "blog.cards.four-of-pentacles.faq",
-        "value": [
-          "Yıldızlar Dörtlü kartı ne anlama gelir?",
-          "Güvenliğimi nasıl sağlarım?",
-          "Kontrolümü nasıl korurum?"
-        ]
+        "value": ["Yıldızlar Dörtlü kartı ne anlama gelir?", "Güvenliğimi nasıl sağlarım?", "Kontrolümü nasıl korurum?"]
       },
       {
         "key": "blog.cards.four-of-pentacles.related_cards",
-        "value": [
-          "three-of-pentacles",
-          "five-of-pentacles",
-          "the-emperor"
-        ]
+        "value": ["three-of-pentacles", "five-of-pentacles", "the-emperor"]
       },
       {
         "key": "blog.cards.four-of-pentacles.imageUrl",
@@ -10255,11 +9453,7 @@
       },
       {
         "key": "blog.cards.five-of-pentacles.related_cards",
-        "value": [
-          "four-of-pentacles",
-          "six-of-pentacles",
-          "the-tower"
-        ]
+        "value": ["four-of-pentacles", "six-of-pentacles", "the-tower"]
       },
       {
         "key": "blog.cards.five-of-pentacles.imageUrl",
@@ -10335,11 +9529,7 @@
       },
       {
         "key": "blog.cards.six-of-pentacles.related_cards",
-        "value": [
-          "five-of-pentacles",
-          "seven-of-pentacles",
-          "justice"
-        ]
+        "value": ["five-of-pentacles", "seven-of-pentacles", "justice"]
       },
       {
         "key": "blog.cards.six-of-pentacles.imageUrl",
@@ -10415,11 +9605,7 @@
       },
       {
         "key": "blog.cards.seven-of-pentacles.related_cards",
-        "value": [
-          "six-of-pentacles",
-          "eight-of-pentacles",
-          "the-hermit"
-        ]
+        "value": ["six-of-pentacles", "eight-of-pentacles", "the-hermit"]
       },
       {
         "key": "blog.cards.seven-of-pentacles.imageUrl",
@@ -10495,11 +9681,7 @@
       },
       {
         "key": "blog.cards.eight-of-pentacles.related_cards",
-        "value": [
-          "seven-of-pentacles",
-          "nine-of-pentacles",
-          "the-magician"
-        ]
+        "value": ["seven-of-pentacles", "nine-of-pentacles", "the-magician"]
       },
       {
         "key": "blog.cards.eight-of-pentacles.imageUrl",
@@ -10575,11 +9757,7 @@
       },
       {
         "key": "blog.cards.nine-of-pentacles.related_cards",
-        "value": [
-          "eight-of-pentacles",
-          "ten-of-pentacles",
-          "the-empress"
-        ]
+        "value": ["eight-of-pentacles", "ten-of-pentacles", "the-empress"]
       },
       {
         "key": "blog.cards.nine-of-pentacles.imageUrl",
@@ -10647,19 +9825,11 @@
       },
       {
         "key": "blog.cards.ten-of-pentacles.faq",
-        "value": [
-          "Yıldızlar Onlu kartı ne anlama gelir?",
-          "Ailemi nasıl güçlendiririm?",
-          "Mirasımı nasıl korurum?"
-        ]
+        "value": ["Yıldızlar Onlu kartı ne anlama gelir?", "Ailemi nasıl güçlendiririm?", "Mirasımı nasıl korurum?"]
       },
       {
         "key": "blog.cards.ten-of-pentacles.related_cards",
-        "value": [
-          "nine-of-pentacles",
-          "page-of-pentacles",
-          "the-world"
-        ]
+        "value": ["nine-of-pentacles", "page-of-pentacles", "the-world"]
       },
       {
         "key": "blog.cards.ten-of-pentacles.imageUrl",
@@ -10735,11 +9905,7 @@
       },
       {
         "key": "blog.cards.page-of-pentacles.related_cards",
-        "value": [
-          "ten-of-pentacles",
-          "knight-of-pentacles",
-          "the-fool"
-        ]
+        "value": ["ten-of-pentacles", "knight-of-pentacles", "the-fool"]
       },
       {
         "key": "blog.cards.page-of-pentacles.imageUrl",
@@ -10815,11 +9981,7 @@
       },
       {
         "key": "blog.cards.knight-of-pentacles.related_cards",
-        "value": [
-          "page-of-pentacles",
-          "queen-of-pentacles",
-          "the-chariot"
-        ]
+        "value": ["page-of-pentacles", "queen-of-pentacles", "the-chariot"]
       },
       {
         "key": "blog.cards.knight-of-pentacles.imageUrl",
@@ -10895,11 +10057,7 @@
       },
       {
         "key": "blog.cards.queen-of-pentacles.related_cards",
-        "value": [
-          "knight-of-pentacles",
-          "king-of-pentacles",
-          "the-empress"
-        ]
+        "value": ["knight-of-pentacles", "king-of-pentacles", "the-empress"]
       },
       {
         "key": "blog.cards.queen-of-pentacles.imageUrl",
@@ -10975,11 +10133,7 @@
       },
       {
         "key": "blog.cards.king-of-pentacles.related_cards",
-        "value": [
-          "queen-of-pentacles",
-          "ace-of-pentacles",
-          "the-emperor"
-        ]
+        "value": ["queen-of-pentacles", "ace-of-pentacles", "the-emperor"]
       },
       {
         "key": "blog.cards.king-of-pentacles.imageUrl",
@@ -12333,12 +11487,7 @@
       },
       {
         "key": "home.services.numerology.features",
-        "value": [
-          "Yaşam Yolu",
-          "İfade Sayısı",
-          "Ruhsal Arzu",
-          "Günlük Sayı"
-        ]
+        "value": ["Yaşam Yolu", "İfade Sayısı", "Ruhsal Arzu", "Günlük Sayı"]
       },
       {
         "key": "home.services.numerology.title",
@@ -12354,12 +11503,7 @@
       },
       {
         "key": "home.services.tarot.features",
-        "value": [
-          "Aşk Açılımı",
-          "Kariyer Rehberliği",
-          "Günlük Rehberlik",
-          "Detaylı Yorumlama"
-        ]
+        "value": ["Aşk Açılımı", "Kariyer Rehberliği", "Günlük Rehberlik", "Detaylı Yorumlama"]
       },
       {
         "key": "home.services.tarot.title",
@@ -12463,12 +11607,7 @@
       },
       {
         "key": "homepage.services.numerology.features",
-        "value": [
-          "Yaşam Yolu",
-          "İfade Sayısı",
-          "Ruhsal Arzu",
-          "Günlük Sayı"
-        ]
+        "value": ["Yaşam Yolu", "İfade Sayısı", "Ruhsal Arzu", "Günlük Sayı"]
       },
       {
         "key": "homepage.services.numerology.title",
@@ -12484,12 +11623,7 @@
       },
       {
         "key": "homepage.services.tarot.features",
-        "value": [
-          "Aşk Açılımı",
-          "Kariyer Rehberliği",
-          "Günlük Rehberlik",
-          "Detaylı Yorumlama"
-        ]
+        "value": ["Aşk Açılımı", "Kariyer Rehberliği", "Günlük Rehberlik", "Detaylı Yorumlama"]
       },
       {
         "key": "homepage.services.tarot.title",
@@ -12693,13 +11827,7 @@
       },
       {
         "key": "love.meanings.thefool.position4.keywords",
-        "value": [
-          "yeni başlangıç",
-          "belirsiz gelecek",
-          "risk almak",
-          "özgürlük",
-          "beklenmedik yol"
-        ]
+        "value": ["yeni başlangıç", "belirsiz gelecek", "risk almak", "özgürlük", "beklenmedik yol"]
       },
       {
         "key": "love.meanings.thefool.position4.context",
@@ -12715,13 +11843,7 @@
       },
       {
         "key": "love.meanings.themagician.position4.keywords",
-        "value": [
-          "birlikte yaratma",
-          "güçlü gelecek",
-          "potansiyel",
-          "irade",
-          "başarı"
-        ]
+        "value": ["birlikte yaratma", "güçlü gelecek", "potansiyel", "irade", "başarı"]
       },
       {
         "key": "love.meanings.themagician.position4.context",
@@ -12737,13 +11859,7 @@
       },
       {
         "key": "love.meanings.thehighpriestess.position4.keywords",
-        "value": [
-          "gizemli gelecek",
-          "belirsizlik",
-          "sezgisel bağ",
-          "saklı potansiyel",
-          "zaman"
-        ]
+        "value": ["gizemli gelecek", "belirsizlik", "sezgisel bağ", "saklı potansiyel", "zaman"]
       },
       {
         "key": "love.meanings.thehighpriestess.position4.context",
@@ -12751,13 +11867,7 @@
       },
       {
         "key": "love.meanings.theempress.position2.keywords",
-        "value": [
-          "şehvet",
-          "bereket",
-          "duyusallık",
-          "doğurganlık",
-          "zevk"
-        ]
+        "value": ["şehvet", "bereket", "duyusallık", "doğurganlık", "zevk"]
       },
       {
         "key": "love.meanings.theempress.position4.upright",
@@ -12769,13 +11879,7 @@
       },
       {
         "key": "love.meanings.theempress.position4.keywords",
-        "value": [
-          "bereket",
-          "büyüme",
-          "evlilik",
-          "doğurganlık",
-          "kalıcı sevgi"
-        ]
+        "value": ["bereket", "büyüme", "evlilik", "doğurganlık", "kalıcı sevgi"]
       },
       {
         "key": "love.meanings.theempress.position4.context",
@@ -12791,13 +11895,7 @@
       },
       {
         "key": "love.meanings.theemperor.position4.keywords",
-        "value": [
-          "kalıcı ilişki",
-          "istikrar",
-          "güvenlik",
-          "evlilik",
-          "sağlam yapı"
-        ]
+        "value": ["kalıcı ilişki", "istikrar", "güvenlik", "evlilik", "sağlam yapı"]
       },
       {
         "key": "love.meanings.theemperor.position4.context",
@@ -12813,13 +11911,7 @@
       },
       {
         "key": "love.meanings.thehierophant.position4.keywords",
-        "value": [
-          "evlilik",
-          "geleneksel bağlılık",
-          "ortak inançlar",
-          "toplumsal onay",
-          "uzun süreli birliktelik"
-        ]
+        "value": ["evlilik", "geleneksel bağlılık", "ortak inançlar", "toplumsal onay", "uzun süreli birliktelik"]
       },
       {
         "key": "love.meanings.thehierophant.position4.context",
@@ -12835,13 +11927,7 @@
       },
       {
         "key": "love.meanings.thelovers.position4.keywords",
-        "value": [
-          "ruh eşi",
-          "kalıcı aşk",
-          "uyumlu ortaklık",
-          "mutluluk",
-          "doğru seçim"
-        ]
+        "value": ["ruh eşi", "kalıcı aşk", "uyumlu ortaklık", "mutluluk", "doğru seçim"]
       },
       {
         "key": "love.meanings.thelovers.position4.context",
@@ -12857,13 +11943,7 @@
       },
       {
         "key": "love.meanings.thechariot.position4.keywords",
-        "value": [
-          "ortak zafer",
-          "başarı",
-          "hedeflere ulaşma",
-          "güçlü birliktelik",
-          "ilerleme"
-        ]
+        "value": ["ortak zafer", "başarı", "hedeflere ulaşma", "güçlü birliktelik", "ilerleme"]
       },
       {
         "key": "love.meanings.thechariot.position4.context",
@@ -12879,13 +11959,7 @@
       },
       {
         "key": "love.meanings.strength.position4.keywords",
-        "value": [
-          "dayanıklı bağ",
-          "şefkat",
-          "sabır",
-          "karşılıklı kabul",
-          "içsel güç"
-        ]
+        "value": ["dayanıklı bağ", "şefkat", "sabır", "karşılıklı kabul", "içsel güç"]
       },
       {
         "key": "love.meanings.strength.position4.context",
@@ -12901,13 +11975,7 @@
       },
       {
         "key": "love.meanings.thehermit.position4.keywords",
-        "value": [
-          "ayrılık",
-          "kişisel yolculuk",
-          "yalnızlık",
-          "içe dönüş",
-          "büyüme"
-        ]
+        "value": ["ayrılık", "kişisel yolculuk", "yalnızlık", "içe dönüş", "büyüme"]
       },
       {
         "key": "love.meanings.thehermit.position4.context",
@@ -12923,13 +11991,7 @@
       },
       {
         "key": "love.meanings.thewheeloffortune.position4.keywords",
-        "value": [
-          "kader",
-          "dönüm noktası",
-          "şans",
-          "yeni döngü",
-          "karmik sonuç"
-        ]
+        "value": ["kader", "dönüm noktası", "şans", "yeni döngü", "karmik sonuç"]
       },
       {
         "key": "love.meanings.thewheeloffortune.position4.context",
@@ -12945,13 +12007,7 @@
       },
       {
         "key": "love.meanings.justice.position4.keywords",
-        "value": [
-          "adalet",
-          "denge",
-          "resmiyet",
-          "sebep-sonuç",
-          "hak edilen sonuç"
-        ]
+        "value": ["adalet", "denge", "resmiyet", "sebep-sonuç", "hak edilen sonuç"]
       },
       {
         "key": "love.meanings.justice.position4.context",
@@ -12967,13 +12023,7 @@
       },
       {
         "key": "love.meanings.thehangedman.position4.keywords",
-        "value": [
-          "belirsizlik",
-          "duraklama",
-          "fedakarlık",
-          "çıkmaz",
-          "bekleyiş"
-        ]
+        "value": ["belirsizlik", "duraklama", "fedakarlık", "çıkmaz", "bekleyiş"]
       },
       {
         "key": "love.meanings.thehangedman.position4.context",
@@ -12989,13 +12039,7 @@
       },
       {
         "key": "love.meanings.death.position4.keywords",
-        "value": [
-          "kaçınılmaz son",
-          "dönüşüm",
-          "bitiş",
-          "yeniden doğuş",
-          "vazgeçiş"
-        ]
+        "value": ["kaçınılmaz son", "dönüşüm", "bitiş", "yeniden doğuş", "vazgeçiş"]
       },
       {
         "key": "love.meanings.death.position4.context",
@@ -13011,13 +12055,7 @@
       },
       {
         "key": "love.meanings.temperance.position4.keywords",
-        "value": [
-          "denge",
-          "uyum",
-          "huzur",
-          "uzun süreli ortaklık",
-          "şifa"
-        ]
+        "value": ["denge", "uyum", "huzur", "uzun süreli ortaklık", "şifa"]
       },
       {
         "key": "love.meanings.temperance.position4.context",
@@ -13037,13 +12075,7 @@
       },
       {
         "key": "love.meanings.thedevil.position4.keywords",
-        "value": [
-          "toksik ilişki",
-          "bağımlılık",
-          "takıntı",
-          "karmik bağ",
-          "kopamama"
-        ]
+        "value": ["toksik ilişki", "bağımlılık", "takıntı", "karmik bağ", "kopamama"]
       },
       {
         "key": "love.meanings.thedevil.position4.context",
@@ -13059,13 +12091,7 @@
       },
       {
         "key": "love.meanings.thetower.position4.keywords",
-        "value": [
-          "ani ayrılık",
-          "yıkım",
-          "kriz",
-          "beklenmedik son",
-          "yüzleşme"
-        ]
+        "value": ["ani ayrılık", "yıkım", "kriz", "beklenmedik son", "yüzleşme"]
       },
       {
         "key": "love.meanings.thetower.position4.context",
@@ -13081,13 +12107,7 @@
       },
       {
         "key": "love.meanings.thestar.position4.keywords",
-        "value": [
-          "umutlu gelecek",
-          "şifa",
-          "mutluluk",
-          "ilham",
-          "huzur"
-        ]
+        "value": ["umutlu gelecek", "şifa", "mutluluk", "ilham", "huzur"]
       },
       {
         "key": "love.meanings.thestar.position4.context",
@@ -13103,13 +12123,7 @@
       },
       {
         "key": "love.meanings.themoon.position4.keywords",
-        "value": [
-          "belirsiz gelecek",
-          "yanılsama",
-          "korkular",
-          "aldatma",
-          "güvensizlik"
-        ]
+        "value": ["belirsiz gelecek", "yanılsama", "korkular", "aldatma", "güvensizlik"]
       },
       {
         "key": "love.meanings.themoon.position4.context",
@@ -13125,13 +12139,7 @@
       },
       {
         "key": "love.meanings.thesun.position4.keywords",
-        "value": [
-          "büyük mutluluk",
-          "başarı",
-          "neşe",
-          "açıklık",
-          "tatmin edici gelecek"
-        ]
+        "value": ["büyük mutluluk", "başarı", "neşe", "açıklık", "tatmin edici gelecek"]
       },
       {
         "key": "love.meanings.thesun.position4.context",
@@ -13147,13 +12155,7 @@
       },
       {
         "key": "love.meanings.judgement.position4.keywords",
-        "value": [
-          "ikinci şans",
-          "uyanış",
-          "affetme",
-          "hesaplaşma",
-          "yeniden doğuş"
-        ]
+        "value": ["ikinci şans", "uyanış", "affetme", "hesaplaşma", "yeniden doğuş"]
       },
       {
         "key": "love.meanings.judgement.position4.context",
@@ -13169,13 +12171,7 @@
       },
       {
         "key": "love.meanings.theworld.position4.keywords",
-        "value": [
-          "tamamlanma",
-          "başarı",
-          "mutluluk",
-          "bütünlük",
-          "döngünün sonu"
-        ]
+        "value": ["tamamlanma", "başarı", "mutluluk", "bütünlük", "döngünün sonu"]
       },
       {
         "key": "love.meanings.theworld.position4.context",
@@ -13191,13 +12187,7 @@
       },
       {
         "key": "love.meanings.aceofcups.position4.keywords",
-        "value": [
-          "gerçek aşk",
-          "duygusal başlangıç",
-          "mutluluk",
-          "şefkat",
-          "yeni ilişki"
-        ]
+        "value": ["gerçek aşk", "duygusal başlangıç", "mutluluk", "şefkat", "yeni ilişki"]
       },
       {
         "key": "love.meanings.aceofcups.position4.context",
@@ -13213,13 +12203,7 @@
       },
       {
         "key": "love.meanings.twoofcups.position4.keywords",
-        "value": [
-          "uyumlu ortaklık",
-          "evlilik",
-          "ruh eşi",
-          "karşılıklı sevgi",
-          "bağlılık"
-        ]
+        "value": ["uyumlu ortaklık", "evlilik", "ruh eşi", "karşılıklı sevgi", "bağlılık"]
       },
       {
         "key": "love.meanings.twoofcups.position4.context",
@@ -13235,13 +12219,7 @@
       },
       {
         "key": "love.meanings.threeofcups.position4.keywords",
-        "value": [
-          "mutlu kutlama",
-          "evlilik",
-          "nişan",
-          "sosyal uyum",
-          "arkadaşça aşk"
-        ]
+        "value": ["mutlu kutlama", "evlilik", "nişan", "sosyal uyum", "arkadaşça aşk"]
       },
       {
         "key": "love.meanings.threeofcups.position4.context",
@@ -13257,13 +12235,7 @@
       },
       {
         "key": "love.meanings.fourofcups.position4.keywords",
-        "value": [
-          "durgunluk",
-          "tatminsizlik",
-          "ilgisizlik",
-          "kaçırılan fırsat",
-          "ayrılık potansiyeli"
-        ]
+        "value": ["durgunluk", "tatminsizlik", "ilgisizlik", "kaçırılan fırsat", "ayrılık potansiyeli"]
       },
       {
         "key": "love.meanings.fourofcups.position4.context",
@@ -13279,13 +12251,7 @@
       },
       {
         "key": "love.meanings.fiveofcups.position4.keywords",
-        "value": [
-          "kayıp",
-          "pişmanlık",
-          "keder",
-          "hayal kırıklığı",
-          "üzücü son"
-        ]
+        "value": ["kayıp", "pişmanlık", "keder", "hayal kırıklığı", "üzücü son"]
       },
       {
         "key": "love.meanings.fiveofcups.position4.context",
@@ -13301,13 +12267,7 @@
       },
       {
         "key": "love.meanings.sixofcups.position4.keywords",
-        "value": [
-          "geçmişin canlanması",
-          "mutlu anılar",
-          "güvenli sevgi",
-          "masumiyet",
-          "kalıcı bağ"
-        ]
+        "value": ["geçmişin canlanması", "mutlu anılar", "güvenli sevgi", "masumiyet", "kalıcı bağ"]
       },
       {
         "key": "love.meanings.sixofcups.position4.context",
@@ -13323,13 +12283,7 @@
       },
       {
         "key": "love.meanings.sevenofcups.position4.keywords",
-        "value": [
-          "kararsızlık",
-          "kafa karışıklığı",
-          "yanılsama",
-          "seçenekler",
-          "belirsiz sonuç"
-        ]
+        "value": ["kararsızlık", "kafa karışıklığı", "yanılsama", "seçenekler", "belirsiz sonuç"]
       },
       {
         "key": "love.meanings.sevenofcups.position4.context",
@@ -13345,13 +12299,7 @@
       },
       {
         "key": "love.meanings.eightofcups.position4.keywords",
-        "value": [
-          "ayrılık",
-          "terk etme",
-          "yeni arayış",
-          "tatminsizlik",
-          "yol ayrımı"
-        ]
+        "value": ["ayrılık", "terk etme", "yeni arayış", "tatminsizlik", "yol ayrımı"]
       },
       {
         "key": "love.meanings.eightofcups.position4.context",
@@ -13367,13 +12315,7 @@
       },
       {
         "key": "love.meanings.nineofcups.position4.keywords",
-        "value": [
-          "dileklerin kabulü",
-          "mutluluk",
-          "duygusal tatmin",
-          "keyif",
-          "başarı"
-        ]
+        "value": ["dileklerin kabulü", "mutluluk", "duygusal tatmin", "keyif", "başarı"]
       },
       {
         "key": "love.meanings.nineofcups.position4.context",
@@ -13389,13 +12331,7 @@
       },
       {
         "key": "love.meanings.tenofcups.position4.keywords",
-        "value": [
-          "kalıcı mutluluk",
-          "aile",
-          "uyum",
-          "duygusal doyum",
-          "mutlu son"
-        ]
+        "value": ["kalıcı mutluluk", "aile", "uyum", "duygusal doyum", "mutlu son"]
       },
       {
         "key": "love.meanings.tenofcups.position4.context",
@@ -13411,13 +12347,7 @@
       },
       {
         "key": "love.meanings.pageofcups.position4.keywords",
-        "value": [
-          "romantik gelişme",
-          "iyi haber",
-          "yaratıcılık",
-          "hassasiyet",
-          "nişan"
-        ]
+        "value": ["romantik gelişme", "iyi haber", "yaratıcılık", "hassasiyet", "nişan"]
       },
       {
         "key": "love.meanings.pageofcups.position4.context",
@@ -13433,13 +12363,7 @@
       },
       {
         "key": "love.meanings.knightofcups.position4.keywords",
-        "value": [
-          "evlilik teklifi",
-          "romantizm",
-          "ideal aşk",
-          "gerçekleşen hayaller",
-          "bağlılık"
-        ]
+        "value": ["evlilik teklifi", "romantizm", "ideal aşk", "gerçekleşen hayaller", "bağlılık"]
       },
       {
         "key": "love.meanings.knightofcups.position4.context",
@@ -13455,13 +12379,7 @@
       },
       {
         "key": "love.meanings.queenofcups.position4.keywords",
-        "value": [
-          "koşulsuz sevgi",
-          "empati",
-          "şefkat",
-          "kalıcı mutluluk",
-          "sezgisel bağ"
-        ]
+        "value": ["koşulsuz sevgi", "empati", "şefkat", "kalıcı mutluluk", "sezgisel bağ"]
       },
       {
         "key": "love.meanings.queenofcups.position4.context",
@@ -13477,13 +12395,7 @@
       },
       {
         "key": "love.meanings.kingofcups.position4.keywords",
-        "value": [
-          "duygusal olgunluk",
-          "istikrarlı aşk",
-          "kalıcı bağlılık",
-          "bilgelik",
-          "şefkat"
-        ]
+        "value": ["duygusal olgunluk", "istikrarlı aşk", "kalıcı bağlılık", "bilgelik", "şefkat"]
       },
       {
         "key": "love.meanings.kingofcups.position4.context",
@@ -13499,13 +12411,7 @@
       },
       {
         "key": "love.meanings.aceofswords.position4.keywords",
-        "value": [
-          "net sonuç",
-          "gerçek",
-          "karar",
-          "dürüstlük",
-          "aydınlanma"
-        ]
+        "value": ["net sonuç", "gerçek", "karar", "dürüstlük", "aydınlanma"]
       },
       {
         "key": "love.meanings.aceofswords.position4.context",
@@ -13521,13 +12427,7 @@
       },
       {
         "key": "love.meanings.twoofswords.position4.keywords",
-        "value": [
-          "çıkmaz",
-          "kararsızlık",
-          "belirsizlik",
-          "sonuçsuzluk",
-          "ateşkes"
-        ]
+        "value": ["çıkmaz", "kararsızlık", "belirsizlik", "sonuçsuzluk", "ateşkes"]
       },
       {
         "key": "love.meanings.twoofswords.position4.context",
@@ -13543,13 +12443,7 @@
       },
       {
         "key": "love.meanings.threeofswords.position4.keywords",
-        "value": [
-          "ayrılık",
-          "kalp kırıklığı",
-          "keder",
-          "acı",
-          "ihanet"
-        ]
+        "value": ["ayrılık", "kalp kırıklığı", "keder", "acı", "ihanet"]
       },
       {
         "key": "love.meanings.threeofswords.position4.context",
@@ -13565,13 +12459,7 @@
       },
       {
         "key": "love.meanings.fourofswords.position4.keywords",
-        "value": [
-          "duraklama",
-          "mola",
-          "geçici ayrılık",
-          "dinlenme",
-          "iyileşme süreci"
-        ]
+        "value": ["duraklama", "mola", "geçici ayrılık", "dinlenme", "iyileşme süreci"]
       },
       {
         "key": "love.meanings.fourofswords.position4.context",
@@ -13587,13 +12475,7 @@
       },
       {
         "key": "love.meanings.fiveofswords.position4.keywords",
-        "value": [
-          "düşmanca ayrılık",
-          "çatışma",
-          "yenilgi",
-          "pişmanlık",
-          "kayıp"
-        ]
+        "value": ["düşmanca ayrılık", "çatışma", "yenilgi", "pişmanlık", "kayıp"]
       },
       {
         "key": "love.meanings.fiveofswords.position4.context",
@@ -13609,13 +12491,7 @@
       },
       {
         "key": "love.meanings.sixofswords.position4.keywords",
-        "value": [
-          "huzurlu gelecek",
-          "iyileşme",
-          "geçiş",
-          "sorunları aşma",
-          "sakinlik"
-        ]
+        "value": ["huzurlu gelecek", "iyileşme", "geçiş", "sorunları aşma", "sakinlik"]
       },
       {
         "key": "love.meanings.sixofswords.position4.context",
@@ -13631,13 +12507,7 @@
       },
       {
         "key": "love.meanings.sevenofswords.position4.keywords",
-        "value": [
-          "aldatma",
-          "ayrılık",
-          "güvensizlik",
-          "sırlar",
-          "dürüstlük eksikliği"
-        ]
+        "value": ["aldatma", "ayrılık", "güvensizlik", "sırlar", "dürüstlük eksikliği"]
       },
       {
         "key": "love.meanings.sevenofswords.position4.context",
@@ -13653,13 +12523,7 @@
       },
       {
         "key": "love.meanings.eightofswords.position4.keywords",
-        "value": [
-          "kapana kısılma",
-          "çaresizlik",
-          "kısıtlayıcı ilişki",
-          "korku",
-          "özgürleşme ihtiyacı"
-        ]
+        "value": ["kapana kısılma", "çaresizlik", "kısıtlayıcı ilişki", "korku", "özgürleşme ihtiyacı"]
       },
       {
         "key": "love.meanings.eightofswords.position4.context",
@@ -13675,13 +12539,7 @@
       },
       {
         "key": "love.meanings.nineofswords.position4.keywords",
-        "value": [
-          "endişe",
-          "korku",
-          "zihinsel acı",
-          "kabus",
-          "suçluluk"
-        ]
+        "value": ["endişe", "korku", "zihinsel acı", "kabus", "suçluluk"]
       },
       {
         "key": "love.meanings.nineofswords.position4.context",
@@ -13697,13 +12555,7 @@
       },
       {
         "key": "love.meanings.tenofswords.position4.keywords",
-        "value": [
-          "kesin son",
-          "ihanet",
-          "acı",
-          "çöküş",
-          "yenilgi"
-        ]
+        "value": ["kesin son", "ihanet", "acı", "çöküş", "yenilgi"]
       },
       {
         "key": "love.meanings.tenofswords.position4.context",
@@ -13719,13 +12571,7 @@
       },
       {
         "key": "love.meanings.pageofswords.position4.keywords",
-        "value": [
-          "sürekli tartışma",
-          "iletişim sorunları",
-          "anlaşmazlık",
-          "sorgulama",
-          "net olmayan gelecek"
-        ]
+        "value": ["sürekli tartışma", "iletişim sorunları", "anlaşmazlık", "sorgulama", "net olmayan gelecek"]
       },
       {
         "key": "love.meanings.pageofswords.position4.context",
@@ -13741,13 +12587,7 @@
       },
       {
         "key": "love.meanings.knightofswords.position4.keywords",
-        "value": [
-          "ani ayrılık",
-          "hızlı son",
-          "düşüncesizlik",
-          "kavga",
-          "kopuş"
-        ]
+        "value": ["ani ayrılık", "hızlı son", "düşüncesizlik", "kavga", "kopuş"]
       },
       {
         "key": "love.meanings.knightofswords.position4.context",
@@ -13763,13 +12603,7 @@
       },
       {
         "key": "love.meanings.queenofswords.position4.keywords",
-        "value": [
-          "mantıklı ayrılık",
-          "bağımsızlık",
-          "net karar",
-          "dürüst son",
-          "mesafe"
-        ]
+        "value": ["mantıklı ayrılık", "bağımsızlık", "net karar", "dürüst son", "mesafe"]
       },
       {
         "key": "love.meanings.queenofswords.position4.context",
@@ -13785,13 +12619,7 @@
       },
       {
         "key": "love.meanings.kingofswords.position4.keywords",
-        "value": [
-          "adil sonuç",
-          "mantıklı karar",
-          "entelektüel ortaklık",
-          "dürüstlük",
-          "otorite"
-        ]
+        "value": ["adil sonuç", "mantıklı karar", "entelektüel ortaklık", "dürüstlük", "otorite"]
       },
       {
         "key": "love.meanings.kingofswords.position4.context",
@@ -13807,13 +12635,7 @@
       },
       {
         "key": "love.meanings.aceofwands.position4.keywords",
-        "value": [
-          "yeni başlangıç",
-          "tutkulu gelecek",
-          "macera",
-          "yaratıcılık",
-          "enerji"
-        ]
+        "value": ["yeni başlangıç", "tutkulu gelecek", "macera", "yaratıcılık", "enerji"]
       },
       {
         "key": "love.meanings.aceofwands.position4.context",
@@ -13829,13 +12651,7 @@
       },
       {
         "key": "love.meanings.twoofwands.position4.keywords",
-        "value": [
-          "ortak gelecek",
-          "planlama",
-          "başarılı ortaklık",
-          "vizyon",
-          "ilerleme"
-        ]
+        "value": ["ortak gelecek", "planlama", "başarılı ortaklık", "vizyon", "ilerleme"]
       },
       {
         "key": "love.meanings.twoofwands.position4.context",
@@ -13851,13 +12667,7 @@
       },
       {
         "key": "love.meanings.threeofwands.position4.keywords",
-        "value": [
-          "başarılı gelecek",
-          "genişleme",
-          "beklentilerin karşılanması",
-          "büyüme",
-          "umut"
-        ]
+        "value": ["başarılı gelecek", "genişleme", "beklentilerin karşılanması", "büyüme", "umut"]
       },
       {
         "key": "love.meanings.threeofwands.position4.context",
@@ -13873,13 +12683,7 @@
       },
       {
         "key": "love.meanings.fourofwands.position4.keywords",
-        "value": [
-          "evlilik",
-          "mutlu yuva",
-          "istikrar",
-          "kutlama",
-          "kalıcı mutluluk"
-        ]
+        "value": ["evlilik", "mutlu yuva", "istikrar", "kutlama", "kalıcı mutluluk"]
       },
       {
         "key": "love.meanings.fourofwands.position4.context",
@@ -13895,13 +12699,7 @@
       },
       {
         "key": "love.meanings.fiveofwands.position4.keywords",
-        "value": [
-          "sürekli çatışma",
-          "rekabet",
-          "uyumsuzluk",
-          "yorucu ilişki",
-          "gerilim"
-        ]
+        "value": ["sürekli çatışma", "rekabet", "uyumsuzluk", "yorucu ilişki", "gerilim"]
       },
       {
         "key": "love.meanings.fiveofwands.position4.context",
@@ -13917,13 +12715,7 @@
       },
       {
         "key": "love.meanings.sixofwands.position4.keywords",
-        "value": [
-          "ortak zafer",
-          "başarı",
-          "takdir",
-          "mutlu son",
-          "özgüven"
-        ]
+        "value": ["ortak zafer", "başarı", "takdir", "mutlu son", "özgüven"]
       },
       {
         "key": "love.meanings.sixofwands.position4.context",
@@ -13939,13 +12731,7 @@
       },
       {
         "key": "love.meanings.sevenofwands.position4.keywords",
-        "value": [
-          "sürekli mücadele",
-          "savunma",
-          "meydan okuma",
-          "dayanıklılık",
-          "zorlu gelecek"
-        ]
+        "value": ["sürekli mücadele", "savunma", "meydan okuma", "dayanıklılık", "zorlu gelecek"]
       },
       {
         "key": "love.meanings.sevenofwands.position4.context",
@@ -13961,13 +12747,7 @@
       },
       {
         "key": "love.meanings.eightofwands.position4.keywords",
-        "value": [
-          "hızlı gelişmeler",
-          "heyecanlı gelecek",
-          "ilerleme",
-          "iyi haberler",
-          "evlilik teklifi"
-        ]
+        "value": ["hızlı gelişmeler", "heyecanlı gelecek", "ilerleme", "iyi haberler", "evlilik teklifi"]
       },
       {
         "key": "love.meanings.eightofwands.position4.context",
@@ -13983,13 +12763,7 @@
       },
       {
         "key": "love.meanings.nineofwands.position4.keywords",
-        "value": [
-          "dayanıklılık",
-          "kalıcı bağ",
-          "güvensizlik",
-          "yorucu ilişki",
-          "vazgeçmeme"
-        ]
+        "value": ["dayanıklılık", "kalıcı bağ", "güvensizlik", "yorucu ilişki", "vazgeçmeme"]
       },
       {
         "key": "love.meanings.nineofwands.position4.context",
@@ -14005,13 +12779,7 @@
       },
       {
         "key": "love.meanings.tenofwands.position4.keywords",
-        "value": [
-          "ağır yük",
-          "sorumluluk",
-          "tükenmişlik",
-          "baskı",
-          "yorucu son"
-        ]
+        "value": ["ağır yük", "sorumluluk", "tükenmişlik", "baskı", "yorucu son"]
       },
       {
         "key": "love.meanings.tenofwands.position4.context",
@@ -14027,13 +12795,7 @@
       },
       {
         "key": "love.meanings.pageofwands.position4.keywords",
-        "value": [
-          "yeni maceralar",
-          "keşif",
-          "eğlence",
-          "dinamik ilişki",
-          "heves"
-        ]
+        "value": ["yeni maceralar", "keşif", "eğlence", "dinamik ilişki", "heves"]
       },
       {
         "key": "love.meanings.pageofwands.position4.context",
@@ -14049,13 +12811,7 @@
       },
       {
         "key": "love.meanings.knightofwands.position4.keywords",
-        "value": [
-          "tutkulu ama istikrarsız",
-          "ani ilişki",
-          "bağlanma korkusu",
-          "macera",
-          "hızlı son"
-        ]
+        "value": ["tutkulu ama istikrarsız", "ani ilişki", "bağlanma korkusu", "macera", "hızlı son"]
       },
       {
         "key": "love.meanings.knightofwands.position4.context",
@@ -14071,13 +12827,7 @@
       },
       {
         "key": "love.meanings.queenofwands.position4.keywords",
-        "value": [
-          "başarılı çift",
-          "özgüven",
-          "sosyal hayat",
-          "yaratıcılık",
-          "ilham"
-        ]
+        "value": ["başarılı çift", "özgüven", "sosyal hayat", "yaratıcılık", "ilham"]
       },
       {
         "key": "love.meanings.queenofwands.position4.context",
@@ -14093,13 +12843,7 @@
       },
       {
         "key": "love.meanings.kingofwands.position4.keywords",
-        "value": [
-          "güçlü ortaklık",
-          "liderlik",
-          "başarı",
-          "ortak vizyon",
-          "imparatorluk"
-        ]
+        "value": ["güçlü ortaklık", "liderlik", "başarı", "ortak vizyon", "imparatorluk"]
       },
       {
         "key": "love.meanings.kingofwands.position4.context",
@@ -14115,13 +12859,7 @@
       },
       {
         "key": "love.meanings.aceofpentacles.position4.keywords",
-        "value": [
-          "somut başlangıç",
-          "kalıcı ilişki",
-          "güven",
-          "refah",
-          "fırsat"
-        ]
+        "value": ["somut başlangıç", "kalıcı ilişki", "güven", "refah", "fırsat"]
       },
       {
         "key": "love.meanings.aceofpentacles.position4.context",
@@ -14137,13 +12875,7 @@
       },
       {
         "key": "love.meanings.twoofpentacles.position4.keywords",
-        "value": [
-          "denge",
-          "uyum",
-          "esneklik",
-          "devamlılık",
-          "inişler ve çıkışlar"
-        ]
+        "value": ["denge", "uyum", "esneklik", "devamlılık", "inişler ve çıkışlar"]
       },
       {
         "key": "love.meanings.twoofpentacles.position4.context",
@@ -14159,13 +12891,7 @@
       },
       {
         "key": "love.meanings.threeofpentacles.position4.keywords",
-        "value": [
-          "başarılı ortaklık",
-          "birlikte inşa etme",
-          "takım çalışması",
-          "saygı",
-          "kalıcı eser"
-        ]
+        "value": ["başarılı ortaklık", "birlikte inşa etme", "takım çalışması", "saygı", "kalıcı eser"]
       },
       {
         "key": "love.meanings.threeofpentacles.position4.context",
@@ -14181,13 +12907,7 @@
       },
       {
         "key": "love.meanings.fourofpentacles.position4.keywords",
-        "value": [
-          "durağanlık",
-          "istikrar",
-          "kontrol",
-          "değişime kapalılık",
-          "güvenlik"
-        ]
+        "value": ["durağanlık", "istikrar", "kontrol", "değişime kapalılık", "güvenlik"]
       },
       {
         "key": "love.meanings.fourofpentacles.position4.context",
@@ -14203,13 +12923,7 @@
       },
       {
         "key": "love.meanings.fiveofpentacles.position4.keywords",
-        "value": [
-          "zor zamanlar",
-          "maddi sıkıntı",
-          "yalnızlık",
-          "kriz",
-          "dayanışma veya ayrılık"
-        ]
+        "value": ["zor zamanlar", "maddi sıkıntı", "yalnızlık", "kriz", "dayanışma veya ayrılık"]
       },
       {
         "key": "love.meanings.fiveofpentacles.position4.context",
@@ -14225,13 +12939,7 @@
       },
       {
         "key": "love.meanings.sixofpentacles.position4.keywords",
-        "value": [
-          "dengeli ortaklık",
-          "cömertlik",
-          "karşılıklı destek",
-          "adalet",
-          "refah"
-        ]
+        "value": ["dengeli ortaklık", "cömertlik", "karşılıklı destek", "adalet", "refah"]
       },
       {
         "key": "love.meanings.sixofpentacles.position4.context",
@@ -14247,13 +12955,7 @@
       },
       {
         "key": "love.meanings.sevenofpentacles.position4.keywords",
-        "value": [
-          "emeğin karşılığı",
-          "sabır",
-          "kalıcı büyüme",
-          "yatırım",
-          "hasat zamanı"
-        ]
+        "value": ["emeğin karşılığı", "sabır", "kalıcı büyüme", "yatırım", "hasat zamanı"]
       },
       {
         "key": "love.meanings.sevenofpentacles.position4.context",
@@ -14269,13 +12971,7 @@
       },
       {
         "key": "love.meanings.eightofpentacles.position4.keywords",
-        "value": [
-          "adanmışlık",
-          "sürekli çaba",
-          "gelişen ilişki",
-          "ustalık",
-          "özen"
-        ]
+        "value": ["adanmışlık", "sürekli çaba", "gelişen ilişki", "ustalık", "özen"]
       },
       {
         "key": "love.meanings.eightofpentacles.position4.context",
@@ -14291,13 +12987,7 @@
       },
       {
         "key": "love.meanings.nineofpentacles.position4.keywords",
-        "value": [
-          "bağımsız ilişki",
-          "refah",
-          "olgunluk",
-          "lüks",
-          "kendine yetme"
-        ]
+        "value": ["bağımsız ilişki", "refah", "olgunluk", "lüks", "kendine yetme"]
       },
       {
         "key": "love.meanings.nineofpentacles.position4.context",
@@ -14313,13 +13003,7 @@
       },
       {
         "key": "love.meanings.tenofpentacles.position4.keywords",
-        "value": [
-          "kalıcı aile",
-          "zenginlik",
-          "güvenlik",
-          "miras",
-          "istikrar"
-        ]
+        "value": ["kalıcı aile", "zenginlik", "güvenlik", "miras", "istikrar"]
       },
       {
         "key": "love.meanings.tenofpentacles.position4.context",
@@ -14335,13 +13019,7 @@
       },
       {
         "key": "love.meanings.pageofpentacles.position4.keywords",
-        "value": [
-          "umut vadeden gelecek",
-          "sağlam temel",
-          "büyüme",
-          "öğrenme",
-          "fırsat"
-        ]
+        "value": ["umut vadeden gelecek", "sağlam temel", "büyüme", "öğrenme", "fırsat"]
       },
       {
         "key": "love.meanings.pageofpentacles.position4.context",
@@ -14357,13 +13035,7 @@
       },
       {
         "key": "love.meanings.knightofpentacles.position4.keywords",
-        "value": [
-          "ömür boyu bağlılık",
-          "sadakat",
-          "güvenilirlik",
-          "istikrar",
-          "sabır"
-        ]
+        "value": ["ömür boyu bağlılık", "sadakat", "güvenilirlik", "istikrar", "sabır"]
       },
       {
         "key": "love.meanings.knightofpentacles.position4.context",
@@ -14379,13 +13051,7 @@
       },
       {
         "key": "love.meanings.queenofpentacles.position4.keywords",
-        "value": [
-          "güvenli yuva",
-          "besleyici ortaklık",
-          "konfor",
-          "cömertlik",
-          "istikrar"
-        ]
+        "value": ["güvenli yuva", "besleyici ortaklık", "konfor", "cömertlik", "istikrar"]
       },
       {
         "key": "love.meanings.queenofpentacles.position4.context",
@@ -14401,13 +13067,7 @@
       },
       {
         "key": "love.meanings.kingofpentacles.position4.keywords",
-        "value": [
-          "başarılı imparatorluk",
-          "zenginlik",
-          "istikrar",
-          "güvenlik",
-          "kalıcı başarı"
-        ]
+        "value": ["başarılı imparatorluk", "zenginlik", "istikrar", "güvenlik", "kalıcı başarı"]
       },
       {
         "key": "love.meanings.kingofpentacles.position4.context",
@@ -17824,11 +16484,7 @@
       },
       {
         "key": "blog.cards.the-fool.related_cards",
-        "value": [
-          "the-magician",
-          "the-sun",
-          "the-tower"
-        ]
+        "value": ["the-magician", "the-sun", "the-tower"]
       },
       {
         "key": "blog.cards.the-fool.imageUrl",
@@ -17896,18 +16552,11 @@
       },
       {
         "key": "blog.cards.the-high-priestess.faq",
-        "value": [
-          "Başrahibe hangi durumlarda olumlu çıkar?",
-          "Sezgimi nasıl güçlendiririm?"
-        ]
+        "value": ["Başrahibe hangi durumlarda olumlu çıkar?", "Sezgimi nasıl güçlendiririm?"]
       },
       {
         "key": "blog.cards.the-high-priestess.related_cards",
-        "value": [
-          "the-moon",
-          "the-hermit",
-          "the-empress"
-        ]
+        "value": ["the-moon", "the-hermit", "the-empress"]
       },
       {
         "key": "blog.cards.the-high-priestess.imageUrl",
@@ -17975,18 +16624,11 @@
       },
       {
         "key": "blog.cards.the-magician.faq",
-        "value": [
-          "Büyücü kartı ne zaman çıkar?",
-          "Yaratıcı gücümü nasıl kullanırım?"
-        ]
+        "value": ["Büyücü kartı ne zaman çıkar?", "Yaratıcı gücümü nasıl kullanırım?"]
       },
       {
         "key": "blog.cards.the-magician.related_cards",
-        "value": [
-          "the-fool",
-          "the-emperor",
-          "the-star"
-        ]
+        "value": ["the-fool", "the-emperor", "the-star"]
       },
       {
         "key": "blog.cards.the-magician.imageUrl",
@@ -18062,11 +16704,7 @@
       },
       {
         "key": "blog.cards.the-empress.related_cards",
-        "value": [
-          "the-emperor",
-          "the-hierophant",
-          "the-star"
-        ]
+        "value": ["the-emperor", "the-hierophant", "the-star"]
       },
       {
         "key": "blog.cards.the-empress.imageUrl",
@@ -18142,11 +16780,7 @@
       },
       {
         "key": "blog.cards.the-emperor.related_cards",
-        "value": [
-          "the-empress",
-          "the-hierophant",
-          "the-justice"
-        ]
+        "value": ["the-empress", "the-hierophant", "the-justice"]
       },
       {
         "key": "blog.cards.the-emperor.imageUrl",
@@ -18222,11 +16856,7 @@
       },
       {
         "key": "blog.cards.the-hierophant.related_cards",
-        "value": [
-          "the-emperor",
-          "the-lovers",
-          "the-justice"
-        ]
+        "value": ["the-emperor", "the-lovers", "the-justice"]
       },
       {
         "key": "blog.cards.the-hierophant.imageUrl",
@@ -18294,19 +16924,11 @@
       },
       {
         "key": "blog.cards.the-lovers.faq",
-        "value": [
-          "Aşıklar kartı ne anlama gelir?",
-          "Aşk hayatımda ne değişecek?",
-          "Önemli seçimler nasıl yapılır?"
-        ]
+        "value": ["Aşıklar kartı ne anlama gelir?", "Aşk hayatımda ne değişecek?", "Önemli seçimler nasıl yapılır?"]
       },
       {
         "key": "blog.cards.the-lovers.related_cards",
-        "value": [
-          "the-hierophant",
-          "the-chariot",
-          "the-temperance"
-        ]
+        "value": ["the-hierophant", "the-chariot", "the-temperance"]
       },
       {
         "key": "blog.cards.the-lovers.imageUrl",
@@ -18382,11 +17004,7 @@
       },
       {
         "key": "blog.cards.the-chariot.related_cards",
-        "value": [
-          "the-lovers",
-          "strength",
-          "the-emperor"
-        ]
+        "value": ["the-lovers", "strength", "the-emperor"]
       },
       {
         "key": "blog.cards.the-chariot.imageUrl",
@@ -18454,19 +17072,11 @@
       },
       {
         "key": "blog.cards.strength.faq",
-        "value": [
-          "Güç kartı ne anlama gelir?",
-          "İçsel gücümü nasıl geliştiririm?",
-          "Sabrımı nasıl güçlendiririm?"
-        ]
+        "value": ["Güç kartı ne anlama gelir?", "İçsel gücümü nasıl geliştiririm?", "Sabrımı nasıl güçlendiririm?"]
       },
       {
         "key": "blog.cards.strength.related_cards",
-        "value": [
-          "the-chariot",
-          "the-hermit",
-          "temperance"
-        ]
+        "value": ["the-chariot", "the-hermit", "temperance"]
       },
       {
         "key": "blog.cards.strength.imageUrl",
@@ -18542,11 +17152,7 @@
       },
       {
         "key": "blog.cards.the-hermit.related_cards",
-        "value": [
-          "strength",
-          "the-moon",
-          "the-star"
-        ]
+        "value": ["strength", "the-moon", "the-star"]
       },
       {
         "key": "blog.cards.the-hermit.imageUrl",
@@ -18622,11 +17228,7 @@
       },
       {
         "key": "blog.cards.wheel-of-fortune.related_cards",
-        "value": [
-          "the-hermit",
-          "justice",
-          "the-sun"
-        ]
+        "value": ["the-hermit", "justice", "the-sun"]
       },
       {
         "key": "blog.cards.wheel-of-fortune.imageUrl",
@@ -18702,11 +17304,7 @@
       },
       {
         "key": "blog.cards.justice.related_cards",
-        "value": [
-          "wheel-of-fortune",
-          "the-hanged-man",
-          "temperance"
-        ]
+        "value": ["wheel-of-fortune", "the-hanged-man", "temperance"]
       },
       {
         "key": "blog.cards.justice.imageUrl",
@@ -18782,11 +17380,7 @@
       },
       {
         "key": "blog.cards.the-hanged-man.related_cards",
-        "value": [
-          "justice",
-          "death",
-          "temperance"
-        ]
+        "value": ["justice", "death", "temperance"]
       },
       {
         "key": "blog.cards.the-hanged-man.imageUrl",
@@ -18862,11 +17456,7 @@
       },
       {
         "key": "blog.cards.death.related_cards",
-        "value": [
-          "the-hanged-man",
-          "temperance",
-          "the-tower"
-        ]
+        "value": ["the-hanged-man", "temperance", "the-tower"]
       },
       {
         "key": "blog.cards.death.imageUrl",
@@ -18942,11 +17532,7 @@
       },
       {
         "key": "blog.cards.temperance.related_cards",
-        "value": [
-          "death",
-          "the-devil",
-          "the-star"
-        ]
+        "value": ["death", "the-devil", "the-star"]
       },
       {
         "key": "blog.cards.temperance.imageUrl",
@@ -19022,11 +17608,7 @@
       },
       {
         "key": "blog.cards.the-devil.related_cards",
-        "value": [
-          "temperance",
-          "the-tower",
-          "the-moon"
-        ]
+        "value": ["temperance", "the-tower", "the-moon"]
       },
       {
         "key": "blog.cards.the-devil.imageUrl",
@@ -19102,11 +17684,7 @@
       },
       {
         "key": "blog.cards.the-tower.related_cards",
-        "value": [
-          "the-devil",
-          "the-star",
-          "the-moon"
-        ]
+        "value": ["the-devil", "the-star", "the-moon"]
       },
       {
         "key": "blog.cards.the-tower.imageUrl",
@@ -19174,19 +17752,11 @@
       },
       {
         "key": "blog.cards.the-star.faq",
-        "value": [
-          "Yıldız kartı ne anlama gelir?",
-          "Umutumu nasıl güçlendiririm?",
-          "Ruhsal rehberliği nasıl bulurum?"
-        ]
+        "value": ["Yıldız kartı ne anlama gelir?", "Umutumu nasıl güçlendiririm?", "Ruhsal rehberliği nasıl bulurum?"]
       },
       {
         "key": "blog.cards.the-star.related_cards",
-        "value": [
-          "the-tower",
-          "the-moon",
-          "the-sun"
-        ]
+        "value": ["the-tower", "the-moon", "the-sun"]
       },
       {
         "key": "blog.cards.the-star.imageUrl",
@@ -19254,19 +17824,11 @@
       },
       {
         "key": "blog.cards.the-moon.faq",
-        "value": [
-          "Ay kartı ne anlama gelir?",
-          "Sezgimi nasıl güçlendiririm?",
-          "Bilinçaltımı nasıl anlarım?"
-        ]
+        "value": ["Ay kartı ne anlama gelir?", "Sezgimi nasıl güçlendiririm?", "Bilinçaltımı nasıl anlarım?"]
       },
       {
         "key": "blog.cards.the-moon.related_cards",
-        "value": [
-          "the-star",
-          "the-sun",
-          "the-hermit"
-        ]
+        "value": ["the-star", "the-sun", "the-hermit"]
       },
       {
         "key": "blog.cards.the-moon.imageUrl",
@@ -19334,19 +17896,11 @@
       },
       {
         "key": "blog.cards.the-sun.faq",
-        "value": [
-          "Güneş kartı ne anlama gelir?",
-          "Neşemi nasıl güçlendiririm?",
-          "Başarıyı nasıl yakalarım?"
-        ]
+        "value": ["Güneş kartı ne anlama gelir?", "Neşemi nasıl güçlendiririm?", "Başarıyı nasıl yakalarım?"]
       },
       {
         "key": "blog.cards.the-sun.related_cards",
-        "value": [
-          "the-moon",
-          "judgement",
-          "the-world"
-        ]
+        "value": ["the-moon", "judgement", "the-world"]
       },
       {
         "key": "blog.cards.the-sun.imageUrl",
@@ -19422,11 +17976,7 @@
       },
       {
         "key": "blog.cards.judgement.related_cards",
-        "value": [
-          "the-sun",
-          "the-world",
-          "the-fool"
-        ]
+        "value": ["the-sun", "the-world", "the-fool"]
       },
       {
         "key": "blog.cards.judgement.imageUrl",
@@ -19494,19 +18044,11 @@
       },
       {
         "key": "blog.cards.the-world.faq",
-        "value": [
-          "Dünya kartı ne anlama gelir?",
-          "Hedeflerimi nasıl tamamlarım?",
-          "Başarıyı nasıl sürdürürüm?"
-        ]
+        "value": ["Dünya kartı ne anlama gelir?", "Hedeflerimi nasıl tamamlarım?", "Başarıyı nasıl sürdürürüm?"]
       },
       {
         "key": "blog.cards.the-world.related_cards",
-        "value": [
-          "judgement",
-          "the-fool",
-          "the-magician"
-        ]
+        "value": ["judgement", "the-fool", "the-magician"]
       },
       {
         "key": "blog.cards.the-world.imageUrl",
@@ -19582,11 +18124,7 @@
       },
       {
         "key": "blog.cards.ace-of-cups.related_cards",
-        "value": [
-          "two-of-cups",
-          "the-lovers",
-          "the-star"
-        ]
+        "value": ["two-of-cups", "the-lovers", "the-star"]
       },
       {
         "key": "blog.cards.ace-of-cups.imageUrl",
@@ -19662,11 +18200,7 @@
       },
       {
         "key": "blog.cards.two-of-cups.related_cards",
-        "value": [
-          "ace-of-cups",
-          "three-of-cups",
-          "the-lovers"
-        ]
+        "value": ["ace-of-cups", "three-of-cups", "the-lovers"]
       },
       {
         "key": "blog.cards.two-of-cups.imageUrl",
@@ -19742,11 +18276,7 @@
       },
       {
         "key": "blog.cards.three-of-cups.related_cards",
-        "value": [
-          "two-of-cups",
-          "four-of-cups",
-          "the-sun"
-        ]
+        "value": ["two-of-cups", "four-of-cups", "the-sun"]
       },
       {
         "key": "blog.cards.three-of-cups.imageUrl",
@@ -19822,11 +18352,7 @@
       },
       {
         "key": "blog.cards.four-of-cups.related_cards",
-        "value": [
-          "three-of-cups",
-          "five-of-cups",
-          "the-moon"
-        ]
+        "value": ["three-of-cups", "five-of-cups", "the-moon"]
       },
       {
         "key": "blog.cards.four-of-cups.imageUrl",
@@ -19902,11 +18428,7 @@
       },
       {
         "key": "blog.cards.five-of-cups.related_cards",
-        "value": [
-          "four-of-cups",
-          "six-of-cups",
-          "the-tower"
-        ]
+        "value": ["four-of-cups", "six-of-cups", "the-tower"]
       },
       {
         "key": "blog.cards.five-of-cups.imageUrl",
@@ -19982,11 +18504,7 @@
       },
       {
         "key": "blog.cards.six-of-cups.related_cards",
-        "value": [
-          "five-of-cups",
-          "seven-of-cups",
-          "the-moon"
-        ]
+        "value": ["five-of-cups", "seven-of-cups", "the-moon"]
       },
       {
         "key": "blog.cards.six-of-cups.imageUrl",
@@ -20062,11 +18580,7 @@
       },
       {
         "key": "blog.cards.seven-of-cups.related_cards",
-        "value": [
-          "six-of-cups",
-          "eight-of-cups",
-          "the-star"
-        ]
+        "value": ["six-of-cups", "eight-of-cups", "the-star"]
       },
       {
         "key": "blog.cards.seven-of-cups.imageUrl",
@@ -20142,11 +18656,7 @@
       },
       {
         "key": "blog.cards.eight-of-cups.related_cards",
-        "value": [
-          "seven-of-cups",
-          "nine-of-cups",
-          "the-hermit"
-        ]
+        "value": ["seven-of-cups", "nine-of-cups", "the-hermit"]
       },
       {
         "key": "blog.cards.eight-of-cups.imageUrl",
@@ -20222,11 +18732,7 @@
       },
       {
         "key": "blog.cards.nine-of-cups.related_cards",
-        "value": [
-          "eight-of-cups",
-          "ten-of-cups",
-          "the-sun"
-        ]
+        "value": ["eight-of-cups", "ten-of-cups", "the-sun"]
       },
       {
         "key": "blog.cards.nine-of-cups.imageUrl",
@@ -20302,11 +18808,7 @@
       },
       {
         "key": "blog.cards.ten-of-cups.related_cards",
-        "value": [
-          "nine-of-cups",
-          "page-of-cups",
-          "the-world"
-        ]
+        "value": ["nine-of-cups", "page-of-cups", "the-world"]
       },
       {
         "key": "blog.cards.ten-of-cups.imageUrl",
@@ -20382,11 +18884,7 @@
       },
       {
         "key": "blog.cards.page-of-cups.related_cards",
-        "value": [
-          "ten-of-cups",
-          "knight-of-cups",
-          "the-fool"
-        ]
+        "value": ["ten-of-cups", "knight-of-cups", "the-fool"]
       },
       {
         "key": "blog.cards.page-of-cups.imageUrl",
@@ -20462,11 +18960,7 @@
       },
       {
         "key": "blog.cards.knight-of-cups.related_cards",
-        "value": [
-          "page-of-cups",
-          "queen-of-cups",
-          "the-lovers"
-        ]
+        "value": ["page-of-cups", "queen-of-cups", "the-lovers"]
       },
       {
         "key": "blog.cards.knight-of-cups.imageUrl",
@@ -20542,11 +19036,7 @@
       },
       {
         "key": "blog.cards.queen-of-cups.related_cards",
-        "value": [
-          "knight-of-cups",
-          "king-of-cups",
-          "the-high-priestess"
-        ]
+        "value": ["knight-of-cups", "king-of-cups", "the-high-priestess"]
       },
       {
         "key": "blog.cards.queen-of-cups.imageUrl",
@@ -20622,11 +19112,7 @@
       },
       {
         "key": "blog.cards.king-of-cups.related_cards",
-        "value": [
-          "queen-of-cups",
-          "ace-of-cups",
-          "temperance"
-        ]
+        "value": ["queen-of-cups", "ace-of-cups", "temperance"]
       },
       {
         "key": "blog.cards.king-of-cups.imageUrl",
@@ -20702,11 +19188,7 @@
       },
       {
         "key": "blog.cards.ace-of-swords.related_cards",
-        "value": [
-          "two-of-swords",
-          "justice",
-          "the-magician"
-        ]
+        "value": ["two-of-swords", "justice", "the-magician"]
       },
       {
         "key": "blog.cards.ace-of-swords.imageUrl",
@@ -20782,11 +19264,7 @@
       },
       {
         "key": "blog.cards.two-of-swords.related_cards",
-        "value": [
-          "ace-of-swords",
-          "three-of-swords",
-          "the-hanged-man"
-        ]
+        "value": ["ace-of-swords", "three-of-swords", "the-hanged-man"]
       },
       {
         "key": "blog.cards.two-of-swords.imageUrl",
@@ -20862,11 +19340,7 @@
       },
       {
         "key": "blog.cards.three-of-swords.related_cards",
-        "value": [
-          "two-of-swords",
-          "four-of-swords",
-          "the-tower"
-        ]
+        "value": ["two-of-swords", "four-of-swords", "the-tower"]
       },
       {
         "key": "blog.cards.three-of-swords.imageUrl",
@@ -20942,11 +19416,7 @@
       },
       {
         "key": "blog.cards.four-of-swords.related_cards",
-        "value": [
-          "three-of-swords",
-          "five-of-swords",
-          "the-hermit"
-        ]
+        "value": ["three-of-swords", "five-of-swords", "the-hermit"]
       },
       {
         "key": "blog.cards.four-of-swords.imageUrl",
@@ -21022,11 +19492,7 @@
       },
       {
         "key": "blog.cards.five-of-swords.related_cards",
-        "value": [
-          "four-of-swords",
-          "six-of-swords",
-          "the-tower"
-        ]
+        "value": ["four-of-swords", "six-of-swords", "the-tower"]
       },
       {
         "key": "blog.cards.five-of-swords.imageUrl",
@@ -21102,11 +19568,7 @@
       },
       {
         "key": "blog.cards.six-of-swords.related_cards",
-        "value": [
-          "five-of-swords",
-          "seven-of-swords",
-          "temperance"
-        ]
+        "value": ["five-of-swords", "seven-of-swords", "temperance"]
       },
       {
         "key": "blog.cards.six-of-swords.imageUrl",
@@ -21182,11 +19644,7 @@
       },
       {
         "key": "blog.cards.seven-of-swords.related_cards",
-        "value": [
-          "six-of-swords",
-          "eight-of-swords",
-          "the-moon"
-        ]
+        "value": ["six-of-swords", "eight-of-swords", "the-moon"]
       },
       {
         "key": "blog.cards.seven-of-swords.imageUrl",
@@ -21262,11 +19720,7 @@
       },
       {
         "key": "blog.cards.eight-of-swords.related_cards",
-        "value": [
-          "seven-of-swords",
-          "nine-of-swords",
-          "the-star"
-        ]
+        "value": ["seven-of-swords", "nine-of-swords", "the-star"]
       },
       {
         "key": "blog.cards.eight-of-swords.imageUrl",
@@ -21342,11 +19796,7 @@
       },
       {
         "key": "blog.cards.nine-of-swords.related_cards",
-        "value": [
-          "eight-of-swords",
-          "ten-of-swords",
-          "the-moon"
-        ]
+        "value": ["eight-of-swords", "ten-of-swords", "the-moon"]
       },
       {
         "key": "blog.cards.nine-of-swords.imageUrl",
@@ -21422,11 +19872,7 @@
       },
       {
         "key": "blog.cards.ten-of-swords.related_cards",
-        "value": [
-          "nine-of-swords",
-          "page-of-swords",
-          "death"
-        ]
+        "value": ["nine-of-swords", "page-of-swords", "death"]
       },
       {
         "key": "blog.cards.ten-of-swords.imageUrl",
@@ -21502,11 +19948,7 @@
       },
       {
         "key": "blog.cards.page-of-swords.related_cards",
-        "value": [
-          "ten-of-swords",
-          "knight-of-swords",
-          "the-fool"
-        ]
+        "value": ["ten-of-swords", "knight-of-swords", "the-fool"]
       },
       {
         "key": "blog.cards.page-of-swords.imageUrl",
@@ -21582,11 +20024,7 @@
       },
       {
         "key": "blog.cards.knight-of-swords.related_cards",
-        "value": [
-          "page-of-swords",
-          "queen-of-swords",
-          "the-chariot"
-        ]
+        "value": ["page-of-swords", "queen-of-swords", "the-chariot"]
       },
       {
         "key": "blog.cards.knight-of-swords.imageUrl",
@@ -21662,11 +20100,7 @@
       },
       {
         "key": "blog.cards.queen-of-swords.related_cards",
-        "value": [
-          "knight-of-swords",
-          "king-of-swords",
-          "justice"
-        ]
+        "value": ["knight-of-swords", "king-of-swords", "justice"]
       },
       {
         "key": "blog.cards.queen-of-swords.imageUrl",
@@ -21742,11 +20176,7 @@
       },
       {
         "key": "blog.cards.king-of-swords.related_cards",
-        "value": [
-          "queen-of-swords",
-          "ace-of-swords",
-          "the-emperor"
-        ]
+        "value": ["queen-of-swords", "ace-of-swords", "the-emperor"]
       },
       {
         "key": "blog.cards.king-of-swords.imageUrl",
@@ -21822,11 +20252,7 @@
       },
       {
         "key": "blog.cards.ace-of-wands.related_cards",
-        "value": [
-          "two-of-wands",
-          "the-magician",
-          "the-sun"
-        ]
+        "value": ["two-of-wands", "the-magician", "the-sun"]
       },
       {
         "key": "blog.cards.ace-of-wands.imageUrl",
@@ -21902,11 +20328,7 @@
       },
       {
         "key": "blog.cards.two-of-wands.related_cards",
-        "value": [
-          "ace-of-wands",
-          "three-of-wands",
-          "the-emperor"
-        ]
+        "value": ["ace-of-wands", "three-of-wands", "the-emperor"]
       },
       {
         "key": "blog.cards.two-of-wands.imageUrl",
@@ -21982,11 +20404,7 @@
       },
       {
         "key": "blog.cards.three-of-wands.related_cards",
-        "value": [
-          "two-of-wands",
-          "four-of-wands",
-          "the-empress"
-        ]
+        "value": ["two-of-wands", "four-of-wands", "the-empress"]
       },
       {
         "key": "blog.cards.three-of-wands.imageUrl",
@@ -22062,11 +20480,7 @@
       },
       {
         "key": "blog.cards.four-of-wands.related_cards",
-        "value": [
-          "three-of-wands",
-          "five-of-wands",
-          "the-sun"
-        ]
+        "value": ["three-of-wands", "five-of-wands", "the-sun"]
       },
       {
         "key": "blog.cards.four-of-wands.imageUrl",
@@ -22142,11 +20556,7 @@
       },
       {
         "key": "blog.cards.five-of-wands.related_cards",
-        "value": [
-          "four-of-wands",
-          "six-of-wands",
-          "the-tower"
-        ]
+        "value": ["four-of-wands", "six-of-wands", "the-tower"]
       },
       {
         "key": "blog.cards.five-of-wands.imageUrl",
@@ -22214,19 +20624,11 @@
       },
       {
         "key": "blog.cards.six-of-wands.faq",
-        "value": [
-          "Asalar Altılı kartı ne anlama gelir?",
-          "Zaferimi nasıl sürdürürüm?",
-          "Başarımı nasıl korurum?"
-        ]
+        "value": ["Asalar Altılı kartı ne anlama gelir?", "Zaferimi nasıl sürdürürüm?", "Başarımı nasıl korurum?"]
       },
       {
         "key": "blog.cards.six-of-wands.related_cards",
-        "value": [
-          "five-of-wands",
-          "seven-of-wands",
-          "the-sun"
-        ]
+        "value": ["five-of-wands", "seven-of-wands", "the-sun"]
       },
       {
         "key": "blog.cards.six-of-wands.imageUrl",
@@ -22302,11 +20704,7 @@
       },
       {
         "key": "blog.cards.seven-of-wands.related_cards",
-        "value": [
-          "six-of-wands",
-          "eight-of-wands",
-          "the-chariot"
-        ]
+        "value": ["six-of-wands", "eight-of-wands", "the-chariot"]
       },
       {
         "key": "blog.cards.seven-of-wands.imageUrl",
@@ -22382,11 +20780,7 @@
       },
       {
         "key": "blog.cards.eight-of-wands.related_cards",
-        "value": [
-          "seven-of-wands",
-          "nine-of-wands",
-          "temperance"
-        ]
+        "value": ["seven-of-wands", "nine-of-wands", "temperance"]
       },
       {
         "key": "blog.cards.eight-of-wands.imageUrl",
@@ -22462,11 +20856,7 @@
       },
       {
         "key": "blog.cards.nine-of-wands.related_cards",
-        "value": [
-          "eight-of-wands",
-          "ten-of-wands",
-          "strength"
-        ]
+        "value": ["eight-of-wands", "ten-of-wands", "strength"]
       },
       {
         "key": "blog.cards.nine-of-wands.imageUrl",
@@ -22542,11 +20932,7 @@
       },
       {
         "key": "blog.cards.ten-of-wands.related_cards",
-        "value": [
-          "nine-of-wands",
-          "page-of-wands",
-          "the-hanged-man"
-        ]
+        "value": ["nine-of-wands", "page-of-wands", "the-hanged-man"]
       },
       {
         "key": "blog.cards.ten-of-wands.imageUrl",
@@ -22622,11 +21008,7 @@
       },
       {
         "key": "blog.cards.page-of-wands.related_cards",
-        "value": [
-          "ten-of-wands",
-          "knight-of-wands",
-          "the-fool"
-        ]
+        "value": ["ten-of-wands", "knight-of-wands", "the-fool"]
       },
       {
         "key": "blog.cards.page-of-wands.imageUrl",
@@ -22702,11 +21084,7 @@
       },
       {
         "key": "blog.cards.knight-of-wands.related_cards",
-        "value": [
-          "page-of-wands",
-          "queen-of-wands",
-          "the-chariot"
-        ]
+        "value": ["page-of-wands", "queen-of-wands", "the-chariot"]
       },
       {
         "key": "blog.cards.knight-of-wands.imageUrl",
@@ -22782,11 +21160,7 @@
       },
       {
         "key": "blog.cards.queen-of-wands.related_cards",
-        "value": [
-          "knight-of-wands",
-          "king-of-wands",
-          "the-sun"
-        ]
+        "value": ["knight-of-wands", "king-of-wands", "the-sun"]
       },
       {
         "key": "blog.cards.queen-of-wands.imageUrl",
@@ -22862,11 +21236,7 @@
       },
       {
         "key": "blog.cards.king-of-wands.related_cards",
-        "value": [
-          "queen-of-wands",
-          "ace-of-wands",
-          "the-magician"
-        ]
+        "value": ["queen-of-wands", "ace-of-wands", "the-magician"]
       },
       {
         "key": "blog.cards.king-of-wands.imageUrl",
@@ -22942,11 +21312,7 @@
       },
       {
         "key": "blog.cards.ace-of-pentacles.related_cards",
-        "value": [
-          "two-of-pentacles",
-          "the-empress",
-          "the-world"
-        ]
+        "value": ["two-of-pentacles", "the-empress", "the-world"]
       },
       {
         "key": "blog.cards.ace-of-pentacles.imageUrl",
@@ -23014,19 +21380,11 @@
       },
       {
         "key": "blog.cards.two-of-pentacles.faq",
-        "value": [
-          "Yıldızlar İkili kartı ne anlama gelir?",
-          "Dengemi nasıl korurum?",
-          "Esnekliğimi nasıl geliştiririm?"
-        ]
+        "value": ["Yıldızlar İkili kartı ne anlama gelir?", "Dengemi nasıl korurum?", "Esnekliğimi nasıl geliştiririm?"]
       },
       {
         "key": "blog.cards.two-of-pentacles.related_cards",
-        "value": [
-          "ace-of-pentacles",
-          "three-of-pentacles",
-          "temperance"
-        ]
+        "value": ["ace-of-pentacles", "three-of-pentacles", "temperance"]
       },
       {
         "key": "blog.cards.two-of-pentacles.imageUrl",
@@ -23102,11 +21460,7 @@
       },
       {
         "key": "blog.cards.three-of-pentacles.related_cards",
-        "value": [
-          "two-of-pentacles",
-          "four-of-pentacles",
-          "the-empress"
-        ]
+        "value": ["two-of-pentacles", "four-of-pentacles", "the-empress"]
       },
       {
         "key": "blog.cards.three-of-pentacles.imageUrl",
@@ -23174,19 +21528,11 @@
       },
       {
         "key": "blog.cards.four-of-pentacles.faq",
-        "value": [
-          "Yıldızlar Dörtlü kartı ne anlama gelir?",
-          "Güvenliğimi nasıl sağlarım?",
-          "Kontrolümü nasıl korurum?"
-        ]
+        "value": ["Yıldızlar Dörtlü kartı ne anlama gelir?", "Güvenliğimi nasıl sağlarım?", "Kontrolümü nasıl korurum?"]
       },
       {
         "key": "blog.cards.four-of-pentacles.related_cards",
-        "value": [
-          "three-of-pentacles",
-          "five-of-pentacles",
-          "the-emperor"
-        ]
+        "value": ["three-of-pentacles", "five-of-pentacles", "the-emperor"]
       },
       {
         "key": "blog.cards.four-of-pentacles.imageUrl",
@@ -23262,11 +21608,7 @@
       },
       {
         "key": "blog.cards.five-of-pentacles.related_cards",
-        "value": [
-          "four-of-pentacles",
-          "six-of-pentacles",
-          "the-tower"
-        ]
+        "value": ["four-of-pentacles", "six-of-pentacles", "the-tower"]
       },
       {
         "key": "blog.cards.five-of-pentacles.imageUrl",
@@ -23342,11 +21684,7 @@
       },
       {
         "key": "blog.cards.six-of-pentacles.related_cards",
-        "value": [
-          "five-of-pentacles",
-          "seven-of-pentacles",
-          "justice"
-        ]
+        "value": ["five-of-pentacles", "seven-of-pentacles", "justice"]
       },
       {
         "key": "blog.cards.six-of-pentacles.imageUrl",
@@ -23422,11 +21760,7 @@
       },
       {
         "key": "blog.cards.seven-of-pentacles.related_cards",
-        "value": [
-          "six-of-pentacles",
-          "eight-of-pentacles",
-          "the-hermit"
-        ]
+        "value": ["six-of-pentacles", "eight-of-pentacles", "the-hermit"]
       },
       {
         "key": "blog.cards.seven-of-pentacles.imageUrl",
@@ -23502,11 +21836,7 @@
       },
       {
         "key": "blog.cards.eight-of-pentacles.related_cards",
-        "value": [
-          "seven-of-pentacles",
-          "nine-of-pentacles",
-          "the-magician"
-        ]
+        "value": ["seven-of-pentacles", "nine-of-pentacles", "the-magician"]
       },
       {
         "key": "blog.cards.eight-of-pentacles.imageUrl",
@@ -23582,11 +21912,7 @@
       },
       {
         "key": "blog.cards.nine-of-pentacles.related_cards",
-        "value": [
-          "eight-of-pentacles",
-          "ten-of-pentacles",
-          "the-empress"
-        ]
+        "value": ["eight-of-pentacles", "ten-of-pentacles", "the-empress"]
       },
       {
         "key": "blog.cards.nine-of-pentacles.imageUrl",
@@ -23654,19 +21980,11 @@
       },
       {
         "key": "blog.cards.ten-of-pentacles.faq",
-        "value": [
-          "Yıldızlar Onlu kartı ne anlama gelir?",
-          "Ailemi nasıl güçlendiririm?",
-          "Mirasımı nasıl korurum?"
-        ]
+        "value": ["Yıldızlar Onlu kartı ne anlama gelir?", "Ailemi nasıl güçlendiririm?", "Mirasımı nasıl korurum?"]
       },
       {
         "key": "blog.cards.ten-of-pentacles.related_cards",
-        "value": [
-          "nine-of-pentacles",
-          "page-of-pentacles",
-          "the-world"
-        ]
+        "value": ["nine-of-pentacles", "page-of-pentacles", "the-world"]
       },
       {
         "key": "blog.cards.ten-of-pentacles.imageUrl",
@@ -23742,11 +22060,7 @@
       },
       {
         "key": "blog.cards.page-of-pentacles.related_cards",
-        "value": [
-          "ten-of-pentacles",
-          "knight-of-pentacles",
-          "the-fool"
-        ]
+        "value": ["ten-of-pentacles", "knight-of-pentacles", "the-fool"]
       },
       {
         "key": "blog.cards.page-of-pentacles.imageUrl",
@@ -23822,11 +22136,7 @@
       },
       {
         "key": "blog.cards.knight-of-pentacles.related_cards",
-        "value": [
-          "page-of-pentacles",
-          "queen-of-pentacles",
-          "the-chariot"
-        ]
+        "value": ["page-of-pentacles", "queen-of-pentacles", "the-chariot"]
       },
       {
         "key": "blog.cards.knight-of-pentacles.imageUrl",
@@ -23902,11 +22212,7 @@
       },
       {
         "key": "blog.cards.queen-of-pentacles.related_cards",
-        "value": [
-          "knight-of-pentacles",
-          "king-of-pentacles",
-          "the-empress"
-        ]
+        "value": ["knight-of-pentacles", "king-of-pentacles", "the-empress"]
       },
       {
         "key": "blog.cards.queen-of-pentacles.imageUrl",
@@ -23982,11 +22288,7 @@
       },
       {
         "key": "blog.cards.king-of-pentacles.related_cards",
-        "value": [
-          "queen-of-pentacles",
-          "ace-of-pentacles",
-          "the-emperor"
-        ]
+        "value": ["queen-of-pentacles", "ace-of-pentacles", "the-emperor"]
       },
       {
         "key": "blog.cards.king-of-pentacles.imageUrl",

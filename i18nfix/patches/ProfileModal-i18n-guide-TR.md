@@ -26,7 +26,8 @@ Aşağıdaki anahtarları `messages/tr.json` dosyasının ilgili bölümlerine e
 
 ### 2. common Bölümüne Eklemeler
 
-`messages/tr.json` içinde `"common"` objesini bulun ve şu anahtarları ekleyin/kontrol edin:
+`messages/tr.json` içinde `"common"` objesini bulun ve şu anahtarları
+ekleyin/kontrol edin:
 
 ```json
 {
@@ -42,7 +43,8 @@ Aşağıdaki anahtarları `messages/tr.json` dosyasının ilgili bölümlerine e
 
 ### 3. dashboard Bölümüne Eklemeler
 
-`messages/tr.json` içinde `"dashboard"` objesini bulun ve şu anahtarları ekleyin/kontrol edin:
+`messages/tr.json` içinde `"dashboard"` objesini bulun ve şu anahtarları
+ekleyin/kontrol edin:
 
 ```json
 {
@@ -151,4 +153,3 @@ grep -q '"title":' messages/tr.json && echo "✓ profile.title eklenmiş"
 grep -q '"saving":' messages/tr.json && echo "✓ common.saving eklenmiş"
 grep -q '"signOut":' messages/tr.json && echo "✓ dashboard.signOut eklenmiş"
 ```
-

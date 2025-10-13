@@ -28,7 +28,10 @@ export function DynamicPDFGenerator({ onGenerate }: PDFGeneratorProps) {
       const canvas = await html2canvas(document.body);
       const imgData = canvas.toDataURL('image/png');
 
-      pdf.addImage(imgData, 'PNG', 0, 0);
+      const imgWidth = 210; // A4 width in mm
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+      pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight, '', 'FAST');
 
       if (onGenerate) {
         onGenerate(pdf);

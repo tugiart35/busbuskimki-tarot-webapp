@@ -44,6 +44,7 @@ import React from 'react';
 import type { TarotCard } from '@/features/tarot/lib/a-tarot-helpers';
 import type { CardMeaningData } from '@/types/ui';
 import BaseCardDetails from './BaseCardDetails';
+import Image from 'next/image';
 // Eski import'lar kaldırıldı - yeni yapıda kullanılmıyor
 
 // CardMeaningData artık @/types/ui'dan import ediliyor
@@ -135,16 +136,17 @@ const CardDetails: React.FC<CardDetailsProps> = ({
     <div className='text-center'>
       <div className='relative inline-block group'>
         {/* Floating card container */}
-        <div className='relative transform transition-all duration-500 group-hover:scale-105 group-hover:-translate-y-2'>
-          <img
+        <div className={`relative transform transition-all duration-500 group-hover:scale-105 group-hover:-translate-y-2 w-44 h-64 ${isReversed ? 'rotate-180' : ''}`}>
+          <Image
             src={card.image || '/cards/CardBack.jpg'}
             alt={card.nameTr}
-            className={`w-44 h-auto mx-auto rounded-3xl shadow-2xl transition-all duration-500 ${
-              isReversed ? 'transform rotate-180' : ''
-            }`}
+            width={176}
+            height={256}
+            className="mx-auto rounded-3xl shadow-2xl transition-all duration-500"
             style={{
               filter: 'drop-shadow(0 25px 50px rgba(0, 0, 0, 0.3))',
             }}
+            priority
           />
           {/* Floating status indicator */}
           {isReversed && (

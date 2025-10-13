@@ -3236,9 +3236,7 @@
       "forms.validation.surnameMinLength",
       "forms.validation.understandingMinLength"
     ],
-    "gallery": [
-      "gallery.title"
-    ],
+    "gallery": ["gallery.title"],
     "home": [
       "home",
       "home.cta",
@@ -3323,11 +3321,7 @@
       "interpretation.placeholder",
       "interpretation.title"
     ],
-    "language": [
-      "language.english",
-      "language.serbian",
-      "language.turkish"
-    ],
+    "language": ["language.english", "language.serbian", "language.turkish"],
     "love": [
       "love.cardGroups",
       "love.data",
@@ -12662,11 +12656,7 @@
       "nav.settings",
       "nav.terms"
     ],
-    "navigation": [
-      "navigation.auth",
-      "navigation.pakize",
-      "navigation.ariaLabel"
-    ],
+    "navigation": ["navigation.auth", "navigation.pakize", "navigation.ariaLabel"],
     "newLover": [
       "newLover.credit",
       "newLover.credit.cancel",
@@ -13281,15 +13271,7 @@
       "relationshipProblems.modals.writtenReading",
       "relationshipProblems.modals.writtenReadingText"
     ],
-    "seo": [
-      "seo",
-      "seo.description",
-      "seo.keywords",
-      "seo.ogDescription",
-      "seo.ogImage",
-      "seo.ogTitle",
-      "seo.title"
-    ],
+    "seo": ["seo", "seo.description", "seo.keywords", "seo.ogDescription", "seo.ogImage", "seo.ogTitle", "seo.title"],
     "situationAnalysis": [
       "situationAnalysis.data",
       "situationAnalysis.data.badgeText",
@@ -13465,14 +13447,8 @@
       "spreads.situationAnalysis.positions.6",
       "spreads.situationAnalysis.positions.7"
     ],
-    "statistics": [
-      "statistics"
-    ],
-    "system": [
-      "system.comprehensive",
-      "system.locale",
-      "system.nextLocale"
-    ],
+    "statistics": ["statistics"],
+    "system": ["system.comprehensive", "system.locale", "system.nextLocale"],
     "tarot": [
       "tarot.action",
       "tarot.advice",
@@ -14031,9 +14007,7 @@
       "tarotPage.situationAnalysisSpread.summary",
       "tarotPage.situationAnalysisSpread.summaryText"
     ],
-    "tarotSpreadSelector": [
-      "tarotSpreadSelector"
-    ],
+    "tarotSpreadSelector": ["tarotSpreadSelector"],
     "technical": [
       "technical",
       "technical.paths",
@@ -14118,9 +14092,7 @@
       "validation.realTime.valid",
       "validation.url"
     ],
-    "profile2": [
-      "profile2"
-    ],
+    "profile2": ["profile2"],
     "blog": [
       "blog",
       "blog.title",

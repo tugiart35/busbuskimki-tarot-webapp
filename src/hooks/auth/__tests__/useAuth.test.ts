@@ -9,6 +9,18 @@ import { renderHook, act } from '@testing-library/react';
 import { useAuth } from '../useAuth';
 import { AuthService } from '@/lib/auth/auth-service';
 
+// Mock useAuthBase
+jest.mock('@/hooks/shared/useAuthBase', () => ({
+  useAuthBase: jest.fn(() => ({
+    user: null,
+    loading: false,
+    error: null,
+    isAuthenticated: false,
+    clearError: jest.fn(),
+    refreshSession: jest.fn(),
+  })),
+}));
+
 // Mock AuthService
 jest.mock('@/lib/auth/auth-service');
 const mockAuthService = AuthService as jest.Mocked<typeof AuthService>;
@@ -26,6 +38,15 @@ jest.mock('@/lib/supabase/client', () => ({
         },
       })),
     },
+    from: jest.fn(() => ({
+      select: jest.fn().mockReturnThis(),
+      insert: jest.fn().mockReturnThis(),
+      update: jest.fn().mockReturnThis(),
+      upsert: jest.fn().mockReturnThis(),
+      delete: jest.fn().mockReturnThis(),
+      eq: jest.fn().mockReturnThis(),
+      single: jest.fn().mockResolvedValue({ data: null, error: null }),
+    })),
   },
 }));
 
@@ -99,7 +120,7 @@ describe('useAuth', () => {
         name: 'John',
         surname: 'Doe',
         birthDate: '1990-01-01',
-        gender: 'male',
+        gender: 'male' as const,
       };
 
       await act(async () => {
@@ -123,7 +144,7 @@ describe('useAuth', () => {
         name: 'John',
         surname: 'Doe',
         birthDate: '1990-01-01',
-        gender: 'male',
+        gender: 'male' as const,
       };
 
       await act(async () => {

@@ -11,14 +11,14 @@
 
 ### Tamamlanan İşlemler
 
-| Adım | Görev | Durum | Süre |
-|------|-------|-------|------|
-| 1 | "use client" direktifi | ✅ | 1 dk |
-| 2 | Türkçe extraction (78 kart) | ✅ | 2 dk |
-| 3 | EN + SR çeviri (Google Translate) | ✅ | ~25 dk |
-| 4 | Cyrillic → Latin (122,849 karakter) | ✅ | 5 dk |
-| 5 | Doğrulama ve commit | ✅ | 2 dk |
-| **TOPLAM** | | ✅ | **~35 dk** |
+| Adım       | Görev                               | Durum | Süre       |
+| ---------- | ----------------------------------- | ----- | ---------- |
+| 1          | "use client" direktifi              | ✅    | 1 dk       |
+| 2          | Türkçe extraction (78 kart)         | ✅    | 2 dk       |
+| 3          | EN + SR çeviri (Google Translate)   | ✅    | ~25 dk     |
+| 4          | Cyrillic → Latin (122,849 karakter) | ✅    | 5 dk       |
+| 5          | Doğrulama ve commit                 | ✅    | 2 dk       |
+| **TOPLAM** |                                     | ✅    | **~35 dk** |
 
 ---
 
@@ -38,12 +38,15 @@ TOPLAM: 936 i18n anahtarı
 ### Örnek Çeviri (The Fool)
 
 **Türkçe:**
+
 > Fiziksel bağlantınızda çocuksu bir merak ve deneme arzusu var...
 
 **English:**
+
 > Your physical connection has a childish curiosity and the desire to try...
 
 **Srpski (Latin):**
+
 > Vaša fizička veza ima djetinju radoznalost i želju da to isproba...
 
 ---
@@ -58,12 +61,12 @@ TOPLAM: 936 i18n anahtarı
 
 ## 📈 Love Spread İlerleme
 
-| Pozisyon | Dosya | TR | EN | SR | Durum |
-|----------|-------|----|----|----|----|
-| 1 | position-1-ilgi-duydugun-kisi.ts | ✅ | ✅ | ✅ | ✅ DONE |
-| 2 | position-2-fiziksel.ts | ✅ | ✅ | ✅ | ✅ DONE |
-| 3 | position-3-baglanti.ts | ⏳ | ⏳ | ⏳ | ⏳ TODO |
-| 4 | position-4-uzun-vadeli-surec.ts | ⏳ | ⏳ | ⏳ | ⏳ TODO |
+| Pozisyon | Dosya                            | TR  | EN  | SR  | Durum   |
+| -------- | -------------------------------- | --- | --- | --- | ------- |
+| 1        | position-1-ilgi-duydugun-kisi.ts | ✅  | ✅  | ✅  | ✅ DONE |
+| 2        | position-2-fiziksel.ts           | ✅  | ✅  | ✅  | ✅ DONE |
+| 3        | position-3-baglanti.ts           | ⏳  | ⏳  | ⏳  | ⏳ TODO |
+| 4        | position-4-uzun-vadeli-surec.ts  | ⏳  | ⏳  | ⏳  | ⏳ TODO |
 
 **Tamamlanma:** %50 (2/4 pozisyon)
 
@@ -72,6 +75,7 @@ TOPLAM: 936 i18n anahtarı
 ## ✅ BAŞARI!
 
 Position-2 başarıyla tamamlandı ve aynı yöntemle:
+
 - Position-3 için ~35 dakika
 - Position-4 için ~35 dakika
 - **TOPLAM LOVE SPREAD:** ~70 dakika kaldı
@@ -83,4 +87,3 @@ Position-2 başarıyla tamamlandı ve aynı yöntemle:
 **Rapor Tarihi:** 2025-10-08  
 **Durum:** ✅ Production-Ready  
 **Maliyet:** $0
-

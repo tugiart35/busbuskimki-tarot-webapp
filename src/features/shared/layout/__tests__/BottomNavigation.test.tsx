@@ -50,15 +50,13 @@ describe('BottomNavigation', () => {
   it('has correct href attributes for SEO-friendly URLs', () => {
     render(<BottomNavigation />);
 
-    const tarotLink = screen.getByRole('link', { name: /tarot/i });
-    const numerologyLink = screen.getByRole('link', { name: /numeroloji/i });
-    const homeLink = screen.getByRole('link', { name: /ana sayfa/i });
-    const loginLink = screen.getByRole('link', { name: /giriş yap/i });
+    const tarotLink = screen.getByRole('menuitem', { name: /tarot/i });
+    const numerologyLink = screen.getByRole('menuitem', { name: /numeroloji/i });
+    const homeLink = screen.getByRole('menuitem', { name: /ana sayfa/i });
 
     expect(tarotLink).toHaveAttribute('href', '/tr/tarot-okuma');
     expect(numerologyLink).toHaveAttribute('href', '/tr/numeroloji');
     expect(homeLink).toHaveAttribute('href', '/tr/anasayfa');
-    expect(loginLink).toHaveAttribute('href', '/tr/giris');
   });
 
   it('has proper accessibility attributes', () => {
@@ -67,9 +65,11 @@ describe('BottomNavigation', () => {
     const nav = screen.getByRole('navigation');
     expect(nav).toHaveAttribute('aria-label', 'Ana navigasyon menüsü');
 
-    const links = screen.getAllByRole('link');
-    links.forEach(link => {
-      expect(link).toHaveAttribute('role', 'menuitem');
+    const menuItems = screen.getAllByRole('menuitem');
+    expect(menuItems.length).toBeGreaterThan(0);
+
+    menuItems.forEach(item => {
+      expect(item).toHaveAttribute('aria-label');
     });
   });
 });

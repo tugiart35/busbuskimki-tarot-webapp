@@ -19,7 +19,18 @@ jest.mock('@/lib/supabase/client', () => ({
       signInWithOAuth: jest.fn(),
       onAuthStateChange: jest.fn(),
       refreshSession: jest.fn(),
+      getUser: jest.fn(),
+      resend: jest.fn(),
     },
+    from: jest.fn(() => ({
+      select: jest.fn().mockReturnThis(),
+      insert: jest.fn().mockReturnThis(),
+      update: jest.fn().mockReturnThis(),
+      upsert: jest.fn().mockReturnThis(),
+      delete: jest.fn().mockReturnThis(),
+      eq: jest.fn().mockReturnThis(),
+      single: jest.fn().mockResolvedValue({ data: null, error: null }),
+    })),
   },
 }));
 
@@ -73,8 +84,11 @@ describe('AuthService', () => {
       const userData = {
         email: 'newuser@example.com',
         password: 'password123',
-        firstName: 'John',
-        lastName: 'Doe',
+        confirmPassword: 'password123',
+        name: 'John',
+        surname: 'Doe',
+        birthDate: '1990-01-01',
+        gender: 'male' as const,
       };
 
       const mockData = {
@@ -94,9 +108,12 @@ describe('AuthService', () => {
         password: userData.password,
         options: {
           data: {
-            first_name: userData.firstName,
-            last_name: userData.lastName,
+            first_name: userData.name,
+            last_name: userData.surname,
+            birth_date: userData.birthDate,
+            gender: userData.gender,
           },
+          emailRedirectTo: 'http://localhost/auth/callback',
         },
       });
       expect(result).toEqual(mockData);
@@ -106,8 +123,11 @@ describe('AuthService', () => {
       const userData = {
         email: 'existing@example.com',
         password: 'password123',
-        firstName: 'John',
-        lastName: 'Doe',
+        confirmPassword: 'password123',
+        name: 'John',
+        surname: 'Doe',
+        birthDate: '1990-01-01',
+        gender: 'male' as const,
       };
 
       const mockError = { message: 'User already registered' };

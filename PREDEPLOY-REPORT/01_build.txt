@@ -1,0 +1,26 @@
+
+> busbuskimki-tarot@0.1.0 build
+> next build
+
+   ▲ Next.js 15.5.4
+   - Environments: .env
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 17.0s
+   Skipping linting
+   Checking validity of types ...
+Failed to compile.
+
+./src/features/tarot/lib/relationship-analysis/position-meanings-index.ts:423:7
+Type error: Type 'RelationshipAnalysisPositionMeaning | undefined' is not assignable to type 'RelationshipAnalysisPositionMeaning | null'.
+  Type 'undefined' is not assignable to type 'RelationshipAnalysisPositionMeaning | null'.
+
+[0m [90m 421 |[39m       [36mbreak[39m[33m;[39m
+ [90m 422 |[39m     [36mcase[39m [35m4[39m[33m:[39m
+[31m[1m>[22m[39m[90m 423 |[39m       originalMeaning [33m=[39m
+ [90m     |[39m       [31m[1m^[22m[39m
+ [90m 424 |[39m         getRelationshipAnalysisPosition4MeaningByCardName(cardName)[33m;[39m
+ [90m 425 |[39m       [36mbreak[39m[33m;[39m
+ [90m 426 |[39m     [36mcase[39m [35m5[39m[33m:[39m[0m
+Next.js build worker exited with code: 1 and signal: null
+Exit code: 1

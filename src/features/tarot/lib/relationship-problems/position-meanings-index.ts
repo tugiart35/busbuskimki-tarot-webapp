@@ -552,39 +552,39 @@ export const getI18nRelationshipProblemsMeaningByCardAndPosition = (
   switch (position) {
     case 1:
       originalMeaning =
-        getRelationshipProblemsPosition1MeaningByCardName(cardName);
+        getRelationshipProblemsPosition1MeaningByCardName(cardName) || null;
       break;
     case 2:
       originalMeaning =
-        getRelationshipProblemsposition2MeaningByCardName(cardName);
+        getRelationshipProblemsposition2MeaningByCardName(cardName) || null;
       break;
     case 3:
       originalMeaning =
-        getRelationshipProblemsposition3MeaningByCardName(cardName);
+        getRelationshipProblemsposition3MeaningByCardName(cardName) || null;
       break;
     case 4:
       originalMeaning =
-        getRelationshipProblemsposition4MeaningByCardName(cardName);
+        getRelationshipProblemsposition4MeaningByCardName(cardName) || null;
       break;
     case 5:
       originalMeaning =
-        getRelationshipProblemsposition5MeaningByCardName(cardName);
+        getRelationshipProblemsposition5MeaningByCardName(cardName) || null;
       break;
     case 6:
       originalMeaning =
-        getRelationshipProblemsposition6MeaningByCardName(cardName);
+        getRelationshipProblemsposition6MeaningByCardName(cardName) || null;
       break;
     case 7:
       originalMeaning =
-        getRelationshipProblemsposition7MeaningByCardName(cardName);
+        getRelationshipProblemsposition7MeaningByCardName(cardName) || null;
       break;
     case 8:
       originalMeaning =
-        getRelationshipProblemsposition8MeaningByCardName(cardName);
+        getRelationshipProblemsposition8MeaningByCardName(cardName) || null;
       break;
     case 9:
       originalMeaning =
-        getRelationshipProblemsposition9MeaningByCardName(cardName);
+        getRelationshipProblemsposition9MeaningByCardName(cardName) || null;
       break;
     default:
       return null;
@@ -651,8 +651,7 @@ export const getI18nRelationshipProblemsMeaningByCardAndPosition = (
       }
     })(),
     context:
-      i18nContext &&
-      !i18nContext.startsWith('relationship-problems.meanings.')
+      i18nContext && !i18nContext.startsWith('relationship-problems.meanings.')
         ? i18nContext
         : originalMeaning.context,
   };

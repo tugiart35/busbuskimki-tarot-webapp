@@ -1,0 +1,417 @@
+================================================================================
+i18n Coverage Report
+Generated: 2025-10-13T00:40:49.444Z
+================================================================================
+
+✓ Loaded tr.json (28385 keys)
+✓ Loaded en.json (28385 keys)
+✓ Loaded sr.json (27971 keys)
+
+--------------------------------------------------------------------------------
+ANALYSIS
+--------------------------------------------------------------------------------
+
+Found 641 unique i18n keys used in source code
+
+
+================================================================================
+LOCALE: TR
+================================================================================
+
+Total keys in tr.json: 28385
+
+❌ MISSING KEYS (115):
+--------------------------------------------------------------------------------
+   1. ${config.spreadId}.data.spreadTitle
+   2. ${config.translationNamespace}.data.badgeText
+   3. ${config.translationNamespace}.data.interpretationTitle
+   4. ${config.translationNamespace}.modals.saveReading
+   5. ${config.translationNamespace}.modals.savingReading
+   6. ${namespace}.form.clearAll
+   7. career.meanings.${cardKey}.position1.context
+   8. career.meanings.${cardKey}.position1.keywords
+   9. career.meanings.${cardKey}.position1.reversed
+  10. career.meanings.${cardKey}.position1.upright
+  11. career.meanings.${cardKey}.position2.context
+  12. career.meanings.${cardKey}.position2.keywords
+  13. career.meanings.${cardKey}.position2.reversed
+  14. career.meanings.${cardKey}.position2.upright
+  15. career.meanings.${cardKey}.position3.context
+  16. career.meanings.${cardKey}.position3.keywords
+  17. career.meanings.${cardKey}.position3.reversed
+  18. career.meanings.${cardKey}.position3.upright
+  19. career.meanings.${cardKey}.position4.context
+  20. career.meanings.${cardKey}.position4.keywords
+  21. career.meanings.${cardKey}.position4.reversed
+  22. career.meanings.${cardKey}.position4.upright
+  23. career.meanings.${cardKey}.position5.context
+  24. career.meanings.${cardKey}.position5.keywords
+  25. career.meanings.${cardKey}.position5.reversed
+  26. career.meanings.${cardKey}.position5.upright
+  27. career.meanings.${cardKey}.position6.context
+  28. career.meanings.${cardKey}.position6.keywords
+  29. career.meanings.${cardKey}.position6.reversed
+  30. career.meanings.${cardKey}.position6.upright
+  31. career.meanings.${cardKey}.position7.context
+  32. career.meanings.${cardKey}.position7.keywords
+  33. career.meanings.${cardKey}.position7.reversed
+  34. career.meanings.${cardKey}.position7.upright
+  35. email
+  36. love.meanings.${cardKey}.position1.context
+  37. love.meanings.${cardKey}.position1.keywords
+  38. love.meanings.${cardKey}.position1.reversed
+  39. love.meanings.${cardKey}.position1.upright
+  40. love.meanings.${cardKey}.position2.context
+  41. love.meanings.${cardKey}.position2.keywords
+  42. love.meanings.${cardKey}.position2.reversed
+  43. love.meanings.${cardKey}.position2.upright
+  44. love.meanings.${cardKey}.position3.context
+  45. love.meanings.${cardKey}.position3.keywords
+  46. love.meanings.${cardKey}.position3.reversed
+  47. love.meanings.${cardKey}.position3.upright
+  48. love.meanings.${cardKey}.position4.context
+  49. love.meanings.${cardKey}.position4.keywords
+  50. love.meanings.${cardKey}.position4.reversed
+  51. love.meanings.${cardKey}.position4.upright
+  52. minLength
+  53. money.meanings.${cardKey}.Position5.context
+  54. money.meanings.${cardKey}.Position5.keywords
+  55. money.meanings.${cardKey}.Position5.reversed
+  56. money.meanings.${cardKey}.Position5.upright
+  57. money.meanings.${cardKey}.Position6.context
+  58. money.meanings.${cardKey}.Position6.keywords
+  59. money.meanings.${cardKey}.Position6.reversed
+  60. money.meanings.${cardKey}.Position6.upright
+  61. money.meanings.${cardKey}.Position7.context
+  62. money.meanings.${cardKey}.Position7.keywords
+  63. money.meanings.${cardKey}.Position7.reversed
+  64. money.meanings.${cardKey}.Position7.upright
+  65. money.meanings.${cardKey}.position1.context
+  66. money.meanings.${cardKey}.position1.keywords
+  67. money.meanings.${cardKey}.position1.reversed
+  68. money.meanings.${cardKey}.position1.upright
+  69. money.meanings.${cardKey}.position2.context
+  70. money.meanings.${cardKey}.position2.keywords
+  71. money.meanings.${cardKey}.position2.reversed
+  72. money.meanings.${cardKey}.position2.upright
+  73. money.meanings.${cardKey}.position3.context
+  74. money.meanings.${cardKey}.position3.keywords
+  75. money.meanings.${cardKey}.position3.reversed
+  76. money.meanings.${cardKey}.position3.upright
+  77. money.meanings.${cardKey}.position4.context
+  78. money.meanings.${cardKey}.position4.keywords
+  79. money.meanings.${cardKey}.position4.reversed
+  80. money.meanings.${cardKey}.position4.upright
+  81. money.meanings.${cardKey}.position8.context
+  82. money.meanings.${cardKey}.position8.keywords
+  83. money.meanings.${cardKey}.position8.reversed
+  84. money.meanings.${cardKey}.position8.upright
+  85. new-lover.meanings.${cardKey}.position1.context
+  86. new-lover.meanings.${cardKey}.position1.keywords
+  87. new-lover.meanings.${cardKey}.position1.reversed
+  88. new-lover.meanings.${cardKey}.position1.upright
+  89. new-lover.meanings.${cardKey}.position2.context
+  90. new-lover.meanings.${cardKey}.position2.keywords
+  91. new-lover.meanings.${cardKey}.position2.reversed
+  92. new-lover.meanings.${cardKey}.position2.upright
+  93. new-lover.meanings.${cardKey}.position3.context
+  94. new-lover.meanings.${cardKey}.position3.keywords
+  95. new-lover.meanings.${cardKey}.position3.reversed
+  96. new-lover.meanings.${cardKey}.position3.upright
+  97. new-lover.meanings.${cardKey}.position4.context
+  98. new-lover.meanings.${cardKey}.position4.keywords
+  99. new-lover.meanings.${cardKey}.position4.reversed
+ 100. new-lover.meanings.${cardKey}.position4.upright
+ 101. new-lover.meanings.${cardKey}.position5.context
+ 102. new-lover.meanings.${cardKey}.position5.keywords
+ 103. new-lover.meanings.${cardKey}.position5.reversed
+ 104. new-lover.meanings.${cardKey}.position5.upright
+ 105. new-lover.meanings.${cardKey}.position6.context
+ 106. new-lover.meanings.${cardKey}.position6.keywords
+ 107. new-lover.meanings.${cardKey}.position6.reversed
+ 108. new-lover.meanings.${cardKey}.position6.upright
+ 109. notFound
+ 110. notFoundDescription
+ 111. numerologyResult.typeLabels.${result.type}
+ 112. pattern
+ 113. required
+ 114. spreads.${spreadKey}.positions.${i}.description
+ 115. spreads.${spreadKey}.positions.${i}.title
+
+⚠️  27859 unused keys found (too many to display)
+
+================================================================================
+LOCALE: EN
+================================================================================
+
+Total keys in en.json: 28385
+
+❌ MISSING KEYS (115):
+--------------------------------------------------------------------------------
+   1. ${config.spreadId}.data.spreadTitle
+   2. ${config.translationNamespace}.data.badgeText
+   3. ${config.translationNamespace}.data.interpretationTitle
+   4. ${config.translationNamespace}.modals.saveReading
+   5. ${config.translationNamespace}.modals.savingReading
+   6. ${namespace}.form.clearAll
+   7. career.meanings.${cardKey}.position1.context
+   8. career.meanings.${cardKey}.position1.keywords
+   9. career.meanings.${cardKey}.position1.reversed
+  10. career.meanings.${cardKey}.position1.upright
+  11. career.meanings.${cardKey}.position2.context
+  12. career.meanings.${cardKey}.position2.keywords
+  13. career.meanings.${cardKey}.position2.reversed
+  14. career.meanings.${cardKey}.position2.upright
+  15. career.meanings.${cardKey}.position3.context
+  16. career.meanings.${cardKey}.position3.keywords
+  17. career.meanings.${cardKey}.position3.reversed
+  18. career.meanings.${cardKey}.position3.upright
+  19. career.meanings.${cardKey}.position4.context
+  20. career.meanings.${cardKey}.position4.keywords
+  21. career.meanings.${cardKey}.position4.reversed
+  22. career.meanings.${cardKey}.position4.upright
+  23. career.meanings.${cardKey}.position5.context
+  24. career.meanings.${cardKey}.position5.keywords
+  25. career.meanings.${cardKey}.position5.reversed
+  26. career.meanings.${cardKey}.position5.upright
+  27. career.meanings.${cardKey}.position6.context
+  28. career.meanings.${cardKey}.position6.keywords
+  29. career.meanings.${cardKey}.position6.reversed
+  30. career.meanings.${cardKey}.position6.upright
+  31. career.meanings.${cardKey}.position7.context
+  32. career.meanings.${cardKey}.position7.keywords
+  33. career.meanings.${cardKey}.position7.reversed
+  34. career.meanings.${cardKey}.position7.upright
+  35. email
+  36. love.meanings.${cardKey}.position1.context
+  37. love.meanings.${cardKey}.position1.keywords
+  38. love.meanings.${cardKey}.position1.reversed
+  39. love.meanings.${cardKey}.position1.upright
+  40. love.meanings.${cardKey}.position2.context
+  41. love.meanings.${cardKey}.position2.keywords
+  42. love.meanings.${cardKey}.position2.reversed
+  43. love.meanings.${cardKey}.position2.upright
+  44. love.meanings.${cardKey}.position3.context
+  45. love.meanings.${cardKey}.position3.keywords
+  46. love.meanings.${cardKey}.position3.reversed
+  47. love.meanings.${cardKey}.position3.upright
+  48. love.meanings.${cardKey}.position4.context
+  49. love.meanings.${cardKey}.position4.keywords
+  50. love.meanings.${cardKey}.position4.reversed
+  51. love.meanings.${cardKey}.position4.upright
+  52. minLength
+  53. money.meanings.${cardKey}.Position5.context
+  54. money.meanings.${cardKey}.Position5.keywords
+  55. money.meanings.${cardKey}.Position5.reversed
+  56. money.meanings.${cardKey}.Position5.upright
+  57. money.meanings.${cardKey}.Position6.context
+  58. money.meanings.${cardKey}.Position6.keywords
+  59. money.meanings.${cardKey}.Position6.reversed
+  60. money.meanings.${cardKey}.Position6.upright
+  61. money.meanings.${cardKey}.Position7.context
+  62. money.meanings.${cardKey}.Position7.keywords
+  63. money.meanings.${cardKey}.Position7.reversed
+  64. money.meanings.${cardKey}.Position7.upright
+  65. money.meanings.${cardKey}.position1.context
+  66. money.meanings.${cardKey}.position1.keywords
+  67. money.meanings.${cardKey}.position1.reversed
+  68. money.meanings.${cardKey}.position1.upright
+  69. money.meanings.${cardKey}.position2.context
+  70. money.meanings.${cardKey}.position2.keywords
+  71. money.meanings.${cardKey}.position2.reversed
+  72. money.meanings.${cardKey}.position2.upright
+  73. money.meanings.${cardKey}.position3.context
+  74. money.meanings.${cardKey}.position3.keywords
+  75. money.meanings.${cardKey}.position3.reversed
+  76. money.meanings.${cardKey}.position3.upright
+  77. money.meanings.${cardKey}.position4.context
+  78. money.meanings.${cardKey}.position4.keywords
+  79. money.meanings.${cardKey}.position4.reversed
+  80. money.meanings.${cardKey}.position4.upright
+  81. money.meanings.${cardKey}.position8.context
+  82. money.meanings.${cardKey}.position8.keywords
+  83. money.meanings.${cardKey}.position8.reversed
+  84. money.meanings.${cardKey}.position8.upright
+  85. new-lover.meanings.${cardKey}.position1.context
+  86. new-lover.meanings.${cardKey}.position1.keywords
+  87. new-lover.meanings.${cardKey}.position1.reversed
+  88. new-lover.meanings.${cardKey}.position1.upright
+  89. new-lover.meanings.${cardKey}.position2.context
+  90. new-lover.meanings.${cardKey}.position2.keywords
+  91. new-lover.meanings.${cardKey}.position2.reversed
+  92. new-lover.meanings.${cardKey}.position2.upright
+  93. new-lover.meanings.${cardKey}.position3.context
+  94. new-lover.meanings.${cardKey}.position3.keywords
+  95. new-lover.meanings.${cardKey}.position3.reversed
+  96. new-lover.meanings.${cardKey}.position3.upright
+  97. new-lover.meanings.${cardKey}.position4.context
+  98. new-lover.meanings.${cardKey}.position4.keywords
+  99. new-lover.meanings.${cardKey}.position4.reversed
+ 100. new-lover.meanings.${cardKey}.position4.upright
+ 101. new-lover.meanings.${cardKey}.position5.context
+ 102. new-lover.meanings.${cardKey}.position5.keywords
+ 103. new-lover.meanings.${cardKey}.position5.reversed
+ 104. new-lover.meanings.${cardKey}.position5.upright
+ 105. new-lover.meanings.${cardKey}.position6.context
+ 106. new-lover.meanings.${cardKey}.position6.keywords
+ 107. new-lover.meanings.${cardKey}.position6.reversed
+ 108. new-lover.meanings.${cardKey}.position6.upright
+ 109. notFound
+ 110. notFoundDescription
+ 111. numerologyResult.typeLabels.${result.type}
+ 112. pattern
+ 113. required
+ 114. spreads.${spreadKey}.positions.${i}.description
+ 115. spreads.${spreadKey}.positions.${i}.title
+
+⚠️  27859 unused keys found (too many to display)
+
+================================================================================
+LOCALE: SR
+================================================================================
+
+Total keys in sr.json: 27971
+
+❌ MISSING KEYS (115):
+--------------------------------------------------------------------------------
+   1. ${config.spreadId}.data.spreadTitle
+   2. ${config.translationNamespace}.data.badgeText
+   3. ${config.translationNamespace}.data.interpretationTitle
+   4. ${config.translationNamespace}.modals.saveReading
+   5. ${config.translationNamespace}.modals.savingReading
+   6. ${namespace}.form.clearAll
+   7. career.meanings.${cardKey}.position1.context
+   8. career.meanings.${cardKey}.position1.keywords
+   9. career.meanings.${cardKey}.position1.reversed
+  10. career.meanings.${cardKey}.position1.upright
+  11. career.meanings.${cardKey}.position2.context
+  12. career.meanings.${cardKey}.position2.keywords
+  13. career.meanings.${cardKey}.position2.reversed
+  14. career.meanings.${cardKey}.position2.upright
+  15. career.meanings.${cardKey}.position3.context
+  16. career.meanings.${cardKey}.position3.keywords
+  17. career.meanings.${cardKey}.position3.reversed
+  18. career.meanings.${cardKey}.position3.upright
+  19. career.meanings.${cardKey}.position4.context
+  20. career.meanings.${cardKey}.position4.keywords
+  21. career.meanings.${cardKey}.position4.reversed
+  22. career.meanings.${cardKey}.position4.upright
+  23. career.meanings.${cardKey}.position5.context
+  24. career.meanings.${cardKey}.position5.keywords
+  25. career.meanings.${cardKey}.position5.reversed
+  26. career.meanings.${cardKey}.position5.upright
+  27. career.meanings.${cardKey}.position6.context
+  28. career.meanings.${cardKey}.position6.keywords
+  29. career.meanings.${cardKey}.position6.reversed
+  30. career.meanings.${cardKey}.position6.upright
+  31. career.meanings.${cardKey}.position7.context
+  32. career.meanings.${cardKey}.position7.keywords
+  33. career.meanings.${cardKey}.position7.reversed
+  34. career.meanings.${cardKey}.position7.upright
+  35. email
+  36. love.meanings.${cardKey}.position1.context
+  37. love.meanings.${cardKey}.position1.keywords
+  38. love.meanings.${cardKey}.position1.reversed
+  39. love.meanings.${cardKey}.position1.upright
+  40. love.meanings.${cardKey}.position2.context
+  41. love.meanings.${cardKey}.position2.keywords
+  42. love.meanings.${cardKey}.position2.reversed
+  43. love.meanings.${cardKey}.position2.upright
+  44. love.meanings.${cardKey}.position3.context
+  45. love.meanings.${cardKey}.position3.keywords
+  46. love.meanings.${cardKey}.position3.reversed
+  47. love.meanings.${cardKey}.position3.upright
+  48. love.meanings.${cardKey}.position4.context
+  49. love.meanings.${cardKey}.position4.keywords
+  50. love.meanings.${cardKey}.position4.reversed
+  51. love.meanings.${cardKey}.position4.upright
+  52. minLength
+  53. money.meanings.${cardKey}.Position5.context
+  54. money.meanings.${cardKey}.Position5.keywords
+  55. money.meanings.${cardKey}.Position5.reversed
+  56. money.meanings.${cardKey}.Position5.upright
+  57. money.meanings.${cardKey}.Position6.context
+  58. money.meanings.${cardKey}.Position6.keywords
+  59. money.meanings.${cardKey}.Position6.reversed
+  60. money.meanings.${cardKey}.Position6.upright
+  61. money.meanings.${cardKey}.Position7.context
+  62. money.meanings.${cardKey}.Position7.keywords
+  63. money.meanings.${cardKey}.Position7.reversed
+  64. money.meanings.${cardKey}.Position7.upright
+  65. money.meanings.${cardKey}.position1.context
+  66. money.meanings.${cardKey}.position1.keywords
+  67. money.meanings.${cardKey}.position1.reversed
+  68. money.meanings.${cardKey}.position1.upright
+  69. money.meanings.${cardKey}.position2.context
+  70. money.meanings.${cardKey}.position2.keywords
+  71. money.meanings.${cardKey}.position2.reversed
+  72. money.meanings.${cardKey}.position2.upright
+  73. money.meanings.${cardKey}.position3.context
+  74. money.meanings.${cardKey}.position3.keywords
+  75. money.meanings.${cardKey}.position3.reversed
+  76. money.meanings.${cardKey}.position3.upright
+  77. money.meanings.${cardKey}.position4.context
+  78. money.meanings.${cardKey}.position4.keywords
+  79. money.meanings.${cardKey}.position4.reversed
+  80. money.meanings.${cardKey}.position4.upright
+  81. money.meanings.${cardKey}.position8.context
+  82. money.meanings.${cardKey}.position8.keywords
+  83. money.meanings.${cardKey}.position8.reversed
+  84. money.meanings.${cardKey}.position8.upright
+  85. new-lover.meanings.${cardKey}.position1.context
+  86. new-lover.meanings.${cardKey}.position1.keywords
+  87. new-lover.meanings.${cardKey}.position1.reversed
+  88. new-lover.meanings.${cardKey}.position1.upright
+  89. new-lover.meanings.${cardKey}.position2.context
+  90. new-lover.meanings.${cardKey}.position2.keywords
+  91. new-lover.meanings.${cardKey}.position2.reversed
+  92. new-lover.meanings.${cardKey}.position2.upright
+  93. new-lover.meanings.${cardKey}.position3.context
+  94. new-lover.meanings.${cardKey}.position3.keywords
+  95. new-lover.meanings.${cardKey}.position3.reversed
+  96. new-lover.meanings.${cardKey}.position3.upright
+  97. new-lover.meanings.${cardKey}.position4.context
+  98. new-lover.meanings.${cardKey}.position4.keywords
+  99. new-lover.meanings.${cardKey}.position4.reversed
+ 100. new-lover.meanings.${cardKey}.position4.upright
+ 101. new-lover.meanings.${cardKey}.position5.context
+ 102. new-lover.meanings.${cardKey}.position5.keywords
+ 103. new-lover.meanings.${cardKey}.position5.reversed
+ 104. new-lover.meanings.${cardKey}.position5.upright
+ 105. new-lover.meanings.${cardKey}.position6.context
+ 106. new-lover.meanings.${cardKey}.position6.keywords
+ 107. new-lover.meanings.${cardKey}.position6.reversed
+ 108. new-lover.meanings.${cardKey}.position6.upright
+ 109. notFound
+ 110. notFoundDescription
+ 111. numerologyResult.typeLabels.${result.type}
+ 112. pattern
+ 113. required
+ 114. spreads.${spreadKey}.positions.${i}.description
+ 115. spreads.${spreadKey}.positions.${i}.title
+
+⚠️  27445 unused keys found (too many to display)
+
+================================================================================
+LOCALE COMPARISON
+================================================================================
+
+Missing keys per locale:
+--------------------------------------------------------------------------------
+
+❌ Missing in SR (present in EN): 428
+   1. numerology.birthdayMeanings.1
+   2. numerology.birthdayMeanings.11
+   3. numerology.birthdayMeanings.2
+   4. numerology.birthdayMeanings.22
+   5. numerology.birthdayMeanings.3
+   6. numerology.birthdayMeanings.33
+   7. numerology.birthdayMeanings.4
+   8. numerology.birthdayMeanings.5
+   9. numerology.birthdayMeanings.6
+  10. numerology.birthdayMeanings.7
+     ... and 418 more
+
+================================================================================
+END OF REPORT
+================================================================================

@@ -43,8 +43,18 @@ export default function CardPage({ card, locale }: CardPageProps) {
           <Link
             href={getCardsPageUrl(locale)}
             className='inline-flex items-center text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors duration-200 group'
+            aria-label={
+              locale === 'tr'
+                ? 'Tarot kartları listesine geri dön'
+                : locale === 'en'
+                  ? 'Back to tarot cards list'
+                  : 'Nazad na listu tarot karata'
+            }
           >
-            <FaArrowLeft className='w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform duration-200' />
+            <FaArrowLeft
+              className='w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform duration-200'
+              aria-hidden='true'
+            />
             {locale === 'tr' && 'Kartlara Geri Dön'}
             {locale === 'en' && 'Back to Cards'}
             {locale === 'sr' && 'Nazad na Karte'}

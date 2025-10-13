@@ -1,0 +1,27 @@
+./deploycheck/PRE-DEPLOY-CHECKLIST.md:113:- [ ] Test CSP doesn't break functionality
+./deploycheck/patches/001-add-security-headers.patch:44:+            key: 'Content-Security-Policy',
+./deploycheck/SECURITY-AUDIT.md:245:| CSP headers                       | ⚠️     | Not explicitly configured      |
+./deploycheck/SECURITY-AUDIT.md:289:    key: 'Content-Security-Policy',
+./deploycheck/SECURITY-AUDIT.md:358:║  Medium Issues: 2 (console logging, CSP headers)      ║
+./deploycheck/README.md:111:| `001-add-security-headers.patch`        | HIGH     | 15 min  | Add CSP, HSTS, etc. |
+./deploycheck/AUDIT-SUMMARY.md:94:   - **Current:** Missing CSP, HSTS, X-Frame-Options
+./i18nfix/AUDIT-COMPLETE-cards-slug-page.md:153:- ⚠️ CSP için JSON-LD script'ler dikkat gerektirir
+./i18nfix/reports/src-components-auth-AuthAccessibilityWrapper.md:317:**Benefit:** Easier to maintain, CSP-friendly  
+./i18nfix/reports/ProfileModal.md:224:### 🛡️ CSP/Middleware Uyumu
+./i18nfix/reports/ProfileModal.md:226:- Component, strict CSP politikalarına uyumlu
+./i18nfix/reports/src-app-locale-main-cards-slug-page.md:172:#### 6. CSP/Middleware Implications
+./i18nfix/reports/src-app-locale-main-cards-slug-page.md:174:- ⚠️ JSON-LD script tag'leri için CSP'de `script-src 'unsafe-inline'`
+./i18nfix/reports/src-app-locale-main-cards-slug-page.md:176:- **Recommendation**: Nonce-based CSP kullanın veya hash-based inline script'ler
+./i18nfix/reports/src-app-locale-main-cards-page.md:268:1. **CSP Headers (Content Security Policy):**
+./.specify/memory/constitution.md:111:- Implement proper CSP headers (configured in `next.config.js`)
+./next.config.js.backup:177:            key: 'Content-Security-Policy',
+./src/middleware.ts:60:  'Content-Security-Policy': [
+./src/types/auth.types.ts:133:  'Content-Security-Policy': string;
+./src/app/api/email/email.md:280:- **Headers**: CSP headers eksik
+./src/app/api/email/email.md:287:response.headers.set('Content-Security-Policy', "default-src 'self'");
+./src/features/shared/layout/HeadTags.tsx:134:        httpEquiv='Content-Security-Policy'
+./src/utils/security.ts:253:export const CSP_HEADERS = {
+./src/utils/security.ts:254:  'Content-Security-Policy': [
+./src/lib/api/email-cors.ts:37:    // CSP header (email API için minimal)
+./src/lib/api/email-cors.ts:39:      'Content-Security-Policy',
+./src/lib/api/geolocation-cors.ts:18:      'Content-Security-Policy': "default-src 'self'",

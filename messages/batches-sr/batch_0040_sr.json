@@ -71,11 +71,7 @@
             "answer": "Jak je u vođstvu, strategiji, uspostavljanju redosleda u porodičnom i poslovnog života, postavljanje granica i pružanje bezbednosti."
           }
         ],
-        "related_cards": [
-          "kampera",
-          "mađioničar",
-          "visoki sveštenik"
-        ],
+        "related_cards": ["kampera", "mađioničar", "visoki sveštenik"],
         "imageUrl": "/cards/rvs/iv-emperor.vebp"
       },
       "the-hierophant": {
@@ -175,11 +171,7 @@
             "answer": "Jak je u oblastima tradicije, učenja, mentorstva, mentorskih odnosa i kohezije zajednice."
           }
         ],
-        "related_cards": [
-          "car",
-          "kampera",
-          "visoki sveštenik"
-        ],
+        "related_cards": ["car", "kampera", "visoki sveštenik"],
         "imageUrl": "/cards/rvs/v-hierofant.vebp"
       },
       "the-lovers": {
@@ -279,11 +271,7 @@
             "answer": "Kartica ljubavnika se pojavljuje kada morate da napravite važnu vezu, partnerstvo ili veliki izbor u vašem životu. Morate da verujete u vođstvo svog srca."
           }
         ],
-        "related_cards": [
-          "visoki sveštenik",
-          "kampera",
-          "budala"
-        ],
+        "related_cards": ["visoki sveštenik", "kampera", "budala"],
         "imageUrl": "/cards/rvs/vi-lovers.vebp"
       },
       "the-chariot": {
@@ -383,11 +371,7 @@
             "answer": "Jak je u postavljanju ciljeva, prevazilaženje prepreka, liderstva i kretanja napred sa određivanjem."
           }
         ],
-        "related_cards": [
-          "snaga",
-          "budala",
-          "mađioničar"
-        ],
+        "related_cards": ["snaga", "budala", "mađioničar"],
         "imageUrl": "/cards/rvs/vii-chartiot.vebp"
       },
       "strength": {
@@ -487,11 +471,7 @@
             "answer": "Unutrašnji rukovodstvo je snažno hrabrost, strpljenje, prevazilaženje izazova i saosećajne upotrebe moći."
           }
         ],
-        "related_cards": [
-          "karita",
-          "pustinjak",
-          "ljubitelji"
-        ],
+        "related_cards": ["karita", "pustinjak", "ljubitelji"],
         "imageUrl": "/cards/rvs/vii-strength.vebp"
       },
       "the-hermit": {
@@ -591,11 +571,7 @@
             "answer": "Ova kartica se pojavljuje kada ste na unutrašnjem putovanju, pronalaženje sebe, trebate biti sami ili tražite duhovne smernice. Preporučuje se strpljenje i unutrašnja tišina."
           }
         ],
-        "related_cards": [
-          "visoki sveštenik",
-          "snaga",
-          "budala"
-        ],
+        "related_cards": ["visoki sveštenik", "snaga", "budala"],
         "imageUrl": "/cards/rvs/ik-hermit.vebp"
       },
       "the-wheel-of-fortune": {
@@ -692,11 +668,7 @@
             "answer": "Donosi neočekivana razvoj i nove mogućnosti zaljubljene. To je vreme kada vas sudbina može odvesti u novom pravcu."
           }
         ],
-        "related_cards": [
-          "budala",
-          "zvezda",
-          "temperament"
-        ]
+        "related_cards": ["budala", "zvezda", "temperament"]
       },
       "justice": {
         "name": "Pravda - ravnoteža, istina i karma se računaju",
@@ -795,11 +767,7 @@
             "answer": "Dolazi se u vremenima kada se morate suočiti sa činjenicama, realizovati posledice svojih izbora ili se obratiti etičkim vrednostima."
           }
         ],
-        "related_cards": [
-          "točak bogatstva",
-          "presjećen čovek",
-          "zvezda"
-        ],
+        "related_cards": ["točak bogatstva", "presjećen čovek", "zvezda"],
         "imageUrl": "/cards/rvs/ki-justice.vebp"
       },
       "the-hanged-man": {

@@ -8,10 +8,7 @@
         "name": "Vitez zlata"
       },
       "page": {
-        "keywords": [
-          "manifestacija",
-          "prilika"
-        ],
+        "keywords": ["manifestacija", "prilika"],
         "meaning": {
           "reversed": "Nedostatak napretka, odlaganja",
           "upright": "Manifestacija, finansijska prilika"
@@ -19,10 +16,7 @@
         "name": "Princ zlata"
       },
       "queen": {
-        "keywords": [
-          "hranilac",
-          "praktičan"
-        ],
+        "keywords": ["hranilac", "praktičan"],
         "meaning": {
           "reversed": "Finansijska nezavisnost, sukob rada",
           "upright": "Hranljiv, praktičan"
@@ -33,10 +27,7 @@
     "swords": [
       null,
       {
-        "keywords": [
-          "jasnoća",
-          "skok"
-        ],
+        "keywords": ["jasnoća", "skok"],
         "meaning": {
           "reversed": "Konfuzija, haos",
           "upright": "proboj, jasnoća"
@@ -44,10 +35,7 @@
         "name": "Ace mačeva"
       },
       {
-        "keywords": [
-          "odluka",
-          "zastoj"
-        ],
+        "keywords": ["odluka", "zastoj"],
         "meaning": {
           "reversed": "Neodlučnost, konfuzija",
           "upright": "Teške odluke, mrtve krajeve"
@@ -55,10 +43,7 @@
         "name": "Dvoje mačeva"
       },
       {
-        "keywords": [
-          "srp",
-          "tuga"
-        ],
+        "keywords": ["srp", "tuga"],
         "meaning": {
           "reversed": "Oslobodite bol, optimizam",
           "upright": "Heartbreak, tuga"
@@ -66,10 +51,7 @@
         "name": "Trio mačeva"
       },
       {
-        "keywords": [
-          "odmor",
-          "meditacija"
-        ],
+        "keywords": ["odmor", "meditacija"],
         "meaning": {
           "reversed": "Izgaranje, izgaranje",
           "upright": "Odmor, meditacija"
@@ -77,10 +59,7 @@
         "name": "Kvartet mačeva"
       },
       {
-        "keywords": [
-          "sukob",
-          "poraz"
-        ],
+        "keywords": ["sukob", "poraz"],
         "meaning": {
           "reversed": "Pomirenje, prošli ogorčeni",
           "upright": "sukob, poraz"
@@ -88,10 +67,7 @@
         "name": "Pet mačeva"
       },
       {
-        "keywords": [
-          "prelaz",
-          "promeniti"
-        ],
+        "keywords": ["prelaz", "promeniti"],
         "meaning": {
           "reversed": "Lična tranzicija, otpornost",
           "upright": "tranzicija, promena"
@@ -99,10 +75,7 @@
         "name": "Šest mačeva"
       },
       {
-        "keywords": [
-          "izdaja",
-          "varati"
-        ],
+        "keywords": ["izdaja", "varati"],
         "meaning": {
           "reversed": "Gindrom Impostor, Tajne",
           "upright": "Izdaja, obmana"
@@ -110,10 +83,7 @@
         "name": "Sedam mačeva"
       },
       {
-        "keywords": [
-          "Ograničenje",
-          "zatvor"
-        ],
+        "keywords": ["Ograničenje", "zatvor"],
         "meaning": {
           "reversed": "Samoograničavajuća uverenja, unutrašnji kritičar",
           "upright": "Ograničenje, zatvor"
@@ -121,10 +91,7 @@
         "name": "Osam mačeva"
       },
       {
-        "keywords": [
-          "anksioznost",
-          "strah"
-        ],
+        "keywords": ["anksioznost", "strah"],
         "meaning": {
           "reversed": "Unutrašnji nemir, oslobađanje anksioznosti",
           "upright": "anksioznost, strah"
@@ -132,10 +99,7 @@
         "name": "Devet mačeva"
       },
       {
-        "keywords": [
-          "završetak",
-          "izdaja"
-        ],
+        "keywords": ["završetak", "izdaja"],
         "meaning": {
           "reversed": "Isceljivanje, odupiru se kraju",
           "upright": "Bolni završeci, izdaja"
@@ -146,10 +110,7 @@
     "wands": [
       null,
       {
-        "keywords": [
-          "inspiracija",
-          "snaga"
-        ],
+        "keywords": ["inspiracija", "snaga"],
         "meaning": {
           "reversed": "Nedostatak energije, dosada",
           "upright": "Inspiracija, nove mogućnosti"
@@ -157,10 +118,7 @@
         "name": "ACE OF SHANDS"
       },
       {
-        "keywords": [
-          "planiranje",
-          "odluka"
-        ],
+        "keywords": ["planiranje", "odluka"],
         "meaning": {
           "reversed": "Lični ciljevi, strah od nepoznatog",
           "upright": "Buduće planiranje, odluke"
@@ -168,10 +126,7 @@
         "name": "Dva štampa"
       },
       {
-        "keywords": [
-          "ekspanzija",
-          "predviđanje"
-        ],
+        "keywords": ["ekspanzija", "predviđanje"],
         "meaning": {
           "reversed": "Malo igranje, LAGS",
           "upright": "Proširenje, predviđanje"
@@ -179,10 +134,7 @@
         "name": "Tri štapića"
       },
       {
-        "keywords": [
-          "proslava",
-          "raport"
-        ],
+        "keywords": ["proslava", "raport"],
         "meaning": {
           "reversed": "Lična proslava, sukob",
           "upright": "Proslava, harmonija"
@@ -190,10 +142,7 @@
         "name": "Četiri štampe"
       },
       {
-        "keywords": [
-          "sukob",
-          "rivalstvo"
-        ],
+        "keywords": ["sukob", "rivalstvo"],
         "meaning": {
           "reversed": "Unutrašnji sukob, izbegavanje",
           "upright": "Sukob, takmičenje"
@@ -201,10 +150,7 @@
         "name": "Pet štapića"
       },
       {
-        "keywords": [
-          "uspeh",
-          "prepoznavanje"
-        ],
+        "keywords": ["uspeh", "prepoznavanje"],
         "meaning": {
           "reversed": "Posebni uspeh, pad sa milosti",
           "upright": "uspeh, prepoznavanje"
@@ -212,10 +158,7 @@
         "name": "Šest štapića"
       },
       {
-        "keywords": [
-          "izazov",
-          "upornost"
-        ],
+        "keywords": ["izazov", "upornost"],
         "meaning": {
           "reversed": "Izgaranje, ne odustaj",
           "upright": "izazov, upornost"
@@ -223,10 +166,7 @@
         "name": "Sedam štapića"
       },
       {
-        "keywords": [
-          "brzina",
-          "napredak"
-        ],
+        "keywords": ["brzina", "napredak"],
         "meaning": {
           "reversed": "Kašnjenja, razočaranje",
           "upright": "Brzina, napredak"
@@ -234,10 +174,7 @@
         "name": "Osam štapića"
       },
       {
-        "keywords": [
-          "izdržljivost",
-          "hrabrost"
-        ],
+        "keywords": ["izdržljivost", "hrabrost"],
         "meaning": {
           "reversed": "Unutrašnji resursi, borba",
           "upright": "Izdržljivost, hrabrost"
@@ -245,10 +182,7 @@
         "name": "Devet štapića"
       },
       {
-        "keywords": [
-          "opteretiti",
-          "odgovornost"
-        ],
+        "keywords": ["opteretiti", "odgovornost"],
         "meaning": {
           "reversed": "Do-It-all, delegatni autoritet",
           "upright": "teret, odgovornost"
@@ -685,11 +619,7 @@
             "answer": "Označava da suzbijate svoju intuiciju, donosite ispričane odluke ili nastavite bez realizacije skrivenih informacija. Budite oprezni i okrenite se prema unutra."
           }
         ],
-        "related_cards": [
-          "mesec",
-          "pustinjak",
-          "kampera"
-        ],
+        "related_cards": ["mesec", "pustinjak", "kampera"],
         "imageUrl": "/cards/rvs/ii-hoghpriestess.vebp"
       },
       "the-empress": {
@@ -789,11 +719,7 @@
             "answer": "U kombinaciji sa Madmanom, visokim sveštenicima i suncem, kreativni potencijal, intuicija i uspeh ojačani su na uravnotežen način."
           }
         ],
-        "related_cards": [
-          "budala",
-          "visoki sveštenik",
-          "sunce"
-        ],
+        "related_cards": ["budala", "visoki sveštenik", "sunce"],
         "imageUrl": "/cards/rvs/ii -Empress.vebp"
       },
       "the-emperor": {

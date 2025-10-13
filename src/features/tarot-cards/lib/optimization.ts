@@ -185,7 +185,7 @@ export class SEOUtils {
       .map(k => k.trim())
       .filter(k => k.length > 0)
       .slice(0, 5); // İlk 5 kelimeyi al
-    
+
     const localeKeywords =
       locale === 'tr'
         ? ['tarot', 'kartlar', 'anlamlar']

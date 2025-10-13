@@ -43,11 +43,7 @@
             "answer": "Javlja se tokom perioda kada ste pozvani u unutrašnju tišinu, strpljenje i primljeno posmatranje."
           }
         ],
-        "related_cards": [
-          "smrt",
-          "pustinjak",
-          "toranj"
-        ],
+        "related_cards": ["smrt", "pustinjak", "toranj"],
         "imageUrl": "/cards/rvs / cii-bangedman.vebp"
       },
       "death": {
@@ -147,11 +143,7 @@
             "answer": "Simbolika kartice ne opisuje fizičku smrt, već duhovnu transformaciju. Završeci su samo deo razvode."
           }
         ],
-        "related_cards": [
-          "presjećen čovek",
-          "toranj",
-          "zvezda"
-        ],
+        "related_cards": ["presjećen čovek", "toranj", "zvezda"],
         "imageUrl": "/cards/rvs / ciii-death.vebp"
       },
       "temperance": {
@@ -251,11 +243,7 @@
             "answer": "Jak je u duhovnom harmoniji, ravnoteži u odnosima i umjerenosti u finansijskom planiranju i procesima donošenja odluka."
           }
         ],
-        "related_cards": [
-          "smrt",
-          "zvezda",
-          "sunce"
-        ],
+        "related_cards": ["smrt", "zvezda", "sunce"],
         "imageUrl": "/cards/rvs/kiv-temperance.vebp"
       },
       "the-devil": {
@@ -355,11 +343,7 @@
             "answer": "Ovisnosti su moćne u procesima sukobanja strana u senci, ograničenja postavljanja i svesnog oslobođenja."
           }
         ],
-        "related_cards": [
-          "temperament",
-          "smrt",
-          "zvezda"
-        ],
+        "related_cards": ["temperament", "smrt", "zvezda"],
         "imageUrl": "/cards/rvs/kv-devil.vebp"
       },
       "the-tower": {
@@ -459,11 +443,7 @@
             "answer": "Jak je u oblastima krize, nagle promene, svest, sukob sa starim strukturama i duhovnom transformacijom."
           }
         ],
-        "related_cards": [
-          "smrt",
-          "vrag",
-          "zvezda"
-        ],
+        "related_cards": ["smrt", "vrag", "zvezda"],
         "imageUrl": "/cards/rvs/kvi-tover.vebp"
       },
       "the-star": {
@@ -563,11 +543,7 @@
             "answer": "Jak je u oblastima nade, inspiracije, duhovnog isceljenja, obnove, motivacije i kreativnih projekata."
           }
         ],
-        "related_cards": [
-          "toranj",
-          "sunce",
-          "pustinjak"
-        ],
+        "related_cards": ["toranj", "sunce", "pustinjak"],
         "imageUrl": "/cards/rvs/kvii-star.vebp"
       },
       "the-moon": {
@@ -667,11 +643,7 @@
             "answer": "Jak je u oblastima podsvesnog istraživanja, intuicije, radnog dela Dream, duhovne smernice i emocionalne svesti."
           }
         ],
-        "related_cards": [
-          "visoki sveštenik",
-          "zvezda",
-          "pustinjak"
-        ],
+        "related_cards": ["visoki sveštenik", "zvezda", "pustinjak"],
         "imageUrl": "/cards/rvs/kvii-moon.vebp"
       },
       "the-sun": {
@@ -771,11 +743,7 @@
             "answer": "Projekat je uspešan kada postoje pozitivni i vidljivi rezultati, kao što su radost nakon lične transformacije, jasnoća u odnosima i nastanku sjajnih prilika."
           }
         ],
-        "related_cards": [
-          "budala",
-          "zvezda",
-          "kampera"
-        ],
+        "related_cards": ["budala", "zvezda", "kampera"],
         "imageUrl": "/cards/rvs/kik-sun.vebp"
       },
       "judgment": {
@@ -875,11 +843,7 @@
             "answer": "Jak je u oblastima duhovne svesti, unutrašnje buđenje, oproštaj, nove početke i kliringa karme."
           }
         ],
-        "related_cards": [
-          "smrt",
-          "sunce",
-          "svet"
-        ]
+        "related_cards": ["smrt", "sunce", "svet"]
       }
     }
   }

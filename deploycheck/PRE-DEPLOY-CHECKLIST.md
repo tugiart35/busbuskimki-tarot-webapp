@@ -1,8 +1,8 @@
 # ✅ PRE-DEPLOYMENT CHECKLIST
 
 **Project:** TaraTarot  
-**Deploy Date:** ******\_******  
-**Deployed By:** ******\_******  
+**Deploy Date:** **\*\***\_**\*\***  
+**Deployed By:** **\*\***\_**\*\***  
 **Deploy Target:** Production
 
 ---
@@ -50,7 +50,7 @@ npm run build
 **CRITICAL:** Backup database before running migrations!
 
 - [ ] Create database backup in Supabase dashboard
-- [ ] Note backup timestamp: ******\_******
+- [ ] Note backup timestamp: **\*\***\_**\*\***
 - [ ] Execute migrations in order (001 → 017)
 - [ ] Verify RLS policies active
 - [ ] Test read query on production DB
@@ -121,10 +121,10 @@ npm run start
 
 ### 8. Rollback Preparation ⏱️ 10 minutes
 
-- [ ] Note current git commit SHA: ******\_******
+- [ ] Note current git commit SHA: **\*\***\_**\*\***
 - [ ] Document rollback commands
 - [ ] Test rollback process in staging (if available)
-- [ ] Identify on-call person: ******\_******
+- [ ] Identify on-call person: **\*\***\_**\*\***
 
 ---
 
@@ -154,7 +154,7 @@ npm run start
 
 1. **Team Notification**
    - [ ] Notify team of upcoming deployment
-   - [ ] Time: ******\_******
+   - [ ] Time: **\*\***\_**\*\***
    - [ ] Expected duration: 1-2 hours
 
 2. **Final Code Review**
@@ -165,7 +165,7 @@ npm run start
 
 3. **Backup Everything**
    - [ ] Database backup created
-   - [ ] Note git SHA: ******\_******
+   - [ ] Note git SHA: **\*\***\_**\*\***
    - [ ] Previous deployment URL noted (for rollback)
 
 #### Deploy (15-30 minutes)
@@ -173,6 +173,7 @@ npm run start
 **If using Vercel:**
 
 1. **Push to Production**
+
    ```bash
    git push origin main
    ```
@@ -184,6 +185,7 @@ npm run start
 **If Manual Deploy:**
 
 1. **Via Vercel CLI**
+
    ```bash
    vercel --prod
    ```
@@ -309,9 +311,9 @@ npm run start
 
 ### Pre-Deploy Approval
 
-**Technical Lead:** ******\_******  
-**Date:** ******\_******  
-**Signature:** ******\_******
+**Technical Lead:** **\*\***\_**\*\***  
+**Date:** **\*\***\_**\*\***  
+**Signature:** **\*\***\_**\*\***
 
 **Checklist Completed:** **\_**% (Must be 100% for MUST COMPLETE items)
 
@@ -325,8 +327,8 @@ npm run start
 
 ### Post-Deploy Confirmation
 
-**Deployment Completed:** ******\_******  
-**Production URL:** ******\_******  
+**Deployment Completed:** **\*\***\_**\*\***  
+**Production URL:** **\*\***\_**\*\***  
 **First Error Check:** ☐ PASS ☐ FAIL  
 **Smoke Tests:** ☐ PASS ☐ FAIL  
 **Status:** ☐ SUCCESS ☐ ROLLED BACK

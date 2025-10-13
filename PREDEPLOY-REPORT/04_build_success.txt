@@ -1,0 +1,104 @@
+
+> busbuskimki-tarot@0.1.0 build
+> next build
+
+   ▲ Next.js 15.5.4
+   - Environments: .env
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 17.3s
+   Skipping linting
+   Checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/250) ...
+   Generating static pages (62/250) 
+   Generating static pages (124/250) 
+   Generating static pages (187/250) 
+ ✓ Generating static pages (250/250)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                 Size  First Load JS
+┌ ○ /_not-found                             1 kB         104 kB
+├ ƒ /[locale]                            2.16 kB        2.31 MB
+├ ƒ /[locale]/admin                       8.8 kB         155 kB
+├ ƒ /[locale]/admin/analytics            11.7 kB         166 kB
+├ ƒ /[locale]/admin/auth                 4.24 kB         151 kB
+├ ƒ /[locale]/admin/orders                8.7 kB         165 kB
+├ ƒ /[locale]/admin/packages             6.81 kB         153 kB
+├ ƒ /[locale]/admin/readings             11.5 kB        2.93 MB
+├ ƒ /[locale]/admin/settings             19.7 kB         180 kB
+├ ƒ /[locale]/admin/users                15.1 kB         175 kB
+├ ƒ /[locale]/auth                       8.84 kB        2.31 MB
+├ ƒ /[locale]/auth/confirm                 180 B         103 kB
+├ ƒ /[locale]/auth/reset-password        5.48 kB         152 kB
+├ ● /[locale]/cards                        218 B         2.3 MB
+├   ├ /tr/cards
+├   ├ /en/cards
+├   └ /sr/cards
+├ ● /[locale]/cards/[slug]                 220 B         2.3 MB
+├   ├ /en/cards/the-fool
+├   ├ /en/cards/the-high-priestess
+├   ├ /en/cards/the-magician
+├   └ [+75 more paths]
+├ ƒ /[locale]/dashboard                  15.8 kB        2.97 MB
+├ ƒ /[locale]/dashboard/credits          3.96 kB         153 kB
+├ ƒ /[locale]/dashboard/packages         4.59 kB        2.31 MB
+├ ƒ /[locale]/dashboard/readings         8.57 kB        2.99 MB
+├ ƒ /[locale]/dashboard/settings         4.65 kB        2.31 MB
+├ ƒ /[locale]/dashboard/statistics       9.83 kB        2.32 MB
+├ ƒ /[locale]/kartice                      218 B         2.3 MB
+├ ● /[locale]/kartice/[slug]               220 B         2.3 MB
+├   ├ /sr/kartice/joker
+├   ├ /sr/kartice/visoka-svestenica
+├   ├ /sr/kartice/carobnjak
+├   └ [+75 more paths]
+├ ƒ /[locale]/kartlar                      218 B         2.3 MB
+├ ● /[locale]/kartlar/[slug]               220 B         2.3 MB
+├   ├ /tr/kartlar/joker
+├   ├ /tr/kartlar/yuksek-rahibe
+├   ├ /tr/kartlar/buyucu
+├   └ [+75 more paths]
+├ ƒ /[locale]/legal/about                  180 B         103 kB
+├ ƒ /[locale]/legal/accessibility          330 B        2.23 MB
+├ ƒ /[locale]/legal/child-privacy          330 B        2.23 MB
+├ ƒ /[locale]/legal/contact                180 B         103 kB
+├ ƒ /[locale]/legal/cookie-policy        2.76 kB        2.29 MB
+├ ƒ /[locale]/legal/copyright-policy       330 B        2.23 MB
+├ ƒ /[locale]/legal/disclaimer           2.66 kB        2.29 MB
+├ ƒ /[locale]/legal/kvkk-disclosure      2.71 kB        2.29 MB
+├ ƒ /[locale]/legal/payment-terms          330 B        2.23 MB
+├ ƒ /[locale]/legal/privacy-policy       3.79 kB        2.29 MB
+├ ƒ /[locale]/legal/refund-policy        2.74 kB        2.29 MB
+├ ƒ /[locale]/legal/security-policy        330 B        2.23 MB
+├ ƒ /[locale]/legal/terms-of-use         2.96 kB        2.29 MB
+├ ƒ /[locale]/numeroloji                 5.83 kB         2.3 MB
+├ ƒ /[locale]/numeroloji/[type]           4.5 kB         2.3 MB
+├ ƒ /[locale]/payment/cancel             2.12 kB        2.28 MB
+├ ƒ /[locale]/payment/success            2.73 kB        2.28 MB
+├ ƒ /[locale]/tarotokumasi               15.7 kB        2.41 MB
+├ ƒ /api/cards/[locale]                    180 B         103 kB
+├ ƒ /api/cards/[locale]/[slug]             180 B         103 kB
+├ ƒ /api/email/reading                     180 B         103 kB
+├ ƒ /api/email/send                        180 B         103 kB
+├ ƒ /api/email/test                        180 B         103 kB
+├ ƒ /api/exchange-rate                     180 B         103 kB
+├ ƒ /api/geolocation                       180 B         103 kB
+├ ƒ /api/webhook/shopier                   180 B         103 kB
+├ ƒ /auth/callback                         180 B         103 kB
+├ ○ /maintenance                         2.51 kB         105 kB
+├ ○ /robots.txt                            180 B         103 kB
+└ ○ /sitemap.xml                           180 B         103 kB
++ First Load JS shared by all             103 kB
+  ├ chunks/3055-000633ffd872e783.js      45.8 kB
+  ├ chunks/3f50220b-ab05cc3c78f08df0.js  54.2 kB
+  └ other shared chunks (total)          2.56 kB
+
+
+ƒ Middleware                             17.2 MB
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+
+Exit code: 0

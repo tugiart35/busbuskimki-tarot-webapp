@@ -1,0 +1,25 @@
+
+> busbuskimki-tarot@0.1.0 build
+> next build
+
+   ▲ Next.js 15.5.4
+   - Environments: .env
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 31.7s
+   Skipping linting
+   Checking validity of types ...
+Failed to compile.
+
+./src/components/dynamic-imports/DynamicPDFGenerator.tsx:31:11
+Type error: No overload expects 4 arguments, but overloads do exist that expect either 1 or 8 arguments.
+
+[0m [90m 29 |[39m       [36mconst[39m imgData [33m=[39m canvas[33m.[39mtoDataURL([32m'image/png'[39m)[33m;[39m
+ [90m 30 |[39m
+[31m[1m>[22m[39m[90m 31 |[39m       pdf[33m.[39maddImage(imgData[33m,[39m [32m'PNG'[39m[33m,[39m [35m0[39m[33m,[39m [35m0[39m)[33m;[39m
+ [90m    |[39m           [31m[1m^[22m[39m
+ [90m 32 |[39m
+ [90m 33 |[39m       [36mif[39m (onGenerate) {
+ [90m 34 |[39m         onGenerate(pdf)[33m;[39m[0m
+Next.js build worker exited with code: 1 and signal: null
+Exit code: 1

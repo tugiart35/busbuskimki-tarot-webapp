@@ -87,6 +87,7 @@ export default function RecentActivity({
             <a
               href={routes.readings}
               className='text-gold hover:text-gold/80 text-sm font-medium transition-colors duration-200 hover:bg-gold/10 px-3 py-1 rounded-lg'
+              aria-label={t('dashboard.viewAllReadings', 'Tüm okumaları görüntüle')}
             >
               {t('common.viewAll', 'Tümünü Gör')} →
             </a>
@@ -196,6 +197,7 @@ export default function RecentActivity({
                   <a
                     href={routes.readings}
                     className='text-gold hover:text-gold/80 text-sm font-medium'
+                    aria-label={t('dashboard.viewAllReadings', 'Tüm okumaları görüntüle')}
                   >
                     {t('dashboard.viewAllReadings', 'Tüm okumaları görüntüle')}{' '}
                     →
@@ -228,6 +230,7 @@ export default function RecentActivity({
               <Link
                 href='/tarot'
                 className='btn btn-primary hover:scale-105 transition-transform duration-200'
+                aria-label={t('dashboard.startFirstReading', 'İlk Okumamı Başlat')}
               >
                 🔮 {t('dashboard.startFirstReading', 'İlk Okumamı Başlat')}
               </Link>
@@ -349,6 +352,7 @@ export default function RecentActivity({
             <a
               href={routes.statistics}
               className='btn btn-primary w-full hover:scale-105 transition-transform duration-200'
+              aria-label={t('dashboard.detailedStatistics', 'Detaylı İstatistikler')}
             >
               📊 {t('dashboard.detailedStatistics', 'Detaylı İstatistikler')}
             </a>

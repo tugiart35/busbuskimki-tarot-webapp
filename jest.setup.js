@@ -24,7 +24,18 @@ jest.mock('next/navigation', () => ({
 jest.mock('next-intl', () => ({
   useTranslations: () => key => key,
   useLocale: () => 'tr',
+  NextIntlClientProvider: ({ children }) => children,
 }));
 
 // Mock environment variables
 process.env.NEXT_PUBLIC_SITE_URL = 'https://busbuskimki.com';
+
+// Mock PerformanceObserver
+global.PerformanceObserver = class PerformanceObserver {
+  constructor() {}
+  observe() {}
+  disconnect() {}
+  takeRecords() {
+    return [];
+  }
+};

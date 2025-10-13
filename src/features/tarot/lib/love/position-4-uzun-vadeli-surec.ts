@@ -1463,7 +1463,10 @@ export const getI18nPosition4Meaning = (
         }
         return originalMeaning.keywords;
       } catch (error) {
-        console.error(`[Love Position 4] Failed to parse keywords for ${cardName}:`, error);
+        console.error(
+          `[Love Position 4] Failed to parse keywords for ${cardName}:`,
+          error
+        );
         return originalMeaning.keywords;
       }
     })(),

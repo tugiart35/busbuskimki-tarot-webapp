@@ -8,11 +8,16 @@ const fs = require('fs');
 const path = require('path');
 
 // Dosyayı oku
-const filePath = path.join(__dirname, '../src/features/tarot/lib/love/position-1-ilgi-duydugun-kisi.ts');
+const filePath = path.join(
+  __dirname,
+  '../src/features/tarot/lib/love/position-1-ilgi-duydugun-kisi.ts'
+);
 const fileContent = fs.readFileSync(filePath, 'utf-8');
 
 // position1Meanings array'ini bul
-const arrayMatch = fileContent.match(/export const position1Meanings: LovePosition1Meaning\[\] = \[([\s\S]*?)\];/);
+const arrayMatch = fileContent.match(
+  /export const position1Meanings: LovePosition1Meaning\[\] = \[([\s\S]*?)\];/
+);
 
 if (!arrayMatch) {
   console.error('❌ position1Meanings array bulunamadı!');
@@ -29,7 +34,7 @@ let inObject = false;
 
 for (let i = 0; i < arrayContent.length; i++) {
   const char = arrayContent[i];
-  
+
   if (char === '{') {
     if (braceCount === 0) {
       inObject = true;
@@ -41,7 +46,7 @@ for (let i = 0; i < arrayContent.length; i++) {
   } else if (char === '}') {
     braceCount--;
     currentObject += char;
-    
+
     if (braceCount === 0 && inObject) {
       cardObjects.push(currentObject);
       currentObject = '';
@@ -62,25 +67,31 @@ cardObjects.forEach((objStr, index) => {
     // Kart adını çıkar
     const cardMatch = objStr.match(/card:\s*['"]([^'"]+)['"]/);
     if (!cardMatch) return;
-    
+
     const cardName = cardMatch[1];
-    
+
     // cardKey oluştur
     const cardKey = cardName
       .toLowerCase()
       .replace(/\s+/g, '')
       .replace(/[^a-z0-9]/g, '');
-    
+
     // upright metni çıkar (field sonuna kadar al, sonraki field'a veya } 'a kadar)
-    const uprightMatch = objStr.match(/upright:\s*['"`]([\s\S]*?)['"`]\s*,?\s*(?=reversed:|keywords:|context:|group:|$)/);
+    const uprightMatch = objStr.match(
+      /upright:\s*['"`]([\s\S]*?)['"`]\s*,?\s*(?=reversed:|keywords:|context:|group:|$)/
+    );
     const upright = uprightMatch ? uprightMatch[1].trim() : '';
-    
+
     // reversed metni çıkar
-    const reversedMatch = objStr.match(/reversed:\s*['"`]([\s\S]*?)['"`]\s*,?\s*(?=keywords:|context:|group:|$)/);
+    const reversedMatch = objStr.match(
+      /reversed:\s*['"`]([\s\S]*?)['"`]\s*,?\s*(?=keywords:|context:|group:|$)/
+    );
     const reversed = reversedMatch ? reversedMatch[1].trim() : '';
-    
+
     // keywords çıkar
-    const keywordsMatch = objStr.match(/keywords:\s*\[([\s\S]*?)\]\s*,?\s*(?=context:|group:|$)/);
+    const keywordsMatch = objStr.match(
+      /keywords:\s*\[([\s\S]*?)\]\s*,?\s*(?=context:|group:|$)/
+    );
     let keywords = [];
     if (keywordsMatch) {
       const keywordsStr = keywordsMatch[1];
@@ -89,22 +100,25 @@ cardObjects.forEach((objStr, index) => {
         .map(k => k.trim().replace(/^['"`]|['"`]$/g, ''))
         .filter(k => k.length > 0);
     }
-    
+
     // context çıkar
-    const contextMatch = objStr.match(/context:\s*['"`]([\s\S]*?)['"`]\s*,?\s*(?=group:|$)/);
+    const contextMatch = objStr.match(
+      /context:\s*['"`]([\s\S]*?)['"`]\s*,?\s*(?=group:|$)/
+    );
     const context = contextMatch ? contextMatch[1].trim() : '';
-    
+
     meanings[cardKey] = {
       position1: {
         upright,
         reversed,
         keywords,
-        context
-      }
+        context,
+      },
     };
-    
-    console.log(`  ✅ ${index + 1}/${cardObjects.length} - ${cardName} (${cardKey})`);
-    
+
+    console.log(
+      `  ✅ ${index + 1}/${cardObjects.length} - ${cardName} (${cardKey})`
+    );
   } catch (error) {
     console.error(`❌ Hata (obje ${index}):`, error.message);
   }
@@ -112,17 +126,17 @@ cardObjects.forEach((objStr, index) => {
 
 // cardGroups ekle
 const cardGroups = {
-  majorArcana: "Majör Arkana",
-  cups: "Kupalar",
-  swords: "Kılıçlar",
-  wands: "Asalar",
-  pentacles: "Tılsımlar"
+  majorArcana: 'Majör Arkana',
+  cups: 'Kupalar',
+  swords: 'Kılıçlar',
+  wands: 'Asalar',
+  pentacles: 'Tılsımlar',
 };
 
 // love objesini oluştur
 const loveData = {
   meanings,
-  cardGroups
+  cardGroups,
 };
 
 // Mevcut tr.json'u oku
@@ -139,7 +153,7 @@ try {
 // love anahtarını ekle/güncelle
 trData.love = {
   ...trData.love,
-  ...loveData
+  ...loveData,
 };
 
 // Dosyaya kaydet
@@ -154,4 +168,3 @@ console.log(`  - love.meanings.thefool.position1.reversed`);
 console.log(`  - love.meanings.thefool.position1.keywords`);
 console.log(`  - love.meanings.thefool.position1.context`);
 console.log(`  - love.cardGroups.majorArcana`);
-

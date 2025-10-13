@@ -5,6 +5,7 @@ import { TarotCard } from '@/types/tarot';
 import { useTranslations } from '@/hooks/useTranslations';
 import { TarotConfig, TarotTheme } from '../types/tarot-config.types';
 import { getThemeClasses } from './theme-utils';
+import Image from 'next/image';
 
 // TarotTheme'i CardTheme'e dönüştür
 const mapTarotThemeToCardTheme = (
@@ -160,13 +161,16 @@ export default function BaseTarotCanvas({
           className={`absolute inset-0 ${getGradientOverlay(config.theme)} backdrop-blur-[2px]`}
           style={{ zIndex: 1 }}
         />
-        <img
-          src={config.backgroundImage}
-          alt={config.backgroundAlt}
-          className='absolute inset-0 w-full h-full object-cover object-center opacity-60'
-          loading='lazy'
-          style={{ zIndex: 0 }}
-        />
+        <div className='absolute inset-0' style={{ zIndex: 0 }}>
+          <Image
+            src={config.backgroundImage}
+            alt={config.backgroundAlt}
+            fill
+            className='object-cover object-center opacity-60'
+            sizes="100vw"
+            priority
+          />
+        </div>
         <div
           className={`absolute inset-0 ${getFinalGradient(config.theme)}`}
           style={{ zIndex: 2 }}

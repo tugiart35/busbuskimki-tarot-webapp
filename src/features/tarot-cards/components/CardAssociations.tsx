@@ -14,14 +14,25 @@ export function CardAssociations({ content, locale }: CardAssociationsProps) {
     astrology: '✨',
     numerology: '🔢',
     element: '🌟',
-    chakra: '🧘'
+    chakra: '🧘',
   };
 
   const labelMap = {
-    astrology: locale === 'tr' ? 'Astroloji' : locale === 'en' ? 'Astrology' : 'Astrologija',
-    numerology: locale === 'tr' ? 'Numeroloji' : locale === 'en' ? 'Numerology' : 'Numerologija',
-    element: locale === 'tr' ? 'Element' : locale === 'en' ? 'Element' : 'Element',
-    chakra: locale === 'tr' ? 'Çakra' : locale === 'en' ? 'Chakra' : 'Čakra'
+    astrology:
+      locale === 'tr'
+        ? 'Astroloji'
+        : locale === 'en'
+          ? 'Astrology'
+          : 'Astrologija',
+    numerology:
+      locale === 'tr'
+        ? 'Numeroloji'
+        : locale === 'en'
+          ? 'Numerology'
+          : 'Numerologija',
+    element:
+      locale === 'tr' ? 'Element' : locale === 'en' ? 'Element' : 'Element',
+    chakra: locale === 'tr' ? 'Çakra' : locale === 'en' ? 'Chakra' : 'Čakra',
   };
 
   return (
@@ -30,14 +41,14 @@ export function CardAssociations({ content, locale }: CardAssociationsProps) {
         <h2 className='text-3xl lg:text-4xl font-bold text-center mb-12 text-gray-800'>
           {associations.title}
         </h2>
-        
+
         <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
           {Object.entries(iconMap).map(([key, icon]) => {
             const value = associations[key as keyof typeof iconMap];
             const label = labelMap[key as keyof typeof labelMap];
-            
+
             return (
-              <div 
+              <div
                 key={key}
                 className='bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-purple-100'
               >
@@ -49,9 +60,7 @@ export function CardAssociations({ content, locale }: CardAssociationsProps) {
                     <h3 className='text-sm font-semibold text-gray-600 uppercase tracking-wide mb-1'>
                       {label}
                     </h3>
-                    <p className='text-lg font-medium text-gray-800'>
-                      {value}
-                    </p>
+                    <p className='text-lg font-medium text-gray-800'>{value}</p>
                   </div>
                 </div>
               </div>
@@ -62,4 +71,3 @@ export function CardAssociations({ content, locale }: CardAssociationsProps) {
     </section>
   );
 }
-

@@ -1,6 +1,7 @@
 # 🔮 Position-1 i18n Patch Uygulama Rehberi
 
 ## 📁 İlgili Dosyalar
+
 - **Kaynak:** `src/features/tarot/lib/love/position-1-ilgi-duydugun-kisi.ts`
 - **Rapor:** `i18nfix/reports/position-1-ilgi-duydugun-kisi-ts-AUDIT.md`
 - **Patch Dosyaları:** `i18nfix/patches/position-1-*.patch`
@@ -28,7 +29,9 @@ git add src/features/tarot/lib/love/position-1-ilgi-duydugun-kisi.ts
 git commit -m "fix(tarot): add 'use client' and error handling to position-1"
 ```
 
-**Not:** Bu düzeltme ile dosya **Türkçe'de çalışır** ancak i18n sistemi tam çalışmayacaktır (İngilizce ve Sırpça desteği için aşağıdaki tam düzeltmeyi yapın).
+**Not:** Bu düzeltme ile dosya **Türkçe'de çalışır** ancak i18n sistemi tam
+çalışmayacaktır (İngilizce ve Sırpça desteği için aşağıdaki tam düzeltmeyi
+yapın).
 
 ---
 
@@ -94,7 +97,8 @@ npx ts-node scripts/generate-love-position1-i18n.ts
 
 #### Seçenek B: Manuel JSON Güncelleme
 
-1. `i18nfix/patches/position-1-ilgi-duydugun-kisi-add-i18n-keys.json` dosyasını aç
+1. `i18nfix/patches/position-1-ilgi-duydugun-kisi-add-i18n-keys.json` dosyasını
+   aç
 2. `SAMPLE_STRUCTURE_TR` bölümünü kopyala
 3. `messages/tr.json` dosyasına ekle
 4. Tüm 78 kart için tekrarla (şablon dosyada var)
@@ -103,7 +107,8 @@ npx ts-node scripts/generate-love-position1-i18n.ts
 
 #### Türkçe (messages/tr.json)
 
-Türkçe metinler zaten `position-1-ilgi-duydugun-kisi.ts` dosyasında var. Bu metinleri `messages/tr.json`'a kopyalayın:
+Türkçe metinler zaten `position-1-ilgi-duydugun-kisi.ts` dosyasında var. Bu
+metinleri `messages/tr.json`'a kopyalayın:
 
 ```json
 {
@@ -120,7 +125,13 @@ Türkçe metinler zaten `position-1-ilgi-duydugun-kisi.ts` dosyasında var. Bu m
         "position1": {
           "upright": "İlgi duyduğun kişi, hayata karşı çocuksu bir merak ve heyecanla dolu...",
           "reversed": "Ters Fool, bu kişinin pervasız, sorumsuz veya bir ilişkiye başlamaktan korkan...",
-          "keywords": ["yeni başlangıçlar", "masumiyet", "spontanlık", "risk almak", "özgür ruh"],
+          "keywords": [
+            "yeni başlangıçlar",
+            "masumiyet",
+            "spontanlık",
+            "risk almak",
+            "özgür ruh"
+          ],
           "context": "Bu kişi, aşk hayatında yeni bir sayfa açmaya hazır veya bundan korkan bir maceracı."
         }
       }
@@ -189,16 +200,16 @@ print("\n🃏 Kart anlamları çeviriliyor (78 kart)...")
 if 'meanings' in tr_data.get('love', {}):
     total_cards = len(tr_data['love']['meanings'])
     current = 0
-    
+
     for card_key, card_data in tr_data['love']['meanings'].items():
         current += 1
         print(f"\n[{current}/{total_cards}] {card_key} çeviriliyor...")
-        
+
         if 'position1' not in card_data:
             continue
-            
+
         pos1 = card_data['position1']
-        
+
         # İngilizce çeviri
         print("  → İngilizce...")
         en_data['love']['meanings'][card_key] = {
@@ -210,7 +221,7 @@ if 'meanings' in tr_data.get('love', {}):
             }
         }
         time.sleep(1)  # Rate limiting
-        
+
         # Sırpça çeviri
         print("  → Sırpça...")
         sr_data['love']['meanings'][card_key] = {
@@ -222,7 +233,7 @@ if 'meanings' in tr_data.get('love', {}):
             }
         }
         time.sleep(1)  # Rate limiting
-        
+
         print(f"  ✅ {card_key} tamamlandı")
 
 # Mevcut dosyaları oku ve merge et
@@ -300,10 +311,10 @@ async function translateKeywords(keywords, targetLang) {
 async function main() {
   console.log('📖 Türkçe dosya okunuyor...');
   const trData = JSON.parse(fs.readFileSync('messages/tr.json', 'utf-8'));
-  
+
   const enData = { love: { meanings: {}, cardGroups: {} } };
   const srData = { love: { meanings: {}, cardGroups: {} } };
-  
+
   // cardGroups çevir
   if (trData.love?.cardGroups) {
     console.log('\n🔮 Kart grupları çeviriliyor...');
@@ -315,21 +326,21 @@ async function main() {
       console.log(`  ✅ ${key}`);
     }
   }
-  
+
   // Kart anlamlarını çevir
   if (trData.love?.meanings) {
     console.log('\n🃏 Kart anlamları çeviriliyor (78 kart)...');
     const cards = Object.entries(trData.love.meanings);
     let current = 0;
-    
+
     for (const [cardKey, cardData] of cards) {
       current++;
       console.log(`\n[${current}/${cards.length}] ${cardKey} çeviriliyor...`);
-      
+
       if (!cardData.position1) continue;
-      
+
       const pos1 = cardData.position1;
-      
+
       // İngilizce
       console.log('  → İngilizce...');
       enData.love.meanings[cardKey] = {
@@ -341,7 +352,7 @@ async function main() {
         }
       };
       await new Promise(resolve => setTimeout(resolve, 1000));
-      
+
       // Sırpça
       console.log('  → Sırpça...');
       srData.love.meanings[cardKey] = {
@@ -353,34 +364,34 @@ async function main() {
         }
       };
       await new Promise(resolve => setTimeout(resolve, 1000));
-      
+
       console.log(`  ✅ ${cardKey} tamamlandı`);
     }
   }
-  
+
   // Mevcut dosyalarla merge et
   console.log('\n📝 Dosyalar merge ediliyor...');
   let existingEn = {};
   let existingSr = {};
-  
+
   try {
     existingEn = JSON.parse(fs.readFileSync('messages/en.json', 'utf-8'));
     existingEn.love = enData.love;
   } catch {
     existingEn = enData;
   }
-  
+
   try {
     existingSr = JSON.parse(fs.readFileSync('messages/sr.json', 'utf-8'));
     existingSr.love = srData.love;
   } catch {
     existingSr = srData;
   }
-  
+
   // Kaydet
   fs.writeFileSync('messages/en.json', JSON.stringify(existingEn, null, 2));
   fs.writeFileSync('messages/sr.json', JSON.stringify(existingSr, null, 2));
-  
+
   console.log('\n✅ Tüm çeviriler tamamlandı!');
   console.log(`📊 İngilizce: ${Object.keys(enData.love.meanings).length} kart`);
   console.log(`📊 Sırpça: ${Object.keys(srData.love.meanings).length} kart`);
@@ -439,7 +450,10 @@ Closes #<issue-number>"
 
 ```typescript
 // __tests__/love-position1.test.ts
-import { useI18nPosition1Meanings, getI18nPosition1Meaning } from '@/features/tarot/lib/love/position-1-ilgi-duydugun-kisi';
+import {
+  useI18nPosition1Meanings,
+  getI18nPosition1Meaning,
+} from '@/features/tarot/lib/love/position-1-ilgi-duydugun-kisi';
 
 describe('Love Position 1 Meanings', () => {
   it('should return 78 card meanings', () => {
@@ -461,7 +475,7 @@ describe('Love Position 1 Meanings', () => {
   });
 
   it('should handle i18n fallback', () => {
-    const meaning = getI18nPosition1Meaning('The Fool', (key) => key);
+    const meaning = getI18nPosition1Meaning('The Fool', key => key);
     expect(meaning).not.toBeNull();
     expect(meaning?.upright).toBeTruthy();
   });
@@ -471,6 +485,7 @@ describe('Love Position 1 Meanings', () => {
 ### Manuel Test
 
 1. **Türkçe Test:**
+
    ```
    1. Uygulamayı başlat: npm run dev
    2. Dil seçimini Türkçe yap
@@ -479,6 +494,7 @@ describe('Love Position 1 Meanings', () => {
    ```
 
 2. **İngilizce Test:**
+
    ```
    1. Dil seçimini İngilizce yap
    2. Kartların İngilizce çevirisini kontrol et
@@ -498,12 +514,14 @@ describe('Love Position 1 Meanings', () => {
 ### Sorun 1: "use client" hatası
 
 **Hata:**
+
 ```
-Error: You're importing a component that needs useState. 
+Error: You're importing a component that needs useState.
 It only works in a Client Component but none of its parents are marked with "use client"
 ```
 
 **Çözüm:**
+
 ```bash
 git apply i18nfix/patches/position-1-ilgi-duydugun-kisi-add-use-client.patch
 ```
@@ -511,20 +529,23 @@ git apply i18nfix/patches/position-1-ilgi-duydugun-kisi-add-use-client.patch
 ### Sorun 2: JSON.parse hatası
 
 **Hata:**
+
 ```
 SyntaxError: Unexpected token in JSON at position X
 ```
 
 **Çözüm:**
+
 ```bash
 git apply i18nfix/patches/position-1-ilgi-duydugun-kisi-error-handling.patch
 ```
 
 ### Sorun 3: i18n anahtarları gösterilmiyor
 
-**Durum:** Kartlar için "love.meanings.thefool.position1.upright" metni gösteriliyor
+**Durum:** Kartlar için "love.meanings.thefool.position1.upright" metni
+gösteriliyor
 
-**Nedeni:** i18n anahtarları messages/*.json dosyalarına eklenmemiş
+**Nedeni:** i18n anahtarları messages/\*.json dosyalarına eklenmemiş
 
 **Çözüm:** Yukarıdaki Adım 2 ve 3'ü takip edin
 
@@ -547,6 +568,7 @@ git apply i18nfix/patches/position-1-ilgi-duydugun-kisi-error-handling.patch
 ## 📞 DESTEK
 
 Sorularınız için:
+
 - **Rapor:** `i18nfix/reports/position-1-ilgi-duydugun-kisi-ts-AUDIT.md`
 - **Patch Dosyaları:** `i18nfix/patches/position-1-*.patch`
 - **GitHub Issues:** Yeni issue açın
@@ -557,4 +579,3 @@ Sorularınız için:
 **Versiyon:** 1.1  
 **Durum:** ✅ Tamamlandı - Commit: f5fed40  
 **Toplam Süre:** ~45 dakika (çeviri: 31dk 44sn, build: 11.5sn)
-

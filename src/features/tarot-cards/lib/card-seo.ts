@@ -6,10 +6,10 @@ export class CardSEO {
   private static normalizeUrl(url: string): string {
     // Ensure https and remove www for consistency
     let normalized = url.replace(/^https?:\/\/(www\.)?/, 'https://');
-    
+
     // Remove trailing slash for SEO best practices
     normalized = normalized.replace(/\/$/, '');
-    
+
     return normalized;
   }
 
@@ -22,19 +22,20 @@ export class CardSEO {
     const baseUrl = this.normalizeUrl(
       process.env.NEXT_PUBLIC_SITE_URL || 'https://busbuskimki.com'
     );
-    
+
     // Safe date handling with proper fallbacks
-    const publishedDate = card.createdAt?.toISOString() || new Date('2025-01-01').toISOString();
+    const publishedDate =
+      card.createdAt?.toISOString() || new Date('2025-01-01').toISOString();
     const modifiedDate = card.updatedAt?.toISOString() || publishedDate;
-    
+
     return {
       title: seo.metaTitle,
       description: seo.metaDescription,
       // ✅ EKLE: keywords
-      keywords: Array.isArray(seo.keywords) 
-        ? seo.keywords.join(', ') 
+      keywords: Array.isArray(seo.keywords)
+        ? seo.keywords.join(', ')
         : seo.keywords || '',
-      
+
       openGraph: {
         title: seo.metaTitle,
         description: seo.metaDescription,
@@ -101,7 +102,8 @@ export class CardSEO {
           : card.serbianName;
 
     // Safe date handling with proper fallbacks
-    const publishedDate = card.createdAt?.toISOString() || new Date('2025-01-01').toISOString();
+    const publishedDate =
+      card.createdAt?.toISOString() || new Date('2025-01-01').toISOString();
     const modifiedDate = card.updatedAt?.toISOString() || publishedDate;
 
     return {

@@ -216,10 +216,18 @@ export function getI18nCareerMeaningByCardAndPosition(
     .replace(/\s+/g, '')
     .replace(/[^a-z0-9]/g, '');
 
-  const i18nUpright = t(`career.meanings.${cardKey}.position${position}.upright`);
-  const i18nReversed = t(`career.meanings.${cardKey}.position${position}.reversed`);
-  const i18nKeywords = t(`career.meanings.${cardKey}.position${position}.keywords`);
-  const i18nContext = t(`career.meanings.${cardKey}.position${position}.context`);
+  const i18nUpright = t(
+    `career.meanings.${cardKey}.position${position}.upright`
+  );
+  const i18nReversed = t(
+    `career.meanings.${cardKey}.position${position}.reversed`
+  );
+  const i18nKeywords = t(
+    `career.meanings.${cardKey}.position${position}.keywords`
+  );
+  const i18nContext = t(
+    `career.meanings.${cardKey}.position${position}.context`
+  );
 
   return {
     ...originalMeaning,
@@ -236,7 +244,10 @@ export function getI18nCareerMeaningByCardAndPosition(
         }
         return originalMeaning.keywords;
       } catch (error) {
-        console.error(`[Career Position ${position}] Failed to parse keywords for ${cardName}:`, error);
+        console.error(
+          `[Career Position ${position}] Failed to parse keywords for ${cardName}:`,
+          error
+        );
         return originalMeaning.keywords;
       }
     })(),

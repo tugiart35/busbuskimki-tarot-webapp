@@ -19,11 +19,7 @@
             "answer": "Deset mačeva - kraj i novi početak nude smernice na kraju, poraz, odustajanje, završetak i novi početak, nada, ponovno rođenje."
           }
         ],
-        "related_cards": [
-          "mađioničar",
-          "budala",
-          "Ace-Of-Of-štapić"
-        ]
+        "related_cards": ["mađioničar", "budala", "Ace-Of-Of-štapić"]
       },
       "page-of-swords": {
         "name": "Princ mačeva - radoznalost i učenje",
@@ -111,11 +107,7 @@
             "answer": "Princ mačeva - radoznalost i učenje nudi smernice o radoznalosti, učenju, komunikaciji, novim idejama i mentalnom razvoju, hrabrosti."
           }
         ],
-        "related_cards": [
-          "mađioničar",
-          "budala",
-          "Ace-Of-Of-štapić"
-        ]
+        "related_cards": ["mađioničar", "budala", "Ace-Of-Of-štapić"]
       },
       "knight-of-swords": {
         "name": "Vitez mačeva - brza akcija i odlučnost",
@@ -203,11 +195,7 @@
             "answer": "Vitez mačeva - Brza akcija i odlučnost nudi smernice za brzu akciju, odlučnost, hrabrost, akciju i pogodak cilja, snažan napredak."
           }
         ],
-        "related_cards": [
-          "mađioničar",
-          "budala",
-          "Ace-Of-Of-štapić"
-        ]
+        "related_cards": ["mađioničar", "budala", "Ace-Of-Of-štapić"]
       },
       "queen-of-swords": {
         "name": "Kraljica mačeva - nezavisnost i jasnoća",
@@ -295,11 +283,7 @@
             "answer": "Kraljica mačeva - Nezavisnost i jasnoća nude smernice o nezavisnosti, jasnoći, iskrenosti, obaveštajnim i fer vođstvu, oštrom inteligenciji."
           }
         ],
-        "related_cards": [
-          "mađioničar",
-          "budala",
-          "Ace-Of-Of-štapić"
-        ]
+        "related_cards": ["mađioničar", "budala", "Ace-Of-Of-štapić"]
       },
       "king-of-swords": {
         "name": "Kralj mačeva - autoritet i pravda",
@@ -387,11 +371,7 @@
             "answer": "Kralj mačeva - autoritet i pravda nudi smernice o autoritetu, pravdi, logici, liderstvu i samo vladi, mudrosti."
           }
         ],
-        "related_cards": [
-          "mađioničar",
-          "budala",
-          "Ace-Of-Of-štapić"
-        ]
+        "related_cards": ["mađioničar", "budala", "Ace-Of-Of-štapić"]
       },
       "queen-of-wands": {
         "name": "Kraljica štapića - samopouzdanje i harizma",
@@ -479,11 +459,7 @@
             "answer": "Kraljica štapića - Povjerenje i Charizma nude smernice o samopouzdanju, karizmi, energiji, kreativnosti i liderstvu, inspiracije."
           }
         ],
-        "related_cards": [
-          "mađioničar",
-          "budala",
-          "Ace-Of-Of-štapić"
-        ]
+        "related_cards": ["mađioničar", "budala", "Ace-Of-Of-štapić"]
       },
       "king-of-wands": {
         "name": "Kralj štapića - vizija i rukovodstvo",
@@ -571,11 +547,7 @@
             "answer": "Kralj štapića - Vizija i rukovodstvo nudi smernice o viziji, liderstvu, preduzetništvu, hrabrosti i snažnom vođstvu, uspeh."
           }
         ],
-        "related_cards": [
-          "mađioničar",
-          "budala",
-          "Ace-Of-Of-štapić"
-        ]
+        "related_cards": ["mađioničar", "budala", "Ace-Of-Of-štapić"]
       }
     },
     "categories": {

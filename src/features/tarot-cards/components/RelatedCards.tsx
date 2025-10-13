@@ -41,7 +41,11 @@ export function RelatedCards({ cards, locale }: RelatedCardsProps) {
             const cardUrl = CardMapping.getCardUrlForLocale(card, locale);
 
             return (
-              <Link key={`${card.id}-${index}`} href={cardUrl}>
+              <Link
+                key={`${card.id}-${index}`}
+                href={cardUrl}
+                aria-label={`${cardName} ${locale === 'tr' ? 'kartı hakkında detaylı bilgi' : locale === 'en' ? 'card detailed information' : 'kartica detaljne informacije'}`}
+              >
                 <div className='group bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200 hover:border-purple-300'>
                   {/* Card Image */}
                   <div className='relative aspect-[2/3] overflow-hidden'>
@@ -127,6 +131,13 @@ export function RelatedCards({ cards, locale }: RelatedCardsProps) {
           <Link
             href={`/${locale}/${locale === 'tr' ? 'kartlar' : locale === 'en' ? 'cards' : 'kartice'}`}
             className='inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl'
+            aria-label={
+              locale === 'tr'
+                ? 'Tüm tarot kartlarını görüntüle'
+                : locale === 'en'
+                  ? 'View all tarot cards'
+                  : 'Pogledajte sve tarot karte'
+            }
           >
             {locale === 'tr'
               ? 'Tüm Kartları Gör'
@@ -138,6 +149,7 @@ export function RelatedCards({ cards, locale }: RelatedCardsProps) {
               fill='none'
               stroke='currentColor'
               viewBox='0 0 24 24'
+              aria-hidden='true'
             >
               <path
                 strokeLinecap='round'

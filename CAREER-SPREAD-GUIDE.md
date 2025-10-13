@@ -10,10 +10,12 @@
 ## 📋 HAZIRLIK
 
 ✅ **14 script oluşturuldu:**
+
 - 7 extraction script (extract-career-position{1-7}-tr.js)
 - 7 translation script (translate-career-position{1-7}.py)
 
 ✅ **Pipeline script hazır:**
+
 - `career-position-pipeline.sh` → Tek pozisyonu baştan sona işler
 
 ---
@@ -95,15 +97,15 @@ tail -f /tmp/career-all.log
 
 ### Career Spread Pozisyonları
 
-| # | Dosya | TR | EN | SR | Durum |
-|---|-------|----|----|----|----|
-| 1 | gercekten-istedigim-kariyer-bumu | ⏳ | ⏳ | ⏳ | ⏳ |
-| 2 | kariyer-gelistirmek-icin-hangi-adımlar | ⏳ | ⏳ | ⏳ | ⏳ |
-| 3 | kariyerimde-degisteremedigigim-taraflar | ⏳ | ⏳ | ⏳ | ⏳ |
-| 4 | elimden-gelenin-en-iyisi-yapıyormuyum | ⏳ | ⏳ | ⏳ | ⏳ |
-| 5 | yardimci-olacak-ne-gibi-degisikler | ⏳ | ⏳ | ⏳ | ⏳ |
-| 6 | gecmisimdeki-hangi-engeller | ⏳ | ⏳ | ⏳ | ⏳ |
-| 7 | sonuc-ne-olacak | ⏳ | ⏳ | ⏳ | ⏳ |
+| #   | Dosya                                   | TR  | EN  | SR  | Durum |
+| --- | --------------------------------------- | --- | --- | --- | ----- |
+| 1   | gercekten-istedigim-kariyer-bumu        | ⏳  | ⏳  | ⏳  | ⏳    |
+| 2   | kariyer-gelistirmek-icin-hangi-adımlar  | ⏳  | ⏳  | ⏳  | ⏳    |
+| 3   | kariyerimde-degisteremedigigim-taraflar | ⏳  | ⏳  | ⏳  | ⏳    |
+| 4   | elimden-gelenin-en-iyisi-yapıyormuyum   | ⏳  | ⏳  | ⏳  | ⏳    |
+| 5   | yardimci-olacak-ne-gibi-degisikler      | ⏳  | ⏳  | ⏳  | ⏳    |
+| 6   | gecmisimdeki-hangi-engeller             | ⏳  | ⏳  | ⏳  | ⏳    |
+| 7   | sonuc-ne-olacak                         | ⏳  | ⏳  | ⏳  | ⏳    |
 
 **İlerleme:** %0 (0/7)
 
@@ -112,27 +114,34 @@ tail -f /tmp/career-all.log
 ## ⚙️ HER POZİSYON İÇİN YAPILACAKLAR
 
 ### 1. Extraction (~2 dk)
+
 ```bash
 node scripts/extract-career-position{X}-tr.js
 ```
+
 **Beklenen:** 78 kart extract edildi
 
 ### 2. Translation (~25-30 dk)
+
 ```bash
 python3 scripts/translate-career-position{X}.py
 ```
+
 **Beklenen:** EN ve SR çeviriler tamamlandı
 
 ### 3. Cleanup Pipeline (~3 dk)
+
 ```bash
 python3 scripts/fix-keywords-to-json-string.py
 python3 scripts/transliterate-serbian.py
 python3 scripts/fix-sentence-spacing.py
 python3 scripts/fix-embedded-code-in-json.py
 ```
+
 **Beklenen:** Tüm kalite kontrolleri geçti
 
 ### 4. Doğrulama
+
 ```python
 import json
 en = json.load(open('messages/en.json'))
@@ -141,6 +150,7 @@ print(f'Position-{X}: {p_count}/78 kart')
 ```
 
 ### 5. Commit
+
 ```bash
 git add messages/*.json scripts/*career*
 git commit -m "feat(tarot): add career position-{X} i18n"
@@ -151,15 +161,18 @@ git commit -m "feat(tarot): add career position-{X} i18n"
 ## 🎯 TAHMİNLER
 
 ### Süre
+
 - Extraction: 7 × 2 dk = 14 dk
 - Translation: 7 × 27 dk = 189 dk (~3 saat)
 - Cleanup: 7 × 3 dk = 21 dk
 - **TOPLAM: ~3.5-4 saat**
 
 ### i18n Anahtarları
+
 - 7 pozisyon × 78 kart × 4 alan × 3 dil = **6,552 anahtar**
 
 ### Maliyet
+
 - **$0** (Google Translate ücretsiz)
 
 ---
@@ -167,6 +180,7 @@ git commit -m "feat(tarot): add career position-{X} i18n"
 ## ✅ BAŞARI KRİTERLERİ
 
 Her pozisyon için:
+
 - [ ] 78/78 kart 3 dilde
 - [ ] Keywords string formatında
 - [ ] Sırpça Latin alfabesinde
@@ -178,12 +192,15 @@ Her pozisyon için:
 ## 💡 İPUCU
 
 **En hızlı yöntem:**
-1. Gece başlat: `nohup bash -c 'for i in {1..7}; do bash scripts/career-position-pipeline.sh $i; done' > /tmp/career.log 2>&1 &`
+
+1. Gece başlat:
+   `nohup bash -c 'for i in {1..7}; do bash scripts/career-position-pipeline.sh $i; done' > /tmp/career.log 2>&1 &`
 2. Sabah kontrol et: `tail -100 /tmp/career.log`
 3. Kalite kontrolü yap
 4. Commit
 
 **Güvenli yöntem:**
+
 1. Position-1'i yap, test et
 2. Sorun yoksa devam et
 3. Her pozisyonu teker teker kontrol et

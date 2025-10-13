@@ -40,11 +40,7 @@
             "answer": "Otvorene komunikacije i iskrenost zaljubljena, a vi dobijate jasnoću u odnosima."
           }
         ],
-        "related_cards": [
-          "pravda",
-          "mađioničar",
-          "kralj mačeva"
-        ]
+        "related_cards": ["pravda", "mađioničar", "kralj mačeva"]
       },
       "two-of-swords": {
         "name": "Dva mačeva - neodlučnost i ravnoteža",
@@ -140,11 +136,7 @@
             "answer": "Označava neodlučnost u ljubavi ili potrebu da se jasno bira u vezi."
           }
         ],
-        "related_cards": [
-          "pravda",
-          "ljubitelji",
-          "dvoje čaša"
-        ]
+        "related_cards": ["pravda", "ljubitelji", "dvoje čaša"]
       },
       "three-of-swords": {
         "name": "Tri mačeva - srce i bol",
@@ -232,11 +224,7 @@
             "answer": "Tri mačeva - Heartbreak i bol nude smernice na srcu, boli, odvajanju, tugi i početku zarastanja, prihvatanje stvarnosti."
           }
         ],
-        "related_cards": [
-          "mađioničar",
-          "budala",
-          "Ace-Of-Of-štapić"
-        ]
+        "related_cards": ["mađioničar", "budala", "Ace-Of-Of-štapić"]
       },
       "four-of-swords": {
         "name": "Četiri mačeva - odmor i oporavak",
@@ -324,11 +312,7 @@
             "answer": "Četiri mačeva - odmor i isceljivanje nudi smernice za odmor, isceljenje, meditiranje, povlačenje i ponovno punjenje, pronalaženje mira."
           }
         ],
-        "related_cards": [
-          "mađioničar",
-          "budala",
-          "Ace-Of-Of-štapić"
-        ]
+        "related_cards": ["mađioničar", "budala", "Ace-Of-Of-štapić"]
       },
       "five-of-swords": {
         "name": "Petorica mačeva - sukob i gubitak",
@@ -416,11 +400,7 @@
             "answer": "Petorica mačeva - sukob i gubitak nudi smernice o sukobu, porazu, takmičenju, ego i časovima učenja i kompromise."
           }
         ],
-        "related_cards": [
-          "mađioničar",
-          "budala",
-          "Ace-Of-Of-štapić"
-        ]
+        "related_cards": ["mađioničar", "budala", "Ace-Of-Of-štapić"]
       },
       "six-of-swords": {
         "name": "Šest mačeva - prolazi i kreće napred",
@@ -508,11 +488,7 @@
             "answer": "Šest mačeva - tranzicija i prelazak napred nudi smernice na tranziciji, putovanju, promeni, prelazeći napred i novim počecima, mirnom tranzicijom."
           }
         ],
-        "related_cards": [
-          "mađioničar",
-          "budala",
-          "Ace-Of-Of-štapić"
-        ]
+        "related_cards": ["mađioničar", "budala", "Ace-Of-Of-štapić"]
       },
       "seven-of-swords": {
         "name": "Sedam mačeva - Strategija i oprez",
@@ -600,11 +576,7 @@
             "answer": "Sedam mačeva - Strategija i OPREZ nudi smernice o strategiji, pažnji, prikrivanju, planiranju i pametnim rešenjima, strateško razmišljanje."
           }
         ],
-        "related_cards": [
-          "mađioničar",
-          "budala",
-          "Ace-Of-Of-štapić"
-        ]
+        "related_cards": ["mađioničar", "budala", "Ace-Of-Of-štapić"]
       },
       "eight-of-swords": {
         "name": "Osam mačeva - ograničenja i strahovi",
@@ -692,11 +664,7 @@
             "answer": "Osam mačeva - ograničenja i strahovi nude smernice o ograničenju, strahovima, mentalnim blokadima i oslobađanju, prevazilaženje strahova."
           }
         ],
-        "related_cards": [
-          "mađioničar",
-          "budala",
-          "Ace-Of-Of-štapić"
-        ]
+        "related_cards": ["mađioničar", "budala", "Ace-Of-Of-štapić"]
       },
       "nine-of-swords": {
         "name": "Devet mačeva - anksioznost i anksioznost",
@@ -784,11 +752,7 @@
             "answer": "Devet mačeva - anksioznost i briga nudi smernice na anksioznosti, anksioznosti, noćnim more, stres i traženju podrške, počevši oporavak."
           }
         ],
-        "related_cards": [
-          "mađioničar",
-          "budala",
-          "Ace-Of-Of-štapić"
-        ]
+        "related_cards": ["mađioničar", "budala", "Ace-Of-Of-štapić"]
       },
       "ten-of-swords": {
         "name": "Deset mačeva - kraj i novi početak",
@@ -860,9 +824,7 @@
         },
         "affirmations": {
           "title": "Deset mačeva - krajnji i novo početne afirmacije",
-          "affirmation_list": [
-            "Jaka sam i spremna za novi početak, nadu, ponovno rođenje."
-          ]
+          "affirmation_list": ["Jaka sam i spremna za novi početak, nadu, ponovno rođenje."]
         }
       }
     }

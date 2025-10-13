@@ -1,0 +1,1100 @@
+================================================================================
+MONITORING & ALERTING ANALYSIS REPORT
+TaraTarot Application - Production Readiness Assessment
+Generated: 2025-10-13
+================================================================================
+
+EXECUTIVE SUMMARY
+================================================================================
+Status: ⚠️  MONITORING NOT CONFIGURED - CRITICAL FOR PRODUCTION
+Priority: HIGH - Must be implemented before production deployment
+Impact: Without monitoring, production issues will go undetected
+
+Current State:
+- ❌ No error tracking system (Sentry, Bugsnag, etc.)
+- ❌ No APM (Application Performance Monitoring)
+- ❌ No real-time alerting for critical errors
+- ❌ No centralized log aggregation
+- ✅ Google Analytics configured in CSP
+- ✅ Internal admin analytics for business metrics
+- ⚠️  70 console.error/warn statements in codebase (not production-safe)
+- ⚠️  9 API routes without monitoring
+
+
+================================================================================
+1. CURRENT MONITORING STATE ANALYSIS
+================================================================================
+
+1.1 Environment Variables
+--------------------------
+FOUND:
+- env.example:38: # SENTRY_DSN=
+  Status: Commented out, not in use
+
+NOT FOUND:
+- NEW_RELIC_LICENSE_KEY
+- DATADOG_API_KEY
+- BUGSNAG_API_KEY
+- ROLLBAR_ACCESS_TOKEN
+- LOGROCKET_APP_ID
+
+1.2 Package Dependencies
+--------------------------
+Checked package.json for monitoring libraries:
+- ❌ @sentry/nextjs - Not installed
+- ❌ @sentry/node - Not installed
+- ❌ newrelic - Not installed
+- ❌ @datadog/browser-rum - Not installed
+- ❌ bugsnag - Not installed
+
+1.3 Code Analysis
+--------------------------
+Error Handling Points:
+- 70 console.error/console.warn statements found in /src/app
+- These will output to Vercel logs but are not aggregated or alerted
+
+API Routes Requiring Monitoring:
+- 9 API routes detected in /src/app/api
+- Critical endpoints that need monitoring:
+  ✓ Payment webhooks (Shopier)
+  ✓ Authentication endpoints
+  ✓ AI interpretation services (Groq/Gemini)
+  ✓ Credit operations
+  ✓ PDF generation
+
+1.4 Existing Analytics
+--------------------------
+✅ Internal Business Analytics:
+- Location: /src/app/[locale]/admin/analytics/page.tsx
+- Tracks: User metrics, revenue, credit usage, feature usage
+- Purpose: Business intelligence, not error tracking
+
+✅ Google Analytics:
+- Configured in middleware.ts CSP headers
+- Purpose: User behavior tracking, not error monitoring
+
+
+================================================================================
+2. RECOMMENDED MONITORING STACK
+================================================================================
+
+2.1 PRIMARY RECOMMENDATION: Sentry
+-----------------------------------
+Why Sentry:
+✓ Industry standard for error tracking
+✓ Excellent Next.js integration (@sentry/nextjs)
+✓ Real-time error reporting and alerting
+✓ Performance monitoring (APM)
+✓ Release tracking and source maps
+✓ Free tier: 5,000 errors/month
+✓ Supports both client and server-side errors
+✓ Breadcrumbs for debugging context
+✓ User context and session replay
+
+Implementation Priority: CRITICAL
+Estimated Setup Time: 2-4 hours
+Cost: Free tier suitable for launch, ~$26/mo for 50k errors
+
+
+2.2 SECONDARY: Vercel Analytics & Monitoring
+---------------------------------------------
+Built-in Vercel features (already available):
+✓ Web Analytics - Page views, user metrics
+✓ Speed Insights - Core Web Vitals
+✓ Log Drains - Export logs to external services
+✓ Monitoring API - Function errors and response times
+
+Enable via:
+- Vercel Dashboard > Project > Analytics tab
+- Vercel Dashboard > Project > Logs > Log Drains
+
+Cost: 
+- Web Analytics: Free (no sampling)
+- Speed Insights: Free
+- Log Drains: Free feature
+
+
+2.3 OPTIONAL: Additional Tools
+-------------------------------
+For enterprise-scale monitoring:
+
+A) Uptime Monitoring:
+   - Better Uptime (https://betteruptime.com)
+   - UptimeRobot (https://uptimerobot.com)
+   - Pingdom
+   Purpose: Detect site downtime before users report it
+   Cost: Free tier available
+
+B) Log Management:
+   - Logtail (Vercel recommended)
+   - Datadog Logs
+   - LogRocket (includes session replay)
+   Purpose: Centralized log search and analysis
+
+C) APM (Application Performance Monitoring):
+   - Sentry Performance (recommended with Sentry)
+   - New Relic
+   - Datadog APM
+   Purpose: Track slow transactions, database queries, API calls
+
+
+================================================================================
+3. SENTRY IMPLEMENTATION GUIDE
+================================================================================
+
+3.1 Installation Steps
+-----------------------
+
+Step 1: Install Sentry SDK
+```bash
+npm install --save @sentry/nextjs
+```
+
+Step 2: Run Sentry Setup Wizard
+```bash
+npx @sentry/wizard@latest -i nextjs
+```
+
+Step 3: Manual Configuration (if wizard fails)
+
+Create: sentry.client.config.ts
+---------------------------------
+import * as Sentry from "@sentry/nextjs";
+
+Sentry.init({
+  dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
+  
+  // Performance Monitoring
+  tracesSampleRate: 1.0, // 100% in development, reduce to 0.1 in production
+  
+  // Session Replay
+  replaysSessionSampleRate: 0.1, // 10% of sessions
+  replaysOnErrorSampleRate: 1.0, // 100% of sessions with errors
+  
+  // Environment
+  environment: process.env.NODE_ENV,
+  
+  // Ignore common browser errors
+  ignoreErrors: [
+    "ResizeObserver loop limit exceeded",
+    "Non-Error promise rejection captured",
+  ],
+  
+  // Performance
+  beforeSend(event, hint) {
+    // Filter out local development errors
+    if (process.env.NODE_ENV === "development") {
+      console.log("Sentry Event:", event);
+      return null;
+    }
+    return event;
+  },
+});
+
+
+Create: sentry.server.config.ts
+---------------------------------
+import * as Sentry from "@sentry/nextjs";
+
+Sentry.init({
+  dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
+  tracesSampleRate: 1.0,
+  environment: process.env.NODE_ENV,
+  
+  // Debug in development
+  debug: process.env.NODE_ENV === "development",
+});
+
+
+Create: sentry.edge.config.ts
+------------------------------
+import * as Sentry from "@sentry/nextjs";
+
+Sentry.init({
+  dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
+  tracesSampleRate: 1.0,
+  environment: process.env.NODE_ENV,
+});
+
+
+Update: next.config.js
+-----------------------
+// Add after module.exports
+const { withSentryConfig } = require("@sentry/nextjs");
+
+module.exports = withSentryConfig(
+  module.exports,
+  {
+    // Sentry webpack plugin options
+    silent: true,
+    org: "your-org-slug",
+    project: "taratarot",
+  },
+  {
+    // Upload source maps
+    widenClientFileUpload: true,
+    transpileClientSDK: true,
+    tunnelRoute: "/monitoring",
+    hideSourceMaps: true,
+    disableLogger: true,
+  }
+);
+
+
+3.2 Environment Variables
+---------------------------
+Add to .env.local and Vercel:
+
+```bash
+# Sentry
+NEXT_PUBLIC_SENTRY_DSN=https://examplePublicKey@o0.ingest.sentry.io/0
+SENTRY_AUTH_TOKEN=your-auth-token
+SENTRY_ORG=your-org-slug
+SENTRY_PROJECT=taratarot
+```
+
+Vercel Setup:
+```bash
+vercel env add NEXT_PUBLIC_SENTRY_DSN production
+vercel env add SENTRY_AUTH_TOKEN production
+vercel env add SENTRY_ORG production
+vercel env add SENTRY_PROJECT production
+```
+
+
+3.3 Update Error Handling
+---------------------------
+
+Replace console.error with Sentry:
+
+BEFORE:
+```typescript
+try {
+  // code
+} catch (error) {
+  console.error('Error:', error);
+}
+```
+
+AFTER:
+```typescript
+import * as Sentry from '@sentry/nextjs';
+
+try {
+  // code
+} catch (error) {
+  Sentry.captureException(error, {
+    tags: {
+      section: 'payment',
+      action: 'process-order',
+    },
+    extra: {
+      orderId: order.id,
+      userId: user.id,
+    },
+  });
+  console.error('Error:', error); // Keep for local debugging
+}
+```
+
+
+3.4 API Route Instrumentation
+-------------------------------
+
+Example: Monitored API Route
+
+```typescript
+import { NextRequest, NextResponse } from 'next/server';
+import * as Sentry from '@sentry/nextjs';
+
+export async function POST(request: NextRequest) {
+  const transaction = Sentry.startTransaction({
+    op: 'api',
+    name: 'POST /api/payment/process',
+  });
+  
+  try {
+    const data = await request.json();
+    
+    // Add breadcrumb
+    Sentry.addBreadcrumb({
+      category: 'payment',
+      message: 'Processing payment',
+      level: 'info',
+      data: { amount: data.amount },
+    });
+    
+    // Your logic here
+    const result = await processPayment(data);
+    
+    transaction.setStatus('ok');
+    return NextResponse.json({ success: true, result });
+    
+  } catch (error) {
+    transaction.setStatus('internal_error');
+    
+    Sentry.captureException(error, {
+      tags: {
+        endpoint: '/api/payment/process',
+        method: 'POST',
+      },
+    });
+    
+    return NextResponse.json(
+      { error: 'Payment processing failed' },
+      { status: 500 }
+    );
+  } finally {
+    transaction.finish();
+  }
+}
+```
+
+
+================================================================================
+4. ALERT CONFIGURATION
+================================================================================
+
+4.1 Critical Alerts (Immediate Action Required)
+------------------------------------------------
+
+Alert 1: High 5xx Error Rate
+-----------------------------
+Trigger: 5xx errors > 5% of total requests in 5 minutes
+Channels: Email, SMS, Slack
+Action: Page on-call engineer
+Sentry Config:
+- Alert Type: Metric Alert
+- Condition: when http.status_code:5* count is > 50 in 5 minutes
+- Environment: production
+- Notify: #critical-alerts Slack, on-call SMS
+
+
+Alert 2: Payment Webhook Failures
+----------------------------------
+Trigger: ANY error in /api/webhook/shopier
+Channels: Email, Slack #payments
+Action: Immediate investigation
+Sentry Config:
+- Alert Type: Issue Alert
+- Condition: A new issue is created
+- Filter: transaction:/api/webhook/shopier
+- Environment: production
+
+
+Alert 3: Authentication Failures
+---------------------------------
+Trigger: Auth error rate > 10% in 10 minutes
+Channels: Email, Slack
+Action: Check Supabase status, investigate
+Sentry Config:
+- Alert Type: Metric Alert
+- Condition: error count with tag "auth:failure" > 100 in 10 minutes
+
+
+Alert 4: AI Service Failures
+-----------------------------
+Trigger: Groq/Gemini API errors > 5 in 5 minutes
+Channels: Slack #engineering
+Action: Check API quotas, switch to fallback
+Sentry Config:
+- Alert Type: Issue Alert
+- Condition: error count with tag "service:ai" > 5 in 5 minutes
+- Filters: 
+  - error.message contains "Groq" OR "Gemini"
+  - environment is production
+
+
+4.2 Warning Alerts (Monitor & Investigate)
+-------------------------------------------
+
+Alert 5: Elevated Error Rate
+-----------------------------
+Trigger: Error count > 100 in 1 hour
+Channels: Slack #engineering
+Action: Review errors, investigate if persistent
+
+
+Alert 6: Slow Response Times
+-----------------------------
+Trigger: P95 response time > 3 seconds for 10 minutes
+Channels: Slack #engineering
+Action: Check for performance regressions
+Vercel Config:
+- Use Vercel Analytics Speed Insights
+- Set up custom alert in Vercel dashboard
+
+
+Alert 7: Credit System Errors
+------------------------------
+Trigger: ANY error in credit deduction/addition
+Channels: Slack #finance
+Action: Manual verification of credit balance
+Sentry Config:
+- Alert Type: Issue Alert
+- Condition: A new issue is created
+- Filter: transaction contains "credit"
+
+
+Alert 8: Database Connection Errors
+------------------------------------
+Trigger: Supabase connection errors > 3 in 5 minutes
+Channels: Slack #engineering, Email
+Action: Check Supabase status, connection pool
+Sentry Config:
+- Alert Type: Metric Alert
+- Condition: error.message contains "ECONNREFUSED" OR "database"
+
+
+4.3 Informational Alerts (Daily Digest)
+----------------------------------------
+
+Daily Error Summary
+-------------------
+Schedule: 9:00 AM daily
+Channels: Email to team
+Content:
+- Total errors in last 24 hours
+- Top 5 error types
+- Affected users count
+- New error types introduced
+
+
+Weekly Performance Report
+-------------------------
+Schedule: Monday 10:00 AM
+Channels: Email to stakeholders
+Content:
+- Average response times
+- Error rate trend
+- Uptime percentage
+- Slow endpoints
+
+
+4.4 Alert Notification Channels
+--------------------------------
+
+Setup Required:
+
+1. Slack Integration
+   - Sentry App: https://sentry.io/integrations/slack/
+   - Channels: #critical-alerts, #engineering, #payments, #finance
+   - Configure urgency levels
+
+2. Email Notifications
+   - Sentry Dashboard > Settings > Notifications
+   - Configure individual and team emails
+
+3. SMS (for critical alerts only)
+   - PagerDuty integration: https://sentry.io/integrations/pagerduty/
+   - Or Twilio webhook
+
+4. Webhook (optional)
+   - Custom endpoint for integrations
+   - POST errors to internal systems
+
+
+================================================================================
+5. UPTIME MONITORING SETUP
+================================================================================
+
+5.1 Recommended: Better Uptime
+-------------------------------
+Website: https://betteruptime.com
+Cost: Free for 1 monitor, $10/mo for unlimited
+
+Monitors to Create:
+
+1. Homepage Monitor
+   URL: https://taratarot.com
+   Check: Every 1 minute
+   Expected: 200 OK
+   Keyword: "Tarot" (verify page loads correctly)
+   Alert: SMS + Email + Slack
+
+2. API Health Check
+   URL: https://taratarot.com/api/health
+   Check: Every 2 minutes
+   Expected: 200 OK, response contains "ok"
+   Alert: Email + Slack
+
+3. Shopier Payment Callback
+   URL: https://taratarot.com/payment/callback
+   Check: Every 5 minutes
+   Expected: 200 or 404 (endpoint exists)
+   Alert: Email if timeout
+
+4. Supabase Connection
+   Indirect: Monitor API that uses Supabase
+   URL: https://taratarot.com/api/user/profile
+   Check: Every 5 minutes
+   Alert: If 503 or timeout
+
+
+5.2 SSL Certificate Monitoring
+--------------------------------
+Better Uptime includes:
+✓ SSL certificate expiry alerts (30 days before)
+✓ SSL issues detection
+✓ Certificate chain validation
+
+
+5.3 Status Page (Optional)
+---------------------------
+Create public status page:
+- Better Uptime: Free status page
+- URL: status.taratarot.com
+- Shows: Uptime, incidents, maintenance
+- Purpose: Transparency for users during outages
+
+
+================================================================================
+6. LOG MANAGEMENT & ANALYSIS
+================================================================================
+
+6.1 Vercel Log Drains
+----------------------
+Export logs to external service:
+
+Option A: Logtail (Recommended)
+- Free tier: 1 GB/month
+- Vercel integration: Native
+- Features: Search, filter, alerting
+- Setup: Vercel Dashboard > Logs > Add Integration
+
+Option B: Datadog Logs
+- Enterprise-grade
+- APM + Logs combined
+- Cost: $0.10/GB ingested
+
+Option C: Custom HTTP Endpoint
+- Vercel log drain to your webhook
+- Store in S3 or your database
+
+
+6.2 Log Retention Strategy
+---------------------------
+Vercel Default: 7 days (Pro plan)
+Recommended:
+- Error logs: 90 days (via log drain)
+- Access logs: 30 days
+- Debug logs: 7 days
+
+
+6.3 Log Analysis Queries
+-------------------------
+Important searches to set up:
+
+1. Payment Errors
+   Query: level:error path:/api/webhook/shopier
+   
+2. Authentication Issues
+   Query: level:error message:*auth*
+   
+3. 5xx Errors
+   Query: status:5xx
+   
+4. Slow Requests
+   Query: duration:>3000
+   
+5. Credit Operations
+   Query: message:*credit* (path:/api/credit OR path:/api/payment)
+
+
+================================================================================
+7. PERFORMANCE MONITORING
+================================================================================
+
+7.1 Sentry Performance Monitoring
+----------------------------------
+Enable in Sentry config:
+- tracesSampleRate: 0.1 (10% of transactions)
+- Tracks:
+  ✓ Page load times
+  ✓ API response times
+  ✓ Database query performance
+  ✓ External API calls (Groq, Gemini, Shopier)
+
+Key Metrics to Monitor:
+- LCP (Largest Contentful Paint): < 2.5s
+- FID (First Input Delay): < 100ms
+- CLS (Cumulative Layout Shift): < 0.1
+- TTFB (Time to First Byte): < 600ms
+
+
+7.2 Vercel Speed Insights
+--------------------------
+Enable: Vercel Dashboard > Speed Insights
+Cost: Free
+Provides:
+✓ Real User Monitoring (RUM)
+✓ Core Web Vitals
+✓ Per-page performance scores
+✓ Geographic performance data
+
+
+7.3 Performance Budgets
+------------------------
+Set alerts for:
+- Bundle size > 500 KB (main bundle)
+- Page load time > 3 seconds
+- API response time > 2 seconds
+- Time to Interactive > 4 seconds
+
+
+================================================================================
+8. IMPLEMENTATION CHECKLIST
+================================================================================
+
+Pre-Deployment (Essential):
+---------------------------
+[ ] Install @sentry/nextjs package
+[ ] Configure Sentry client, server, edge configs
+[ ] Add NEXT_PUBLIC_SENTRY_DSN to environment variables
+[ ] Set up Sentry project in Sentry.io
+[ ] Replace critical console.error with Sentry.captureException
+[ ] Configure source map uploads
+[ ] Test error reporting in staging
+[ ] Set up 4 critical alerts in Sentry
+[ ] Enable Vercel Analytics
+[ ] Set up uptime monitoring (Better Uptime)
+[ ] Create API health check endpoint
+[ ] Configure Slack notifications
+
+Post-Deployment (Week 1):
+--------------------------
+[ ] Verify errors are being captured in Sentry
+[ ] Check alert notifications are working
+[ ] Review first 24-hour error report
+[ ] Tune alert thresholds (reduce noise)
+[ ] Set up log drain to Logtail
+[ ] Create Sentry dashboard for stakeholders
+[ ] Configure weekly performance reports
+[ ] Add user context to Sentry events
+[ ] Enable session replay for critical paths
+[ ] Set up release tracking in Sentry
+
+Ongoing Maintenance:
+--------------------
+[ ] Review error trends weekly
+[ ] Tune alert thresholds monthly
+[ ] Check uptime reports monthly
+[ ] Update performance budgets quarterly
+[ ] Rotate Sentry auth tokens annually
+
+
+================================================================================
+9. COST ESTIMATION
+================================================================================
+
+Monitoring Stack Costs:
+-----------------------
+
+Tier 1: Minimum Viable (Free - $30/month)
+  - Sentry Free: 5,000 errors/month ........... $0
+  - Vercel Analytics: Built-in ................ $0
+  - Better Uptime: 1 monitor ................... $0
+  - Total: ...................................... $0
+
+Tier 2: Recommended Launch (~ $50/month)
+  - Sentry Team: 50k errors/month .............. $26
+  - Vercel Analytics: Built-in ................. $0
+  - Better Uptime: Pro ......................... $10
+  - Logtail: 10 GB logs/month .................. $15
+  - Total: ...................................... $51
+
+Tier 3: Production Scale (~ $200/month)
+  - Sentry Business: 500k errors/month ......... $99
+  - Vercel Pro: Analytics + Speed Insights ..... $0 (included)
+  - Better Uptime: Team ........................ $20
+  - Datadog Logs: 50 GB/month .................. $80
+  - Total: ...................................... $199
+
+RECOMMENDATION FOR LAUNCH:
+Start with Tier 1 (Free), upgrade to Tier 2 when you exceed free limits.
+
+
+================================================================================
+10. SECURITY & COMPLIANCE
+================================================================================
+
+10.1 Data Privacy
+-----------------
+Sentry collects error data that may contain PII:
+- Configure data scrubbing rules
+- Redact sensitive fields (passwords, credit cards, tokens)
+- Set data retention to 90 days
+- Enable IP anonymization
+
+Sentry Data Scrubbing Config:
+```javascript
+beforeSend(event) {
+  // Remove sensitive data
+  if (event.request) {
+    delete event.request.cookies;
+    delete event.request.headers['Authorization'];
+  }
+  
+  // Scrub user emails from messages
+  if (event.message) {
+    event.message = event.message.replace(
+      /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g,
+      '[email]'
+    );
+  }
+  
+  return event;
+}
+```
+
+
+10.2 GDPR Compliance
+--------------------
+- Users can request error data deletion
+- Sentry API: Delete user data
+- Store minimal user context in errors
+- Document in Privacy Policy
+
+
+================================================================================
+11. INCIDENT RESPONSE PLAYBOOK
+================================================================================
+
+When Alert Fires:
+-----------------
+
+1. ACKNOWLEDGE (< 5 minutes)
+   - Click alert to acknowledge
+   - Note time and your name in Slack thread
+
+2. ASSESS (< 10 minutes)
+   - Check Sentry for error details
+   - Check Vercel logs for context
+   - Verify scope: How many users affected?
+   - Check status pages: Supabase, Vercel, Shopier
+
+3. MITIGATE (< 30 minutes)
+   - Can you rollback to previous version?
+   - Can you disable affected feature?
+   - Can you fix forward quickly?
+
+4. COMMUNICATE (< 15 minutes from detection)
+   - Update status page
+   - Post in Slack #incidents
+   - If user-facing: Tweet/notify users
+
+5. RESOLVE
+   - Deploy fix
+   - Verify error rate drops
+   - Monitor for 30 minutes
+
+6. POST-MORTEM (< 24 hours)
+   - Write incident report
+   - Root cause analysis
+   - Action items to prevent recurrence
+
+
+Escalation Path:
+----------------
+Severity 1 (Critical - site down):
+- On-call engineer (immediate)
+- Engineering lead (within 15 min)
+- CTO (within 30 min)
+
+Severity 2 (Major feature broken):
+- On-call engineer (within 15 min)
+- Engineering lead (within 1 hour)
+
+Severity 3 (Minor issue):
+- Create ticket
+- Fix in next sprint
+
+
+================================================================================
+12. DASHBOARD & REPORTING
+================================================================================
+
+12.1 Sentry Dashboard Widgets
+------------------------------
+Create custom dashboard with:
+
+1. Error Rate Trends (Last 7 days)
+2. Top 10 Errors by Volume
+3. Top 10 Errors by User Impact
+4. Performance: Slowest Transactions
+5. New Issues (Last 24 hours)
+6. Resolved vs Unresolved Issues
+7. Errors by Release Version
+8. Errors by Environment
+
+
+12.2 Weekly Engineering Report
+-------------------------------
+Automated email every Monday:
+
+Subject: TaraTarot Weekly Error Report
+Content:
+- Total errors: X (↑↓ vs last week)
+- Unique issues: Y (↑↓ vs last week)
+- Users affected: Z (↑↓ vs last week)
+- Top 3 errors:
+  1. [Error title] - X occurrences
+  2. [Error title] - Y occurrences
+  3. [Error title] - Z occurrences
+- Deployments: N releases
+- Uptime: 99.X%
+
+
+12.3 Monthly Stakeholder Report
+--------------------------------
+For non-technical stakeholders:
+
+Metrics:
+- Uptime: 99.X%
+- Average page load: X.Xs
+- Total errors: X (trend)
+- Critical incidents: X
+- Mean time to resolution: X hours
+
+Charts:
+- Uptime trend
+- Error rate trend
+- Performance score trend
+
+
+================================================================================
+13. TESTING MONITORING SETUP
+================================================================================
+
+Before Production Deployment:
+------------------------------
+
+Test 1: Trigger Test Error
+```typescript
+// Add temporary test endpoint
+// /api/test/sentry-error
+
+export async function GET() {
+  throw new Error('Test Sentry error - please ignore');
+}
+```
+- Visit endpoint
+- Verify error appears in Sentry
+- Verify alert fires (if configured)
+
+
+Test 2: Test Performance Tracking
+```typescript
+// /api/test/sentry-performance
+
+import * as Sentry from '@sentry/nextjs';
+
+export async function GET() {
+  const transaction = Sentry.startTransaction({
+    op: 'test',
+    name: 'Test Performance Tracking',
+  });
+  
+  await new Promise(resolve => setTimeout(resolve, 2000));
+  
+  transaction.finish();
+  return new Response('OK');
+}
+```
+- Visit endpoint
+- Verify transaction in Sentry Performance
+
+
+Test 3: Test Uptime Monitor
+- Temporarily break homepage (return 500)
+- Verify uptime monitor detects and alerts
+- Restore homepage
+
+
+Test 4: Test Alert Notifications
+- Trigger test error multiple times
+- Verify Slack message received
+- Verify email received
+
+
+================================================================================
+14. PRODUCTION LAUNCH CHECKLIST
+================================================================================
+
+Environment Variables (Vercel):
+--------------------------------
+[ ] NEXT_PUBLIC_SENTRY_DSN (production DSN)
+[ ] SENTRY_AUTH_TOKEN (for source maps)
+[ ] SENTRY_ORG (your org slug)
+[ ] SENTRY_PROJECT (taratarot)
+[ ] NODE_ENV=production
+
+Sentry Configuration:
+---------------------
+[ ] Production project created in Sentry.io
+[ ] Source maps upload configured
+[ ] Data scrubbing rules enabled
+[ ] PII redaction enabled
+[ ] IP anonymization enabled
+[ ] Session replay enabled (10% sample)
+[ ] Performance monitoring enabled (10% sample)
+[ ] Release tracking configured
+
+Alert Rules Configured:
+-----------------------
+[ ] High 5xx error rate (> 5% in 5 min)
+[ ] Payment webhook failures (any error)
+[ ] Authentication failures (> 10% in 10 min)
+[ ] AI service failures (> 5 in 5 min)
+[ ] Elevated error rate (> 100 in 1 hour)
+[ ] Slow response times (P95 > 3s for 10 min)
+[ ] Credit system errors (any error)
+[ ] Database connection errors (> 3 in 5 min)
+
+Notification Channels:
+----------------------
+[ ] Slack #critical-alerts created
+[ ] Slack #engineering created
+[ ] Slack #payments created
+[ ] Slack #finance created
+[ ] Sentry Slack integration connected
+[ ] Email notifications configured
+[ ] On-call rotation set up (if applicable)
+
+Uptime Monitoring:
+------------------
+[ ] Better Uptime account created
+[ ] Homepage monitor configured
+[ ] API health check monitor configured
+[ ] Payment callback monitor configured
+[ ] SSL certificate monitoring enabled
+[ ] Status page created (optional)
+
+Performance Monitoring:
+-----------------------
+[ ] Vercel Analytics enabled
+[ ] Vercel Speed Insights enabled
+[ ] Sentry Performance enabled
+[ ] Performance budgets set
+
+Log Management:
+---------------
+[ ] Vercel log drain configured (optional)
+[ ] Logtail integration added (optional)
+[ ] Log retention policy documented
+
+Documentation:
+--------------
+[ ] Incident response playbook created
+[ ] Alert escalation path documented
+[ ] On-call rotation schedule (if applicable)
+[ ] Runbook for common issues created
+
+
+================================================================================
+15. NEXT STEPS & RECOMMENDATIONS
+================================================================================
+
+IMMEDIATE (Before Production):
+-------------------------------
+1. Install and configure Sentry
+   Priority: CRITICAL
+   Time: 2-4 hours
+   Owner: Backend engineer
+
+2. Set up 4 critical alerts
+   Priority: CRITICAL
+   Time: 1 hour
+   Owner: DevOps/Backend engineer
+
+3. Enable Vercel Analytics
+   Priority: HIGH
+   Time: 5 minutes
+   Owner: Any engineer
+
+4. Set up uptime monitoring
+   Priority: HIGH
+   Time: 30 minutes
+   Owner: DevOps/Backend engineer
+
+
+WEEK 1 (Post-Launch):
+----------------------
+5. Configure log drain to Logtail
+   Priority: MEDIUM
+   Time: 1 hour
+   Owner: DevOps engineer
+
+6. Create Sentry dashboard
+   Priority: MEDIUM
+   Time: 30 minutes
+   Owner: Engineering lead
+
+7. Test all alert channels
+   Priority: HIGH
+   Time: 1 hour
+   Owner: DevOps engineer
+
+8. Document incident response
+   Priority: HIGH
+   Time: 2 hours
+   Owner: Engineering lead
+
+
+WEEK 2-4 (Optimization):
+-------------------------
+9. Tune alert thresholds
+   Priority: MEDIUM
+   Time: Ongoing
+   Owner: On-call engineer
+
+10. Set up weekly reports
+    Priority: LOW
+    Time: 1 hour
+    Owner: Engineering lead
+
+11. Enable session replay
+    Priority: LOW
+    Time: 30 minutes (already in config)
+    Owner: Frontend engineer
+
+
+================================================================================
+16. CONCLUSION
+================================================================================
+
+CURRENT STATE:
+❌ No monitoring system configured
+❌ Production errors will go undetected
+❌ No alerting for critical failures
+❌ No performance tracking
+
+REQUIRED FOR PRODUCTION:
+✅ Sentry error tracking (CRITICAL)
+✅ Critical alerts configured (CRITICAL)
+✅ Uptime monitoring (HIGH)
+✅ Vercel Analytics enabled (MEDIUM)
+
+ESTIMATED SETUP TIME: 4-6 hours
+ESTIMATED COST: $0-51/month (depending on tier)
+
+RISK WITHOUT MONITORING:
+- Users experiencing errors without your knowledge
+- Payment failures going unnoticed
+- Performance degradation not detected
+- Extended downtime before detection
+- Customer trust and revenue loss
+
+RECOMMENDATION:
+Implement Tier 1 (Free) monitoring stack BEFORE production launch.
+This is non-negotiable for any production application.
+
+Monitoring is not optional - it's the difference between knowing your
+app is broken and your users telling you it's broken.
+
+
+================================================================================
+REPORT GENERATED BY: Pre-Deployment Analysis System
+NEXT REPORT: 11_FINAL_PREFLIGHT.txt
+================================================================================
+

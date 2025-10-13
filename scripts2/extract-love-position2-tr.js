@@ -8,11 +8,16 @@ const fs = require('fs');
 const path = require('path');
 
 // Dosyayı oku
-const filePath = path.join(__dirname, '../src/features/tarot/lib/love/position-2-fiziksel.ts');
+const filePath = path.join(
+  __dirname,
+  '../src/features/tarot/lib/love/position-2-fiziksel.ts'
+);
 const fileContent = fs.readFileSync(filePath, 'utf-8');
 
 // position2Meanings array'ini bul
-const arrayMatch = fileContent.match(/export const position2Meanings: LovePositionMeaning\[\] = \[([\s\S]*?)\];/);
+const arrayMatch = fileContent.match(
+  /export const position2Meanings: LovePositionMeaning\[\] = \[([\s\S]*?)\];/
+);
 
 if (!arrayMatch) {
   console.error('❌ position2Meanings array bulunamadı!');
@@ -29,7 +34,7 @@ let inObject = false;
 
 for (let i = 0; i < arrayContent.length; i++) {
   const char = arrayContent[i];
-  
+
   if (char === '{') {
     if (braceCount === 0) {
       inObject = true;
@@ -41,7 +46,7 @@ for (let i = 0; i < arrayContent.length; i++) {
   } else if (char === '}') {
     braceCount--;
     currentObject += char;
-    
+
     if (braceCount === 0 && inObject) {
       cardObjects.push(currentObject);
       currentObject = '';
@@ -62,25 +67,31 @@ cardObjects.forEach((objStr, index) => {
     // Kart adını çıkar
     const cardMatch = objStr.match(/card:\s*['"]([^'"]+)['"]/);
     if (!cardMatch) return;
-    
+
     const cardName = cardMatch[1];
-    
+
     // cardKey oluştur
     const cardKey = cardName
       .toLowerCase()
       .replace(/\s+/g, '')
       .replace(/[^a-z0-9]/g, '');
-    
+
     // upright metni çıkar (field sonuna kadar al, sonraki field'a veya } 'a kadar)
-    const uprightMatch = objStr.match(/upright:\s*['"`]([\s\S]*?)['"`]\s*,?\s*(?=reversed:|keywords:|context:|group:|$)/);
+    const uprightMatch = objStr.match(
+      /upright:\s*['"`]([\s\S]*?)['"`]\s*,?\s*(?=reversed:|keywords:|context:|group:|$)/
+    );
     const upright = uprightMatch ? uprightMatch[1].trim() : '';
-    
+
     // reversed metni çıkar
-    const reversedMatch = objStr.match(/reversed:\s*['"`]([\s\S]*?)['"`]\s*,?\s*(?=keywords:|context:|group:|$)/);
+    const reversedMatch = objStr.match(
+      /reversed:\s*['"`]([\s\S]*?)['"`]\s*,?\s*(?=keywords:|context:|group:|$)/
+    );
     const reversed = reversedMatch ? reversedMatch[1].trim() : '';
-    
+
     // keywords çıkar
-    const keywordsMatch = objStr.match(/keywords:\s*\[([\s\S]*?)\]\s*,?\s*(?=context:|group:|$)/);
+    const keywordsMatch = objStr.match(
+      /keywords:\s*\[([\s\S]*?)\]\s*,?\s*(?=context:|group:|$)/
+    );
     let keywords = [];
     if (keywordsMatch) {
       const keywordsStr = keywordsMatch[1];
@@ -89,25 +100,28 @@ cardObjects.forEach((objStr, index) => {
         .map(k => k.trim().replace(/^['"`]|['"`]$/g, ''))
         .filter(k => k.length > 0);
     }
-    
+
     // context çıkar
-    const contextMatch = objStr.match(/context:\s*['"`]([\s\S]*?)['"`]\s*,?\s*(?=group:|$)/);
+    const contextMatch = objStr.match(
+      /context:\s*['"`]([\s\S]*?)['"`]\s*,?\s*(?=group:|$)/
+    );
     const context = contextMatch ? contextMatch[1].trim() : '';
-    
+
     // Mevcut position2 objesini al veya oluştur
     if (!meanings[cardKey]) {
       meanings[cardKey] = {};
     }
-    
+
     meanings[cardKey].position2 = {
       upright,
       reversed,
       keywords,
-      context
+      context,
     };
-    
-    console.log(`  ✅ ${index + 1}/${cardObjects.length} - ${cardName} (${cardKey})`);
-    
+
+    console.log(
+      `  ✅ ${index + 1}/${cardObjects.length} - ${cardName} (${cardKey})`
+    );
   } catch (error) {
     console.error(`❌ Hata (obje ${index}):`, error.message);
   }
@@ -151,4 +165,3 @@ console.log(`  - love.meanings.thefool.position2.upright`);
 console.log(`  - love.meanings.thefool.position2.reversed`);
 console.log(`  - love.meanings.thefool.position2.keywords`);
 console.log(`  - love.meanings.thefool.position2.context`);
-

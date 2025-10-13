@@ -109,10 +109,10 @@ SELECT COUNT(*) FROM credit_transactions;
 
 **Record Previous Values:**
 
-| Variable             | Previous Value       | New Value            | Changed Date |
-| -------------------- | -------------------- | -------------------- | ------------ |
-| ******\_\_\_\_****** | ******\_\_\_\_****** | ******\_\_\_\_****** | **\_\_\_\_** |
-| ******\_\_\_\_****** | ******\_\_\_\_****** | ******\_\_\_\_****** | **\_\_\_\_** |
+| Variable                 | Previous Value           | New Value                | Changed Date |
+| ------------------------ | ------------------------ | ------------------------ | ------------ |
+| **\*\***\_\_\_\_**\*\*** | **\*\***\_\_\_\_**\*\*** | **\*\***\_\_\_\_**\*\*** | **\_\_\_\_** |
+| **\*\***\_\_\_\_**\*\*** | **\*\***\_\_\_\_**\*\*** | **\*\***\_\_\_\_**\*\*** | **\_\_\_\_** |
 
 ---
 
@@ -154,7 +154,7 @@ SELECT COUNT(*) FROM credit_transactions;
 
 5. **Notify team**
    - "Production rolled back due to [reason]"
-   - ETA for fix: ****\_\_\_****
+   - ETA for fix: \***\*\_\_\_\*\***
 
 ### P0: Database Connection Lost
 
@@ -383,8 +383,8 @@ Thank you for your patience.
 
 ### Post-Mortem Template
 
-**Date:** ******\_******  
-**Incident ID:** ******\_******  
+**Date:** **\*\***\_**\*\***  
+**Incident ID:** **\*\***\_**\*\***  
 **Duration:** **\_\_\_** minutes  
 **Severity:** P\_\_\_
 
@@ -398,15 +398,15 @@ Thank you for your patience.
 
 **Impact:**
 
-- Users affected: ******\_******
-- Revenue impact: ******\_******
+- Users affected: **\*\***\_**\*\***
+- Revenue impact: **\*\***\_**\*\***
 - Data loss: YES / NO
 
 **Timeline:**
 
-- Detected: ******\_******
-- Rollback initiated: ******\_******
-- Resolved: ******\_******
+- Detected: **\*\***\_**\*\***
+- Rollback initiated: **\*\***\_**\*\***
+- Resolved: **\*\***\_**\*\***
 
 **What Went Well:**
 
@@ -519,10 +519,10 @@ Thank you for your patience.
 
 ## 📝 EMERGENCY CONTACTS
 
-**On-Call Engineer:** ******\_******  
-**Database Admin:** ******\_******  
-**Security Lead:** ******\_******  
-**Product Owner:** ******\_******
+**On-Call Engineer:** **\*\***\_**\*\***  
+**Database Admin:** **\*\***\_**\*\***  
+**Security Lead:** **\*\***\_**\*\***  
+**Product Owner:** **\*\***\_**\*\***
 
 **Escalation Path:**
 
@@ -541,13 +541,13 @@ Thank you for your patience.
 - [ ] Update documentation
 - [ ] Train team members
 
-**Last Rollback Test:** ******\_******  
-**Next Rollback Test:** ******\_******
+**Last Rollback Test:** **\*\***\_**\*\***  
+**Next Rollback Test:** **\*\***\_**\*\***
 
 ---
 
 **Rollback Plan Version:** 1.0  
-**Approved By:** ******\_******  
-**Date:** ******\_******
+**Approved By:** **\*\***\_**\*\***  
+**Date:** **\*\***\_**\*\***
 
 **Keep this document updated after each incident!**

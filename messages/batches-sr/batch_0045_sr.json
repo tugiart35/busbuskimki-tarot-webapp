@@ -101,11 +101,7 @@
             "answer": "Jak je u situacijama koje zahtevaju finansijsku sigurnost, odgovornost, negovanja i stabilnost."
           }
         ],
-        "related_cards": [
-          "vitez-pentacles",
-          "kampera",
-          "temperament"
-        ],
+        "related_cards": ["vitez-pentacles", "kampera", "temperament"],
         "imageUrl": "/cards/rvs/kueen-pentacles.vebp"
       },
       "king-of-pentacles": {
@@ -205,11 +201,7 @@
             "answer": "Jak je u situacijama koje zahtevaju finansijsku sigurnost, liderstvo, odgovornost i strategija."
           }
         ],
-        "related_cards": [
-          "kraljica-pentacles",
-          "temperament",
-          "car"
-        ],
+        "related_cards": ["kraljica-pentacles", "temperament", "car"],
         "imageUrl": "/cards/rvs / king-piće.vebp"
       },
       "ace-of-cups": {
@@ -309,11 +301,7 @@
             "answer": "Snažno je u situacijama koje zahtevaju nove emocionalne iskustva, ljubav, intimne odnose i duhovnu svest."
           }
         ],
-        "related_cards": [
-          "dvoje čaša",
-          "kralj šoljica",
-          "Page-of-of Cups"
-        ],
+        "related_cards": ["dvoje čaša", "kralj šoljica", "Page-of-of Cups"],
         "imageUrl": "/cards/rvs / toace-cups.vebp"
       },
       "two-of-cups": {
@@ -413,11 +401,7 @@
             "answer": "To je jak tokom perioda odnosa, partnerstva, saradnje i emocionalnog lepljenja."
           }
         ],
-        "related_cards": [
-          "Ace-Cups",
-          "ljubitelji",
-          "svet"
-        ],
+        "related_cards": ["Ace-Cups", "ljubitelji", "svet"],
         "imageUrl": "/cards/rvs/ii-cups.vebp"
       },
       "three-of-cups": {
@@ -517,11 +501,7 @@
             "answer": "Jak je tokom perioda uspeha, društvenih događaja, prijateljstava i proslava."
           }
         ],
-        "related_cards": [
-          "šest šoljica",
-          "devet šoljica",
-          "sunce"
-        ],
+        "related_cards": ["šest šoljica", "devet šoljica", "sunce"],
         "imageUrl": "/cards/rvs/ii-cups.vebp"
       },
       "four-of-cups": {
@@ -621,11 +601,7 @@
             "answer": "To je jak tokom perioda potrage za unutrašnju ravnotežu, vežbe svesti i emocionalne obnove."
           }
         ],
-        "related_cards": [
-          "Ace-Cups",
-          "osam šoljica",
-          "presuda"
-        ],
+        "related_cards": ["Ace-Cups", "osam šoljica", "presuda"],
         "imageUrl": "/cards/rvs/iv-cups.vebp"
       },
       "five-of-cups": {
@@ -725,11 +701,7 @@
             "answer": "Moćan je u lekovima post-gubici, emocionalnom transformaciji i procesima oproštenja."
           }
         ],
-        "related_cards": [
-          "smrt",
-          "šest šoljica",
-          "sunce"
-        ],
+        "related_cards": ["smrt", "šest šoljica", "sunce"],
         "imageUrl": "/cards/rvs/v-cups.vebp"
       },
       "six-of-cups": {
@@ -829,11 +801,7 @@
             "answer": "Moćan je tokom perioda suočavanja u prošlosti, praštanju i pronalaženje unutrašnjeg mira."
           }
         ],
-        "related_cards": [
-          "petorokopi",
-          "devet šoljica",
-          "sunce"
-        ],
+        "related_cards": ["petorokopi", "devet šoljica", "sunce"],
         "imageUrl": "/cards/rvs / vi-cups.vebp"
       },
       "seven-of-cups": {

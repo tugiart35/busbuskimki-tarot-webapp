@@ -38,6 +38,7 @@ Anlam Seçimi Öncelik Sırası:
 import { forwardRef } from 'react';
 import type { TarotCard } from '@/types/tarot';
 import type { Theme, PositionInfo, CardMeaningData } from '@/types/ui';
+import Image from 'next/image';
 // useAuth kaldırıldı - login sistemi kaldırıldı
 // import { saveTarotReading } from '@/lib/services/reading-service'; // Service kaldırıldı
 
@@ -440,15 +441,13 @@ const BaseInterpretation = forwardRef<HTMLDivElement, BaseInterpretationProps>(
                 style={{ animationDelay: `${idx * 80}ms` }}
               >
                 {/* Kart Görseli */}
-                <div className='flex-shrink-0'>
-                  <img
+                <div className={`flex-shrink-0 relative w-22 h-40 ${isReversed[idx] ? 'rotate-180' : ''}`}>
+                  <Image
                     src={card.image || '/cards/CardBack.jpg'}
                     alt={card.nameTr}
-                    className={`
-                      w-22 h-40 object-cover rounded-lg border-2 ${colors.cardBorder} shadow 
-                      ${isReversed[idx] ? 'rotate-180' : ''}
-                    `}
-                    loading='lazy'
+                    width={88}
+                    height={160}
+                    className={`object-cover rounded-lg border-2 ${colors.cardBorder} shadow`}
                   />
                 </div>
 

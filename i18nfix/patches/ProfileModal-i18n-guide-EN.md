@@ -87,4 +87,3 @@ cat messages/en.json | jq . > /dev/null && echo "✓ JSON valid" || echo "✗ JS
 grep -q '"firstName":' messages/en.json && echo "✓ profile.firstName added"
 grep -q '"saving":' messages/en.json && echo "✓ common.saving added"
 ```
-

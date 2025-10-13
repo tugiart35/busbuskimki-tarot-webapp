@@ -10,7 +10,6 @@ import {
   CreditKeys,
 } from '../schemas/tarot-config.schema';
 import { PositionInfo, PositionLayout } from '../../../../types/tarot';
-import { useTranslations } from '@/hooks/useTranslations';
 // Position data will be fetched from i18n
 
 const toCamelCase = (value: string): string => {
@@ -35,11 +34,11 @@ export const getPositionsFromI18n = (
   t: (key: string) => string
 ): PositionInfo[] => {
   const positions: PositionInfo[] = [];
-  
+
   for (let i = 1; i <= positionCount; i++) {
     const title = t(`spreads.${spreadKey}.positions.${i}.title`);
     const description = t(`spreads.${spreadKey}.positions.${i}.description`);
-    
+
     positions.push({
       id: i,
       title,
@@ -47,7 +46,7 @@ export const getPositionsFromI18n = (
       description,
     });
   }
-  
+
   return positions;
 };
 
@@ -574,9 +573,7 @@ export function createTarotConfig(
   const formI18nKeys = createFormI18nKeys(namespace);
 
   // Position bilgilerini i18n'den çek (eğer t fonksiyonu varsa)
-  const positionsInfo = t
-    ? getPositionsFromI18n(spreadKey, cardCount, t)
-    : [];
+  const positionsInfo = t ? getPositionsFromI18n(spreadKey, cardCount, t) : [];
 
   const defaultCreditKeys: CreditKeys = {
     detailed: `${creditPrefix}_DETAILED`,
@@ -697,7 +694,7 @@ export function createCareerConfig(t?: (key: string) => string): TarotConfig {
     readingType: 'CAREER_SPREAD',
     supabaseReadingType: 'career', // Veritabanında mevcut enum değeri
     creditKeyPrefix: 'CAREER_SPREAD',
-    t,
+    ...(t && { t }),
   });
 }
 
@@ -718,7 +715,7 @@ export function createLoveConfig(t?: (key: string) => string): TarotConfig {
     readingType: 'LOVE_SPREAD',
     supabaseReadingType: 'love', // Veritabanında mevcut enum değeri
     creditKeyPrefix: 'LOVE_SPREAD',
-    t,
+    ...(t && { t }),
   });
 }
 
@@ -739,7 +736,7 @@ export function createMoneyConfig(t?: (key: string) => string): TarotConfig {
     readingType: 'MONEY_SPREAD',
     supabaseReadingType: 'money', // Veritabanında mevcut enum değeri
     creditKeyPrefix: 'MONEY_SPREAD',
-    t,
+    ...(t && { t }),
   });
 }
 
@@ -747,7 +744,9 @@ export function createMoneyConfig(t?: (key: string) => string): TarotConfig {
  * Problem Solving spread için özel konfigürasyon
  * @param t - i18n translation function (optional)
  */
-export function createProblemSolvingConfig(t?: (key: string) => string): TarotConfig {
+export function createProblemSolvingConfig(
+  t?: (key: string) => string
+): TarotConfig {
   return createTarotConfig({
     spreadId: 'problem-solving',
     spreadKey: 'problemSolving',
@@ -761,7 +760,7 @@ export function createProblemSolvingConfig(t?: (key: string) => string): TarotCo
     readingType: 'PROBLEM_SOLVING_SPREAD',
     supabaseReadingType: 'problem-solving', // Veritabanında mevcut enum değeri
     creditKeyPrefix: 'PROBLEM_SOLVING',
-    t,
+    ...(t && { t }),
   });
 }
 
@@ -782,7 +781,7 @@ export function createMarriageConfig(t?: (key: string) => string): TarotConfig {
     readingType: 'MARRIAGE_SPREAD',
     supabaseReadingType: 'marriage', // Veritabanında mevcut enum değeri
     creditKeyPrefix: 'MARRIAGE',
-    t,
+    ...(t && { t }),
   });
 }
 
@@ -790,7 +789,9 @@ export function createMarriageConfig(t?: (key: string) => string): TarotConfig {
  * Relationship Analysis spread için özel konfigürasyon
  * @param t - i18n translation function (optional)
  */
-export function createRelationshipAnalysisConfig(t?: (key: string) => string): TarotConfig {
+export function createRelationshipAnalysisConfig(
+  t?: (key: string) => string
+): TarotConfig {
   return createTarotConfig({
     spreadId: 'relationship-analysis',
     spreadKey: 'relationshipAnalysis',
@@ -803,7 +804,7 @@ export function createRelationshipAnalysisConfig(t?: (key: string) => string): T
     readingType: 'RELATIONSHIP_ANALYSIS_SPREAD',
     supabaseReadingType: 'relationship-analysis', // Veritabanında mevcut enum değeri
     creditKeyPrefix: 'RELATIONSHIP_ANALYSIS',
-    t,
+    ...(t && { t }),
   });
 }
 
@@ -811,7 +812,9 @@ export function createRelationshipAnalysisConfig(t?: (key: string) => string): T
  * Relationship Problems spread için özel konfigürasyon
  * @param t - i18n translation function (optional)
  */
-export function createRelationshipProblemsConfig(t?: (key: string) => string): TarotConfig {
+export function createRelationshipProblemsConfig(
+  t?: (key: string) => string
+): TarotConfig {
   return createTarotConfig({
     spreadId: 'relationship-problems',
     spreadKey: 'relationshipProblems',
@@ -824,7 +827,7 @@ export function createRelationshipProblemsConfig(t?: (key: string) => string): T
     readingType: 'RELATIONSHIP_PROBLEMS_SPREAD',
     supabaseReadingType: 'relationship-problems', // Veritabanında mevcut enum değeri
     creditKeyPrefix: 'RELATIONSHIP_PROBLEMS',
-    t,
+    ...(t && { t }),
   });
 }
 
@@ -845,7 +848,7 @@ export function createNewLoverConfig(t?: (key: string) => string): TarotConfig {
     readingType: 'NEW_LOVER_SPREAD',
     supabaseReadingType: 'new-lover', // Veritabanında mevcut enum değeri
     creditKeyPrefix: 'NEW_LOVER',
-    t,
+    ...(t && { t }),
   });
 }
 
@@ -853,7 +856,9 @@ export function createNewLoverConfig(t?: (key: string) => string): TarotConfig {
  * Situation Analysis spread için özel konfigürasyon
  * @param t - i18n translation function (optional)
  */
-export function createSituationAnalysisConfig(t?: (key: string) => string): TarotConfig {
+export function createSituationAnalysisConfig(
+  t?: (key: string) => string
+): TarotConfig {
   return createTarotConfig({
     spreadId: 'situation-analysis',
     spreadKey: 'situationAnalysis',
@@ -867,6 +872,6 @@ export function createSituationAnalysisConfig(t?: (key: string) => string): Taro
     readingType: 'SITUATION_ANALYSIS_SPREAD',
     supabaseReadingType: 'situation-analysis', // Veritabanında mevcut enum değeri
     creditKeyPrefix: 'SITUATION_ANALYSIS',
-    t,
+    ...(t && { t }),
   });
 }

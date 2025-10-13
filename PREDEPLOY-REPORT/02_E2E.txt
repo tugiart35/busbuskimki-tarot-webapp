@@ -1,0 +1,91 @@
+
+> busbuskimki-tarot@0.1.0 test:e2e
+> playwright test
+
+⚠️ Supabase Client: Environment değişkenleri eksik, dummy client oluşturuluyor
+ReferenceError: jest is not defined
+
+   at src/features/shared/layout/__tests__/BottomNavigation.test.tsx:5
+
+  3 |
+  4 | // Mock useNavigation hook
+> 5 | jest.mock('@/hooks/useNavigation', () => ({
+    | ^
+  6 |   useNavigation: () => ({
+  7 |     navigationItems: [
+  8 |       {
+    at Object.<anonymous> (/Users/tugi/Desktop/TaraTarot/src/features/shared/layout/__tests__/BottomNavigation.test.tsx:5:1)
+ReferenceError: describe is not defined
+
+   at src/hooks/__tests__/useErrorBoundary.test.ts:4
+
+  2 | import { useErrorBoundary, useAsyncError } from '../useErrorBoundary';
+  3 |
+> 4 | describe('useErrorBoundary', () => {
+    | ^
+  5 |   it('should initialize with no error', () => {
+  6 |     const { result } = renderHook(() => useErrorBoundary());
+  7 |
+    at Object.<anonymous> (/Users/tugi/Desktop/TaraTarot/src/hooks/__tests__/useErrorBoundary.test.ts:4:1)
+ReferenceError: describe is not defined
+
+   at src/hooks/__tests__/useInputValidation.test.ts:4
+
+  2 | import { useInputValidation } from '../useInputValidation';
+  3 |
+> 4 | describe('useInputValidation', () => {
+    | ^
+  5 |   it('should validate required fields', () => {
+  6 |     const { result } = renderHook(() => useInputValidation());
+  7 |
+    at Object.<anonymous> (/Users/tugi/Desktop/TaraTarot/src/hooks/__tests__/useInputValidation.test.ts:4:1)
+ReferenceError: jest is not defined
+
+   at src/hooks/auth/__tests__/useAuth.test.ts:13
+
+  11 |
+  12 | // Mock AuthService
+> 13 | jest.mock('@/lib/auth/auth-service');
+     | ^
+  14 | const mockAuthService = AuthService as jest.Mocked<typeof AuthService>;
+  15 |
+  16 | // Mock Supabase auth
+    at Object.<anonymous> (/Users/tugi/Desktop/TaraTarot/src/hooks/auth/__tests__/useAuth.test.ts:13:1)
+ReferenceError: jest is not defined
+
+   at src/lib/auth/__tests__/auth-service.test.ts:12
+
+  10 |
+  11 | // Mock Supabase client
+> 12 | jest.mock('@/lib/supabase/client', () => ({
+     | ^
+  13 |   supabase: {
+  14 |     auth: {
+  15 |       signInWithPassword: jest.fn(),
+    at Object.<anonymous> (/Users/tugi/Desktop/TaraTarot/src/lib/auth/__tests__/auth-service.test.ts:12:1)
+ReferenceError: describe is not defined
+
+   at src/lib/auth/__tests__/auth-validation.test.ts:17
+
+  15 | } from '../auth-validation';
+  16 |
+> 17 | describe('Auth Validation', () => {
+     | ^
+  18 |   describe('loginSchema', () => {
+  19 |     it('should validate correct login data', () => {
+  20 |       const validData = {
+    at Object.<anonymous> (/Users/tugi/Desktop/TaraTarot/src/lib/auth/__tests__/auth-validation.test.ts:17:1)
+ReferenceError: describe is not defined
+
+   at src/lib/payment/__tests__/shopier-security.test.ts:16
+
+  14 | } from '../shopier-security';
+  15 |
+> 16 | describe('Shopier Security', () => {
+     | ^
+  17 |   describe('generateSecureSignature', () => {
+  18 |     it('should generate HMAC-SHA256 signature', () => {
+  19 |       const params = {
+    at Object.<anonymous> (/Users/tugi/Desktop/TaraTarot/src/lib/payment/__tests__/shopier-security.test.ts:16:1)
+Error: No tests found
+

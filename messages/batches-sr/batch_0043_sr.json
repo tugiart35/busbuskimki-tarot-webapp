@@ -69,11 +69,7 @@
             "answer": "Snažan u napredovanju projekata, ocenjivanje brzih mogućnosti, donošenje odluka i djelovanja."
           }
         ],
-        "related_cards": [
-          "sedam štapića",
-          "devet štapića",
-          "karita"
-        ],
+        "related_cards": ["sedam štapića", "devet štapića", "karita"],
         "imageUrl": "/cards/rvs/vii-vands.vebp"
       },
       "nine-of-wands": {
@@ -173,11 +169,7 @@
             "answer": "Jak je u situacijama koje zahtevaju borbu, prevazilaženje prepreka, odlučnosti, strpljenja i izdržljivosti."
           }
         ],
-        "related_cards": [
-          "osam štapića",
-          "deset štapiće",
-          "snaga"
-        ],
+        "related_cards": ["osam štapića", "deset štapiće", "snaga"],
         "imageUrl": "/cards/rvs/ik-inds.vebp"
       },
       "ten-of-wands": {
@@ -277,11 +269,7 @@
             "answer": "Jak je u situacijama koje zahtevaju odgovornost, borbu, završetak, organizacija i odlučnost."
           }
         ],
-        "related_cards": [
-          "devet štapića",
-          "svet",
-          "karita"
-        ],
+        "related_cards": ["devet štapića", "svet", "karita"],
         "imageUrl": "/cards/rvs/k-vands.vebp"
       },
       "page-of-wands": {
@@ -381,11 +369,7 @@
             "answer": "Kreativnost je snažna u situacijama koje zahtevaju učenje, nove projekte, otkriće i inspiraciju."
           }
         ],
-        "related_cards": [
-          "Ace-Of-Of-štapić",
-          "dvoje štapiće",
-          "mađioničar"
-        ],
+        "related_cards": ["Ace-Of-Of-štapić", "dvoje štapiće", "mađioničar"],
         "imageUrl": "/cards/rvs / page-vands.vebp"
       },
       "knight-of-wands": {
@@ -485,11 +469,7 @@
             "answer": "Jak je u novim projektima, situacijama koje zahtevaju rizike, brze odluke i preduzetništvo."
           }
         ],
-        "related_cards": [
-          "Stranice",
-          "Ace-Of-Of-štapić",
-          "snaga"
-        ],
+        "related_cards": ["Stranice", "Ace-Of-Of-štapić", "snaga"],
         "imageUrl": "/cards/rvs/Knight-vands.vebp"
       },
       "ace-of-pentacles": {
@@ -589,11 +569,7 @@
             "answer": "Jak je na početku novog poslovanja, ulaganja, zdravlja ili sigurnog odnosa. Donosi uspeh u uzemljenje i strpljenje."
           }
         ],
-        "related_cards": [
-          "troje pentakla",
-          "devet šoljica",
-          "sunce"
-        ],
+        "related_cards": ["troje pentakla", "devet šoljica", "sunce"],
         "imageUrl": "/cards/rvs / toace-pentacles.vebp"
       },
       "two-of-pentacles": {
@@ -693,11 +669,7 @@
             "answer": "Moćno je kada morate da uravnotežite više odgovornosti u svom životu i želite da se prilagodite promenama i protoku."
           }
         ],
-        "related_cards": [
-          "ace-of-pentacles",
-          "petostrukoćeno",
-          "dvoje čaša"
-        ],
+        "related_cards": ["ace-of-pentacles", "petostrukoćeno", "dvoje čaša"],
         "imageUrl": "/cards/rvs/ii-pentacles.vebp"
       },
       "three-of-pentacles": {
@@ -797,11 +769,7 @@
             "answer": "Moćan je kada se okupimo za novi projekat, timski rad ili zajednički cilj."
           }
         ],
-        "related_cards": [
-          "osamdeset pentakla",
-          "Šest štapića",
-          "tri šolje"
-        ],
+        "related_cards": ["osamdeset pentakla", "Šest štapića", "tri šolje"],
         "imageUrl": "/cards/rvs/iii-piće.vebp"
       },
       "four-of-pentacles": {

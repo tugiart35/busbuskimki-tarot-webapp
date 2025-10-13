@@ -1,13 +1,13 @@
 /**
  * Marriage Spread i18n Helper
- * 
+ *
  * Bu dosya, Evlilik açılımı için i18n çevirilerini yönetir.
- * 
+ *
  * Bağlı dosyalar:
  * - messages/tr.json (Türkçe çeviriler)
  * - messages/en.json (İngilizce çeviriler)
  * - messages/sr.json (Sırpça çeviriler)
- * 
+ *
  * Kullanım:
  * ```typescript
  * const { t } = useMarriageTranslations();
@@ -24,7 +24,7 @@ import { useTranslations as useNextIntlTranslations } from 'next-intl';
  */
 export function useMarriageTranslations() {
   const t = useNextIntlTranslations();
-  
+
   return { t };
 }
 
@@ -33,7 +33,10 @@ export function useMarriageTranslations() {
  * Örnek: "The Fool" → "thefool"
  */
 export function getCardI18nKey(cardName: string): string {
-  return cardName.toLowerCase().replace(/\s+/g, '').replace(/[^a-z]/g, '');
+  return cardName
+    .toLowerCase()
+    .replace(/\s+/g, '')
+    .replace(/[^a-z]/g, '');
 }
 
 /**
@@ -57,5 +60,3 @@ export function getMarriageMeaningI18nKey(
   const posKey = getPositionI18nKey(position);
   return `marriage.meanings.${cardKey}.${posKey}.${field}`;
 }
-
-

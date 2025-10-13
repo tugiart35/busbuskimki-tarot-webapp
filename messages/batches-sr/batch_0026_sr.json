@@ -231,97 +231,49 @@
         "position1": {
           "upright": "Ludman pokazuje da se njegova finansijska pitanja nastane od nesigurnosti. Kada se budućnost čini neizvesno, postaje teško rizikovati i možete se ustručavati da se slobodno ponašate.",
           "reversed": "Invertirana luda, nepažnja i nedostatak planiranja su izvor anksioznosti. Nepotrebni troškovi ili prekomjerni rizici mogu vas učiniti nesigurno.",
-          "keywords": [
-            "neizvesnost",
-            "rizikovati",
-            "sloboda",
-            "anksioznost",
-            "kontrola"
-          ],
+          "keywords": ["neizvesnost", "rizikovati", "sloboda", "anksioznost", "kontrola"],
           "context": "Vaša anksioznost se hrani neizvesnošću i nedostatak kontrole. Planirani koraci povećavaju osećaj poverenja."
         },
         "position2": {
           "upright": "Ludi pokazuje želju da preuzme nove finansijske korake sa hrabrošću da rizikuju. Tražite finansijsku sigurnost poverenjem protokom i ostalo otvoren za nove mogućnosti.",
           "reversed": "OGRANIČENO CRAZI stvara nepažnju anksioznost u materijalnim avanturama. Želja za bezbednošću može se zarobiti u stasisu, izbegavajući rizike.",
-          "keywords": [
-            "rizikovati",
-            "sloboda",
-            "sigurnost",
-            "početak",
-            "prilika"
-          ],
+          "keywords": ["rizikovati", "sloboda", "sigurnost", "početak", "prilika"],
           "context": "Vi tražite finansijsku sigurnost kroz odvažne korake i besplatne izbore."
         },
         "position3": {
           "upright": "Ludak teži da slobodno troši novac i bez planiranja. Takav stav, iako uzbudljiv, može stvoriti nestabilnost.",
           "reversed": "Ludi preokrenuti ukazuje na anksioznost o prekomjernoj averziji rizika ili nepažljivog zaduživanja. Upotreba novca postaje nesvesna.",
-          "keywords": [
-            "sloboda",
-            "rizikovati",
-            "nepažnja",
-            "trošenje",
-            "nedostatak planiranja"
-          ],
+          "keywords": ["sloboda", "rizikovati", "nepažnja", "trošenje", "nedostatak planiranja"],
           "context": "Podseća nas na ravnotežu između slobode i odgovornosti u upotrebi novca."
         },
         "position4": {
           "upright": "Možda ste uzeli nepromišljene rizike u finansijskim pitanjima u prošlosti. Neplanirani troškovi mogu se postići za kratkotrajno uzbuđenje.",
           "reversed": "OGROKERIRANO Ludi ukazuje na gubitke u prošlosti zbog ekstremne nesreće ili nepažnje u finansijskim pitanjima.",
-          "keywords": [
-            "rizikovati",
-            "nedostatak planiranja",
-            "trošenje",
-            "sloboda",
-            "gubitak"
-          ],
+          "keywords": ["rizikovati", "nedostatak planiranja", "trošenje", "sloboda", "gubitak"],
           "context": "U prošlosti je nepažnja u novcu pitala na čelu."
         },
         "position5": {
           "upright": "Lukman ima tendenciju da podneži svoje finansijske odgovornosti. Ponekad se planovi mogu odlagati zbog potrage za slobodom. To otežava u potpunosti ispunjene obaveze.",
           "reversed": "Ludi preokrenuti ukazuje da izbegavanje odgovornosti ili neopreznih odluka donose opterećenja. Neplanirani koraci su možda poremetili finansijski bilans.",
-          "keywords": [
-            "sloboda",
-            "odgovornost",
-            "nedostatak planiranja",
-            "rizikovati",
-            "lakoća"
-          ],
+          "keywords": ["sloboda", "odgovornost", "nedostatak planiranja", "rizikovati", "lakoća"],
           "context": "Postoji sukob između želje za slobodom i disciplinom u finansijskim odgovornostima."
         },
         "position6": {
           "upright": "Deli predstavlja prvi korak koji će se uzimati hrabrošću i slobodom u novim finansijskim planovima. Otvoreni ste za rizike i imate želju da isprobate različite staze.",
           "reversed": "Ludi preokrenuti ukazuje na rizike koji proizilaze iz žurbe ili nepažnje u finansijskim planovima. Nedostatak planiranja može dovesti do finansijskih gubitaka.",
-          "keywords": [
-            "početak",
-            "rizikovati",
-            "sloboda",
-            "hrabrost",
-            "plan"
-          ],
+          "keywords": ["početak", "rizikovati", "sloboda", "hrabrost", "plan"],
           "context": "Morate uravnotežiti hrabrosti i nepažnju u novim finansijskim planovima."
         },
         "position7": {
           "upright": "U budućim finansijskim planovima DELI ukazuje na rizike i odvajanje odvažnih koraka prema novim počecima. Iako postoji neizvesnost, duh avanture može vas dovesti do novih prilika.",
           "reversed": "Preokrenuo je ludo upozorava na finansijske rizike i neplanirane investicije koje proizilaze iz nepažnje. Potrebni su oprezni koraci za osiguranje budućnosti.",
-          "keywords": [
-            "početak",
-            "rizikovati",
-            "hrabrost",
-            "prilika",
-            "sloboda"
-          ],
+          "keywords": ["početak", "rizikovati", "hrabrost", "prilika", "sloboda"],
           "context": "Odvažni koraci ili nepažljivi rizici biće na prvom planovima u vašim planovima."
         },
         "position8": {
           "upright": "Luda pokazuje hrabrost, kreativnost i pokušava inovativne načine u njihovim sposobnostima donošenja novca. Kada se ne bojite da rizikujete, otvaraju se novi vrata prihoda.",
           "reversed": "Ludi preokrenuti ukazuje da su užurbane i nepromišljene inicijative mogu dovesti do gubitka novca. Potrebno je da se držite podalje od neplaniranih rizika.",
-          "keywords": [
-            "hrabrost",
-            "rizikovati",
-            "kreativnost",
-            "inovativnost",
-            "početak"
-          ],
+          "keywords": ["hrabrost", "rizikovati", "kreativnost", "inovativnost", "početak"],
           "context": "Vaša sposobnost da zarađujete može uticati na isprobavanje novih načina ili nepromišljenih rizika."
         }
       },
@@ -329,97 +281,49 @@
         "position1": {
           "upright": "Mađitelj ukazuje na strah od zloupotrebe resursa i nedostajućih mogućnosti. Anksioznost se diže kada mislite da ne možete u potpunosti da iskoristite svoj finansijski potencijal.",
           "reversed": "Preokrećeni mađioničar otkriva tjeskobu da je prevaren i zavedeni. Strah od manipulacije u finansijskoj sferi podriva samopouzdanje.",
-          "keywords": [
-            "izvor",
-            "prilika",
-            "nesigurnost",
-            "strah",
-            "manipulacija"
-          ],
+          "keywords": ["izvor", "prilika", "nesigurnost", "strah", "manipulacija"],
           "context": "Anksioznost nastaje iz trošenja mogućnosti ili je prevarena. Transparentnost i jasnoća štite vas."
         },
         "position2": {
           "upright": "Čarobnjak naglašava želju za finansijskom sigurnošću koristeći svoje sposobnosti i resurse. Imate moć i možete da izgradite sigurnost aktivnim akcijama.",
           "reversed": "Mađioničar u obrnutom jeziku ukazuje na strah od manipulacije ili zloupotrebe resursa. Želja za sigurnost može se oslabiti nesigurnošću i pogrešnim strategijama.",
-          "keywords": [
-            "stvaranje",
-            "veština",
-            "izvor",
-            "sigurnost",
-            "vizija"
-          ],
+          "keywords": ["stvaranje", "veština", "izvor", "sigurnost", "vizija"],
           "context": "Možete da izgradite sigurnost koristeći svoje veštine i usmeravanje svojih resursa."
         },
         "position3": {
           "upright": "Maga može pokazati sposobnost da mudro koristi svoje resurse i iskoriste mogućnosti. Novac postaje sredstvo za stvaranje.",
           "reversed": "Preokrećeni mađioničar signalizira rizik od manipulativnog trošenja ili podcjenjivanjem nečije sposobnosti. Novac stvara nesigurnost.",
-          "keywords": [
-            "stvaranje",
-            "veština",
-            "prilika",
-            "Upravljanje novcem",
-            "svest"
-          ],
+          "keywords": ["stvaranje", "veština", "prilika", "Upravljanje novcem", "svest"],
           "context": "Vreme je da vešto upravljate i investirate svesno."
         },
         "position4": {
           "upright": "Bili ste vešti i kreativni u upravljanju novcem u prošlosti. Izvori ste ocenili na različite načine.",
           "reversed": "Preokrećeni mađioničar ukazuje na manipulativne odluke ili rizično ponašanje za kratkoročno dobitak.",
-          "keywords": [
-            "kreativnost",
-            "veština",
-            "izvor",
-            "prilika",
-            "lukav"
-          ],
+          "keywords": ["kreativnost", "veština", "izvor", "prilika", "lukav"],
           "context": "U prošlosti je postojala tendencija da se kreativno koristi novac."
         },
         "position5": {
           "upright": "Čarobnjak pokazuje da su upravljanje veštinama i resursima istaknuti u finansijskim odgovornostima. Obaveze su savladale obaveštajne i volje.",
           "reversed": "Mađioničar u obrnutom pokazuje da manipulacija ili pogrešne odluke otežavaju finansijske odgovornosti. Povrčna rešenja su dugoročno stvorila teret.",
-          "keywords": [
-            "izvor",
-            "veština",
-            "odgovornost",
-            "volja",
-            "ravnoteža"
-          ],
+          "keywords": ["izvor", "veština", "odgovornost", "volja", "ravnoteža"],
           "context": "Veština i svesno menadžment dođe do izražaja finansijskih odgovornosti."
         },
         "position6": {
           "upright": "Mađitelj ukazuje na efikasno korišćenje veština i resursa u novim finansijskim planovima. Uspeh je moguć u vašoj komunikacijskoj moći i kreativnosti.",
           "reversed": "Preokrećeni mađioničar ukazuje na rizik od pogrešnog prekršaja, manipulacije ili trošene energije u novim finansijskim planovima.",
-          "keywords": [
-            "veština",
-            "kreativnost",
-            "izvor",
-            "uspeh",
-            "plan"
-          ],
+          "keywords": ["veština", "kreativnost", "izvor", "uspeh", "plan"],
           "context": "Upravljanje resursima pravilno u novim finansijskim planovima doneće uspeh."
         },
         "position7": {
           "upright": "Mađioničar pokazuje da možete da kreirate nove mogućnosti efikasno koristeći svoje veštine i resurse u budućim finansijskim planovima. Snažna vizija se pojavljuje sa inteligencijom i kreativnošću.",
           "reversed": "Mađioničar obrnuti ukazuje na rizik od manipulacije, pogrešno zloupotrebe resursa. Iskrenost i jasnoća su od suštinskog značaja za buduće planove.",
-          "keywords": [
-            "stvaranje",
-            "izvor",
-            "vizija",
-            "veština",
-            "snaga"
-          ],
+          "keywords": ["stvaranje", "izvor", "vizija", "veština", "snaga"],
           "context": "Snažna vizija ili zloupotreba resursa biće na dnevnom redu u budućim finansijskim planovima."
         },
         "position8": {
           "upright": "Mađioničar pokazuje vašu sposobnost da koristite svoje veštine, komunikacijske snage i kreativnog uma da zaradite novac. Možete usmjeriti resurse koje ste pravilno.",
           "reversed": "Reversirani mađioničar signaliziraju da ne koristi svoje sposobnosti njihovim punim potencijalom zbog manipulacije, neorganizacije ili nedostatka fokusa.",
-          "keywords": [
-            "veština",
-            "fokus",
-            "kreativnost",
-            "komunikacija",
-            "izvor"
-          ],
+          "keywords": ["veština", "fokus", "kreativnost", "komunikacija", "izvor"],
           "context": "Zarađeni novac je povezan sa upotrebom ili pogrešnom prekršajem vaših talenata."
         }
       },
@@ -427,97 +331,49 @@
         "position1": {
           "upright": "Visoka sveštenica ukazuje da materijalne nesigurnosti i poverljive informacije stvaraju anksioznost. Kada ne verujete svojoj unutrašnje intuiciji, to postaje teško donositi odluke.",
           "reversed": "Reverzna visoka sveštenica objašnjava da suzbijanje vašeg unutrašnjeg glasa stvara finansijsku anksioznost. Slušanje spoljnih glasova može zasjeniti vašu unutrašnju snagu.",
-          "keywords": [
-            "nejasnost",
-            "intuicija",
-            "sigurnost",
-            "anksioznost",
-            "nesigurnost"
-          ],
+          "keywords": ["nejasnost", "intuicija", "sigurnost", "anksioznost", "nesigurnost"],
           "context": "Anksioznost proizilazi iz vašeg suzbijanja vašeg unutrašnjeg glasa i nedostatka transparentnosti. Verujući vašoj intuiciji donosi mir."
         },
         "position2": {
           "upright": "Visoka sveštenica pokazuje da se želja za finansijskom sigurnošću podstiče intuicijom i unutrašnjom mudrošću. Verujući vašem unutrašnjem vodiču štiti vas.",
           "reversed": "Preokrećena visoka sveštenica ukazuje na nesigurnost i zabrinutost za tajnost. Ne mogu da pristupite otvorenim informacijama u vašoj potrazi za sigurnost, možete vas izazvati.",
-          "keywords": [
-            "intuicija",
-            "mudrost",
-            "sigurnost",
-            "tajna",
-            "ravnoteža"
-          ],
+          "keywords": ["intuicija", "mudrost", "sigurnost", "tajna", "ravnoteža"],
           "context": "Vi bezbednost pripisujete svojim unutrašnjim uputstvima i mudrim izborima."
         },
         "position3": {
           "upright": "Visoki sveštenici ukazuje na intuitivni pristup i umerenost u upotrebi novca. Mirno planiranje donosi koristi.",
           "reversed": "Preokrećena visoka sveštenica ukazuje na skrivene troškove ili neprozirne finansijske odluke.",
-          "keywords": [
-            "intuicija",
-            "merenje",
-            "tajna",
-            "štedljiv",
-            "ravnoteža"
-          ],
+          "keywords": ["intuicija", "merenje", "tajna", "štedljiv", "ravnoteža"],
           "context": "Transparentnost i moderiranje su važni u upotrebi novca."
         },
         "position4": {
           "upright": "U prošlosti ste možda doneli finansijske odluke na osnovu intuicije. Iskoristili ste nevidljive mogućnosti.",
           "reversed": "Ograničena visoka sveštenica može prouzrokovati probleme sa prekomernom tajnom ili nedostatkom razmene informacija u vezi sa finansijskim pitanjima.",
-          "keywords": [
-            "intuicija",
-            "sigurnost",
-            "informacije",
-            "uvid",
-            "neizvesnost"
-          ],
+          "keywords": ["intuicija", "sigurnost", "informacije", "uvid", "neizvesnost"],
           "context": "U prošlosti su intuicija i tajnost bili istaknuti u upravljanju novcem."
         },
         "position5": {
           "upright": "Visoka sveštenica ima tendenciju da deluje sa intuicijom i uvidom u finansijske odgovornosti. Neke odluke su podržale unutrašnji glas.",
           "reversed": "Invertirana visoka svećenica, tajnost ili neznanje u pogledu finansijskih odgovornosti mogu stvoriti probleme. Nejasna pitanja pogoršavaju obaveze.",
-          "keywords": [
-            "intuicija",
-            "mudrost",
-            "sigurnost",
-            "odgovornost",
-            "odluka"
-          ],
+          "keywords": ["intuicija", "mudrost", "sigurnost", "odgovornost", "odluka"],
           "context": "Postoji potreba za rancom, ali i transparentnost u fiskalnim odgovornostima."
         },
         "position6": {
           "upright": "Visoki sveštenici kaže da biste trebali da verujete svojoj intuiciji sa novim finansijskim planovima. Neviđene prilike mogu se prepoznati sa unutrašnjim glasom.",
           "reversed": "Preokrećena visoka sveštenica ukazuje na suzbijanje intuicije ili se izgubila u neizvesnosti u finansijskim planovima.",
-          "keywords": [
-            "intuicija",
-            "mudrost",
-            "nevidljiv",
-            "unutrašnja smernica",
-            "plan"
-          ],
+          "keywords": ["intuicija", "mudrost", "nevidljiv", "unutrašnja smernica", "plan"],
           "context": "Slušanje vaše intuicije vodiće vas u novim finansijskim planovima."
         },
         "position7": {
           "upright": "Visoka sveštenica naglašava da biste trebali da verujete svojoj intuiciji u svojim finansijskim odlukama u budućnosti. Sa dubokim razumevanjem, moći ćete da vidite skrivene mogućnosti.",
           "reversed": "Obrnuti visoki sveštenik, podnošenje finansijskih odluka sa nesigurnošću, prekomerne tajnosti ili je ignorisana intuicija rizična.",
-          "keywords": [
-            "intuicija",
-            "informacije",
-            "skrivena prilika",
-            "uvid",
-            "ravnoteža"
-          ],
+          "keywords": ["intuicija", "informacije", "skrivena prilika", "uvid", "ravnoteža"],
           "context": "Intuicija ili neizvesnost odrediće buduće finansijske planove."
         },
         "position8": {
           "upright": "Visoka sveštenica donosi intuiciju, arcane znanje i strateške uvide u snažan resurs za zarađivanje novca. Pouzdajući u unutrašnju glasu je velika prednost.",
           "reversed": "Prekoračeni visoki sveštenici ukazuje da se mogućnosti mogu propustiti zbog suzbijanja intuicije, konfuzije ili ne deljenja informacija.",
-          "keywords": [
-            "intuicija",
-            "informacije",
-            "uvid",
-            "strategija",
-            "sigurnost"
-          ],
+          "keywords": ["intuicija", "informacije", "uvid", "strategija", "sigurnost"],
           "context": "Vaše sposobnosti donošenja novca povezane su sa korišćenjem ili ignorisanjem vaše intuicije."
         }
       },
@@ -525,97 +381,49 @@
         "position1": {
           "upright": "Campres ukazuje na strah od gubitka obilja i neadekvatnosti. Oštećenja na finansijskoj sigurnosti može povećati zabrinutost.",
           "reversed": "Reverse carica otkriva zavisnost i anksioznost produktivnosti. Anksioznost zbog toga što nije samostalno ili održavanje obilja dolazi do izražaja.",
-          "keywords": [
-            "dosta",
-            "nedovoljnost",
-            "zavisnost",
-            "anksioznost",
-            "sigurnost"
-          ],
+          "keywords": ["dosta", "nedovoljnost", "zavisnost", "anksioznost", "sigurnost"],
           "context": "Anksioznost proizilazi iz straha da izgubite obilje ili postane zavisni. Sećanje na vašu sopstvenu vrednost daje samopouzdanje."
         },
         "position2": {
           "upright": "EMPRESS-a podstiče želju za obiljem, produktivnošću i sigurnošću kroz obilje. Želja da se čvrsto ukorijenjene u materijalnom svetu dolazi do izražaja.",
           "reversed": "Reversirana carica ukazuje na anksioznost nad preterivanjem ili zavisnošću. Želja za bezbednošću može se zamutiti nedostatkom kontrole.",
-          "keywords": [
-            "dosta",
-            "obilje",
-            "sigurnost",
-            "proizvodnja",
-            "ukorenjevanje"
-          ],
+          "keywords": ["dosta", "obilje", "sigurnost", "proizvodnja", "ukorenjevanje"],
           "context": "Osnivate sigurnost stvaranjem obilja i uspostavljanja korena."
         },
         "position3": {
           "upright": "Carica teži da koristi novac za stvaranje obilja i podržati druge. Vedroznik dolazi do izražaja.",
           "reversed": "Reversed carica ukazuje na anksioznost o prekomernom ili emocionalnom kupovini.",
-          "keywords": [
-            "dosta",
-            "velikodušnost",
-            "podrška",
-            "trošenje",
-            "obilje"
-          ],
+          "keywords": ["dosta", "velikodušnost", "podrška", "trošenje", "obilje"],
           "context": "Upotreba novca je da se deli i proizvodi obilje."
         },
         "position4": {
           "upright": "Doživeli ste periode obilja i prosperiteta u novcu u prošlosti. Rashodi su možda napravljeni za porodicu i zadovoljstvo.",
           "reversed": "Reversirana carica ukazuje na tendenciju da se prevrne ili ispušni materijalni resursi.",
-          "keywords": [
-            "dosta",
-            "obilje",
-            "porodica",
-            "trošenje",
-            "zadovoljstvo"
-          ],
+          "keywords": ["dosta", "obilje", "porodica", "trošenje", "zadovoljstvo"],
           "context": "U prošlosti su potrošnja i orijentisana na zadovoljstvo bila na čelu."
         },
         "position5": {
           "upright": "Campress naglašava porodicu, negu i potrebe za sastancima u finansijskim odgovornostima. Finansijska pitanja upravljala su saosećanjem i velikodušom.",
           "reversed": "Invertirana carica, prekomerna ili previdnaaktivnost može povećati finansijske terete. Mnogo je opterećenja na sebi i drugima.",
-          "keywords": [
-            "briga",
-            "velikodušnost",
-            "porodica",
-            "trošenje",
-            "opteretiti"
-          ],
+          "keywords": ["briga", "velikodušnost", "porodica", "trošenje", "opteretiti"],
           "context": "Finansijske odgovornosti su oblikovane zaštitom i podrškom najmilijih."
         },
         "position6": {
           "upright": "Carica ukazuje na obilje i produktivnost u novim finansijskim planovima. Sa kreativnost, plodne investicije mogu doći do izražaja.",
           "reversed": "Ukrašena carica može ukazivati na prenos, nezadovoljstvo ili produktivnost blokadu.",
-          "keywords": [
-            "dosta",
-            "kreativnost",
-            "produktivnost",
-            "investicija",
-            "plan"
-          ],
+          "keywords": ["dosta", "kreativnost", "produktivnost", "investicija", "plan"],
           "context": "Energija i kreativnost obilja nalaze se na novim finansijskim planovima."
         },
         "position7": {
           "upright": "Carica ukazuje na vreme da žeti plodove obilja, obilja i ulaganja u budućnost. Vaša finansijska sigurnost će snažnije iskoristiti koren.",
           "reversed": "Reversed carica upozorava na rizik da se prevrne, nekontrolisane investicije ili finansijsko iscrpljivanje.",
-          "keywords": [
-            "dosta",
-            "investicija",
-            "obilje",
-            "sigurnost",
-            "rast"
-          ],
+          "keywords": ["dosta", "investicija", "obilje", "sigurnost", "rast"],
           "context": "Obilnost ili prekomerna potrošnja će biti na dnevnom redu u budućim finansijskim planovima."
         },
         "position8": {
           "upright": "Carica pokazuje kreativnost, produktivnost i sposobnost množenja resursa. Vaše veštine pravljenja novca podržavaju energiju obilja i obilja.",
           "reversed": "Reversirana carica ukazuje da finansijske mogućnosti mogu biti oslabljene zbog previsene zavisnosti, nepažnje ili neefikasnosti.",
-          "keywords": [
-            "kreativnost",
-            "dosta",
-            "obilje",
-            "proizvodnja",
-            "izvor"
-          ],
+          "keywords": ["kreativnost", "dosta", "obilje", "proizvodnja", "izvor"],
           "context": "Vaše sposobnosti donošenja novca razvijaju se kroz produktivnost ili neefikasnost."
         }
       },
@@ -623,97 +431,49 @@
         "position1": {
           "upright": "Car pokazuje anksioznost zbog gubitka kontrole i nedostatak naloga. Kada ne postoji struktura za pružanje finansijske sigurnosti, nastaje nemiri.",
           "reversed": "Invertirani car ukazuje na anksioznost uzrokovanu nedostatkom autoriteta ili prekomernog pritiska. Finansijske odgovornosti vas mogu biti neodoljive.",
-          "keywords": [
-            "kontrola",
-            "narediti",
-            "sigurnost",
-            "odgovornost",
-            "vlast"
-          ],
+          "keywords": ["kontrola", "narediti", "sigurnost", "odgovornost", "vlast"],
           "context": "Anksioznost proizilazi iz nedostatka kontrole i naloga. Čvrsto planiranje daje duševni mir."
         },
         "position2": {
           "upright": "Car simbolizuje redosled, strukturu i želju za autoritetom i bezbednošću. Obriši planovi i čvrste strategije koje ste pokrili.",
           "reversed": "Reverzni car ukazuje na anksioznost o zavisnosti od autoriteta ili prekomerne kontrole. Želja za sigurnost može se suziti rigidnosti.",
-          "keywords": [
-            "narediti",
-            "vlast",
-            "plan",
-            "sigurnost",
-            "stabilnost"
-          ],
+          "keywords": ["narediti", "vlast", "plan", "sigurnost", "stabilnost"],
           "context": "Tražite sigurnost kroz organizovanu strukturu i strateške korake."
         },
         "position3": {
           "upright": "Car obično koristi novac redovno i na planiran način. Vi upravljate resursima za izgradnju sigurnih struktura.",
           "reversed": "Reversirani car ukazuje na zabrinutost za sigurnost prekomernom kontrolom ili strogim pravilima potrošnje.",
-          "keywords": [
-            "narediti",
-            "plan",
-            "kontrola",
-            "sigurnost",
-            "sistem"
-          ],
+          "keywords": ["narediti", "plan", "kontrola", "sigurnost", "sistem"],
           "context": "Red i struktura dolaze na prvi plan u upotrebi novca."
         },
         "position4": {
           "upright": "U prošlosti ste imali disciplinovani i organizovani pristup pitanjima novca. Strukturirani planovi su napravljeni za sigurnost.",
           "reversed": "Reversed car signalizira gubitak fleksibilnosti zbog prekomerne kontrole ili krute stavove.",
-          "keywords": [
-            "disciplina",
-            "narediti",
-            "sigurnost",
-            "planiranje",
-            "vlast"
-          ],
+          "keywords": ["disciplina", "narediti", "sigurnost", "planiranje", "vlast"],
           "context": "U prošlosti je došlo do urednog i autoritarnog pristupa novca."
         },
         "position5": {
           "upright": "Car pokazuje sposobnost uspostavljanja reda i discipline u finansijskim odgovornostima. Poverenje i struktura bili su osnovni u ovom procesu.",
           "reversed": "U obrnutom caru, finansijske odgovornosti mogu pretvoriti u pritisak zbog prekomerne kontrole ili krutog stava.",
-          "keywords": [
-            "narediti",
-            "vlast",
-            "odgovornost",
-            "poverenje",
-            "disciplina"
-          ],
+          "keywords": ["narediti", "vlast", "odgovornost", "poverenje", "disciplina"],
           "context": "Finansijske odgovornosti zasnivaju se na disciplini i strukturi."
         },
         "position6": {
           "upright": "Car ukazuje na uspostavljanje redosleda, autoritete i čvrste strukture u novim finansijskim planovima. Strateški koraci donose trajne rezultate.",
           "reversed": "Otkriveni car kaže da nedostatak krute kontrole ili fleksibilnosti u finansijskim planovima može dovesti do kvara.",
-          "keywords": [
-            "narediti",
-            "vlast",
-            "planiranje",
-            "stabilnost",
-            "struktura"
-          ],
+          "keywords": ["narediti", "vlast", "planiranje", "stabilnost", "struktura"],
           "context": "Novi finansijski planovi zahtevaju disciplinu i strateški pristup."
         },
         "position7": {
           "upright": "Car ukazuje na dugoročni uspeh sa disciplinom, nalogom i čvrstim strategijama u budućim finansijskim planovima.",
           "reversed": "Reversirani car ukazuje da kruta pravila ili nefleksibilni finansijski planovi mogu biti rizični.",
-          "keywords": [
-            "narediti",
-            "strategija",
-            "stabilnost",
-            "vlast",
-            "dugoročan"
-          ],
+          "keywords": ["narediti", "strategija", "stabilnost", "vlast", "dugoročan"],
           "context": "Disciplina ili krutost će biti istaknuta u budućim finansijskim planovima."
         },
         "position8": {
           "upright": "Car pokazuje da je ojačao svoje veštine koje stvaraju novac kroz disciplinu, planiranje i red. Strateške odluke donose uspeh.",
           "reversed": "Reversirani car ukazuje da se mogućnosti mogu sužavati zbog prekomerne krutosti, autoritarizma ili nefleksibilnosti.",
-          "keywords": [
-            "narediti",
-            "planiranje",
-            "disciplina",
-            "vlast",
-            "stabilnost"
-          ],
+          "keywords": ["narediti", "planiranje", "disciplina", "vlast", "stabilnost"],
           "context": "Vaša sposobnost zarada je direktno povezana sa porudžbinom ili rigidnosti."
         }
       },

@@ -51,10 +51,11 @@ export function CardFAQ({ seo, locale }: CardFAQProps) {
                       </h4>
                       <div className='flex-shrink-0'>
                         <svg
-                          className='w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform duration-200'
+                          className='w-5 h-5 text-gray-700 group-open:rotate-180 transition-transform duration-200'
                           fill='none'
                           stroke='currentColor'
                           viewBox='0 0 24 24'
+                          aria-hidden='true'
                         >
                           <path
                             strokeLinecap='round'
@@ -101,6 +102,13 @@ export function CardFAQ({ seo, locale }: CardFAQProps) {
             <a
               href={`/${locale}/tarot-okumasi`}
               className='inline-flex items-center px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl'
+              aria-label={
+                locale === 'tr'
+                  ? 'Tarot okuması sayfasına git'
+                  : locale === 'en'
+                    ? 'Go to tarot reading page'
+                    : 'Idite na stranicu za tarot čitanje'
+              }
             >
               {locale === 'tr'
                 ? 'Tarot Okuması Yap'
@@ -112,6 +120,7 @@ export function CardFAQ({ seo, locale }: CardFAQProps) {
                 fill='none'
                 stroke='currentColor'
                 viewBox='0 0 24 24'
+                aria-hidden='true'
               >
                 <path
                   strokeLinecap='round'

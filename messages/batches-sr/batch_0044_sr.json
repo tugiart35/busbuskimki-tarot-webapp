@@ -43,11 +43,7 @@
             "answer": "Moćno je kada je u pitanju uspostavljanje finansijske strukture, stvarajući siguran prostor i pružanje dugoročne stabilnosti."
           }
         ],
-        "related_cards": [
-          "devet stanovnika",
-          "šest šoljica",
-          "toranj"
-        ],
+        "related_cards": ["devet stanovnika", "šest šoljica", "toranj"],
         "imageUrl": "/cards/rvs/iv-pentacles.vebp"
       },
       "five-of-pentacles": {
@@ -147,11 +143,7 @@
             "answer": "U vreme gubitka, usamljenosti ili ponovnog rođenja; Moćno je kada nas uči da krenemo naprijed solidarnosti i empatije."
           }
         ],
-        "related_cards": [
-          "troje pentakla",
-          "sunce",
-          "šest šoljica"
-        ],
+        "related_cards": ["troje pentakla", "sunce", "šest šoljica"],
         "imageUrl": "/cards/rvs/v-pentacles.vebp"
       },
       "six-of-pentacles": {
@@ -251,11 +243,7 @@
             "answer": "Kada je potrebno materijal, emocionalna ili duhovna deljenja; Jak je u procesima saradnje i ravnoteže."
           }
         ],
-        "related_cards": [
-          "troje pentakla",
-          "pravda",
-          "šest šoljica"
-        ],
+        "related_cards": ["troje pentakla", "pravda", "šest šoljica"],
         "imageUrl": "/cards/rvs / vi-pentacles.vebp"
       },
       "seven-of-pentacles": {
@@ -355,11 +343,7 @@
             "answer": "Jak je u dugoročnim projektima, ulaganjima koja zahtevaju strpljenje ili periode internog rasta."
           }
         ],
-        "related_cards": [
-          "osamdeset pentakla",
-          "sunce",
-          "sedam štapića"
-        ],
+        "related_cards": ["osamdeset pentakla", "sunce", "sedam štapića"],
         "imageUrl": "/cards/rvs / vii-pentacles.vebp"
       },
       "eight-of-pentacles": {
@@ -459,11 +443,7 @@
             "answer": "Jak je u procesima učenja, u razvoju veština ili se fokusiralo odlučno na cilj."
           }
         ],
-        "related_cards": [
-          "troje pentakla",
-          "mađioničar",
-          "osam štapića"
-        ],
+        "related_cards": ["troje pentakla", "mađioničar", "osam štapića"],
         "imageUrl": "/cards/rvs / viii-pentacles.vebp"
       },
       "nine-of-pentacles": {
@@ -563,11 +543,7 @@
             "answer": "Jak je kad želi da shvati svoju snagu i iskusi u unutrašnje zadovoljstvo dok je realizovao rezultate svog rada."
           }
         ],
-        "related_cards": [
-          "deset stanovnika",
-          "kampera",
-          "sunce"
-        ],
+        "related_cards": ["deset stanovnika", "kampera", "sunce"],
         "imageUrl": "/cards/rvs/ik-pentacles.vebp"
       },
       "ten-of-pentacles": {
@@ -667,11 +643,7 @@
             "answer": "Snažno je u procesu jačanja porodičnih veza, ulaganja ulaganja ili uspostavljanje dobro utvrđenog sistema."
           }
         ],
-        "related_cards": [
-          "devet stanovnika",
-          "car",
-          "mesec"
-        ],
+        "related_cards": ["devet stanovnika", "car", "mesec"],
         "imageUrl": "/cards/rvs/k-pentacles.vebp"
       },
       "page-of-pentacles": {
@@ -771,11 +743,7 @@
             "answer": "Moćno je kada započinje novo obrazovanje, poslovni ili proces ličnog razvoja."
           }
         ],
-        "related_cards": [
-          "ace-of-pentacles",
-          "pustinjak",
-          "trojke"
-        ],
+        "related_cards": ["ace-of-pentacles", "pustinjak", "trojke"],
         "imageUrl": "/cards/rvs / page-pentacles.vebp"
       },
       "knight-of-pentacles": {
@@ -875,11 +843,7 @@
             "answer": "Jak je u dugoročnim planovima, razvoju poslovanja ili procesima koji zahtevaju odgovornost."
           }
         ],
-        "related_cards": [
-          "troje pentakla",
-          "temperament",
-          "osam štapića"
-        ]
+        "related_cards": ["troje pentakla", "temperament", "osam štapića"]
       }
     }
   }

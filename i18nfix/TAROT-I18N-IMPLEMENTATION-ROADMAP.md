@@ -9,9 +9,11 @@
 
 ## 📋 GENEL BAKIŞ
 
-Bu dokuman, herhangi bir tarot açılım pozisyon dosyasına (position-X-*.ts) tam i18n desteği eklemek için adım adım rehberdir.
+Bu dokuman, herhangi bir tarot açılım pozisyon dosyasına (position-X-\*.ts) tam
+i18n desteği eklemek için adım adım rehberdir.
 
-**Hedef:** Bir pozisyon dosyasındaki 78 kartın anlamlarını 3 dilde (tr/en/sr) kullanılabilir hale getirmek.
+**Hedef:** Bir pozisyon dosyasındaki 78 kartın anlamlarını 3 dilde (tr/en/sr)
+kullanılabilir hale getirmek.
 
 **Tahmini Süre:** 60-90 dakika per position  
 **Maliyet:** $0 (Google Translate ücretsiz)  
@@ -22,17 +24,20 @@ Bu dokuman, herhangi bir tarot açılım pozisyon dosyasına (position-X-*.ts) t
 ## ⚠️ ÖNEMLİ NOTLAR
 
 ### Sırpça Dili
+
 - ✅ **Latin alfabesi** kullanın (örn: "ljubav", "sreća")
 - ❌ **Cyrillic kullanmayın** (örn: "љубав", "срећа")
 - Google Translate'de hedef dil: **"sr"** (otomatik Latin verir)
 - Eğer Cyrillic gelirse: `transliterate.py` script'i kullanın
 
 ### Türkçe Metinler
-- Türkçe anlamlar **zaten position-X-*.ts dosyasında hardcoded**
+
+- Türkçe anlamlar **zaten position-X-\*.ts dosyasında hardcoded**
 - Extract script'i ile direkt `messages/tr.json`'a aktarın
 - Manuel çeviri **GEREKMEZ**
 
 ### Çeviri Stratejisi
+
 - TR (kaynak) → EN (Google Translate)
 - TR (kaynak) → SR Latin (Google Translate)
 
@@ -51,12 +56,14 @@ cat $FILE_PATH | head -50
 ```
 
 **Kontrol listesi:**
+
 - [ ] Dosya `position{X}Meanings` array'i içeriyor mu?
 - [ ] Her kart için `upright`, `reversed`, `keywords`, `context` var mı?
 - [ ] Kaç kart var? (beklenen: 78)
 - [ ] Spread türü nedir? (love/career/money/vb.)
 
 **Önemli bilgileri not edin:**
+
 - Array adı: `position2Meanings` / `position3Meanings` / vb.
 - Spread adı: `love` / `career` / `money` / vb.
 - Pozisyon numarası: 1, 2, 3, 4
@@ -70,6 +77,7 @@ cat $FILE_PATH | head -50
 **Dosya:** `position-X-*.ts`
 
 **Eklenecek satır:**
+
 ```typescript
 'use client';
 ```
@@ -77,11 +85,12 @@ cat $FILE_PATH | head -50
 **Konum:** Dosyanın en başına (yorumlardan sonra, import'lardan önce)
 
 **Örnek:**
+
 ```typescript
 // Bu dosya, Aşk açılımında Pozisyon 2 için özel kart anlamlarını içerir.
 // Her kartın bu pozisyonda ne anlama geldiği tanımlanmıştır.
 // i18n desteği için güncellenmiştir.
-'use client';  // ← BURAYA EKLE
+'use client'; // ← BURAYA EKLE
 
 import { useLoveTranslations } from './i18n-helper';
 ```
@@ -91,6 +100,7 @@ import { useLoveTranslations } from './i18n-helper';
 **Dosya:** `position-X-*.ts` içindeki `getI18nPosition{X}Meaning` fonksiyonu
 
 **Bulun:**
+
 ```typescript
 keywords: i18nKeywords
   ? JSON.parse(i18nKeywords)
@@ -98,6 +108,7 @@ keywords: i18nKeywords
 ```
 
 **Değiştirin:**
+
 ```typescript
 keywords: (() => {
   if (!i18nKeywords) {
@@ -125,7 +136,7 @@ keywords: (() => {
 **Sadece 1 kez yapılır** (tüm pozisyonlar için ortak)
 
 ```typescript
-'use client';  // ← Dosyanın başına ekle
+'use client'; // ← Dosyanın başına ekle
 
 // Bu dosya, Aşk açılımında tüm pozisyonlar için...
 ```
@@ -142,23 +153,31 @@ keywords: (() => {
 // DOSYA: scripts/extract-{spread}-position{X}-tr.js
 
 // 1. Hedef dosya yolu
-const filePath = path.join(__dirname, '../src/features/tarot/lib/{spread}/position-{X}-*.ts');
+const filePath = path.join(
+  __dirname,
+  '../src/features/tarot/lib/{spread}/position-{X}-*.ts'
+);
 
 // 2. Array adı (dosyadan bakın)
-const arrayMatch = fileContent.match(/export const position{X}Meanings: .*?\[\] = \[([\s\S]*?)\];/);
+const arrayMatch = fileContent.match(
+  /export const position{X}Meanings: .*?\[\] = \[([\s\S]*?)\];/
+);
 
 // 3. Spread adı
-const spreadKey = '{spread}';  // 'love', 'career', 'money', vb.
+const spreadKey = '{spread}'; // 'love', 'career', 'money', vb.
 
 // 4. Pozisyon numarası
-const positionKey = 'position{X}';  // 'position1', 'position2', vb.
+const positionKey = 'position{X}'; // 'position1', 'position2', vb.
 
 // ⚠️ ÖNEMLİ: REGEX PATTERN'LERİ DOĞRU KULLANIN
 // Field extraction için lookahead assertion kullanın:
-const uprightMatch = objStr.match(/upright:\s*['"\`]([\s\S]*?)['"\`]\s*,?\s*(?=reversed:|keywords:|context:|group:|$)/);
+const uprightMatch = objStr.match(
+  /upright:\s*['"\`]([\s\S]*?)['"\`]\s*,?\s*(?=reversed:|keywords:|context:|group:|$)/
+);
 ```
 
-**Script şablonu:** `scripts/extract-love-position2-tr.js` dosyasını kopyalayın (güncellenmiş regex'ler var)
+**Script şablonu:** `scripts/extract-love-position2-tr.js` dosyasını kopyalayın
+(güncellenmiş regex'ler var)
 
 ### Adım 3.2: Çalıştır
 
@@ -171,6 +190,7 @@ node scripts/extract-{spread}-position{X}-tr.js
 ```
 
 **Beklenen çıktı:**
+
 ```
 📖 78 kart objesi bulundu
   ✅ 1/78 - The Fool (thefool)
@@ -184,6 +204,7 @@ node scripts/extract-{spread}-position{X}-tr.js
 ```
 
 **Doğrulama:**
+
 ```bash
 # Türkçe anahtarları kontrol et
 python3 -c "
@@ -232,14 +253,14 @@ def translate_text(text, target_lang):
     try:
         if not text or len(text.strip()) == 0:
             return text
-        
+
         # ÖNEMLİ: SR için transliterate=False kullan (Latin alfabe)
         if target_lang == 'sr':
             result = translator.translate(text, dest=target_lang, src='tr')
             # Google Translate varsayılan olarak Latin alfabe verir
         else:
             result = translator.translate(text, dest=target_lang, src='tr')
-        
+
         return result.text
     except Exception as e:
         print(f"    ❌ Çeviri hatası: {e}")
@@ -249,7 +270,7 @@ def translate_keywords(keywords, target_lang):
     """Anahtar kelimeleri çevir"""
     if not keywords or not isinstance(keywords, list):
         return keywords
-    
+
     translated = []
     for keyword in keywords:
         result = translate_text(keyword, target_lang)
@@ -261,18 +282,18 @@ def main():
     print("=" * 70)
     print(f"🔮 {SPREAD_KEY.upper()} POSITION-{POSITION_NUM} ÇEVİRİ ARACI")
     print("=" * 70)
-    
+
     # Türkçe dosyayı oku
     with open('messages/tr.json', 'r', encoding='utf-8') as f:
         tr_data = json.load(f)
-    
+
     if SPREAD_KEY not in tr_data or 'meanings' not in tr_data[SPREAD_KEY]:
         print(f"❌ {SPREAD_KEY}.meanings bulunamadı!")
         return
-    
+
     en_data = {SPREAD_KEY: {"meanings": {}, "cardGroups": {}}}
     sr_data = {SPREAD_KEY: {"meanings": {}, "cardGroups": {}}}
-    
+
     # cardGroups çevir (varsa ve daha önce eklenmemişse)
     if 'cardGroups' in tr_data.get(SPREAD_KEY, {}):
         print("\n🔮 Kart grupları çeviriliyor...")
@@ -282,21 +303,21 @@ def main():
             time.sleep(0.3)
             sr_data[SPREAD_KEY]['cardGroups'][group_key] = translate_text(group_value, 'sr')
             time.sleep(0.3)
-    
+
     # Kart anlamlarını çevir
     print(f"\n🃏 Position-{POSITION_NUM} kart anlamları çeviriliyor (78 kart)...")
     print("⏱️  Tahmini süre: 30-45 dakika")
     print("🔤 Sırpça: Latin alfabesi (translitere edilecek)")
     print("=" * 70)
-    
+
     total_cards = len(tr_data[SPREAD_KEY]['meanings'])
     current = 0
     start_time = time.time()
-    
+
     for card_key, card_data in tr_data[SPREAD_KEY]['meanings'].items():
         current += 1
         elapsed = time.time() - start_time
-        
+
         if current > 1:
             avg_time = elapsed / (current - 1)
             remaining = avg_time * (total_cards - current)
@@ -304,15 +325,15 @@ def main():
             print(f"⏱️  Geçen: {int(elapsed/60)}dk {int(elapsed%60)}sn | Kalan: ~{int(remaining/60)}dk {int(remaining%60)}sn")
         else:
             print(f"\n[{current}/{total_cards}] {card_key}")
-        
+
         # POZİSYON ANAHTARINI KONTROL ET
         pos_key = f'position{POSITION_NUM}'
         if pos_key not in card_data:
             print(f"  ⚠️  {pos_key} bulunamadı, atlanıyor")
             continue
-        
+
         pos_data = card_data[pos_key]
-        
+
         # İngilizce çeviri
         print("  → İngilizce çeviriliyor...")
         en_upright = translate_text(pos_data.get('upright', ''), 'en')
@@ -323,7 +344,7 @@ def main():
         time.sleep(0.5)
         en_context = translate_text(pos_data.get('context', ''), 'en')
         time.sleep(0.5)
-        
+
         en_data[SPREAD_KEY]['meanings'][card_key] = {
             pos_key: {
                 'upright': en_upright,
@@ -332,7 +353,7 @@ def main():
                 'context': en_context
             }
         }
-        
+
         # Sırpça çeviri (Latin alfabesi)
         print("  → Sırpça (Latin) çeviriliyor...")
         sr_upright = translate_text(pos_data.get('upright', ''), 'sr')
@@ -343,7 +364,7 @@ def main():
         time.sleep(0.5)
         sr_context = translate_text(pos_data.get('context', ''), 'sr')
         time.sleep(0.5)
-        
+
         sr_data[SPREAD_KEY]['meanings'][card_key] = {
             pos_key: {
                 'upright': sr_upright,
@@ -352,74 +373,74 @@ def main():
                 'context': sr_context
             }
         }
-        
+
         print(f"  ✅ {card_key} tamamlandı")
-    
+
     # Mevcut dosyalarla MERGE ET (önemli!)
     print("\n📝 Dosyalar merge ediliyor...")
-    
+
     # İngilizce
     try:
         with open('messages/en.json', 'r', encoding='utf-8') as f:
             existing_en = json.load(f)
-        
+
         # Mevcut {spread} objesini koru, sadece yeni position'ı ekle/güncelle
         if SPREAD_KEY not in existing_en:
             existing_en[SPREAD_KEY] = {}
         if 'meanings' not in existing_en[SPREAD_KEY]:
             existing_en[SPREAD_KEY]['meanings'] = {}
-        
+
         # Yeni çevirileri merge et
         for card_key, card_data in en_data[SPREAD_KEY]['meanings'].items():
             if card_key not in existing_en[SPREAD_KEY]['meanings']:
                 existing_en[SPREAD_KEY]['meanings'][card_key] = {}
             existing_en[SPREAD_KEY]['meanings'][card_key].update(card_data)
-        
+
         # cardGroups varsa merge et
         if 'cardGroups' in en_data[SPREAD_KEY]:
             if 'cardGroups' not in existing_en[SPREAD_KEY]:
                 existing_en[SPREAD_KEY]['cardGroups'] = {}
             existing_en[SPREAD_KEY]['cardGroups'].update(en_data[SPREAD_KEY]['cardGroups'])
-        
+
         print("  ✓ Mevcut en.json güncellendi")
     except FileNotFoundError:
         existing_en = en_data
         print("  ⚠️  en.json bulunamadı, yeni oluşturulacak")
-    
+
     # Sırpça (aynı logic)
     try:
         with open('messages/sr.json', 'r', encoding='utf-8') as f:
             existing_sr = json.load(f)
-        
+
         if SPREAD_KEY not in existing_sr:
             existing_sr[SPREAD_KEY] = {}
         if 'meanings' not in existing_sr[SPREAD_KEY]:
             existing_sr[SPREAD_KEY]['meanings'] = {}
-        
+
         for card_key, card_data in sr_data[SPREAD_KEY]['meanings'].items():
             if card_key not in existing_sr[SPREAD_KEY]['meanings']:
                 existing_sr[SPREAD_KEY]['meanings'][card_key] = {}
             existing_sr[SPREAD_KEY]['meanings'][card_key].update(card_data)
-        
+
         if 'cardGroups' in sr_data[SPREAD_KEY]:
             if 'cardGroups' not in existing_sr[SPREAD_KEY]:
                 existing_sr[SPREAD_KEY]['cardGroups'] = {}
             existing_sr[SPREAD_KEY]['cardGroups'].update(sr_data[SPREAD_KEY]['cardGroups'])
-        
+
         print("  ✓ Mevcut sr.json güncellendi")
     except FileNotFoundError:
         existing_sr = sr_data
         print("  ⚠️  sr.json bulunamadı, yeni oluşturulacak")
-    
+
     # Kaydet
     with open('messages/en.json', 'w', encoding='utf-8') as f:
         json.dump(existing_en, f, ensure_ascii=False, indent=2)
-    
+
     with open('messages/sr.json', 'w', encoding='utf-8') as f:
         json.dump(existing_sr, f, ensure_ascii=False, indent=2)
-    
+
     total_time = time.time() - start_time
-    
+
     print("\n" + "=" * 70)
     print("✅ TÜM ÇEVİRİLER TAMAMLANDI!")
     print("=" * 70)
@@ -534,6 +555,7 @@ python3 scripts/fix-keywords-to-json-string.py
 ```
 
 **Ne yapar:**
+
 ```json
 // Önce (array):
 "keywords": ["keyword1", "keyword2"]
@@ -566,6 +588,7 @@ print('✅ String' if isinstance(keywords, str) else '❌ Hala array')
 **Dosya:** `src/features/tarot/components/{Spread}-Spread/{Spread}Tarot.tsx`
 
 **❌ ÖNCE (i18n ÇALIŞMAZ):**
+
 ```typescript
 import { getMeaningByCardAndPosition } from '@/features/tarot/lib/{spread}/position-meanings-index';
 
@@ -580,27 +603,28 @@ export default {Spread}Reading;
 ```
 
 **✅ SONRA (i18n ÇALIŞIR):**
+
 ```typescript
 import { getI18nMeaningByCardAndPosition } from '@/features/tarot/lib/{spread}/position-meanings-index';
 import { useTranslations } from '@/hooks/useTranslations';
 
 export default function {Spread}Reading(props: any) {
   const { t } = useTranslations();  // Hook component içinde
-  
+
   const TarotComponent = createTarotReadingComponent({
     getConfig: () => create{Spread}Config(),
     interpretationEmoji: '❤️',  // Spread'e göre değiştir
     getCardMeaning: (card, position, isReversed) => {
       if (!card) return '';
-      
+
       // i18n destekli fonksiyon + t parametresi
       const meaning = getI18nMeaningByCardAndPosition(card.name, position, t);
-      
+
       if (!meaning) {
         // Fallback
         return isReversed ? card.meaningTr.reversed : card.meaningTr.upright;
       }
-      
+
       const interpretation = isReversed ? meaning.reversed : meaning.upright;
       return {
         interpretation,
@@ -608,12 +632,13 @@ export default function {Spread}Reading(props: any) {
       };
     },
   });
-  
+
   return <TarotComponent {...props} />;
 }
 ```
 
 **Anahtar noktalar:**
+
 1. Factory → Wrapper component pattern
 2. `useTranslations` hook'u component içinde
 3. `t` fonksiyonu closure ile `getCardMeaning`'e erişilebilir
@@ -676,6 +701,7 @@ npm run build
 ```
 
 **Başarı kriterleri:**
+
 - ✅ Compiled successfully
 - ✅ No TypeScript errors
 - ✅ All pages generated
@@ -688,6 +714,7 @@ npm run dev
 ```
 
 **Test senaryosu:**
+
 1. İlgili spread'i seç (ör: Love Spread)
 2. Kartları çek
 3. Position-{X} kartına tıkla
@@ -750,6 +777,7 @@ git commit -m "feat(tarot): add full i18n support for {spread} position-{X}
 **Maliyet:** $0
 
 ## Yapılanlar
+
 - [x] "use client" direktifi
 - [x] Error handling
 - [x] Türkçe extraction
@@ -761,6 +789,7 @@ git commit -m "feat(tarot): add full i18n support for {spread} position-{X}
 - [x] Runtime testi
 
 ## Test Sonuçları
+
 - TypeScript: ✅
 - Build: ✅
 - Runtime tr: ✅
@@ -768,6 +797,7 @@ git commit -m "feat(tarot): add full i18n support for {spread} position-{X}
 - Runtime sr: ✅
 
 ## Commit
+
 - Hash: [commit-hash]
 - Branch: [branch-name]
 ```
@@ -817,12 +847,14 @@ npm run dev
 Her position için şunları kontrol edin:
 
 ### Kod
+
 - [ ] `position-{X}-*.ts` dosyasında "use client" var
 - [ ] `getI18nPosition{X}Meaning` fonksiyonunda error handling var
 - [ ] `position-meanings-index.ts` dosyasında "use client" var (1 kez)
 - [ ] `{Spread}Tarot.tsx` wrapper pattern ile düzeltildi (1 kez)
 
 ### Veri
+
 - [ ] `messages/tr.json` → position{X} için 78 kart var
 - [ ] `messages/en.json` → position{X} için 78 kart var
 - [ ] `messages/sr.json` → position{X} için 78 kart var
@@ -830,6 +862,7 @@ Her position için şunları kontrol edin:
 - [ ] Keywords **JSON string** formatında (array değil)
 
 ### Test
+
 - [ ] TypeScript derleme: No errors
 - [ ] `npm run build`: PASSED
 - [ ] Türkçe runtime: Çalışıyor
@@ -838,6 +871,7 @@ Her position için şunları kontrol edin:
 - [ ] Dil değiştirme: Otomatik güncelleniyor
 
 ### Dokümantasyon
+
 - [ ] Commit mesajı yazıldı
 - [ ] Tamamlanma raporu oluşturuldu
 - [ ] Script'ler dokümante edildi
@@ -848,11 +882,14 @@ Her position için şunları kontrol edin:
 
 ### Sorun 0: Extraction Sonrası Embedded JavaScript Kodu
 
-**Belirti:** JSON string'lerinin içinde JavaScript kodu var (örn: `"text',\nreversed:\n'more"`)
+**Belirti:** JSON string'lerinin içinde JavaScript kodu var (örn:
+`"text',\nreversed:\n'more"`)
 
-**Neden:** Extraction script'inin regex pattern'i field sonunu doğru tespit edemiyor
+**Neden:** Extraction script'inin regex pattern'i field sonunu doğru tespit
+edemiyor
 
 **Çözüm:**
+
 ```bash
 # Mevcut veriyi temizle
 python3 scripts/fix-embedded-code-in-json.py
@@ -862,8 +899,10 @@ python3 scripts/fix-embedded-code-in-json.py
 ```
 
 **Önleme:**
+
 - Extraction script'lerinde **lookahead assertion** kullanın: `(?=nextField:|$)`
-- Test edin: İlk kartın çıktısını kontrol edin, JavaScript kodu varsa regex'i düzeltin
+- Test edin: İlk kartın çıktısını kontrol edin, JavaScript kodu varsa regex'i
+  düzeltin
 
 ### Sorun 1: "t is not defined" Hatası
 
@@ -872,29 +911,32 @@ python3 scripts/fix-embedded-code-in-json.py
 **Neden:** `getCardMeaning` callback'i hook'lara erişemiyor
 
 **Çözüm:**
+
 ```typescript
 // Wrapper component pattern kullan
 export default function {Spread}Reading(props: any) {
   const { t } = useTranslations();  // Component içinde
-  
+
   const TarotComponent = createTarotReadingComponent({
     getCardMeaning: (card, position, isReversed) => {
       const meaning = getI18nMeaningByCardAndPosition(card.name, position, t);
       // t artık closure ile erişilebilir
     },
   });
-  
+
   return <TarotComponent {...props} />;
 }
 ```
 
 ### Sorun 2: "JSON.parse" Hatası
 
-**Belirti:** `SyntaxError: Unexpected token 'l', "love.meani"... is not valid JSON`
+**Belirti:**
+`SyntaxError: Unexpected token 'l', "love.meani"... is not valid JSON`
 
 **Neden:** Keywords array formatında ama i18n string bekliyor
 
 **Çözüm:**
+
 ```bash
 python3 scripts/fix-keywords-to-json-string.py
 ```
@@ -904,6 +946,7 @@ python3 scripts/fix-keywords-to-json-string.py
 **Belirti:** "Особа коју..." yerine "Osoba koju..." görmek istiyorsunuz
 
 **Çözüm:**
+
 ```bash
 python3 scripts/transliterate-serbian.py
 ```
@@ -911,12 +954,14 @@ python3 scripts/transliterate-serbian.py
 ### Sorun 4: Çeviriler Görünmüyor
 
 **Kontrol:**
-1. i18n anahtarları messages/*.json'da var mı?
+
+1. i18n anahtarları messages/\*.json'da var mı?
 2. "use client" direktifleri ekli mi?
 3. Component wrapper pattern kullanıyor mu?
 4. Dev server yeniden başlatıldı mı?
 
 **Hızlı debug:**
+
 ```typescript
 // position-X dosyasında test et
 const { t } = useTranslations();
@@ -931,28 +976,34 @@ console.log('Test çeviri:', test);
 ## 💡 İPUÇLARI VE EN İYİ UYGULAMALAR
 
 ### 1. Sıralı İlerleyin
+
 - Position-1'i bitirin, test edin, commit edin
 - Sonra Position-2'ye geçin
 - Her position'ı izole test edin
 
 ### 2. Merge Dikkatli Yapın
+
 - `messages/*.json` dosyaları çok büyük
 - Her zaman **merge** yapın, **overwrite** yapmayın
 - Git conflict olursa dikkatle çözün
 
 ### 3. Çeviri Kalitesi
+
 - İlk 2-3 kartı manuel kontrol edin
 - Eğer kalite kötüyse:
   - Prompt'u iyileştirin
   - Veya OpenAI GPT-4 kullanın (ücretli ama kaliteli)
 
 ### 4. Performance
+
 - Rate limiting'i kaldırmayın (ban risk)
 - Sabırlı olun, 78 kart ~30-45 dakika sürer
 - Script'i arka planda çalıştırabilirsiniz
 
 ### 5. Backup
+
 Her aşamadan önce backup alın:
+
 ```bash
 cp messages/tr.json messages/tr.json.backup-position{X}
 cp messages/en.json messages/en.json.backup-position{X}
@@ -965,12 +1016,12 @@ cp messages/sr.json messages/sr.json.backup-position{X}
 
 ### Love Spread - Tüm Pozisyonlar
 
-| Pozisyon | Dosya | TR | EN | SR | Kod | Test | Commit |
-|----------|-------|----|----|----|----|------|--------|
-| 1 | position-1-ilgi-duydugun-kisi.ts | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ f5fed40 |
-| 2 | position-2-fiziksel.ts | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ |
-| 3 | position-3-baglanti.ts | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ |
-| 4 | position-4-uzun-vadeli-surec.ts | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ |
+| Pozisyon | Dosya                            | TR  | EN  | SR  | Kod | Test | Commit     |
+| -------- | -------------------------------- | --- | --- | --- | --- | ---- | ---------- |
+| 1        | position-1-ilgi-duydugun-kisi.ts | ✅  | ✅  | ✅  | ✅  | ✅   | ✅ f5fed40 |
+| 2        | position-2-fiziksel.ts           | ⏳  | ⏳  | ⏳  | ⏳  | ⏳   | ⏳         |
+| 3        | position-3-baglanti.ts           | ⏳  | ⏳  | ⏳  | ⏳  | ⏳   | ⏳         |
+| 4        | position-4-uzun-vadeli-surec.ts  | ⏳  | ⏳  | ⏳  | ⏳  | ⏳   | ⏳         |
 
 **Tamamlanma:** %25 (1/4 pozisyon)
 
@@ -1010,43 +1061,46 @@ MoneyTarot.tsx
 
 ### Tek Position İçin
 
-| Aşama | Süre | Maliyet |
-|-------|------|---------|
-| Hazırlık | 5 dk | $0 |
-| Kod düzeltmeleri | 10 dk | $0 |
-| TR extraction | 5 dk | $0 |
-| EN çeviri | 30-45 dk | $0 |
-| SR çeviri (Latin) | 30-45 dk | $0 |
-| Keywords düzeltme | 2 dk | $0 |
-| Component entegrasyonu | 10 dk | $0 |
-| Test | 15 dk | $0 |
-| Commit | 10 dk | $0 |
-| **TOPLAM** | **60-90 dk** | **$0** |
+| Aşama                  | Süre         | Maliyet |
+| ---------------------- | ------------ | ------- |
+| Hazırlık               | 5 dk         | $0      |
+| Kod düzeltmeleri       | 10 dk        | $0      |
+| TR extraction          | 5 dk         | $0      |
+| EN çeviri              | 30-45 dk     | $0      |
+| SR çeviri (Latin)      | 30-45 dk     | $0      |
+| Keywords düzeltme      | 2 dk         | $0      |
+| Component entegrasyonu | 10 dk        | $0      |
+| Test                   | 15 dk        | $0      |
+| Commit                 | 10 dk        | $0      |
+| **TOPLAM**             | **60-90 dk** | **$0**  |
 
 ### Tam Spread İçin (4 Pozisyon)
 
-| Metric | Değer |
-|--------|-------|
-| Toplam süre | ~6 saat |
-| i18n anahtarları | ~3,800 |
-| Maliyet | $0 |
-| Çevrilen kelime | ~180,000 |
+| Metric           | Değer    |
+| ---------------- | -------- |
+| Toplam süre      | ~6 saat  |
+| i18n anahtarları | ~3,800   |
+| Maliyet          | $0       |
+| Çevrilen kelime  | ~180,000 |
 
 ---
 
 ## 📞 DESTEK VE KAYNAKLAR
 
 ### Başarılı Implementasyon Örneği
+
 - **Dosya:** `src/features/tarot/lib/love/position-1-ilgi-duydugun-kisi.ts`
 - **Raporlar:** `i18nfix/reports/position-1-*.md`
 - **Commit:** f5fed40, 8091652, 290a61d, de9b3e2
 
 ### Script Şablonları
+
 - `scripts/extract-love-position1-tr.js` - Türkçe extraction
 - `scripts/translate-love-position1.py` - Google Translate çeviri
 - `scripts/fix-keywords-to-json-string.py` - Format düzeltme
 
 ### i18n Sistemi
+
 - `src/hooks/useTranslations.ts` - Ana i18n hook
 - `src/features/tarot/lib/love/i18n-helper.ts` - Spread-specific helper
 
@@ -1076,4 +1130,3 @@ Position i18n implementasyonu **tamamlandı** mı?
 **Son Güncelleme:** 2025-10-08  
 **Durum:** ✅ Production-Ready  
 **Kullanım:** Tüm tarot spread position dosyaları için
-

@@ -132,7 +132,7 @@ export default function UserDetailModal({
 
         {/* Tab Navigation */}
         <div className='admin-glass rounded-xl p-2 mb-6'>
-          <nav
+          <div
             className='flex space-x-2'
             role='tablist'
             aria-label='Kullanıcı detay sekmeleri'
@@ -158,6 +158,10 @@ export default function UserDetailModal({
                   ? 'admin-gradient-accent text-white'
                   : 'text-slate-400 hover:text-white hover:bg-slate-700/30'
               }`}
+              role='tab'
+              aria-selected={activeTab === 'transactions'}
+              aria-controls='transactions-panel'
+              id='transactions-tab'
             >
               💳 İşlem Geçmişi
             </button>
@@ -168,6 +172,10 @@ export default function UserDetailModal({
                   ? 'admin-gradient-accent text-white'
                   : 'text-slate-400 hover:text-white hover:bg-slate-700/30'
               }`}
+              role='tab'
+              aria-selected={activeTab === 'readings'}
+              aria-controls='readings-panel'
+              id='readings-tab'
             >
               🔮 Okuma Geçmişi
             </button>
@@ -178,16 +186,20 @@ export default function UserDetailModal({
                   ? 'admin-gradient-accent text-white'
                   : 'text-slate-400 hover:text-white hover:bg-slate-700/30'
               }`}
+              role='tab'
+              aria-selected={activeTab === 'payments'}
+              aria-controls='payments-panel'
+              id='payments-tab'
             >
               💰 Ödeme Geçmişi
             </button>
-          </nav>
+          </div>
         </div>
 
         {/* Content */}
         <div className='flex-1 overflow-y-auto'>
           {activeTab === 'overview' && (
-            <div className='grid md:grid-cols-2 gap-6'>
+            <div className='grid md:grid-cols-2 gap-6' role='tabpanel' id='overview-panel' aria-labelledby='overview-tab'>
               {/* User Info */}
               <div>
                 <h4 className='text-lg font-medium text-gold mb-4'>
@@ -297,7 +309,7 @@ export default function UserDetailModal({
           )}
 
           {activeTab === 'transactions' && (
-            <div>
+            <div role='tabpanel' id='transactions-panel' aria-labelledby='transactions-tab'>
               <h4 className='text-lg font-medium text-gold mb-4'>
                 Kredi İşlem Geçmişi
               </h4>
@@ -306,13 +318,13 @@ export default function UserDetailModal({
           )}
 
           {activeTab === 'readings' && (
-            <div>
+            <div role='tabpanel' id='readings-panel' aria-labelledby='readings-tab'>
               <ReadingHistory userId={user.id} limit={15} />
             </div>
           )}
 
           {activeTab === 'payments' && (
-            <div>
+            <div role='tabpanel' id='payments-panel' aria-labelledby='payments-tab'>
               <PaymentHistory userId={user.id} limit={15} />
             </div>
           )}

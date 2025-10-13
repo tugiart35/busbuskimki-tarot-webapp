@@ -1,7 +1,13 @@
 const withNextIntl = require('next-intl/plugin')('./src/lib/i18n/config.ts');
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Enable standalone output for Docker deployment
+  output: 'standalone',
+
   typescript: {
     ignoreBuildErrors: false,
   },
@@ -12,9 +18,49 @@ const nextConfig = {
   poweredByHeader: false,
 
   images: {
-    formats: ['image/webp'],
+    formats: ['image/webp', 'image/avif'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256],
+    minimumCacheTTL: 60,
+    dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+  },
+
+  // Compression and performance
+  compress: true,
+  productionBrowserSourceMaps: false,
+
+  // Headers for caching and compression
+  async headers() {
+    return [
+      {
+        source: '/:all*(svg|jpg|jpeg|png|webp|avif|gif|ico)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/_next/static/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/fonts/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+    ];
   },
 
   async rewrites() {
@@ -78,6 +124,53 @@ const nextConfig = {
       },
     ];
   },
+
+  // Webpack optimizations
+  webpack: (config, { isServer }) => {
+    // Optimize bundle size
+    if (!isServer) {
+      config.optimization = {
+        ...config.optimization,
+        moduleIds: 'deterministic',
+        splitChunks: {
+          chunks: 'all',
+          cacheGroups: {
+            default: false,
+            vendors: false,
+            // Framework chunk (react, react-dom)
+            framework: {
+              name: 'framework',
+              chunks: 'all',
+              test: /[\\/]node_modules[\\/](react|react-dom|scheduler)[\\/]/,
+              priority: 40,
+              enforce: true,
+            },
+            // Commons chunk
+            commons: {
+              name: 'commons',
+              minChunks: 2,
+              priority: 20,
+            },
+            // Lib chunk for large libraries
+            lib: {
+              test: /[\\/]node_modules[\\/]/,
+              name(module) {
+                const packageName = module.context.match(
+                  /[\\/]node_modules[\\/](.*?)([\\/]|$)/
+                )?.[1];
+                return `npm.${packageName?.replace('@', '')}`;
+              },
+              priority: 30,
+              minChunks: 1,
+              reuseExistingChunk: true,
+            },
+          },
+        },
+      };
+    }
+
+    return config;
+  },
 };
 
-module.exports = withNextIntl(nextConfig);
+module.exports = withBundleAnalyzer(withNextIntl(nextConfig));

@@ -1,6 +1,7 @@
 # 🌍 MarianMT ile Ücretsiz Çeviri Sistemi
 
-Helsinki-NLP'nin MarianMT modelleri ile **%100 ücretsiz** tr.json → en.json + sr.json çevirisi.
+Helsinki-NLP'nin MarianMT modelleri ile **%100 ücretsiz** tr.json → en.json +
+sr.json çevirisi.
 
 ## ✨ Özellikler
 
@@ -37,6 +38,7 @@ Ekranda şu seçenekler çıkar:
 ### 3️⃣ Sonuçları Kontrol Et
 
 Çevrilen dosyalar:
+
 - `messages/en.json` (İngilizce)
 - `messages/sr.json` (Sırpça)
 
@@ -61,6 +63,7 @@ git push
 ```
 
 GitHub Actions:
+
 1. Python ve bağımlılıkları kurar
 2. MarianMT modellerini indirir (~300 MB, cache'lenir)
 3. tr.json → en.json + sr.json çevirir
@@ -68,11 +71,11 @@ GitHub Actions:
 
 ## 📊 Model Detayları
 
-| Dil Çifti | Model | Boyut | Kalite |
-|-----------|-------|-------|--------|
-| tr → en | `Helsinki-NLP/opus-mt-tr-en` | ~300 MB | ⭐⭐⭐⭐⭐ |
-| tr → sr | `Helsinki-NLP/opus-mt-tr-sr` | ~300 MB | ⭐⭐⭐⭐ |
-| en → sr | `Helsinki-NLP/opus-mt-en-sh` | ~300 MB | ⭐⭐⭐⭐⭐ |
+| Dil Çifti | Model                        | Boyut   | Kalite     |
+| --------- | ---------------------------- | ------- | ---------- |
+| tr → en   | `Helsinki-NLP/opus-mt-tr-en` | ~300 MB | ⭐⭐⭐⭐⭐ |
+| tr → sr   | `Helsinki-NLP/opus-mt-tr-sr` | ~300 MB | ⭐⭐⭐⭐   |
+| en → sr   | `Helsinki-NLP/opus-mt-en-sh` | ~300 MB | ⭐⭐⭐⭐⭐ |
 
 ### Alternatif Yol (tr → sr yoksa)
 
@@ -121,12 +124,12 @@ BATCH_SIZE = 100
 
 ## 🆚 Diğer Servislerle Karşılaştırma
 
-| Servis | Maliyet | Kalite | Hız | Offline |
-|--------|---------|--------|-----|---------|
-| **MarianMT** | ✅ Ücretsiz | ⭐⭐⭐⭐ | Orta | ✅ Evet |
+| Servis           | Maliyet        | Kalite     | Hız       | Offline  |
+| ---------------- | -------------- | ---------- | --------- | -------- |
+| **MarianMT**     | ✅ Ücretsiz    | ⭐⭐⭐⭐   | Orta      | ✅ Evet  |
 | Google Translate | 💰 $20/1M char | ⭐⭐⭐⭐⭐ | Çok Hızlı | ❌ Hayır |
-| DeepL | 💰 $25/1M char | ⭐⭐⭐⭐⭐ | Hızlı | ❌ Hayır |
-| Argos Translate | ✅ Ücretsiz | ⭐⭐⭐ | Yavaş | ✅ Evet |
+| DeepL            | 💰 $25/1M char | ⭐⭐⭐⭐⭐ | Hızlı     | ❌ Hayır |
+| Argos Translate  | ✅ Ücretsiz    | ⭐⭐⭐     | Yavaş     | ✅ Evet  |
 
 ## 🐛 Sorun Giderme
 
@@ -172,7 +175,7 @@ Artık tamamen **ücretsiz** bir şekilde:
 
 1. Yerel bilgisayarınızda çeviri yapabilirsiniz
 2. GitHub Actions'ta otomatik çeviri pipeline'ı çalıştırabilirsiniz
-3. API limiti veya maliyet endişesi olmadan istediğiniz kadar çeviri yapabilirsiniz
+3. API limiti veya maliyet endişesi olmadan istediğiniz kadar çeviri
+   yapabilirsiniz
 
 **Toplam Maliyet: $0** 💰✨
-

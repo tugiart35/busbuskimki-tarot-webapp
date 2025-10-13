@@ -9,7 +9,7 @@
     "love.meanings.*.position1.context": "78 kart × 3 dil = 234 anahtar",
     "love.cardGroups.*": "5 grup × 2 dil (en,sr) = 10 anahtar (tr zaten var)"
   },
-  
+
   "SAMPLE_STRUCTURE_TR": {
     "love": {
       "cardGroups": {
@@ -39,7 +39,7 @@
       }
     }
   },
-  
+
   "SAMPLE_STRUCTURE_EN": {
     "love": {
       "cardGroups": {
@@ -69,7 +69,7 @@
       }
     }
   },
-  
+
   "SAMPLE_STRUCTURE_SR": {
     "love": {
       "cardGroups": {
@@ -99,7 +99,7 @@
       }
     }
   },
-  
+
   "ALL_78_CARDS_NEEDED": [
     "thefool",
     "themagician",
@@ -180,7 +180,7 @@
     "queenofpentacles",
     "kingofpentacles"
   ],
-  
+
   "AUTOMATION_SCRIPT_SUGGESTION": {
     "description": "Tüm 78 kartı otomatik doldurmak için bir Node.js script'i yazılabilir",
     "script_path": "scripts/generate-love-position1-i18n.ts",
@@ -192,7 +192,7 @@
       "5. messages/en.json ve messages/sr.json'a ekle"
     ]
   },
-  
+
   "TRANSLATION_SERVICE_RECOMMENDATION": {
     "best_for_context": "OpenAI GPT-4",
     "reason": "Tarot kartlarının ruhsal ve mistik bağlamını anlar",
@@ -200,4 +200,3 @@
     "cost_estimate": "OpenAI GPT-4: ~$5-10 for 933 translations"
   }
 }
-

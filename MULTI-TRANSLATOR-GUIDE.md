@@ -5,6 +5,7 @@ Production-ready, multi-tier fallback çeviri sistemi.
 ## ✨ Özellikler
 
 ### 🔄 Multi-Tier Fallback Chain
+
 ```
 MarianMT (Primary) → Google Translate → Argos → MarianMT (Retry) → Original Text
      ↓ timeout/fail      ↓ timeout/fail    ↓ fail      ↓ fail          ↓
@@ -12,6 +13,7 @@ MarianMT (Primary) → Google Translate → Argos → MarianMT (Retry) → Origi
 ```
 
 ### 🛡️ Güvenlik ve Dayanıklılık
+
 - ✅ **2000'lik Batch'ler**: Güvenlik için küçük batch'ler
 - ✅ **Her Batch Kaydedilir**: Hata durumunda veri kaybı yok
 - ✅ **Checkpoint System**: Kaldığı yerden devam eder
@@ -19,23 +21,27 @@ MarianMT (Primary) → Google Translate → Argos → MarianMT (Retry) → Origi
 - ✅ **60 Saniye Timeout**: Takılan translator'lar atlanır
 
 ### 📊 Canlı İzleme
+
 - Progress bar ile anlık ilerleme
 - Her batch için translator dağılımı
 - ETA (Estimated Time of Arrival) hesaplama
 - Detaylı istatistik raporları
 
 ### 🌐 Desteklenen Diller
+
 - 🇹🇷 → 🇬🇧 (Türkçe → İngilizce)
 - 🇹🇷 → 🇷🇸 (Türkçe → Sırpça/Latin)
 
 ## 🚀 Kurulum
 
 ### 1️⃣ Temel Kurulum (Zorunlu)
+
 ```bash
 pip install transformers torch sentencepiece tqdm
 ```
 
 ### 2️⃣ Fallback Translator'lar (Opsiyonel)
+
 ```bash
 # Google Translate API (ücretli, hızlı)
 pip install googletrans==4.0.0-rc1
@@ -45,6 +51,7 @@ pip install argostranslate
 ```
 
 ### 3️⃣ Tüm Paketleri Bir Arada
+
 ```bash
 pip install -r requirements-translate.txt
 ```
@@ -52,6 +59,7 @@ pip install -r requirements-translate.txt
 ## 📖 Kullanım
 
 ### Temel Kullanım
+
 ```bash
 cd /Users/tugi/Desktop/TaraTarot
 python scripts/translate-multi-batch.py
@@ -69,6 +77,7 @@ q: Çıkış
 ```
 
 ### Örnek 1: İngilizce Çeviri
+
 ```bash
 $ python scripts/translate-multi-batch.py
 Seçim: 1
@@ -79,6 +88,7 @@ Seçim: 1
 ```
 
 ### Örnek 2: Her İki Dil
+
 ```bash
 $ python scripts/translate-multi-batch.py
 Seçim: 3
@@ -89,6 +99,7 @@ Seçim: 3
 ```
 
 ### Örnek 3: Kaldığı Yerden Devam
+
 ```bash
 # Çeviri yarıda kesildi (Ctrl+C veya hata)
 $ python scripts/translate-multi-batch.py
@@ -106,6 +117,7 @@ Seçim: 1
 ## 📊 Çıktı Örnekleri
 
 ### Batch İşleme
+
 ```
 ════════════════════════════════════════════════════════════════════
 🔄 Batch 0005/0020
@@ -125,6 +137,7 @@ Batch 0005/0020 |████████████████████| 2
 ```
 
 ### İstatistik Raporu
+
 ```
 ══════════════════════════════════════════════════════════════════════
 📊 TRANSLATOR İSTATİSTİKLERİ
@@ -146,6 +159,7 @@ Batch 0005/0020 |████████████████████| 2
 ## 🗂️ Dosya Yapısı
 
 ### Çeviri Sırasında
+
 ```
 messages/
 ├── tr.json (kaynak)
@@ -160,6 +174,7 @@ messages/
 ```
 
 ### Çeviri Sonrası
+
 ```
 messages/
 ├── tr.json (kaynak)
@@ -171,22 +186,27 @@ messages/
 ## 🛠️ İleri Seviye
 
 ### Batch Boyutunu Değiştirme
+
 Script içinde `BATCH_SIZE` değişkenini düzenleyin:
+
 ```python
 BATCH_SIZE = 1000  # Daha küçük batch'ler
 BATCH_SIZE = 5000  # Daha büyük batch'ler
 ```
 
 ### Timeout Süresini Ayarlama
+
 ```python
 TIMEOUT_SECONDS = 30   # Daha kısa timeout
 TIMEOUT_SECONDS = 120  # Daha uzun timeout
 ```
 
 ### Sadece MarianMT Kullanma
+
 Opsiyonel paketleri kurmayın. Fallback zinciri otomatik devre dışı kalır.
 
 ### Manuel Batch Birleştirme
+
 ```bash
 python scripts/translate-multi-batch.py
 Seçim: 4
@@ -198,6 +218,7 @@ Seçim: 4
 ## 🐛 Sorun Giderme
 
 ### Model İndirme Hatası
+
 ```bash
 # Manuel indirme
 python -c "from transformers import MarianMTModel, MarianTokenizer; \
@@ -206,16 +227,19 @@ MarianMTModel.from_pretrained('Helsinki-NLP/opus-mt-tr-en')"
 ```
 
 ### Memory Hatası
+
 - Batch boyutunu küçültün: `BATCH_SIZE = 1000`
 - Diğer uygulamaları kapatın
 - Swap alanını artırın
 
 ### Timeout Çok Sık Oluyor
+
 - Internet bağlantınızı kontrol edin
 - Timeout süresini artırın: `TIMEOUT_SECONDS = 120`
 - Sadece offline translator kullanın (MarianMT, Argos)
 
 ### Google Translate Çalışmıyor
+
 ```bash
 # Doğru versiyonu yükleyin
 pip uninstall googletrans
@@ -223,6 +247,7 @@ pip install googletrans==4.0.0-rc1
 ```
 
 ### Argos Paketi Bulunamıyor
+
 ```bash
 # Argos'u yeniden yükleyin
 pip install --upgrade argostranslate
@@ -238,6 +263,7 @@ for p in available if p.from_code == 'tr' and p.to_code == 'en']"
 ## 📈 Performans İpuçları
 
 ### En Hızlı Yapılandırma
+
 ```bash
 # GPU varsa
 # Otomatik CUDA kullanılır (10x hızlı)
@@ -247,6 +273,7 @@ for p in available if p.from_code == 'tr' and p.to_code == 'en']"
 ```
 
 ### En Güvenli Yapılandırma
+
 ```bash
 # Küçük batch'ler
 BATCH_SIZE = 1000
@@ -259,6 +286,7 @@ pip install googletrans==4.0.0-rc1 argostranslate
 ```
 
 ### En Ucuz Yapılandırma
+
 ```bash
 # Sadece ücretsiz translator'lar
 pip install transformers torch sentencepiece tqdm argostranslate
@@ -270,11 +298,13 @@ pip install transformers torch sentencepiece tqdm argostranslate
 ## 🔍 Log Dosyaları
 
 Her çalıştırmada yeni log dosyası oluşturulur:
+
 ```
 translation-multi-20251011-143052.log
 ```
 
 Log seviyelerini değiştirmek için:
+
 ```python
 logging.basicConfig(level=logging.DEBUG)  # Daha detaylı
 logging.basicConfig(level=logging.WARNING)  # Daha az
@@ -283,6 +313,7 @@ logging.basicConfig(level=logging.WARNING)  # Daha az
 ## 💾 Backup Stratejisi
 
 Script otomatik backup almaz. Manual backup:
+
 ```bash
 # Çeviri öncesi
 cp messages/tr.json messages/tr.backup.json
@@ -306,6 +337,7 @@ cp messages/tr.json messages/tr.backup-$(date +%Y%m%d).json
 Log dosyasını kontrol edin: `translation-multi-*.log`
 
 Hata raporu için log'da şunları arayın:
+
 - `ERROR`: Kritik hatalar
 - `WARNING`: Uyarılar
 - `Timeout`: Timeout sorunları
@@ -319,8 +351,6 @@ Artık production-ready, fault-tolerant bir çeviri sisteminiz var:
 ✅ **Hızlı**: Multi-tier fallback ile maksimum hız  
 ✅ **Güvenilir**: Timeout ve hata yönetimi  
 ✅ **İzlenebilir**: Canlı progress tracking  
-✅ **Sürdürülebilir**: Kaldığı yerden devam eder  
+✅ **Sürdürülebilir**: Kaldığı yerden devam eder
 
 **Happy Translating! 🚀**
-
-

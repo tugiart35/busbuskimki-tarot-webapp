@@ -3,73 +3,37 @@
     "meanings": {
       "knightofpentacles": {
         "position3": {
-          "keywords": [
-            null,
-            null,
-            null,
-            null,
-            "studija"
-          ],
+          "keywords": [null, null, null, null, "studija"],
           "context": "Stabilnost i oprez dolaze na prvi plan kada koristite novac."
         },
         "position4": {
           "upright": "Stabilni, pouzdani i disciplinirani koraci možda su u prošlosti preduzeti finansijska pitanja.",
           "reversed": "Vitez Pentacles obrnut, mogućnosti se gube zbog stagnacije i leta iz inovacija.",
-          "keywords": [
-            "stabilnost",
-            "poverenje",
-            "novac",
-            "disciplina",
-            "rad"
-          ],
+          "keywords": ["stabilnost", "poverenje", "novac", "disciplina", "rad"],
           "context": "U prošlosti su finansijski stavovi bili stabilni i orijentisani na poverenje."
         },
         "position5": {
           "upright": "Vitez Pentaklova ukazuje na disciplinu, pouzdanost i stalni napor u finansijskim odgovornostima.",
           "reversed": "Okolišteni vitez Pentaklova: Stagnacija, dosadnost ili pretjerano spor napredak u finansijskim odgovornostima mogu biti problematični.",
-          "keywords": [
-            "disciplina",
-            "pouzdanost",
-            "stabilnost",
-            "spornica",
-            "odgovornost"
-          ],
+          "keywords": ["disciplina", "pouzdanost", "stabilnost", "spornica", "odgovornost"],
           "context": "Pouzdanost ili stabilnost dolazi do izražaja finansijskih odgovornosti."
         },
         "position6": {
           "upright": "Vitez Pentaklova ukazuje na disciplinovani rad, strpljenje i pouzdane korake u finansijskim planovima.",
           "reversed": "Vitez pentaklova obrnut ukazuje na stagnaciju, dosadnost ili izuzetno spor napredak.",
-          "keywords": [
-            "disciplina",
-            "poverenje",
-            "strpljenje",
-            "stabilnost",
-            "studija"
-          ],
+          "keywords": ["disciplina", "poverenje", "strpljenje", "stabilnost", "studija"],
           "context": "Pouzdanost ili stabilnost će doći do prednih koji su u novim finansijskim planovima."
         },
         "position7": {
           "upright": "Vitez pentaka, strpljenja, discipline i stalni napredak u finansijskim planovima dolaze u budućnost.",
           "reversed": "Vitez Pentaklova obrnut ukazuje na rizik od stagnacije, preoverljivost ili izbegavanje inovacije.",
-          "keywords": [
-            "stabilnost",
-            "strpljenje",
-            "studija",
-            "odgovornost",
-            "planiranje"
-          ],
+          "keywords": ["stabilnost", "strpljenje", "studija", "odgovornost", "planiranje"],
           "context": "Stabilnost ili stagnacija biće presudni u budućim finansijskim planovima."
         },
         "position8": {
           "upright": "Vitez Pentaklova ukazuje da strpljenje, pouzdanost i dosledan rad jača sposobnosti donošenja novca.",
           "reversed": "Vitez Pentacles-a obrnut ukazuje da se mogućnosti mogu izgubiti zbog stagnacije, tvrdoglavosti ili nedostatka inovacija.",
-          "keywords": [
-            "stabilnost",
-            "strpljenje",
-            "pouzdanost",
-            "studija",
-            "kontinuitet"
-          ],
+          "keywords": ["stabilnost", "strpljenje", "pouzdanost", "studija", "kontinuitet"],
           "context": "Vaše sposobnosti za donošenje novca povezane su sa strpljenjem ili stabilnošću."
         }
       },
@@ -77,97 +41,49 @@
         "position1": {
           "upright": "Kraljica Pentaklova ukazuje na anksioznost da ne mogu dobro da upravlja resursima i pruža podršku. Možda se plašite da niste mogli da se pobrinite za sebe i druge.",
           "reversed": "Kraljica obrnutog preokreta otkriva anksioznost o preopterećenju i nedostatku samo-nege. Možete se brinuti da iskrivite svoje resurse.",
-          "keywords": [
-            "izvor",
-            "anksioznost",
-            "briga o sebi",
-            "opteretiti",
-            "ravnoteža"
-          ],
+          "keywords": ["izvor", "anksioznost", "briga o sebi", "opteretiti", "ravnoteža"],
           "context": "Anksioznost se pojavljuje da ne mogu da upravljaju balansiranje resursa."
         },
         "position2": {
           "upright": "Kraljica Pentakova ukazuje da traži sigurnost putem saosećanja, praktičnosti i upravljanja resursima. Udobnost donosi mir.",
           "reversed": "Kraljica Pentekla je preokrenuta, ukazuje na anksioznost o preopterećenju ili zanemarivanju. Želja za sigurnost oslabljena je gubitkom ravnoteže.",
-          "keywords": [
-            "praktičnost",
-            "izvor",
-            "sigurnost",
-            "saosećanje",
-            "ravnoteža"
-          ],
+          "keywords": ["praktičnost", "izvor", "sigurnost", "saosećanje", "ravnoteža"],
           "context": "Nalazite sigurnost tako što ćete upravljati balansiranjem resursa."
         },
         "position3": {
           "upright": "Kraljica Pentekla ukazuje na velikodušnost, sigurnost i praktičnost u korištenju novca. Resursi se koriste balansirano.",
           "reversed": "Kraljica Pentaklova obrnuta ukazuje na finansijske poteškoće zbog zanemarivanja samo-nege ili preopterećenja.",
-          "keywords": [
-            "velikodušnost",
-            "praktičnost",
-            "izvor",
-            "nega",
-            "novac"
-          ],
+          "keywords": ["velikodušnost", "praktičnost", "izvor", "nega", "novac"],
           "context": "Velikodušnost i praktičnost dolaze u prvi plan u upotrebi novca."
         },
         "position4": {
           "upright": "U prošlosti, saosećajan, podržavajući i dobro upravljani pristup finansijskim pitanjima možda je došao do izražaja.",
           "reversed": "Kraljica Pentacles-a obrnuta ukazuje da preopterećenje ili nedostatak samo-nege utiču na finansijsku ravnotežu.",
-          "keywords": [
-            "saosećanje",
-            "izvor",
-            "novac",
-            "podrška",
-            "upravljanje"
-          ],
+          "keywords": ["saosećanje", "izvor", "novac", "podrška", "upravljanje"],
           "context": "U prošlosti su finansijska sredstva upravljala u uravnoteženom i podržavajućem način."
         },
         "position5": {
           "upright": "Kraljica Pentaklova ukazuje na saosećanje u finansijskim odgovornostima, brinu o porodici i balansiranju resursa.",
           "reversed": "Kraljica obrnutog obrnuto može ukazivati na preopterećenje sa finansijskim odgovornostima, nedostatkom samo-nege ili izgaranja.",
-          "keywords": [
-            "saosećanje",
-            "porodica",
-            "ravnoteža",
-            "nega",
-            "odgovornost"
-          ],
+          "keywords": ["saosećanje", "porodica", "ravnoteža", "nega", "odgovornost"],
           "context": "Bilans ili iscrpljenost određuje finansijske odgovornosti."
         },
         "position6": {
           "upright": "Kraljica Pentaklova ukazuje na saosećajno upravljanje finansijskim planovima, praktičnim rešenjima i uravnoteženom upotrebom resursa.",
           "reversed": "Kraljica Pentekla je obrnuta ukazuje na nedostatak samo-nege, neravnoteže ili preopterećenja.",
-          "keywords": [
-            "praktičnost",
-            "ravnoteža",
-            "nega",
-            "upravljanje",
-            "izvor"
-          ],
+          "keywords": ["praktičnost", "ravnoteža", "nega", "upravljanje", "izvor"],
           "context": "Nedostatak ravnoteže ili samo-nege određuje nove finansijske planove."
         },
         "position7": {
           "upright": "Kraljica Pentakova ukazuje da će saosećajno rukovodstvo, upravljanje resursima i praktična inteligencija doći do finansijskih planova u budućnosti.",
           "reversed": "Kraljica Pentacles-a preokrećena označava preopterećenje, nedostatak samo-nege ili zloupotrebe resursa.",
-          "keywords": [
-            "izvor",
-            "praktičnost",
-            "rukovodstvo",
-            "nega",
-            "ravnoteža"
-          ],
+          "keywords": ["izvor", "praktičnost", "rukovodstvo", "nega", "ravnoteža"],
           "context": "Nedostatak upravljanja resursima ili samo-nege će faktor biti u buduće finansijske planove."
         },
         "position8": {
           "upright": "Kraljica Pentakova ukazuje da upravljanje resursima, saosećajna praktičnost i efikasnost povećavaju finansijske veštine.",
           "reversed": "Kraljica Pentaklova obrnuta ukazuje da sposobnosti mogu biti ograničene zbog preopterećenja, nedostatka samo-nege ili previše fokusiranja na finansijska pitanja.",
-          "keywords": [
-            "izvor",
-            "praktičnost",
-            "saosećanje",
-            "prinos",
-            "ravnoteža"
-          ],
+          "keywords": ["izvor", "praktičnost", "saosećanje", "prinos", "ravnoteža"],
           "context": "Vaše sposobnosti donošenja novca povezane su sa upravljanjem resursima ili neravnotežom."
         }
       },
@@ -175,97 +91,49 @@
         "position1": {
           "upright": "Kralj pentaklova ukazuje na anksioznost zbog toga što nije u stanju da održi moć i uspeh. Možda se plašite da ne možete da održite finansijsku stabilnost.",
           "reversed": "Kralj pentaklova obrnut otkriva anksioznost zbog gubitka kontrole i gubitka statusa. Možete se brinuti da ne možete da održite ono što ste postigli.",
-          "keywords": [
-            "snaga",
-            "anksioznost",
-            "statistika",
-            "kontrola",
-            "uspeh"
-          ],
+          "keywords": ["snaga", "anksioznost", "statistika", "kontrola", "uspeh"],
           "context": "Anksioznost nastaje da ne mogu da održavaju uspeh i moć."
         },
         "position2": {
           "upright": "Kralj Pentekla pokazuje da on traži sigurnost kroz snažno rukovodstvo i čvrste sisteme. Finansijska sigurnost donosi mir.",
           "reversed": "Kralj pentaklova obrnut ukazuje na anksioznost nad kontrolom ili finansijske zavisnosti. Želja za bezbednošću slabi se sa gubitkom fleksibilnosti.",
-          "keywords": [
-            "rukovodstvo",
-            "robusnost",
-            "sigurnost",
-            "sistem",
-            "stabilnost"
-          ],
+          "keywords": ["rukovodstvo", "robusnost", "sigurnost", "sistem", "stabilnost"],
           "context": "Nalazite sigurnost sa čvrstim rukovodstvom i sistemom."
         },
         "position3": {
           "upright": "Kralj stanovnika ukazuje na čvrstinu, disciplinu i liderstvo u korištenju novca. Resursi se upravljaju strateški.",
           "reversed": "Kralj pentaklova obrnut ukazuje na strepnje zbog pretjerane kontrole ili priloga za status.",
-          "keywords": [
-            "rukovodstvo",
-            "disciplina",
-            "sigurnost",
-            "strategija",
-            "novac"
-          ],
+          "keywords": ["rukovodstvo", "disciplina", "sigurnost", "strategija", "novac"],
           "context": "Liderstvo i bezbednost dolaze u napred u upotrebi novca."
         },
         "position4": {
           "upright": "U prošlosti je došlo do disciplinovog, snažnog i strateškog liderskog pristupa finansijskim pitanjima.",
           "reversed": "Kralj pentaklova obrnut ukazuje na senku prekomerne kontrole ili finansijske odluke orijentisane na status.",
-          "keywords": [
-            "rukovodstvo",
-            "strategija",
-            "novac",
-            "vlast",
-            "snaga"
-          ],
+          "keywords": ["rukovodstvo", "strategija", "novac", "vlast", "snaga"],
           "context": "U prošlosti su finansijska pitanja upravljala snažno rukovodstvo."
         },
         "position5": {
           "upright": "Kralj pentaklova ukazuje na snažno rukovodstvo, finansijsko obezbeđenje i strateško upravljanje finansijskim odgovornostima.",
           "reversed": "Prekoračeni kralj stanovnika može ukazivati na preveliku kontrolu nad finansijskim odgovornostima, opsesijom statusom ili stavovima za dominaciju.",
-          "keywords": [
-            "rukovodstvo",
-            "uverenje",
-            "strategija",
-            "kontrola",
-            "odgovornost"
-          ],
+          "keywords": ["rukovodstvo", "uverenje", "strategija", "kontrola", "odgovornost"],
           "context": "Vođstvo ili pritisak dolazi do izražaja finansijskih odgovornosti."
         },
         "position6": {
           "upright": "Kralj pentakla označava stratešku viziju, bogatstvo i snažno rukovodstvo u finansijskim planovima.",
           "reversed": "Preokrećeni kralj stanovnika ukazuje na pohlepu, prekomernu kontrolu ili materijalno usmerene probleme.",
-          "keywords": [
-            "rukovodstvo",
-            "vizija",
-            "bogatstvo",
-            "kontrola",
-            "snaga"
-          ],
+          "keywords": ["rukovodstvo", "vizija", "bogatstvo", "kontrola", "snaga"],
           "context": "Liderstvo ili prekomerna kontrola će doći do prenosa u novim finansijskim planovima."
         },
         "position7": {
           "upright": "Kralj pentakla ukazuje da će strateška stabilnost, snažne investicije i dugoročni prosperitet dominirati finansijskim planovima u budućnosti.",
           "reversed": "Preokrećeni kralj stanovnika ukazuje na preveliku kontrolu, ambiciju za status ili rizik od pogrešnog resursa.",
-          "keywords": [
-            "strategija",
-            "blagostanje",
-            "sigurnost",
-            "rukovodstvo",
-            "vizija"
-          ],
+          "keywords": ["strategija", "blagostanje", "sigurnost", "rukovodstvo", "vizija"],
           "context": "Želja za čvrstinom ili kontrolom doći će do zaruka u budućim finansijskim planovima."
         },
         "position8": {
           "upright": "Kralj pentaklova ukazuje da strateško planiranje, zvučna investicija i mudro rukovodstvo ojačavaju sposobnosti donošenja novca.",
           "reversed": "Kralj pentaklova obrnut ukazuje da se mogućnosti mogu izgubiti zbog prevelike kontrole, opsednutosti statusom ili kruto razmišljanje.",
-          "keywords": [
-            "rukovodstvo",
-            "investicija",
-            "strategija",
-            "robusnost",
-            "vizija"
-          ],
+          "keywords": ["rukovodstvo", "investicija", "strategija", "robusnost", "vizija"],
           "context": "Vaše sposobnosti donošenja novca povezane su sa strateškim liderstvom ili rigidnosti."
         }
       }

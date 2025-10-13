@@ -5,6 +5,7 @@
 
 import * as React from 'react';
 import { useEffect, useRef, useState, useCallback } from 'react';
+import Image from 'next/image';
 
 export interface LazyLoadingConfig {
   rootMargin: string;
@@ -184,11 +185,14 @@ export function LazyImage({
           style={{ width, height }}
         >
           {placeholder ? (
-            <img
-              src={placeholder}
-              alt=''
-              className='w-full h-full object-cover opacity-50'
-            />
+            <div className='relative w-full h-full'>
+              <Image
+                src={placeholder}
+                alt=''
+                fill
+                className='object-cover opacity-50'
+              />
+            </div>
           ) : (
             <div className='w-8 h-8 bg-gray-300 rounded'></div>
           )}
@@ -197,7 +201,7 @@ export function LazyImage({
 
       {/* Main image */}
       {isInView && (
-        <img
+        <Image
           src={src}
           alt={alt}
           width={width}
@@ -207,8 +211,6 @@ export function LazyImage({
           }`}
           onLoad={handleImageLoad}
           onError={handleImageError}
-          loading='lazy'
-          decoding='async'
         />
       )}
 
@@ -307,30 +309,30 @@ export function ProgressiveImage({
     >
       {/* Low quality image */}
       {lowQualitySrc && !isHighQualityLoaded && (
-        <img
-          src={lowQualitySrc}
-          alt={alt}
-          width={width}
-          height={height}
-          className='absolute inset-0 w-full h-full object-cover filter blur-sm'
-        />
+        <div className='absolute inset-0'>
+          <Image
+            src={lowQualitySrc}
+            alt={alt}
+            fill
+            className='object-cover filter blur-sm'
+          />
+        </div>
       )}
 
       {/* High quality image */}
       {isInView && currentSrc && (
-        <img
-          src={currentSrc}
-          alt={alt}
-          width={width}
-          height={height}
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
-            isHighQualityLoaded ? 'opacity-100' : 'opacity-0'
-          }`}
-          onLoad={handleImageLoad}
-          onError={handleImageError}
-          loading='lazy'
-          decoding='async'
-        />
+        <div className='absolute inset-0'>
+          <Image
+            src={currentSrc}
+            alt={alt}
+            fill
+            className={`object-cover transition-opacity duration-500 ${
+              isHighQualityLoaded ? 'opacity-100' : 'opacity-0'
+            }`}
+            onLoad={handleImageLoad}
+            onError={handleImageError}
+          />
+        </div>
       )}
 
       {/* Error state */}

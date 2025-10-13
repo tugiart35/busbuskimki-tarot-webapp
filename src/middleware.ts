@@ -35,6 +35,10 @@ import { createServerClient } from '@supabase/ssr';
 import type { UserRole } from '@/types/auth.types';
 import createIntlMiddleware from 'next-intl/middleware';
 import { locales, defaultLocale } from './lib/i18n/config';
+import {
+  checkRateLimit,
+  RATE_LIMIT_CONFIG,
+} from './lib/rate-limiter';
 // import { checkMaintenanceMode } from './middleware/maintenance';
 
 // next-intl middleware oluştur
@@ -59,10 +63,17 @@ const securityHeaders = {
   }),
   'Content-Security-Policy': [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com",
-    "style-src 'self' 'unsafe-inline'",
-    "img-src 'self' data: https:",
-    "font-src 'self'",
+    // Script sources - unsafe-eval kaldırıldı, sadece production'da güvenli modda
+    process.env.NODE_ENV === 'production'
+      ? "script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com"
+      : "script-src 'self' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com",
+    // Style sources - production'da unsafe-inline kaldırıldı
+    process.env.NODE_ENV === 'production'
+      ? "style-src 'self'"
+      : "style-src 'self' 'unsafe-inline'",
+    // Image sources - belirli domain'lerle sınırlandırıldı
+    "img-src 'self' data: https://*.supabase.co https://*.supabase.in https://www.googletagmanager.com https://www.google-analytics.com",
+    "font-src 'self' data:",
     "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://www.google-analytics.com https://www.googletagmanager.com",
     "frame-src 'none'",
     "object-src 'none'",
@@ -102,9 +113,63 @@ export async function middleware(request: NextRequest) {
   //   return maintenanceResponse;
   // }
 
-  // Bot detection kaldırıldı - development için
+  // Rate Limiting - Production'da aktif
+  if (process.env.NODE_ENV === 'production') {
+    // IP adresini al (Vercel, Cloudflare vb. için)
+    const ip =
+      request.headers.get('x-forwarded-for')?.split(',')[0].trim() ||
+      request.headers.get('x-real-ip') ||
+      'unknown';
 
-  // Rate limiting kaldırıldı - development için
+    // Endpoint'e göre rate limit konfigürasyonu seç
+    let rateLimitConfig = RATE_LIMIT_CONFIG.general;
+
+    if (pathname.includes('/auth') || pathname.includes('/login')) {
+      rateLimitConfig = RATE_LIMIT_CONFIG.auth;
+    } else if (pathname.startsWith('/api/payment') || pathname.includes('/shopier')) {
+      rateLimitConfig = RATE_LIMIT_CONFIG.payment;
+    } else if (pathname.startsWith('/api')) {
+      rateLimitConfig = RATE_LIMIT_CONFIG.api;
+    }
+
+    // Rate limit kontrolü
+    const { allowed, remainingRequests, resetTime, retryAfter } = checkRateLimit(
+      ip,
+      rateLimitConfig
+    );
+
+    if (!allowed) {
+      const response = new NextResponse(
+        JSON.stringify({
+          error: 'Too Many Requests',
+          message: 'Çok fazla istek gönderdiniz. Lütfen daha sonra tekrar deneyin.',
+          retryAfter,
+        }),
+        {
+          status: 429,
+          headers: {
+            'Content-Type': 'application/json',
+            'Retry-After': String(retryAfter || 60),
+            'X-RateLimit-Limit': String(rateLimitConfig.maxRequests),
+            'X-RateLimit-Remaining': '0',
+            'X-RateLimit-Reset': String(Math.ceil(resetTime / 1000)),
+          },
+        }
+      );
+
+      return response;
+    }
+
+    // Rate limit header'larını response'a ekle
+    const responseHeaders = {
+      'X-RateLimit-Limit': String(rateLimitConfig.maxRequests),
+      'X-RateLimit-Remaining': String(remainingRequests),
+      'X-RateLimit-Reset': String(Math.ceil(resetTime / 1000)),
+    };
+
+    // Header'ları sonraki response'lara eklemek için kullan
+    request.headers.set('x-rate-limit-info', JSON.stringify(responseHeaders));
+  }
 
   // API route'ları ve static dosyaları bypass et
   if (
@@ -128,6 +193,21 @@ export async function middleware(request: NextRequest) {
   Object.entries(securityHeaders).forEach(([key, value]) => {
     response.headers.set(key, value);
   });
+
+  // Rate limit header'larını ekle (production)
+  if (process.env.NODE_ENV === 'production') {
+    const rateLimitInfo = request.headers.get('x-rate-limit-info');
+    if (rateLimitInfo) {
+      try {
+        const headers = JSON.parse(rateLimitInfo);
+        Object.entries(headers).forEach(([key, value]) => {
+          response.headers.set(key, String(value));
+        });
+      } catch (error) {
+        // Header parsing hatası - sessizce devam et
+      }
+    }
+  }
 
   // Supabase client oluştur
   const supabase = createServerClient(

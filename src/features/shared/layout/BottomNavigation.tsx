@@ -84,10 +84,9 @@ export default function BottomNavigation() {
     <LayoutErrorBoundary>
       <nav
         className='fixed bottom-0 left-0 right-0 z-50 bg-slate-900/95 backdrop-blur-md border-t border-slate-700'
-        role='navigation'
         aria-label='Ana navigasyon menüsü'
       >
-        <div className='flex items-center justify-around h-16 px-1'>
+        <ul className='flex items-center justify-around h-16 px-1' role='menubar'>
           {navigationItems.map(item => {
             const isActive =
               pathname === item.href ||
@@ -101,75 +100,78 @@ export default function BottomNavigation() {
 
             if (isProfileOrAuth) {
               return (
-                <button
-                  key={item.name}
-                  onClick={handleProfileClick}
-                  className={`
-                  flex flex-col items-center justify-center px-2 py-2 rounded-lg
-                  transition-all duration-300 min-w-0 flex-1
-                  ${isActive ? 'text-amber-400' : 'text-gray-500 hover:text-gray-300'}
-                `}
-                  aria-label={`${item.name} ${t('navigation.menu.goToPage', 'sayfasına git')}`}
-                  aria-current={isActive ? 'page' : undefined}
-                  role='menuitem'
-                >
-                  <span className='text-lg mb-1'>
-                    {isActive ? item.activeIcon : item.icon}
-                  </span>
-                  <span className='text-xs font-medium truncate'>
-                    {item.name}
-                  </span>
-                </button>
+                <li key={item.name} role='none'>
+                  <button
+                    onClick={handleProfileClick}
+                    className={`
+                    flex flex-col items-center justify-center px-2 py-2 rounded-lg
+                    transition-all duration-300 min-w-0 flex-1
+                    ${isActive ? 'text-amber-400' : 'text-gray-500 hover:text-gray-300'}
+                  `}
+                    aria-label={`${item.name} ${t('navigation.menu.goToPage', 'sayfasına git')}`}
+                    aria-current={isActive ? 'page' : undefined}
+                    role='menuitem'
+                  >
+                    <span className='text-lg mb-1' aria-hidden='true'>
+                      {isActive ? item.activeIcon : item.icon}
+                    </span>
+                    <span className='text-xs font-medium truncate'>
+                      {item.name}
+                    </span>
+                  </button>
+                </li>
               );
             }
 
             if (isPakize) {
               return (
-                <button
-                  key={item.name}
-                  onClick={handlePakizeClick}
+                <li key={item.name} role='none'>
+                  <button
+                    onClick={handlePakizeClick}
+                    className={`
+                    flex flex-col items-center justify-center px-2 py-2 rounded-lg
+                    transition-all duration-300 min-w-0 flex-1
+                    ${isActive ? 'text-amber-400' : 'text-gray-500 hover:text-gray-300'}
+                  `}
+                    aria-label={`${item.name} ${t('navigation.menu.goToPage', 'sayfasına git')}`}
+                    aria-current={isActive ? 'page' : undefined}
+                    role='menuitem'
+                  >
+                    <span className='text-lg mb-1' aria-hidden='true'>
+                      {isActive ? item.activeIcon : item.icon}
+                    </span>
+                    <span className='text-xs font-medium truncate'>
+                      {item.name}
+                    </span>
+                  </button>
+                </li>
+              );
+            }
+
+            return (
+              <li key={item.name} role='none'>
+                <Link
+                  href={item.href}
                   className={`
                   flex flex-col items-center justify-center px-2 py-2 rounded-lg
                   transition-all duration-300 min-w-0 flex-1
                   ${isActive ? 'text-amber-400' : 'text-gray-500 hover:text-gray-300'}
                 `}
-                  aria-label={`${item.name} ${t('navigation.menu.goToPage', 'sayfasına git')}`}
+                  aria-label={`${item.name} sayfasına git`}
                   aria-current={isActive ? 'page' : undefined}
                   role='menuitem'
                 >
-                  <span className='text-lg mb-1'>
+                  <span className='text-lg mb-1' aria-hidden='true'>
                     {isActive ? item.activeIcon : item.icon}
                   </span>
                   <span className='text-xs font-medium truncate'>
                     {item.name}
                   </span>
-                </button>
-              );
-            }
-
-            return (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`
-                flex flex-col items-center justify-center px-2 py-2 rounded-lg
-                transition-all duration-300 min-w-0 flex-1
-                ${isActive ? 'text-amber-400' : 'text-gray-500 hover:text-gray-300'}
-              `}
-                aria-label={`${item.name} sayfasına git`}
-                aria-current={isActive ? 'page' : undefined}
-                role='menuitem'
-              >
-                <span className='text-lg mb-1'>
-                  {isActive ? item.activeIcon : item.icon}
-                </span>
-                <span className='text-xs font-medium truncate'>
-                  {item.name}
-                </span>
-              </Link>
+                </Link>
+              </li>
             );
           })}
-        </div>
+        </ul>
       </nav>
     </LayoutErrorBoundary>
   );

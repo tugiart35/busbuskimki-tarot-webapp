@@ -36,7 +36,7 @@ describe('Auth Validation', () => {
       const result = loginSchema.safeParse(invalidData);
       expect(result.success).toBe(false);
       if (!result.success) {
-        expect(result.error.issues[0].message).toBe(
+        expect(result.error.issues[0]?.message).toBe(
           'Geçerli bir e-posta adresi girin'
         );
       }
@@ -51,7 +51,7 @@ describe('Auth Validation', () => {
       const result = loginSchema.safeParse(invalidData);
       expect(result.success).toBe(false);
       if (!result.success) {
-        expect(result.error.issues[0].message).toBe(
+        expect(result.error.issues[0]?.message).toBe(
           'Şifre en az 6 karakter olmalı'
         );
       }
@@ -88,7 +88,7 @@ describe('Auth Validation', () => {
       const result = registerSchema.safeParse(invalidData);
       expect(result.success).toBe(false);
       if (!result.success) {
-        expect(result.error.issues[0].message).toBe('Şifreler eşleşmiyor');
+        expect(result.error.issues[0]?.message).toBe('Şifreler eşleşmiyor');
       }
     });
 
@@ -106,7 +106,7 @@ describe('Auth Validation', () => {
       const result = registerSchema.safeParse(invalidData);
       expect(result.success).toBe(false);
       if (!result.success) {
-        expect(result.error.issues[0].message).toBe(
+        expect(result.error.issues[0]?.message).toBe(
           'Ad en az 2 karakter olmalı'
         );
       }
@@ -126,7 +126,7 @@ describe('Auth Validation', () => {
       const result = registerSchema.safeParse(invalidData);
       expect(result.success).toBe(false);
       if (!result.success) {
-        expect(result.error.issues[0].message).toBe(
+        expect(result.error.issues[0]?.message).toBe(
           'En az 13 yaşında olmalısınız'
         );
       }

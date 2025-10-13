@@ -142,4 +142,3 @@ grep -q '"firstName":' messages/sr.json && echo "✓ profile.firstName added"
 grep -q '"saving":' messages/sr.json && echo "✓ common.saving added"
 grep -q '"level":' messages/sr.json && echo "✓ dashboard.level added"
 ```
-

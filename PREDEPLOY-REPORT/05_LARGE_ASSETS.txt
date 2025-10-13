@@ -1,0 +1,7 @@
+public/images/bg-3card-tarot.webp
+public/images/bg-3card-tarot.jpg
+public/images/bg-love-tarot.webp
+public/images/bg-love-tarot.jpg
+public/Spread/careertarot.jpeg
+public/Spread/iliskisorunları.jpeg
+public/Spread/IMG_4632.jpeg

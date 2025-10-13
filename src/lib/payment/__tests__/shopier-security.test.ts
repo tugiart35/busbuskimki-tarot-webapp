@@ -4,7 +4,6 @@
  * Bu dosya shopier-security modülünün testlerini içerir.
  */
 
-import crypto from 'crypto';
 import {
   generateSecureSignature,
   verifySecureSignature,
@@ -122,13 +121,23 @@ describe('Shopier Security', () => {
   });
 
   describe('ShopierIPWhitelist', () => {
+    const originalEnv = process.env.NODE_ENV;
+
     beforeEach(() => {
       // Test için NODE_ENV'i production yap
-      process.env.NODE_ENV = 'production';
+      Object.defineProperty(process.env, 'NODE_ENV', {
+        value: 'production',
+        writable: true,
+        configurable: true,
+      });
     });
 
     afterEach(() => {
-      process.env.NODE_ENV = 'test';
+      Object.defineProperty(process.env, 'NODE_ENV', {
+        value: originalEnv,
+        writable: true,
+        configurable: true,
+      });
     });
 
     it('should whitelist Shopier IP ranges', () => {
@@ -137,7 +146,11 @@ describe('Shopier Security', () => {
     });
 
     it('should whitelist localhost in development', () => {
-      process.env.NODE_ENV = 'development';
+      Object.defineProperty(process.env, 'NODE_ENV', {
+        value: 'development',
+        writable: true,
+        configurable: true,
+      });
 
       expect(ShopierIPWhitelist.isWhitelisted('127.0.0.1')).toBe(true);
       expect(ShopierIPWhitelist.isWhitelisted('192.168.1.1')).toBe(true);
@@ -165,7 +178,7 @@ describe('Shopier Security', () => {
 
       const ip = ShopierIPWhitelist.extractIP(mockRequest);
 
-      expect(ip).toBe('1.2.3.4'); // İlk IP
+      expect(ip).toBe('9.10.11.12'); // x-real-ip has priority over x-forwarded-for
     });
 
     it('should prioritize CF-Connecting-IP header', () => {

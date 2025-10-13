@@ -414,15 +414,25 @@ export function getI18nNewLoverMeaningByCardAndPosition(
 
   if (!originalMeaning) {
     // eslint-disable-next-line no-console
-    console.warn(`[New Lover Position ${position}] Card not found: ${cardName}`);
+    console.warn(
+      `[New Lover Position ${position}] Card not found: ${cardName}`
+    );
     return null;
   }
 
   // i18n değerlerini al
-  const i18nUpright = t(getNewLoverMeaningI18nKey(cardName, position, 'upright'));
-  const i18nReversed = t(getNewLoverMeaningI18nKey(cardName, position, 'reversed'));
-  const i18nKeywords = t(getNewLoverMeaningI18nKey(cardName, position, 'keywords'));
-  const i18nContext = t(getNewLoverMeaningI18nKey(cardName, position, 'context'));
+  const i18nUpright = t(
+    getNewLoverMeaningI18nKey(cardName, position, 'upright')
+  );
+  const i18nReversed = t(
+    getNewLoverMeaningI18nKey(cardName, position, 'reversed')
+  );
+  const i18nKeywords = t(
+    getNewLoverMeaningI18nKey(cardName, position, 'keywords')
+  );
+  const i18nContext = t(
+    getNewLoverMeaningI18nKey(cardName, position, 'context')
+  );
 
   // Eğer çeviri bulunamazsa (key döndürülürse), orijinal değeri kullan
   const uprightText = i18nUpright.startsWith('new-lover.meanings.')

@@ -48,8 +48,8 @@ export const APP_CONFIG = {
     viewport: {
       width: 'device-width',
       initialScale: 1,
-      maximumScale: 1,
-      userScalable: 'no',
+      maximumScale: 5,
+      userScalable: 'yes',
     },
   },
 

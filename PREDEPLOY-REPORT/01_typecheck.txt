@@ -1,0 +1,108 @@
+src/features/shared/layout/__tests__/BottomNavigation.test.tsx(44,39): error TS2339: Property 'toBeInTheDocument' does not exist on type 'JestMatchers<HTMLElement>'.
+src/features/shared/layout/__tests__/BottomNavigation.test.tsx(45,44): error TS2339: Property 'toBeInTheDocument' does not exist on type 'JestMatchers<HTMLElement>'.
+src/features/shared/layout/__tests__/BottomNavigation.test.tsx(46,43): error TS2339: Property 'toBeInTheDocument' does not exist on type 'JestMatchers<HTMLElement>'.
+src/features/shared/layout/__tests__/BottomNavigation.test.tsx(47,43): error TS2339: Property 'toBeInTheDocument' does not exist on type 'JestMatchers<HTMLElement>'.
+src/features/shared/layout/__tests__/BottomNavigation.test.tsx(58,23): error TS2339: Property 'toHaveAttribute' does not exist on type 'JestMatchers<HTMLElement>'.
+src/features/shared/layout/__tests__/BottomNavigation.test.tsx(59,28): error TS2339: Property 'toHaveAttribute' does not exist on type 'JestMatchers<HTMLElement>'.
+src/features/shared/layout/__tests__/BottomNavigation.test.tsx(60,22): error TS2339: Property 'toHaveAttribute' does not exist on type 'JestMatchers<HTMLElement>'.
+src/features/shared/layout/__tests__/BottomNavigation.test.tsx(61,23): error TS2339: Property 'toHaveAttribute' does not exist on type 'JestMatchers<HTMLElement>'.
+src/features/shared/layout/__tests__/BottomNavigation.test.tsx(68,17): error TS2339: Property 'toHaveAttribute' does not exist on type 'JestMatchers<HTMLElement>'.
+src/features/shared/layout/__tests__/BottomNavigation.test.tsx(72,20): error TS2339: Property 'toHaveAttribute' does not exist on type 'JestMatchers<HTMLElement>'.
+src/features/tarot/lib/relationship-analysis/position-meanings-index.ts(423,7): error TS2322: Type 'RelationshipAnalysisPositionMeaning | undefined' is not assignable to type 'RelationshipAnalysisPositionMeaning | null'.
+  Type 'undefined' is not assignable to type 'RelationshipAnalysisPositionMeaning | null'.
+src/features/tarot/lib/relationship-analysis/position-meanings-index.ts(427,7): error TS2322: Type 'RelationshipAnalysisPositionMeaning | undefined' is not assignable to type 'RelationshipAnalysisPositionMeaning | null'.
+  Type 'undefined' is not assignable to type 'RelationshipAnalysisPositionMeaning | null'.
+src/features/tarot/lib/relationship-analysis/position-meanings-index.ts(431,7): error TS2322: Type 'RelationshipAnalysisPositionMeaning | undefined' is not assignable to type 'RelationshipAnalysisPositionMeaning | null'.
+  Type 'undefined' is not assignable to type 'RelationshipAnalysisPositionMeaning | null'.
+src/features/tarot/lib/relationship-analysis/position-meanings-index.ts(435,7): error TS2322: Type 'RelationshipAnalysisPositionMeaning | undefined' is not assignable to type 'RelationshipAnalysisPositionMeaning | null'.
+  Type 'undefined' is not assignable to type 'RelationshipAnalysisPositionMeaning | null'.
+src/features/tarot/lib/relationship-problems/position-meanings-index.ts(554,7): error TS2322: Type 'RelationshipProblemsPositionMeaning | undefined' is not assignable to type 'RelationshipProblemsPositionMeaning | null'.
+  Type 'undefined' is not assignable to type 'RelationshipProblemsPositionMeaning | null'.
+src/features/tarot/lib/relationship-problems/position-meanings-index.ts(558,7): error TS2322: Type 'RelationshipProblemsPositionMeaning | undefined' is not assignable to type 'RelationshipProblemsPositionMeaning | null'.
+  Type 'undefined' is not assignable to type 'RelationshipProblemsPositionMeaning | null'.
+src/features/tarot/lib/relationship-problems/position-meanings-index.ts(562,7): error TS2322: Type 'RelationshipProblemsPositionMeaning | undefined' is not assignable to type 'RelationshipProblemsPositionMeaning | null'.
+  Type 'undefined' is not assignable to type 'RelationshipProblemsPositionMeaning | null'.
+src/features/tarot/lib/relationship-problems/position-meanings-index.ts(566,7): error TS2322: Type 'RelationshipProblemsPositionMeaning | undefined' is not assignable to type 'RelationshipProblemsPositionMeaning | null'.
+  Type 'undefined' is not assignable to type 'RelationshipProblemsPositionMeaning | null'.
+src/features/tarot/lib/relationship-problems/position-meanings-index.ts(570,7): error TS2322: Type 'RelationshipProblemsPositionMeaning | undefined' is not assignable to type 'RelationshipProblemsPositionMeaning | null'.
+  Type 'undefined' is not assignable to type 'RelationshipProblemsPositionMeaning | null'.
+src/features/tarot/lib/relationship-problems/position-meanings-index.ts(574,7): error TS2322: Type 'RelationshipProblemsPositionMeaning | undefined' is not assignable to type 'RelationshipProblemsPositionMeaning | null'.
+  Type 'undefined' is not assignable to type 'RelationshipProblemsPositionMeaning | null'.
+src/features/tarot/lib/relationship-problems/position-meanings-index.ts(578,7): error TS2322: Type 'RelationshipProblemsPositionMeaning | undefined' is not assignable to type 'RelationshipProblemsPositionMeaning | null'.
+  Type 'undefined' is not assignable to type 'RelationshipProblemsPositionMeaning | null'.
+src/features/tarot/lib/relationship-problems/position-meanings-index.ts(582,7): error TS2322: Type 'RelationshipProblemsPositionMeaning | undefined' is not assignable to type 'RelationshipProblemsPositionMeaning | null'.
+  Type 'undefined' is not assignable to type 'RelationshipProblemsPositionMeaning | null'.
+src/features/tarot/lib/relationship-problems/position-meanings-index.ts(586,7): error TS2322: Type 'RelationshipProblemsPositionMeaning | undefined' is not assignable to type 'RelationshipProblemsPositionMeaning | null'.
+  Type 'undefined' is not assignable to type 'RelationshipProblemsPositionMeaning | null'.
+src/features/tarot/lib/situation-analysis/position-meanings-index.ts(502,7): error TS2322: Type 'SituationAnalysisPositionMeaning | undefined' is not assignable to type 'SituationAnalysisPositionMeaning | null'.
+  Type 'undefined' is not assignable to type 'SituationAnalysisPositionMeaning | null'.
+src/features/tarot/lib/situation-analysis/position-meanings-index.ts(505,7): error TS2322: Type 'SituationAnalysisPositionMeaning | undefined' is not assignable to type 'SituationAnalysisPositionMeaning | null'.
+  Type 'undefined' is not assignable to type 'SituationAnalysisPositionMeaning | null'.
+src/features/tarot/lib/situation-analysis/position-meanings-index.ts(508,7): error TS2322: Type 'SituationAnalysisPositionMeaning | undefined' is not assignable to type 'SituationAnalysisPositionMeaning | null'.
+  Type 'undefined' is not assignable to type 'SituationAnalysisPositionMeaning | null'.
+src/features/tarot/lib/situation-analysis/position-meanings-index.ts(511,7): error TS2322: Type 'SituationAnalysisPositionMeaning | undefined' is not assignable to type 'SituationAnalysisPositionMeaning | null'.
+  Type 'undefined' is not assignable to type 'SituationAnalysisPositionMeaning | null'.
+src/features/tarot/lib/situation-analysis/position-meanings-index.ts(514,7): error TS2322: Type 'SituationAnalysisPositionMeaning | undefined' is not assignable to type 'SituationAnalysisPositionMeaning | null'.
+  Type 'undefined' is not assignable to type 'SituationAnalysisPositionMeaning | null'.
+src/features/tarot/lib/situation-analysis/position-meanings-index.ts(517,7): error TS2322: Type 'SituationAnalysisPositionMeaning | undefined' is not assignable to type 'SituationAnalysisPositionMeaning | null'.
+  Type 'undefined' is not assignable to type 'SituationAnalysisPositionMeaning | null'.
+src/features/tarot/lib/situation-analysis/position-meanings-index.ts(520,7): error TS2322: Type 'SituationAnalysisPositionMeaning | undefined' is not assignable to type 'SituationAnalysisPositionMeaning | null'.
+  Type 'undefined' is not assignable to type 'SituationAnalysisPositionMeaning | null'.
+src/features/tarot/shared/config/tarot-config-factory.ts(13,1): error TS6133: 'useTranslations' is declared but its value is never read.
+src/features/tarot/shared/config/tarot-config-factory.ts(688,28): error TS2379: Argument of type '{ spreadId: string; spreadKey: string; cardCount: number; translationNamespace: string; summaryKey: string; positionsLayout: readonly PositionLayout[]; theme: "blue"; icon: string; readingType: string; supabaseReadingType: string; creditKeyPrefix: string; t: ((key: string) => string) | undefined; }' is not assignable to parameter of type 'CreateTarotConfigParams' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 't' are incompatible.
+    Type '((key: string) => string) | undefined' is not assignable to type '(key: string) => string'.
+      Type 'undefined' is not assignable to type '(key: string) => string'.
+src/features/tarot/shared/config/tarot-config-factory.ts(709,28): error TS2379: Argument of type '{ spreadId: string; spreadKey: string; cardCount: number; translationNamespace: string; summaryKey: string; positionsLayout: PositionLayout[]; theme: "pink"; icon: string; readingType: string; supabaseReadingType: string; creditKeyPrefix: string; t: ((key: string) => string) | undefined; }' is not assignable to parameter of type 'CreateTarotConfigParams' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 't' are incompatible.
+    Type '((key: string) => string) | undefined' is not assignable to type '(key: string) => string'.
+      Type 'undefined' is not assignable to type '(key: string) => string'.
+src/features/tarot/shared/config/tarot-config-factory.ts(730,28): error TS2379: Argument of type '{ spreadId: string; spreadKey: string; cardCount: number; translationNamespace: string; summaryKey: string; positionsLayout: PositionLayout[]; theme: "green"; icon: string; readingType: string; supabaseReadingType: string; creditKeyPrefix: string; t: ((key: string) => string) | undefined; }' is not assignable to parameter of type 'CreateTarotConfigParams' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 't' are incompatible.
+    Type '((key: string) => string) | undefined' is not assignable to type '(key: string) => string'.
+      Type 'undefined' is not assignable to type '(key: string) => string'.
+src/features/tarot/shared/config/tarot-config-factory.ts(751,28): error TS2379: Argument of type '{ spreadId: string; spreadKey: string; cardCount: number; spreadName: string; translationNamespace: string; summaryKey: string; positionsLayout: PositionLayout[]; theme: "orange"; ... 4 more ...; t: ((key: string) => string) | undefined; }' is not assignable to parameter of type 'CreateTarotConfigParams' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 't' are incompatible.
+    Type '((key: string) => string) | undefined' is not assignable to type '(key: string) => string'.
+      Type 'undefined' is not assignable to type '(key: string) => string'.
+src/features/tarot/shared/config/tarot-config-factory.ts(773,28): error TS2379: Argument of type '{ spreadId: string; spreadKey: string; cardCount: number; translationNamespace: string; summaryKey: string; positionsLayout: PositionLayout[]; theme: "pink"; icon: string; readingType: string; supabaseReadingType: string; creditKeyPrefix: string; t: ((key: string) => string) | undefined; }' is not assignable to parameter of type 'CreateTarotConfigParams' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 't' are incompatible.
+    Type '((key: string) => string) | undefined' is not assignable to type '(key: string) => string'.
+      Type 'undefined' is not assignable to type '(key: string) => string'.
+src/features/tarot/shared/config/tarot-config-factory.ts(794,28): error TS2379: Argument of type '{ spreadId: string; spreadKey: string; cardCount: number; translationNamespace: string; summaryKey: string; positionsLayout: PositionLayout[]; theme: "blue"; icon: string; readingType: string; supabaseReadingType: string; creditKeyPrefix: string; t: ((key: string) => string) | undefined; }' is not assignable to parameter of type 'CreateTarotConfigParams' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 't' are incompatible.
+    Type '((key: string) => string) | undefined' is not assignable to type '(key: string) => string'.
+      Type 'undefined' is not assignable to type '(key: string) => string'.
+src/features/tarot/shared/config/tarot-config-factory.ts(815,28): error TS2379: Argument of type '{ spreadId: string; spreadKey: string; cardCount: number; translationNamespace: string; summaryKey: string; positionsLayout: PositionLayout[]; theme: "red"; icon: string; readingType: string; supabaseReadingType: string; creditKeyPrefix: string; t: ((key: string) => string) | undefined; }' is not assignable to parameter of type 'CreateTarotConfigParams' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 't' are incompatible.
+    Type '((key: string) => string) | undefined' is not assignable to type '(key: string) => string'.
+      Type 'undefined' is not assignable to type '(key: string) => string'.
+src/features/tarot/shared/config/tarot-config-factory.ts(836,28): error TS2379: Argument of type '{ spreadId: string; spreadKey: string; cardCount: number; translationNamespace: string; summaryKey: string; positionsLayout: PositionLayout[]; theme: "pink"; icon: string; readingType: string; supabaseReadingType: string; creditKeyPrefix: string; t: ((key: string) => string) | undefined; }' is not assignable to parameter of type 'CreateTarotConfigParams' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 't' are incompatible.
+    Type '((key: string) => string) | undefined' is not assignable to type '(key: string) => string'.
+      Type 'undefined' is not assignable to type '(key: string) => string'.
+src/features/tarot/shared/config/tarot-config-factory.ts(857,28): error TS2379: Argument of type '{ spreadId: string; spreadKey: string; cardCount: number; translationNamespace: string; summaryKey: string; spreadName: string; positionsLayout: PositionLayout[]; theme: "purple"; ... 4 more ...; t: ((key: string) => string) | undefined; }' is not assignable to parameter of type 'CreateTarotConfigParams' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 't' are incompatible.
+    Type '((key: string) => string) | undefined' is not assignable to type '(key: string) => string'.
+      Type 'undefined' is not assignable to type '(key: string) => string'.
+src/hooks/__tests__/useInputValidation.test.ts(1,22): error TS6133: 'act' is declared but its value is never read.
+src/hooks/auth/__tests__/useAuth.test.ts(106,37): error TS2345: Argument of type '{ email: string; password: string; confirmPassword: string; name: string; surname: string; birthDate: string; gender: string; }' is not assignable to parameter of type '{ email: string; password: string; confirmPassword: string; name: string; surname: string; birthDate: string; gender: "other" | "male" | "female" | "prefer_not_to_say"; }'.
+  Types of property 'gender' are incompatible.
+    Type 'string' is not assignable to type '"other" | "male" | "female" | "prefer_not_to_say"'.
+src/hooks/auth/__tests__/useAuth.test.ts(131,39): error TS2345: Argument of type '{ email: string; password: string; confirmPassword: string; name: string; surname: string; birthDate: string; gender: string; }' is not assignable to parameter of type '{ email: string; password: string; confirmPassword: string; name: string; surname: string; birthDate: string; gender: "other" | "male" | "female" | "prefer_not_to_say"; }'.
+  Types of property 'gender' are incompatible.
+    Type 'string' is not assignable to type '"other" | "male" | "female" | "prefer_not_to_say"'.
+src/lib/auth/__tests__/auth-service.test.ts(90,47): error TS2345: Argument of type '{ email: string; password: string; firstName: string; lastName: string; }' is not assignable to parameter of type '{ email: string; password: string; confirmPassword: string; name: string; surname: string; birthDate: string; gender: "other" | "male" | "female" | "prefer_not_to_say"; }'.
+  Type '{ email: string; password: string; firstName: string; lastName: string; }' is missing the following properties from type '{ email: string; password: string; confirmPassword: string; name: string; surname: string; birthDate: string; gender: "other" | "male" | "female" | "prefer_not_to_say"; }': confirmPassword, name, surname, birthDate, gender
+src/lib/auth/__tests__/auth-service.test.ts(120,39): error TS2345: Argument of type '{ email: string; password: string; firstName: string; lastName: string; }' is not assignable to parameter of type '{ email: string; password: string; confirmPassword: string; name: string; surname: string; birthDate: string; gender: "other" | "male" | "female" | "prefer_not_to_say"; }'.
+  Type '{ email: string; password: string; firstName: string; lastName: string; }' is missing the following properties from type '{ email: string; password: string; confirmPassword: string; name: string; surname: string; birthDate: string; gender: "other" | "male" | "female" | "prefer_not_to_say"; }': confirmPassword, name, surname, birthDate, gender
+src/lib/auth/__tests__/auth-validation.test.ts(39,16): error TS2532: Object is possibly 'undefined'.
+src/lib/auth/__tests__/auth-validation.test.ts(54,16): error TS2532: Object is possibly 'undefined'.
+src/lib/auth/__tests__/auth-validation.test.ts(91,16): error TS2532: Object is possibly 'undefined'.
+src/lib/auth/__tests__/auth-validation.test.ts(109,16): error TS2532: Object is possibly 'undefined'.
+src/lib/auth/__tests__/auth-validation.test.ts(129,16): error TS2532: Object is possibly 'undefined'.
+src/lib/payment/__tests__/shopier-security.test.ts(7,1): error TS6133: 'crypto' is declared but its value is never read.
+src/lib/payment/__tests__/shopier-security.test.ts(127,19): error TS2540: Cannot assign to 'NODE_ENV' because it is a read-only property.
+src/lib/payment/__tests__/shopier-security.test.ts(131,19): error TS2540: Cannot assign to 'NODE_ENV' because it is a read-only property.
+src/lib/payment/__tests__/shopier-security.test.ts(140,19): error TS2540: Cannot assign to 'NODE_ENV' because it is a read-only property.
+Exit code: 1

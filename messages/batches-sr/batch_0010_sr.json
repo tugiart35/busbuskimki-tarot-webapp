@@ -3,24 +3,13 @@
     "meanings": {
       "aceofcups": {
         "position7": {
-          "keywords": [
-            null,
-            "početak",
-            "zadovoljstvo",
-            "osećanje",
-            "budućnost"
-          ],
+          "keywords": [null, "početak", "zadovoljstvo", "osećanje", "budućnost"],
           "context": "Rezultat će biti emocionalno zadovoljavajući novu eru."
         },
         "position1": {
           "upright": "ACE CUP-a ukazuje da tražite emocionalno ispunjenje u karijeri. Karijera koju želite da bude posao koji vas popuni umesto da samo zarađujete. Slušajte svoje srce.",
           "reversed": "ACE of Cups preokrenuti ukazuje na osećaj emocionalno praznog. Vaša trenutna u karijeri vas ne čini srećnom unutra. Vreme je da ponovo otkrijete svoju strast.",
-          "keywords": [
-            "Emotivno zadovoljstvo",
-            "strast",
-            "glas srca",
-            "unutrašnja sreća"
-          ],
+          "keywords": ["Emotivno zadovoljstvo", "strast", "glas srca", "unutrašnja sreća"],
           "context": "Ova kartica naglašava važnost emocionalnog zadovoljstva u izboru karijere. Karijeru koju stvarno želite treba da se oseti svojim srcem, a ne samo vaše logike."
         }
       },
@@ -28,84 +17,43 @@
         "position2": {
           "upright": "Tvoje šolje sugeriraju da krenete napred kroz saradnju i partnerstvo. Radeći u skladu sa pouzdanim ljudima će rasti vašu karijeru.",
           "reversed": "Dvojica preokrenuta šoljicama ukazuje da vas nespojiva partnerstva mogu usporiti.",
-          "keywords": [
-            "partnerstvo",
-            "partnerstvo",
-            "raport",
-            "ravnoteža",
-            "priključak"
-          ],
+          "keywords": ["partnerstvo", "partnerstvo", "raport", "ravnoteža", "priključak"],
           "context": "Da biste razvili svoju karijeru, morate da sarađujete sa pravim ljudima."
         },
         "position3": {
           "upright": "Dvoje šoljica vam govore da poslovna partnerstva i harmonija odnosa nisu u potpunosti pod vašom kontrolom. Stav druge osobe je presudan.",
           "reversed": "Dvojica preokrećenih CURS-a ukazuje da nesklad i neslaganja ponekad se razvijaju van vas.",
-          "keywords": [
-            "partnerstvo",
-            "raport",
-            "ravnoteža",
-            "odnose",
-            "van kontrole"
-          ],
+          "keywords": ["partnerstvo", "raport", "ravnoteža", "odnose", "van kontrole"],
           "context": "Ne možete uvek da odredite ravnotežu u odnosima u vašoj karijeri."
         },
         "position4": {
           "upright": "Njih dvoje šoljica pokazuju da dajete sve od sebe u saradnji i harmoniji. Doprinosi performansama partnerstava.",
           "reversed": "Druga dva šolja, nedostatak harmonije ili nesporazuma može sprečiti da se pojave napor.",
-          "keywords": [
-            "raport",
-            "partnerstvo",
-            "partnerstvo",
-            "ravnoteža",
-            "performanse"
-          ],
+          "keywords": ["raport", "partnerstvo", "partnerstvo", "ravnoteža", "performanse"],
           "context": "Vaš trud se ogleda u vašem radu kroz harmoniju koju uspostavite u svojim odnosima."
         },
         "position5": {
           "upright": "Dvoje šoljica, jačanje poslovnih odnosa i otvoren za saradnju stvaraju korisne promene u vašoj karijeri.",
           "reversed": "Otvaranje dve šolje, rješavanje komunikacijskih praznina je kritični korak u vašem razvoju.",
-          "keywords": [
-            "partnerstvo",
-            "raport",
-            "odnos",
-            "ravnoteža",
-            "promeniti"
-          ],
+          "keywords": ["partnerstvo", "raport", "odnos", "ravnoteža", "promeniti"],
           "context": "Za promenu u vašoj karijeri, morate da svoje poslovne partnerske partnerstvo bude kompatibilnije."
         },
         "position6": {
           "upright": "Dvoje šoljica: poremećaj ili disharmonija u poslovnim odnosima u prošlosti su možda uticali na vašu trenutnu karijeru.",
           "reversed": "Dvojica obrnutosti mogu se komplikovati put razočaranja ili gubitka poverenja u partnerstva.",
-          "keywords": [
-            "odnos",
-            "raport",
-            "partnerstvo",
-            "poverenje",
-            "prošlost"
-          ],
+          "keywords": ["odnos", "raport", "partnerstvo", "poverenje", "prošlost"],
           "context": "Nekompatibilni radni odnosi u prošlosti možda su ometali vašu trenutnu karijeru."
         },
         "position7": {
           "upright": "Dve šolje pokazuju da će ishod putovanja u karijeri ojačati harmonične saradnje i međusobno poverenje.",
           "reversed": "Ograničena dva šolja, nekompatibilno partnerstvo ili nedostatak komunikacije mogu uticati na ishod.",
-          "keywords": [
-            "partnerstvo",
-            "raport",
-            "poverenje",
-            "partnerstvo",
-            "budućnost"
-          ],
+          "keywords": ["partnerstvo", "raport", "poverenje", "partnerstvo", "budućnost"],
           "context": "Rezultat će se kretati naprijed sa harmoničnim poslovnim odnosima."
         },
         "position1": {
           "upright": "Dvoje šoljica pokazuju da je karijera koju želite zasnivati na saradnji i uravnoteženim odnosima. Timski rad i skladno okruženje čine vas srećnim.",
           "reversed": "Invertirana dva šolja ukazuje na nesklad u trenutnom poslovnom okruženju. Karijera koju želite treba da ponudi uravnoteženije i podržavajuće okruženje.",
-          "keywords": [
-            "partnerstvo",
-            "ravnoteža",
-            "raport",
-            "partnerstvo"
-          ],
+          "keywords": ["partnerstvo", "ravnoteža", "raport", "partnerstvo"],
           "context": "Ova kartica vas podseća koliko su važni ljudski odnosi i saradnja u karijeri."
         }
       },
@@ -113,84 +61,43 @@
         "position2": {
           "upright": "Tri šolje preporučuje da dobijete podršku od onih oko sebe za razvoj i delite svoje uspehe. Proslave i društvene veze mogu otvoriti nova vrata za vas.",
           "reversed": "Tri trupa se obrnuta ukazuje da vas zanemarivanje vašeg društvenog kruga može učiniti usamljenim.",
-          "keywords": [
-            "proslava",
-            "podrška",
-            "prijateljstvo",
-            "deljenje",
-            "priključak"
-          ],
+          "keywords": ["proslava", "podrška", "prijateljstvo", "deljenje", "priključak"],
           "context": "Da biste unapredili svoju karijeru, trebalo bi da podelite svoje uspehe i ojačate svoju mrežu podrške."
         },
         "position3": {
           "upright": "Tri šolje vam govore da se dinamika zajednica i proslava razvijaju izvan vas. Ne možete uvek da kontrolišete okruženje podrške oko sebe.",
           "reversed": "Preokrećena tri šolje pokazuje da su isključenja ili nesporazumi u vašem društvenom krugu ponekad van vaše kontrole.",
-          "keywords": [
-            "zajednica",
-            "podrška",
-            "proslava",
-            "odnos",
-            "priključak"
-          ],
+          "keywords": ["zajednica", "podrška", "proslava", "odnos", "priključak"],
           "context": "Ne možete da kontrolišete podršku, vaše socijalno okruženje vam nudi u vašoj karijeri."
         },
         "position4": {
           "upright": "Tri šolje pokazuju da doprinosite timskom duhu u vašem radu i delite uspehe.",
           "reversed": "Pretvorena tri šolje, disharmonija u timu može zasjeniti vrednost napora.",
-          "keywords": [
-            "podrška",
-            "tim",
-            "deljenje",
-            "proslava",
-            "performanse"
-          ],
+          "keywords": ["podrška", "tim", "deljenje", "proslava", "performanse"],
           "context": "Vaš trud sija kroz podršku koju donesete u svoj timski rad."
         },
         "position5": {
           "upright": "Tri šolje, što je više uključena u timski rad i deljenje uspeha pružaju razvoj karijere.",
           "reversed": "Okrećena tri šolje, potrebno je da se odvojite od izolacije i povežite se više sa zajednicama.",
-          "keywords": [
-            "tim",
-            "proslava",
-            "podrška",
-            "deljenje",
-            "promeniti"
-          ],
+          "keywords": ["tim", "proslava", "podrška", "deljenje", "promeniti"],
           "context": "Za promenu u karijeri morate ojačati svoje društvene veze."
         },
         "position6": {
           "upright": "Tri šolje: Nedostatak podrške ili siromašnih društvenih veza u prošlosti je možda usporio vašu karijeru.",
           "reversed": "Invertirana tri šolje, izolacije ili nedostatak saradnje mogu biti prepreka prošlosti.",
-          "keywords": [
-            "podrška",
-            "zajednica",
-            "socijalna veza",
-            "izolacija",
-            "prošlost"
-          ],
+          "keywords": ["podrška", "zajednica", "socijalna veza", "izolacija", "prošlost"],
           "context": "Slabe veze u prošlosti utiču na vašu karijeru."
         },
         "position7": {
           "upright": "Tri šolje pokazuju da će ishod putovanja u karijeri oblikovati podrške i dostignuća da se proslave.",
           "reversed": "Pretvorena tri šolje, usamljenost ili nedostatak podrške mogu usporiti ishod.",
-          "keywords": [
-            "proslava",
-            "podrška",
-            "zajednica",
-            "uspeh",
-            "budućnost"
-          ],
+          "keywords": ["proslava", "podrška", "zajednica", "uspeh", "budućnost"],
           "context": "Rezultat će biti uspeh koji donosi podršku i proslavu."
         },
         "position1": {
           "upright": "Tri šolje pokazuju da će karijeri koju želite donijeti društvene interakcije i osećaj zajednice. Timski duh i proslave vas motiviraju.",
           "reversed": "Pretvorena tri šolje ukazuje na nesreću radeći sam ili društvenu izolaciju. Karijera koju želite treba da ponudi više socijalnih veza.",
-          "keywords": [
-            "društvena interakcija",
-            "zajednica",
-            "proslava",
-            "timski duh"
-          ],
+          "keywords": ["društvena interakcija", "zajednica", "proslava", "timski duh"],
           "context": "Ova kartica naglašava važnost socijalne dimenzije i zajednička dostignuća u zadovoljstvu u karijeri."
         }
       },
@@ -198,84 +105,43 @@
         "position2": {
           "upright": "Četiri šolje sugeriraju da vidite mogućnosti da niste svesni. Ne bi trebalo da podcenjujete ponude koje stesrećete na svoj razvoj.",
           "reversed": "Pretvorena četvero šoljica govore da je vreme da steknete svest i iskorištava nove mogućnosti.",
-          "keywords": [
-            "prilika",
-            "svest",
-            "buđenje",
-            "izbor",
-            "ekspanzija"
-          ],
+          "keywords": ["prilika", "svest", "buđenje", "izbor", "ekspanzija"],
           "context": "Da biste unapredili svoju karijeru, morate otvoriti svoj um i iskoristiti mogućnosti."
         },
         "position3": {
           "upright": "Četiri šolje pokazuju da ne možete da kontrolišete kada se mogućnosti predoči. Ponekad opcije zavise od spoljnih okolnosti.",
           "reversed": "Preokrećena četvorka čaša govore vam da morate sačekati pravi trenutak da se svesti otvori; Ovo vreme je iz tvojih ruku.",
-          "keywords": [
-            "prilika",
-            "vremenski vreme",
-            "petlja",
-            "svest",
-            "van kontrole"
-          ],
+          "keywords": ["prilika", "vremenski vreme", "petlja", "svest", "van kontrole"],
           "context": "Neke mogućnosti u vašoj karijeri postaju vidljive samo kada dođe vreme."
         },
         "position4": {
           "upright": "Četiri šolje pokazuju da ponekad možete osećati nezadovoljne čak i ako se potrudite najbolje. Vaš trud je snažan, ali možda nedostaje motivacija.",
           "reversed": "Kada se obrnuta četvoro šoljica ne fokusira na prilike, vidljivost njenih performansi opada.",
-          "keywords": [
-            "zadovoljstvo",
-            "svest",
-            "motivacija",
-            "trud",
-            "performanse"
-          ],
+          "keywords": ["zadovoljstvo", "svest", "motivacija", "trud", "performanse"],
           "context": "Imate trud, ali možda ćete se morati više fokusirati na prilike."
         },
         "position5": {
           "upright": "Četiri šolje pokazuju da morate biti otvoreniji za nove mogućnosti. Umesto da se previše fokusirate na trenutnu situaciju, trebalo bi da pogledate svoju okolinu.",
           "reversed": "Pretvorena četvoro šoljica, možete da stvorite snažnu promenu u vašem učinku povećanjem svesti.",
-          "keywords": [
-            "svest",
-            "prilika",
-            "motivacija",
-            "inovativnost",
-            "promeniti"
-          ],
+          "keywords": ["svest", "prilika", "motivacija", "inovativnost", "promeniti"],
           "context": "Morate biti pažljiviji i otvoreni za promenu u karijeri."
         },
         "position6": {
           "upright": "Četiri šolje, neuspeh u prepoznavanju mogućnosti u prošlosti možda su danas ograničila njegov put.",
           "reversed": "Pretvorena četiri šolje, apatija ili nedostatak motivacije u prošlosti možda su uticali na sadašnjost.",
-          "keywords": [
-            "prilika",
-            "motivacija",
-            "ravnodušnost",
-            "svest",
-            "prošlost"
-          ],
+          "keywords": ["prilika", "motivacija", "ravnodušnost", "svest", "prošlost"],
           "context": "Prilike koje ste ignorisali u prošlosti danas blokiraju put."
         },
         "position7": {
           "upright": "Četiri šolje pokazuju da će ishod putovanja u karijeri biti traženje unutrašnje ispunjenosti.",
           "reversed": "Ukrasana četiri šolje može vam dovesti do toga da ostvarite mogućnosti kasno kao rezultat nedostatka svesti.",
-          "keywords": [
-            "zadovoljstvo",
-            "svest",
-            "potraga",
-            "razmišljanje",
-            "budućnost"
-          ],
+          "keywords": ["zadovoljstvo", "svest", "potraga", "razmišljanje", "budućnost"],
           "context": "Rezultat će se zasnivati na unutrašnjem zadovoljstvu i svesti."
         },
         "position1": {
           "upright": "Četiri šolje pokazuju da ignorišete raspoložive mogućnosti. Karijera koju želite možda je već ispred vas, ali nezadovoljstvo vas je zaslepilo.",
           "reversed": "Preokrećena četiri šolje ukazuje da se konačno probudite i počnete da vidite mogućnosti oko sebe. Nova perspektiva može vam pomoći da pronađete karijeru koju želite.",
-          "keywords": [
-            "prilika",
-            "nezadovoljstvo",
-            "introspekcija",
-            "Nova perspektiva"
-          ],
+          "keywords": ["prilika", "nezadovoljstvo", "introspekcija", "Nova perspektiva"],
           "context": "Ova nas kartica podseća da u našoj pretrazi karijere ponekad problem nije napolju, već u našoj perspektivi."
         }
       },
@@ -283,84 +149,43 @@
         "position2": {
           "upright": "Petorica šoljica sugeriše da u toku prošlih gubitaka i krenite dalje. Trebali biste se fokusirati na prilike koje postavljaju unapred za razvoj.",
           "reversed": "Preokrećena pet šoljica kaže vam da biste trebali prestati da prebivate u prošlosti i pređite na nove mogućnosti.",
-          "keywords": [
-            "lekcija",
-            "prilika",
-            "preuzmi gubitak",
-            "napredak",
-            "novi pravac"
-          ],
+          "keywords": ["lekcija", "prilika", "preuzmi gubitak", "napredak", "novi pravac"],
           "context": "Da biste poboljšali svoju karijeru, morate prepustiti prošlo razočarenja."
         },
         "position3": {
           "upright": "Petorica šoljica pokazuje da neki gubici i razočarenja ne mogu se menjati. Uticaj prošlosti je izvan vaše kontrole.",
           "reversed": "Okrećena pet šoljica podseća vas da je vreme prilike koji slijede gubitke izvan vas.",
-          "keywords": [
-            "gubitak",
-            "razočaranje",
-            "prošlost",
-            "lekcija",
-            "van kontrole"
-          ],
+          "keywords": ["gubitak", "razočaranje", "prošlost", "lekcija", "van kontrole"],
           "context": "Neko razočaranje su neizbežno u vašoj karijeri; Ne možete ih promeniti."
         },
         "position4": {
           "upright": "Pet šoljica pokazuje da je on učinio najbolje uprkos prošlim gubicima. Vaš trud se nastavlja uprkos poteškoćama.",
           "reversed": "Vaše performanse će se ojačati kada je obrnuta petorica šoljica udaljila u fokus od gubitaka.",
-          "keywords": [
-            "gubitak",
-            "trud",
-            "strpljenje",
-            "ravnoteža",
-            "performanse"
-          ],
+          "keywords": ["gubitak", "trud", "strpljenje", "ravnoteža", "performanse"],
           "context": "Vaš trud ističe se nastavkom čak i u teškim vremenima."
         },
         "position5": {
           "upright": "Petorica šoljica, možete da se poboljšate učećima iz prethodnih gubitaka i pretvarajući fokus na predstojeće mogućnosti.",
           "reversed": "Okrećeno pet šoljica, prepuštanje žaljenja olakšava kretanje naprijed u vašoj karijeri.",
-          "keywords": [
-            "lekcija",
-            "fokus",
-            "šansa",
-            "svest",
-            "promeniti"
-          ],
+          "keywords": ["lekcija", "fokus", "šansa", "svest", "promeniti"],
           "context": "Za promenu u karijeri, trebalo bi da pretvorite svoj fokus na prilike, a ne gubitke."
         },
         "position6": {
           "upright": "Petorica šoljica, fokusirajući se previše na prethodne gubitke, možda vam je otežalo da napredujete u svojoj karijeri.",
           "reversed": "Invertirano pet šoljica, a ne mogu da puštaju žaljenje možda je prepreka koja vas nosi do danas.",
-          "keywords": [
-            "gubitak",
-            "žaliti",
-            "fokus",
-            "lekcija",
-            "prošlost"
-          ],
+          "keywords": ["gubitak", "žaliti", "fokus", "lekcija", "prošlost"],
           "context": "Stanovanje o prošlim gubicima danas utiče na vašu karijeru."
         },
         "position7": {
           "upright": "Petorica šoljica ukazuje da će ishod vašeg putovanja u karijeri biti učiti od gubitaka i postati jači.",
           "reversed": "Ograničeno pet šoljica, prebivalište u prošlosti može odložiti ishod.",
-          "keywords": [
-            "lekcija",
-            "gubitak",
-            "fokus",
-            "osnaživanje",
-            "budućnost"
-          ],
+          "keywords": ["lekcija", "gubitak", "fokus", "osnaživanje", "budućnost"],
           "context": "Rezultat će biti jača budućnost sa lekcijama naučenim od gubitaka."
         },
         "position1": {
           "upright": "Petorica šoljica ukazuje na fokusiranje na prethodno razočaranje u karijeri. Ne gledaj u ono što ste izgubili, ali na prilikama još uvek imate. Karijera koju želite je i dalje moguća.",
           "reversed": "Uokrećeno pet šoljica pokazuje da ostavljaju prošlost iza i fokusira se na budućnost. Stari razočarenja vas više ne drže. Vreme je da napravite novi početak.",
-          "keywords": [
-            "razočaranje",
-            "žrtava",
-            "poboljšanje",
-            "novi početak"
-          ],
+          "keywords": ["razočaranje", "žrtava", "poboljšanje", "novi početak"],
           "context": "Ova kartica naglašava da nas prošli neuspesi ne bi trebali definisati u našem putovanju u karijeri i važnosti da se radujemo."
         }
       }
@@ -480,23 +305,13 @@
       "numerology": {
         "button": "Analiza numerologije",
         "description": "Otkrijte tajne brojeva. Saznajte svoj životnu stazu, broj ekspresije i duhovnu želju.",
-        "features": [
-          "Životni put",
-          "Broj emotikona",
-          "Duhovna želja",
-          "Svakodnevno pitanje"
-        ],
+        "features": ["Životni put", "Broj emotikona", "Duhovna želja", "Svakodnevno pitanje"],
         "title": "Analiza numerologije"
       },
       "tarot": {
         "button": "Tarot čitanje",
         "description": "Krenuti na put u misteriozni svet karata. Istražite svoju prošlost, sadašnjost i budućnost.",
-        "features": [
-          "Ljubavna ekspanzija",
-          "Uputstvo za karijere",
-          "Svakodnevno uputstvo",
-          "Detaljna interpretacija"
-        ],
+        "features": ["Ljubavna ekspanzija", "Uputstvo za karijere", "Svakodnevno uputstvo", "Detaljna interpretacija"],
         "title": "Tarot čitanje"
       }
     },
@@ -546,23 +361,13 @@
       "numerology": {
         "button": "Analiza numerologije",
         "description": "Otkrijte tajne brojeva. Saznajte svoj životnu stazu, broj ekspresije i duhovnu želju.",
-        "features": [
-          "Životni put",
-          "Broj emotikona",
-          "Duhovna želja",
-          "Svakodnevno pitanje"
-        ],
+        "features": ["Životni put", "Broj emotikona", "Duhovna želja", "Svakodnevno pitanje"],
         "title": "Analiza numerologije"
       },
       "tarot": {
         "button": "Tarot čitanje",
         "description": "Krenuti na put u misteriozni svet karata. Istražite svoju prošlost, sadašnjost i budućnost.",
-        "features": [
-          "Ljubavna ekspanzija",
-          "Uputstvo za karijere",
-          "Svakodnevno uputstvo",
-          "Detaljna interpretacija"
-        ],
+        "features": ["Ljubavna ekspanzija", "Uputstvo za karijere", "Svakodnevno uputstvo", "Detaljna interpretacija"],
         "title": "Tarot čitanje"
       }
     },
@@ -647,13 +452,7 @@
         "position2": {
           "upright": "Postoji radoznalost dječije i želja za eksperimentiranjem u vašoj fizičkoj vezi. Ima potencijal za spontanu, zabavnu i neplanirano seksualno istraživanje. Besplatna avantura, daleko od pravila i očekivanja.",
           "reversed": "Obrnuta budala pokazuje da može postojati nesmotrenost, nepromišljenost ili rizično ponašanje u seksualnim stvarima. Jedna strana se može zadržati zbog neiskustva ili straha od posvećenosti.",
-          "keywords": [
-            "otkriće",
-            "spontanost",
-            "neiskustvo",
-            "zabava",
-            "sloboda"
-          ],
+          "keywords": ["otkriće", "spontanost", "neiskustvo", "zabava", "sloboda"],
           "context": "Senzualna atrakcija između vas označava početak nove i uzbudljive seksualne avanture."
         },
         "position3": {
@@ -679,13 +478,7 @@
         "position2": {
           "upright": "Između vas postoji snažna i svesna seksualna atrakcija. Jedna ili obe strane znaju šta žele i sasvim su vešta u krevetu. Potencijal kreativnog i zadovoljavajućeg seksualnog života je visok.",
           "reversed": "Prekoračeni mađioničar ukazuje da se seksualna energija može koristiti za manipulaciju ili obmanu. Može doći do anksioznosti ili nemogućnosti upotrebe seksualnog potencijala.",
-          "keywords": [
-            "seksualna veština",
-            "čarolija",
-            "kreativnost",
-            "manifest",
-            "jaka želja"
-          ],
+          "keywords": ["seksualna veština", "čarolija", "kreativnost", "manifest", "jaka želja"],
           "context": "Vaša seksualna veza je poput kreativnog igrališta gde se želja i veština okupljaju."
         },
         "position3": {
@@ -743,13 +536,7 @@
         "position2": {
           "upright": "Vaša fizička veza je izuzetno senzualna, negovanje, produktivna i senzualna. Seksualnost se doživljava kao proslava zadovoljstva i obilja. Postoji plodnost i udobna, prirodna senzualna harmonija.",
           "reversed": "Reverse carica ukazuje da može postojati lenjost u seksualnoj energiji, nedostatku samo-nege ili nemogućnosti da dožive zadovoljstvo. Možda postoji nedostatak kreativnosti ili posesivan stav u fizičkoj vezi.",
-          "keywords": [
-            "požuda",
-            "obilje",
-            "senzualnost",
-            "plodnost",
-            "zadovoljstvo"
-          ],
+          "keywords": ["požuda", "obilje", "senzualnost", "plodnost", "zadovoljstvo"],
           "context": "Vaš seksualni život je poput plodnog i zabavnog vrta ispunjenog zadovoljstva u kojem su sve čula stimulisane."
         },
         "position3": {

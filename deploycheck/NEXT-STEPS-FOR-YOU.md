@@ -26,9 +26,10 @@
 3. **"Create Backup"** butonuna tıklayın
 4. İsim: `pre-production-deploy-2025-10-08`
 5. Backup tamamlanana kadar bekleyin (~2-3 dakika)
-6. ✅ Backup ID'sini not edin: _______________
+6. ✅ Backup ID'sini not edin: ******\_\_\_******
 
 **NEDEN ÖNEMLİ:**
+
 - Bir şeyler ters giderse geri dönebilirsiniz
 - Migrations öncesi MUTLAKA backup olmalı
 - 5 dakika yatırım, saatler tasarruf
@@ -56,6 +57,7 @@
 ```
 
 **Tam liste migrations/ klasöründe:**
+
 ```
 001_create_tarot_cards_tables.sql
 002_insert_sample_tarot_cards.sql
@@ -77,13 +79,15 @@
 ```
 
 **Her migration sonrası:**
+
 - ✅ Success mesajı gördüğünüzden emin olun
 - ❌ Hata varsa DURDURUN ve rollback yapın
 
 **Doğrulama:**
+
 ```sql
 -- Tabloları kontrol et
-SELECT table_name FROM information_schema.tables 
+SELECT table_name FROM information_schema.tables
 WHERE table_schema = 'public';
 
 -- RLS policy'leri kontrol et
@@ -250,6 +254,7 @@ npm run build
 ## 🚀 HAZIR MISINIZ?
 
 Eğer:
+
 - ✅ .env dosyanız hazır (you said YES!)
 - ✅ Veritabanını yedekleyebilirsiniz
 - ✅ 1-2 saat vakitiniz var
@@ -272,6 +277,7 @@ Eğer:
 **Kodunuz hazır. Audit onayladı. .env hazır.**
 
 **Tek yapmanız gereken:**
+
 1. Database backup
 2. Migrations
 3. Deploy butonu!
@@ -283,10 +289,10 @@ Eğer:
 ---
 
 **P.S:** Deploy ettikten sonra:
+
 - İlk kullanıcı kaydını siz yapın (test için)
 - İlk tarot okumasını siz oluşturun (doğrulama için)
 - İlk 1 saat aktif izleyin
 - Sorun yoksa: Rahat uyuyun! 😴
 
 **Deployment adventure awaits!** 🚀
-

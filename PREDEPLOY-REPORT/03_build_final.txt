@@ -1,0 +1,25 @@
+
+> busbuskimki-tarot@0.1.0 build
+> next build
+
+   ▲ Next.js 15.5.4
+   - Environments: .env
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 16.7s
+   Skipping linting
+   Checking validity of types ...
+Failed to compile.
+
+./src/components/dynamic-imports/DynamicPDFGenerator.tsx:32:13
+Type error: 'pageHeight' is declared but its value is never read.
+
+[0m [90m 30 |[39m
+ [90m 31 |[39m       [36mconst[39m imgWidth [33m=[39m [35m210[39m[33m;[39m [90m// A4 width in mm[39m
+[31m[1m>[22m[39m[90m 32 |[39m       [36mconst[39m pageHeight [33m=[39m [35m295[39m[33m;[39m [90m// A4 height in mm[39m
+ [90m    |[39m             [31m[1m^[22m[39m
+ [90m 33 |[39m       [36mconst[39m imgHeight [33m=[39m (canvas[33m.[39mheight [33m*[39m imgWidth) [33m/[39m canvas[33m.[39mwidth[33m;[39m
+ [90m 34 |[39m
+ [90m 35 |[39m       pdf[33m.[39maddImage(imgData[33m,[39m [32m'PNG'[39m[33m,[39m [35m0[39m[33m,[39m [35m0[39m[33m,[39m imgWidth[33m,[39m imgHeight[33m,[39m [32m''[39m[33m,[39m [32m'FAST'[39m)[33m;[39m[0m
+Next.js build worker exited with code: 1 and signal: null
+Exit code: 1

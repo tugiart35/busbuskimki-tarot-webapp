@@ -37,7 +37,7 @@ Hassas veriler (signature, user data) production'da loglanmayacak.
 */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase/client';
+import { createClient } from '@/lib/supabase/server';
 import {
   verifyShopierWebhook,
   ShopierWebhookData,
@@ -60,6 +60,9 @@ export async function POST(request: NextRequest) {
   const startTime = Date.now();
 
   try {
+    // Server-side Supabase client with service role key
+    const supabase = createClient();
+
     // Test modunu kontrol et
     const isTestMode = process.env.NODE_ENV === 'development';
 

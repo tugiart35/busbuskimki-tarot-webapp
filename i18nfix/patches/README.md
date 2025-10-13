@@ -1,15 +1,18 @@
 # ProfileModal.tsx - Patch Files
 
-Bu dizin, `src/components/dashboard/ProfileModal.tsx` dosyasının deploy-ready hale getirilmesi için gerekli patch dosyalarını içerir.
+Bu dizin, `src/components/dashboard/ProfileModal.tsx` dosyasının deploy-ready
+hale getirilmesi için gerekli patch dosyalarını içerir.
 
 ## 📋 Dosya Listesi
 
 ### 1. Console Log Düzeltmesi
+
 - **Dosya:** `ProfileModal-console-fix.patch`
 - **Amaç:** Console log çağrılarını production-safe hale getirir
 - **Öncelik:** 🟡 Orta
 
 ### 2. i18n Eklemeleri (Rehberler)
+
 - **TR:** `ProfileModal-i18n-guide-TR.md`
 - **EN:** `ProfileModal-i18n-guide-EN.md`
 - **SR:** `ProfileModal-i18n-guide-SR.md`
@@ -21,12 +24,14 @@ Bu dizin, `src/components/dashboard/ProfileModal.tsx` dosyasının deploy-ready 
 ### Adım 1: i18n Anahtarlarını Ekle (Zorunlu)
 
 **Seçenek A: Manuel**
+
 1. Her dil için ilgili guide dosyasını açın
 2. JSON eklemelerini kopyalayın
 3. `messages/{lang}.json` dosyalarını düzenleyin
 4. Doğrulama komutlarını çalıştırın
 
 **Seçenek B: Otomatik (jq gerekli)**
+
 ```bash
 cd /Users/tugi/Desktop/TaraTarot
 
@@ -48,6 +53,7 @@ git apply i18nfix/patches/ProfileModal-console-fix.patch
 ```
 
 Eğer git apply başarısız olursa (dosya değişmişse), manuel düzeltme yapın:
+
 - Satır 140-149: Console.error çağrısını düzeltin
 - Satır 157-168: Console.error çağrısını düzeltin
 - Detaylar için patch dosyasına bakın
@@ -84,7 +90,7 @@ keys = [
 for lang in ['tr', 'en', 'sr']:
     with open(f'messages/{lang}.json', 'r', encoding='utf-8') as f:
         data = json.load(f)
-    
+
     missing = []
     for key in keys:
         parts = key.split('.')
@@ -98,7 +104,7 @@ for lang in ['tr', 'en', 'sr']:
                 break
         if not found:
             missing.append(key)
-    
+
     if missing:
         print(f"{lang.upper()}: ✗ {len(missing)} missing keys")
         for m in missing[:5]:
@@ -119,6 +125,7 @@ npm run build 2>&1 | grep -i "error" && echo "✗ Build failed" || echo "✓ Bui
 ## 📊 Beklenen Sonuç
 
 Tüm patch'ler uygulandığında:
+
 - ✅ 24/24 i18n anahtarı tüm dillerde mevcut
 - ✅ Console log'lar production-safe
 - ✅ Build başarılı
@@ -150,16 +157,19 @@ cp messages/sr.json.backup-[TIMESTAMP] messages/sr.json
 ## 🆘 Sorun Giderme
 
 ### "JSON invalid" hatası
+
 - Virgül eksikliği/fazlalığı kontrol edin
 - Son satırda virgül olmamalı
 - Parantez eşleşmelerini kontrol edin
 
 ### "git apply" başarısız
+
 - Dosya zaten değişmiş olabilir
 - Manuel olarak patch içeriğini uygulayın
 - veya `git apply --3way` deneyin
 
 ### i18n anahtarları çalışmıyor
+
 - Next.js dev server'ı yeniden başlatın
 - Browser cache'i temizleyin
 - `messages/*.json` dosyalarının doğru dizinde olduğunu kontrol edin
@@ -169,4 +179,3 @@ cp messages/sr.json.backup-[TIMESTAMP] messages/sr.json
 **Oluşturulma Tarihi:** 2025-10-08  
 **İlişkili Rapor:** `i18nfix/reports/ProfileModal.md`  
 **Hedef Dosya:** `src/components/dashboard/ProfileModal.tsx`
-

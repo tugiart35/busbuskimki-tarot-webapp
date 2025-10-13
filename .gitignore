@@ -29,7 +29,12 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
+.env
+.env.local
 .env*.local
+.env.development.local
+.env.test.local
+.env.production.local
 # .env dosyaları hassas bilgiler içerdiğinden versiyon kontrolüne eklenmemelidir.
 # Bu satır, .env dosyalarının git tarafından göz ardı edilmesini sağlar.
 

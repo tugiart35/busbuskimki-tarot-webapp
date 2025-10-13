@@ -121,7 +121,10 @@ export default function NavigationHeader({
           className='md:hidden border-t border-mystical-700/50'
           id='mobile-menu'
         >
-          <nav className='px-4 py-2 space-y-1' aria-label={t('navigation.ariaLabel.mobile', 'Mobil Navigasyon')}>
+          <nav
+            className='px-4 py-2 space-y-1'
+            aria-label={t('navigation.ariaLabel.mobile', 'Mobil Navigasyon')}
+          >
             {/* Dashboard linki - mobil */}
             <a
               href={routes.main}

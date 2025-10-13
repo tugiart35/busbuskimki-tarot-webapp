@@ -1,0 +1,686 @@
+================================================================================
+SEO Tags Analysis Report
+Generated: 2025-10-13T00:41:44.621Z
+================================================================================
+
+Found 50 page/layout files
+
+================================================================================
+
+Analyzing: src/app/[locale]/(main)/cards/[slug]/page.tsx
+Route: /locale/(main)/cards/slug
+--------------------------------------------------------------------------------
+✓ Has metadata export
+✗ Missing alternates (hreflang)
+✗ Missing canonical URL
+✓ Has title
+✓ Has description
+
+❌ Issues:
+   - Missing alternates.languages for hreflang tags
+   - Missing canonical URL
+
+💡 Suggestions:
+   - Add alternates.languages with tr, en, sr locales
+   - Add alternates.canonical for proper SEO
+   - Consider adding OpenGraph metadata for social sharing
+   - Consider adding Twitter Card metadata
+
+Analyzing: src/app/[locale]/(main)/cards/page.tsx
+Route: /locale/(main)/cards
+--------------------------------------------------------------------------------
+✓ Has metadata export
+✓ Has alternates (hreflang)
+✓ Has canonical URL
+✓ Has OpenGraph metadata
+✓ Has Twitter Card metadata
+✓ Has title
+✓ Has description
+
+Analyzing: src/app/[locale]/(main)/kartice/[slug]/page.tsx
+Route: /locale/(main)/kartice/slug
+--------------------------------------------------------------------------------
+✓ Has metadata export
+✗ Missing alternates (hreflang)
+✗ Missing canonical URL
+✓ Has title
+✓ Has description
+
+❌ Issues:
+   - Missing alternates.languages for hreflang tags
+   - Missing canonical URL
+
+💡 Suggestions:
+   - Add alternates.languages with tr, en, sr locales
+   - Add alternates.canonical for proper SEO
+   - Consider adding OpenGraph metadata for social sharing
+   - Consider adding Twitter Card metadata
+
+Analyzing: src/app/[locale]/(main)/kartice/page.tsx
+Route: /locale/(main)/kartice
+--------------------------------------------------------------------------------
+✓ Has metadata export
+✓ Has alternates (hreflang)
+✓ Has canonical URL
+✓ Has OpenGraph metadata
+✓ Has Twitter Card metadata
+✓ Has title
+✓ Has description
+
+Analyzing: src/app/[locale]/(main)/kartlar/[slug]/page.tsx
+Route: /locale/(main)/kartlar/slug
+--------------------------------------------------------------------------------
+✓ Has metadata export
+✗ Missing alternates (hreflang)
+✗ Missing canonical URL
+✓ Has title
+✓ Has description
+
+❌ Issues:
+   - Missing alternates.languages for hreflang tags
+   - Missing canonical URL
+
+💡 Suggestions:
+   - Add alternates.languages with tr, en, sr locales
+   - Add alternates.canonical for proper SEO
+   - Consider adding OpenGraph metadata for social sharing
+   - Consider adding Twitter Card metadata
+
+Analyzing: src/app/[locale]/(main)/kartlar/page.tsx
+Route: /locale/(main)/kartlar
+--------------------------------------------------------------------------------
+✓ Has metadata export
+✓ Has alternates (hreflang)
+✓ Has canonical URL
+✓ Has OpenGraph metadata
+✓ Has Twitter Card metadata
+✓ Has title
+✓ Has description
+
+Analyzing: src/app/[locale]/(main)/legal/about/page.tsx
+Route: /locale/(main)/legal/about
+--------------------------------------------------------------------------------
+✗ No metadata found
+
+❌ Issues:
+   - No metadata export or generateMetadata function found
+
+Analyzing: src/app/[locale]/(main)/legal/accessibility/page.tsx
+Route: /locale/(main)/legal/accessibility
+--------------------------------------------------------------------------------
+✗ No metadata found
+
+❌ Issues:
+   - No metadata export or generateMetadata function found
+
+Analyzing: src/app/[locale]/(main)/legal/child-privacy/page.tsx
+Route: /locale/(main)/legal/child-privacy
+--------------------------------------------------------------------------------
+✗ No metadata found
+
+❌ Issues:
+   - No metadata export or generateMetadata function found
+
+Analyzing: src/app/[locale]/(main)/legal/contact/page.tsx
+Route: /locale/(main)/legal/contact
+--------------------------------------------------------------------------------
+✗ No metadata found
+
+❌ Issues:
+   - No metadata export or generateMetadata function found
+
+Analyzing: src/app/[locale]/(main)/legal/cookie-policy/page.tsx
+Route: /locale/(main)/legal/cookie-policy
+--------------------------------------------------------------------------------
+✗ No metadata found
+
+❌ Issues:
+   - No metadata export or generateMetadata function found
+
+Analyzing: src/app/[locale]/(main)/legal/copyright-policy/page.tsx
+Route: /locale/(main)/legal/copyright-policy
+--------------------------------------------------------------------------------
+✗ No metadata found
+
+❌ Issues:
+   - No metadata export or generateMetadata function found
+
+Analyzing: src/app/[locale]/(main)/legal/disclaimer/page.tsx
+Route: /locale/(main)/legal/disclaimer
+--------------------------------------------------------------------------------
+✗ No metadata found
+
+❌ Issues:
+   - No metadata export or generateMetadata function found
+
+Analyzing: src/app/[locale]/(main)/legal/kvkk-disclosure/page.tsx
+Route: /locale/(main)/legal/kvkk-disclosure
+--------------------------------------------------------------------------------
+✗ No metadata found
+
+❌ Issues:
+   - No metadata export or generateMetadata function found
+
+Analyzing: src/app/[locale]/(main)/legal/payment-terms/page.tsx
+Route: /locale/(main)/legal/payment-terms
+--------------------------------------------------------------------------------
+✗ No metadata found
+
+❌ Issues:
+   - No metadata export or generateMetadata function found
+
+Analyzing: src/app/[locale]/(main)/legal/privacy-policy/page.tsx
+Route: /locale/(main)/legal/privacy-policy
+--------------------------------------------------------------------------------
+✗ No metadata found
+
+❌ Issues:
+   - No metadata export or generateMetadata function found
+
+Analyzing: src/app/[locale]/(main)/legal/refund-policy/page.tsx
+Route: /locale/(main)/legal/refund-policy
+--------------------------------------------------------------------------------
+✗ No metadata found
+
+❌ Issues:
+   - No metadata export or generateMetadata function found
+
+Analyzing: src/app/[locale]/(main)/legal/security-policy/page.tsx
+Route: /locale/(main)/legal/security-policy
+--------------------------------------------------------------------------------
+✗ No metadata found
+
+❌ Issues:
+   - No metadata export or generateMetadata function found
+
+Analyzing: src/app/[locale]/(main)/legal/terms-of-use/page.tsx
+Route: /locale/(main)/legal/terms-of-use
+--------------------------------------------------------------------------------
+✗ No metadata found
+
+❌ Issues:
+   - No metadata export or generateMetadata function found
+
+Analyzing: src/app/[locale]/(main)/numeroloji/[type]/layout.tsx
+Route: /locale/(main)/numeroloji/type
+--------------------------------------------------------------------------------
+✓ Has metadata export
+✓ Has alternates (hreflang)
+✓ Has canonical URL
+✓ Has OpenGraph metadata
+✓ Has Twitter Card metadata
+✓ Has title
+✓ Has description
+
+Analyzing: src/app/[locale]/(main)/numeroloji/[type]/page.tsx
+Route: /locale/(main)/numeroloji/type
+--------------------------------------------------------------------------------
+✗ No metadata found
+
+❌ Issues:
+   - No metadata export or generateMetadata function found
+
+Analyzing: src/app/[locale]/(main)/numeroloji/layout.tsx
+Route: /locale/(main)/numeroloji
+--------------------------------------------------------------------------------
+✓ Has metadata export
+✗ Missing alternates (hreflang)
+✗ Missing canonical URL
+
+❌ Issues:
+   - Missing alternates.languages for hreflang tags
+   - Missing canonical URL
+   - Missing title metadata
+   - Missing description metadata
+
+💡 Suggestions:
+   - Add alternates.languages with tr, en, sr locales
+   - Add alternates.canonical for proper SEO
+   - Consider adding OpenGraph metadata for social sharing
+   - Consider adding Twitter Card metadata
+
+Analyzing: src/app/[locale]/(main)/numeroloji/page.tsx
+Route: /locale/(main)/numeroloji
+--------------------------------------------------------------------------------
+✗ No metadata found
+
+❌ Issues:
+   - No metadata export or generateMetadata function found
+
+Analyzing: src/app/[locale]/(main)/tarotokumasi/layout.tsx
+Route: /locale/(main)/tarotokumasi
+--------------------------------------------------------------------------------
+✓ Has metadata export
+✗ Missing alternates (hreflang)
+✗ Missing canonical URL
+
+❌ Issues:
+   - Missing alternates.languages for hreflang tags
+   - Missing canonical URL
+   - Missing title metadata
+   - Missing description metadata
+
+💡 Suggestions:
+   - Add alternates.languages with tr, en, sr locales
+   - Add alternates.canonical for proper SEO
+   - Consider adding OpenGraph metadata for social sharing
+   - Consider adding Twitter Card metadata
+
+Analyzing: src/app/[locale]/(main)/tarotokumasi/page.tsx
+Route: /locale/(main)/tarotokumasi
+--------------------------------------------------------------------------------
+✗ No metadata found
+
+❌ Issues:
+   - No metadata export or generateMetadata function found
+
+Analyzing: src/app/[locale]/admin/analytics/page.tsx
+Route: /locale/admin/analytics
+--------------------------------------------------------------------------------
+✗ No metadata found
+
+❌ Issues:
+   - No metadata export or generateMetadata function found
+
+Analyzing: src/app/[locale]/admin/auth/page.tsx
+Route: /locale/admin/auth
+--------------------------------------------------------------------------------
+✗ No metadata found
+
+❌ Issues:
+   - No metadata export or generateMetadata function found
+
+Analyzing: src/app/[locale]/admin/layout.tsx
+Route: /locale/admin
+--------------------------------------------------------------------------------
+✗ No metadata found
+
+❌ Issues:
+   - No metadata export or generateMetadata function found
+
+Analyzing: src/app/[locale]/admin/orders/page.tsx
+Route: /locale/admin/orders
+--------------------------------------------------------------------------------
+✗ No metadata found
+
+❌ Issues:
+   - No metadata export or generateMetadata function found
+
+Analyzing: src/app/[locale]/admin/packages/page.tsx
+Route: /locale/admin/packages
+--------------------------------------------------------------------------------
+✗ No metadata found
+
+❌ Issues:
+   - No metadata export or generateMetadata function found
+
+Analyzing: src/app/[locale]/admin/page.tsx
+Route: /locale/admin
+--------------------------------------------------------------------------------
+✗ No metadata found
+
+❌ Issues:
+   - No metadata export or generateMetadata function found
+
+Analyzing: src/app/[locale]/admin/readings/page.tsx
+Route: /locale/admin/readings
+--------------------------------------------------------------------------------
+✗ No metadata found
+
+❌ Issues:
+   - No metadata export or generateMetadata function found
+
+Analyzing: src/app/[locale]/admin/settings/page.tsx
+Route: /locale/admin/settings
+--------------------------------------------------------------------------------
+✗ No metadata found
+
+❌ Issues:
+   - No metadata export or generateMetadata function found
+
+Analyzing: src/app/[locale]/admin/users/page.tsx
+Route: /locale/admin/users
+--------------------------------------------------------------------------------
+✗ No metadata found
+
+❌ Issues:
+   - No metadata export or generateMetadata function found
+
+Analyzing: src/app/[locale]/auth/layout.tsx
+Route: /locale/auth
+--------------------------------------------------------------------------------
+✓ Has metadata export
+✗ Missing alternates (hreflang)
+✗ Missing canonical URL
+
+❌ Issues:
+   - Missing alternates.languages for hreflang tags
+   - Missing canonical URL
+   - Missing title metadata
+   - Missing description metadata
+
+💡 Suggestions:
+   - Add alternates.languages with tr, en, sr locales
+   - Add alternates.canonical for proper SEO
+   - Consider adding OpenGraph metadata for social sharing
+   - Consider adding Twitter Card metadata
+
+Analyzing: src/app/[locale]/auth/page.tsx
+Route: /locale/auth
+--------------------------------------------------------------------------------
+✓ Has metadata export
+✗ Missing alternates (hreflang)
+✗ Missing canonical URL
+
+❌ Issues:
+   - Missing alternates.languages for hreflang tags
+   - Missing canonical URL
+   - Missing title metadata
+   - Missing description metadata
+
+💡 Suggestions:
+   - Add alternates.languages with tr, en, sr locales
+   - Add alternates.canonical for proper SEO
+   - Consider adding OpenGraph metadata for social sharing
+   - Consider adding Twitter Card metadata
+
+Analyzing: src/app/[locale]/auth/reset-password/page.tsx
+Route: /locale/auth/reset-password
+--------------------------------------------------------------------------------
+✗ No metadata found
+
+❌ Issues:
+   - No metadata export or generateMetadata function found
+
+Analyzing: src/app/[locale]/dashboard/credits/page.tsx
+Route: /locale/dashboard/credits
+--------------------------------------------------------------------------------
+✗ No metadata found
+
+❌ Issues:
+   - No metadata export or generateMetadata function found
+
+Analyzing: src/app/[locale]/dashboard/layout.tsx
+Route: /locale/dashboard
+--------------------------------------------------------------------------------
+✓ Has metadata export
+✗ Missing alternates (hreflang)
+✓ Has canonical URL
+✓ Has OpenGraph metadata
+✓ Has Twitter Card metadata
+✓ Has title
+✓ Has description
+
+❌ Issues:
+   - Missing alternates.languages for hreflang tags
+
+💡 Suggestions:
+   - Add alternates.languages with tr, en, sr locales
+   - Page has noindex - verify if intentional
+
+Analyzing: src/app/[locale]/dashboard/packages/page.tsx
+Route: /locale/dashboard/packages
+--------------------------------------------------------------------------------
+✗ No metadata found
+
+❌ Issues:
+   - No metadata export or generateMetadata function found
+
+Analyzing: src/app/[locale]/dashboard/page.tsx
+Route: /locale/dashboard
+--------------------------------------------------------------------------------
+✗ No metadata found
+
+❌ Issues:
+   - No metadata export or generateMetadata function found
+
+Analyzing: src/app/[locale]/dashboard/readings/page.tsx
+Route: /locale/dashboard/readings
+--------------------------------------------------------------------------------
+✗ No metadata found
+
+❌ Issues:
+   - No metadata export or generateMetadata function found
+
+Analyzing: src/app/[locale]/dashboard/settings/page.tsx
+Route: /locale/dashboard/settings
+--------------------------------------------------------------------------------
+✗ No metadata found
+
+❌ Issues:
+   - No metadata export or generateMetadata function found
+
+Analyzing: src/app/[locale]/dashboard/statistics/page.tsx
+Route: /locale/dashboard/statistics
+--------------------------------------------------------------------------------
+✗ No metadata found
+
+❌ Issues:
+   - No metadata export or generateMetadata function found
+
+Analyzing: src/app/[locale]/layout.tsx
+Route: /locale
+--------------------------------------------------------------------------------
+✓ Has metadata export
+✗ Missing alternates (hreflang)
+✗ Missing canonical URL
+
+❌ Issues:
+   - Missing alternates.languages for hreflang tags
+   - Missing canonical URL
+   - Missing title metadata
+   - Missing description metadata
+
+💡 Suggestions:
+   - Add alternates.languages with tr, en, sr locales
+   - Add alternates.canonical for proper SEO
+   - Consider adding OpenGraph metadata for social sharing
+   - Consider adding Twitter Card metadata
+
+Analyzing: src/app/[locale]/page.tsx
+Route: /locale
+--------------------------------------------------------------------------------
+✗ No metadata found
+
+❌ Issues:
+   - No metadata export or generateMetadata function found
+
+Analyzing: src/app/[locale]/payment/cancel/page.tsx
+Route: /locale/payment/cancel
+--------------------------------------------------------------------------------
+✗ No metadata found
+
+❌ Issues:
+   - No metadata export or generateMetadata function found
+
+Analyzing: src/app/[locale]/payment/success/page.tsx
+Route: /locale/payment/success
+--------------------------------------------------------------------------------
+✗ No metadata found
+
+❌ Issues:
+   - No metadata export or generateMetadata function found
+
+Analyzing: src/app/layout.tsx
+Route: /
+--------------------------------------------------------------------------------
+✓ Has metadata export
+✗ Missing alternates (hreflang)
+✗ Missing canonical URL
+
+❌ Issues:
+   - Missing alternates.languages for hreflang tags
+   - Missing canonical URL
+   - Missing title metadata
+   - Missing description metadata
+
+💡 Suggestions:
+   - Add alternates.languages with tr, en, sr locales
+   - Add alternates.canonical for proper SEO
+   - Consider adding OpenGraph metadata for social sharing
+   - Consider adding Twitter Card metadata
+
+Analyzing: src/app/maintenance/page.tsx
+Route: /maintenance
+--------------------------------------------------------------------------------
+✗ No metadata found
+
+❌ Issues:
+   - No metadata export or generateMetadata function found
+
+
+================================================================================
+SUMMARY REPORT
+================================================================================
+
+Total pages analyzed: 50
+Pages with metadata: 14 (28%)
+Pages with alternates (hreflang): 4 (8%)
+Pages with canonical URLs: 5 (10%)
+
+❌ PAGES WITHOUT METADATA:
+--------------------------------------------------------------------------------
+  1. /locale/(main)/legal/about
+     File: src/app/[locale]/(main)/legal/about/page.tsx
+  2. /locale/(main)/legal/accessibility
+     File: src/app/[locale]/(main)/legal/accessibility/page.tsx
+  3. /locale/(main)/legal/child-privacy
+     File: src/app/[locale]/(main)/legal/child-privacy/page.tsx
+  4. /locale/(main)/legal/contact
+     File: src/app/[locale]/(main)/legal/contact/page.tsx
+  5. /locale/(main)/legal/cookie-policy
+     File: src/app/[locale]/(main)/legal/cookie-policy/page.tsx
+  6. /locale/(main)/legal/copyright-policy
+     File: src/app/[locale]/(main)/legal/copyright-policy/page.tsx
+  7. /locale/(main)/legal/disclaimer
+     File: src/app/[locale]/(main)/legal/disclaimer/page.tsx
+  8. /locale/(main)/legal/kvkk-disclosure
+     File: src/app/[locale]/(main)/legal/kvkk-disclosure/page.tsx
+  9. /locale/(main)/legal/payment-terms
+     File: src/app/[locale]/(main)/legal/payment-terms/page.tsx
+ 10. /locale/(main)/legal/privacy-policy
+     File: src/app/[locale]/(main)/legal/privacy-policy/page.tsx
+ 11. /locale/(main)/legal/refund-policy
+     File: src/app/[locale]/(main)/legal/refund-policy/page.tsx
+ 12. /locale/(main)/legal/security-policy
+     File: src/app/[locale]/(main)/legal/security-policy/page.tsx
+ 13. /locale/(main)/legal/terms-of-use
+     File: src/app/[locale]/(main)/legal/terms-of-use/page.tsx
+ 14. /locale/(main)/numeroloji/type
+     File: src/app/[locale]/(main)/numeroloji/[type]/page.tsx
+ 15. /locale/(main)/numeroloji
+     File: src/app/[locale]/(main)/numeroloji/page.tsx
+ 16. /locale/(main)/tarotokumasi
+     File: src/app/[locale]/(main)/tarotokumasi/page.tsx
+ 17. /locale/admin/analytics
+     File: src/app/[locale]/admin/analytics/page.tsx
+ 18. /locale/admin/auth
+     File: src/app/[locale]/admin/auth/page.tsx
+ 19. /locale/admin
+     File: src/app/[locale]/admin/layout.tsx
+ 20. /locale/admin/orders
+     File: src/app/[locale]/admin/orders/page.tsx
+ 21. /locale/admin/packages
+     File: src/app/[locale]/admin/packages/page.tsx
+ 22. /locale/admin
+     File: src/app/[locale]/admin/page.tsx
+ 23. /locale/admin/readings
+     File: src/app/[locale]/admin/readings/page.tsx
+ 24. /locale/admin/settings
+     File: src/app/[locale]/admin/settings/page.tsx
+ 25. /locale/admin/users
+     File: src/app/[locale]/admin/users/page.tsx
+ 26. /locale/auth/reset-password
+     File: src/app/[locale]/auth/reset-password/page.tsx
+ 27. /locale/dashboard/credits
+     File: src/app/[locale]/dashboard/credits/page.tsx
+ 28. /locale/dashboard/packages
+     File: src/app/[locale]/dashboard/packages/page.tsx
+ 29. /locale/dashboard
+     File: src/app/[locale]/dashboard/page.tsx
+ 30. /locale/dashboard/readings
+     File: src/app/[locale]/dashboard/readings/page.tsx
+ 31. /locale/dashboard/settings
+     File: src/app/[locale]/dashboard/settings/page.tsx
+ 32. /locale/dashboard/statistics
+     File: src/app/[locale]/dashboard/statistics/page.tsx
+ 33. /locale
+     File: src/app/[locale]/page.tsx
+ 34. /locale/payment/cancel
+     File: src/app/[locale]/payment/cancel/page.tsx
+ 35. /locale/payment/success
+     File: src/app/[locale]/payment/success/page.tsx
+ 36. /maintenance
+     File: src/app/maintenance/page.tsx
+
+⚠️  PAGES MISSING HREFLANG (alternates.languages):
+--------------------------------------------------------------------------------
+  1. /locale/(main)/cards/slug
+     File: src/app/[locale]/(main)/cards/[slug]/page.tsx
+  2. /locale/(main)/kartice/slug
+     File: src/app/[locale]/(main)/kartice/[slug]/page.tsx
+  3. /locale/(main)/kartlar/slug
+     File: src/app/[locale]/(main)/kartlar/[slug]/page.tsx
+  4. /locale/(main)/numeroloji
+     File: src/app/[locale]/(main)/numeroloji/layout.tsx
+  5. /locale/(main)/tarotokumasi
+     File: src/app/[locale]/(main)/tarotokumasi/layout.tsx
+  6. /locale/auth
+     File: src/app/[locale]/auth/layout.tsx
+  7. /locale/auth
+     File: src/app/[locale]/auth/page.tsx
+  8. /locale/dashboard
+     File: src/app/[locale]/dashboard/layout.tsx
+  9. /locale
+     File: src/app/[locale]/layout.tsx
+ 10. /
+     File: src/app/layout.tsx
+
+⚠️  PAGES MISSING CANONICAL URL:
+--------------------------------------------------------------------------------
+  1. /locale/(main)/cards/slug
+     File: src/app/[locale]/(main)/cards/[slug]/page.tsx
+  2. /locale/(main)/kartice/slug
+     File: src/app/[locale]/(main)/kartice/[slug]/page.tsx
+  3. /locale/(main)/kartlar/slug
+     File: src/app/[locale]/(main)/kartlar/[slug]/page.tsx
+  4. /locale/(main)/numeroloji
+     File: src/app/[locale]/(main)/numeroloji/layout.tsx
+  5. /locale/(main)/tarotokumasi
+     File: src/app/[locale]/(main)/tarotokumasi/layout.tsx
+  6. /locale/auth
+     File: src/app/[locale]/auth/layout.tsx
+  7. /locale/auth
+     File: src/app/[locale]/auth/page.tsx
+  8. /locale
+     File: src/app/[locale]/layout.tsx
+  9. /
+     File: src/app/layout.tsx
+
+================================================================================
+RECOMMENDATIONS
+================================================================================
+
+1. Add alternates.languages to all pages for proper hreflang support:
+   ```typescript
+   alternates: {
+     languages: {
+       tr: "/tr/your-page",
+       en: "/en/your-page",
+       sr: "/sr/your-page"
+     }
+   }
+   ```
+
+2. Add canonical URL to all pages:
+   ```typescript
+   alternates: {
+     canonical: "https://yoursite.com/your-page"
+   }
+   ```
+
+3. Consider adding OpenGraph and Twitter Card metadata for better social sharing.
+
+================================================================================
+END OF SEO REPORT
+================================================================================
