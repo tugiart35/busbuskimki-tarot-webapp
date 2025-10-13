@@ -1,0 +1,138 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "version": 2,
+  "buildCommand": "npm run build",
+  "framework": "nextjs",
+  "installCommand": "npm install",
+  "outputDirectory": ".next",
+  "regions": ["fra1", "iad1"],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-DNS-Prefetch-Control",
+          "value": "on"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=31536000; includeSubDomains; preload"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(self)"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.shopier.com https://vercel.live; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob:; font-src 'self' data:; connect-src 'self' https://*.supabase.co https://api.groq.com https://generativelanguage.googleapis.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://www.shopier.com;"
+        }
+      ]
+    },
+    {
+      "source": "/api/:path*",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store, no-cache, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/:path*.(svg|jpg|jpeg|png|webp|avif|gif|ico)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/_next/static/:path*",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/tr/anasayfa",
+      "destination": "/tr"
+    },
+    {
+      "source": "/tr/tarot-okuma",
+      "destination": "/tr/tarotokumasi"
+    },
+    {
+      "source": "/tr/giris",
+      "destination": "/tr/auth"
+    },
+    {
+      "source": "/tr/panel",
+      "destination": "/tr/dashboard"
+    },
+    {
+      "source": "/en/home",
+      "destination": "/en"
+    },
+    {
+      "source": "/en/tarot-reading",
+      "destination": "/en/tarotokumasi"
+    },
+    {
+      "source": "/en/numerology",
+      "destination": "/en/numeroloji"
+    },
+    {
+      "source": "/en/login",
+      "destination": "/en/auth"
+    },
+    {
+      "source": "/sr/pocetna",
+      "destination": "/sr"
+    },
+    {
+      "source": "/sr/tarot-citanje",
+      "destination": "/sr/tarotokumasi"
+    },
+    {
+      "source": "/sr/numerologija",
+      "destination": "/sr/numeroloji"
+    },
+    {
+      "source": "/sr/prijava",
+      "destination": "/sr/auth"
+    },
+    {
+      "source": "/sr/panel",
+      "destination": "/sr/dashboard"
+    }
+  ],
+  "redirects": [],
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "functions": {
+    "api/webhook/shopier.ts": {
+      "maxDuration": 10
+    },
+    "api/email/reading.ts": {
+      "maxDuration": 30
+    }
+  }
+}
+
