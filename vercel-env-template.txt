@@ -1,0 +1,139 @@
+# ============================================
+# VERCEL ENVIRONMENT VARIABLES TEMPLATE
+# ============================================
+# 
+# Bu dosya Vercel deployment için gerekli tüm
+# environment variables'ı içerir.
+# 
+# KULLANIM:
+# 1. Her değişkeni Vercel Dashboard'a ekleyin
+# 2. Settings → Environment Variables
+# 3. Production environment seçin
+# 4. Add butonuna tıklayın
+# 
+# ⚠️ DİKKAT: .env dosyalarını ASLA Git'e commit ETMEYİN!
+# ============================================
+
+# --------------------------------------------
+# 🔴 KRİTİK - Olmadan Çalışmaz (14 Değişken)
+# --------------------------------------------
+
+# Supabase Configuration
+NEXT_PUBLIC_SUPABASE_URL=https://xxxxxxxxxxxx.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.xxxxx
+SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.xxxxx
+
+# Application URLs
+NODE_ENV=production
+NEXT_PUBLIC_SITE_URL=https://your-domain.vercel.app
+NEXT_PUBLIC_CONTACT_PHONE=+90 (xxx) xxx xx xx
+
+# AI Services (En az biri gerekli)
+GROQ_API_KEY=gsk_xxxxxxxxxxxxxxxxxxxxx
+# VEYA
+GEMINI_API_KEY=AIzaSyxxxxxxxxxxxxxxxxxxxxx
+
+# Shopier Payment
+SHOPIER_MERCHANT_ID=your-merchant-id
+SHOPIER_API_KEY=your-api-key
+SHOPIER_API_SECRET=your-api-secret
+SHOPIER_TEST_MODE=false
+
+# Email Configuration
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=your-email@gmail.com
+SMTP_PASS=your-16-digit-app-password
+
+# Security
+WEBHOOK_SECRET=your-secure-random-secret-minimum-32-characters
+
+# --------------------------------------------
+# 🟡 ÖNEMLİ - Özellikler İçin Gerekli
+# --------------------------------------------
+
+# Shopier URLs (Gerçek domain ile güncelleyin!)
+NEXT_PUBLIC_SHOPIER_API_URL=https://www.shopier.com/ShowProduct/api_pay4.php
+NEXT_PUBLIC_SHOPIER_CALLBACK_URL=https://your-domain.vercel.app/payment/callback
+NEXT_PUBLIC_SHOPIER_WEBHOOK_URL=https://your-domain.vercel.app/api/webhook/shopier
+
+# Email Additional
+SMTP_SECURE=false
+
+# Supabase (Duplicate for consistency)
+SUPABASE_URL=https://xxxxxxxxxxxx.supabase.co
+
+# --------------------------------------------
+# 🟢 OPSİYONEL - Gelişmiş Özellikler
+# --------------------------------------------
+
+# OAuth (İleride kullanılacaksa)
+NEXT_PUBLIC_GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+NEXT_PUBLIC_FACEBOOK_CLIENT_ID=
+FACEBOOK_CLIENT_SECRET=
+
+# Monitoring & Debug
+DEBUG=false
+SENTRY_DSN=
+
+# ============================================
+# HIZLI KOPYALAMA İÇİN CLI KOMUTLARI
+# ============================================
+# 
+# Terminal'de çalıştırın:
+# 
+# vercel env add NEXT_PUBLIC_SUPABASE_URL production
+# vercel env add NEXT_PUBLIC_SUPABASE_ANON_KEY production
+# vercel env add SUPABASE_SERVICE_ROLE_KEY production
+# vercel env add NODE_ENV production
+# vercel env add NEXT_PUBLIC_SITE_URL production
+# vercel env add GROQ_API_KEY production
+# vercel env add SHOPIER_MERCHANT_ID production
+# vercel env add SHOPIER_API_KEY production
+# vercel env add SHOPIER_API_SECRET production
+# vercel env add SHOPIER_TEST_MODE production
+# vercel env add SMTP_HOST production
+# vercel env add SMTP_USER production
+# vercel env add SMTP_PASS production
+# vercel env add WEBHOOK_SECRET production
+# 
+# ============================================
+
+# ============================================
+# DEPLOYMENT KONTROL LİSTESİ
+# ============================================
+# 
+# Deployment öncesi kontrol edin:
+# [ ] Tüm 🔴 KRİTİK değişkenler eklendi (14 adet)
+# [ ] SHOPIER_TEST_MODE=false
+# [ ] NODE_ENV=production
+# [ ] URL'ler gerçek domain ile güncellendi
+# [ ] SMTP credentials doğru (Gmail App Password)
+# [ ] Webhook secret güçlü (32+ karakter)
+# [ ] SUPABASE_SERVICE_ROLE_KEY NEXT_PUBLIC ile başlamıyor
+# [ ] Vercel'de Environment: Production seçildi
+# 
+# ============================================
+
+# ============================================
+# GÜÇ SECRET OLUŞTURMA
+# ============================================
+# 
+# Terminal'de çalıştırın:
+# openssl rand -base64 32
+# 
+# Çıktıyı WEBHOOK_SECRET olarak kullanın
+# ============================================
+
+# ============================================
+# SMTP APP PASSWORD (Gmail)
+# ============================================
+# 
+# 1. Google Account → Security
+# 2. 2-Step Verification aktif olmalı
+# 3. App passwords → Generate
+# 4. "Mail" ve "Other" seçin
+# 5. 16 haneli şifreyi SMTP_PASS olarak kullanın
+# ============================================
+

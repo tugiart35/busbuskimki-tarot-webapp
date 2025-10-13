@@ -30,8 +30,18 @@ yarn-error.log*
 
 # local env files
 .env*.local
+.env
+.env.production
+.env.development
+.env.test
 # .env dosyaları hassas bilgiler içerdiğinden versiyon kontrolüne eklenmemelidir.
 # Bu satır, .env dosyalarının git tarafından göz ardı edilmesini sağlar.
+
+# API Keys & Secrets - ASLA commit edilmemeli
+.gemini/
+*.key
+*.pem
+.secrets/
 
 # vercel
 .vercel
