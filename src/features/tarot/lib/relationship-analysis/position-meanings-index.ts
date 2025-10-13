@@ -409,31 +409,31 @@ export const getI18nRelationshipAnalysisMeaningByCardAndPosition = (
   switch (position) {
     case 1:
       originalMeaning =
-        getRelationshipAnalysisPosition1MeaningByCardName(cardName);
+        getRelationshipAnalysisPosition1MeaningByCardName(cardName) ?? null;
       break;
     case 2:
       originalMeaning =
-        getRelationshipAnalysisPosition2MeaningByCardName(cardName);
+        getRelationshipAnalysisPosition2MeaningByCardName(cardName) ?? null;
       break;
     case 3:
       originalMeaning =
-        getRelationshipAnalysisPosition3MeaningByCardName(cardName);
+        getRelationshipAnalysisPosition3MeaningByCardName(cardName) ?? null;
       break;
     case 4:
       originalMeaning =
-        getRelationshipAnalysisPosition4MeaningByCardName(cardName);
+        getRelationshipAnalysisPosition4MeaningByCardName(cardName) ?? null;
       break;
     case 5:
       originalMeaning =
-        getRelationshipAnalysisPosition5MeaningByCardName(cardName);
+        getRelationshipAnalysisPosition5MeaningByCardName(cardName) ?? null;
       break;
     case 6:
       originalMeaning =
-        getRelationshipAnalysisPosition6MeaningByCardName(cardName);
+        getRelationshipAnalysisPosition6MeaningByCardName(cardName) ?? null;
       break;
     case 7:
       originalMeaning =
-        getRelationshipAnalysisPosition7MeaningByCardName(cardName);
+        getRelationshipAnalysisPosition7MeaningByCardName(cardName) ?? null;
       break;
     default:
       return null;

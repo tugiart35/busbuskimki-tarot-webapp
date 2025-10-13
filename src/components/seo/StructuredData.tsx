@@ -25,8 +25,6 @@ Geliştirme ve öneriler:
 - Performance optimization
 */
 
-'use client';
-
 import { APP_INFO } from '@/lib/config/app-config';
 
 interface StructuredDataProps {

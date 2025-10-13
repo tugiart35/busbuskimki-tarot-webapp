@@ -11,6 +11,9 @@ const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
 
+  // Transpile problematic packages for Next.js 15
+  transpilePackages: ['react-icons', '@supabase/supabase-js', '@supabase/ssr'],
+
   images: {
     formats: ['image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
