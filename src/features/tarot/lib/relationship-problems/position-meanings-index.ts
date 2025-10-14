@@ -619,10 +619,7 @@ export const getI18nRelationshipProblemsMeaningByCardAndPosition = (
         }
         return originalMeaning.keywords;
       } catch (error) {
-        console.error(
-          `[Relationship Problems Position ${position}] Failed to parse keywords for ${cardName}:`,
-          error
-        );
+        
         return originalMeaning.keywords;
       }
     })(),

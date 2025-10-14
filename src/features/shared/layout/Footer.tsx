@@ -4,6 +4,7 @@
 // İçerik: Telif hakkı, iletişim bilgileri, sosyal medya bağlantıları ve yasal bilgiler
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import {
   FaFacebook,
   FaTwitter,
@@ -28,6 +29,8 @@ import { useTranslations } from '@/hooks/useTranslations';
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const { t } = useTranslations();
+  const pathname = usePathname();
+  const locale = pathname?.split('/')[1] || 'tr';
 
   return (
     <footer className='relative overflow-hidden bg-gradient-to-br from-purple-900 via-indigo-900 to-purple-800'>
@@ -66,7 +69,7 @@ const Footer = () => {
               <ul className='space-y-3'>
                 <li>
                   <Link
-                    href='/tr/tarot-okuma'
+                    href={`/${locale}/tarot-okuma`}
                     className='group flex items-center text-sm text-gray-300 hover:text-white transition-all duration-300 hover:translate-x-1'
                   >
                     <FaChevronRight className='w-3 h-3 mr-2 text-purple-400 group-hover:text-purple-300 transition-colors' />
@@ -75,7 +78,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <Link
-                    href='/tr/numeroloji'
+                    href={`/${locale}/numeroloji`}
                     className='group flex items-center text-sm text-gray-300 hover:text-white transition-all duration-300 hover:translate-x-1'
                   >
                     <FaChevronRight className='w-3 h-3 mr-2 text-purple-400 group-hover:text-purple-300 transition-colors' />
@@ -84,7 +87,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <Link
-                    href='/ask-acilimi'
+                    href={`/${locale}/ask-acilimi`}
                     className='group flex items-center text-sm text-gray-300 hover:text-white transition-all duration-300 hover:translate-x-1'
                   >
                     <FaChevronRight className='w-3 h-3 mr-2 text-purple-400 group-hover:text-purple-300 transition-colors' />
@@ -93,7 +96,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <Link
-                    href='/kariyer-acilimi'
+                    href={`/${locale}/kariyer-acilimi`}
                     className='group flex items-center text-sm text-gray-300 hover:text-white transition-all duration-300 hover:translate-x-1'
                   >
                     <FaChevronRight className='w-3 h-3 mr-2 text-purple-400 group-hover:text-purple-300 transition-colors' />
@@ -113,7 +116,7 @@ const Footer = () => {
               </div>
               <div className='grid grid-cols-1 gap-2'>
                 <Link
-                  href='/legal/privacy-policy'
+                  href={`/${locale}/legal/privacy-policy`}
                   className='text-sm text-gray-300 hover:text-white transition-all duration-300 hover:translate-x-1 group'
                 >
                   <span className='group-hover:text-purple-300'>
@@ -121,7 +124,7 @@ const Footer = () => {
                   </span>
                 </Link>
                 <Link
-                  href='/legal/terms-of-use'
+                  href={`/${locale}/legal/terms-of-use`}
                   className='text-sm text-gray-300 hover:text-white transition-all duration-300 hover:translate-x-1 group'
                 >
                   <span className='group-hover:text-purple-300'>
@@ -129,7 +132,7 @@ const Footer = () => {
                   </span>
                 </Link>
                 <Link
-                  href='/legal/kvkk-disclosure'
+                  href={`/${locale}/legal/kvkk-disclosure`}
                   className='text-sm text-gray-300 hover:text-white transition-all duration-300 hover:translate-x-1 group'
                 >
                   <span className='group-hover:text-purple-300'>
@@ -137,7 +140,7 @@ const Footer = () => {
                   </span>
                 </Link>
                 <Link
-                  href='/legal/cookie-policy'
+                  href={`/${locale}/legal/cookie-policy`}
                   className='text-sm text-gray-300 hover:text-white transition-all duration-300 hover:translate-x-1 group'
                 >
                   <span className='group-hover:text-purple-300'>
@@ -145,7 +148,7 @@ const Footer = () => {
                   </span>
                 </Link>
                 <Link
-                  href='/legal/disclaimer'
+                  href={`/${locale}/legal/disclaimer`}
                   className='text-sm text-gray-300 hover:text-white transition-all duration-300 hover:translate-x-1 group'
                 >
                   <span className='group-hover:text-purple-300'>
@@ -153,7 +156,7 @@ const Footer = () => {
                   </span>
                 </Link>
                 <Link
-                  href='/legal/refund-policy'
+                  href={`/${locale}/legal/refund-policy`}
                   className='text-sm text-gray-300 hover:text-white transition-all duration-300 hover:translate-x-1 group'
                 >
                   <span className='group-hover:text-purple-300'>
