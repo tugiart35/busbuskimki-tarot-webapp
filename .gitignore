@@ -74,6 +74,61 @@ Thumbs.db
 # Large cache files
 *.pack.*
 
+# === DEPLOYMENT'A GİTMEMESİ GEREKEN DOSYALAR ===
+# Analiz ve geliştirme script'leri
+analyze-*.js
+manual-cleanup-strategy.js
+extract-cards.js
+fix-trailing-commas.js
+rebuild-blog-json.js
+package-merge.js
+debug-supabase-connection.js
+add-missing-cards.js
+
+# Geliştirme shell script'leri
+*.sh
+protect-files.sh
+transfer-project.sh
+bulk-log-removal.sh
+final-log-cleanup.sh
+remove-all-logs.sh
+remove-logs.sh
+
+# Log dosyaları (zaten var ama daha spesifik)
+dev-server.log
+build-errors.log
+full-build-test.log
+
+# Backup dosyaları
+*.backup
+*.broken
+middleware.ts.backup
+middleware.ts.broken
+next.config.js.backup
+
+# JSON analiz ve rapor dosyaları
+*-analysis*.json
+*-report*.json
+translation-analysis-report.json
+smart-translation-analysis.json
+unused-translations.json
+test-batch-output.json
+performance-report.json
+image-path-*.json
+project-map.json
+RENAME-MAP.json
+URL-MAP.json
+
+# Geçici yapı dosyaları
+/new-structure/
+refactor-moves.plan.json
+
+# pnpm (npm kullanıyorsunuz)
+pnpm-lock.yaml
+
+# Diğer geliştirme dosyaları
+requirements-translate.txt
+
 # KORUNACAK DOSYALAR - Bu dosyalar değiştirilmemelidir
 # Bu dosyalar kritik olduğu için git tarafından izlenir ama değiştirilmemelidir
 # messages/tr.json

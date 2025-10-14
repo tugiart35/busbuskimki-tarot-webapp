@@ -67,3 +67,23 @@ transfer-project.sh
 
 # Diğer gereksiz dosyalar
 requirements-translate.txt
+
+# TypeScript build cache
+tsconfig.tsbuildinfo
+
+# Environment dosyaları (Vercel'de zaten var)
+.env*.local
+.env.development
+.env.test
+
+# IDE ve editor dosyaları
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# macOS dosyaları
+.DS_Store
+.AppleDouble
+.LSOverride
