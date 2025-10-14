@@ -2,7 +2,8 @@
 
 **Tarih:** 13 Ekim 2025  
 **Durum:** ✅ HAZIR  
-**Yapılan İşlemler:** Güvenlik önlemleri alındı, deployment rehberleri oluşturuldu
+**Yapılan İşlemler:** Güvenlik önlemleri alındı, deployment rehberleri
+oluşturuldu
 
 ---
 
@@ -11,6 +12,7 @@
 ### 1. Güvenlik Önlemleri 🔒
 
 #### .gitignore Güncellemesi
+
 ```diff
 + .env
 + .env.production
@@ -26,12 +28,12 @@
 
 ### 2. Oluşturulan Dökümanlar 📚
 
-| Dosya | Açıklama | Kullanım |
-|-------|----------|----------|
-| `VERCEL-DEPLOYMENT-GUIDE.md` | 20+ sayfa detaylı rehber | Adım adım deployment |
-| `vercel-deploy-checklist.md` | Basılabilir kontrol listesi | Her deployment'ta kullan |
-| `.env.vercel.template` | Environment variables şablonu | Vercel'e kopyala |
-| `deploy-ready.md` | Güncellenmiş hızlı başlangıç | Hızlı referans |
+| Dosya                        | Açıklama                      | Kullanım                 |
+| ---------------------------- | ----------------------------- | ------------------------ |
+| `VERCEL-DEPLOYMENT-GUIDE.md` | 20+ sayfa detaylı rehber      | Adım adım deployment     |
+| `vercel-deploy-checklist.md` | Basılabilir kontrol listesi   | Her deployment'ta kullan |
+| `.env.vercel.template`       | Environment variables şablonu | Vercel'e kopyala         |
+| `deploy-ready.md`            | Güncellenmiş hızlı başlangıç  | Hızlı referans           |
 
 ---
 
@@ -102,12 +104,14 @@ WEBHOOK_SECRET=your-secure-32-char-secret
 ## ⚠️ KRİTİK UYARILAR
 
 ### ASLA YAPMAYIN ❌
+
 1. ❌ `.env` dosyasını Git'e commit etmeyin
 2. ❌ API key'leri kodda hardcode etmeyin
 3. ❌ `SHOPIER_TEST_MODE=true` ile production deploy yapmayın
 4. ❌ `SUPABASE_SERVICE_ROLE_KEY`'i client-side'da kullanmayın
 
 ### MUTLAKA YAPIN ✅
+
 1. ✅ `npm run build` başarılı olduğunu doğrulayın
 2. ✅ Environment variables'ı **Production** environment'ına ekleyin
 3. ✅ Deployment sonrası site testlerini yapın
@@ -120,10 +124,12 @@ WEBHOOK_SECRET=your-secure-32-char-secret
 Deployment başarılı sayılır:
 
 ### Build ✅
+
 - [x] `npm run build` hatasız tamamlandı
 - [x] Type errors yok (test dosyaları hariç)
 
 ### Site ✅
+
 - [ ] HTTPS aktif
 - [ ] Ana sayfa açılıyor
 - [ ] Auth flow çalışıyor
@@ -131,6 +137,7 @@ Deployment başarılı sayılır:
 - [ ] AI yorumları geliyor
 
 ### Performance ✅
+
 - [ ] Lighthouse score >85
 - [ ] First Paint <2s
 - [ ] No console errors
@@ -158,6 +165,7 @@ graph TD
 ## 🆘 SORUN GİDERME
 
 ### Build Hatası
+
 ```bash
 # Çözüm:
 cd /Users/tugi/Desktop/TaraTarot
@@ -167,6 +175,7 @@ npm run build
 ```
 
 ### Environment Variable Eksik
+
 ```bash
 # Çözüm:
 # Vercel Dashboard → Settings → Environment Variables
@@ -175,6 +184,7 @@ npm run build
 ```
 
 ### 500 Server Error
+
 ```bash
 # Çözüm:
 vercel logs --follow
@@ -186,16 +196,19 @@ vercel logs --follow
 ## 📞 DESTEK KAYNAKLARI
 
 ### Dökümanlar
+
 - **Ana Rehber:** `VERCEL-DEPLOYMENT-GUIDE.md`
 - **Checklist:** `vercel-deploy-checklist.md`
 - **Template:** `.env.vercel.template`
 
 ### Online Kaynaklar
+
 - **Vercel Docs:** https://vercel.com/docs
 - **Next.js Docs:** https://nextjs.org/docs/deployment
 - **Supabase Docs:** https://supabase.com/docs
 
 ### Vercel Support
+
 - **Dashboard:** https://vercel.com/support
 - **Status:** https://www.vercel-status.com
 
@@ -204,6 +217,7 @@ vercel logs --follow
 ## ✅ SONRAKI ADIMLAR
 
 ### Hemen Yapılacaklar (Bugün)
+
 1. [ ] **Build test:** `npm run build`
 2. [ ] **Vercel hesabı:** Oluştur/Login
 3. [ ] **Repository import:** Vercel'e bağla
@@ -212,12 +226,14 @@ vercel logs --follow
 6. [ ] **Test:** Site fonksiyonlarını test et
 
 ### Bu Hafta
+
 - [ ] Custom domain bağla (opsiyonel)
 - [ ] Monitoring kur (Sentry, Analytics)
 - [ ] Performance optimize et
 - [ ] SEO check yap
 
 ### İleride
+
 - [ ] A/B testing başlat
 - [ ] User feedback topla
 - [ ] Feature improvements planla
@@ -226,20 +242,21 @@ vercel logs --follow
 
 ## 📈 TAHMİNİ SÜRE
 
-| Adım | Süre |
-|------|------|
-| Build test | 5 dk |
-| Vercel import | 5 dk |
-| Env variables | 15 dk |
-| Deploy | 5 dk |
-| Test | 15 dk |
-| **TOPLAM** | **45 dk** |
+| Adım          | Süre      |
+| ------------- | --------- |
+| Build test    | 5 dk      |
+| Vercel import | 5 dk      |
+| Env variables | 15 dk     |
+| Deploy        | 5 dk      |
+| Test          | 15 dk     |
+| **TOPLAM**    | **45 dk** |
 
 ---
 
 ## ✍️ NOTLAR
 
 ### Deployment Bilgileri
+
 ```
 Deployment Tarihi: ___________
 Deployment URL: ___________
@@ -248,17 +265,19 @@ Deploy Eden: ___________
 ```
 
 ### Karşılaşılan Sorunlar
+
 ```
-1. 
-2. 
-3. 
+1.
+2.
+3.
 ```
 
 ### Çözümler
+
 ```
-1. 
-2. 
-3. 
+1.
+2.
+3.
 ```
 
 ---
@@ -284,4 +303,3 @@ Tüm adımları tamamladıysanız:
 **Durum:** ✅ PRODUCTION READY
 
 **Başarılar! 🎉**
-

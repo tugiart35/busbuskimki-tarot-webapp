@@ -6,7 +6,7 @@ export const runtime = 'edge';
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    
+
     // Query params
     const cardName = searchParams.get('name') || 'Tarot Kartı';
     const cardType = searchParams.get('type') || 'major'; // major or minor
@@ -45,7 +45,8 @@ export async function GET(request: NextRequest) {
             alignItems: 'center',
             justifyContent: 'center',
             backgroundColor: '#1e1b4b',
-            backgroundImage: 'radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%)',
+            backgroundImage:
+              'radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%)',
             position: 'relative',
           }}
         >
@@ -58,7 +59,8 @@ export async function GET(request: NextRequest) {
               width: '80px',
               height: '80px',
               borderRadius: '50%',
-              background: 'radial-gradient(circle, rgba(99, 102, 241, 0.3) 0%, transparent 70%)',
+              background:
+                'radial-gradient(circle, rgba(99, 102, 241, 0.3) 0%, transparent 70%)',
             }}
           />
           <div
@@ -69,7 +71,8 @@ export async function GET(request: NextRequest) {
               width: '120px',
               height: '120px',
               borderRadius: '50%',
-              background: 'radial-gradient(circle, rgba(139, 92, 246, 0.3) 0%, transparent 70%)',
+              background:
+                'radial-gradient(circle, rgba(139, 92, 246, 0.3) 0%, transparent 70%)',
             }}
           />
 
@@ -97,7 +100,8 @@ export async function GET(request: NextRequest) {
                 letterSpacing: '3px',
                 marginBottom: '20px',
                 padding: '8px 24px',
-                background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.3) 0%, rgba(139, 92, 246, 0.3) 100%)',
+                background:
+                  'linear-gradient(135deg, rgba(99, 102, 241, 0.3) 0%, rgba(139, 92, 246, 0.3) 100%)',
                 borderRadius: '20px',
                 border: '1px solid rgba(99, 102, 241, 0.4)',
               }}
@@ -118,13 +122,15 @@ export async function GET(request: NextRequest) {
                 style={{
                   width: '140px',
                   height: '200px',
-                  background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a78bfa 100%)',
+                  background:
+                    'linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a78bfa 100%)',
                   borderRadius: '16px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   fontSize: '80px',
-                  boxShadow: '0 20px 60px rgba(99, 102, 241, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.1)',
+                  boxShadow:
+                    '0 20px 60px rgba(99, 102, 241, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.1)',
                   border: '3px solid rgba(255, 255, 255, 0.1)',
                 }}
               >
@@ -186,7 +192,8 @@ export async function GET(request: NextRequest) {
               left: 0,
               right: 0,
               height: '6px',
-              background: 'linear-gradient(90deg, transparent 0%, #6366f1 25%, #8b5cf6 50%, #a78bfa 75%, transparent 100%)',
+              background:
+                'linear-gradient(90deg, transparent 0%, #6366f1 25%, #8b5cf6 50%, #a78bfa 75%, transparent 100%)',
             }}
           />
         </div>
@@ -203,4 +210,3 @@ export async function GET(request: NextRequest) {
     });
   }
 }
-

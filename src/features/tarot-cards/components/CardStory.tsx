@@ -55,9 +55,7 @@ export function CardStory({ content, locale }: CardStoryProps) {
                   {content.story.historytitle}
                 </h4>
               </div>
-              <p className='text-gray-700'>
-                {content.story.history_message}
-              </p>
+              <p className='text-gray-700'>{content.story.history_message}</p>
             </div>
 
             <div className='bg-indigo-50 rounded-lg p-6'>
@@ -69,9 +67,7 @@ export function CardStory({ content, locale }: CardStoryProps) {
                   {content.story.mystic_title}
                 </h4>
               </div>
-              <p className='text-gray-700'>
-                {content.story.mystic_message}
-              </p>
+              <p className='text-gray-700'>{content.story.mystic_message}</p>
             </div>
           </div>
 
@@ -85,9 +81,7 @@ export function CardStory({ content, locale }: CardStoryProps) {
                 {content.story.cultural_title}
               </h4>
             </div>
-            <p className='text-gray-700'>
-              {content.story.cultural_message}
-            </p>
+            <p className='text-gray-700'>{content.story.cultural_message}</p>
           </div>
         </div>
       </div>

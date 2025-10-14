@@ -55,11 +55,13 @@ rm -rf .gemini/
 
 ## 🌍 2. ENVIRONMENT VARIABLES (30 Değişken)
 
-Vercel Dashboard'da **Settings → Environment Variables** bölümüne gidin ve aşağıdaki değişkenleri ekleyin.
+Vercel Dashboard'da **Settings → Environment Variables** bölümüne gidin ve
+aşağıdaki değişkenleri ekleyin.
 
 ### 🔴 Kritik - Olmadan Çalışmaz
 
 #### Supabase Configuration
+
 ```bash
 NEXT_PUBLIC_SUPABASE_URL=https://your-production-project.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
@@ -68,22 +70,26 @@ SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ```
 
 **Nereden Bulunur:**
+
 - Supabase Dashboard → Settings → API
 - **ANON_KEY:** Public, client-side safe
 - **SERVICE_ROLE_KEY:** ⚠️ Private, server-only, RLS bypass
 
 #### Application URLs
+
 ```bash
 NODE_ENV=production
 NEXT_PUBLIC_SITE_URL=https://your-domain.vercel.app
 NEXT_PUBLIC_CONTACT_PHONE=+90 (xxx) xxx xx xx
 ```
 
-**Not:** İlk deployment'tan sonra `NEXT_PUBLIC_SITE_URL`'i gerçek domain'iniz ile güncelleyin.
+**Not:** İlk deployment'tan sonra `NEXT_PUBLIC_SITE_URL`'i gerçek domain'iniz
+ile güncelleyin.
 
 ### 🟡 Önemli - Özellikler İçin Gerekli
 
 #### AI Services (En az biri gerekli)
+
 ```bash
 GROQ_API_KEY=gsk_...
 # VEYA
@@ -91,12 +97,14 @@ GEMINI_API_KEY=AIzaSy...
 ```
 
 **Nereden Alınır:**
+
 - **GROQ:** https://console.groq.com/keys
 - **GEMINI:** https://makersuite.google.com/app/apikey
 
 **Kullanım:** Tarot kartı yorumları için kritik
 
 #### Payment - Shopier
+
 ```bash
 SHOPIER_MERCHANT_ID=your-merchant-id
 SHOPIER_API_KEY=your-api-key
@@ -107,14 +115,17 @@ NEXT_PUBLIC_SHOPIER_CALLBACK_URL=https://your-domain.vercel.app/payment/callback
 NEXT_PUBLIC_SHOPIER_WEBHOOK_URL=https://your-domain.vercel.app/api/webhook/shopier
 ```
 
-**⚠️ ÖNEMLİ:** 
+**⚠️ ÖNEMLİ:**
+
 - `SHOPIER_TEST_MODE=false` **MUTLAKA** false olmalı!
 - URL'leri gerçek domain'iniz ile güncelleyin
 
 **Nereden Alınır:**
+
 - Shopier Merchant Panel → API Ayarları
 
 #### Email Configuration
+
 ```bash
 SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
@@ -124,6 +135,7 @@ SMTP_PASS=your-app-specific-password
 ```
 
 **Gmail App Password Oluşturma:**
+
 1. Google Account → Security
 2. 2-Step Verification aktif olmalı
 3. App passwords → Generate
@@ -131,11 +143,13 @@ SMTP_PASS=your-app-specific-password
 5. 16 haneli şifreyi `SMTP_PASS` olarak kullanın
 
 #### Security
+
 ```bash
 WEBHOOK_SECRET=your-secure-random-secret-minimum-32-characters-long
 ```
 
 **Güçlü Secret Oluşturma:**
+
 ```bash
 # Terminal'de çalıştırın:
 openssl rand -base64 32
@@ -144,6 +158,7 @@ openssl rand -base64 32
 ### 🟢 Opsiyonel - Gelişmiş Özellikler
 
 #### OAuth (İleride kullanılacaksa)
+
 ```bash
 NEXT_PUBLIC_GOOGLE_CLIENT_ID=your-client-id
 GOOGLE_CLIENT_SECRET=your-client-secret
@@ -152,6 +167,7 @@ FACEBOOK_CLIENT_SECRET=your-app-secret
 ```
 
 #### Monitoring & Analytics
+
 ```bash
 # Sentry (Error tracking)
 SENTRY_DSN=https://...@sentry.io/...
@@ -173,7 +189,8 @@ DEBUG=false
 5. Her bir değişken için:
    - **Name:** Değişken adı (örn: `NEXT_PUBLIC_SUPABASE_URL`)
    - **Value:** Değişken değeri
-   - **Environment:** `Production` seçin (Preview ve Development için de ekleyebilirsiniz)
+   - **Environment:** `Production` seçin (Preview ve Development için de
+     ekleyebilirsiniz)
    - **Add** butonuna tıklayın
 
 ### Yöntem 2: CLI (Hızlı - Toplu Ekleme)
@@ -200,7 +217,8 @@ vercel env add GROQ_API_KEY production
 
 ### Yöntem 3: .env Dosyasından Toplu Import
 
-**⚠️ DİKKAT:** Bu yöntem sadece lokal test için! Production'da asla .env dosyası kullanmayın!
+**⚠️ DİKKAT:** Bu yöntem sadece lokal test için! Production'da asla .env dosyası
+kullanmayın!
 
 ```bash
 # Geliştirme için .env.local oluşturun (Git'e eklenmez)
@@ -230,6 +248,7 @@ npm run build
 ```
 
 **Başarı Kriterleri:**
+
 - ✅ "Compiled successfully" mesajı görülmeli
 - ✅ Build errors olmamalı
 - ❌ Eğer hata varsa, deployment YAPMAYIN!
@@ -266,6 +285,7 @@ git push origin main
 **Dashboard'dan yukarıdaki 30 değişkeni ekleyin** (Bölüm 2'ye bakın)
 
 **Minimum Gerekli 14 Değişken:**
+
 1. NEXT_PUBLIC_SUPABASE_URL
 2. NEXT_PUBLIC_SUPABASE_ANON_KEY
 3. SUPABASE_SERVICE_ROLE_KEY
@@ -292,6 +312,7 @@ vercel --prod
 ```
 
 **Deployment süreci:**
+
 - ⏳ Building... (2-3 dakika)
 - ⏳ Deploying... (1-2 dakika)
 - ✅ Success!
@@ -299,18 +320,19 @@ vercel --prod
 ### Adım 6: Domain Ayarları (Opsiyonel - 10 dk)
 
 **Vercel Domain (Otomatik):**
+
 - `https://tara-tarot.vercel.app`
 
 **Custom Domain Ekleme:**
+
 1. **Vercel Dashboard → Settings → Domains**
 2. **Add Domain:** `yourdomain.com`
 3. **DNS kayıtlarını güncelleyin:**
    - Type: `A` Record
    - Name: `@`
    - Value: `76.76.21.21`
-   
+
    **VEYA**
-   
    - Type: `CNAME`
    - Name: `www`
    - Value: `cname.vercel-dns.com`
@@ -338,34 +360,40 @@ curl https://your-domain.vercel.app
 Browser'da test edin:
 
 #### 1. Ana Sayfa
+
 - ✅ `https://your-domain.vercel.app/tr`
 - ✅ Sayfa yükleniyor mu?
 - ✅ Görüntüler yükleniyor mu?
 - ✅ Console'da critical error yok mu?
 
 #### 2. Dil Değiştirme (i18n)
+
 - ✅ `/tr` → `/en` → `/sr` geçişleri çalışıyor mu?
 - ✅ Çeviriler doğru mu?
 
 #### 3. Authentication
+
 - ✅ `/tr/auth` - Login sayfası açılıyor mu?
 - ✅ Yeni kullanıcı kaydı yapılabiliyor mu?
 - ✅ Email confirmation geliyor mu?
 - ✅ Login çalışıyor mu?
 
 #### 4. Tarot Reading
+
 - ✅ `/tr/tarotokumasi` - Sayfa açılıyor mu?
 - ✅ Açılım seçimi çalışıyor mu?
 - ✅ Kart çekimi yapılabiliyor mu?
 - ✅ AI yorumları geliyor mu? (GROQ/GEMINI test)
 
 #### 5. Payment
+
 - ✅ Dashboard → Credit Packages
 - ✅ Paketler görünüyor mu?
 - ✅ **TEST PAYMENT YAPMAYIN** (Test mode kapalı!)
 - ✅ Sadece görsel olarak kontrol edin
 
 #### 6. Email
+
 ```bash
 # Test email endpoint (production'da dikkatli!)
 curl -X POST https://your-domain.vercel.app/api/email/test \
@@ -375,18 +403,21 @@ curl -X POST https://your-domain.vercel.app/api/email/test \
 ### Performance Checks (10 dk)
 
 #### Lighthouse Audit
+
 ```bash
 # Chrome DevTools → Lighthouse
 # Run audit on: https://your-domain.vercel.app
 ```
 
 **Başarı Kriterleri:**
+
 - Performance: >90
 - Accessibility: >90
 - Best Practices: >90
 - SEO: >90
 
 #### Vercel Analytics
+
 1. **Dashboard → Analytics**
 2. **Core Web Vitals** kontrol edin:
    - LCP (Largest Contentful Paint): <2.5s
@@ -413,12 +444,14 @@ vercel logs --filter=api
 ### Error Tracking
 
 **Dashboard'da:**
+
 - **Functions** sekmesi → Error rates
 - **Analytics** sekmesi → Page errors
 
 ### Database Monitoring
 
 **Supabase Dashboard:**
+
 1. **Database → Query Performance**
 2. **API → Logs**
 3. **Auth → Users** (Yeni kayıtlar var mı?)
@@ -432,6 +465,7 @@ vercel logs --filter=api
 **Hata:** `Build failed`
 
 **Çözüm:**
+
 ```bash
 # Local'de build test yapın
 npm run build
@@ -449,6 +483,7 @@ npm run typecheck
 **Hata:** `NEXT_PUBLIC_SUPABASE_URL is undefined`
 
 **Çözüm:**
+
 1. Vercel Dashboard → Settings → Environment Variables
 2. Değişkenin **Production** environment'ında olduğunu doğrulayın
 3. **Redeploy** yapın (değişiklikler aktif olması için)
@@ -456,6 +491,7 @@ npm run typecheck
 ### 500 Internal Server Error
 
 **Çözüm:**
+
 ```bash
 # Function logs kontrol edin
 vercel logs --follow
@@ -468,6 +504,7 @@ console.log(process.env.NEXT_PUBLIC_SUPABASE_URL)
 ### AI Yorumları Gelmiyor
 
 **Çözüm:**
+
 1. `GROQ_API_KEY` veya `GEMINI_API_KEY` doğru mu?
 2. API key'in rate limit'i dolmuş olabilir mi?
 3. Function logs'da AI API error'u var mı?
@@ -516,6 +553,7 @@ vercel rollback <deployment-url>
 Deployment öncesi son kontrol:
 
 ### Güvenlik ✅
+
 - [ ] `.env` dosyası Git'te yok
 - [ ] `.gemini/` klasörü silindi ve .gitignore'da
 - [ ] API key'ler hardcode edilmemiş
@@ -524,6 +562,7 @@ Deployment öncesi son kontrol:
 - [ ] WEBHOOK_SECRET güçlü (32+ karakter)
 
 ### Configuration ✅
+
 - [ ] `NODE_ENV=production`
 - [ ] `SHOPIER_TEST_MODE=false`
 - [ ] `NEXT_PUBLIC_SITE_URL` gerçek domain
@@ -531,12 +570,14 @@ Deployment öncesi son kontrol:
 - [ ] SMTP credentials doğru
 
 ### Database ✅
+
 - [ ] Supabase production projesi hazır
 - [ ] Migration'lar çalıştırıldı
 - [ ] RLS policies aktif
 - [ ] Test data temizlendi
 
 ### Testing ✅
+
 - [ ] Local build başarılı
 - [ ] Type check geçti
 - [ ] Tüm sayfalar açılıyor
@@ -545,6 +586,7 @@ Deployment öncesi son kontrol:
 - [ ] AI yorumları geliyor
 
 ### Monitoring ✅
+
 - [ ] Vercel Analytics aktif
 - [ ] Error tracking kurulu (Sentry opsiyonel)
 - [ ] Logs akıyor
@@ -557,12 +599,14 @@ Deployment öncesi son kontrol:
 Deployment başarılı sayılır:
 
 ### Teknik ✅
+
 - Build sürecinde hata yok
 - 200 OK response
 - HTTPS aktif
 - Core Web Vitals sağlıklı
 
 ### Fonksiyonel ✅
+
 - Tüm sayfalar açılıyor
 - i18n çalışıyor (TR/EN/SR)
 - Auth flow sorunsuz
@@ -570,6 +614,7 @@ Deployment başarılı sayılır:
 - AI yorumları geliyor
 
 ### Performans ✅
+
 - Lighthouse score >90
 - First Paint <1.5s
 - Time to Interactive <3s
@@ -580,11 +625,13 @@ Deployment başarılı sayılır:
 ## 📞 DESTEK
 
 ### Vercel
+
 - **Docs:** https://vercel.com/docs
 - **Support:** https://vercel.com/support
 - **Status:** https://www.vercel-status.com
 
 ### Framework & Services
+
 - **Next.js:** https://nextjs.org/docs
 - **Supabase:** https://supabase.com/docs
 - **Shopier:** https://shopier.com/destek
@@ -594,6 +641,7 @@ Deployment başarılı sayılır:
 ## ✅ SONUÇ
 
 Bu rehberi takip ederek:
+
 - ✅ Güvenli deployment
 - ✅ Production-ready yapılandırma
 - ✅ Monitoring ve alerting
@@ -607,5 +655,4 @@ Bu rehberi takip ederek:
 
 **🚀 Başarılı Deployment'lar!**
 
-*Son güncelleme: 13 Ekim 2025*
-
+_Son güncelleme: 13 Ekim 2025_

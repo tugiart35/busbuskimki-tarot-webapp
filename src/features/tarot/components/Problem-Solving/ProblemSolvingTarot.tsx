@@ -41,8 +41,10 @@ export default function ProblemSolvingReading(props: any) {
         found: !!meaning,
         card: meaning?.card,
         interpretation: meaning
-          ? (isReversed ? meaning.reversed : meaning.upright)?.substring(0, 50) +
-            '...'
+          ? (isReversed ? meaning.reversed : meaning.upright)?.substring(
+              0,
+              50
+            ) + '...'
           : 'No meaning',
       });
 

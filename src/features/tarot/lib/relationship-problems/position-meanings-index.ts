@@ -651,8 +651,7 @@ export const getI18nRelationshipProblemsMeaningByCardAndPosition = (
       }
     })(),
     context:
-      i18nContext &&
-      !i18nContext.startsWith('relationship-problems.meanings.')
+      i18nContext && !i18nContext.startsWith('relationship-problems.meanings.')
         ? i18nContext
         : originalMeaning.context,
   };

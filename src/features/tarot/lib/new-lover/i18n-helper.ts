@@ -1,15 +1,15 @@
 /**
  * New Lover Spread i18n Helper
- * 
+ *
  * Bu dosya, Yeni Sevgili açılımı için i18n çevirilerini yönetir.
- * 
+ *
  * Bağlı dosyalar:
  * - messages/tr.json (Türkçe çeviriler - "new-lover" key)
  * - messages/en.json (İngilizce çeviriler - "new-lover" key)
  * - messages/sr.json (Sırpça çeviriler - "new-lover" key)
- * 
+ *
  * NOT: messages/*.json'da key "new-lover" (tire ile)
- * 
+ *
  * Kullanım:
  * ```typescript
  * const { t } = useNewLoverTranslations();
@@ -26,7 +26,7 @@ import { useTranslations as useNextIntlTranslations } from 'next-intl';
  */
 export function useNewLoverTranslations() {
   const t = useNextIntlTranslations();
-  
+
   return { t };
 }
 
@@ -35,7 +35,10 @@ export function useNewLoverTranslations() {
  * Örnek: "The Fool" → "thefool"
  */
 export function getCardI18nKey(cardName: string): string {
-  return cardName.toLowerCase().replace(/\s+/g, '').replace(/[^a-z]/g, '');
+  return cardName
+    .toLowerCase()
+    .replace(/\s+/g, '')
+    .replace(/[^a-z]/g, '');
 }
 
 /**
@@ -49,7 +52,7 @@ export function getPositionI18nKey(position: number): string {
 /**
  * New Lover meaning için tam i18n key path'i oluşturur
  * Örnek: ("The Fool", 1, "upright") → "new-lover.meanings.thefool.position1.upright"
- * 
+ *
  * NOT: key "new-lover" (tire ile)
  */
 export function getNewLoverMeaningI18nKey(
@@ -61,4 +64,3 @@ export function getNewLoverMeaningI18nKey(
   const posKey = getPositionI18nKey(position);
   return `new-lover.meanings.${cardKey}.${posKey}.${field}`;
 }
-

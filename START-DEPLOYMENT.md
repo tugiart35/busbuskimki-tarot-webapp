@@ -50,6 +50,7 @@ npm run build
 ```
 
 **Sonuç:** ✅ Build başarılı!
+
 ```
 ✓ Compiled with warnings in 40s
 ✓ Generating static pages (16/16)
@@ -134,24 +135,26 @@ Deployment öncesi:
 
 Elinizin altında olan rehberler:
 
-| Dosya | Ne İçin? |
-|-------|----------|
-| `DEPLOYMENT-SUMMARY.md` | Genel özet ve yapılanlar |
-| `VERCEL-DEPLOYMENT-GUIDE.md` | 20+ sayfa detaylı rehber |
-| `vercel-deploy-checklist.md` | Basılabilir kontrol listesi |
-| `vercel-env-template.txt` | Environment variables şablonu |
-| `deploy-ready.md` | Hızlı başlangıç |
+| Dosya                        | Ne İçin?                      |
+| ---------------------------- | ----------------------------- |
+| `DEPLOYMENT-SUMMARY.md`      | Genel özet ve yapılanlar      |
+| `VERCEL-DEPLOYMENT-GUIDE.md` | 20+ sayfa detaylı rehber      |
+| `vercel-deploy-checklist.md` | Basılabilir kontrol listesi   |
+| `vercel-env-template.txt`    | Environment variables şablonu |
+| `deploy-ready.md`            | Hızlı başlangıç               |
 
 ---
 
 ## ⚠️ ÖNEMLİ UYARILAR
 
 ### ASLA YAPMA ❌
+
 1. ❌ `.env` dosyasını Git'e commit etme
 2. ❌ `SHOPIER_TEST_MODE=true` ile deploy yapma
 3. ❌ API key'leri kodda hardcode etme
 
 ### MUTLAKA YAP ✅
+
 1. ✅ Environment variables'ı **Production** environment'a ekle
 2. ✅ Deployment sonrası site testlerini yap
 3. ✅ İlk 5 dakika logs'u izle
@@ -176,6 +179,7 @@ Deployment başarılı sayılır:
 ## 🆘 SORUN MU YAŞIYORSUN?
 
 ### Build Hatası
+
 ```bash
 # Local'de test et:
 npm run build
@@ -183,12 +187,14 @@ npm run build
 ```
 
 ### Environment Variable Eksik
+
 ```
 Vercel Dashboard → Settings → Environment Variables
 Eksik olanı ekle → Redeploy yap
 ```
 
 ### Daha Fazla Yardım
+
 - `VERCEL-DEPLOYMENT-GUIDE.md` → Bölüm 7: Sorun Giderme
 - Vercel Support: https://vercel.com/support
 
@@ -197,12 +203,14 @@ Eksik olanı ekle → Redeploy yap
 ## 🚀 ŞİMDİ NE YAPMALI?
 
 ### Hemen Şimdi:
+
 1. **Vercel'e git:** https://vercel.com/new
 2. **Repository import et**
 3. **Environment variables ekle** (14 adet)
 4. **Deploy!**
 
 ### Deployment Sonrası:
+
 1. **Test:** Site'nin her özelliğini test et
 2. **Monitor:** İlk 5 dakika logs izle
 3. **Optimize:** Lighthouse audit yap
@@ -241,4 +249,3 @@ Eksik olanı ekle → Redeploy yap
 **Oluşturulma:** 13 Ekim 2025  
 **Durum:** ✅ PRODUCTION READY  
 **Build Test:** ✅ BAŞARILI
-

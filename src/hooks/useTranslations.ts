@@ -76,31 +76,46 @@ export function useTranslations() {
 
   // Çeviri fonksiyonu - stable referans için useCallback kullan
   const t = useCallback(
-    (key: string, fallback?: string): string => {
+    (
+      key: string,
+      variables?: Record<string, string | number> | string
+    ): string => {
       try {
         if (!currentMessages) {
-          return fallback || key;
+          return typeof variables === 'string' ? variables : key;
         }
 
         const message = getNestedValue(currentMessages, key);
 
+        let result: string;
         if (message && typeof message === 'string') {
-          return message;
-        }
-
-        // Fallback olarak Türkçe'yi dene
-        if (currentLocale !== 'tr') {
+          result = message;
+        } else if (currentLocale !== 'tr') {
+          // Fallback olarak Türkçe'yi dene
           const fallbackMessage = getNestedValue(messages.tr, key);
           if (fallbackMessage && typeof fallbackMessage === 'string') {
-            return fallbackMessage;
+            result = fallbackMessage;
+          } else {
+            result = typeof variables === 'string' ? variables : key;
           }
+        } else {
+          result = typeof variables === 'string' ? variables : key;
         }
 
-        // Son çare olarak verilen fallback'i kullan
-        return fallback || key;
+        // Değişkenleri yerine koy
+        if (variables && typeof variables === 'object') {
+          Object.entries(variables).forEach(([varKey, varValue]) => {
+            result = result.replace(
+              new RegExp(`{${varKey}}`, 'g'),
+              String(varValue)
+            );
+          });
+        }
+
+        return result;
       } catch (error) {
         console.error('Translation error:', error);
-        return fallback || key;
+        return typeof variables === 'string' ? variables : key;
       }
     },
     [currentLocale, currentMessages]

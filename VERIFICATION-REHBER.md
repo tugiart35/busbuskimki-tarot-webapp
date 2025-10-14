@@ -3,25 +3,31 @@
 ## 📊 GOOGLE SEARCH CONSOLE VERİFİCATION
 
 ### Adım 1: Google Search Console'a Giriş Yap
+
 1. **URL:** https://search.google.com/search-console
 2. Google hesabınla giriş yap
 3. "Property ekle" / "Add Property" butonuna tıkla
 
 ### Adım 2: Domain veya URL Prefix Seç
+
 İki seçenek var:
 
 **Seçenek A: Domain (Önerilen)**
+
 ```
 Domain: busbuskimki.com
 ```
+
 - Tüm subdomain'leri (www, blog, etc.) otomatik kapsar
 - Tüm protokolleri (http, https) kapsar
 - **Ancak DNS verification gerektirir**
 
 **Seçenek B: URL Prefix (Daha Kolay)**
+
 ```
 URL prefix: https://busbuskimki.com
 ```
+
 - Sadece belirtilen URL'yi kapsar
 - HTML tag verification kullanabilirsin
 - **BU YÖNTEMI ÖNERİYORUM (daha kolay)**
@@ -31,29 +37,35 @@ URL prefix: https://busbuskimki.com
 "URL Prefix" seçtiysen şu yöntemlerden birini kullanabilirsin:
 
 #### Yöntem 1: HTML Tag (EN KOLAY - BİZ BUNU KULLANACAĞIZ) ✅
+
 ```html
 <!-- Google Search Console şuna benzer bir kod verecek: -->
 <meta name="google-site-verification" content="abc123xyz456..." />
 ```
 
 **Ne yapman gerekiyor:**
+
 1. Google sana yukarıdaki gibi bir meta tag verecek
 2. `content="..."` içindeki kodu kopyala (örnek: `abc123xyz456...`)
 3. `.env.local` dosyana ekle:
+
 ```bash
 NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=abc123xyz456...
 ```
 
 #### Yöntem 2: HTML Dosyası
+
 - Google bir .html dosyası verir, onu public/ klasörüne at
 - Daha zahmetli, önermiyor um
 
 #### Yöntem 3: DNS Record
+
 - Domain DNS'ine TXT record eklemen gerekir
 - Domain sağlayıcında (GoDaddy, Cloudflare, vb.) yapılır
 - Biraz teknik
 
 #### Yöntem 4: Google Analytics
+
 - Zaten Google Analytics varsa bu yöntemi kullanabilirsin
 - Ama meta tag daha kolay
 
@@ -62,12 +74,14 @@ NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=abc123xyz456...
 **Bizim projede zaten hazırladık!**
 
 1. `.env.local` dosyasını aç (yoksa oluştur):
+
 ```bash
 # .env.local dosyası
 NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=BURAYA_KODU_YAPIŞTIR
 ```
 
 2. Google'dan aldığın kodu yapıştır:
+
 ```bash
 # Örnek:
 NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=abc123xyz456def789ghi
@@ -78,6 +92,7 @@ NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=abc123xyz456def789ghi
 ### Adım 5: Test Et (Local)
 
 1. Development server'ı başlat:
+
 ```bash
 npm run dev
 ```
@@ -89,6 +104,7 @@ npm run dev
 4. Arama yap (Ctrl+F): `google-site-verification`
 
 5. Şunu görmeli sin:
+
 ```html
 <meta name="google-site-verification" content="abc123xyz456..." />
 ```
@@ -111,6 +127,7 @@ npm run dev
 3. ✅ Başarılı mesajı göreceksin!
 
 **Sorun çıkarsa:**
+
 - 5-10 dakika bekle, cache temizlensin
 - Tarayıcı cache'ini temizle
 - Incognito/Private window'da dene
@@ -121,16 +138,19 @@ npm run dev
 ## 🔍 BING WEBMASTER TOOLS VERİFİCATION
 
 ### Adım 1: Bing Webmaster Tools'a Giriş Yap
+
 1. **URL:** https://www.bing.com/webmasters
 2. Microsoft hesabınla giriş yap (yoksa oluştur)
 3. "Add a site" / "Site ekle" butonuna tıkla
 
 ### Adım 2: Site URL'ini Ekle
+
 ```
 Site URL: https://busbuskimki.com
 ```
 
 ### Adım 3: Sitemap Ekle (Opsiyonel ama Önerilen)
+
 ```
 Sitemap URL: https://busbuskimki.com/sitemap.xml
 ```
@@ -140,36 +160,43 @@ Sitemap URL: https://busbuskimki.com/sitemap.xml
 Bing de benzer yöntemler sunuyor:
 
 #### Yöntem 1: Meta Tag (EN KOLAY - BİZ BUNU KULLANACAĞIZ) ✅
+
 ```html
 <!-- Bing şuna benzer bir kod verecek: -->
 <meta name="msvalidate.01" content="xyz789abc456..." />
 ```
 
 **Ne yapman gerekiyor:**
+
 1. Bing sana yukarıdaki gibi bir meta tag verecek
 2. `content="..."` içindeki kodu kopyala
 3. `.env.local` dosyana ekle:
+
 ```bash
 NEXT_PUBLIC_BING_SITE_VERIFICATION=xyz789abc456...
 ```
 
 #### Yöntem 2: XML Dosyası
+
 - Bing bir .xml dosyası verir
 - Zahmetli, önermiyor um
 
 #### Yöntem 3: CNAME Record
+
 - DNS'te CNAME record eklemen gerekir
 - Biraz teknik
 
 ### Adım 5: Verification Kodunu Ekle
 
 1. `.env.local` dosyasını aç:
+
 ```bash
 # .env.local dosyası
 NEXT_PUBLIC_BING_SITE_VERIFICATION=BURAYA_KODU_YAPIŞTIR
 ```
 
 2. Bing'den aldığın kodu yapıştır:
+
 ```bash
 # Örnek:
 NEXT_PUBLIC_BING_SITE_VERIFICATION=xyz789abc456def123ghi
@@ -178,6 +205,7 @@ NEXT_PUBLIC_BING_SITE_VERIFICATION=xyz789abc456def123ghi
 ### Adım 6: Test Et (Local)
 
 1. Development server çalışıyorsa yeniden başlat:
+
 ```bash
 npm run dev
 ```
@@ -189,6 +217,7 @@ npm run dev
 4. Arama yap: `msvalidate.01`
 
 5. Şunu görmelisin:
+
 ```html
 <meta name="msvalidate.01" content="xyz789abc456..." />
 ```
@@ -215,6 +244,7 @@ npm run dev
 ## 📝 ÖZET KONTROL LİSTESİ
 
 ### Google Search Console
+
 - [ ] https://search.google.com/search-console adresine git
 - [ ] "Add Property" → "URL Prefix" seç
 - [ ] `https://busbuskimki.com` yaz
@@ -228,6 +258,7 @@ npm run dev
 - [ ] ✅ Başarılı!
 
 ### Bing Webmaster Tools
+
 - [ ] https://www.bing.com/webmasters adresine git
 - [ ] "Add a site" tıkla
 - [ ] `https://busbuskimki.com` yaz
@@ -248,6 +279,7 @@ npm run dev
 ### Google Search Console
 
 **1. Property Ekleme Ekranı:**
+
 ```
 ┌─────────────────────────────────────┐
 │  Select property type               │
@@ -263,6 +295,7 @@ npm run dev
 ```
 
 **2. Verification Yöntemi:**
+
 ```
 ┌─────────────────────────────────────┐
 │  Verify ownership                   │
@@ -286,6 +319,7 @@ npm run dev
 ### Bing Webmaster Tools
 
 **1. Site Ekleme:**
+
 ```
 ┌─────────────────────────────────────┐
 │  Add a site                         │
@@ -301,6 +335,7 @@ npm run dev
 ```
 
 **2. Verification:**
+
 ```
 ┌─────────────────────────────────────┐
 │  Verify ownership                   │
@@ -365,16 +400,19 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
    - Projenizi seçin (TaraTarot)
 
 2. **Settings Sekmesine Git:**
+
    ```
    Dashboard → TaraTarot → Settings
    ```
 
 3. **Environment Variables'a Git:**
+
    ```
    Settings → Environment Variables
    ```
 
 4. **Yeni Variable Ekle:**
+
    ```
    ┌─────────────────────────────────────┐
    │ Add New Environment Variable        │
@@ -395,6 +433,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
    ```
 
 5. **İkinci Variable Ekle:**
+
    ```
    Name: NEXT_PUBLIC_BING_SITE_VERIFICATION
    Value: xyz789abc456def123ghi
@@ -411,33 +450,45 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ## ❓ SIKÇA SORULAN SORULAR
 
 ### S: Verification kodu nerede görünecek?
+
 **C:** HTML'in `<head>` bölümünde, diğer meta tag'lerle birlikte.
 
 ### S: Local'de çalışıyor ama production'da çalışmıyor?
+
 **C:** Vercel environment variables'ı kontrol et. Redeploy yap.
 
 ### S: "Could not verify" hatası alıyorum?
-**C:** 
+
+**C:**
+
 - 5-10 dakika bekle
 - Tarayıcı cache'ini temizle
 - View Source'da meta tag'i kontrol et
 - Vercel'de environment variable doğru mu kontrol et
 
 ### S: Hem Google hem Bing için aynı kodu kullanabilir miyim?
+
 **C:** Hayır, her biri farklı kod verir ve farklı meta tag kullanır:
+
 - Google: `google-site-verification`
 - Bing: `msvalidate.01`
 
 ### S: Production'a deploy etmeden test edebilir miyim?
-**C:** Local'de (localhost) görebilirsin ama Google/Bing sadece gerçek domain'i verify edebilir.
+
+**C:** Local'de (localhost) görebilirsin ama Google/Bing sadece gerçek domain'i
+verify edebilir.
 
 ### S: Kodları nerede saklıyoruz?
-**C:** 
+
+**C:**
+
 - **Local:** `.env.local` dosyası (git ignore'da)
 - **Production:** Vercel Environment Variables
 
 ### S: Birden fazla domain verify edebilir miyim?
-**C:** Evet, her domain için ayrı property ekle ve ayrı verification kod alırsın.
+
+**C:** Evet, her domain için ayrı property ekle ve ayrı verification kod
+alırsın.
 
 ---
 
@@ -446,7 +497,9 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 Verification başarılı olduktan sonra:
 
 ### Google Search Console'da Yapılacaklar:
+
 1. **Sitemap Gönder:**
+
    ```
    Sitemaps → Add new sitemap
    URL: https://busbuskimki.com/sitemap.xml
@@ -469,7 +522,9 @@ Verification başarılı olduktan sonra:
    - CLS (Cumulative Layout Shift)
 
 ### Bing Webmaster Tools'da Yapılacaklar:
+
 1. **Sitemap Gönder:**
+
    ```
    Sitemaps → Submit sitemap
    URL: https://busbuskimki.com/sitemap.xml
@@ -529,4 +584,3 @@ Sorun yaşarsan:
 
 **Son Güncelleme:** 13 Ekim 2025  
 **Hazırlayan:** AI SEO Uzmanı
-

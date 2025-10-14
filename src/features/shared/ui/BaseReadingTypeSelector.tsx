@@ -303,7 +303,9 @@ export default function BaseReadingTypeSelector({
             !isAuthenticated
               ? t('reading.messages.loginRequired')
               : !detailedCredits.creditStatus.hasEnoughCredits
-                ? t('reading.messages.insufficientCreditsDetail', { count: detailedCredits.creditStatus.requiredCredits })
+                ? t('reading.messages.insufficientCreditsDetail', {
+                    count: detailedCredits.creditStatus.requiredCredits,
+                  })
                 : `${defaultDetailedText} - ${t('reading.messages.detailedDescription')} (${detailedCredits.creditStatus.requiredCredits} ${t('reading.messages.creditsRequired')})`
           }
         >
@@ -346,7 +348,9 @@ export default function BaseReadingTypeSelector({
             !isAuthenticated
               ? t('reading.messages.loginRequired')
               : !writtenCredits.creditStatus.hasEnoughCredits
-                ? t('reading.messages.insufficientCreditsDetail', { count: writtenCredits.creditStatus.requiredCredits })
+                ? t('reading.messages.insufficientCreditsDetail', {
+                    count: writtenCredits.creditStatus.requiredCredits,
+                  })
                 : `${defaultWrittenText} - ${t('reading.messages.writtenDescription')} (${writtenCredits.creditStatus.requiredCredits} ${t('reading.messages.creditsRequired')})`
           }
         >
@@ -397,12 +401,18 @@ export default function BaseReadingTypeSelector({
           <div className='flex flex-col gap-1 text-xs'>
             {!detailedCredits.creditStatus.hasEnoughCredits && (
               <span className={`${currentTheme.messages.adminRequired}`}>
-                💳 {t('reading.messages.voiceReadingCreditsRequired', { count: detailedCredits.creditStatus.requiredCredits })}
+                💳{' '}
+                {t('reading.messages.voiceReadingCreditsRequired', {
+                  count: detailedCredits.creditStatus.requiredCredits,
+                })}
               </span>
             )}
             {!writtenCredits.creditStatus.hasEnoughCredits && (
               <span className={`${currentTheme.messages.adminRequired}`}>
-                💳 {t('reading.messages.writtenReadingCreditsRequired', { count: writtenCredits.creditStatus.requiredCredits })}
+                💳{' '}
+                {t('reading.messages.writtenReadingCreditsRequired', {
+                  count: writtenCredits.creditStatus.requiredCredits,
+                })}
               </span>
             )}
             {detailedCredits.creditStatus.hasEnoughCredits &&

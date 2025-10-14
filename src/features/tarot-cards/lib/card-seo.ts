@@ -6,10 +6,10 @@ export class CardSEO {
   private static normalizeUrl(url: string): string {
     // Ensure https and remove www for consistency
     let normalized = url.replace(/^https?:\/\/(www\.)?/, 'https://');
-    
+
     // Remove trailing slash for SEO best practices
     normalized = normalized.replace(/\/$/, '');
-    
+
     return normalized;
   }
 
@@ -22,32 +22,34 @@ export class CardSEO {
     const baseUrl = this.normalizeUrl(
       process.env.NEXT_PUBLIC_SITE_URL || 'https://busbuskimki.com'
     );
-    
+
     // Safe date handling with proper fallbacks
-    const publishedDate = card.createdAt?.toISOString() || new Date('2025-01-01').toISOString();
+    const publishedDate =
+      card.createdAt?.toISOString() || new Date('2025-01-01').toISOString();
     const modifiedDate = card.updatedAt?.toISOString() || publishedDate;
-    
+
     // Card name for OG image
-    const cardName = locale === 'tr' 
-      ? card.turkishName 
-      : locale === 'en' 
-        ? card.englishName 
-        : card.serbianName;
-    
+    const cardName =
+      locale === 'tr'
+        ? card.turkishName
+        : locale === 'en'
+          ? card.englishName
+          : card.serbianName;
+
     // Determine card type (major or minor arcana)
-    const cardType = card.number <= 21 ? 'major' : 'minor';
-    
+    const cardType = card.number !== undefined && card.number <= 21 ? 'major' : 'minor';
+
     // Dynamic OG image URL
     const ogImageUrl = `/api/og/card?name=${encodeURIComponent(cardName)}&type=${cardType}&locale=${locale}`;
-    
+
     return {
       title: seo.metaTitle,
       description: seo.metaDescription,
       // ✅ EKLE: keywords
-      keywords: Array.isArray(seo.keywords) 
-        ? seo.keywords.join(', ') 
+      keywords: Array.isArray(seo.keywords)
+        ? seo.keywords.join(', ')
         : seo.keywords || '',
-      
+
       openGraph: {
         title: seo.metaTitle,
         description: seo.metaDescription,
@@ -88,12 +90,12 @@ export class CardSEO {
       },
       alternates: {
         canonical: seo.canonicalUrl,
-      languages: {
-        'x-default': `${baseUrl}/en/cards/${card.slug?.en || card.slug}`,
-        tr: `${baseUrl}/tr/kartlar/${card.slug?.tr || card.slug}`,
-        en: `${baseUrl}/en/cards/${card.slug?.en || card.slug}`,
-        sr: `${baseUrl}/sr/kartice/${card.slug?.sr || card.slug}`,
-      },
+        languages: {
+          'x-default': `${baseUrl}/en/cards/${card.slug?.en || card.slug}`,
+          tr: `${baseUrl}/tr/kartlar/${card.slug?.tr || card.slug}`,
+          en: `${baseUrl}/en/cards/${card.slug?.en || card.slug}`,
+          sr: `${baseUrl}/sr/kartice/${card.slug?.sr || card.slug}`,
+        },
       },
     };
   }
@@ -115,7 +117,8 @@ export class CardSEO {
           : card.serbianName;
 
     // Safe date handling with proper fallbacks
-    const publishedDate = card.createdAt?.toISOString() || new Date('2025-01-01').toISOString();
+    const publishedDate =
+      card.createdAt?.toISOString() || new Date('2025-01-01').toISOString();
     const modifiedDate = card.updatedAt?.toISOString() || publishedDate;
 
     return {

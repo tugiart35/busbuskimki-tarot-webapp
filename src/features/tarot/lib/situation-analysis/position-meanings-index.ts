@@ -499,25 +499,32 @@ export const getI18nSituationAnalysisMeaningByCardAndPosition = (
 
   switch (position) {
     case 1:
-      originalMeaning = getSituationAnalysisPosition1MeaningByCardName(cardName) ?? null;
+      originalMeaning =
+        getSituationAnalysisPosition1MeaningByCardName(cardName) ?? null;
       break;
     case 2:
-      originalMeaning = getSituationAnalysisPosition2MeaningByCardName(cardName) ?? null;
+      originalMeaning =
+        getSituationAnalysisPosition2MeaningByCardName(cardName) ?? null;
       break;
     case 3:
-      originalMeaning = getSituationAnalysisPosition3MeaningByCardName(cardName) ?? null;
+      originalMeaning =
+        getSituationAnalysisPosition3MeaningByCardName(cardName) ?? null;
       break;
     case 4:
-      originalMeaning = getSituationAnalysisPosition4MeaningByCardName(cardName) ?? null;
+      originalMeaning =
+        getSituationAnalysisPosition4MeaningByCardName(cardName) ?? null;
       break;
     case 5:
-      originalMeaning = getSituationAnalysisPosition5MeaningByCardName(cardName) ?? null;
+      originalMeaning =
+        getSituationAnalysisPosition5MeaningByCardName(cardName) ?? null;
       break;
     case 6:
-      originalMeaning = getSituationAnalysisPosition6MeaningByCardName(cardName) ?? null;
+      originalMeaning =
+        getSituationAnalysisPosition6MeaningByCardName(cardName) ?? null;
       break;
     case 7:
-      originalMeaning = getSituationAnalysisPosition7MeaningByCardName(cardName) ?? null;
+      originalMeaning =
+        getSituationAnalysisPosition7MeaningByCardName(cardName) ?? null;
       break;
     default:
       return null;

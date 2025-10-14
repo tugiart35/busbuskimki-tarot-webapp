@@ -98,10 +98,12 @@ class EmailService {
 
       this.transporter = nodemailer.createTransport(config);
       this.isInitialized = true;
-      
+
       // Only log in development
       if (process.env.NODE_ENV === 'development') {
-        console.log('Email transporter initialized successfully with connection pooling');
+        console.log(
+          'Email transporter initialized successfully with connection pooling'
+        );
       }
     } catch (error) {
       console.error('Email transporter initialization failed:', error);
@@ -136,12 +138,12 @@ class EmailService {
       }
 
       const result = await this.transporter.sendMail(mailOptions);
-      
+
       // Only log success in development
       if (process.env.NODE_ENV === 'development') {
         console.log('Email sent successfully:', result.messageId);
       }
-      
+
       return true;
     } catch (error) {
       // Always log errors (but sanitize in production)

@@ -861,13 +861,7 @@ export const position6Meanings: MoneyPosition6Meaning[] = [
       'Üç Değnek, mali planlarda genişleme, yeni işbirlikleri ve uzun vadeli kazanç fırsatlarını işaret eder.',
     reversed:
       'Ters Üç Değnek, gecikme, dar görüşlülük veya planlarda tıkanıklığı gösterir.',
-    keywords: [
-      'genişleme',
-      'işbirliği',
-      'uzun vade',
-      'vizyon',
-      'fırsat',
-    ],
+    keywords: ['genişleme', 'işbirliği', 'uzun vade', 'vizyon', 'fırsat'],
     context:
       'Yeni mali planlarda genişleme veya dar görüşlülük belirleyici olacak.',
     group: 'Asalar',

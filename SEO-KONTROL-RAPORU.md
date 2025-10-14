@@ -9,12 +9,14 @@
 ## ✅ TAMAMLANAN ADIMLAR
 
 ### 1. Google Search Console ✅
+
 - [x] Hesap açıldı
 - [x] Property eklendi (busbuskimki.com)
 - [x] Verification kodu alındı
 - [x] Kod sisteme entegre edildi
 
 ### 2. Bing Webmaster Tools ✅
+
 - [x] Hesap açıldı
 - [x] Site eklendi
 - [x] Verification kodu alındı
@@ -25,6 +27,7 @@
 ## 🔍 SİSTEM KONTROL SONUÇLARI
 
 ### ✅ Kod Entegrasyonu
+
 **Dosya:** `src/lib/config/metadata.ts`
 
 ```typescript
@@ -43,22 +46,25 @@ other: {
 ### 1. Environment Variables Kontrolü
 
 #### Vercel Dashboard'da Kontrol Et:
+
 🔗 https://vercel.com → Projeniz → Settings → Environment Variables
 
 **Olması gereken değişkenler:**
 
-| Variable Name | Değer | Ortam |
-|--------------|-------|-------|
-| `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` | [Google'dan aldığınız kod] | Production, Preview |
-| `NEXT_PUBLIC_BING_SITE_VERIFICATION` | [Bing'den aldığınız kod] | Production, Preview |
-| `NEXT_PUBLIC_SITE_URL` | `https://busbuskimki.com` | Production, Preview, Development |
+| Variable Name                          | Değer                      | Ortam                            |
+| -------------------------------------- | -------------------------- | -------------------------------- |
+| `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` | [Google'dan aldığınız kod] | Production, Preview              |
+| `NEXT_PUBLIC_BING_SITE_VERIFICATION`   | [Bing'den aldığınız kod]   | Production, Preview              |
+| `NEXT_PUBLIC_SITE_URL`                 | `https://busbuskimki.com`  | Production, Preview, Development |
 
 **Kontrol:**
+
 - [ ] Değişkenler ekli mi?
 - [ ] Kodlar doğru mu?
 - [ ] Ortamlar seçili mi? (Production + Preview)
 
 #### Eğer Eksikse:
+
 1. Vercel'de Environment Variables ekle
 2. **Redeploy yap** (Değişiklik çalışması için şart!)
 
@@ -67,23 +73,25 @@ other: {
 ### 2. Production Site Kontrolü
 
 #### Meta Tag Kontrolü:
+
 1. Tarayıcıda açın: `https://busbuskimki.com/tr`
 2. Sağ tık → **"View Page Source"** / **"Kaynağı Görüntüle"**
 3. `Ctrl+F` → Ara: `google-site-verification`
 4. `Ctrl+F` → Ara: `msvalidate.01`
 
 **Görmemiz gereken:**
+
 ```html
 <meta name="google-site-verification" content="abc123..." />
 <meta name="msvalidate.01" content="def456..." />
 ```
 
 **Durum:**
+
 - [ ] Google tag var ve doğru
 - [ ] Bing tag var ve doğru
 
-**Eğer yoksa veya boşsa:**
-→ Vercel'de Redeploy yapmanız gerekiyor!
+**Eğer yoksa veya boşsa:** → Vercel'de Redeploy yapmanız gerekiyor!
 
 ---
 
@@ -92,12 +100,14 @@ other: {
 🔗 https://search.google.com/search-console
 
 **Adımlar:**
+
 1. Google Search Console'a git
 2. Property'nizi seçin (busbuskimki.com)
 3. Eğer henüz verify etmediyseniz → **"Verify"** butonuna tıklayın
 4. ✅ **"Ownership verified"** mesajını almalısınız
 
 **Sorun olursa:**
+
 - 5-10 dakika bekleyin (DNS propagation)
 - Browser cache temizleyin
 - Incognito mode'da test edin
@@ -108,18 +118,21 @@ other: {
 ### 4. Sitemap Submit
 
 #### Google Search Console:
+
 1. Sol menü → **"Sitemaps"**
 2. **"Yeni sitemap ekle"** / **"Add a new sitemap"**
 3. Yaz: `sitemap.xml`
 4. **Submit**
 
 **Beklenen durum:**
+
 ```
 ✅ Success
 📊 Discovered URLs: 510+
 ```
 
 #### Bing Webmaster Tools:
+
 1. Sitemaps → Submit sitemap
 2. URL: `https://busbuskimki.com/sitemap.xml`
 3. Submit
@@ -129,21 +142,27 @@ other: {
 ### 5. Test ve Doğrulama
 
 #### A) Sitemap Test:
+
 ```
 https://busbuskimki.com/sitemap.xml
 ```
+
 **Beklenen:** XML formatında ~510 URL
 
 #### B) Robots.txt Test:
+
 ```
 https://busbuskimki.com/robots.txt
 ```
-**Beklenen:** 
+
+**Beklenen:**
+
 ```text
 Sitemap: https://busbuskimki.com/sitemap.xml
 ```
 
 #### C) URL Inspection (Google):
+
 1. Google Search Console → URL Inspection
 2. Test URL: `https://busbuskimki.com/tr`
 3. **Beklenen:**
@@ -152,15 +171,18 @@ Sitemap: https://busbuskimki.com/sitemap.xml
    - ✅ Mobile-friendly: Yes
 
 #### D) Rich Results Test:
+
 🔗 https://search.google.com/test/rich-results
 
 Test URL'leri:
+
 ```
 https://busbuskimki.com/tr
 https://busbuskimki.com/tr/kartlar/joker
 ```
 
 **Beklenen Schema'lar:**
+
 - ✅ Organization
 - ✅ WebSite
 - ✅ Breadcrumb
@@ -172,6 +194,7 @@ https://busbuskimki.com/tr/kartlar/joker
 ## 📊 CHECKLIST - KONTROL LİSTESİ
 
 ### Environment & Deployment
+
 - [ ] Vercel'de GOOGLE_SITE_VERIFICATION var
 - [ ] Vercel'de BING_SITE_VERIFICATION var
 - [ ] Vercel'de SITE_URL var
@@ -179,12 +202,14 @@ https://busbuskimki.com/tr/kartlar/joker
 - [ ] Redeploy yapıldı (env değişikliği sonrası)
 
 ### Verification
+
 - [ ] Production sitede Google meta tag var
 - [ ] Production sitede Bing meta tag var
 - [ ] Google Search Console'da verified
 - [ ] Bing Webmaster Tools'da verified
 
 ### Sitemap & SEO
+
 - [ ] Sitemap.xml erişilebilir
 - [ ] Robots.txt erişilebilir
 - [ ] Google'a sitemap submit edildi
@@ -217,6 +242,7 @@ SUPABASE_SERVICE_ROLE_KEY=...
 ```
 
 **Avantajları:**
+
 - Local'de test edebilirsiniz
 - Production ile aynı ortam
 - Hata ayıklama kolaylaşır
@@ -230,18 +256,20 @@ SUPABASE_SERVICE_ROLE_KEY=...
 **Şu anda:** Bazı resimlerde alt text eksik veya kısa olabilir
 
 **İyileştirme:**
+
 ```tsx
 // ÖNCE (kötü):
 <Image src="/cards/joker.webp" alt="Joker" />
 
 // SONRA (iyi):
-<Image 
-  src="/cards/joker.webp" 
-  alt="Joker Tarot Kartı - Yeni başlangıçlar ve özgürlük sembolü" 
+<Image
+  src="/cards/joker.webp"
+  alt="Joker Tarot Kartı - Yeni başlangıçlar ve özgürlük sembolü"
 />
 ```
 
 **Hedef dosyalar:**
+
 - `src/features/tarot-cards/components/*`
 - Tüm Image component'leri
 
@@ -252,6 +280,7 @@ SUPABASE_SERVICE_ROLE_KEY=...
 **Eklenebilecek Schema'lar:**
 
 #### A) Review Schema (Kullanıcı Yorumları)
+
 ```json
 {
   "@type": "Review",
@@ -268,6 +297,7 @@ SUPABASE_SERVICE_ROLE_KEY=...
 ```
 
 #### B) HowTo Schema (Tarot Nasıl Okunur)
+
 ```json
 {
   "@type": "HowTo",
@@ -291,18 +321,22 @@ SUPABASE_SERVICE_ROLE_KEY=...
 **Şu anda:** Bazı sayfalarda internal link eksik
 
 **İyileştirme:**
+
 - Kart sayfalarında "İlgili Kartlar" bölümü
 - Blog yazılarında (eğer varsa) ilgili kart linkleri
 - Footer'da sitemap linki
 - Breadcrumb navigation (zaten var ✅)
 
 **Örnek:**
+
 ```tsx
 // Kart sayfasında:
-<RelatedCards cards={[
-  { name: "Büyücü", slug: "buyucu" },
-  { name: "Yüksek Rahibe", slug: "yuksek-rahibe" }
-]} />
+<RelatedCards
+  cards={[
+    { name: 'Büyücü', slug: 'buyucu' },
+    { name: 'Yüksek Rahibe', slug: 'yuksek-rahibe' },
+  ]}
+/>
 ```
 
 ---
@@ -316,7 +350,7 @@ SUPABASE_SERVICE_ROLE_KEY=...
 ```typescript
 export async function GET() {
   const baseUrl = 'https://busbuskimki.com';
-  
+
   const imageSitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
@@ -331,7 +365,7 @@ export async function GET() {
 </urlset>`;
 
   return new Response(imageSitemap, {
-    headers: { 'Content-Type': 'application/xml' }
+    headers: { 'Content-Type': 'application/xml' },
   });
 }
 ```
@@ -346,25 +380,28 @@ export async function GET() {
 **Öneriler:**
 
 #### A) Image Lazy Loading
+
 ```tsx
-<Image 
-  loading="lazy"  // ✅ Ekle
+<Image
+  loading="lazy" // ✅ Ekle
   placeholder="blur"
   priority={false}
 />
 ```
 
 #### B) Font Optimization
+
 ```tsx
 // layout.tsx'te zaten var ✅
 const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
-  preload: true
+  preload: true,
 });
 ```
 
 #### C) Unused CSS Removal
+
 ```bash
 npm install -D @fullhuman/postcss-purgecss
 ```
@@ -376,12 +413,14 @@ npm install -D @fullhuman/postcss-purgecss
 **Google Search Console Metrikleri:**
 
 Haftalık kontrol edilecek:
+
 - Total impressions (görüntüleme)
 - Total clicks (tıklama)
 - Average CTR (tıklama oranı)
 - Average position (sıralama)
 
 **Hedefler (3 ay içinde):**
+
 - Impressions: 10,000+
 - Clicks: 500+
 - CTR: %5+
@@ -392,16 +431,19 @@ Haftalık kontrol edilecek:
 ### 8. Content Güncelleme Stratejisi
 
 **İlk ay:**
+
 - [ ] Her hafta 5 kart sayfası güncelle
 - [ ] Her hafta 1 blog yazısı ekle (opsiyonel)
 - [ ] FAQ'ları genişlet
 
 **İkinci ay:**
+
 - [ ] Kullanıcı yorumları sistemi ekle
 - [ ] Video içerik (YouTube) için hazırlık
 - [ ] Email newsletter başlat
 
 **Üçüncü ay:**
+
 - [ ] Backlink stratejisi (guest post)
 - [ ] Social media optimization
 - [ ] Local SEO (Google My Business)
@@ -411,16 +453,19 @@ Haftalık kontrol edilecek:
 ## 📈 BEKLENEN SONUÇLAR
 
 ### 1 Hafta İçinde
+
 - ✅ İlk crawling başladı
 - ✅ 50-100 sayfa discovered
 - ✅ Google Search Console'da ilk veriler
 
 ### 1 Ay İçinde
+
 - ✅ 300+ sayfa indexed
 - ✅ İlk organic clicks (50+)
 - ✅ Top 100'e giren keyword'ler
 
 ### 3 Ay İçinde
+
 - ✅ 510+ sayfa indexed (tümü)
 - ✅ Organic traffic +50-100%
 - ✅ Top 20'ye giren keyword'ler
@@ -431,18 +476,21 @@ Haftalık kontrol edilecek:
 ## 🎯 SONRAKI ADIMLAR (Sırayla)
 
 ### Bugün (Hemen):
+
 1. [ ] Vercel Environment Variables kontrol et
 2. [ ] Gerekirse Redeploy yap
 3. [ ] Production sitede meta tag'leri kontrol et
 4. [ ] Google ve Bing'de verification yap
 
 ### Bu Hafta:
+
 5. [ ] Sitemap submit et (Google + Bing)
 6. [ ] URL Inspection test yap
 7. [ ] Rich Results test yap
 8. [ ] `.env.local` dosyası oluştur
 
 ### Bu Ay:
+
 9. [ ] Alt text audit yap
 10. [ ] Image sitemap ekle
 11. [ ] Performance 90+ skor için optimize et
@@ -453,6 +501,7 @@ Haftalık kontrol edilecek:
 ## ❓ SORUN GİDERME
 
 ### Meta Tag Görünmüyorsa:
+
 ```bash
 # Vercel'de:
 1. Settings → Environment Variables
@@ -463,6 +512,7 @@ Haftalık kontrol edilecek:
 ```
 
 ### Verification Başarısız Olursa:
+
 ```bash
 1. Meta tag'ler production'da var mı? → Kontrol
 2. 10 dakika bekle → Tekrar dene
@@ -471,6 +521,7 @@ Haftalık kontrol edilecek:
 ```
 
 ### Sitemap Görünmüyorsa:
+
 ```bash
 1. https://busbuskimki.com/sitemap.xml → Tarayıcıda aç
 2. Build başarılı mı? → Vercel logs kontrol
@@ -482,6 +533,7 @@ Haftalık kontrol edilecek:
 ## 📞 DESTEK KAYNAKLARI
 
 **Test Araçları:**
+
 - Google Search Console: https://search.google.com/search-console
 - Bing Webmaster Tools: https://www.bing.com/webmasters
 - Rich Results Test: https://search.google.com/test/rich-results
@@ -489,6 +541,7 @@ Haftalık kontrol edilecek:
 - PageSpeed Insights: https://pagespeed.web.dev
 
 **Dokümantasyon:**
+
 - Next.js SEO: https://nextjs.org/learn/seo
 - Google SEO Guide: https://developers.google.com/search/docs
 - Schema.org: https://schema.org
@@ -500,6 +553,7 @@ Haftalık kontrol edilecek:
 **Durum:** Google ve Bing kuruldu ✅
 
 **Yapılması gerekenler:**
+
 1. ✅ Vercel environment variables kontrol
 2. ✅ Meta tag'leri production'da kontrol
 3. ✅ Verification tamamla
@@ -507,6 +561,7 @@ Haftalık kontrol edilecek:
 5. ✅ Testleri yap
 
 **Sonra:**
+
 - İyileştirmeleri uygula (alt text, image sitemap, vb.)
 - Analytics'i takip et
 - İçerik güncelleme stratejisi
@@ -515,11 +570,11 @@ Haftalık kontrol edilecek:
 
 **Tebrikler!** 🎉
 
-Google ve Bing kurulumunuz tamamlandı. Şimdi sırada verification ve sitemap submit var!
+Google ve Bing kurulumunuz tamamlandı. Şimdi sırada verification ve sitemap
+submit var!
 
 ---
 
 **Hazırlayan:** AI SEO Uzmanı  
 **Tarih:** 13 Ekim 2025  
 **Proje:** TaraTarot (BüşBüşKimKi)
-

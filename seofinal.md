@@ -12,9 +12,13 @@
 
 ### Genel SEO Skoru: ⭐⭐⭐⭐½ (4.5/5)
 
-TaraTarot projesi, modern SEO best practice'lerinin büyük çoğunluğunu başarıyla uygulamıştır. **Teknik SEO altyapısı oldukça sağlam** ve arama motorlarına optimize edilmiştir. Proje, 3 dil desteği, 234 dinamik kart sayfası ve kapsamlı structured data ile güçlü bir SEO temeline sahiptir.
+TaraTarot projesi, modern SEO best practice'lerinin büyük çoğunluğunu başarıyla
+uygulamıştır. **Teknik SEO altyapısı oldukça sağlam** ve arama motorlarına
+optimize edilmiştir. Proje, 3 dil desteği, 234 dinamik kart sayfası ve kapsamlı
+structured data ile güçlü bir SEO temeline sahiptir.
 
 ### Temel Güçlü Yönler
+
 - ✅ Dinamik sitemap.xml (510+ sayfa)
 - ✅ Çoklu dil SEO optimizasyonu (hreflang)
 - ✅ Kapsamlı Schema.org structured data
@@ -23,6 +27,7 @@ TaraTarot projesi, modern SEO best practice'lerinin büyük çoğunluğunu başa
 - ✅ Performans optimizasyonu (%95 SEO skoru)
 
 ### Kritik İyileştirme Alanları
+
 - 🔴 OG/Twitter image dosyaları eksik
 - 🟡 Google/Bing verification kodları placeholder
 - 🟡 HeadTags.tsx'te duplicate meta tag'ler
@@ -39,6 +44,7 @@ TaraTarot projesi, modern SEO best practice'lerinin büyük çoğunluğunu başa
 **Dosya:** `src/app/sitemap.ts`
 
 **Kapsam:**
+
 - Ana sayfalar: 3 dil × 1 = 3 sayfa
 - Tarot sayfası: 3 dil × 1 = 3 sayfa
 - Numeroloji sayfası: 3 dil × 1 = 3 sayfa
@@ -50,6 +56,7 @@ TaraTarot projesi, modern SEO best practice'lerinin büyük çoğunluğunu başa
 - **TOPLAM: ~276 sayfa**
 
 **Güçlü Yönler:**
+
 ```typescript
 {
   url: `${baseUrl}/tr/kartlar/joker`,
@@ -60,6 +67,7 @@ TaraTarot projesi, modern SEO best practice'lerinin büyük çoğunluğunu başa
 ```
 
 **İyileştirme Önerileri:**
+
 1. ✅ Dinamik içerik ekle (blog/reading history - opsiyonel)
 2. ✅ Image sitemap ekle (Google Image Search için)
 3. ✅ Video sitemap (eğer video içerik eklenirse)
@@ -71,6 +79,7 @@ TaraTarot projesi, modern SEO best practice'lerinin büyük çoğunluğunu başa
 **Dosya:** `src/app/robots.txt/route.ts`
 
 **Mevcut Yapı:**
+
 ```
 User-agent: *
 Allow: /
@@ -91,12 +100,14 @@ Crawl-delay: 1
 ```
 
 **Güçlü Yönler:**
+
 - ✅ Sitemap referansı var
 - ✅ Private alanlar korunmuş
 - ✅ Static asset'lere izin verilmiş
 - ✅ Crawl delay makul (1 saniye)
 
 **İyileştirme Önerileri:**
+
 ```txt
 # EKLE:
 User-agent: Googlebot-Image
@@ -115,6 +126,7 @@ Disallow: /*?*session=*
 **İmplementasyon:** Next.js Metadata API `alternates`
 
 **Mevcut Yapı:**
+
 ```typescript
 alternates: {
   canonical: 'https://busbuskimki.com/tr/kartlar/joker',
@@ -127,11 +139,13 @@ alternates: {
 ```
 
 **Güçlü Yönler:**
+
 - ✅ Her sayfa için canonical URL
 - ✅ 3 dil için hreflang tags
 - ✅ URL normalizasyonu (CardSEO sınıfında)
 
 **İyileştirme:**
+
 ```typescript
 // EKLE: x-default
 alternates: {
@@ -152,6 +166,7 @@ alternates: {
 #### 2.1 Next.js Metadata API ⭐⭐⭐⭐⭐
 
 **Güçlü Yönler:**
+
 - ✅ Her sayfa için `generateMetadata()` fonksiyonu
 - ✅ Dinamik metadata generation
 - ✅ SEO generator sınıfları:
@@ -162,22 +177,20 @@ alternates: {
   - `card-seo.ts` (Kart sayfaları)
 
 **Örnek - Kart Sayfası Metadata:**
+
 ```typescript
 export async function generateMetadata({ params }: PageProps) {
   const { locale, slug } = await params;
   const cardData = await CardData.getCardBySlug(slug, locale);
-  
-  return CardSEO.generateMetadata(
-    cardData.card,
-    cardData.seo,
-    locale
-  );
+
+  return CardSEO.generateMetadata(cardData.card, cardData.seo, locale);
 }
 ```
 
 #### 2.2 Open Graph Tags ⭐⭐⭐⭐
 
 **Mevcut:**
+
 ```typescript
 openGraph: {
   title: seo.metaTitle,
@@ -197,6 +210,7 @@ openGraph: {
 ```
 
 **Problem:**
+
 ```bash
 # Eksik OG image dosyaları:
 public/images/og-image.jpg  ❌
@@ -206,6 +220,7 @@ public/assets/logo/social-og.jpg  ❌
 #### 2.3 Twitter Card Tags ⭐⭐⭐⭐
 
 **Mevcut:**
+
 ```typescript
 twitter: {
   card: 'summary_large_image',
@@ -228,6 +243,7 @@ twitter: {
 **Mevcut Schema'lar:**
 
 1. **Organization Schema** ✅
+
 ```json
 {
   "@context": "https://schema.org",
@@ -249,6 +265,7 @@ twitter: {
 ```
 
 2. **Website Schema** ✅
+
 ```json
 {
   "@type": "WebSite",
@@ -261,6 +278,7 @@ twitter: {
 ```
 
 3. **Service Schema** ✅
+
 ```json
 {
   "@type": "Service",
@@ -280,6 +298,7 @@ twitter: {
 ```
 
 4. **Article Schema (Kart Sayfaları)** ✅
+
 ```json
 {
   "@type": "Article",
@@ -302,6 +321,7 @@ twitter: {
 ```
 
 5. **FAQ Schema** ✅
+
 ```json
 {
   "@type": "FAQPage",
@@ -319,6 +339,7 @@ twitter: {
 ```
 
 6. **Breadcrumb Schema** ✅
+
 ```json
 {
   "@type": "BreadcrumbList",
@@ -348,6 +369,7 @@ twitter: {
 **İyileştirme Önerileri:**
 
 Eklenebilecek Schema'lar:
+
 ```json
 // Review Schema (kullanıcı yorumları varsa)
 {
@@ -383,6 +405,7 @@ Eklenebilecek Schema'lar:
 **Metadata Generator:** `page-seo-generator.ts`
 
 **SEO Özellikleri:**
+
 ```typescript
 {
   title: "Büşbüşkimki - Profesyonel Tarot Okuması ve Numeroloji Analizi",
@@ -397,6 +420,7 @@ Eklenebilecek Schema'lar:
 ```
 
 **Structured Data:**
+
 - Organization ✅
 - Website ✅
 - Service ✅
@@ -410,6 +434,7 @@ Eklenebilecek Schema'lar:
 **Layout:** `src/app/[locale]/(main)/tarotokumasi/layout.tsx`
 
 **SEO Özellikleri:**
+
 ```typescript
 {
   title: "Tarot Okuması - Ücretsiz Online Tarot Falı | Büşbüşkimki",
@@ -420,6 +445,7 @@ Eklenebilecek Schema'lar:
 ```
 
 **5 Farklı Spread:**
+
 - Love Spread (priority: 0.8)
 - Career Spread (priority: 0.7)
 - Situation Analysis (priority: 0.7)
@@ -431,11 +457,13 @@ Eklenebilecek Schema'lar:
 **Toplam:** 234 sayfa (78 kart × 3 dil)
 
 **Örnekler:**
+
 - `/tr/kartlar/joker`
 - `/en/cards/the-fool`
 - `/sr/kartice/joker`
 
 **SEO Stratejisi:**
+
 ```typescript
 // Supabase'den çekilen SEO verileri:
 {
@@ -458,19 +486,23 @@ Eklenebilecek Schema'lar:
 ```
 
 **Structured Data:**
+
 - Article Schema ✅
 - FAQ Schema ✅
 - Breadcrumb Schema ✅
 - Hreflang (3 dil) ✅
 
 **generateStaticParams:**
+
 ```typescript
 // 78 kart için static generation
 export async function generateStaticParams() {
   const slugs = [
-    'joker', 'buyucu', 'yuksek-rahibe', // ... 78 kart
+    'joker',
+    'buyucu',
+    'yuksek-rahibe', // ... 78 kart
   ];
-  return slugs.map((slug) => ({ slug }));
+  return slugs.map(slug => ({ slug }));
 }
 ```
 
@@ -479,6 +511,7 @@ export async function generateStaticParams() {
 **Metadata Generator:** `numerology-seo-generator.ts`
 
 **SEO Özellikleri:**
+
 ```typescript
 {
   title: "Numeroloji Hesaplama - Ücretsiz Numeroloji Analizi",
@@ -497,6 +530,7 @@ Disallow: /dashboard/
 ```
 
 **Metadata:**
+
 ```typescript
 {
   robots: {
@@ -515,23 +549,25 @@ Disallow: /dashboard/
 **Dosya:** `src/features/tarot-cards/lib/image-optimization.ts`
 
 **Özellikler:**
+
 ```typescript
 const IMAGE_OPTIMIZATION = {
   MAX_IMAGE_SIZE: 100000, // 100KB
   RECOMMENDED_SIZE: 50000, // 50KB
-  
+
   CARD_WIDTH: 400,
   CARD_HEIGHT: 600,
-  
+
   SUPPORTED_FORMATS: ['webp', 'jpg', 'jpeg', 'png'],
   PREFERRED_FORMAT: 'webp',
-  
+
   LAZY_LOADING_THRESHOLD: 100,
   PROGRESSIVE_LOADING: true,
-}
+};
 ```
 
 **Next.js Image Component:**
+
 ```typescript
 {
   src: '/cards/rws/0-Fool.webp',
@@ -549,6 +585,7 @@ const IMAGE_OPTIMIZATION = {
 #### 5.2 Mevcut Görsel Dosyaları
 
 **public/cards/ klasörü:**
+
 ```bash
 # 78 kart × 2 format (webp + jpg) = 156 dosya
 public/cards/rws/
@@ -560,6 +597,7 @@ public/cards/rws/
 ```
 
 **public/icons/ klasörü:**
+
 ```bash
 public/icons/
 ├── icon.svg
@@ -576,6 +614,7 @@ public/icons/
 #### 5.3 Eksik Görseller ⚠️
 
 **OG/Twitter Images:**
+
 ```bash
 # Kod içinde referans var ama dosya yok:
 public/images/og-image.jpg  ❌
@@ -592,6 +631,7 @@ public/images/tarot-cards/the-fool-twitter.jpg  ❌
 **Çözüm Stratejileri:**
 
 1. **Statik OG Images:**
+
 ```bash
 # Oluşturulması gereken:
 public/og-image.webp (1200×630)
@@ -599,6 +639,7 @@ public/twitter-card.webp (1200×630)
 ```
 
 2. **Dinamik OG Image Generation:**
+
 ```typescript
 // @vercel/og kullanarak
 import { ImageResponse } from '@vercel/og'
@@ -628,18 +669,19 @@ export async function GET(request: Request) {
 **Dosya:** `performance-report.json`
 
 **Mevcut Skorlar:**
+
 ```json
 {
   "lighthouse": {
-    "seo": 95,           // ✅ Mükemmel
-    "performance": 88,   // ✅ İyi
+    "seo": 95, // ✅ Mükemmel
+    "performance": 88, // ✅ İyi
     "accessibility": 92, // ✅ Çok İyi
-    "bestPractices": 90  // ✅ Çok İyi
+    "bestPractices": 90 // ✅ Çok İyi
   },
   "coreWebVitals": {
-    "lcp": 1200,  // ✅ Hedef: <2500ms
-    "fid": 50,    // ✅ Hedef: <100ms
-    "cls": 0.05   // ✅ Hedef: <0.1
+    "lcp": 1200, // ✅ Hedef: <2500ms
+    "fid": 50, // ✅ Hedef: <100ms
+    "cls": 0.05 // ✅ Hedef: <0.1
   }
 }
 ```
@@ -647,17 +689,18 @@ export async function GET(request: Request) {
 #### 6.2 Next.js Optimizasyonları ⭐⭐⭐⭐
 
 **next.config.js:**
+
 ```javascript
 {
   reactStrictMode: true,
   poweredByHeader: false,  // ✅ Güvenlik
-  
+
   images: {
     formats: ['image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256],
   },
-  
+
   // Security headers
   headers: [
     'X-Frame-Options': 'DENY',
@@ -670,13 +713,14 @@ export async function GET(request: Request) {
 #### 6.3 Font Optimization ⭐⭐⭐⭐⭐
 
 **layout.tsx:**
+
 ```typescript
 import { Inter } from 'next/font/google';
 
 const inter = Inter({
   subsets: ['latin'],
-  display: 'swap',     // ✅ FOIT önleme
-  preload: true,       // ✅ Preload
+  display: 'swap', // ✅ FOIT önleme
+  preload: true, // ✅ Preload
   variable: '--font-inter',
   fallback: ['system-ui', 'arial'],
 });
@@ -689,11 +733,13 @@ const inter = Inter({
 #### 7.1 i18n Yapılandırması ⭐⭐⭐⭐⭐
 
 **Desteklenen Diller:**
+
 - 🇹🇷 Türkçe (tr) - Default
 - 🇬🇧 İngilizce (en)
 - 🇷🇸 Sırpça (sr)
 
 **URL Yapısı:**
+
 ```
 /tr/kartlar/joker          → Türkçe
 /en/cards/the-fool         → İngilizce
@@ -703,16 +749,34 @@ const inter = Inter({
 #### 7.2 Hreflang Implementation ⭐⭐⭐⭐
 
 **Her sayfa için:**
+
 ```html
-<link rel="alternate" hreflang="tr" href="https://busbuskimki.com/tr/kartlar/joker" />
-<link rel="alternate" hreflang="en" href="https://busbuskimki.com/en/cards/the-fool" />
-<link rel="alternate" hreflang="sr" href="https://busbuskimki.com/sr/kartice/joker" />
-<link rel="alternate" hreflang="x-default" href="https://busbuskimki.com/en/cards/the-fool" />
+<link
+  rel="alternate"
+  hreflang="tr"
+  href="https://busbuskimki.com/tr/kartlar/joker"
+/>
+<link
+  rel="alternate"
+  hreflang="en"
+  href="https://busbuskimki.com/en/cards/the-fool"
+/>
+<link
+  rel="alternate"
+  hreflang="sr"
+  href="https://busbuskimki.com/sr/kartice/joker"
+/>
+<link
+  rel="alternate"
+  hreflang="x-default"
+  href="https://busbuskimki.com/en/cards/the-fool"
+/>
 ```
 
 #### 7.3 Locale-Specific SEO
 
 **Her dil için ayrı:**
+
 - Meta title/description ✅
 - Keywords ✅
 - OG tags ✅
@@ -726,6 +790,7 @@ const inter = Inter({
 #### 8.1 Security Headers ⭐⭐⭐⭐
 
 **next.config.js:**
+
 ```javascript
 headers: [
   {
@@ -748,7 +813,7 @@ headers: [
     key: 'Permissions-Policy',
     value: 'camera=(), microphone=(), geolocation=()',
   },
-]
+];
 ```
 
 #### 8.2 robots.txt - Private Areas ⭐⭐⭐⭐⭐
@@ -768,6 +833,7 @@ Disallow: /settings/    ✅
 #### 9.1 PWA Manifest ⭐⭐⭐⭐⭐
 
 **public/manifest.json:**
+
 ```json
 {
   "name": "TarotNumeroloji - Mystical Tarot Reading",
@@ -802,18 +868,20 @@ Disallow: /settings/    ✅
 #### 9.2 Mobile Optimization ⭐⭐⭐⭐⭐
 
 **Viewport:**
+
 ```typescript
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 1,
   themeColor: '#6366f1',
-}
+};
 ```
 
 **Responsive Images:**
+
 ```typescript
-sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw';
 ```
 
 ---
@@ -823,6 +891,7 @@ sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
 #### 10.1 Google Analytics ⭐⭐⭐⭐⭐
 
 **layout.tsx:**
+
 ```typescript
 <script
   async
@@ -851,6 +920,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 #### 10.3 Sentry Error Tracking ⭐⭐⭐⭐
 
 **env.example:**
+
 ```
 NEXT_PUBLIC_SENTRY_DSN=https://490aff9d88761f5329de1971ee8ca16f@...
 SENTRY_ORG=busbuskimki-dh
@@ -866,14 +936,16 @@ SENTRY_PROJECT=javascript-nextjs
 #### 1.1 OG/Twitter Image Dosyaları Oluştur
 
 **Problem:**
+
 ```typescript
 // Kod referansları var ama dosyalar yok
 openGraph: {
-  images: [{ url: '/images/og-image.jpg' }]  // ❌ 404
+  images: [{ url: '/images/og-image.jpg' }]; // ❌ 404
 }
 ```
 
 **Çözüm:**
+
 ```bash
 # Oluşturulacak dosyalar:
 public/
@@ -887,6 +959,7 @@ public/
 ```
 
 **Tasarım Gereksinimleri:**
+
 - Boyut: 1200×630 piksel
 - Format: WebP (öncelik) veya JPEG
 - Dosya boyutu: <200KB
@@ -894,6 +967,7 @@ public/
 - Kart görseli (kart sayfaları için)
 
 **Alternatif - Dinamik Generation:**
+
 ```typescript
 // app/api/og/route.tsx
 import { ImageResponse } from '@vercel/og';
@@ -901,7 +975,7 @@ import { ImageResponse } from '@vercel/og';
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const cardName = searchParams.get('card');
-  
+
   return new ImageResponse(
     (
       <div style={{
@@ -925,6 +999,7 @@ export async function GET(request: Request) {
 #### 1.2 Google/Bing Verification Kodları
 
 **Problem:**
+
 ```typescript
 other: {
   'google-site-verification': 'your-google-verification-code',  // ❌ Placeholder
@@ -939,6 +1014,7 @@ other: {
    - Property ekle: `https://busbuskimki.com`
    - Verification kodu al
    - `.env.local` ekle:
+
    ```bash
    NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=abc123xyz...
    ```
@@ -948,11 +1024,13 @@ other: {
    - Site ekle: `https://busbuskimki.com`
    - Verification kodu al
    - `.env.local` ekle:
+
    ```bash
    NEXT_PUBLIC_BING_SITE_VERIFICATION=def456uvw...
    ```
 
 3. **metadata.ts güncelle:**
+
 ```typescript
 other: {
   'google-site-verification': process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || '',
@@ -963,6 +1041,7 @@ other: {
 #### 1.3 Duplicate Meta Tags Temizliği
 
 **Problem:**
+
 ```typescript
 // HeadTags.tsx - Manuel meta tags
 <meta name="description" content="..." />
@@ -976,6 +1055,7 @@ export const metadata = {
 ```
 
 **Çözüm:**
+
 ```typescript
 // src/features/shared/layout/HeadTags.tsx
 // SADECE bunları bırak, diğerlerini SİL:
@@ -985,16 +1065,16 @@ export default function HeadTags() {
     <>
       {/* Format detection */}
       <meta name="format-detection" content="telephone=no" />
-      
+
       {/* Mobile web app */}
       <meta name="mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-capable" content="yes" />
-      
+
       {/* Icons */}
       <link rel="icon" href="/favicon.ico" sizes="any" />
       <link rel="icon" href="/icons/icon.svg" type="image/svg+xml" />
       <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
-      
+
       {/* Manifest */}
       <link rel="manifest" href="/manifest.json" />
     </>
@@ -1005,6 +1085,7 @@ export default function HeadTags() {
 #### 1.4 x-default Hreflang Ekle
 
 **Problem:**
+
 ```typescript
 languages: {
   'tr': 'https://busbuskimki.com/tr',
@@ -1015,6 +1096,7 @@ languages: {
 ```
 
 **Çözüm:**
+
 ```typescript
 // Tüm metadata generator'lerde:
 languages: {
@@ -1032,6 +1114,7 @@ languages: {
 #### 2.1 Alt Text Audit
 
 **Gerekli İşlem:**
+
 ```typescript
 // Tüm Image component'lerde alt kontrol
 <Image
@@ -1042,6 +1125,7 @@ languages: {
 ```
 
 **Kontrol Edilecek Dosyalar:**
+
 - `src/features/tarot-cards/components/CardPage.tsx`
 - `src/components/shared/OptimizedCardImage.tsx`
 - Tüm kart görselleri
@@ -1049,21 +1133,23 @@ languages: {
 #### 2.2 404 ve Error Sayfaları SEO
 
 **Oluşturulacak:**
+
 ```typescript
 // app/not-found.tsx
 export const metadata = {
   title: '404 - Sayfa Bulunamadı | Büşbüşkimki',
   description: 'Aradığınız sayfa bulunamadı.',
   robots: {
-    index: false,  // ✅ 404'leri indexleme
+    index: false, // ✅ 404'leri indexleme
     follow: true,
-  }
-}
+  },
+};
 ```
 
 #### 2.3 Canonical URL Tutarlılık Kontrolü
 
 **Kontrol Edilecek:**
+
 - Sitemap URL'leri = Canonical URL'ler ✅
 - Trailing slash tutarlılığı
 - HTTP → HTTPS redirects
@@ -1076,6 +1162,7 @@ export const metadata = {
 #### 3.1 Rich Snippets Test
 
 **Test Araçları:**
+
 - Google Rich Results Test
 - Schema Markup Validator
 - Facebook Sharing Debugger
@@ -1084,15 +1171,18 @@ export const metadata = {
 #### 3.2 Image Sitemap
 
 **Oluşturulacak:**
+
 ```typescript
 // app/image-sitemap.xml/route.ts
 export async function GET() {
   const cards = await getAllCards();
-  
+
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-  ${cards.map(card => `
+  ${cards
+    .map(
+      card => `
     <url>
       <loc>https://busbuskimki.com/tr/kartlar/${card.slug}</loc>
       <image:image>
@@ -1100,11 +1190,13 @@ export async function GET() {
         <image:title>${card.name}</image:title>
       </image:image>
     </url>
-  `).join('')}
+  `
+    )
+    .join('')}
 </urlset>`;
 
   return new Response(sitemap, {
-    headers: { 'Content-Type': 'application/xml' }
+    headers: { 'Content-Type': 'application/xml' },
   });
 }
 ```
@@ -1112,6 +1204,7 @@ export async function GET() {
 #### 3.3 Internal Linking Strategy
 
 **Öneriler:**
+
 - Kart sayfalarında related cards
 - Breadcrumb navigation
 - Contextual links (content içi)
@@ -1123,24 +1216,25 @@ export async function GET() {
 
 ### Mevcut Durum
 
-| Metrik | Hedef | Mevcut | Durum |
-|--------|-------|--------|-------|
-| Lighthouse SEO | 95+ | 95 | ✅ Mükemmel |
-| Page Speed (Mobile) | 90+ | 88 | ⚠️ İyi (iyileştirilebilir) |
-| LCP | <2.5s | 1.2s | ✅ Mükemmel |
-| FID | <100ms | 50ms | ✅ Mükemmel |
-| CLS | <0.1 | 0.05 | ✅ Mükemmel |
-| Sitemap Coverage | %100 | %100 | ✅ Tam |
-| Hreflang | %100 | %100 | ✅ Tam |
-| Structured Data | Valid | Valid | ✅ Geçerli |
-| Mobile Friendly | Evet | Evet | ✅ Uyumlu |
-| HTTPS | Evet | Evet | ✅ Güvenli |
+| Metrik              | Hedef  | Mevcut | Durum                      |
+| ------------------- | ------ | ------ | -------------------------- |
+| Lighthouse SEO      | 95+    | 95     | ✅ Mükemmel                |
+| Page Speed (Mobile) | 90+    | 88     | ⚠️ İyi (iyileştirilebilir) |
+| LCP                 | <2.5s  | 1.2s   | ✅ Mükemmel                |
+| FID                 | <100ms | 50ms   | ✅ Mükemmel                |
+| CLS                 | <0.1   | 0.05   | ✅ Mükemmel                |
+| Sitemap Coverage    | %100   | %100   | ✅ Tam                     |
+| Hreflang            | %100   | %100   | ✅ Tam                     |
+| Structured Data     | Valid  | Valid  | ✅ Geçerli                 |
+| Mobile Friendly     | Evet   | Evet   | ✅ Uyumlu                  |
+| HTTPS               | Evet   | Evet   | ✅ Güvenli                 |
 
 ---
 
 ## 🎯 AKSİYON PLANI
 
 ### Hafta 1 (ACİL)
+
 - [ ] OG/Twitter image template tasarla
 - [ ] Ana OG image oluştur (1200×630)
 - [ ] Google Search Console verification
@@ -1149,6 +1243,7 @@ export async function GET() {
 - [ ] x-default hreflang ekle
 
 ### Hafta 2 (ACİL)
+
 - [ ] 78 kart için OG image generate (dinamik veya statik)
 - [ ] Environment variables düzenle
 - [ ] Production deploy
@@ -1156,6 +1251,7 @@ export async function GET() {
 - [ ] Bing Webmaster Tools'a sitemap submit
 
 ### Hafta 3-4 (ÖNEMLİ)
+
 - [ ] Alt text audit ve düzeltmeler
 - [ ] 404/500 error sayfaları SEO optimize
 - [ ] Canonical URL audit
@@ -1163,6 +1259,7 @@ export async function GET() {
 - [ ] Schema.org validation
 
 ### Ay 1 (OPTİMİZASYON)
+
 - [ ] Image sitemap oluştur
 - [ ] Internal linking strategy
 - [ ] Related cards recommendations
@@ -1176,6 +1273,7 @@ export async function GET() {
 ### 3 Ay İçinde Hedefler
 
 **Teknik SEO:**
+
 - ✅ Google Search Console 0 error
 - ✅ Bing Webmaster Tools 0 error
 - ✅ Tüm sayfalar indexlendi
@@ -1183,11 +1281,13 @@ export async function GET() {
 - ✅ Mobile-Friendly: %100
 
 **Organik Trafik:**
+
 - 📈 Organik trafik %50 artış
 - 📈 Ortalama session duration %20 artış
 - 📈 Bounce rate %10 azalış
 
 **Anahtar Kelimeler:**
+
 - 🎯 "tarot okuması" → Top 10
 - 🎯 "online tarot" → Top 10
 - 🎯 "numeroloji hesaplama" → Top 10
@@ -1198,12 +1298,14 @@ export async function GET() {
 ## 🛠️ TAVSİYE EDİLEN ARAÇLAR
 
 ### SEO Analiz
+
 - ✅ Google Search Console (kurulu)
 - ✅ Google Analytics (kurulu)
 - ⭕ Bing Webmaster Tools (kurulacak)
 - ⭕ Ahrefs / SEMrush (opsiyonel, ücretli)
 
 ### Test Araçları
+
 - Google Rich Results Test
 - Schema Markup Validator
 - Google PageSpeed Insights
@@ -1211,6 +1313,7 @@ export async function GET() {
 - WebPageTest
 
 ### Monitoring
+
 - ✅ Vercel Analytics (kurulu)
 - ✅ Sentry (kurulu)
 - Google Search Console Performance
@@ -1221,6 +1324,7 @@ export async function GET() {
 ## 📝 EK NOTLAR
 
 ### Güçlü Yönler (Devam Edilmeli)
+
 1. ✅ Next.js Metadata API kullanımı mükemmel
 2. ✅ Structured data implementasyonu profesyonel
 3. ✅ Çoklu dil SEO stratejisi çok iyi
@@ -1228,12 +1332,14 @@ export async function GET() {
 5. ✅ Image optimization sistemi var
 
 ### Gelişim Alanları
+
 1. ⚠️ OG/Twitter images eksik
 2. ⚠️ Verification kodları placeholder
 3. ⚠️ Duplicate meta tags
 4. ⚠️ Alt text audit gerekli
 
 ### Uzun Vadeli Stratejiler
+
 1. 📝 Blog/içerik bölümü ekle
 2. 📝 User-generated content (yorumlar)
 3. 📝 Video içerik (YouTube SEO)
@@ -1244,9 +1350,11 @@ export async function GET() {
 
 ## 🎓 SONUÇ
 
-TaraTarot projesi, **SEO açısından çok güçlü bir temel**e sahiptir. Teknik altyapı modern ve arama motorları için optimize edilmiştir. 
+TaraTarot projesi, **SEO açısından çok güçlü bir temel**e sahiptir. Teknik
+altyapı modern ve arama motorları için optimize edilmiştir.
 
 **Ana Artılar:**
+
 - Kapsamlı sitemap (276+ sayfa)
 - Profesyonel structured data
 - Çoklu dil desteği
@@ -1254,6 +1362,7 @@ TaraTarot projesi, **SEO açısından çok güçlü bir temel**e sahiptir. Tekni
 - Güvenlik best practices
 
 **Kritik 3 İyileştirme:**
+
 1. OG/Twitter image dosyalarını oluştur
 2. Google/Bing verification kodlarını ekle
 3. Duplicate meta tag'leri temizle
@@ -1261,6 +1370,7 @@ TaraTarot projesi, **SEO açısından çok güçlü bir temel**e sahiptir. Tekni
 Bu 3 iyileştirme yapıldığında, proje **SEO açısından %100 hazır** olacaktır.
 
 **Tahmini Etki:**
+
 - Organik trafik: **+50-100%** (3 ay içinde)
 - Search visibility: **+70%**
 - Rich snippets görünürlüğü: **+80%**
@@ -1276,12 +1386,17 @@ Bu 3 iyileştirme yapıldığında, proje **SEO açısından %100 hazır** olaca
 ## 📎 EKLER
 
 ### Ek A: SEO Checklist
+
 ### Ek B: Keyword Research
+
 ### Ek C: Competitor Analysis
+
 ### Ek D: Technical SEO Audit Details
+
 ### Ek E: Image Optimization Guidelines
 
 ---
 
-*Bu rapor, TaraTarot projesinin mevcut SEO durumunu kapsamlı olarak analiz etmektedir. Önerilen iyileştirmeler, organik arama trafiğini artırmak ve arama motoru görünürlüğünü maksimize etmek için tasarlanmıştır.*
-
+_Bu rapor, TaraTarot projesinin mevcut SEO durumunu kapsamlı olarak analiz
+etmektedir. Önerilen iyileştirmeler, organik arama trafiğini artırmak ve arama
+motoru görünürlüğünü maksimize etmek için tasarlanmıştır._

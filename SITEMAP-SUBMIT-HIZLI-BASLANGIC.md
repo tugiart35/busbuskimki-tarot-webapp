@@ -7,6 +7,7 @@
 ## 🎯 HIZLI ADIMLAR
 
 ### 1️⃣ Google Search Console'a Git
+
 🔗 https://search.google.com/search-console
 
 - Google hesabınla giriş yap
@@ -16,6 +17,7 @@
 ---
 
 ### 2️⃣ Verification Kodu Al
+
 - **"HTML tag"** yöntemini seç
 - Size verilen koddan sadece **content** kısmını kopyala:
   ```html
@@ -28,13 +30,16 @@
 ### 3️⃣ Kodu Environment'a Ekle
 
 #### A) Local (Geliştirme için)
+
 Proje root'unda `.env.local` dosyası oluştur:
+
 ```bash
 NEXT_PUBLIC_SITE_URL=https://busbuskimki.com
 NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=abc123XYZ456def789
 ```
 
 #### B) Production (Vercel)
+
 1. Vercel Dashboard → Projen → **Settings** → **Environment Variables**
 2. Ekle:
    - Name: `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION`
@@ -46,6 +51,7 @@ NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=abc123XYZ456def789
 ---
 
 ### 4️⃣ Verification Yap
+
 - Google Search Console'a dön
 - **"Verify"** butonuna tıkla
 - ✅ **"Ownership verified"** mesajını al
@@ -55,6 +61,7 @@ NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=abc123XYZ456def789
 ---
 
 ### 5️⃣ Sitemap Submit Et
+
 - Sol menüden **"Sitemaps"** sekmesine git
 - **"Yeni sitemap ekle"**
 - Yaz: `sitemap.xml`
@@ -67,41 +74,50 @@ NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=abc123XYZ456def789
 ## 🔍 TEST ET
 
 ### Sitemap'i Kontrol Et
+
 Tarayıcıda aç:
+
 ```
 https://busbuskimki.com/sitemap.xml
 ```
+
 ✅ XML görünüyorsa başarılı!
 
 ### Robots.txt'i Kontrol Et
+
 ```
 https://busbuskimki.com/robots.txt
 ```
+
 ✅ "Sitemap: https://busbuskimki.com/sitemap.xml" satırını gör.
 
 ---
 
 ## ⏱️ BEKLEME SÜRELERİ
 
-| Adım | Süre |
-|------|------|
-| Verification | Hemen |
-| Sitemap submit | Hemen |
-| İlk crawling | 1-2 gün |
-| İlk indexleme | 3-7 gün |
-| Tam indexleme | 2-4 hafta |
+| Adım           | Süre      |
+| -------------- | --------- |
+| Verification   | Hemen     |
+| Sitemap submit | Hemen     |
+| İlk crawling   | 1-2 gün   |
+| İlk indexleme  | 3-7 gün   |
+| Tam indexleme  | 2-4 hafta |
 
 ---
 
 ## 📊 SONUÇLARI KONTROL ET
 
 ### 1 Hafta Sonra
+
 Google Search Console → **Coverage**
+
 - Indexed pages: 50-100+ sayfa
 - Valid URLs görmeye başlarsın
 
 ### 1 Ay Sonra
+
 Google Search Console → **Performance**
+
 - Total clicks: İlk tıklamalar
 - Total impressions: İlk gösterimler
 - Top queries: İlk anahtar kelimeler
@@ -125,12 +141,14 @@ Google Search Console → **Performance**
 ## ❓ SORUN GİDERME
 
 ### Verification başarısız olursa:
+
 1. ✅ Vercel'de Redeploy yaptın mı?
 2. ✅ Environment variable doğru mu?
 3. ✅ 5-10 dakika bekledin mi?
 4. ✅ Browser cache'i temizledin mi?
 
 ### Sitemap görünmüyorsa:
+
 1. ✅ Build başarılı mı? (`npm run build`)
 2. ✅ Sitemap dosyası var mı? (`src/app/sitemap.ts`)
 3. ✅ Production'da deploy edildi mi?
@@ -142,6 +160,7 @@ Google Search Console → **Performance**
 **Detaylı Rehber:** `GOOGLE-SEARCH-CONSOLE-REHBER.md` dosyasını oku
 
 **Test Araçları:**
+
 - Rich Results Test: https://search.google.com/test/rich-results
 - Mobile-Friendly: https://search.google.com/test/mobile-friendly
 - PageSpeed Insights: https://pagespeed.web.dev
@@ -169,6 +188,7 @@ Tamamladıkça işaretle:
 ## 🎯 ŞİMDİ YAPILMASI GEREKENLER
 
 ### 1️⃣ Öncelik: Vercel Redeploy
+
 **Neden:** Environment variables ekledikten sonra mutlaka redeploy yapılmalı!
 
 1. Vercel Dashboard → Projeniz
@@ -177,25 +197,31 @@ Tamamladıkça işaretle:
 4. 2-3 dakika bekle
 
 ### 2️⃣ Meta Tag Kontrolü
+
 **Tarayıcıda:**
+
 ```
 https://busbuskimki.com/tr
 ```
+
 - Sağ tık → "View Page Source"
 - `Ctrl+F` → Ara: `google-site-verification`
 - Ara: `msvalidate.01`
 
 **Görmelisiniz:**
+
 ```html
 <meta name="google-site-verification" content="abc123..." />
 <meta name="msvalidate.01" content="def456..." />
 ```
 
 ### 3️⃣ Verification Tamamla
+
 - Google Search Console → **Verify** butonuna tıkla
 - Bing Webmaster Tools → **Verify** butonuna tıkla
 
 ### 4️⃣ Sitemap Submit
+
 - Google: Sitemaps → `sitemap.xml` → Submit
 - Bing: Sitemaps → `https://busbuskimki.com/sitemap.xml` → Submit
 
@@ -203,10 +229,10 @@ https://busbuskimki.com/tr
 
 **Tebrikler! 🎉**
 
-Sitemap'iniz artık Google'a gönderildi. 1-2 hafta içinde sayfalarınız indexlenmeye başlayacak!
+Sitemap'iniz artık Google'a gönderildi. 1-2 hafta içinde sayfalarınız
+indexlenmeye başlayacak!
 
 ---
 
 **Hazırlayan:** AI SEO Uzmanı  
 **Tarih:** 13 Ekim 2025
-

@@ -391,7 +391,9 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
                   </div>
                   <div className='flex justify-between'>
                     <span className='text-slate-400'>Database:</span>
-                    <span className='text-green-400'>🟢 {t('admin.layout.databaseConnected')}</span>
+                    <span className='text-green-400'>
+                      🟢 {t('admin.layout.databaseConnected')}
+                    </span>
                   </div>
                   <div className='flex justify-between'>
                     <span className='text-slate-400'>Uptime:</span>
@@ -435,7 +437,9 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
                   </button>
 
                   <div className='bg-mystical-900/50 backdrop-blur-sm border border-mystical-700/50 rounded-xl p-3'>
-                    <div className='text-sm text-slate-400'>{t('admin.layout.lastUpdate')}</div>
+                    <div className='text-sm text-slate-400'>
+                      {t('admin.layout.lastUpdate')}
+                    </div>
                     <div className='text-white font-medium'>
                       {new Date().toLocaleTimeString('tr-TR')}
                     </div>

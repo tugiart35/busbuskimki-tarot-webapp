@@ -135,7 +135,7 @@ export interface UseTarotReadingFlowReturn {
 
   // Reading Type Management
   setSelectedReadingType: (type: string | null) => void;
-  handleReadingTypeSelect: (type: string) => Promise<void>;
+  handleReadingTypeSelect: (type: string) => void;
 
   // Config
   config: TarotConfig;
@@ -166,7 +166,7 @@ export function useTarotReadingFlow({
     (type: string) => {
       // Reading type'ı önce set et
       tarotReading.setSelectedReadingType(type);
-      
+
       // Eğer DETAILED veya WRITTEN seçildiyse bilgilendirme modal'ını göster
       if (type === READING_TYPES.DETAILED || type === READING_TYPES.WRITTEN) {
         formState.setModalStates(prev => ({ ...prev, showInfoModal: true }));

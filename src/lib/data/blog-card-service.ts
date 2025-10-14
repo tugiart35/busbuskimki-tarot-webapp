@@ -86,12 +86,15 @@ export class BlogCardService {
     const messages = {
       tr: trMessages,
       en: enMessages,
-      sr: srMessages
+      sr: srMessages,
     };
     return (messages[locale] as any).blog.cards;
   }
 
-  static getCardById(id: string, locale: 'tr' | 'en' | 'sr'): BlogCardData | null {
+  static getCardById(
+    id: string,
+    locale: 'tr' | 'en' | 'sr'
+  ): BlogCardData | null {
     const cards = this.getBlogCards(locale);
     return cards[id] || null;
   }
@@ -381,7 +384,11 @@ export class BlogCardService {
     return Object.values(cards);
   }
 
-  static getRelatedCards(cardId: string, locale: 'tr' | 'en' | 'sr', limit: number = 4): BlogCardData[] {
+  static getRelatedCards(
+    cardId: string,
+    locale: 'tr' | 'en' | 'sr',
+    limit: number = 4
+  ): BlogCardData[] {
     const cards = this.getBlogCards(locale);
     const currentCard = cards[cardId];
 

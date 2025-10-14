@@ -1,9 +1,9 @@
 /**
  * Environment Variables Validation
- * 
+ *
  * Bu modül uygulama başlangıcında environment variables'ların
  * doğru şekilde ayarlandığını kontrol eder.
- * 
+ *
  * Production'da eksik environment variable'lar varsa
  * uygulama başlamaz ve hata fırlatır.
  */
@@ -15,11 +15,8 @@ interface EnvironmentConfig {
 
 const environmentConfig: EnvironmentConfig = {
   // Zorunlu environment variables
-  required: [
-    'NEXT_PUBLIC_SUPABASE_URL',
-    'NEXT_PUBLIC_SUPABASE_ANON_KEY',
-  ],
-  
+  required: ['NEXT_PUBLIC_SUPABASE_URL', 'NEXT_PUBLIC_SUPABASE_ANON_KEY'],
+
   // Opsiyonel ama önerilen environment variables
   optional: [
     'SUPABASE_SERVICE_ROLE_KEY',
@@ -44,10 +41,8 @@ const environmentConfig: EnvironmentConfig = {
 export function validateEnv(): void {
   // Development'da sadece uyarı ver
   if (process.env.NODE_ENV === 'development') {
-    const missing = environmentConfig.required.filter(
-      key => !process.env[key]
-    );
-    
+    const missing = environmentConfig.required.filter(key => !process.env[key]);
+
     if (missing.length > 0) {
       console.warn(
         '⚠️ Missing required environment variables:',
@@ -57,30 +52,28 @@ export function validateEnv(): void {
         '⚠️ Application may not work correctly. Please check your .env file.'
       );
     }
-    
+
     const missingOptional = environmentConfig.optional.filter(
       key => !process.env[key]
     );
-    
+
     if (missingOptional.length > 0) {
       console.info(
         'ℹ️ Missing optional environment variables:',
         missingOptional.join(', ')
       );
     }
-    
+
     return;
   }
 
   // Production'da zorunlu variable'ları kontrol et
-  const missing = environmentConfig.required.filter(
-    key => !process.env[key]
-  );
+  const missing = environmentConfig.required.filter(key => !process.env[key]);
 
   if (missing.length > 0) {
     throw new Error(
       `❌ CRITICAL: Missing required environment variables: ${missing.join(', ')}\n` +
-      `Please configure these variables in your deployment platform (Vercel, etc.)`
+        `Please configure these variables in your deployment platform (Vercel, etc.)`
     );
   }
 
@@ -108,7 +101,7 @@ export function validateEnv(): void {
  */
 export function getEnv(key: string, defaultValue?: string): string {
   const value = process.env[key];
-  
+
   if (!value && !defaultValue) {
     if (process.env.NODE_ENV === 'production') {
       throw new Error(`Environment variable ${key} is not set`);
@@ -116,7 +109,7 @@ export function getEnv(key: string, defaultValue?: string): string {
     console.warn(`⚠️ Environment variable ${key} is not set`);
     return '';
   }
-  
+
   return value || defaultValue || '';
 }
 
@@ -128,11 +121,11 @@ export function getEnv(key: string, defaultValue?: string): string {
  */
 export function getEnvBoolean(key: string, defaultValue = false): boolean {
   const value = process.env[key];
-  
+
   if (!value) {
     return defaultValue;
   }
-  
+
   return value.toLowerCase() === 'true' || value === '1';
 }
 
@@ -144,20 +137,20 @@ export function getEnvBoolean(key: string, defaultValue = false): boolean {
  */
 export function getEnvNumber(key: string, defaultValue = 0): number {
   const value = process.env[key];
-  
+
   if (!value) {
     return defaultValue;
   }
-  
+
   const parsed = parseInt(value, 10);
-  
+
   if (isNaN(parsed)) {
     console.warn(
       `⚠️ Environment variable ${key} is not a valid number: ${value}`
     );
     return defaultValue;
   }
-  
+
   return parsed;
 }
 
@@ -170,11 +163,14 @@ export function getEnvSummary(): Record<string, boolean> {
     ...environmentConfig.required,
     ...environmentConfig.optional,
   ];
-  
-  return allVars.reduce((acc, key) => {
-    acc[key] = !!process.env[key];
-    return acc;
-  }, {} as Record<string, boolean>);
+
+  return allVars.reduce(
+    (acc, key) => {
+      acc[key] = !!process.env[key];
+      return acc;
+    },
+    {} as Record<string, boolean>
+  );
 }
 
 // Development'da environment özeti göster
@@ -182,7 +178,6 @@ if (process.env.NODE_ENV === 'development') {
   const summary = getEnvSummary();
   const totalVars = Object.keys(summary).length;
   const setVars = Object.values(summary).filter(Boolean).length;
-  
+
   console.log(`📊 Environment Variables: ${setVars}/${totalVars} configured`);
 }
-

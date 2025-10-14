@@ -39,8 +39,9 @@ Kullanım durumu:
 
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
+import Link from 'next/link';
 import { supabase } from '@/lib/supabase/client';
 import { useAuth } from '@/hooks/auth/useAuth';
 import { useTranslations } from '@/hooks/useTranslations';
@@ -134,19 +135,7 @@ export default function StatisticsPage() {
     'overview' | 'numerology' | 'patterns'
   >('overview');
 
-  // Auth kontrolü
-  useEffect(() => {
-    if (!authLoading) {
-      if (!isAuthenticated) {
-        router.replace(`/${locale}/auth`);
-        return;
-      }
-      fetchUserStats();
-      fetchNumerologyInsights();
-    }
-  }, [authLoading, isAuthenticated, router, locale]);
-
-  const fetchUserStats = async () => {
+  const fetchUserStats = useCallback(async () => {
     if (!user) {
       return;
     }
@@ -160,9 +149,6 @@ export default function StatisticsPage() {
         .order('created_at', { ascending: false });
 
       if (error) {
-        if (process.env.NODE_ENV === 'development') {
-          console.error('Error fetching readings:', error);
-        }
         return;
       }
 
@@ -415,16 +401,14 @@ export default function StatisticsPage() {
         streakDays: currentStreak,
         longestStreak,
       });
-    } catch (error) {
-      if (process.env.NODE_ENV === 'development') {
-        console.error('Error fetching user stats:', error);
-      }
+    } catch {
+      // Hata durumunda sessizce devam et
     } finally {
       setLoading(false);
     }
-  };
+  }, [user, t]);
 
-  const fetchNumerologyInsights = async () => {
+  const fetchNumerologyInsights = useCallback(async () => {
     try {
       const {
         data: { user },
@@ -501,13 +485,29 @@ export default function StatisticsPage() {
         // Doğum tarihi yoksa numeroloji verilerini null olarak ayarla
         setNumerologyInsights(null);
       }
-    } catch (error) {
-      if (process.env.NODE_ENV === 'development') {
-        console.error('Error fetching numerology insights:', error);
-      }
+    } catch {
       setNumerologyInsights(null);
     }
-  };
+  }, []);
+
+  // Auth kontrolü
+  useEffect(() => {
+    if (!authLoading) {
+      if (!isAuthenticated) {
+        router.replace(`/${locale}/auth`);
+        return;
+      }
+      fetchUserStats();
+      fetchNumerologyInsights();
+    }
+  }, [
+    authLoading,
+    isAuthenticated,
+    router,
+    locale,
+    fetchUserStats,
+    fetchNumerologyInsights,
+  ]);
 
   if (authLoading || loading) {
     return (
@@ -562,13 +562,13 @@ export default function StatisticsPage() {
               />
               <span>{t('statistics.refresh', 'Yenile')}</span>
             </button>
-            <a
-              href='/dashboard'
+            <Link
+              href={`/${locale}/dashboard`}
               className='flex items-center space-x-2 px-4 py-2 bg-gold/10 hover:bg-gold/20 text-gold hover:text-yellow-300 transition-all duration-300 rounded-lg border border-gold/20 hover:border-gold/40'
             >
               <span>←</span>
               <span>{t('statistics.backToDashboard', "Dashboard'a Dön")}</span>
-            </a>
+            </Link>
           </div>
         </div>
       </header>
@@ -739,7 +739,9 @@ export default function StatisticsPage() {
                     </span>
                   </div>
                   <div className='flex justify-between items-center p-3 bg-white/5 rounded-lg'>
-                    <span className='text-lavender text-sm'>{t('statistics.mostActiveDay')}:</span>
+                    <span className='text-lavender text-sm'>
+                      {t('statistics.mostActiveDay')}:
+                    </span>
                     <span className='text-white font-semibold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent'>
                       {userStats.mostActiveDay}
                     </span>
@@ -749,7 +751,8 @@ export default function StatisticsPage() {
                       {t('statistics.average')}:
                     </span>
                     <span className='text-white font-semibold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent'>
-                      {userStats.averagePerMonth.toFixed(1)} {t('statistics.perReading')}
+                      {userStats.averagePerMonth.toFixed(1)}{' '}
+                      {t('statistics.perReading')}
                     </span>
                   </div>
                 </div>
@@ -812,9 +815,13 @@ export default function StatisticsPage() {
                     </span>
                   </div>
                   <div className='flex justify-between items-center p-3 bg-white/5 rounded-lg'>
-                    <span className='text-lavender text-sm'>{t('statistics.dailyStreak')}:</span>
+                    <span className='text-lavender text-sm'>
+                      {t('statistics.dailyStreak')}:
+                    </span>
                     <span className='text-white font-semibold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent flex items-center space-x-1'>
-                      <span>{userStats.streakDays} {t('statistics.days')}</span>
+                      <span>
+                        {userStats.streakDays} {t('statistics.days')}
+                      </span>
                       <span>🔥</span>
                     </span>
                   </div>
@@ -1252,13 +1259,13 @@ export default function StatisticsPage() {
                   belirtmeniz gerekiyor. Bu bilgi ile kişiselleştirilmiş
                   numerolojik rehberliğinizi keşfedebilirsiniz.
                 </p>
-                <a
-                  href='/dashboard'
+                <Link
+                  href={`/${locale}/dashboard`}
                   className='inline-flex items-center space-x-2 bg-gradient-to-r from-gold to-yellow-500 hover:from-gold/80 hover:to-yellow-500/80 text-night font-semibold py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-gold/20'
                 >
                   <User className='h-5 w-5' />
                   <span>Profil Ayarlarına Git</span>
-                </a>
+                </Link>
               </div>
             )}
           </div>
@@ -1327,20 +1334,28 @@ export default function StatisticsPage() {
                     </span>
                   </div>
                   <div className='flex justify-between items-center'>
-                    <span className='text-lavender'>Bu Ay Hedefi:</span>
+                    <span className='text-lavender'>
+                      {' '}
+                      {t('statistics.thisMonthTarget')} :
+                    </span>
                     <span className='text-white font-medium'>
                       {userStats.thisMonth}/10
                       {userStats.thisMonth >= 10 ? ' ✅' : ' 🎯'}
                     </span>
                   </div>
                   <div className='flex justify-between items-center'>
-                    <span className='text-lavender'>Kredi Verimliliği:</span>
+                    <span className='text-lavender'>
+                      {' '}
+                      {t('statistics.creditEfficiency')} :
+                    </span>
                     <span className='text-white font-medium'>
                       {userStats.averagePerReading.toFixed(1)}/okuma
                     </span>
                   </div>
                   <div className='flex justify-between items-center'>
-                    <span className='text-lavender'>Favori Dizilim:</span>
+                    <span className='text-lavender'>
+                      {t('statistics.favoriteSpread')} :
+                    </span>
                     <span className='text-white font-medium'>
                       {userStats.favoriteSpread}
                     </span>
@@ -1454,12 +1469,12 @@ export default function StatisticsPage() {
 
         {/* Navigation */}
         <div className='mt-12 text-center'>
-          <a
-            href='/dashboard'
+          <Link
+            href={`/${locale}/dashboard`}
             className='bg-gold hover:bg-gold/80 text-night font-semibold py-3 px-6 rounded-lg transition-colors'
           >
             {t('statistics.backToDashboard', "Dashboard'a Dön")}
-          </a>
+          </Link>
         </div>
       </main>
 

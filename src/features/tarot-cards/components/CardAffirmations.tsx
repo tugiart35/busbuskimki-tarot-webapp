@@ -5,7 +5,10 @@ interface CardAffirmationsProps {
   locale: 'tr' | 'en' | 'sr';
 }
 
-export function CardAffirmations({ content, locale: _locale }: CardAffirmationsProps) {
+export function CardAffirmations({
+  content,
+  locale: _locale,
+}: CardAffirmationsProps) {
   const { affirmations } = content;
 
   if (!affirmations || !affirmations.affirmation_list.length) return null;
@@ -16,10 +19,10 @@ export function CardAffirmations({ content, locale: _locale }: CardAffirmationsP
         <h2 className='text-3xl lg:text-4xl font-bold text-center mb-12'>
           {affirmations.title}
         </h2>
-        
+
         <div className='space-y-6'>
           {affirmations.affirmation_list.map((affirmation, index) => (
-            <div 
+            <div
               key={index}
               className='bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/20 transition-colors duration-300'
             >
@@ -38,4 +41,3 @@ export function CardAffirmations({ content, locale: _locale }: CardAffirmationsP
     </section>
   );
 }
-

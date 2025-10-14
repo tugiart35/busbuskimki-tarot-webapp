@@ -103,25 +103,26 @@ TaraTarotMobile/
 **Dosya:** `src/lib/supabase/client.ts`
 
 ```typescript
-import 'react-native-url-polyfill/auto'
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import { createClient } from '@supabase/supabase-js'
-import type { Database } from './database.types'
+import 'react-native-url-polyfill/auto';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { createClient } from '@supabase/supabase-js';
+import type { Database } from './database.types';
 
-const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL!
-const supabaseAnonKey = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY!
+const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL!;
+const supabaseAnonKey = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY!;
 
 export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
   auth: {
-    storage: AsyncStorage,  // localStorage yerine AsyncStorage
+    storage: AsyncStorage, // localStorage yerine AsyncStorage
     autoRefreshToken: true,
     persistSession: true,
     detectSessionInUrl: false,
   },
-})
+});
 ```
 
 **Kullanılacak Mevcut Dosyalar:**
+
 - ✅ `/src/lib/supabase/client.ts` → Database types kopyala (satır 137-532)
 - ✅ `/src/types/` → Tüm tipler direkt kopyalanacak
 
@@ -130,33 +131,32 @@ export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
 **Dosya:** `src/lib/i18n/config.ts`
 
 ```typescript
-import i18n from 'i18next'
-import { initReactI18next } from 'react-i18next'
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import tr from '../../../i18n/tr.json'
-import en from '../../../i18n/en.json'
-import sr from '../../../i18n/sr.json'
+import tr from '../../../i18n/tr.json';
+import en from '../../../i18n/en.json';
+import sr from '../../../i18n/sr.json';
 
-i18n
-  .use(initReactI18next)
-  .init({
-    resources: {
-      tr: { translation: tr },
-      en: { translation: en },
-      sr: { translation: sr },
-    },
-    lng: 'tr',
-    fallbackLng: 'tr',
-    interpolation: {
-      escapeValue: false,
-    },
-  })
+i18n.use(initReactI18next).init({
+  resources: {
+    tr: { translation: tr },
+    en: { translation: en },
+    sr: { translation: sr },
+  },
+  lng: 'tr',
+  fallbackLng: 'tr',
+  interpolation: {
+    escapeValue: false,
+  },
+});
 
-export default i18n
+export default i18n;
 ```
 
 **Kopyalanacak Dosyalar:**
+
 - ✅ `/messages/tr.json` → `/i18n/tr.json` (21,361 satır)
 - ✅ `/messages/en.json` → `/i18n/en.json` (6,164 satır)
 - ✅ `/messages/sr.json` → `/i18n/sr.json` (6,148 satır)
@@ -168,6 +168,7 @@ export default i18n
 ### Adım 2.1: Auth Hook'larını Taşıma (1 Gün)
 
 **Direkt Kopyalanacak Dosyalar:**
+
 ```
 MEVCUT → YENİ (Değişiklik Yok)
 /src/lib/auth/auth-service.ts → src/lib/auth/auth-service.ts
@@ -194,7 +195,7 @@ export function AuthForm() {
   const { control, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(authSchema)
   })
-  
+
   return (
     <View className="p-4 bg-white rounded-lg">
       <Controller
@@ -216,7 +217,7 @@ export function AuthForm() {
           </View>
         )}
       />
-      
+
       <Controller
         control={control}
         name="password"
@@ -235,7 +236,7 @@ export function AuthForm() {
           </View>
         )}
       />
-      
+
       <TouchableOpacity
         onPress={handleSubmit(signIn)}
         disabled={loading}
@@ -253,6 +254,7 @@ export function AuthForm() {
 ```
 
 **Mevcut Dosyadan Dönüştürülecek:**
+
 - 🔄 `/src/components/auth/AuthForm.tsx` → HTML componentlerini RN'e çevir
 
 ---
@@ -262,6 +264,7 @@ export function AuthForm() {
 ### Adım 3.1: Tarot Deck Data (1 Gün)
 
 **Direkt Kopyalanacak Dosyalar:**
+
 ```
 MEVCUT → YENİ (Değişiklik Yok)
 /src/features/tarot/lib/full-tarot-deck.ts → src/features/tarot/lib/full-tarot-deck.ts
@@ -293,15 +296,15 @@ interface Props {
 
 export function TarotCardComponent({ card, isFlipped, onPress }: Props) {
   const rotation = useSharedValue(0)
-  
+
   React.useEffect(() => {
     rotation.value = isFlipped ? withSpring(180) : withSpring(0)
   }, [isFlipped])
-  
+
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [{ rotateY: `${rotation.value}deg` }],
   }))
-  
+
   return (
     <Pressable onPress={onPress}>
       <Animated.View
@@ -343,18 +346,18 @@ interface Props {
 export function CardSelector({ count, onComplete }: Props) {
   const [selectedCards, setSelectedCards] = useState<TarotCard[]>([])
   const [availableCards, setAvailableCards] = useState(fullTarotDeck)
-  
+
   const handleCardSelect = (card: TarotCard) => {
     if (selectedCards.length < count) {
       setSelectedCards([...selectedCards, card])
       setAvailableCards(availableCards.filter(c => c.id !== card.id))
-      
+
       if (selectedCards.length + 1 === count) {
         onComplete([...selectedCards, card])
       }
     }
   }
-  
+
   return (
     <FlatList
       data={availableCards}
@@ -381,6 +384,7 @@ export function CardSelector({ count, onComplete }: Props) {
 **Direkt Kopyalanacak Dosyalar (Değişiklik Yok):**
 
 #### 1. Love Spread (Aşk Açılımı)
+
 ```
 /src/features/tarot/lib/love/position-meanings-index.ts → Aynı
 /src/features/tarot/lib/love/position-1-ilgi-duydugun-kisi.ts → Aynı
@@ -390,6 +394,7 @@ export function CardSelector({ count, onComplete }: Props) {
 ```
 
 #### 2. Career Spread (Kariyer Açılımı)
+
 ```
 /src/features/tarot/lib/career/position-meanings-index.ts → Aynı
 /src/features/tarot/lib/career/position-1-gercekten-istedigim-kariyer-bumu.ts → Aynı
@@ -402,32 +407,38 @@ export function CardSelector({ count, onComplete }: Props) {
 ```
 
 #### 3. Marriage Spread (Evlilik Açılımı)
+
 ```
 /src/features/tarot/lib/marriage/ → Tüm dosyalar direkt kopyalanır
 ```
 
 #### 4. Money Spread (Para Açılımı)
+
 ```
 /src/features/tarot/lib/money/ → Tüm dosyalar direkt kopyalanır
 ```
 
 #### 5. New Lover Spread (Yeni Aşk Açılımı)
+
 ```
 /src/features/tarot/lib/new-lover/position-meanings-index.ts → Aynı (397 satır)
 /src/features/tarot/lib/new-lover/ → Tüm dosyalar direkt kopyalanır
 ```
 
 #### 6. Problem Solving Spread (Problem Çözme Açılımı)
+
 ```
 /src/features/tarot/lib/problem-solving/ → Tüm dosyalar direkt kopyalanır
 ```
 
 #### 7. Relationship Analysis Spread (İlişki Analizi)
+
 ```
 /src/features/tarot/lib/relationship-analysis/ → Tüm dosyalar direkt kopyalanır
 ```
 
 #### 8. Situation Analysis Spread (Durum Analizi)
+
 ```
 /src/features/tarot/lib/situation-analysis/ → Tüm dosyalar direkt kopyalanır
 ```
@@ -446,12 +457,12 @@ import type { TarotCard } from '@/types/tarot'
 export function LoveTarot() {
   const [selectedCards, setSelectedCards] = useState<TarotCard[]>([])
   const [step, setStep] = useState<'select' | 'interpret'>('select')
-  
+
   const handleCardsSelected = (cards: TarotCard[]) => {
     setSelectedCards(cards)
     setStep('interpret')
   }
-  
+
   if (step === 'select') {
     return (
       <View className="flex-1">
@@ -462,13 +473,13 @@ export function LoveTarot() {
       </View>
     )
   }
-  
+
   return (
     <ScrollView className="flex-1 p-4">
       {selectedCards.map((card, index) => {
         const position = lovePositionMeanings.positions[index + 1] // MEVCUT DATA
         const meaning = position.find(m => m.card === card.name)
-        
+
         return (
           <View key={index} className="mb-6 bg-white rounded-lg p-4 shadow">
             <Text className="text-lg font-bold mb-2">
@@ -486,6 +497,7 @@ export function LoveTarot() {
 ```
 
 **Her Spread İçin Aynı Pattern:**
+
 - ✅ Business logic (position-meanings) → Direkt kopyala
 - 🔄 UI Component → React Native'e çevir
 
@@ -498,54 +510,64 @@ export function LoveTarot() {
 **Dosya:** `supabase/functions/ai-interpret/index.ts`
 
 ```typescript
-import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
+import { serve } from 'https://deno.land/std@0.168.0/http/server.ts';
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
-const GROQ_API_KEY = Deno.env.get('GROQ_API_KEY')!
+const GROQ_API_KEY = Deno.env.get('GROQ_API_KEY')!;
 
-serve(async (req) => {
+serve(async req => {
   try {
-    const { cards, spreadType, userId } = await req.json()
-    
+    const { cards, spreadType, userId } = await req.json();
+
     // MEVCUT AI PROMPT LOGIC'İ BURAYA TAŞI
-    const prompt = generatePrompt(cards, spreadType) // Mevcut fonksiyon
-    
-    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${GROQ_API_KEY}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        model: 'llama-3.1-70b-versatile',
-        messages: [{ role: 'user', content: prompt }],
-        temperature: 0.8,
-        max_tokens: 3000
-      })
-    })
-    
-    const data = await response.json()
-    const interpretation = data.choices[0].message.content
-    
-    return new Response(JSON.stringify({ 
-      success: true, 
-      interpretation 
-    }), {
-      headers: { 'Content-Type': 'application/json' }
-    })
+    const prompt = generatePrompt(cards, spreadType); // Mevcut fonksiyon
+
+    const response = await fetch(
+      'https://api.groq.com/openai/v1/chat/completions',
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${GROQ_API_KEY}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          model: 'llama-3.1-70b-versatile',
+          messages: [{ role: 'user', content: prompt }],
+          temperature: 0.8,
+          max_tokens: 3000,
+        }),
+      }
+    );
+
+    const data = await response.json();
+    const interpretation = data.choices[0].message.content;
+
+    return new Response(
+      JSON.stringify({
+        success: true,
+        interpretation,
+      }),
+      {
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
   } catch (error) {
-    return new Response(JSON.stringify({ 
-      success: false, 
-      error: error.message 
-    }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' }
-    })
+    return new Response(
+      JSON.stringify({
+        success: false,
+        error: error.message,
+      }),
+      {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
   }
-})
+});
 ```
 
 **Mevcut Dosyadan Taşınacak:**
+
 - ✅ `/src/lib/api/ai-service.ts` → AI prompt generation logic
 
 ### Adım 5.2: Mobile Client Integration (1 Gün)
@@ -553,31 +575,31 @@ serve(async (req) => {
 **Dosya:** `src/hooks/useAIInterpretation.ts`
 
 ```typescript
-import { useState } from 'react'
-import { supabase } from '@/lib/supabase/client'
-import type { TarotCard } from '@/types/tarot'
+import { useState } from 'react';
+import { supabase } from '@/lib/supabase/client';
+import type { TarotCard } from '@/types/tarot';
 
 export function useAIInterpretation() {
-  const [loading, setLoading] = useState(false)
-  const [interpretation, setInterpretation] = useState<string | null>(null)
-  
+  const [loading, setLoading] = useState(false);
+  const [interpretation, setInterpretation] = useState<string | null>(null);
+
   const getInterpretation = async (cards: TarotCard[], spreadType: string) => {
-    setLoading(true)
+    setLoading(true);
     try {
       const { data, error } = await supabase.functions.invoke('ai-interpret', {
-        body: { cards, spreadType }
-      })
-      
-      if (error) throw error
-      setInterpretation(data.interpretation)
+        body: { cards, spreadType },
+      });
+
+      if (error) throw error;
+      setInterpretation(data.interpretation);
     } catch (error) {
-      console.error('AI interpretation error:', error)
+      console.error('AI interpretation error:', error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
-  
-  return { getInterpretation, interpretation, loading }
+  };
+
+  return { getInterpretation, interpretation, loading };
 }
 ```
 
@@ -588,6 +610,7 @@ export function useAIInterpretation() {
 ### Adım 6.1: Dashboard Hooks (1 Gün)
 
 **Direkt Kopyalanacak Dosyalar:**
+
 ```
 MEVCUT → YENİ (Değişiklik Yok)
 /src/hooks/useDashboardData.ts → src/hooks/useDashboardData.ts
@@ -606,7 +629,7 @@ import { useDashboardData } from '@/hooks/useDashboardData' // MEVCUT HOOK
 
 export function DashboardScreen() {
   const { stats, readings, loading } = useDashboardData()
-  
+
   if (loading) {
     return (
       <View className="flex-1 items-center justify-center">
@@ -614,7 +637,7 @@ export function DashboardScreen() {
       </View>
     )
   }
-  
+
   return (
     <ScrollView className="flex-1 bg-gray-50">
       {/* Stats Cards */}
@@ -625,7 +648,7 @@ export function DashboardScreen() {
             {stats?.creditBalance || 0}
           </Text>
         </View>
-        
+
         <View className="flex-1 bg-white rounded-lg p-4 ml-2 shadow">
           <Text className="text-gray-600">Toplam Okuma</Text>
           <Text className="text-2xl font-bold text-indigo-600">
@@ -633,7 +656,7 @@ export function DashboardScreen() {
           </Text>
         </View>
       </View>
-      
+
       {/* Recent Readings */}
       <View className="p-4">
         <Text className="text-lg font-bold mb-4">Son Okumalar</Text>
@@ -672,7 +695,7 @@ export function ProfileScreen() {
       email: user?.email || '',
     }
   })
-  
+
   return (
     <View className="flex-1 bg-white p-4">
       <View className="items-center mb-6">
@@ -682,7 +705,7 @@ export function ProfileScreen() {
         />
         <Text className="text-xl font-bold mt-2">{user?.display_name}</Text>
       </View>
-      
+
       <Controller
         control={control}
         name="display_name"
@@ -696,7 +719,7 @@ export function ProfileScreen() {
           </View>
         )}
       />
-      
+
       <TouchableOpacity
         onPress={handleSubmit(updateProfile)}
         disabled={loading}
@@ -716,6 +739,7 @@ export function ProfileScreen() {
 ### Adım 7.1: Payment Hooks (1 Gün)
 
 **Direkt Kopyalanacak Dosyalar:**
+
 ```
 MEVCUT → YENİ (Değişiklik Yok)
 /src/lib/payment/ → src/lib/payment/ (Tüm dosyalar)
@@ -731,31 +755,32 @@ npx expo install expo-in-app-purchases
 **Dosya:** `src/hooks/useInAppPurchase.ts`
 
 ```typescript
-import { useState, useEffect } from 'react'
-import * as InAppPurchases from 'expo-in-app-purchases'
+import { useState, useEffect } from 'react';
+import * as InAppPurchases from 'expo-in-app-purchases';
 
 export function useInAppPurchase() {
-  const [products, setProducts] = useState<any[]>([])
-  
+  const [products, setProducts] = useState<any[]>([]);
+
   useEffect(() => {
-    InAppPurchases.connectAsync()
-    
+    InAppPurchases.connectAsync();
+
     return () => {
-      InAppPurchases.disconnectAsync()
-    }
-  }, [])
-  
+      InAppPurchases.disconnectAsync();
+    };
+  }, []);
+
   const buyProduct = async (productId: string) => {
-    await InAppPurchases.purchaseItemAsync(productId)
-  }
-  
-  return { products, buyProduct }
+    await InAppPurchases.purchaseItemAsync(productId);
+  };
+
+  return { products, buyProduct };
 }
 ```
 
 ### Adım 7.3: Shopier Integration (Mevcut Webhook Kullan) (2 Gün)
 
 **Mevcut Edge Function Kullan:**
+
 - ✅ `/functions/payment-webhook/index.ts` → Zaten hazır
 - Sadece mobil için WebView ekle
 
@@ -767,20 +792,24 @@ export function useInAppPurchase() {
 
 ```typescript
 // src/animations/cardFlip.ts
-import { useSharedValue, useAnimatedStyle, withSpring } from 'react-native-reanimated'
+import {
+  useSharedValue,
+  useAnimatedStyle,
+  withSpring,
+} from 'react-native-reanimated';
 
 export function useCardFlip() {
-  const rotation = useSharedValue(0)
-  
+  const rotation = useSharedValue(0);
+
   const flip = () => {
-    rotation.value = withSpring(rotation.value === 0 ? 180 : 0)
-  }
-  
+    rotation.value = withSpring(rotation.value === 0 ? 180 : 0);
+  };
+
   const animatedStyle = useAnimatedStyle(() => ({
-    transform: [{ rotateY: `${rotation.value}deg` }]
-  }))
-  
-  return { flip, animatedStyle }
+    transform: [{ rotateY: `${rotation.value}deg` }],
+  }));
+
+  return { flip, animatedStyle };
 }
 ```
 
@@ -793,22 +822,22 @@ npx expo install expo-notifications
 **Dosya:** `src/lib/notifications/config.ts`
 
 ```typescript
-import * as Notifications from 'expo-notifications'
+import * as Notifications from 'expo-notifications';
 
 export async function registerForPushNotifications() {
-  const { status } = await Notifications.requestPermissionsAsync()
-  
+  const { status } = await Notifications.requestPermissionsAsync();
+
   if (status !== 'granted') {
-    alert('Bildirimler için izin gerekli!')
-    return
+    alert('Bildirimler için izin gerekli!');
+    return;
   }
-  
-  const token = await Notifications.getExpoPushTokenAsync()
-  
+
+  const token = await Notifications.getExpoPushTokenAsync();
+
   // Token'ı Supabase'e kaydet
   // ...
-  
-  return token.data
+
+  return token.data;
 }
 ```
 
@@ -816,14 +845,14 @@ export async function registerForPushNotifications() {
 
 ```typescript
 // src/hooks/useImagePreload.ts
-import { Image } from 'react-native'
+import { Image } from 'react-native';
 
 export function useImagePreload(images: string[]) {
   useEffect(() => {
     images.forEach(uri => {
-      Image.prefetch(uri)
-    })
-  }, [images])
+      Image.prefetch(uri);
+    });
+  }, [images]);
 }
 ```
 
@@ -883,70 +912,73 @@ npm install @sentry/react-native
 
 ### ✅ Direkt Kopyalanacak Dosyalar (%100 Aynı Kalacak)
 
-| Mevcut Dosya | Yeni Konum | Satır | Not |
-|--------------|------------|-------|-----|
-| `src/types/tarot.ts` | `src/types/tarot.ts` | 168 | TarotCard interface |
-| `src/types/auth.types.ts` | `src/types/auth.types.ts` | - | Auth types |
-| `src/types/dashboard.types.ts` | `src/types/dashboard.types.ts` | - | Dashboard types |
-| `src/features/tarot/lib/full-tarot-deck.ts` | Aynı | - | 78 kart data |
-| `src/features/tarot/lib/love/position-meanings-index.ts` | Aynı | - | Love spread logic |
-| `src/features/tarot/lib/career/position-meanings-index.ts` | Aynı | - | Career spread logic |
-| `src/features/tarot/lib/marriage/position-meanings-index.ts` | Aynı | - | Marriage spread logic |
-| `src/features/tarot/lib/money/position-meanings-index.ts` | Aynı | - | Money spread logic |
-| `src/features/tarot/lib/new-lover/position-meanings-index.ts` | Aynı | 397 | New lover spread logic |
-| `src/features/tarot/lib/problem-solving/position-meanings-index.ts` | Aynı | - | Problem solving logic |
-| `src/features/tarot/lib/relationship-analysis/position-meanings-index.ts` | Aynı | - | Relationship analysis logic |
-| `src/features/tarot/lib/relationship-problems/position-meanings-index.ts` | Aynı | - | Relationship problems logic |
-| `src/features/tarot/lib/situation-analysis/position-meanings-index.ts` | Aynı | - | Situation analysis logic |
-| `src/lib/auth/auth-service.ts` | Aynı | - | Auth business logic |
-| `src/lib/auth/validation.ts` | Aynı | - | Zod schemas |
-| `src/hooks/useDashboardData.ts` | Aynı | - | Dashboard data hook |
-| `src/hooks/useDashboardActions.ts` | Aynı | - | Dashboard actions hook |
-| `src/hooks/usePayment.ts` | Aynı | - | Payment hook |
-| `src/lib/payment/` | Aynı | - | Tüm payment logic |
-| `messages/tr.json` | `i18n/tr.json` | 21,361 | Türkçe çeviriler |
-| `messages/en.json` | `i18n/en.json` | 6,164 | İngilizce çeviriler |
-| `messages/sr.json` | `i18n/sr.json` | 6,148 | Sırpça çeviriler |
+| Mevcut Dosya                                                              | Yeni Konum                     | Satır  | Not                         |
+| ------------------------------------------------------------------------- | ------------------------------ | ------ | --------------------------- |
+| `src/types/tarot.ts`                                                      | `src/types/tarot.ts`           | 168    | TarotCard interface         |
+| `src/types/auth.types.ts`                                                 | `src/types/auth.types.ts`      | -      | Auth types                  |
+| `src/types/dashboard.types.ts`                                            | `src/types/dashboard.types.ts` | -      | Dashboard types             |
+| `src/features/tarot/lib/full-tarot-deck.ts`                               | Aynı                           | -      | 78 kart data                |
+| `src/features/tarot/lib/love/position-meanings-index.ts`                  | Aynı                           | -      | Love spread logic           |
+| `src/features/tarot/lib/career/position-meanings-index.ts`                | Aynı                           | -      | Career spread logic         |
+| `src/features/tarot/lib/marriage/position-meanings-index.ts`              | Aynı                           | -      | Marriage spread logic       |
+| `src/features/tarot/lib/money/position-meanings-index.ts`                 | Aynı                           | -      | Money spread logic          |
+| `src/features/tarot/lib/new-lover/position-meanings-index.ts`             | Aynı                           | 397    | New lover spread logic      |
+| `src/features/tarot/lib/problem-solving/position-meanings-index.ts`       | Aynı                           | -      | Problem solving logic       |
+| `src/features/tarot/lib/relationship-analysis/position-meanings-index.ts` | Aynı                           | -      | Relationship analysis logic |
+| `src/features/tarot/lib/relationship-problems/position-meanings-index.ts` | Aynı                           | -      | Relationship problems logic |
+| `src/features/tarot/lib/situation-analysis/position-meanings-index.ts`    | Aynı                           | -      | Situation analysis logic    |
+| `src/lib/auth/auth-service.ts`                                            | Aynı                           | -      | Auth business logic         |
+| `src/lib/auth/validation.ts`                                              | Aynı                           | -      | Zod schemas                 |
+| `src/hooks/useDashboardData.ts`                                           | Aynı                           | -      | Dashboard data hook         |
+| `src/hooks/useDashboardActions.ts`                                        | Aynı                           | -      | Dashboard actions hook      |
+| `src/hooks/usePayment.ts`                                                 | Aynı                           | -      | Payment hook                |
+| `src/lib/payment/`                                                        | Aynı                           | -      | Tüm payment logic           |
+| `messages/tr.json`                                                        | `i18n/tr.json`                 | 21,361 | Türkçe çeviriler            |
+| `messages/en.json`                                                        | `i18n/en.json`                 | 6,164  | İngilizce çeviriler         |
+| `messages/sr.json`                                                        | `i18n/sr.json`                 | 6,148  | Sırpça çeviriler            |
 
 ### 🔄 UI Çevrilecek Dosyalar (HTML → React Native)
 
-| Mevcut Dosya | Yeni Dosya | Değişiklik |
-|--------------|------------|------------|
-| `src/components/auth/AuthForm.tsx` | `src/components/auth/AuthForm.tsx` | div → View, input → TextInput |
-| `src/features/tarot/components/Love-Spread/LoveTarot.tsx` | `src/features/tarot/love/LoveTarot.tsx` | ScrollView, Image |
-| `src/features/tarot/components/Career-Spread/CareerTarot.tsx` | `src/features/tarot/career/CareerTarot.tsx` | FlatList, Pressable |
-| `src/features/tarot/components/Marriage/MarriageTarot.tsx` | `src/features/tarot/marriage/MarriageTarot.tsx` | Animated.View |
-| `src/components/dashboard/DashboardContainer.tsx` | `src/screens/DashboardScreen.tsx` | SafeAreaView |
-| `src/features/shared/ui/LoadingSpinner.tsx` | `src/components/ui/LoadingSpinner.tsx` | ActivityIndicator |
-| `src/features/shared/ui/Toast.tsx` | `src/components/ui/Toast.tsx` | Modal, Animated |
+| Mevcut Dosya                                                  | Yeni Dosya                                      | Değişiklik                    |
+| ------------------------------------------------------------- | ----------------------------------------------- | ----------------------------- |
+| `src/components/auth/AuthForm.tsx`                            | `src/components/auth/AuthForm.tsx`              | div → View, input → TextInput |
+| `src/features/tarot/components/Love-Spread/LoveTarot.tsx`     | `src/features/tarot/love/LoveTarot.tsx`         | ScrollView, Image             |
+| `src/features/tarot/components/Career-Spread/CareerTarot.tsx` | `src/features/tarot/career/CareerTarot.tsx`     | FlatList, Pressable           |
+| `src/features/tarot/components/Marriage/MarriageTarot.tsx`    | `src/features/tarot/marriage/MarriageTarot.tsx` | Animated.View                 |
+| `src/components/dashboard/DashboardContainer.tsx`             | `src/screens/DashboardScreen.tsx`               | SafeAreaView                  |
+| `src/features/shared/ui/LoadingSpinner.tsx`                   | `src/components/ui/LoadingSpinner.tsx`          | ActivityIndicator             |
+| `src/features/shared/ui/Toast.tsx`                            | `src/components/ui/Toast.tsx`                   | Modal, Animated               |
 
 ### ❌ Kullanılmayacak Dosyalar
 
-| Dosya | Sebep |
-|-------|-------|
-| `src/app/**` | Next.js routing → Expo Router |
-| `src/middleware.ts` | Server-side → Edge Functions |
-| `src/app/api/**` | API Routes → Supabase Edge Functions |
-| `next.config.js` | Next.js config → app.json |
-| `tailwind.config.ts` | Tailwind → NativeWind |
+| Dosya                | Sebep                                |
+| -------------------- | ------------------------------------ |
+| `src/app/**`         | Next.js routing → Expo Router        |
+| `src/middleware.ts`  | Server-side → Edge Functions         |
+| `src/app/api/**`     | API Routes → Supabase Edge Functions |
+| `next.config.js`     | Next.js config → app.json            |
+| `tailwind.config.ts` | Tailwind → NativeWind                |
 
 ---
 
 ## 🗓️ HAFTALIK İŞ PLANI
 
 ### **Hafta 1: Altyapı + Auth**
+
 - ✅ Expo projesi kur
 - ✅ Supabase entegre et
 - ✅ i18n konfigüre et
 - ✅ Auth sistemi çalıştır
 
 ### **Hafta 2-3: Tarot Kartları**
+
 - ✅ 78 kart data kopyala
 - ✅ Kart gösterimi UI
 - ✅ Flip animasyonları
 - ✅ Kart seçim sistemi
 
 ### **Hafta 4-6: 8 Spread Sistemi**
+
 - ✅ Love Spread (Hafta 4)
 - ✅ Career Spread (Hafta 4)
 - ✅ Marriage Spread (Hafta 5)
@@ -957,24 +989,28 @@ npm install @sentry/react-native
 - ✅ Situation Analysis Spread (Hafta 6)
 
 ### **Hafta 7: Dashboard & Profile**
+
 - ✅ Dashboard hooks kopyala
 - ✅ Dashboard UI
 - ✅ Profile management
 - ✅ Reading history
 
 ### **Hafta 8: Payment & Credits**
+
 - ✅ Payment hooks kopyala
 - ✅ In-app purchases
 - ✅ Shopier integration
 - ✅ Credit management
 
 ### **Hafta 9-10: Polish**
+
 - ✅ Animasyonlar
 - ✅ Push notifications
 - ✅ Performance optimizations
 - ✅ Error handling
 
 ### **Hafta 11-12: Test & Deploy**
+
 - ✅ Unit & E2E tests
 - ✅ Beta testing
 - ✅ App Store submission
@@ -985,23 +1021,28 @@ npm install @sentry/react-native
 ## 🎯 BAŞARILI GEÇİŞ İÇİN İPUÇLARI
 
 ### 1. **Modüler Geçiş Yapın**
+
 - Her spread'i ayrı ayrı taşıyın
 - Test edin, sonra bir sonrakine geçin
 
 ### 2. **Business Logic Dokunmayın**
+
 - Position meanings dosyaları %100 aynı
 - Sadece UI katmanını değiştirin
 
 ### 3. **i18n Verilerini Koruyun**
+
 - 21,361 satır Türkçe çeviri hazır
 - Direkt kopyalayın
 
 ### 4. **Supabase Yapısı Aynı**
+
 - Database schema değişmeyecek
 - RLS policies aynı kalacak
 - Edge Functions ekleyin
 
 ### 5. **TypeScript Tiplerini Kullanın**
+
 - Mevcut tipler %100 geçerli
 - Tip güvenliği kaybolmayacak
 
@@ -1010,36 +1051,40 @@ npm install @sentry/react-native
 ## ⚠️ DİKKAT EDİLECEKLER
 
 ### 1. **AsyncStorage vs localStorage**
+
 ```typescript
 // YANLIŞ (Web)
-localStorage.setItem('key', 'value')
+localStorage.setItem('key', 'value');
 
 // DOĞRU (React Native)
-import AsyncStorage from '@react-native-async-storage/async-storage'
-await AsyncStorage.setItem('key', 'value')
+import AsyncStorage from '@react-native-async-storage/async-storage';
+await AsyncStorage.setItem('key', 'value');
 ```
 
 ### 2. **Navigation**
+
 ```typescript
 // YANLIŞ (Next.js)
-import { useRouter } from 'next/navigation'
-router.push('/path')
+import { useRouter } from 'next/navigation';
+router.push('/path');
 
 // DOĞRU (Expo Router)
-import { router } from 'expo-router'
-router.push('/path')
+import { router } from 'expo-router';
+router.push('/path');
 ```
 
 ### 3. **Environment Variables**
+
 ```typescript
 // YANLIŞ (Next.js)
-process.env.NEXT_PUBLIC_SUPABASE_URL
+process.env.NEXT_PUBLIC_SUPABASE_URL;
 
 // DOĞRU (Expo)
-process.env.EXPO_PUBLIC_SUPABASE_URL
+process.env.EXPO_PUBLIC_SUPABASE_URL;
 ```
 
 ### 4. **Image Components**
+
 ```typescript
 // YANLIŞ (Next.js)
 import Image from 'next/image'
@@ -1055,6 +1100,7 @@ import { Image } from 'react-native'
 ## 📊 BEKLENEN SONUÇLAR
 
 ### ✅ Kazanımlar
+
 - 📱 iOS ve Android native app
 - 🚀 App Store ve Play Store'da yayın
 - ⚡ Daha hızlı performans
@@ -1063,11 +1109,13 @@ import { Image } from 'react-native'
 - 🎨 Native UI/UX
 
 ### 📈 İş Yükü
+
 - **Kod Taşıma:** %60 (Business logic direkt kopyalanır)
 - **UI Dönüşüm:** %35 (HTML → React Native)
 - **Yeni Özellikler:** %5 (Push notifications, In-app purchases)
 
 ### 💰 Maliyet
+
 - **Geliştirme:** 8-12 hafta
 - **Apple Developer:** $99/yıl
 - **Google Play:** $25 (tek seferlik)
@@ -1087,9 +1135,9 @@ import { Image } from 'react-native'
 ## 📞 DESTEK
 
 Bu yol haritasını takip ederken herhangi bir aşamada takılırsanız:
+
 - Her adım için detaylı kod örnekleri var
 - Business logic'iniz hazır (%60 iş bitti!)
 - Sadece UI dönüşümü yapmanız gerekiyor
 
 **Başlamaya hazır mısınız?** 🚀
-

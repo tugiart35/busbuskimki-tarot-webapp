@@ -67,14 +67,17 @@ export function CardHero({ card, content, locale }: CardHeroProps) {
             {/* Card Keywords */}
             {content.keywords?.keywords_message && (
               <div className='flex flex-wrap gap-2'>
-                {content.keywords.keywords_message.split(',').slice(0, 6).map((keyword, index) => (
-                  <span
-                    key={index}
-                    className='bg-white/20 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium'
-                  >
-                    {keyword.trim()}
-                  </span>
-                ))}
+                {content.keywords.keywords_message
+                  .split(',')
+                  .slice(0, 6)
+                  .map((keyword, index) => (
+                    <span
+                      key={index}
+                      className='bg-white/20 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium'
+                    >
+                      {keyword.trim()}
+                    </span>
+                  ))}
               </div>
             )}
 

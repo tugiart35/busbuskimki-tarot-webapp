@@ -36,11 +36,11 @@ export const getPositionsFromI18n = (
   t: (key: string) => string
 ): PositionInfo[] => {
   const positions: PositionInfo[] = [];
-  
+
   for (let i = 1; i <= positionCount; i++) {
     const title = t(`spreads.${spreadKey}.positions.${i}.title`);
     const description = t(`spreads.${spreadKey}.positions.${i}.description`);
-    
+
     positions.push({
       id: i,
       title,
@@ -48,7 +48,7 @@ export const getPositionsFromI18n = (
       description,
     });
   }
-  
+
   return positions;
 };
 
@@ -575,9 +575,7 @@ export function createTarotConfig(
   const formI18nKeys = createFormI18nKeys(namespace);
 
   // Position bilgilerini i18n'den çek (eğer t fonksiyonu varsa)
-  const positionsInfo = t
-    ? getPositionsFromI18n(spreadKey, cardCount, t)
-    : [];
+  const positionsInfo = t ? getPositionsFromI18n(spreadKey, cardCount, t) : [];
 
   const defaultCreditKeys: CreditKeys = {
     detailed: `${creditPrefix}_DETAILED`,
@@ -754,7 +752,9 @@ export function createMoneyConfig(t?: (key: string) => string): TarotConfig {
  * Problem Solving spread için özel konfigürasyon
  * @param t - i18n translation function (optional)
  */
-export function createProblemSolvingConfig(t?: (key: string) => string): TarotConfig {
+export function createProblemSolvingConfig(
+  t?: (key: string) => string
+): TarotConfig {
   return createTarotConfig({
     spreadId: 'problem-solving',
     spreadKey: 'problemSolving',
@@ -801,7 +801,9 @@ export function createMarriageConfig(t?: (key: string) => string): TarotConfig {
  * Relationship Analysis spread için özel konfigürasyon
  * @param t - i18n translation function (optional)
  */
-export function createRelationshipAnalysisConfig(t?: (key: string) => string): TarotConfig {
+export function createRelationshipAnalysisConfig(
+  t?: (key: string) => string
+): TarotConfig {
   return createTarotConfig({
     spreadId: 'relationship-analysis',
     spreadKey: 'relationshipAnalysis',
@@ -824,7 +826,9 @@ export function createRelationshipAnalysisConfig(t?: (key: string) => string): T
  * Relationship Problems spread için özel konfigürasyon
  * @param t - i18n translation function (optional)
  */
-export function createRelationshipProblemsConfig(t?: (key: string) => string): TarotConfig {
+export function createRelationshipProblemsConfig(
+  t?: (key: string) => string
+): TarotConfig {
   return createTarotConfig({
     spreadId: 'relationship-problems',
     spreadKey: 'relationshipProblems',
@@ -870,7 +874,9 @@ export function createNewLoverConfig(t?: (key: string) => string): TarotConfig {
  * Situation Analysis spread için özel konfigürasyon
  * @param t - i18n translation function (optional)
  */
-export function createSituationAnalysisConfig(t?: (key: string) => string): TarotConfig {
+export function createSituationAnalysisConfig(
+  t?: (key: string) => string
+): TarotConfig {
   return createTarotConfig({
     spreadId: 'situation-analysis',
     spreadKey: 'situationAnalysis',

@@ -24,7 +24,10 @@ export default function ProfileManagement({
       <div
         className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'
         role='group'
-        aria-label={t('dashboard.ariaLabel.profileOptions', 'Profil yönetimi seçenekleri')}
+        aria-label={t(
+          'dashboard.ariaLabel.profileOptions',
+          'Profil yönetimi seçenekleri'
+        )}
       >
         {/* Profil bilgileri kartı */}
         <button

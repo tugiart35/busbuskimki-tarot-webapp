@@ -1,14 +1,15 @@
 # ✅ Vercel Deployment Kontrol Listesi
 
 **Proje:** TaraTarot  
-**Tarih:** ___________  
-**Deploy Eden:** ___________
+**Tarih:** ****\_\_\_****  
+**Deploy Eden:** ****\_\_\_****
 
 ---
 
 ## 🔒 1. GÜVENLİK KONTROLÜ (5 dk)
 
 ### .gitignore Koruması
+
 - [ ] `.env` dosyası .gitignore'da
 - [ ] `.gemini/` klasörü .gitignore'da
 - [ ] Local'de `.env` dosyası varsa Git'te olmadığını doğrula
@@ -23,6 +24,7 @@
   ```
 
 ### API Key Güvenliği
+
 - [ ] Kodda hardcoded API key yok
 - [ ] Tüm secrets environment variables'da
 - [ ] `SUPABASE_SERVICE_ROLE_KEY` sadece server-side kullanımda
@@ -34,6 +36,7 @@
 Vercel Dashboard → Settings → Environment Variables
 
 ### Kritik (14 Değişken) 🔴
+
 - [ ] `NEXT_PUBLIC_SUPABASE_URL`
 - [ ] `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 - [ ] `SUPABASE_SERVICE_ROLE_KEY`
@@ -50,10 +53,12 @@ Vercel Dashboard → Settings → Environment Variables
 - [ ] `WEBHOOK_SECRET` (min 32 karakter)
 
 ### Shopier URL'leri (Gerçek domain ile güncelleyin)
+
 - [ ] `NEXT_PUBLIC_SHOPIER_CALLBACK_URL`
 - [ ] `NEXT_PUBLIC_SHOPIER_WEBHOOK_URL`
 
 ### Opsiyonel
+
 - [ ] `SENTRY_DSN` (Error tracking için)
 - [ ] `DEBUG=false`
 
@@ -75,6 +80,7 @@ npm run build
 ```
 
 ### Başarı Kriterleri
+
 - [ ] Build tamamlandı: "✓ Compiled successfully"
 - [ ] Build error yok
 - [ ] Type error yok (test dosyaları hariç - OK)
@@ -99,12 +105,14 @@ git push origin main
 ## 📦 5. VERCEL IMPORT (5 dk)
 
 ### Yeni Proje
+
 - [ ] https://vercel.com/new adresine gidildi
 - [ ] Repository import edildi
 - [ ] Framework: Next.js seçildi (otomatik)
 - [ ] Project name belirlendi: `tara-tarot`
 
 ### Mevcut Proje
+
 - [ ] Vercel projesine gidildi
 - [ ] Environment variables kontrol edildi
 
@@ -120,21 +128,24 @@ vercel --prod
 ```
 
 ### Deployment Süreci
+
 - [ ] Building başladı
 - [ ] Build logs temiz (error yok)
 - [ ] Deployment tamamlandı
-- [ ] Production URL alındı: ___________
+- [ ] Production URL alındı: ****\_\_\_****
 
 ---
 
 ## ✅ 7. DEPLOYMENT SONRASI TEST (15 dk)
 
 ### Basic Checks
+
 - [ ] Site açılıyor: `https://your-domain.vercel.app`
 - [ ] HTTPS aktif
 - [ ] SSL sertifikası geçerli (yeşil kilit ikonu)
 
 ### Functional Tests
+
 - [ ] **Ana sayfa:** `/tr` açılıyor
 - [ ] **Dil değiştirme:** TR → EN → SR çalışıyor
 - [ ] **Login:** `/tr/auth` açılıyor
@@ -146,15 +157,18 @@ vercel --prod
 - [ ] **Credit packages:** Görünüyor (SATINALMA!)
 
 ### Browser Console
+
 - [ ] No critical errors
 - [ ] No 404 errors
 - [ ] No CORS errors
 
 ### Performance
+
 ```bash
 # Chrome DevTools → Lighthouse
 # URL: https://your-domain.vercel.app
 ```
+
 - [ ] Performance: >85
 - [ ] Accessibility: >90
 - [ ] Best Practices: >85
@@ -165,16 +179,19 @@ vercel --prod
 ## 📊 8. MONITORING SETUP (5 dk)
 
 ### Vercel Dashboard
+
 - [ ] Analytics aktif
 - [ ] Functions logs akıyor
 - [ ] No errors in logs (ilk 5 dakika)
 
 ### Supabase
+
 - [ ] Database bağlantısı başarılı
 - [ ] New auth users görünüyor (test kayıt)
 - [ ] Readings tablosuna veri yazılıyor
 
 ### Email
+
 - [ ] Test email gönderildi (opsiyonel)
 - [ ] SMTP bağlantısı çalışıyor
 
@@ -183,14 +200,16 @@ vercel --prod
 ## 🔄 9. DOMAIN AYARLARI (Opsiyonel - 10 dk)
 
 ### Custom Domain
+
 - [ ] Vercel → Settings → Domains
-- [ ] Domain eklendi: ___________
+- [ ] Domain eklendi: ****\_\_\_****
 - [ ] DNS kayıtları güncellendi
   - A Record: `76.76.21.21`
   - VEYA CNAME: `cname.vercel-dns.com`
 - [ ] SSL/HTTPS aktif (otomatik)
 
 ### Environment Variables Güncelleme (Domain değiştikten sonra)
+
 - [ ] `NEXT_PUBLIC_SITE_URL` güncellendi
 - [ ] `NEXT_PUBLIC_SHOPIER_CALLBACK_URL` güncellendi
 - [ ] `NEXT_PUBLIC_SHOPIER_WEBHOOK_URL` güncellendi
@@ -203,6 +222,7 @@ vercel --prod
 ### Yaygın Hatalar ve Çözümleri
 
 #### Build Hatası
+
 ```bash
 # Local'de test edin
 npm run build
@@ -210,17 +230,20 @@ npm run build
 ```
 
 #### Environment Variable Hatası
+
 - [ ] Dashboard'da değişken var mı kontrol edin
 - [ ] **Production** environment'ında mı kontrol edin
 - [ ] Redeploy yapın (değişiklikler aktif olsun)
 
 #### 500 Internal Server Error
+
 ```bash
 # Logs kontrol edin
 vercel logs --follow
 ```
 
 #### AI Yorumları Gelmiyor
+
 - [ ] `GROQ_API_KEY` veya `GEMINI_API_KEY` doğru mu?
 - [ ] API rate limit dolmuş olabilir mi?
 - [ ] Function logs'da hata var mı?
@@ -230,21 +253,24 @@ vercel logs --follow
 ## 📝 11. DEPLOYMENT NOTLARI
 
 ### Deployment Bilgileri
-- **Deployment URL:** ___________
-- **Deployment ID:** ___________
-- **Deployment Time:** ___________
-- **Git Commit:** ___________
+
+- **Deployment URL:** ****\_\_\_****
+- **Deployment ID:** ****\_\_\_****
+- **Deployment Time:** ****\_\_\_****
+- **Git Commit:** ****\_\_\_****
 
 ### Test Sonuçları
-- **Build Süresi:** ___ dakika
-- **First Deploy:** ___ dakika
+
+- **Build Süresi:** \_\_\_ dakika
+- **First Deploy:** \_\_\_ dakika
 - **Lighthouse Score:**
-  - Performance: ___
-  - Accessibility: ___
-  - Best Practices: ___
-  - SEO: ___
+  - Performance: \_\_\_
+  - Accessibility: \_\_\_
+  - Best Practices: \_\_\_
+  - SEO: \_\_\_
 
 ### Sorunlar ve Çözümler
+
 _Yaşanan sorunları ve çözümlerini buraya not edin_
 
 ---
@@ -254,6 +280,7 @@ _Yaşanan sorunları ve çözümlerini buraya not edin_
 Deployment başarılı sayılır:
 
 ### Zorunlu ✅
+
 - [x] Build başarılı
 - [x] Site açılıyor (200 OK)
 - [x] HTTPS aktif
@@ -263,6 +290,7 @@ Deployment başarılı sayılır:
 - [x] AI yorumları geliyor
 
 ### Önerilen ✅
+
 - [ ] Lighthouse score >85
 - [ ] No console errors
 - [ ] Email gönderimi çalışıyor
@@ -274,11 +302,13 @@ Deployment başarılı sayılır:
 ## ✍️ ONAY
 
 ### Deployment Onayı
-- **Deploy Eden:** ___________
-- **Tarih/Saat:** ___________
+
+- **Deploy Eden:** ****\_\_\_****
+- **Tarih/Saat:** ****\_\_\_****
 - **Durum:** ☐ BAŞARILI ☐ BAŞARISIZ
 
 ### Sonraki Adımlar
+
 - [ ] Team'e bilgi verildi
 - [ ] Documentation güncellendi
 - [ ] Users'a duyuru yapıldı (eğer gerekirse)
@@ -289,5 +319,4 @@ Deployment başarılı sayılır:
 
 **🚀 Deployment Tamamlandı!**
 
-*Bu checklist'i her deployment için kullanın ve arşivleyin.*
-
+_Bu checklist'i her deployment için kullanın ve arşivleyin._

@@ -71,50 +71,105 @@ export class CardData {
       cardId: slug,
       locale: locale,
       name: cardName[locale],
-      short_description: this.getBasicUprightMeaning(cardName[locale], locale).substring(0, 150),
+      short_description: this.getBasicUprightMeaning(
+        cardName[locale],
+        locale
+      ).substring(0, 150),
       meanings: {
         upright: {
           general: this.getBasicUprightMeaning(cardName[locale], locale),
           love: this.getBasicLoveInterpretation(cardName[locale], locale),
           career: this.getBasicCareerInterpretation(cardName[locale], locale),
           money: this.getBasicMoneyInterpretation(cardName[locale], locale),
-          spiritual: this.getBasicSpiritualInterpretation(cardName[locale], locale),
+          spiritual: this.getBasicSpiritualInterpretation(
+            cardName[locale],
+            locale
+          ),
         },
         reversed: {
           general: this.getBasicReversedMeaning(cardName[locale], locale),
           love: this.getBasicLoveInterpretation(cardName[locale], locale),
           career: this.getBasicCareerInterpretation(cardName[locale], locale),
           money: this.getBasicMoneyInterpretation(cardName[locale], locale),
-          spiritual: this.getBasicSpiritualInterpretation(cardName[locale], locale),
+          spiritual: this.getBasicSpiritualInterpretation(
+            cardName[locale],
+            locale
+          ),
         },
       },
       context: {
         mythology: this.getBasicCardStory(cardName[locale], locale),
       },
       story: {
-        title: locale === 'tr' ? 'Kartın Hikayesi' : locale === 'en' ? 'Card Story' : 'Priča Karte',
+        title:
+          locale === 'tr'
+            ? 'Kartın Hikayesi'
+            : locale === 'en'
+              ? 'Card Story'
+              : 'Priča Karte',
         description: this.getBasicCardStory(cardName[locale], locale),
         history: this.getBasicCardStory(cardName[locale], locale),
-        historytitle: locale === 'tr' ? 'Tarihsel Köken' : locale === 'en' ? 'Historical Origin' : 'Istorijsko Poreklo',
+        historytitle:
+          locale === 'tr'
+            ? 'Tarihsel Köken'
+            : locale === 'en'
+              ? 'Historical Origin'
+              : 'Istorijsko Poreklo',
         history_message: this.getBasicCardStory(cardName[locale], locale),
-        mystic_title: locale === 'tr' ? 'Mistik Anlam' : locale === 'en' ? 'Mystical Meaning' : 'Mističko Značenje',
+        mystic_title:
+          locale === 'tr'
+            ? 'Mistik Anlam'
+            : locale === 'en'
+              ? 'Mystical Meaning'
+              : 'Mističko Značenje',
         mystic_message: this.getBasicCardStory(cardName[locale], locale),
-        cultural_title: locale === 'tr' ? 'Kültürel Önem' : locale === 'en' ? 'Cultural Significance' : 'Kulturni Značaj',
+        cultural_title:
+          locale === 'tr'
+            ? 'Kültürel Önem'
+            : locale === 'en'
+              ? 'Cultural Significance'
+              : 'Kulturni Značaj',
         cultural_message: this.getBasicCardStory(cardName[locale], locale),
       },
       keywords: {
-        keywords_title: locale === 'tr' ? 'Anahtar Kelimeler' : locale === 'en' ? 'Keywords' : 'Ključne Reči',
+        keywords_title:
+          locale === 'tr'
+            ? 'Anahtar Kelimeler'
+            : locale === 'en'
+              ? 'Keywords'
+              : 'Ključne Reči',
         keywords_message: this.getBasicCardKeywords(locale).join(', '),
-        positive_title: locale === 'tr' ? 'Pozitif Enerjiler' : locale === 'en' ? 'Positive Energies' : 'Pozitivne Energije',
-        positive_message: this.getBasicCardKeywords(locale).slice(0, 3).join(', '),
-        balance_title: locale === 'tr' ? 'Denge' : locale === 'en' ? 'Balance' : 'Ravnoteža',
-        balance_message: this.getBasicCardKeywords(locale).slice(3, 5).join(', '),
-        soul_title: locale === 'tr' ? 'Ruhsal Yön' : locale === 'en' ? 'Spiritual Aspect' : 'Duhovni Aspekt',
+        positive_title:
+          locale === 'tr'
+            ? 'Pozitif Enerjiler'
+            : locale === 'en'
+              ? 'Positive Energies'
+              : 'Pozitivne Energije',
+        positive_message: this.getBasicCardKeywords(locale)
+          .slice(0, 3)
+          .join(', '),
+        balance_title:
+          locale === 'tr' ? 'Denge' : locale === 'en' ? 'Balance' : 'Ravnoteža',
+        balance_message: this.getBasicCardKeywords(locale)
+          .slice(3, 5)
+          .join(', '),
+        soul_title:
+          locale === 'tr'
+            ? 'Ruhsal Yön'
+            : locale === 'en'
+              ? 'Spiritual Aspect'
+              : 'Duhovni Aspekt',
         soul_message: this.getBasicCardKeywords(locale).slice(5).join(', '),
       },
       cta: {
-        main: locale === 'tr' ? 'Keşfet' : locale === 'en' ? 'Explore' : 'Istraži',
-        micro: locale === 'tr' ? 'Daha fazla öğren' : locale === 'en' ? 'Learn more' : 'Saznaj više',
+        main:
+          locale === 'tr' ? 'Keşfet' : locale === 'en' ? 'Explore' : 'Istraži',
+        micro:
+          locale === 'tr'
+            ? 'Daha fazla öğren'
+            : locale === 'en'
+              ? 'Learn more'
+              : 'Saznaj više',
       },
       faq: [],
       related_cards: [],
@@ -204,7 +259,10 @@ export class CardData {
       cardId: slug,
       locale: locale,
       name: cardName[locale],
-      short_description: this.getUprightMeaning(suit, number, locale).substring(0, 150),
+      short_description: this.getUprightMeaning(suit, number, locale).substring(
+        0,
+        150
+      ),
       meanings: {
         upright: {
           general: this.getUprightMeaning(suit, number, locale),
@@ -225,29 +283,77 @@ export class CardData {
         mythology: this.getCardStory(suit, number, locale),
       },
       story: {
-        title: locale === 'tr' ? 'Kartın Hikayesi' : locale === 'en' ? 'Card Story' : 'Priča Karte',
+        title:
+          locale === 'tr'
+            ? 'Kartın Hikayesi'
+            : locale === 'en'
+              ? 'Card Story'
+              : 'Priča Karte',
         description: this.getCardStory(suit, number, locale),
         history: this.getCardStory(suit, number, locale),
-        historytitle: locale === 'tr' ? 'Tarihsel Köken' : locale === 'en' ? 'Historical Origin' : 'Istorijsko Poreklo',
+        historytitle:
+          locale === 'tr'
+            ? 'Tarihsel Köken'
+            : locale === 'en'
+              ? 'Historical Origin'
+              : 'Istorijsko Poreklo',
         history_message: this.getCardStory(suit, number, locale),
-        mystic_title: locale === 'tr' ? 'Mistik Anlam' : locale === 'en' ? 'Mystical Meaning' : 'Mističko Značenje',
+        mystic_title:
+          locale === 'tr'
+            ? 'Mistik Anlam'
+            : locale === 'en'
+              ? 'Mystical Meaning'
+              : 'Mističko Značenje',
         mystic_message: this.getCardStory(suit, number, locale),
-        cultural_title: locale === 'tr' ? 'Kültürel Önem' : locale === 'en' ? 'Cultural Significance' : 'Kulturni Značaj',
+        cultural_title:
+          locale === 'tr'
+            ? 'Kültürel Önem'
+            : locale === 'en'
+              ? 'Cultural Significance'
+              : 'Kulturni Značaj',
         cultural_message: this.getCardStory(suit, number, locale),
       },
       keywords: {
-        keywords_title: locale === 'tr' ? 'Anahtar Kelimeler' : locale === 'en' ? 'Keywords' : 'Ključne Reči',
+        keywords_title:
+          locale === 'tr'
+            ? 'Anahtar Kelimeler'
+            : locale === 'en'
+              ? 'Keywords'
+              : 'Ključne Reči',
         keywords_message: this.getCardKeywords(suit, number, locale).join(', '),
-        positive_title: locale === 'tr' ? 'Pozitif Enerjiler' : locale === 'en' ? 'Positive Energies' : 'Pozitivne Energije',
-        positive_message: this.getCardKeywords(suit, number, locale).slice(0, 3).join(', '),
-        balance_title: locale === 'tr' ? 'Denge' : locale === 'en' ? 'Balance' : 'Ravnoteža',
-        balance_message: this.getCardKeywords(suit, number, locale).slice(3, 5).join(', '),
-        soul_title: locale === 'tr' ? 'Ruhsal Yön' : locale === 'en' ? 'Spiritual Aspect' : 'Duhovni Aspekt',
-        soul_message: this.getCardKeywords(suit, number, locale).slice(5).join(', '),
+        positive_title:
+          locale === 'tr'
+            ? 'Pozitif Enerjiler'
+            : locale === 'en'
+              ? 'Positive Energies'
+              : 'Pozitivne Energije',
+        positive_message: this.getCardKeywords(suit, number, locale)
+          .slice(0, 3)
+          .join(', '),
+        balance_title:
+          locale === 'tr' ? 'Denge' : locale === 'en' ? 'Balance' : 'Ravnoteža',
+        balance_message: this.getCardKeywords(suit, number, locale)
+          .slice(3, 5)
+          .join(', '),
+        soul_title:
+          locale === 'tr'
+            ? 'Ruhsal Yön'
+            : locale === 'en'
+              ? 'Spiritual Aspect'
+              : 'Duhovni Aspekt',
+        soul_message: this.getCardKeywords(suit, number, locale)
+          .slice(5)
+          .join(', '),
       },
       cta: {
-        main: locale === 'tr' ? 'Keşfet' : locale === 'en' ? 'Explore' : 'Istraži',
-        micro: locale === 'tr' ? 'Daha fazla öğren' : locale === 'en' ? 'Learn more' : 'Saznaj više',
+        main:
+          locale === 'tr' ? 'Keşfet' : locale === 'en' ? 'Explore' : 'Istraži',
+        micro:
+          locale === 'tr'
+            ? 'Daha fazla öğren'
+            : locale === 'en'
+              ? 'Learn more'
+              : 'Saznaj više',
       },
       faq: [],
       related_cards: [],
@@ -1123,38 +1229,84 @@ export class CardData {
           love: this.getBasicLoveInterpretation(blogCard.name, locale),
           career: this.getBasicCareerInterpretation(blogCard.name, locale),
           money: this.getBasicMoneyInterpretation(blogCard.name, locale),
-          spiritual: this.getBasicSpiritualInterpretation(blogCard.name, locale),
+          spiritual: this.getBasicSpiritualInterpretation(
+            blogCard.name,
+            locale
+          ),
         },
         reversed: {
           general: this.getBasicReversedMeaning(blogCard.name, locale),
           love: this.getBasicLoveInterpretation(blogCard.name, locale),
           career: this.getBasicCareerInterpretation(blogCard.name, locale),
           money: this.getBasicMoneyInterpretation(blogCard.name, locale),
-          spiritual: this.getBasicSpiritualInterpretation(blogCard.name, locale),
+          spiritual: this.getBasicSpiritualInterpretation(
+            blogCard.name,
+            locale
+          ),
         },
       },
       context: blogCard.context || {
         mythology: this.getBasicCardStory(blogCard.name, locale),
       },
       story: blogCard.story || {
-        title: locale === 'tr' ? 'Kartın Hikayesi' : locale === 'en' ? 'Card Story' : 'Priča Karte',
+        title:
+          locale === 'tr'
+            ? 'Kartın Hikayesi'
+            : locale === 'en'
+              ? 'Card Story'
+              : 'Priča Karte',
         description: this.getBasicCardStory(blogCard.name, locale),
         history: this.getBasicCardStory(blogCard.name, locale),
-        historytitle: locale === 'tr' ? 'Tarihsel Köken' : locale === 'en' ? 'Historical Origin' : 'Istorijsko Poreklo',
+        historytitle:
+          locale === 'tr'
+            ? 'Tarihsel Köken'
+            : locale === 'en'
+              ? 'Historical Origin'
+              : 'Istorijsko Poreklo',
         history_message: this.getBasicCardStory(blogCard.name, locale),
-        mystic_title: locale === 'tr' ? 'Mistik Anlam' : locale === 'en' ? 'Mystical Meaning' : 'Mističko Značenje',
+        mystic_title:
+          locale === 'tr'
+            ? 'Mistik Anlam'
+            : locale === 'en'
+              ? 'Mystical Meaning'
+              : 'Mističko Značenje',
         mystic_message: this.getBasicCardStory(blogCard.name, locale),
-        cultural_title: locale === 'tr' ? 'Kültürel Önem' : locale === 'en' ? 'Cultural Significance' : 'Kulturni Značaj',
+        cultural_title:
+          locale === 'tr'
+            ? 'Kültürel Önem'
+            : locale === 'en'
+              ? 'Cultural Significance'
+              : 'Kulturni Značaj',
         cultural_message: this.getBasicCardStory(blogCard.name, locale),
       },
       keywords: blogCard.keywords || {
-        keywords_title: locale === 'tr' ? 'Anahtar Kelimeler' : locale === 'en' ? 'Keywords' : 'Ključne Reči',
+        keywords_title:
+          locale === 'tr'
+            ? 'Anahtar Kelimeler'
+            : locale === 'en'
+              ? 'Keywords'
+              : 'Ključne Reči',
         keywords_message: this.getBasicCardKeywords(locale).join(', '),
-        positive_title: locale === 'tr' ? 'Pozitif Enerjiler' : locale === 'en' ? 'Positive Energies' : 'Pozitivne Energije',
-        positive_message: this.getBasicCardKeywords(locale).slice(0, 3).join(', '),
-        balance_title: locale === 'tr' ? 'Denge' : locale === 'en' ? 'Balance' : 'Ravnoteža',
-        balance_message: this.getBasicCardKeywords(locale).slice(3, 6).join(', '),
-        soul_title: locale === 'tr' ? 'Ruhsal Mesaj' : locale === 'en' ? 'Soul Message' : 'Duhovna Poruka',
+        positive_title:
+          locale === 'tr'
+            ? 'Pozitif Enerjiler'
+            : locale === 'en'
+              ? 'Positive Energies'
+              : 'Pozitivne Energije',
+        positive_message: this.getBasicCardKeywords(locale)
+          .slice(0, 3)
+          .join(', '),
+        balance_title:
+          locale === 'tr' ? 'Denge' : locale === 'en' ? 'Balance' : 'Ravnoteža',
+        balance_message: this.getBasicCardKeywords(locale)
+          .slice(3, 6)
+          .join(', '),
+        soul_title:
+          locale === 'tr'
+            ? 'Ruhsal Mesaj'
+            : locale === 'en'
+              ? 'Soul Message'
+              : 'Duhovna Poruka',
         soul_message: this.getBasicCardKeywords(locale).join(', '),
       },
       associations: blogCard.associations,
@@ -1162,7 +1314,9 @@ export class CardData {
       affirmations: blogCard.affirmations,
       cta: blogCard.cta,
       faq: Array.isArray(blogCard.faq) ? blogCard.faq : [],
-      related_cards: Array.isArray(blogCard.related_cards) ? blogCard.related_cards : [],
+      related_cards: Array.isArray(blogCard.related_cards)
+        ? blogCard.related_cards
+        : [],
       imageUrl: blogCard.imageUrl,
       readingTime: 5,
       createdAt: new Date(),

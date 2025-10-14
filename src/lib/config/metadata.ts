@@ -84,7 +84,9 @@ export const defaultMetadata: Metadata = {
     title: 'Büşbüşkimki - Profesyonel Tarot Okuması ve Numeroloji Analizi',
     description:
       'Profesyonel tarot okuması ve numeroloji analizi ile geleceğinizi keşfedin.',
-    images: ['/api/og?title=Büşbüşkimki&subtitle=Profesyonel Tarot Okuması ve Numeroloji Analizi&locale=tr'],
+    images: [
+      '/api/og?title=Büşbüşkimki&subtitle=Profesyonel Tarot Okuması ve Numeroloji Analizi&locale=tr',
+    ],
   },
   alternates: {
     canonical: 'https://busbuskimki.com',
@@ -98,7 +100,8 @@ export const defaultMetadata: Metadata = {
   category: 'Spirituality',
   classification: 'Mystical Services',
   other: {
-    'google-site-verification': process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || '',
+    'google-site-verification':
+      process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || '',
     'msvalidate.01': process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION || '',
   },
 };

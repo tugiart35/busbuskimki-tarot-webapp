@@ -106,7 +106,7 @@ export async function generateStaticParams() {
     'yildizlar-krali',
   ];
 
-  return slugs.map((slug) => ({ slug }));
+  return slugs.map(slug => ({ slug }));
 }
 
 export async function generateMetadata({ params }: PageProps) {

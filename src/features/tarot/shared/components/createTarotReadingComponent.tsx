@@ -550,9 +550,9 @@ interface CreateTarotReadingComponentOptions {
   readingType?: string;
   // Kart anlamını getiren fonksiyon - pozisyon ve ters duruma göre anlam döner
   getCardMeaning: (
-    card: TarotCard | null,
-    position: number,
-    isReversed: boolean
+    _card: TarotCard | null,
+    _position: number,
+    _isReversed: boolean
   ) =>
     | string
     | { interpretation: string; context: string; keywords?: string[] };
@@ -846,30 +846,15 @@ export function createTarotReadingComponent({
           p_idempotency_key: `reading_${user.id}_${readingData.timestamp}`,
         };
 
-        // Only log RPC calls in development
-        if (process.env.NODE_ENV === 'development') {
-          console.log(
-            '🔍 Situation Analysis RPC çağrısı parametreleri:',
-            rpcParams
-          );
-        }
-
         // Supabase RPC fonksiyonu ile okuma kaydetme ve kredi düşme
         const { data: rpcResult, error: rpcError } = await supabase.rpc(
           'fn_create_reading_with_debit',
           rpcParams
         );
 
-        if (process.env.NODE_ENV === 'development') {
-          console.log('🔍 Situation Analysis RPC sonucu:', {
-            rpcResult,
-            rpcError,
-          });
-        }
-
         // Okuma kaydedildikten sonra iletişim bilgilerini güncelle
         if (rpcResult?.id) {
-          const { error: updateError } = await supabase
+          await supabase
             .from('readings')
             .update({
               contact_method: communicationMethod,
@@ -877,33 +862,16 @@ export function createTarotReadingComponent({
                 communicationMethod === 'whatsapp' ? personalInfo.phone : null,
             })
             .eq('id', rpcResult.id);
-
-          if (updateError && process.env.NODE_ENV === 'development') {
-            console.warn('İletişim bilgileri güncellenemedi:', updateError);
-          }
         }
 
         // RPC hatası kontrolü
         if (rpcError) {
-          if (process.env.NODE_ENV === 'development') {
-            console.error('❌ Situation Analysis RPC hatası:', rpcError);
-            console.error('❌ RPC hata detayları:', {
-              message: rpcError.message,
-              details: rpcError.details,
-              hint: rpcError.hint,
-              code: rpcError.code,
-            });
-          } else {
-            console.error('RPC call failed - check server logs');
-          }
           throw rpcError;
         }
 
         // Email gönderimini arka planda yap, kullanıcıyı bekletme
-        triggerEmailSending(rpcResult?.id).catch(error => {
-          if (process.env.NODE_ENV === 'development') {
-            console.warn('Email gönderimi başarısız:', error);
-          }
+        triggerEmailSending(rpcResult?.id).catch(() => {
+          // Sessizce devam et
         });
 
         return {
@@ -979,16 +947,13 @@ export function createTarotReadingComponent({
           };
 
           // Kaydetme işlemini arka planda yap, kullanıcıyı yönlendir
-          saveReadingToSupabase(simpleReadingData).catch(error => {
-            if (process.env.NODE_ENV === 'development') {
-              console.warn('Simple reading kaydedilemedi:', error);
-            }
+          saveReadingToSupabase(simpleReadingData).catch(() => {
+            // Sessizce devam et
           });
           showToast(t(messages.simpleReadingCompleted), 'success');
           try {
             router.push('/dashboard');
-          } catch (error) {
-            console.warn('Dashboard yönlendirme hatası:', error);
+          } catch {
             window.location.href = '/dashboard';
           }
           return;
@@ -1069,10 +1034,7 @@ export function createTarotReadingComponent({
               // Locale-aware dashboard yönlendirmesi
               const currentLocale = pathname?.split('/')[1] || 'tr';
               router.push(`/${currentLocale}/dashboard`);
-            } catch (error) {
-              if (process.env.NODE_ENV === 'development') {
-                console.warn('Dashboard yönlendirme hatası:', error);
-              }
+            } catch {
               // Fallback: window.location kullan
               const currentLocale = pathname?.split('/')[1] || 'tr';
               window.location.href = `/${currentLocale}/dashboard`;
@@ -1081,18 +1043,7 @@ export function createTarotReadingComponent({
 
           return;
         }
-      } catch (error) {
-        if (process.env.NODE_ENV === 'development') {
-          console.error('❌ Situation Analysis kaydetme hatası:', error);
-          console.error('❌ Hata detayları:', {
-            error: error instanceof Error ? error.message : error,
-            stack: error instanceof Error ? error.stack : undefined,
-            readingType: config.supabaseReadingType,
-            spreadName: t(dataKeys.spreadName),
-          });
-        } else {
-          console.error('Reading save failed - check server logs');
-        }
+      } catch {
         showToast(t(messages.readingSaveError), 'error');
       } finally {
         setSavingReading(false);
@@ -1112,10 +1063,7 @@ export function createTarotReadingComponent({
             onReadingTypeSelected();
           }
         }, 0);
-      } catch (error) {
-        if (process.env.NODE_ENV === 'development') {
-          console.error('Reading type seçiminde hata:', error);
-        }
+      } catch {
         showToast(
           'Okuma tipi seçiminde bir hata oluştu. Lütfen tekrar deneyin.',
           'error'
@@ -1130,15 +1078,8 @@ export function createTarotReadingComponent({
           showToast(t(messages.selectReadingTypeFirst), 'info');
           return;
         }
-
-        if (process.env.NODE_ENV === 'development') {
-          console.log(`Kart seçiliyor: ${card.name}`);
-        }
         handleCardSelect(card);
-      } catch (error) {
-        if (process.env.NODE_ENV === 'development') {
-          console.error('Kart seçiminde hata:', error);
-        }
+      } catch {
         showToast(
           'Kart seçiminde bir hata oluştu. Lütfen tekrar deneyin.',
           'error'
@@ -1388,18 +1329,12 @@ export function createTarotReadingComponent({
                 <button
                   onClick={() => {
                     try {
-                      if (process.env.NODE_ENV === 'development') {
-                        console.log('Okuma tipi değiştiriliyor...');
-                      }
                       setSelectedReadingType(null);
                       showToast(
                         'Okuma tipi değiştirildi. Yeni tip seçebilirsiniz.',
                         'info'
                       );
-                    } catch (error) {
-                      if (process.env.NODE_ENV === 'development') {
-                        console.error('Okuma tipi değiştirirken hata:', error);
-                      }
+                    } catch {
                       showToast(
                         'Okuma tipi değiştirirken bir hata oluştu.',
                         'error'

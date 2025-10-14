@@ -1,9 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
+import Link from 'next/link';
 import { supabase } from '@/lib/supabase/client';
 import { useAuth } from '@/hooks/auth/useAuth';
+import { useTranslations } from '@/hooks/useTranslations';
 import {
   Coins,
   TrendingUp,
@@ -35,6 +37,7 @@ interface CreditStats {
 
 export default function CreditsPage() {
   const { user, loading: authLoading } = useAuth();
+  const { t } = useTranslations();
   const router = useRouter();
   const pathname = usePathname();
 
@@ -51,18 +54,7 @@ export default function CreditsPage() {
     'all'
   );
 
-  // Auth kontrolü
-  useEffect(() => {
-    if (!authLoading) {
-      if (!user) {
-        router.replace(`/${locale}/auth`);
-        return;
-      }
-      fetchTransactions();
-    }
-  }, [authLoading, user, filter, dateRange, router, locale]);
-
-  const fetchTransactions = async () => {
+  const fetchTransactions = useCallback(async () => {
     if (!user) {
       return;
     }
@@ -160,7 +152,19 @@ export default function CreditsPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [user, filter, dateRange, t]);
+
+  // Auth kontrolü
+  useEffect(() => {
+    if (!authLoading) {
+      if (!user) {
+        router.replace(`/${locale}/auth`);
+        return;
+      }
+      fetchTransactions();
+    }
+  }, [authLoading, user, filter, dateRange, router, locale, fetchTransactions]);
+
   const calculateStats = (transactions: Transaction[]) => {
     const totalPurchased = transactions
       .filter(
@@ -255,7 +259,12 @@ export default function CreditsPage() {
 
   const exportTransactions = () => {
     const csvContent = [
-      [t('dashboard.creditHistory.csvDate'), t('dashboard.creditHistory.csvType'), t('dashboard.creditHistory.csvAmount'), t('dashboard.creditHistory.csvDescription')],
+      [
+        t('dashboard.creditHistory.csvDate'),
+        t('dashboard.creditHistory.csvType'),
+        t('dashboard.creditHistory.csvAmount'),
+        t('dashboard.creditHistory.csvDescription'),
+      ],
       ...transactions.map(transaction => [
         formatDate(transaction.created_at),
         getTransactionLabel(transaction),
@@ -304,12 +313,12 @@ export default function CreditsPage() {
               Kredi Geçmişi
             </span>
           </div>
-          <a
-            href='/dashboard'
+          <Link
+            href={`/${locale}/dashboard`}
             className='text-text-mystic hover:text-gold transition-colors'
           >
             ← {t('dashboard.backToDashboard')}
-          </a>
+          </Link>
         </div>
       </header>
 
@@ -411,7 +420,10 @@ export default function CreditsPage() {
 
           {/* Results Count */}
           <div className='text-sm text-text-mystic'>
-            {t('dashboard.creditHistory.transactionsFound', { count: transactions.length })}
+            {t('dashboard.creditHistory.transactionsFound').replace(
+              '{count}',
+              String(transactions.length)
+            )}
           </div>
         </div>
 
@@ -481,17 +493,17 @@ export default function CreditsPage() {
             <p className='text-text-mystic mb-6'>
               {t('dashboard.creditHistory.startWithFirstPurchase')}
             </p>
-            <a href='/packages' className='btn btn-primary'>
+            <Link href={`/${locale}/packages`} className='btn btn-primary'>
               {t('dashboard.creditHistory.buyCredits')}
-            </a>
+            </Link>
           </div>
         )}
 
         {/* Navigation */}
         <div className='mt-12 text-center'>
-          <a href='/dashboard' className='btn btn-primary'>
+          <Link href={`/${locale}/dashboard`} className='btn btn-primary'>
             {t('dashboard.backToDashboard')}
-          </a>
+          </Link>
         </div>
       </main>
     </div>

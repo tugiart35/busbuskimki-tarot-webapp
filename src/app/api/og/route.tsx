@@ -6,10 +6,11 @@ export const runtime = 'edge';
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    
+
     // Query params
     const title = searchParams.get('title') || 'Büşbüşkimki';
-    const subtitle = searchParams.get('subtitle') || 'Profesyonel Tarot Okuması ve Numeroloji';
+    const subtitle =
+      searchParams.get('subtitle') || 'Profesyonel Tarot Okuması ve Numeroloji';
     const locale = searchParams.get('locale') || 'tr';
 
     // Locale-specific text
@@ -32,7 +33,8 @@ export async function GET(request: NextRequest) {
             alignItems: 'center',
             justifyContent: 'center',
             backgroundColor: '#0f0f23',
-            backgroundImage: 'radial-gradient(circle at 25px 25px, rgba(99, 102, 241, 0.15) 2%, transparent 0%), radial-gradient(circle at 75px 75px, rgba(139, 92, 246, 0.1) 2%, transparent 0%)',
+            backgroundImage:
+              'radial-gradient(circle at 25px 25px, rgba(99, 102, 241, 0.15) 2%, transparent 0%), radial-gradient(circle at 75px 75px, rgba(139, 92, 246, 0.1) 2%, transparent 0%)',
             backgroundSize: '100px 100px',
             position: 'relative',
           }}
@@ -45,7 +47,8 @@ export async function GET(request: NextRequest) {
               left: 0,
               right: 0,
               bottom: 0,
-              background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(139, 92, 246, 0.2) 50%, rgba(167, 139, 250, 0.2) 100%)',
+              background:
+                'linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(139, 92, 246, 0.2) 50%, rgba(167, 139, 250, 0.2) 100%)',
             }}
           />
 
@@ -74,7 +77,8 @@ export async function GET(request: NextRequest) {
                   width: '120px',
                   height: '120px',
                   borderRadius: '30px',
-                  background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
+                  background:
+                    'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -142,7 +146,8 @@ export async function GET(request: NextRequest) {
               left: '60px',
               right: '60px',
               height: '4px',
-              background: 'linear-gradient(90deg, transparent 0%, #6366f1 50%, transparent 100%)',
+              background:
+                'linear-gradient(90deg, transparent 0%, #6366f1 50%, transparent 100%)',
               borderRadius: '2px',
             }}
           />
@@ -160,4 +165,3 @@ export async function GET(request: NextRequest) {
     });
   }
 }
-

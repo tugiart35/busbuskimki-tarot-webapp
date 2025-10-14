@@ -828,8 +828,7 @@ export const position4Meanings: RelationshipAnalysisPositionMeaning[] = [
     reversed:
       'Ters Tılsım Prensi, ertelemeyi bırak ve odaklan der. Disiplin güç getirir.',
     keywords: ['öğrenme', 'başlangıç', 'odak', 'pratik', 'somutluk'],
-    context:
-      'Tavsiyen; adım adım ilerlemek. Her küçük çaba sevgiyi büyütür.',
+    context: 'Tavsiyen; adım adım ilerlemek. Her küçük çaba sevgiyi büyütür.',
     group: 'Tılsımlar',
   },
   {
@@ -841,8 +840,7 @@ export const position4Meanings: RelationshipAnalysisPositionMeaning[] = [
     reversed:
       'Ters Tılsım Şövalyesi, durağanlıktan çık ve yenile der. Esneklik can katar.',
     keywords: ['kararlılık', 'tutarlılık', 'istikrar', 'güven', 'esneklik'],
-    context:
-      'Tavsiyen; emin adımlarla ilerlemek. Tutarlılık sevgiyi besler.',
+    context: 'Tavsiyen; emin adımlarla ilerlemek. Tutarlılık sevgiyi besler.',
     group: 'Tılsımlar',
   },
   {

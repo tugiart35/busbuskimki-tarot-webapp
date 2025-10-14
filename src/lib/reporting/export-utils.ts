@@ -149,10 +149,7 @@ export const exportToExcel = async (
 
   // Header formatting
   summarySheet.getRow(1).font = { bold: true };
-  summarySheet.columns = [
-    { width: 30 },
-    { width: 20 }
-  ];
+  summarySheet.columns = [{ width: 30 }, { width: 20 }];
 
   // Kullanıcı kayıtları
   const userRegSheet = workbook.addWorksheet('Kullanıcı Kayıtları');
@@ -161,10 +158,7 @@ export const exportToExcel = async (
     userRegSheet.addRow([item.name, item.value]);
   });
   userRegSheet.getRow(1).font = { bold: true };
-  userRegSheet.columns = [
-    { width: 20 },
-    { width: 15 }
-  ];
+  userRegSheet.columns = [{ width: 20 }, { width: 15 }];
 
   // Paket satışları
   const packageSheet = workbook.addWorksheet('Paket Satışları');
@@ -173,10 +167,7 @@ export const exportToExcel = async (
     packageSheet.addRow([item.name, item.value]);
   });
   packageSheet.getRow(1).font = { bold: true };
-  packageSheet.columns = [
-    { width: 25 },
-    { width: 15 }
-  ];
+  packageSheet.columns = [{ width: 25 }, { width: 15 }];
 
   // Özellik kullanımı
   const featureSheet = workbook.addWorksheet('Özellik Kullanımı');
@@ -185,10 +176,7 @@ export const exportToExcel = async (
     featureSheet.addRow([item.name, item.value]);
   });
   featureSheet.getRow(1).font = { bold: true };
-  featureSheet.columns = [
-    { width: 25 },
-    { width: 15 }
-  ];
+  featureSheet.columns = [{ width: 25 }, { width: 15 }];
 
   // Gelir verileri
   const revenueSheet = workbook.addWorksheet('Gelir Verileri');
@@ -197,15 +185,12 @@ export const exportToExcel = async (
     revenueSheet.addRow([item.date, item.revenue]);
   });
   revenueSheet.getRow(1).font = { bold: true };
-  revenueSheet.columns = [
-    { width: 20 },
-    { width: 15 }
-  ];
+  revenueSheet.columns = [{ width: 20 }, { width: 15 }];
 
   // Write to buffer and return as Blob
   const buffer = await workbook.xlsx.writeBuffer();
-  return new Blob([buffer], { 
-    type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' 
+  return new Blob([buffer], {
+    type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
   });
 };
 
