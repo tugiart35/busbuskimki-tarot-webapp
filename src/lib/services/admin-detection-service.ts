@@ -66,7 +66,6 @@ export class AdminDetectionService {
    */
   static logAdminAccess(userId: string, isAdmin: boolean): void {
     if (process.env.NODE_ENV === 'development') {
-      console.log('Admin detection:', {
         userId,
         isAdmin,
         timestamp: new Date().toISOString(),

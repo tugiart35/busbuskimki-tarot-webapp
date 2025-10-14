@@ -345,19 +345,16 @@ export class CDNCacheStrategy {
     return {
       // Invalidate by pattern
       invalidateByPattern: (pattern: string) => {
-        console.log(`Invalidating cache for pattern: ${pattern}`);
         // In real implementation, this would call CDN API
       },
 
       // Invalidate by tag
       invalidateByTag: (tag: string) => {
-        console.log(`Invalidating cache for tag: ${tag}`);
         // In real implementation, this would call CDN API
       },
 
       // Invalidate specific URLs
       invalidateUrls: (urls: string[]) => {
-        console.log(`Invalidating cache for URLs: ${urls.join(', ')}`);
         // In real implementation, this would call CDN API
       },
     };
@@ -397,7 +394,6 @@ export class CacheWarmingStrategy {
           );
           if (!StaticGenerationCache.get(cardPageKey)) {
             // In real implementation, this would pre-generate the page
-            console.log(`Warming cache for ${cardId} in ${locale}`);
           }
 
           // Warm related cards cache
@@ -406,7 +402,6 @@ export class CacheWarmingStrategy {
             locale
           );
           if (!StaticGenerationCache.get(relatedCardsKey)) {
-            console.log(
               `Warming related cards cache for ${cardId} in ${locale}`
             );
           }

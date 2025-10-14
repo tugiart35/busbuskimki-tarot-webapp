@@ -102,18 +102,14 @@ export function useAuth() {
   const resendConfirmation = useCallback(
     async (email: string) => {
       try {
-        console.log('useAuth.resendConfirmation called with email:', email);
         setAuthLoading(true);
         clearError();
 
-        console.log('Calling AuthService.resendConfirmation');
         await AuthService.resendConfirmation(email);
-        console.log('AuthService.resendConfirmation completed successfully');
       } catch (err) {
         console.error('useAuth.resendConfirmation error:', err);
         throw err;
       } finally {
-        console.log('useAuth.resendConfirmation finally block');
         setAuthLoading(false);
       }
     },

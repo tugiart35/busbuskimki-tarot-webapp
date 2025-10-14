@@ -295,7 +295,6 @@ export class ApiBase {
    * Request logging
    */
   static logRequest(request: NextRequest, context: string): void {
-    console.log(`[API Request] ${context}:`, {
       method: request.method,
       url: request.url,
       ip: this.getClientIP(request),

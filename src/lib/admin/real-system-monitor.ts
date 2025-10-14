@@ -169,7 +169,6 @@ export async function collectAndLogSystemPerformance(): Promise<SystemPerformanc
 export function startPerformanceMonitoring(
   intervalMinutes = 5
 ): NodeJS.Timeout {
-  console.log(
     `Starting system performance monitoring every ${intervalMinutes} minutes`
   );
 
@@ -189,7 +188,6 @@ export function startPerformanceMonitoring(
  * Performans izlemeyi durdurur
  */
 export function stopPerformanceMonitoring(intervalId: NodeJS.Timeout): void {
-  console.log('Stopping system performance monitoring');
   clearInterval(intervalId);
 }
 
@@ -206,7 +204,6 @@ export function useRealSystemMonitoring(intervalMinutes = 1) {
       return;
     }
 
-    console.log('Starting real-time system monitoring');
     setIsMonitoring(true);
 
     // İlk metrikleri topla
@@ -228,7 +225,6 @@ export function useRealSystemMonitoring(intervalMinutes = 1) {
       return;
     }
 
-    console.log('Stopping real-time system monitoring');
     setIsMonitoring(false);
     clearInterval(intervalId);
     setIntervalId(null);

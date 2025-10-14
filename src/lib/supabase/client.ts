@@ -39,7 +39,6 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
 // Production'da console.log'ları kaldır - performans için
 if (process.env.NODE_ENV === 'development') {
-  console.log('🔍 Supabase Client: Environment kontrolü:', {
     hasUrl: !!supabaseUrl,
     hasKey: !!supabaseAnonKey,
     urlLength: supabaseUrl?.length,

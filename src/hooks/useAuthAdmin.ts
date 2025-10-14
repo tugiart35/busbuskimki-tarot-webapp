@@ -27,7 +27,6 @@ export function useAuthAdmin() {
       // Production için tüm geliştirme modu kodları kaldırıldı
 
       // Supabase admin kontrolü - güvenli authentication
-      console.log('🔐 Supabase admin authentication başlatılıyor...');
 
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
@@ -83,7 +82,6 @@ export function useAuthAdmin() {
           display_name: profile.display_name,
         };
 
-        console.log('✅ Admin kullanıcısı doğrulandı:', profile.email);
         setAdmin(adminUser);
         return { success: true, error: null };
       }
@@ -116,7 +114,6 @@ export function useAuthAdmin() {
         } = await supabase.auth.getSession();
 
         if (session?.user) {
-          console.log('🔐 Mevcut session bulundu:', session.user.email);
 
           // Admin kontrolü yap - önce admins tablosundan kontrol et
           const { data: adminRecord } = await supabase
@@ -144,7 +141,6 @@ export function useAuthAdmin() {
               is_admin: true,
               display_name: profile.display_name,
             };
-            console.log('✅ Admin session restore edildi:', profile.email);
             setAdmin(adminUser);
           }
         }

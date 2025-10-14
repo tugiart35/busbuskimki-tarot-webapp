@@ -468,6 +468,5 @@ export function initializeCodeSplitting() {
   // Track component usage for preloading
   if (CODE_SPLITTING_CONFIG.TRACK_USAGE) {
     // Set up usage tracking
-    console.log('Code splitting initialized with usage tracking');
   }
 }

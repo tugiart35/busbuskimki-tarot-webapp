@@ -28,10 +28,8 @@ export function useSimpleAdmin() {
         };
 
         setAdmin(adminUser);
-        console.log('Admin girişi onaylandı:', user.email);
       } else {
         setAdmin(null);
-        console.log('Admin girişi bulunamadı');
       }
     } catch (error) {
       console.error('Admin auth check failed:', error);

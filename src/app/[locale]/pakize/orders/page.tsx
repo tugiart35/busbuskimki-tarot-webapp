@@ -432,7 +432,6 @@ export default function OrdersPage() {
     }
 
     try {
-      console.log('İşlem güncelleniyor:', orderId, 'yeni durum:', newStatus);
 
       // UI'ı hemen güncelle - optimistic update
       setOrders(prevOrders =>
@@ -474,7 +473,6 @@ export default function OrdersPage() {
         .eq('id', orderId);
 
       if (directUpdateError) {
-        console.log('Direct status update failed, using alternative method');
 
         // Alternatif 1: RPC fonksiyonu kullanarak güncelleme
         const { error: rpcError } = await supabase.rpc(
@@ -486,7 +484,6 @@ export default function OrdersPage() {
         );
 
         if (rpcError) {
-          console.log('RPC update failed, using client-side only storage');
           // Başarılı bildirim göster (client-side storage çalıştı)
           showToast('İşlem durumu sadece görsel olarak güncellendi', 'warning');
         } else {

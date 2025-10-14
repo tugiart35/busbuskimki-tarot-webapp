@@ -23,7 +23,6 @@ export default function CardImagePreloader({
 
   useEffect(() => {
     if (allLoaded) {
-      console.log('Critical card images preloaded successfully');
     }
   }, [allLoaded]);
 

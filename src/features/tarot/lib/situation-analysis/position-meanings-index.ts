@@ -160,7 +160,6 @@ export function getSituationAnalysisMeaningByCardAndPosition(
   // Kart ismini İngilizce'ye çevir - önce nameTr'yi dene, sonra name'i
   const englishCardName =
     cardNameMapping[card.nameTr] || cardNameMapping[card.name] || card.name;
-  console.log('🔄 Situation Analysis Card name mapping:', {
     original: card.nameTr,
     originalName: card.name,
     mapped: englishCardName,
@@ -202,7 +201,6 @@ export function getSituationAnalysisMeaningByCardAndPosition(
   }
 
   if (positionMeaning) {
-    console.log('✅ Situation Analysis: Found position meaning for', {
       cardName: card.nameTr,
       position: position,
       meaningId: positionMeaning.id,
@@ -237,7 +235,6 @@ export function getSituationAnalysisMeaningByCardAndPosition(
     reversed: isReversed ? baseMeaning.upright : baseMeaning.reversed,
   };
 
-  console.log('⚠️ Situation Analysis: Using fallback meaning for', {
     cardName: card.nameTr,
     position: position,
     meaningPreview: fallbackResult.upright.substring(0, 50) + '...',

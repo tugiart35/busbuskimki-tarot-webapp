@@ -25,7 +25,6 @@ export async function triggerEmailSending(
       );
     } else {
       const result = await response.json();
-      console.log('Email gönderimi başarılı:', readingId, result.fileName);
     }
   } catch (error) {
     console.warn('Email gönderimi sırasında hata:', error);

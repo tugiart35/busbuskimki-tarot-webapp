@@ -93,7 +93,6 @@ export class AuthService {
    */
   static async signUp(userData: RegisterFormData) {
     try {
-      console.log('Kullanıcı kaydı başlatılıyor:', { email: userData.email });
 
       // Supabase auth signup işlemi
       const { data, error } = await supabase.auth.signUp({
@@ -126,12 +125,10 @@ export class AuthService {
         throw new AuthError(error.message, error, error.status?.toString());
       }
 
-      console.log('Auth signup başarılı:', { userId: data.user?.id });
 
       // Kullanıcı başarıyla oluşturulduysa profile oluştur
       if (data.user) {
         try {
-          console.log('Profile oluşturma başlatılıyor...');
           const { createOrUpdateProfile } = await import(
             '@/lib/utils/profile-utils'
           );
@@ -149,7 +146,6 @@ export class AuthService {
             console.error('Profile oluşturulamadı:', profileResult.error);
             // Profile oluşturulamasa bile auth işlemi başarılı sayılır
           } else {
-            console.log(
               'Profile başarıyla oluşturuldu:',
               profileResult.profile?.id
             );
@@ -285,21 +281,18 @@ export class AuthService {
    */
   static async resendConfirmation(email: string) {
     try {
-      console.log('AuthService.resendConfirmation called with email:', email);
 
       const { error } = await supabase.auth.resend({
         type: 'signup',
         email,
       });
 
-      console.log('Supabase resend response:', { error });
 
       if (error) {
         console.error('Resend error:', error);
         throw new AuthError(error.message, error);
       }
 
-      console.log('Resend confirmation successful');
       return true;
     } catch (error) {
       console.error('Resend confirmation catch block:', error);

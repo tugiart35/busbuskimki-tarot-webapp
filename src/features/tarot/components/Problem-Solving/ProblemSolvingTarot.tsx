@@ -24,7 +24,6 @@ export default function ProblemSolvingReading(props: any) {
         return '';
       }
 
-      console.log('🔍 ProblemSolvingTarot getCardMeaning:', {
         cardName: card.name,
         position,
         isReversed,
@@ -37,7 +36,6 @@ export default function ProblemSolvingReading(props: any) {
         t
       );
 
-      console.log('🔍 ProblemSolvingTarot meaning result:', {
         found: !!meaning,
         card: meaning?.card,
         interpretation: meaning

@@ -58,7 +58,6 @@ export class AdminErrorService {
     details: Record<string, unknown>
   ): void {
     // Action logging is handled by monitoring system
-    console.log(`Admin action: ${action}`, details);
   }
 
   /**

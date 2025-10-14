@@ -61,29 +61,23 @@ export const useDashboardActions = (
 
   // Çıkış yap fonksiyonu - Supabase ile entegre
   const handleLogout = async () => {
-    console.log('🚪 Çıkış yapma işlemi başlatılıyor...');
 
     try {
       // Supabase signOut çağrısı
-      console.log('🔐 Supabase signOut çağrılıyor...');
       const { error } = await supabase.auth.signOut();
 
-      console.log('🔍 SignOut sonucu:', {
         hasError: !!error,
         errorMessage: error?.message,
       });
 
-      console.log('✅ Çıkış tamamlandı, yönlendiriliyor...');
 
       // Kısa bir bekleme sonrası yönlendir
       setTimeout(() => {
-        console.log('🔄 Yönlendirme:', `/${currentLocale}`);
         window.location.href = `/${currentLocale}`;
       }, 100);
     } catch (error) {
       console.error('❌ Çıkış yapma hatası:', error);
 
-      console.log('🔄 Hata durumunda yönlendiriliyor...');
       window.location.href = `/${currentLocale}`;
     }
   };

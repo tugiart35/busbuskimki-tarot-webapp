@@ -87,7 +87,6 @@ class EmailService {
       // SMTP configuration loaded from environment variables
       // Only log in development environment
       if (process.env.NODE_ENV === 'development') {
-        console.log('SMTP Config (dev only):', {
           host: config.host,
           port: config.port,
           secure: config.secure,
@@ -101,7 +100,6 @@ class EmailService {
 
       // Only log in development
       if (process.env.NODE_ENV === 'development') {
-        console.log(
           'Email transporter initialized successfully with connection pooling'
         );
       }
@@ -127,8 +125,6 @@ class EmailService {
 
       // Only log in development environment
       if (process.env.NODE_ENV === 'development') {
-        console.log('Sending email to:', emailData.to);
-        console.log('Mail options:', {
           from: mailOptions.from,
           to: mailOptions.to,
           subject: mailOptions.subject,
@@ -141,7 +137,6 @@ class EmailService {
 
       // Only log success in development
       if (process.env.NODE_ENV === 'development') {
-        console.log('Email sent successfully:', result.messageId);
       }
 
       return true;

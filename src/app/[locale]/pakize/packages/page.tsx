@@ -152,7 +152,6 @@ export default function PackagesPage() {
   }, [error, success]);
 
   const fetchPackages = async () => {
-    console.log('📥 Paketler yükleniyor...');
     setLoading(true);
     clearMessages();
     try {
@@ -161,7 +160,6 @@ export default function PackagesPage() {
         .select('*')
         .order('created_at', { ascending: false });
 
-      console.log('📦 Supabase packages response:', { data, error });
 
       if (error) {
         console.error('❌ Supabase error:', error);
@@ -188,7 +186,6 @@ export default function PackagesPage() {
         shopier_product_id: pkg.shopier_product_id || '',
       }));
 
-      console.log(
         '✅ Formatted packages (EUR güncel kurla hesaplandı):',
         formattedPackages
       );
@@ -265,7 +262,6 @@ export default function PackagesPage() {
       return;
     }
 
-    console.log('🔄 Paket güncelleme başlatılıyor:', {
       selectedPackage: selectedPackage.id,
       formData: formData,
     });
@@ -291,7 +287,6 @@ export default function PackagesPage() {
     }
 
     try {
-      console.log('📤 Supabase update isteği gönderiliyor...');
 
       // EUR'yu güncel kurla hesapla
       const currentRate = exchangeRate || 38.5;
@@ -311,18 +306,15 @@ export default function PackagesPage() {
         .eq('id', selectedPackage.id)
         .select('*');
 
-      console.log('📥 Supabase response:', { error });
 
       if (error) {
         console.error('❌ Supabase error:', error);
         throw error;
       }
 
-      console.log(
         '✅ Paket güncellendi, fetchPackages ile yeniden yükleniyor...'
       );
 
-      console.log('🔄 fetchPackages çağrılıyor...');
       await fetchPackages();
 
       // Modal'ı kapat ve formu temizle
@@ -330,7 +322,6 @@ export default function PackagesPage() {
       resetForm();
       setSuccess('Paket başarıyla güncellendi');
 
-      console.log('🎉 Paket güncelleme tamamlandı');
     } catch (error: any) {
       console.error('❌ Error updating package:', error);
       setError(

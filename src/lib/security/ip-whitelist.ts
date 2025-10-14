@@ -114,7 +114,6 @@ export function getAllowedIps(): string[] {
 export function addAllowedIp(ip: string): void {
   if (!ALLOWED_ADMIN_IPS.includes(ip)) {
     ALLOWED_ADMIN_IPS.push(ip);
-    console.log(`✅ IP Whitelist: Added ${ip}`);
   }
 }
 
@@ -125,6 +124,5 @@ export function removeAllowedIp(ip: string): void {
   const index = ALLOWED_ADMIN_IPS.indexOf(ip);
   if (index > -1) {
     ALLOWED_ADMIN_IPS.splice(index, 1);
-    console.log(`✅ IP Whitelist: Removed ${ip}`);
   }
 }

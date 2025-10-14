@@ -450,7 +450,6 @@ export class LazyLoadingUtils {
             entry.name.includes('/cards/rws/')
           ) {
             const resource = entry as PerformanceResourceTiming;
-            console.log(
               `Lazy loaded image: ${resource.name}, load time: ${resource.duration}ms`
             );
           }

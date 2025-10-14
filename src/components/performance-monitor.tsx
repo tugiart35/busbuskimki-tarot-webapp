@@ -34,7 +34,6 @@ export function PerformanceMonitor() {
     onCLS(metric => {
       metrics.cls = metric.value;
       const meetsTarget = metric.value <= TARGETS.CLS;
-      console.log(
         `CLS: ${metric.value.toFixed(3)} (${meetsTarget ? '✅' : '❌'} target: ${TARGETS.CLS})`
       );
     });
@@ -42,7 +41,6 @@ export function PerformanceMonitor() {
     onINP(metric => {
       metrics.inp = metric.value;
       const meetsTarget = metric.value <= TARGETS.INP;
-      console.log(
         `INP: ${metric.value.toFixed(0)}ms (${meetsTarget ? '✅' : '❌'} target: ${TARGETS.INP}ms)`
       );
     });
@@ -50,7 +48,6 @@ export function PerformanceMonitor() {
     onFCP(metric => {
       metrics.fcp = metric.value;
       const meetsTarget = metric.value <= TARGETS.FCP;
-      console.log(
         `FCP: ${metric.value.toFixed(0)}ms (${meetsTarget ? '✅' : '❌'} target: ${TARGETS.FCP}ms)`
       );
     });
@@ -58,7 +55,6 @@ export function PerformanceMonitor() {
     onLCP(metric => {
       metrics.lcp = metric.value;
       const meetsTarget = metric.value <= TARGETS.LCP;
-      console.log(
         `LCP: ${metric.value.toFixed(0)}ms (${meetsTarget ? '✅' : '❌'} target: ${TARGETS.LCP}ms)`
       );
     });
@@ -66,7 +62,6 @@ export function PerformanceMonitor() {
     onTTFB(metric => {
       metrics.ttfb = metric.value;
       const meetsTarget = metric.value <= TARGETS.TTFB;
-      console.log(
         `TTFB: ${metric.value.toFixed(0)}ms (${meetsTarget ? '✅' : '❌'} target: ${TARGETS.TTFB}ms)`
       );
     });
@@ -78,7 +73,6 @@ export function PerformanceMonitor() {
       )[0] as PerformanceNavigationTiming;
       const bundleSize = navigation.transferSize;
       const meetsTarget = bundleSize <= TARGETS.BUNDLE_SIZE;
-      console.log(
         `Bundle Size: ${(bundleSize / 1024).toFixed(1)}KB (${meetsTarget ? '✅' : '❌'} target: ${(TARGETS.BUNDLE_SIZE / 1024).toFixed(0)}KB)`
       );
     };

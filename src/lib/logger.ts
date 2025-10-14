@@ -19,7 +19,6 @@ class SecureLogger {
    */
   debug(message: string, data?: unknown) {
     if (this.isDevelopment) {
-      console.log(`🔍 [DEBUG] ${message}`, data || '');
     }
   }
 
@@ -81,7 +80,6 @@ class SecureLogger {
     };
 
     if (this.isDevelopment) {
-      console.log(`👤 [ADMIN] ${action}`, logData);
     }
 
     // TODO: Send to audit logging service in production

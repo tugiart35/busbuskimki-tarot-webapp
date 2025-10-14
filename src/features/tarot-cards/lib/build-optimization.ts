@@ -417,7 +417,6 @@ export async function optimizeBuild(
     // Log performance metrics
     if (finalConfig.monitoringEnabled) {
       const metrics = monitor.getMetrics();
-      console.log('Build Performance Metrics:', metrics);
     }
 
     return results;
@@ -436,5 +435,4 @@ export function initializeBuildOptimization(): void {
   IncrementalBuildOptimizer.getInstance();
   BuildPerformanceMonitor.getInstance();
 
-  console.log('Build optimization initialized');
 }

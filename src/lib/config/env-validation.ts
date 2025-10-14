@@ -181,5 +181,4 @@ if (process.env.NODE_ENV === 'development') {
   const totalVars = Object.keys(summary).length;
   const setVars = Object.values(summary).filter(Boolean).length;
 
-  console.log(`📊 Environment Variables: ${setVars}/${totalVars} configured`);
 }

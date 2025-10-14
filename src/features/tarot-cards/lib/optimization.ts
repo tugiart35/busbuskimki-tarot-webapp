@@ -403,7 +403,6 @@ export class BundleOptimizer {
           if (entry.entryType === 'resource') {
             const resource = entry as PerformanceResourceTiming;
             if (resource.name.includes('_next/static/chunks/')) {
-              console.log(
                 `Chunk loaded: ${resource.name}, size: ${resource.transferSize} bytes`
               );
             }
@@ -518,7 +517,6 @@ export class PerformanceUtils {
     const end = performance.now();
 
     if (process.env.NODE_ENV === 'development') {
-      console.log(`${name} took ${end - start} milliseconds`);
     }
 
     return result;
@@ -533,7 +531,6 @@ export class PerformanceUtils {
     const end = performance.now();
 
     if (process.env.NODE_ENV === 'development') {
-      console.log(`${name} took ${end - start} milliseconds`);
     }
 
     return result;

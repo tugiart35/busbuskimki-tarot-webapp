@@ -28,7 +28,6 @@ export function WebVitals({
       // Track Core Web Vitals
       onCLS((metric: WebVitalsMetric) => {
         const meetsTarget = metric.value <= TARGETS.CLS;
-        console.log(
           `CLS: ${metric.value.toFixed(3)} (${meetsTarget ? '✅' : '❌'} target: ${TARGETS.CLS})`
         );
         onPerfEntry?.(metric);
@@ -36,7 +35,6 @@ export function WebVitals({
 
       onFCP((metric: WebVitalsMetric) => {
         const meetsTarget = metric.value <= TARGETS.FCP;
-        console.log(
           `FCP: ${metric.value.toFixed(2)}ms (${meetsTarget ? '✅' : '❌'} target: ${TARGETS.FCP}ms)`
         );
         onPerfEntry?.(metric);
@@ -44,7 +42,6 @@ export function WebVitals({
 
       onLCP((metric: WebVitalsMetric) => {
         const meetsTarget = metric.value <= TARGETS.LCP;
-        console.log(
           `LCP: ${metric.value.toFixed(2)}ms (${meetsTarget ? '✅' : '❌'} target: ${TARGETS.LCP}ms)`
         );
         onPerfEntry?.(metric);
@@ -52,7 +49,6 @@ export function WebVitals({
 
       onTTFB((metric: WebVitalsMetric) => {
         const meetsTarget = metric.value <= TARGETS.TTFB;
-        console.log(
           `TTFB: ${metric.value.toFixed(2)}ms (${meetsTarget ? '✅' : '❌'} target: ${TARGETS.TTFB}ms)`
         );
         onPerfEntry?.(metric);
@@ -65,13 +61,11 @@ export function WebVitals({
         for (const entry of list.getEntries()) {
           if (entry.entryType === 'navigation') {
             const navEntry = entry as PerformanceNavigationTiming;
-            console.log(
               `Navigation: ${navEntry.loadEventEnd - navEntry.loadEventStart}ms`
             );
           } else if (entry.entryType === 'resource') {
             const resourceEntry = entry as PerformanceResourceTiming;
             if (resourceEntry.name.includes('cards/')) {
-              console.log(
                 `Image loaded: ${resourceEntry.name} (${resourceEntry.duration.toFixed(2)}ms)`
               );
             }
@@ -108,7 +102,6 @@ export function useWebVitals() {
           totalTime: navigation.loadEventEnd - navigation.fetchStart,
         };
 
-        console.log('Page Load Metrics:', metrics);
 
         // Check if metrics meet targets
         const meetsTargets = {
@@ -117,7 +110,6 @@ export function useWebVitals() {
           totalTime: metrics.totalTime < 3000,
         };
 
-        console.log('Performance Targets:', meetsTargets);
       }
     };
 
@@ -153,7 +145,6 @@ export function usePerformanceBudget() {
       });
 
       const meetsTarget = totalSize < 500000; // 500KB target
-      console.log(
         `Bundle Size: ${(totalSize / 1024).toFixed(2)}KB (${meetsTarget ? '✅' : '❌'} target: 500KB)`
       );
     };
@@ -166,7 +157,6 @@ export function usePerformanceBudget() {
         const limitMB = memory.jsHeapSizeLimit / 1024 / 1024;
         const percentage = (usedMB / limitMB) * 100;
 
-        console.log(
           `Memory Usage: ${usedMB.toFixed(2)}MB / ${limitMB.toFixed(2)}MB (${percentage.toFixed(1)}%)`
         );
 

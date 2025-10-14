@@ -39,7 +39,6 @@ export function monitorBundleSize() {
           const resource = entry as PerformanceResourceTiming;
           if (resource.name.includes('_next/static/chunks/')) {
             const sizeKB = (resource.transferSize / 1024).toFixed(2);
-            console.log(
               `Chunk: ${resource.name.split('/').pop()}, Size: ${sizeKB}KB`
             );
           }
@@ -116,7 +115,6 @@ export function checkBundleOptimization() {
       inp: metrics.inp <= performanceBudget.inp,
     };
 
-    console.log('Performance Budget Check:', budgetCheck);
     return budgetCheck;
   }
 

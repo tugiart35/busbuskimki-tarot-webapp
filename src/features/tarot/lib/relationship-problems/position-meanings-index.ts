@@ -157,7 +157,6 @@ export function getRelationshipProblemsMeaningByCardAndPosition(
   isReversed: boolean = false
 ): RelationshipProblemsPositionMeaning {
   // Debug için console.log ekle
-  console.log('🔍 getRelationshipProblemsMeaningByCardAndPosition called:', {
     cardName: card.name,
     cardNameTr: card.nameTr,
     position,
@@ -166,7 +165,6 @@ export function getRelationshipProblemsMeaningByCardAndPosition(
 
   // Pozisyon 1-9 arasında olmalı
   if (position < 1 || position > 9) {
-    console.log('❌ Invalid position:', position);
     return {
       id: `relationship-problems-${position}-${card.id}-${isReversed ? 'reversed' : 'upright'}`,
       position: 0,
@@ -188,7 +186,6 @@ export function getRelationshipProblemsMeaningByCardAndPosition(
   // Kart ismini İngilizce'ye çevir - önce nameTr'yi dene, sonra name'i
   const englishCardName =
     cardNameMapping[card.nameTr] || cardNameMapping[card.name] || card.name;
-  console.log('🔄 Card name mapping:', {
     original: card.nameTr,
     originalName: card.name,
     mapped: englishCardName,
@@ -236,7 +233,6 @@ export function getRelationshipProblemsMeaningByCardAndPosition(
       break;
   }
 
-  console.log('🎯 Position meaning found:', positionMeaning ? 'YES' : 'NO');
 
   if (positionMeaning) {
     const result = {
@@ -245,7 +241,6 @@ export function getRelationshipProblemsMeaningByCardAndPosition(
       upright: isReversed ? positionMeaning.reversed : positionMeaning.upright,
       reversed: isReversed ? positionMeaning.upright : positionMeaning.reversed,
     };
-    console.log(
       '✅ Returning position-specific meaning:',
       result.upright.substring(0, 50) + '...'
     );
@@ -272,7 +267,6 @@ export function getRelationshipProblemsMeaningByCardAndPosition(
     reversed: isReversed ? baseMeaning.upright : baseMeaning.reversed,
   };
 
-  console.log(
     '⚠️ Returning fallback meaning:',
     fallbackResult.upright.substring(0, 50) + '...'
   );

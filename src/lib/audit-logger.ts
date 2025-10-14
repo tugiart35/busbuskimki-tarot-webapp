@@ -125,7 +125,6 @@ class AuditLogger {
       this.queue.push(entry);
 
       if (process.env.NODE_ENV === 'development') {
-        console.log('🔍 [AUDIT]', entry);
       }
 
       // Flush queue to Supabase (async, don't wait)
@@ -412,7 +411,6 @@ class AuditLogger {
       if (typeof window !== 'undefined' && window.localStorage) {
         localStorage.removeItem('audit_logs_fallback');
         if (process.env.NODE_ENV === 'development') {
-          console.log('🧹 [AUDIT] Cleared localStorage fallback logs');
         }
       }
     } catch (error) {
@@ -446,7 +444,6 @@ class AuditLogger {
       this.clearLocalStorageLogs();
 
       if (process.env.NODE_ENV === 'development') {
-        console.log(
           `✅ [AUDIT] Successfully retried ${failedLogs.length} logs from localStorage`
         );
       }
@@ -565,7 +562,6 @@ class AuditLogger {
       }));
 
       if (process.env.NODE_ENV === 'development') {
-        console.log(
           `🔍 [AUDIT] Attempting to insert ${cleanedLogs.length} logs to Supabase`
         );
       }
@@ -613,7 +609,6 @@ class AuditLogger {
       }
 
       if (process.env.NODE_ENV === 'development') {
-        console.log(
           `✅ [AUDIT] Successfully persisted ${logs.length} audit logs`
         );
       }

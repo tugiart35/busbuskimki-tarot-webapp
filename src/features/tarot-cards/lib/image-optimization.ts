@@ -197,7 +197,6 @@ export class ImageOptimizer {
       webpPaths.push(webpPath);
 
       // In a real implementation, this would convert the image to WebP
-      console.log(`Converting ${image.name} to WebP format`);
     }
 
     return webpPaths;
@@ -238,7 +237,6 @@ export class ImageOptimizer {
             entry.name.includes('/cards/rws/')
           ) {
             const resource = entry as PerformanceResourceTiming;
-            console.log(
               `Image loaded: ${resource.name}, load time: ${resource.duration}ms, size: ${resource.transferSize} bytes`
             );
           }

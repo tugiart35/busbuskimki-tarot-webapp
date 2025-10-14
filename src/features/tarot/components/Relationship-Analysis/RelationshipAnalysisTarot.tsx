@@ -24,7 +24,6 @@ export default function RelationshipAnalysisReading(props: any) {
         return '';
       }
 
-      console.log('🔍 RelationshipAnalysisTarot getCardMeaning:', {
         cardName: card.name,
         position,
         isReversed,
@@ -37,7 +36,6 @@ export default function RelationshipAnalysisReading(props: any) {
         t
       );
 
-      console.log('🔍 RelationshipAnalysisTarot meaning result:', {
         found: !!meaning,
         card: meaning?.card,
         interpretation: meaning

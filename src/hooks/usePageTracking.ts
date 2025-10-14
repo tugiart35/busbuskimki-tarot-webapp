@@ -79,13 +79,11 @@ export const usePageTracking = () => {
         if (error) {
           console.error('Error tracking page view:', error);
         } else if (process.env.NODE_ENV === 'development') {
-          console.log('📊 [PAGE TRACKING]', pageViewData);
         }
         */
 
         // Geçici olarak sadece development modunda log
         if (process.env.NODE_ENV === 'development') {
-          console.log('📊 [PAGE TRACKING - DISABLED]', pageViewData);
         }
       } catch (error) {
         console.error('Error in page tracking:', error);
@@ -136,7 +134,6 @@ export const usePageTracking = () => {
       */
 
       if (process.env.NODE_ENV === 'development') {
-        console.log('📊 [CUSTOM PAGE TRACKING - DISABLED]', pageViewData);
       }
 
       return true;
