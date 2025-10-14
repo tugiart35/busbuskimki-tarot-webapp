@@ -3,7 +3,7 @@ import {
   generateHomepageMetadata,
   generateHomepageStructuredData,
 } from '@/lib/seo/page-seo-generator';
-import { LocaleLayoutClient } from './LocaleLayoutClient';
+import { LocaleLayoutClient } from '@/app/[locale]/LocaleLayoutClient';
 
 interface LocaleLayoutProps {
   children: React.ReactNode;

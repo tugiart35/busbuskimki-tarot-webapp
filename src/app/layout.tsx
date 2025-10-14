@@ -21,7 +21,7 @@ Güncellemeler:
 
 import { ReactNode } from 'react';
 import './globals.css';
-import Script from 'next/script';
+
 
 // Modüler dosyalardan import'lar
 import { defaultMetadata, viewport } from '@/lib/config/metadata';
