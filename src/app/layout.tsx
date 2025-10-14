@@ -22,7 +22,6 @@ Güncellemeler:
 import { ReactNode } from 'react';
 import './globals.css';
 
-
 // Modüler dosyalardan import'lar
 import { defaultMetadata, viewport } from '@/lib/config/metadata';
 import { APP_CONFIG } from '@/lib/config/app-config';
@@ -58,6 +57,25 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     >
       <head>
         <HeadTags />
+
+        {/* Google Site Verification */}
+        <meta
+          name='google-site-verification'
+          content='9jC0OHEYEMjbGS1yL65eyZ-QRAN_uPHn0lRvxtdK9GU'
+        />
+
+        {/* Bing Site Verification */}
+        <meta
+          name='msvalidate.01'
+          content={process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION || ''}
+        />
+
+        {/* Google AdSense */}
+        <script
+          async
+          src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7105264375916972'
+          crossOrigin='anonymous'
+        />
 
         {/* Performance Optimization: Preconnect (daha hızlı DNS + TLS) */}
         <link rel='preconnect' href='https://fonts.googleapis.com' />

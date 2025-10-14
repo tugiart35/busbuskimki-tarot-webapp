@@ -40,6 +40,8 @@
     "test:payment": "jest --testPathPattern=payment/__tests__",
     "test:security": "jest --testPathPattern=shopier-security.test",
     "test:webhook": "jest --testPathPattern=webhook/shopier/__tests__",
+    "test:canonical": "node tests/canonical-url-validator.js",
+    "test:seo": "npm run test:canonical",
     "test:love": "node test-love-reading.js",
     "test:love:run": "npm run test:love",
     "test:quick": "node quick-test.js",

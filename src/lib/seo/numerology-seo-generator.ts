@@ -50,7 +50,7 @@ const numerologyPageSeoData: Record<
     ogImage: '/assets/seo/og-image-numerology.jpg',
     twitterImage: '/assets/seo/twitter-image-numerology.jpg',
     breadcrumbs: [
-      { name: 'Anasayfa', url: `${baseUrl}/tr/anasayfa` },
+      { name: 'Anasayfa', url: `${baseUrl}/tr` },
       { name: 'Numeroloji', url: `${baseUrl}/tr/numeroloji` },
     ],
     faq: [
@@ -100,7 +100,7 @@ const numerologyPageSeoData: Record<
     ogImage: '/assets/seo/og-image-numerology.jpg',
     twitterImage: '/assets/seo/twitter-image-numerology.jpg',
     breadcrumbs: [
-      { name: 'Home', url: `${baseUrl}/en/home` },
+      { name: 'Home', url: `${baseUrl}/en` },
       { name: 'Numerology', url: `${baseUrl}/en/numerology` },
     ],
     faq: [
@@ -151,7 +151,7 @@ const numerologyPageSeoData: Record<
     ogImage: '/assets/seo/og-image-numerology.jpg',
     twitterImage: '/assets/seo/twitter-image-numerology.jpg',
     breadcrumbs: [
-      { name: 'Početna', url: `${baseUrl}/sr/pocetna` },
+      { name: 'Početna', url: `${baseUrl}/sr` },
       { name: 'Numerologija', url: `${baseUrl}/sr/numerologija` },
     ],
     faq: [

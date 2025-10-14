@@ -130,17 +130,15 @@ export function generateHomepageMetadata(locale: string): Metadata {
     homepageSeoData[locale as keyof typeof homepageSeoData] ||
     homepageSeoData.tr;
 
-  // SEO-friendly URL'ler
-  const localePaths = seoFriendlyPaths[locale as keyof typeof seoFriendlyPaths];
-  const homePath = localePaths?.['/'] || '/';
-  const canonicalUrl = `${baseUrl}/${locale}${homePath}`;
+  // Canonical URL - gerçek route kullan (SEO-friendly URL değil)
+  const canonicalUrl = `${baseUrl}/${locale}`;
 
-  // Hreflang URL'leri
+  // Hreflang URL'leri - gerçek route'lar
   const hreflangUrls = {
-    'x-default': `${baseUrl}/tr/anasayfa`,
-    tr: `${baseUrl}/tr/anasayfa`,
-    en: `${baseUrl}/en/home`,
-    sr: `${baseUrl}/sr/pocetna`,
+    'x-default': `${baseUrl}/tr`,
+    tr: `${baseUrl}/tr`,
+    en: `${baseUrl}/en`,
+    sr: `${baseUrl}/sr`,
   };
 
   return {

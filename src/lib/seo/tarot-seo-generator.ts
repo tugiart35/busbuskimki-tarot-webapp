@@ -34,12 +34,12 @@ const tarotPageSeoData = {
       'kişisel açılım',
       'tarot rehberlik',
     ],
-    canonicalPath: '/tr/tarot-okumasi',
+    canonicalPath: '/tr/tarotokumasi',
     ogImage: 'https://busbuskimki.com/assets/logo/social-og-tarot.jpg',
     twitterImage: 'https://busbuskimki.com/assets/logo/twitter-card-tarot.jpg',
     breadcrumbs: [
-      { name: 'Anasayfa', url: `${baseUrl}/tr/anasayfa` },
-      { name: 'Tarot Okuması', url: `${baseUrl}/tr/tarot-okumasi` },
+      { name: 'Anasayfa', url: `${baseUrl}/tr` },
+      { name: 'Tarot Okuması', url: `${baseUrl}/tr/tarotokumasi` },
     ],
     faq: [
       {
@@ -75,12 +75,12 @@ const tarotPageSeoData = {
       'personal spread',
       'tarot guidance',
     ],
-    canonicalPath: '/en/tarot-reading',
+    canonicalPath: '/en/tarotokumasi',
     ogImage: 'https://busbuskimki.com/assets/logo/social-og-tarot.jpg',
     twitterImage: 'https://busbuskimki.com/assets/logo/twitter-card-tarot.jpg',
     breadcrumbs: [
-      { name: 'Home', url: `${baseUrl}/en/home` },
-      { name: 'Tarot Reading', url: `${baseUrl}/en/tarot-reading` },
+      { name: 'Home', url: `${baseUrl}/en` },
+      { name: 'Tarot Reading', url: `${baseUrl}/en/tarotokumasi` },
     ],
     faq: [
       {
@@ -115,12 +115,12 @@ const tarotPageSeoData = {
       'lični raspored',
       'tarot vodič',
     ],
-    canonicalPath: '/sr/tarot-čitaje',
+    canonicalPath: '/sr/tarotokumasi',
     ogImage: 'https://busbuskimki.com/assets/logo/social-og-tarot.jpg',
     twitterImage: 'https://busbuskimki.com/assets/logo/twitter-card-tarot.jpg',
     breadcrumbs: [
-      { name: 'Početna', url: `${baseUrl}/sr/pocetna` },
-      { name: 'Tarot Čitanje', url: `${baseUrl}/sr/tarot-čitaje` },
+      { name: 'Početna', url: `${baseUrl}/sr` },
+      { name: 'Tarot Čitanje', url: `${baseUrl}/sr/tarotokumasi` },
     ],
     faq: [
       {
@@ -154,10 +154,10 @@ export function generateTarotPageMetadata(locale: string): Metadata {
     alternates: {
       canonical: `${baseUrl}${data.canonicalPath}`,
       languages: {
-        'x-default': `${baseUrl}/tr/tarot-okumasi`,
-        tr: `${baseUrl}/tr/tarot-okumasi`,
-        en: `${baseUrl}/en/tarot-reading`,
-        sr: `${baseUrl}/sr/tarot-čitaje`,
+        'x-default': `${baseUrl}/tr/tarotokumasi`,
+        tr: `${baseUrl}/tr/tarotokumasi`,
+        en: `${baseUrl}/en/tarotokumasi`,
+        sr: `${baseUrl}/sr/tarotokumasi`,
       },
     },
     openGraph: {
