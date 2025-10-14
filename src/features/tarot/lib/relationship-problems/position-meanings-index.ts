@@ -156,13 +156,6 @@ export function getRelationshipProblemsMeaningByCardAndPosition(
   position: number,
   isReversed: boolean = false
 ): RelationshipProblemsPositionMeaning {
-  // Debug için console.log ekle
-    cardName: card.name,
-    cardNameTr: card.nameTr,
-    position,
-    isReversed,
-  });
-
   // Pozisyon 1-9 arasında olmalı
   if (position < 1 || position > 9) {
     return {
@@ -186,10 +179,6 @@ export function getRelationshipProblemsMeaningByCardAndPosition(
   // Kart ismini İngilizce'ye çevir - önce nameTr'yi dene, sonra name'i
   const englishCardName =
     cardNameMapping[card.nameTr] || cardNameMapping[card.name] || card.name;
-    original: card.nameTr,
-    originalName: card.name,
-    mapped: englishCardName,
-  });
 
   // Pozisyon özel anlamları kontrol et
   let positionMeaning = null;
@@ -233,7 +222,6 @@ export function getRelationshipProblemsMeaningByCardAndPosition(
       break;
   }
 
-
   if (positionMeaning) {
     const result = {
       ...positionMeaning,
@@ -241,9 +229,6 @@ export function getRelationshipProblemsMeaningByCardAndPosition(
       upright: isReversed ? positionMeaning.reversed : positionMeaning.upright,
       reversed: isReversed ? positionMeaning.upright : positionMeaning.reversed,
     };
-      '✅ Returning position-specific meaning:',
-      result.upright.substring(0, 50) + '...'
-    );
     return result;
   }
 
@@ -267,9 +252,6 @@ export function getRelationshipProblemsMeaningByCardAndPosition(
     reversed: isReversed ? baseMeaning.upright : baseMeaning.reversed,
   };
 
-    '⚠️ Returning fallback meaning:',
-    fallbackResult.upright.substring(0, 50) + '...'
-  );
   return fallbackResult;
 }
 

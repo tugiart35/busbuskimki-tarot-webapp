@@ -432,7 +432,6 @@ export default function OrdersPage() {
     }
 
     try {
-
       // UI'ı hemen güncelle - optimistic update
       setOrders(prevOrders =>
         prevOrders.map(order =>
@@ -473,7 +472,6 @@ export default function OrdersPage() {
         .eq('id', orderId);
 
       if (directUpdateError) {
-
         // Alternatif 1: RPC fonksiyonu kullanarak güncelleme
         const { error: rpcError } = await supabase.rpc(
           'update_transaction_status',

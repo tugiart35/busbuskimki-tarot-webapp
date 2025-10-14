@@ -11,15 +11,11 @@ interface LogContext {
 }
 
 class SecureLogger {
-  private isDevelopment = process.env.NODE_ENV === 'development';
-  private isProduction = process.env.NODE_ENV === 'production';
-
   /**
    * Development-only debug logging
    */
-  debug(message: string, data?: unknown) {
-    if (this.isDevelopment) {
-    }
+  debug(_message: string, _data?: unknown) {
+    // Debug logging disabled for production
   }
 
   /**
@@ -28,7 +24,7 @@ class SecureLogger {
   error(message: string, error?: unknown, context?: LogContext) {
     const sanitizedError = this.sanitizeError(error);
 
-    if (this.isDevelopment) {
+    if (process.env.NODE_ENV === 'development') {
       console.error(`❌ [ERROR] ${message}`, {
         error: sanitizedError || 'No error details available',
         context: context || 'No context provided',
@@ -49,7 +45,7 @@ class SecureLogger {
    * Warning logging
    */
   warn(message: string, data?: unknown, context?: LogContext) {
-    if (this.isDevelopment) {
+    if (process.env.NODE_ENV === 'development') {
       console.warn(`⚠️ [WARN] ${message}`, data);
     } else {
       console.warn(`WARN: ${message}`, {
@@ -63,7 +59,7 @@ class SecureLogger {
    * Info logging
    */
   info(message: string, context?: LogContext) {
-    if (this.isDevelopment) {
+    if (process.env.NODE_ENV === 'development') {
       console.info(`ℹ️ [INFO] ${message}`, context || '');
     }
     // Production info logs are usually not needed
@@ -72,20 +68,8 @@ class SecureLogger {
   /**
    * Admin action logging (for audit trail)
    */
-  adminAction(action: string, context: LogContext) {
-    const logData = {
-      action,
-      timestamp: new Date().toISOString(),
-      ...context,
-    };
-
-    if (this.isDevelopment) {
-    }
-
-    // TODO: Send to audit logging service in production
-    if (this.isProduction) {
-      // this.sendToAuditService(logData);
-    }
+  adminAction(_action: string, _context: LogContext) {
+    // Admin action logging disabled for production
   }
 
   /**

@@ -175,10 +175,4 @@ export function getEnvSummary(): Record<string, boolean> {
   );
 }
 
-// Development'da environment özeti göster
-if (process.env.NODE_ENV === 'development') {
-  const summary = getEnvSummary();
-  const totalVars = Object.keys(summary).length;
-  const setVars = Object.values(summary).filter(Boolean).length;
-
-}
+// Environment validation completed

@@ -443,11 +443,6 @@ class AuditLogger {
       // Başarılı olursa localStorage'ı temizle
       this.clearLocalStorageLogs();
 
-      if (process.env.NODE_ENV === 'development') {
-          `✅ [AUDIT] Successfully retried ${failedLogs.length} logs from localStorage`
-        );
-      }
-
       return { success: true, retriedCount: failedLogs.length };
     } catch (error) {
       logError('Failed to retry localStorage audit logs', error, {
@@ -561,11 +556,6 @@ class AuditLogger {
         status: log.status || 'success',
       }));
 
-      if (process.env.NODE_ENV === 'development') {
-          `🔍 [AUDIT] Attempting to insert ${cleanedLogs.length} logs to Supabase`
-        );
-      }
-
       // Önce audit_logs tablosunun var olup olmadığını kontrol et
       const { error: tableCheckError } = await supabase
         .from('audit_logs')
@@ -606,11 +596,6 @@ class AuditLogger {
         }
 
         throw error; // Diğer hatalar için throw et
-      }
-
-      if (process.env.NODE_ENV === 'development') {
-          `✅ [AUDIT] Successfully persisted ${logs.length} audit logs`
-        );
       }
     } catch (error) {
       // Audit log hatalarını sessizce handle et, ana uygulamayı etkilemesin

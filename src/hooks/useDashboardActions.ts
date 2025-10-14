@@ -61,15 +61,9 @@ export const useDashboardActions = (
 
   // Çıkış yap fonksiyonu - Supabase ile entegre
   const handleLogout = async () => {
-
     try {
       // Supabase signOut çağrısı
-      const { error } = await supabase.auth.signOut();
-
-        hasError: !!error,
-        errorMessage: error?.message,
-      });
-
+      await supabase.auth.signOut();
 
       // Kısa bir bekleme sonrası yönlendir
       setTimeout(() => {

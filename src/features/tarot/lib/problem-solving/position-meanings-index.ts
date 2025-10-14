@@ -162,26 +162,14 @@ export function getProblemSolvingMeaningByCardAndPosition(
 
   // Kart ismini İngilizce'ye çevir
   const englishCardName = cardNameMapping[card.nameTr] || card.nameTr;
-    original: card.nameTr,
-    mapped: englishCardName,
-    position: position,
-  });
 
   // Pozisyon özel anlamları kontrol et
   let positionMeaning = null;
 
   switch (position) {
     case 1:
-        englishCardName,
-        position,
-        isReversed,
-      });
       positionMeaning =
         getProblemSolvingPosition1MeaningByCardName(englishCardName);
-        found: !!positionMeaning,
-        card: positionMeaning?.card,
-        upright: positionMeaning?.upright?.substring(0, 50) + '...',
-      });
       break;
     case 2:
       positionMeaning =
@@ -231,10 +219,6 @@ export function getProblemSolvingMeaningByCardAndPosition(
     return result;
   }
 
-    '⚠️ No position-specific meaning found, using fallback for:',
-    card.nameTr
-  );
-
   // Fallback: Genel kart anlamlarını döndür
   const baseMeaning: ProblemSolvingPositionMeaning = {
     id: `${card.name.toLowerCase().replace(/\s+/g, '_')}_pos${position}`,
@@ -253,9 +237,6 @@ export function getProblemSolvingMeaningByCardAndPosition(
     reversed: isReversed ? baseMeaning.upright : baseMeaning.reversed,
   };
 
-    '✅ Returning fallback meaning:',
-    fallbackResult.upright.substring(0, 50) + '...'
-  );
   return fallbackResult;
 }
 

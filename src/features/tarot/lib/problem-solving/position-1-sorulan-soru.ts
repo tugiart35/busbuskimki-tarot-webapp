@@ -1068,16 +1068,7 @@ export function getProblemSolvingPosition1Meaning(
 export function getProblemSolvingPosition1MeaningByCardName(
   cardName: string
 ): ProblemSolvingPosition1Meaning | null {
-    searchingFor: cardName,
-    availableCards: position1Meanings.slice(0, 5).map(m => m.card),
-  });
-
   const result = position1Meanings.find(m => m.card === cardName) || null;
-
-    found: !!result,
-    card: result?.card,
-    upright: result?.upright?.substring(0, 50) + '...',
-  });
 
   return result;
 }

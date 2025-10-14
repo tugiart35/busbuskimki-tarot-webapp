@@ -160,11 +160,6 @@ export function getSituationAnalysisMeaningByCardAndPosition(
   // Kart ismini İngilizce'ye çevir - önce nameTr'yi dene, sonra name'i
   const englishCardName =
     cardNameMapping[card.nameTr] || cardNameMapping[card.name] || card.name;
-    original: card.nameTr,
-    originalName: card.name,
-    mapped: englishCardName,
-    position: position,
-  });
 
   // Pozisyon özel anlamları kontrol et
   let positionMeaning = null;
@@ -201,10 +196,6 @@ export function getSituationAnalysisMeaningByCardAndPosition(
   }
 
   if (positionMeaning) {
-      cardName: card.nameTr,
-      position: position,
-      meaningId: positionMeaning.id,
-    });
     const result = {
       ...positionMeaning,
       cardName: card.nameTr, // cardName alanını ekle
@@ -235,10 +226,6 @@ export function getSituationAnalysisMeaningByCardAndPosition(
     reversed: isReversed ? baseMeaning.upright : baseMeaning.reversed,
   };
 
-    cardName: card.nameTr,
-    position: position,
-    meaningPreview: fallbackResult.upright.substring(0, 50) + '...',
-  });
   return fallbackResult;
 }
 

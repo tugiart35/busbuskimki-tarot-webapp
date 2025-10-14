@@ -64,12 +64,7 @@ export class AdminDetectionService {
   /**
    * Admin kullanıcı için özel log mesajı
    */
-  static logAdminAccess(userId: string, isAdmin: boolean): void {
-    if (process.env.NODE_ENV === 'development') {
-        userId,
-        isAdmin,
-        timestamp: new Date().toISOString(),
-      });
-    }
-  }
+      static logAdminAccess(_userId?: string, _isAdmin?: boolean): void {
+        // Admin access logging disabled in production
+      }
 }

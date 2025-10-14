@@ -414,10 +414,7 @@ export async function optimizeBuild(
     // Stop monitoring
     stopMonitoring();
 
-    // Log performance metrics
-    if (finalConfig.monitoringEnabled) {
-      const metrics = monitor.getMetrics();
-    }
+    // Performance metrics monitoring disabled for production
 
     return results;
   } catch (error) {
@@ -434,5 +431,4 @@ export function initializeBuildOptimization(): void {
   BuildOptimizer.getInstance();
   IncrementalBuildOptimizer.getInstance();
   BuildPerformanceMonitor.getInstance();
-
 }

@@ -54,8 +54,8 @@ export class AdminErrorService {
    * Admin action'ını logla
    */
   static logAdminAction(
-    action: string,
-    details: Record<string, unknown>
+    _action: string,
+    _details: Record<string, unknown>
   ): void {
     // Action logging is handled by monitoring system
   }

@@ -85,24 +85,9 @@ class EmailService {
       };
 
       // SMTP configuration loaded from environment variables
-      // Only log in development environment
-      if (process.env.NODE_ENV === 'development') {
-          host: config.host,
-          port: config.port,
-          secure: config.secure,
-          user: config.auth.user,
-          hasPassword: !!config.auth.pass,
-        });
-      }
 
       this.transporter = nodemailer.createTransport(config);
       this.isInitialized = true;
-
-      // Only log in development
-      if (process.env.NODE_ENV === 'development') {
-          'Email transporter initialized successfully with connection pooling'
-        );
-      }
     } catch (error) {
       console.error('Email transporter initialization failed:', error);
     }
@@ -123,21 +108,7 @@ class EmailService {
         attachments: emailData.attachments,
       };
 
-      // Only log in development environment
-      if (process.env.NODE_ENV === 'development') {
-          from: mailOptions.from,
-          to: mailOptions.to,
-          subject: mailOptions.subject,
-          hasHtml: !!mailOptions.html,
-          hasAttachments: !!mailOptions.attachments,
-        });
-      }
-
-      const result = await this.transporter.sendMail(mailOptions);
-
-      // Only log success in development
-      if (process.env.NODE_ENV === 'development') {
-      }
+      await this.transporter.sendMail(mailOptions);
 
       return true;
     } catch (error) {

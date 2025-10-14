@@ -23,8 +23,6 @@ export async function triggerEmailSending(
         response.status,
         response.statusText
       );
-    } else {
-      const result = await response.json();
     }
   } catch (error) {
     console.warn('Email gönderimi sırasında hata:', error);

@@ -93,7 +93,6 @@ export class AuthService {
    */
   static async signUp(userData: RegisterFormData) {
     try {
-
       // Supabase auth signup işlemi
       const { data, error } = await supabase.auth.signUp({
         email: userData.email,
@@ -125,7 +124,6 @@ export class AuthService {
         throw new AuthError(error.message, error, error.status?.toString());
       }
 
-
       // Kullanıcı başarıyla oluşturulduysa profile oluştur
       if (data.user) {
         try {
@@ -145,10 +143,6 @@ export class AuthService {
           if (!profileResult.success) {
             console.error('Profile oluşturulamadı:', profileResult.error);
             // Profile oluşturulamasa bile auth işlemi başarılı sayılır
-          } else {
-              'Profile başarıyla oluşturuldu:',
-              profileResult.profile?.id
-            );
           }
         } catch (profileError) {
           console.error('Profile oluşturma hatası:', profileError);
@@ -281,12 +275,10 @@ export class AuthService {
    */
   static async resendConfirmation(email: string) {
     try {
-
       const { error } = await supabase.auth.resend({
         type: 'signup',
         email,
       });
-
 
       if (error) {
         console.error('Resend error:', error);

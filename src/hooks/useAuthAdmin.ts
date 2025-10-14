@@ -114,7 +114,6 @@ export function useAuthAdmin() {
         } = await supabase.auth.getSession();
 
         if (session?.user) {
-
           // Admin kontrolü yap - önce admins tablosundan kontrol et
           const { data: adminRecord } = await supabase
             .from('admins')

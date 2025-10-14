@@ -160,7 +160,6 @@ export default function PackagesPage() {
         .select('*')
         .order('created_at', { ascending: false });
 
-
       if (error) {
         console.error('❌ Supabase error:', error);
         setError('Paketler yüklenirken hata oluştu: ' + error.message);
@@ -186,9 +185,6 @@ export default function PackagesPage() {
         shopier_product_id: pkg.shopier_product_id || '',
       }));
 
-        '✅ Formatted packages (EUR güncel kurla hesaplandı):',
-        formattedPackages
-      );
       setPackages(formattedPackages);
     } catch (error) {
       console.error('❌ Error fetching packages:', error);
@@ -262,10 +258,6 @@ export default function PackagesPage() {
       return;
     }
 
-      selectedPackage: selectedPackage.id,
-      formData: formData,
-    });
-
     setActionLoading(true);
     clearMessages();
 
@@ -287,7 +279,6 @@ export default function PackagesPage() {
     }
 
     try {
-
       // EUR'yu güncel kurla hesapla
       const currentRate = exchangeRate || 38.5;
       const calculatedEur =
@@ -306,14 +297,10 @@ export default function PackagesPage() {
         .eq('id', selectedPackage.id)
         .select('*');
 
-
       if (error) {
         console.error('❌ Supabase error:', error);
         throw error;
       }
-
-        '✅ Paket güncellendi, fetchPackages ile yeniden yükleniyor...'
-      );
 
       await fetchPackages();
 
@@ -321,7 +308,6 @@ export default function PackagesPage() {
       setShowEditModal(false);
       resetForm();
       setSuccess('Paket başarıyla güncellendi');
-
     } catch (error: any) {
       console.error('❌ Error updating package:', error);
       setError(

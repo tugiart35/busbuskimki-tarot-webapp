@@ -24,27 +24,12 @@ export default function ProblemSolvingReading(props: any) {
         return '';
       }
 
-        cardName: card.name,
-        position,
-        isReversed,
-      });
-
       // i18n destekli anlam al - t fonksiyonu closure ile erişilebilir!
       const meaning = getI18nProblemSolvingMeaningByCardAndPosition(
         card.name,
         position,
         t
       );
-
-        found: !!meaning,
-        card: meaning?.card,
-        interpretation: meaning
-          ? (isReversed ? meaning.reversed : meaning.upright)?.substring(
-              0,
-              50
-            ) + '...'
-          : 'No meaning',
-      });
 
       if (!meaning) {
         // Fallback: kartın kendi Türkçe anlamını kullan

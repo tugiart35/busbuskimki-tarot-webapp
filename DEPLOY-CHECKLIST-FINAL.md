@@ -128,42 +128,32 @@ Son 5 Commit
 🔴 KRİTİK
 
 1. Environment Variables
-
-
-    - Tüm .env değişkenlerini Vercel'e ekleyin
-    - NODE_ENV=production olarak ayarlayın
-    - SMTP credentials'ları doğrulayın
-    - Supabase production URL/keys kontrol edin
+   - Tüm .env değişkenlerini Vercel'e ekleyin
+   - NODE_ENV=production olarak ayarlayın
+   - SMTP credentials'ları doğrulayın
+   - Supabase production URL/keys kontrol edin
 
 2. Domain & SSL
-
-
-    - Domain DNS ayarlarını yapın
-    - SSL sertifikası otomatik (Vercel)
-    - NEXT_PUBLIC_SITE_URL production domain olarak güncelleyin
+   - Domain DNS ayarlarını yapın
+   - SSL sertifikası otomatik (Vercel)
+   - NEXT_PUBLIC_SITE_URL production domain olarak güncelleyin
 
 🟡 ÖNERİLEN
 
 1. Monitoring & Analytics
-
-
-    - Vercel Analytics aktif mi kontrol edin
-    - Sentry DSN ekleyin (optional)
-    - Google Search Console'a site ekleyin
+   - Vercel Analytics aktif mi kontrol edin
+   - Sentry DSN ekleyin (optional)
+   - Google Search Console'a site ekleyin
 
 2. Performance
-
-
-    - İlk deployment sonrası Lighthouse testi çalıştırın
-    - Core Web Vitals'ı izleyin
-    - Bundle Analyzer ile optimize edilebilecek alanlar kontrol edin
+   - İlk deployment sonrası Lighthouse testi çalıştırın
+   - Core Web Vitals'ı izleyin
+   - Bundle Analyzer ile optimize edilebilecek alanlar kontrol edin
 
 3. SEO
-
-
-    - Deployment sonrası sitemap submit edin
-    - robots.txt erişimini doğrulayın
-    - Canonical URL'lerin doğru çalıştığını test edin
+   - Deployment sonrası sitemap submit edin
+   - robots.txt erişimini doğrulayın
+   - Canonical URL'lerin doğru çalıştığını test edin
 
 🚦 DEPLOYMENT DURUMU
 
@@ -195,28 +185,22 @@ vercel --prod
 📋 POST-DEPLOYMENT CHECKLIST
 
 1. Hemen Yapılacaklar (0-24 saat)
-
-
-    - Site erişimini test edin (tüm diller: /tr, /en, /sr)
-    - Auth flow'u test edin (signup, login, logout)
-    - Tarot okuma işlemini test edin
-    - Ödeme webhook'unu test edin (Shopier test modu)
-    - Email gönderimini test edin
+   - Site erişimini test edin (tüm diller: /tr, /en, /sr)
+   - Auth flow'u test edin (signup, login, logout)
+   - Tarot okuma işlemini test edin
+   - Ödeme webhook'unu test edin (Shopier test modu)
+   - Email gönderimini test edin
 
 2. İlk Hafta
-
-
-    - Google Search Console'a sitemap submit edin
-    - Analytics verilerini izlemeye başlayın
-    - Error tracking setup (Sentry)
-    - Performance metrics izleyin
+   - Google Search Console'a sitemap submit edin
+   - Analytics verilerini izlemeye başlayın
+   - Error tracking setup (Sentry)
+   - Performance metrics izleyin
 
 3. İlk Ay
-
-
-    - SEO performansını analiz edin
-    - User feedback toplayın
-    - Gerekirse optimizasyonlar yapın
+   - SEO performansını analiz edin
+   - User feedback toplayın
+   - Gerekirse optimizasyonlar yapın
 
 ---
 

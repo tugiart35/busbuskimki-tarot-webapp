@@ -294,13 +294,8 @@ export class ApiBase {
   /**
    * Request logging
    */
-  static logRequest(request: NextRequest, context: string): void {
-      method: request.method,
-      url: request.url,
-      ip: this.getClientIP(request),
-      userAgent: request.headers.get('user-agent'),
-      timestamp: new Date().toISOString(),
-    });
+      static logRequest(_request: NextRequest, _context: string): void {
+        // Request logging disabled in production for performance
   }
 }
 
