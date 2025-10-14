@@ -37,46 +37,29 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { BottomNavigation } from '@/features/shared/layout';
 import { useTranslations } from '@/hooks/useTranslations';
-import { supabase } from '@/lib/supabase/client';
 
 interface HomePageClientProps {
   locale: string;
+  initialReadings?: number;
 }
 
-export function HomePageClient({ locale }: HomePageClientProps) {
+export function HomePageClient({
+  locale,
+  initialReadings = 0,
+}: HomePageClientProps) {
   const { t } = useTranslations();
-  const [totalReadings, setTotalReadings] = useState<number>(0);
-  const [loadingStats, setLoadingStats] = useState(true); // SSR ile uyumlu olması için true başlat
   const [mounted, setMounted] = useState(false);
 
   // Ana sayfada otomatik yönlendirme kaldırıldı
   // Kullanıcı ana sayfayı görebilir ve isterse dashboard'a gidebilir
 
-  // Database'den toplam okuma sayısını çek
-  const fetchTotalReadings = async () => {
-    try {
-      setLoadingStats(true);
-      const { count, error } = await supabase
-        .from('readings')
-        .select('*', { count: 'exact', head: true })
-        .eq('status', 'completed');
+  // PERFORMANCE OPTIMIZATION: Database query kaldırıldı
+  // Server component'ten ISR ile cache'lenmiş veri geliyor (initialReadings prop)
+  // Her sayfa yüklemesinde query çalışmıyor - sadece 5 dakikada bir ISR ile güncelleniyor
 
-      if (error) {
-        setTotalReadings(0);
-      } else {
-        setTotalReadings(count || 0);
-      }
-    } catch (error) {
-      setTotalReadings(0);
-    } finally {
-      setLoadingStats(false);
-    }
-  };
-
-  // Component mount olduğunda okuma sayısını çek
+  // Component mount olduğunda sadece mounted state'i set et
   useEffect(() => {
     setMounted(true);
-    fetchTotalReadings();
   }, []);
 
   // Structured Data for SEO - moved to layout.tsx for better SEO
@@ -307,10 +290,10 @@ export function HomePageClient({ locale }: HomePageClientProps) {
               </div>
               <div className='bg-white/5 backdrop-blur-xl border border-white/20 rounded-2xl p-8 hover:bg-white/10 hover:border-white/30 transition-all duration-500 shadow-xl hover:shadow-2xl'>
                 <div className='text-4xl font-bold text-white mb-3'>
-                  {!mounted || loadingStats ? (
+                  {!mounted ? (
                     <div className='animate-pulse text-white/50'>...</div>
                   ) : (
-                    totalReadings.toLocaleString('tr-TR')
+                    initialReadings.toLocaleString('tr-TR')
                   )}
                 </div>
                 <div className='text-white/70 text-sm font-medium'>

@@ -16732,7 +16732,7 @@
     "description": "Lečenje tarot i numerička čitanja za vašu ljubav, karijeru i životnu stazu sa toplim i profesionalnim vodstvom Busbuskimkim.",
     "keywords": "Tarot, čitanje, sudbina, ljubav, karijera, zdravlje, smernice, kartice",
     "ogDescription": "Pouzdani i saosećajni komentari koji su dobri za vaše srce. Dobijte uputstva o ljubavi, karijeri, zdravlju i još mnogo toga.",
-    "ogImage": "/images/og-image.vebp",
+    "ogImage": "/images/og-image.webp",
     "ogTitle": "Busbuskimki Tarot - Lečenje tarot čitanja",
     "title": "Busbuskimki Tarot - Lečenje tarot čitanja"
   },
@@ -18066,7 +18066,7 @@
             "answer": "Obrnuta pozicija upozorava na nepažnju, iskrivene odluke ili neodgovorno ponašanje. Budite planirani i svesni."
           }
         ],
-        "imageUrl": "/cards/rvs/0-fol.vebp"
+        "imageUrl": "/cards/rws/0-fol.webp"
       },
       "the-magician": {
         "name": "Čarobnjak - snaga i master će uneti nameru",
@@ -18164,7 +18164,7 @@
             "answer": "Četiri alata, kao što je štapić, halice, mač i pentagram, predstavljaju četiri elementa i resurse koje možete koristiti u fizičkom svetu. Jedna ruka čarobnjaka izgleda na nebo, drugi na zemlju; To pokazuje princip \"kao gore, pa ispod\"."
           }
         ],
-        "imageUrl": "/cards/rvs / magician.vebp"
+        "imageUrl": "/cards/rvs / magician.webp"
       },
       "the-high-priestess": {
         "name": "Abbess",
@@ -18263,7 +18263,7 @@
           }
         ],
         "related_cards": ["mesec", "pustinjak", "kampera"],
-        "imageUrl": "/cards/rvs/ii-hoghpriestess.vebp"
+        "imageUrl": "/cards/rws/ii-hoghpriestess.webp"
       },
       "the-empress": {
         "name": "Carica - obilje, kreativnost i prirodni tok",
@@ -18363,7 +18363,7 @@
           }
         ],
         "related_cards": ["budala", "visoki sveštenik", "sunce"],
-        "imageUrl": "/cards/rvs/ii -Empress.vebp"
+        "imageUrl": "/cards/rws/ii -Empress.webp"
       },
       "the-emperor": {
         "name": "Car - snaga, narudžba i prizemljena vlast",
@@ -18463,7 +18463,7 @@
           }
         ],
         "related_cards": ["kampera", "mađioničar", "visoki sveštenik"],
-        "imageUrl": "/cards/rvs/iv-emperor.vebp"
+        "imageUrl": "/cards/rws/iv-emperor.webp"
       },
       "the-hierophant": {
         "name": "Visoko sveštenik - mudrost, tradicija i duhovna uputstva",
@@ -18563,7 +18563,7 @@
           }
         ],
         "related_cards": ["car", "kampera", "visoki sveštenik"],
-        "imageUrl": "/cards/rvs/v-hierofant.vebp"
+        "imageUrl": "/cards/rws/v-hierofant.webp"
       },
       "the-lovers": {
         "name": "Ljubitelji - Sveti unija, izbor i buđenje srca",
@@ -18663,7 +18663,7 @@
           }
         ],
         "related_cards": ["visoki sveštenik", "kampera", "budala"],
-        "imageUrl": "/cards/rvs/vi-lovers.vebp"
+        "imageUrl": "/cards/rws/vi-lovers.webp"
       },
       "the-chariot": {
         "name": "Kočija - pobeda, VillPover i Master of the Put",
@@ -18763,7 +18763,7 @@
           }
         ],
         "related_cards": ["snaga", "budala", "mađioničar"],
-        "imageUrl": "/cards/rvs/vii-chartiot.vebp"
+        "imageUrl": "/cards/rws/vii-chartiot.webp"
       },
       "strength": {
         "name": "Snaga - hrabrost, unutrašnja snaga i saosećanje",
@@ -18863,7 +18863,7 @@
           }
         ],
         "related_cards": ["karita", "pustinjak", "ljubitelji"],
-        "imageUrl": "/cards/rvs/vii-strength.vebp"
+        "imageUrl": "/cards/rws/vii-strength.webp"
       },
       "the-hermit": {
         "name": "Saint - unutrašnja mudrost i svetlost duhovnog putovanja",
@@ -18963,12 +18963,12 @@
           }
         ],
         "related_cards": ["visoki sveštenik", "snaga", "budala"],
-        "imageUrl": "/cards/rvs/ik-hermit.vebp"
+        "imageUrl": "/cards/rws/ik-hermit.webp"
       },
       "the-wheel-of-fortune": {
         "name": "Točak sudbine - promena i ciklusa",
         "short_description": "Točak sudbine predstavlja cikluse života, promene i sudbine. Simbolizuje povratak sreće, nove mogućnosti i predaje se toku života.",
-        "imageUrl": "/cards/rvs/k-Vheeloffortune.vebp",
+        "imageUrl": "/cards/rws/k-Vheeloffortune.webp",
         "meanings": {
           "upright": {
             "general": "Točak sudbine predstavlja cikličku prirodu života i promene. Vi ste u periodu u kojem se može promeniti sreća i mogu doći nove mogućnosti. Idite sa tokom i budite otvoreni za promenu.",
@@ -19159,7 +19159,7 @@
           }
         ],
         "related_cards": ["točak bogatstva", "presjećen čovek", "zvezda"],
-        "imageUrl": "/cards/rvs/ki-justice.vebp"
+        "imageUrl": "/cards/rws/ki-justice.webp"
       },
       "the-hanged-man": {
         "name": "Obješen muškarac - predaja, svest i nova perspektiva",
@@ -19258,7 +19258,7 @@
           }
         ],
         "related_cards": ["smrt", "pustinjak", "toranj"],
-        "imageUrl": "/cards/rvs / cii-bangedman.vebp"
+        "imageUrl": "/cards/rvs / cii-bangedman.webp"
       },
       "death": {
         "name": "SMRT - TRANSFORACIJA, OBNOVA I REBITTH",
@@ -19358,7 +19358,7 @@
           }
         ],
         "related_cards": ["presjećen čovek", "toranj", "zvezda"],
-        "imageUrl": "/cards/rvs / ciii-death.vebp"
+        "imageUrl": "/cards/rvs / ciii-death.webp"
       },
       "temperance": {
         "name": "Ravnoteža - harmonija, strpljenje i unutrašnji integritet",
@@ -19458,7 +19458,7 @@
           }
         ],
         "related_cards": ["smrt", "zvezda", "sunce"],
-        "imageUrl": "/cards/rvs/kiv-temperance.vebp"
+        "imageUrl": "/cards/rws/kiv-temperance.webp"
       },
       "the-devil": {
         "name": "Sotona - zavisnost, senka i oslobađanje",
@@ -19558,7 +19558,7 @@
           }
         ],
         "related_cards": ["temperament", "smrt", "zvezda"],
-        "imageUrl": "/cards/rvs/kv-devil.vebp"
+        "imageUrl": "/cards/rws/kv-devil.webp"
       },
       "the-tower": {
         "name": "Toranj - uništavanje, iznenadna promena i suočavanje sa stvarnošću",
@@ -19658,7 +19658,7 @@
           }
         ],
         "related_cards": ["smrt", "vrag", "zvezda"],
-        "imageUrl": "/cards/rvs/kvi-tover.vebp"
+        "imageUrl": "/cards/rws/kvi-tover.webp"
       },
       "the-star": {
         "name": "Iıldız - Nada, inspiracija i duhovno isceljivanje",
@@ -19758,7 +19758,7 @@
           }
         ],
         "related_cards": ["toranj", "sunce", "pustinjak"],
-        "imageUrl": "/cards/rvs/kvii-star.vebp"
+        "imageUrl": "/cards/rws/kvii-star.webp"
       },
       "the-moon": {
         "name": "Moon - podsvesna, intuicija i misterija",
@@ -19858,7 +19858,7 @@
           }
         ],
         "related_cards": ["visoki sveštenik", "zvezda", "pustinjak"],
-        "imageUrl": "/cards/rvs/kvii-moon.vebp"
+        "imageUrl": "/cards/rws/kvii-moon.webp"
       },
       "the-sun": {
         "name": "Sunce - uspeh, radost i prosvetljenje",
@@ -19958,7 +19958,7 @@
           }
         ],
         "related_cards": ["budala", "zvezda", "kampera"],
-        "imageUrl": "/cards/rvs/kik-sun.vebp"
+        "imageUrl": "/cards/rws/kik-sun.webp"
       },
       "judgment": {
         "name": "Apokalipsa - buđenje, svest i ponovno rođenje",
@@ -20058,7 +20058,7 @@
           }
         ],
         "related_cards": ["smrt", "sunce", "svet"],
-        "imageUrl": "/cards/rvs/kk-judgement.vebp"
+        "imageUrl": "/cards/rws/kk-judgement.webp"
       },
       "the-world": {
         "name": "Zemlja - završetak, celovitost i univerzalna harmonija",
@@ -20158,7 +20158,7 @@
           }
         ],
         "related_cards": ["presuda", "sunce", "budala"],
-        "imageUrl": "/cards/rvs/kki-vorld.vebp"
+        "imageUrl": "/cards/rws/kki-vorld.webp"
       },
       "ace-of-wands": {
         "name": "Ace of Vinds - kreativni počeci i inspiracija",
@@ -20258,7 +20258,7 @@
           }
         ],
         "related_cards": ["dvoje štapiće", "Ace-Cups", "mađioničar"],
-        "imageUrl": "/cards/rvs / toace-vands.vebp"
+        "imageUrl": "/cards/rvs / toace-vands.webp"
       },
       "two-of-wands": {
         "name": "Dvoje štapiće - planiranje i širenje potencijala",
@@ -20358,7 +20358,7 @@
           }
         ],
         "related_cards": ["Ace-Of-Of-štapić", "trojke", "mađioničar"],
-        "imageUrl": "/cards/rvs/ii-vands.vebp"
+        "imageUrl": "/cards/rws/ii-vands.webp"
       },
       "three-of-wands": {
         "name": "Tri štapića - Razvoj mogućnosti i širenja",
@@ -20458,7 +20458,7 @@
           }
         ],
         "related_cards": ["dvoje štapiće", "četvero štapiće", "mađioničar"],
-        "imageUrl": "/cards/rvs/ii-vands.vebp"
+        "imageUrl": "/cards/rws/ii-vands.webp"
       },
       "four-of-wands": {
         "name": "Četiri štapića - proslava, uspeh i završetak",
@@ -20558,7 +20558,7 @@
           }
         ],
         "related_cards": ["trojke", "petogodišnji", "sunce"],
-        "imageUrl": "/cards/rvs/iv-ronds.vebp"
+        "imageUrl": "/cards/rws/iv-ronds.webp"
       },
       "five-of-wands": {
         "name": "Pet štapića - borba, takmičenje i učenje",
@@ -20658,7 +20658,7 @@
           }
         ],
         "related_cards": ["četvero štapiće", "Šest štapića", "snaga"],
-        "imageUrl": "/cards/rvs/v-inds.vebp"
+        "imageUrl": "/cards/rws/v-inds.webp"
       },
       "six-of-wands": {
         "name": "Šest štapića - pobeda, prepoznavanje i uspeh",
@@ -20758,7 +20758,7 @@
           }
         ],
         "related_cards": ["petogodišnji", "sedam štapića", "sunce"],
-        "imageUrl": "/cards/rvs/vi-Vands.vebp"
+        "imageUrl": "/cards/rws/vi-Vands.webp"
       },
       "seven-of-wands": {
         "name": "Sedam štapića - borbe, braniti i stoji hrabro",
@@ -20858,7 +20858,7 @@
           }
         ],
         "related_cards": ["Šest štapića", "osam štapića", "snaga"],
-        "imageUrl": "/cards/rvs/vii-vands.vebp"
+        "imageUrl": "/cards/rws/vii-vands.webp"
       },
       "eight-of-wands": {
         "name": "Osam štapića - brzina, napredak i preduzimanje akcije",
@@ -20958,7 +20958,7 @@
           }
         ],
         "related_cards": ["sedam štapića", "devet štapića", "karita"],
-        "imageUrl": "/cards/rvs/vii-vands.vebp"
+        "imageUrl": "/cards/rws/vii-vands.webp"
       },
       "nine-of-wands": {
         "name": "Devet štapića - otpornost, strpljenje i odlučnost",
@@ -21058,7 +21058,7 @@
           }
         ],
         "related_cards": ["osam štapića", "deset štapiće", "snaga"],
-        "imageUrl": "/cards/rvs/ik-inds.vebp"
+        "imageUrl": "/cards/rws/ik-inds.webp"
       },
       "ten-of-wands": {
         "name": "Deset štapića - teret, odgovornost i završetak",
@@ -21158,7 +21158,7 @@
           }
         ],
         "related_cards": ["devet štapića", "svet", "karita"],
-        "imageUrl": "/cards/rvs/k-vands.vebp"
+        "imageUrl": "/cards/rws/k-vands.webp"
       },
       "page-of-wands": {
         "name": "Princ of Vands - otkriće, inspiracija i nove mogućnosti",
@@ -21258,7 +21258,7 @@
           }
         ],
         "related_cards": ["Ace-Of-Of-štapić", "dvoje štapiće", "mađioničar"],
-        "imageUrl": "/cards/rvs / page-vands.vebp"
+        "imageUrl": "/cards/rvs / page-vands.webp"
       },
       "knight-of-wands": {
         "name": "Vitez štapića - strast, avantura i akcija",
@@ -21358,7 +21358,7 @@
           }
         ],
         "related_cards": ["Stranice", "Ace-Of-Of-štapić", "snaga"],
-        "imageUrl": "/cards/rvs/Knight-vands.vebp"
+        "imageUrl": "/cards/rws/Knight-vands.webp"
       },
       "ace-of-pentacles": {
         "name": "ACE PENTACLES - Obilje, prilika i novi početak",
@@ -21458,7 +21458,7 @@
           }
         ],
         "related_cards": ["troje pentakla", "devet šoljica", "sunce"],
-        "imageUrl": "/cards/rvs / toace-pentacles.vebp"
+        "imageUrl": "/cards/rvs / toace-pentacles.webp"
       },
       "two-of-pentacles": {
         "name": "Dva pentaklova - ravnoteža, harmonija i odlazak sa protokom",
@@ -21558,7 +21558,7 @@
           }
         ],
         "related_cards": ["ace-of-pentacles", "petostrukoćeno", "dvoje čaša"],
-        "imageUrl": "/cards/rvs/ii-pentacles.vebp"
+        "imageUrl": "/cards/rws/ii-pentacles.webp"
       },
       "three-of-pentacles": {
         "name": "Tri pentaklora - saradnja, majstorstvo i kreativnost",
@@ -21658,7 +21658,7 @@
           }
         ],
         "related_cards": ["osamdeset pentakla", "Šest štapića", "tri šolje"],
-        "imageUrl": "/cards/rvs/iii-piće.vebp"
+        "imageUrl": "/cards/rws/iii-piće.webp"
       },
       "four-of-pentacles": {
         "name": "Četiri pentaklova - lekcija u sigurnosti, kontroli i deljenju",
@@ -21757,7 +21757,7 @@
           }
         ],
         "related_cards": ["devet stanovnika", "šest šoljica", "toranj"],
-        "imageUrl": "/cards/rvs/iv-pentacles.vebp"
+        "imageUrl": "/cards/rws/iv-pentacles.webp"
       },
       "five-of-pentacles": {
         "name": "Pet stanovnika - oskudica resursa, isceljujuće verom i saosećanjem",
@@ -21857,7 +21857,7 @@
           }
         ],
         "related_cards": ["troje pentakla", "sunce", "šest šoljica"],
-        "imageUrl": "/cards/rvs/v-pentacles.vebp"
+        "imageUrl": "/cards/rws/v-pentacles.webp"
       },
       "six-of-pentacles": {
         "name": "Šest pentakova - deljenja, ravnoteža i zahvalnost",
@@ -21957,7 +21957,7 @@
           }
         ],
         "related_cards": ["troje pentakla", "pravda", "šest šoljica"],
-        "imageUrl": "/cards/rvs / vi-pentacles.vebp"
+        "imageUrl": "/cards/rvs / vi-pentacles.webp"
       },
       "seven-of-pentacles": {
         "name": "Sedam pentakla - strpljenja, napora i poverenja u budućnost",
@@ -22057,7 +22057,7 @@
           }
         ],
         "related_cards": ["osamdeset pentakla", "sunce", "sedam štapića"],
-        "imageUrl": "/cards/rvs / vii-pentacles.vebp"
+        "imageUrl": "/cards/rvs / vii-pentacles.webp"
       },
       "eight-of-pentacles": {
         "name": "Osam stanovnika - majstorstvo, fokus i razvoj",
@@ -22157,7 +22157,7 @@
           }
         ],
         "related_cards": ["troje pentakla", "mađioničar", "osam štapića"],
-        "imageUrl": "/cards/rvs / viii-pentacles.vebp"
+        "imageUrl": "/cards/rvs / viii-pentacles.webp"
       },
       "nine-of-pentacles": {
         "name": "Devet stanovnika - samopouzdanje, luksuzno i unutrašnje zadovoljstvo",
@@ -22257,7 +22257,7 @@
           }
         ],
         "related_cards": ["deset stanovnika", "kampera", "sunce"],
-        "imageUrl": "/cards/rvs/ik-pentacles.vebp"
+        "imageUrl": "/cards/rws/ik-pentacles.webp"
       },
       "ten-of-pentacles": {
         "name": "Deset pentakala - trajan uspeh, porodica i zaostavština",
@@ -22357,7 +22357,7 @@
           }
         ],
         "related_cards": ["devet stanovnika", "car", "mesec"],
-        "imageUrl": "/cards/rvs/k-pentacles.vebp"
+        "imageUrl": "/cards/rws/k-pentacles.webp"
       },
       "page-of-pentacles": {
         "name": "Princ Pentacles - Učenje, potencijal i nove mogućnosti",
@@ -22457,7 +22457,7 @@
           }
         ],
         "related_cards": ["ace-of-pentacles", "pustinjak", "trojke"],
-        "imageUrl": "/cards/rvs / page-pentacles.vebp"
+        "imageUrl": "/cards/rvs / page-pentacles.webp"
       },
       "knight-of-pentacles": {
         "name": "Knight of Pentacles - Odgovornost, disciplina i lojalnost",
@@ -22557,7 +22557,7 @@
           }
         ],
         "related_cards": ["troje pentakla", "temperament", "osam štapića"],
-        "imageUrl": "/cards/rvs/Knight-piće.vebp"
+        "imageUrl": "/cards/rws/Knight-piće.webp"
       },
       "queen-of-pentacles": {
         "name": "Kueen of Pentacles - obilje, saosećanje i siguran prostor",
@@ -22657,7 +22657,7 @@
           }
         ],
         "related_cards": ["vitez-pentacles", "kampera", "temperament"],
-        "imageUrl": "/cards/rvs/kueen-pentacles.vebp"
+        "imageUrl": "/cards/rws/kueen-pentacles.webp"
       },
       "king-of-pentacles": {
         "name": "Kralj pentakla - obilje, rukovodstvo i odgovornost",
@@ -22757,7 +22757,7 @@
           }
         ],
         "related_cards": ["kraljica-pentacles", "temperament", "car"],
-        "imageUrl": "/cards/rvs / king-piće.vebp"
+        "imageUrl": "/cards/rvs / king-piće.webp"
       },
       "ace-of-cups": {
         "name": "ACE CUPS - Novi emocionalni počeci",
@@ -22857,7 +22857,7 @@
           }
         ],
         "related_cards": ["dvoje čaša", "kralj šoljica", "Page-of-of Cups"],
-        "imageUrl": "/cards/rvs / toace-cups.vebp"
+        "imageUrl": "/cards/rvs / toace-cups.webp"
       },
       "two-of-cups": {
         "name": "Dvoje šoljica - obveznice i partnerstva",
@@ -22957,7 +22957,7 @@
           }
         ],
         "related_cards": ["Ace-Cups", "ljubitelji", "svet"],
-        "imageUrl": "/cards/rvs/ii-cups.vebp"
+        "imageUrl": "/cards/rws/ii-cups.webp"
       },
       "three-of-cups": {
         "name": "Tri šolje - proslava i zajedništvo",
@@ -23057,7 +23057,7 @@
           }
         ],
         "related_cards": ["šest šoljica", "devet šoljica", "sunce"],
-        "imageUrl": "/cards/rvs/ii-cups.vebp"
+        "imageUrl": "/cards/rws/ii-cups.webp"
       },
       "four-of-cups": {
         "name": "Četiri šolje - unutrašnji odraz i svest",
@@ -23157,7 +23157,7 @@
           }
         ],
         "related_cards": ["Ace-Cups", "osam šoljica", "presuda"],
-        "imageUrl": "/cards/rvs/iv-cups.vebp"
+        "imageUrl": "/cards/rws/iv-cups.webp"
       },
       "five-of-cups": {
         "name": "Pet šoljica - gubitak, prihvatanje i isceljenje",
@@ -23257,7 +23257,7 @@
           }
         ],
         "related_cards": ["smrt", "šest šoljica", "sunce"],
-        "imageUrl": "/cards/rvs/v-cups.vebp"
+        "imageUrl": "/cards/rws/v-cups.webp"
       },
       "six-of-cups": {
         "name": "Šest šoljica - prošlost, nevinost i saosećanje",
@@ -23357,7 +23357,7 @@
           }
         ],
         "related_cards": ["petorokopi", "devet šoljica", "sunce"],
-        "imageUrl": "/cards/rvs / vi-cups.vebp"
+        "imageUrl": "/cards/rvs / vi-cups.webp"
       },
       "seven-of-cups": {
         "name": "Sedam šoljica - snovi, izbori i stvarnost",
@@ -23457,7 +23457,7 @@
           }
         ],
         "related_cards": ["mesec", "osam šoljica", "Ace-Cups"],
-        "imageUrl": "/cards/rvs/vii-cups.vebp"
+        "imageUrl": "/cards/rws/vii-cups.webp"
       },
       "eight-of-cups": {
         "name": "Osam šoljica - oproštaj, unutrašnji put i svesno odlazak",
@@ -23557,7 +23557,7 @@
           }
         ],
         "related_cards": ["sedam šoljica", "devet šoljica", "pustinjak"],
-        "imageUrl": "/cards/rvs / viii-cups.vebp"
+        "imageUrl": "/cards/rvs / viii-cups.webp"
       },
       "nine-of-cups": {
         "name": "Devet šoljica - ispunjenje želja i emocionalno zadovoljstvo",
@@ -23657,7 +23657,7 @@
           }
         ],
         "related_cards": ["osam šoljica", "deset šoljica", "sunce"],
-        "imageUrl": "/cards/rvs/ik-cups.vebp"
+        "imageUrl": "/cards/rws/ik-cups.webp"
       },
       "ten-of-cups": {
         "name": "Deset šoljica - porodica, harmonija i emocionalni završetak",
@@ -23757,7 +23757,7 @@
           }
         ],
         "related_cards": ["devet šoljica", "ljubitelji", "sunce"],
-        "imageUrl": "/cards/rvs/k-cups.vebp"
+        "imageUrl": "/cards/rws/k-cups.webp"
       },
       "page-of-cups": {
         "name": "Princ Cup-a - intuicija, inspiracija i emocionalno istraživanje",
@@ -23857,7 +23857,7 @@
           }
         ],
         "related_cards": ["Stranice-of-pentacles", "kraljica šoljica", "vitez"],
-        "imageUrl": "/cards/rvs / page-cups.vebp"
+        "imageUrl": "/cards/rvs / page-cups.webp"
       },
       "knight-of-cups": {
         "name": "Knight of Cups - Romantika, inspiracija i emocionalno putovanje",
@@ -23957,7 +23957,7 @@
           }
         ],
         "related_cards": ["Page-of-of Cups", "kraljica šoljica", "ljubitelji"],
-        "imageUrl": "/cards/rvs/knight-cups.vebp"
+        "imageUrl": "/cards/rws/knight-cups.webp"
       },
       "queen-of-cups": {
         "name": "Kueen of Cups - emocionalna zrelost i saosećanje",
@@ -24057,7 +24057,7 @@
           }
         ],
         "related_cards": ["vitez", "Page-of-of Cups", "ljubitelji"],
-        "imageUrl": "/cards/rvs/kueen-cups.vebp"
+        "imageUrl": "/cards/rws/kueen-cups.webp"
       },
       "king-of-cups": {
         "name": "Kralj šoljica - emocionalna zrelost i smernice",
@@ -24157,12 +24157,12 @@
           }
         ],
         "related_cards": ["kraljica šoljica", "vitez", "karita"],
-        "imageUrl": "/cards/rvs/king-cups.vebp"
+        "imageUrl": "/cards/rws/king-cups.webp"
       },
       "ace-of-swords": {
         "name": "Ace mačeva - jasnoća i nove misli",
         "short_description": "Ace mačeva predstavlja mentalnu jasnoću, nove ideje i moć da se upita stvarnost. Simbolizuje snažan početak za oštre inteligencije i fer odluke.",
-        "imageUrl": "/cards/rvs / toace-ssvords.vebp",
+        "imageUrl": "/cards/rvs / toace-ssvords.webp",
         "meanings": {
           "upright": {
             "general": "Ace mačeva donosi mentalnu jasnoću i nove misli. Idealno je vreme da se vidi istinu, praveći fer odluke i jasnoću u komunikaciji.",
@@ -24258,7 +24258,7 @@
       "two-of-swords": {
         "name": "Dva mačeva - neodlučnost i ravnoteža",
         "short_description": "Dvoje mačeva predstavljaju teške odluke, unutrašnji sukob i ravnotežu. Simbolizuje situaciju suzdržavanja od donošenja izbora ili preostalih neutralnih.",
-        "imageUrl": "/cards/rvs/ii-svords.vebp",
+        "imageUrl": "/cards/rws/ii-svords.webp",
         "meanings": {
           "upright": {
             "general": "Dvoje mačeva ukazuje da je rastrgano između dve opcije i imati poteškoće u odlučivanju. Važno je održavati unutrašnju ravnotežu.",
@@ -24354,7 +24354,7 @@
       "three-of-swords": {
         "name": "Tri mačeva - srce i bol",
         "short_description": "Tri mačeva - Heartbreak i bol nudi smernice na srcu, boli, odvajanju, tugi. To je moćna karta za početak zarastanja, prihvatanje stvarnosti.",
-        "imageUrl": "/cards/rvs/ii-ssvords.vebp",
+        "imageUrl": "/cards/rws/ii-ssvords.webp",
         "meanings": {
           "upright": {
             "general": "Tri mačeva - Heartbreak i bol nosi važne poruke o srcu, boli, razdvajanju, tugi. U ovom periodu, početak oporavka i prihvatanje istine nalaze se na čelu.",
@@ -24442,7 +24442,7 @@
       "four-of-swords": {
         "name": "Četiri mačeva - odmor i oporavak",
         "short_description": "Četiri mačeva - odmor i isceljivanje nudi smernice o mirovanju, oporavku, meditaciji, povlačenju. To je moćna karta za ponovno punjenje i pronalaženje mira.",
-        "imageUrl": "/cards/rvs/iv-ssvords.vebp",
+        "imageUrl": "/cards/rws/iv-ssvords.webp",
         "meanings": {
           "upright": {
             "general": "Četiri mačeva - odmor i isceljenje nosi važne poruke u vezi sa odmaranjem, oporavkama, meditacijom, povlačenjem. Tokom ovog perioda, punjenje i pronalaženje mira su na čelu.",
@@ -24530,7 +24530,7 @@
       "five-of-swords": {
         "name": "Petorica mačeva - sukob i gubitak",
         "short_description": "Petorica mačeva - sukob i gubitak nudi smernice o sukobu, porazu, takmičenju, ego. To je moćna karta za učenje nastave i pomirenje.",
-        "imageUrl": "/cards/rvs/v-ssvords.vebp",
+        "imageUrl": "/cards/rws/v-ssvords.webp",
         "meanings": {
           "upright": {
             "general": "Petorica mačeva - sukob i gubitak nosi važne poruke o sukobu, porazi, takmičenju, ego. Tokom ovog perioda lekcije i pomirenje učenja su na čelu.",
@@ -24618,7 +24618,7 @@
       "six-of-swords": {
         "name": "Šest mačeva - prolazi i kreće napred",
         "short_description": "Šest mačeva - tranzicija i prelazak napred nudi smernice na tranziciji, putovanju, promenama, krećući se napred. To je moćna karta za nove početke i mirna tranzicija.",
-        "imageUrl": "/cards/rvs/vi-ssvords.vebp",
+        "imageUrl": "/cards/rws/vi-ssvords.webp",
         "meanings": {
           "upright": {
             "general": "Šest mačeva - tranzicija i kretanje napred nosi važne poruke o tranziciji, putovanju, promeni, krećući se napred. Tokom ovog perioda, novi počeci i mirna tranzicija nalaze se na čelu.",
@@ -24706,7 +24706,7 @@
       "seven-of-swords": {
         "name": "Sedam mačeva - Strategija i oprez",
         "short_description": "Sedam mačeva - Strategija i OPREZ nudi smernice o strategiji, oprezu, prikrivenosti, planiranju. Pametna rešenja su moćna karta za strateško razmišljanje.",
-        "imageUrl": "/cards/rvs / vii-ssvords.vebp",
+        "imageUrl": "/cards/rvs / vii-ssvords.webp",
         "meanings": {
           "upright": {
             "general": "Sedam mačeva - Strategija i OPREZ ima važne poruke o strategiji, pažnji, prikrivanju, planiranju. Tokom ovog perioda, inteligentna rešenja i strateško razmišljanje su na čelu.",
@@ -24794,7 +24794,7 @@
       "eight-of-swords": {
         "name": "Osam mačeva - ograničenja i strahovi",
         "short_description": "Osam mačeva - ograničenje i strahovi nude smernice na ograničenjima, strahovima, mentalnim blokadama. To je moćna karta za oslobađanje i prevazilaženje strahova.",
-        "imageUrl": "/cards/rvs/viii-ssvords.vebp",
+        "imageUrl": "/cards/rws/viii-ssvords.webp",
         "meanings": {
           "upright": {
             "general": "Osam mačeva - ograničenja i strahovi nosi važne poruke u vezi sa ograničenjem, strahovima, mentalnim blokadama. U ovom periodu, oslobođenje i prevazilaženje strahova su na čelu.",
@@ -24882,7 +24882,7 @@
       "nine-of-swords": {
         "name": "Devet mačeva - anksioznost i anksioznost",
         "short_description": "Devet mačeva - anksioznost i zabrinutost nudi smernice o anksioznosti, anksioznosti, noćni more, stres. Traženje podrške je moćna kartica za početak isceljenja.",
-        "imageUrl": "/cards/rvs/ik-ssvords.vebp",
+        "imageUrl": "/cards/rws/ik-ssvords.webp",
         "meanings": {
           "upright": {
             "general": "Devet mačeva - anksioznost i briga nosi važne poruke u vezi sa anksioznošću, anksioznošću, noćnim morama, stresom. Tokom ovog perioda traženje podrške i početka oporavka nalaze se na čelu.",
@@ -24970,7 +24970,7 @@
       "ten-of-swords": {
         "name": "Deset mačeva - kraj i novi početak",
         "short_description": "Deset mačeva - kraj i novi početak nude smernice na kraju, poraz, odustajanje, završava. To je moćna karta za nove početke, nade i ponovno rođenje.",
-        "imageUrl": "/cards/rvs/k-svords.vebp",
+        "imageUrl": "/cards/rws/k-svords.webp",
         "meanings": {
           "upright": {
             "general": "Deset mačeva - kraj i novi početak nosi važne poruke o kraju, poraza, odustajanja, završavajući. Tokom ovog perioda, novi početak, nada i ponovno rođenje nalaze se na čelu.",
@@ -25058,7 +25058,7 @@
       "page-of-swords": {
         "name": "Princ mačeva - radoznalost i učenje",
         "short_description": "Princ mačeva - radoznalost i učenje nudi smernice na radoznalosti, učenju, komunikaciji, novim idejama. To je moćna karta za mentalni razvoj i hrabrost.",
-        "imageUrl": "/cards/rvs / page-ssvords.vebp",
+        "imageUrl": "/cards/rvs / page-ssvords.webp",
         "meanings": {
           "upright": {
             "general": "Princ mačeva - radoznalost i učenje vrši važne poruke o radoznalosti, učenju, komunikaciji, novim idejama. Tokom ovog perioda, mentalni razvoj i hrabrost su na čelu.",
@@ -25146,7 +25146,7 @@
       "knight-of-swords": {
         "name": "Vitez mačeva - brza akcija i odlučnost",
         "short_description": "Vitez mačeva - brza akcija i određivanje nudi smernice na brzom pokretu, odlučnosti, hrabrosti, akciji. Cilj fokus je moćna karta za snažan napredak.",
-        "imageUrl": "/cards/rvs/Knight-ssvords.vebp",
+        "imageUrl": "/cards/rws/Knight-ssvords.webp",
         "meanings": {
           "upright": {
             "general": "Vitez mačeva - brza akcija i određivanje nosi važne poruke o brzom pokretu, određivanju, hrabrosti, akciji. U ovom periodu fokusiranje na cilj i snažan napredak nalaze se na čelu.",
@@ -25234,7 +25234,7 @@
       "queen-of-swords": {
         "name": "Kraljica mačeva - nezavisnost i jasnoća",
         "short_description": "Kraljica mačeva - Nezavisnost i jasnoća nude smernice o nezavisnosti, jasnoći, iskrenosti, inteligenciji. To je moćna karta za pravično vođstvo i oštre inteligencije.",
-        "imageUrl": "/cards/rvs/kueen-ssvords.vebp",
+        "imageUrl": "/cards/rws/kueen-ssvords.webp",
         "meanings": {
           "upright": {
             "general": "Kraljica mačeva - nezavisnost i jasnoća nosi važne poruke u vezi sa nezavisnošću, jasnoćom, iskrenošću, inteligencije. Tokom ovog perioda, pošteno rukovodstvo i oštra inteligencija su na čelu.",
@@ -25322,7 +25322,7 @@
       "king-of-swords": {
         "name": "Kralj mačeva - autoritet i pravda",
         "short_description": "Kralj mačeva - autoritet i pravda nudi smernice o autoritetu, pravdi, logici, liderstvu. Pravično upravljanje je moćna kartica za mudrost.",
-        "imageUrl": "/cards/rvs/King-svords.Vebp",
+        "imageUrl": "/cards/rws/King-svords.webp",
         "meanings": {
           "upright": {
             "general": "Kralj mačeva - autoritet i pravda vrši važne poruke o autoritetu, pravdi, logici, liderstvu. Tokom ovog perioda, fer upravljanje i mudrost su na čelu.",
@@ -25410,7 +25410,7 @@
       "queen-of-wands": {
         "name": "Kraljica štapića - samopouzdanje i harizma",
         "short_description": "Kraljica štapića - Samopouzdanje i Charizma nude smernice na pouzdanju, karizmi, energiji, kreativnosti. To je moćna karta za liderstvo i inspiraciju.",
-        "imageUrl": "/cards/rvs/kueen-vands.vebp",
+        "imageUrl": "/cards/rws/kueen-vands.webp",
         "meanings": {
           "upright": {
             "general": "Kraljica štapića - Samopouzdanje i harizma nosi važne poruke o pouzdanju, karizmi, energiji, kreativnosti. Tokom ovog perioda, rukovodstvo i inspiracija su na čelu.",
@@ -25498,7 +25498,7 @@
       "king-of-wands": {
         "name": "Kralj štapića - vizija i rukovodstvo",
         "short_description": "Kralj štapića - Vizija i rukovodstvo nudi smernice o viziji, liderstvu, preduzetništvu, hrabrosti. Snažno rukovodstvo je moćna karta za uspeh.",
-        "imageUrl": "/cards/rvs/King-Vands.Vebp",
+        "imageUrl": "/cards/rws/King-Vands.webp",
         "meanings": {
           "upright": {
             "general": "Kralj štapića - vizija i rukovodstvo vrši važne poruke o viziji, liderstvu, preduzetništvu i hrabrosti. Tokom ovog perioda, snažno rukovodstvo i uspeh su na čelu.",

@@ -39,12 +39,9 @@ const intlMiddleware = createMiddleware({
 export default function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  console.log(`🔍 Middleware processing: ${pathname}`);
-
   // First, apply SEO URL rewrites
   const mapping = urlMappings[pathname];
   if (mapping) {
-    console.log(`🔄 Redirecting ${pathname} to ${mapping}`);
     return NextResponse.redirect(new URL(mapping, request.url));
   }
 
@@ -54,12 +51,10 @@ export default function middleware(request: NextRequest) {
       const remainingPath = pathname.slice(pattern.length);
       const url = request.nextUrl.clone();
       url.pathname = destination + remainingPath;
-      console.log(`🔄 Dynamic redirect: ${pathname} to ${url.pathname}`);
       return NextResponse.redirect(new URL(url.pathname, request.url));
     }
   }
 
-  console.log(`➡️ Passing to intl middleware: ${pathname}`);
   // Then apply next-intl middleware for locale handling
   return intlMiddleware(request);
 }

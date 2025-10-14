@@ -463,10 +463,12 @@ export function initializeMemoryOptimization() {
     }
   };
 
-  // Cleanup every 30 seconds
-  setInterval(cleanup, 30000);
+  // Cleanup every 30 seconds - MEMORY LEAK FIX: interval'i kaydet
+  const intervalId = setInterval(cleanup, 30000);
 
+  // Cleanup function - MEMORY LEAK FIX: interval'i temizle
   return () => {
+    clearInterval(intervalId);  // ← EKLENEN SATIR
     monitor.stopMonitoring();
   };
 }

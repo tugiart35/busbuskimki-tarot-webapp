@@ -37,7 +37,8 @@ export class CardSEO {
           : card.serbianName;
 
     // Determine card type (major or minor arcana)
-    const cardType = card.number !== undefined && card.number <= 21 ? 'major' : 'minor';
+    const cardType =
+      card.number !== undefined && card.number <= 21 ? 'major' : 'minor';
 
     // Dynamic OG image URL
     const ogImageUrl = `/api/og/card?name=${encodeURIComponent(cardName)}&type=${cardType}&locale=${locale}`;

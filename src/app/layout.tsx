@@ -21,6 +21,7 @@ Güncellemeler:
 
 import { ReactNode } from 'react';
 import './globals.css';
+import Script from 'next/script';
 
 // Modüler dosyalardan import'lar
 import { defaultMetadata, viewport } from '@/lib/config/metadata';
@@ -58,45 +59,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <head>
         <HeadTags />
 
-        {/* Performance Optimization: DNS Prefetch */}
-        <link rel='dns-prefetch' href='//fonts.googleapis.com' />
-        <link rel='dns-prefetch' href='//www.google-analytics.com' />
+        {/* Performance Optimization: Preconnect (daha hızlı DNS + TLS) */}
+        <link rel='preconnect' href='https://fonts.googleapis.com' />
+        <link rel='preconnect' href='https://www.google-analytics.com' />
+        <link rel='preconnect' href='https://pagead2.googlesyndication.com' />
         <link rel='dns-prefetch' href='//connect.facebook.net' />
-        <link rel='dns-prefetch' href='//pagead2.googlesyndication.com' />
 
-        {/* Preload Critical Resources - Font dosyaları mevcut değil, Google Fonts kullanıyoruz */}
-        {/* <link
-          rel='preload'
-          href='/fonts/mystical-font.woff2'
-          as='font'
-          type='font/woff2'
-          crossOrigin='anonymous'
-        /> */}
-
-        {/* Google AdSense */}
-        <script
-          async
-          src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7105264375916972'
-          crossOrigin='anonymous'
-        />
-
-        {/* Google Analytics - G-Y2HESMXJXD */}
-        <script
-          async
-          src='https://www.googletagmanager.com/gtag/js?id=G-Y2HESMXJXD'
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-Y2HESMXJXD');
-            `,
-          }}
-        />
-
-        {/* Schema.org JSON-LD Structured Data */}
+        {/* Schema.org JSON-LD Structured Data - Kritik SEO, head'de kalmalı */}
         {generateHomepageSchemas().map((schema, index) => (
           <script
             key={index}
