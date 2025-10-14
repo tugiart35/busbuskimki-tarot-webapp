@@ -16094,7 +16094,11 @@
       "creditsAddedDescription": "Credits added to your account",
       "goToDashboard": "Go to Dashboard",
       "packagePurchased": "{packageName} successfully purchased",
-      "title": "Payment Successful!"
+      "title": "Payment Successful!",
+      "autoRedirect": "Redirecting you to Dashboard",
+      "seconds": " seconds...",
+      "redirecting": "Redirecting...",
+      "goToDashboardNow": "Go to Dashboard Now"
     }
   },
   "problemSolving": {

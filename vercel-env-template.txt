@@ -54,7 +54,8 @@ WEBHOOK_SECRET=your-secure-random-secret-minimum-32-characters
 
 # Shopier URLs (Gerçek domain ile güncelleyin!)
 NEXT_PUBLIC_SHOPIER_API_URL=https://www.shopier.com/ShowProduct/api_pay4.php
-NEXT_PUBLIC_SHOPIER_CALLBACK_URL=https://your-domain.vercel.app/payment/callback
+NEXT_PUBLIC_SHOPIER_SUCCESS_URL=https://your-domain.vercel.app/payment/success
+NEXT_PUBLIC_SHOPIER_CANCEL_URL=https://your-domain.vercel.app/payment/cancel
 NEXT_PUBLIC_SHOPIER_WEBHOOK_URL=https://your-domain.vercel.app/api/webhook/shopier
 
 # Email Additional

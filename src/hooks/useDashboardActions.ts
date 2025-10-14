@@ -16,7 +16,8 @@ export const useDashboardActions = (
   profile: UserProfile | null,
   user: User | null,
   currentLocale: string,
-  setProfile: (profile: UserProfile | null) => void
+  setProfile: (profile: UserProfile | null) => void,
+  currency: 'TRY' | 'EUR' = 'TRY' // Para birimi desteği
 ) => {
   // useShopier hook'undan ödeme fonksiyonlarını al
   const { initiatePayment, loading: paymentLoading } = useShopier();
@@ -42,12 +43,15 @@ export const useDashboardActions = (
         return;
       }
 
+      // Para birimini ve fiyatı dinamik seç
+      const price = currency === 'TRY' ? pkg.price_try : pkg.price_eur;
+
       // Fallback: Shopier ödeme sistemi ile satın alma
       const packageData = {
         name: pkg.name,
         credits: pkg.credits,
-        price: pkg.price_try, // Türk Lirası fiyatını kullan
-        currency: 'TRY',
+        price: price,
+        currency: currency,
       };
       await initiatePayment(pkg.id.toString(), packageData); // useShopier hook'u ile ödeme başlat
     } catch (error) {

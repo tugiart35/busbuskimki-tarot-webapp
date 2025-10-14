@@ -1,4 +1,4 @@
-# 🚀 Vercel Deployment Rehberi - TaraTarot
+# 🚀 Vercel Deployment Rehberi - busbuskimki
 
 **Son Güncelleme:** 13 Ekim 2025  
 **Durum:** ✅ DEPLOYMENT'A HAZIR  
@@ -111,7 +111,8 @@ SHOPIER_API_KEY=your-api-key
 SHOPIER_API_SECRET=your-api-secret
 SHOPIER_TEST_MODE=false
 NEXT_PUBLIC_SHOPIER_API_URL=https://www.shopier.com/ShowProduct/api_pay4.php
-NEXT_PUBLIC_SHOPIER_CALLBACK_URL=https://your-domain.vercel.app/payment/callback
+NEXT_PUBLIC_SHOPIER_SUCCESS_URL=https://your-domain.vercel.app/payment/success
+NEXT_PUBLIC_SHOPIER_CANCEL_URL=https://your-domain.vercel.app/payment/cancel
 NEXT_PUBLIC_SHOPIER_WEBHOOK_URL=https://your-domain.vercel.app/api/webhook/shopier
 ```
 
@@ -235,7 +236,7 @@ nano .env.local
 ### Adım 1: Local Build Test (5 dk)
 
 ```bash
-cd /Users/tugi/Desktop/TaraTarot
+cd /Users/tugi/Desktop/busbuskimki
 
 # Dependencies güncelleme
 npm install

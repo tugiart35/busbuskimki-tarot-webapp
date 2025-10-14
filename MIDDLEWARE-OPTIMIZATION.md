@@ -2,11 +2,13 @@
 
 ## 📋 Özet
 
-Middleware'deki ağır Supabase auth ve session kontrollerini **serverless API route'a taşıyarak** Vercel edge runtime limitlerinden kaçındık.
+Middleware'deki ağır Supabase auth ve session kontrollerini **serverless API
+route'a taşıyarak** Vercel edge runtime limitlerinden kaçındık.
 
 ## ✅ Yapılan Değişiklikler
 
 ### 1. **API Route Oluşturuldu** `/api/auth-check`
+
 - **Konum:** `src/app/api/auth-check/route.ts`
 - **Runtime:** Node.js serverless (limit yok)
 - **Görevler:**
@@ -16,6 +18,7 @@ Middleware'deki ağır Supabase auth ve session kontrollerini **serverless API r
   - User bilgileri döndürme
 
 ### 2. **Middleware Hafifletildi** `/middleware.ts`
+
 - **Runtime:** Edge (ultra hızlı)
 - **Görevler:**
   - Next-intl locale routing
@@ -24,10 +27,12 @@ Middleware'deki ağır Supabase auth ve session kontrollerini **serverless API r
   - ❌ Supabase auth (API route'a taşındı)
 
 ### 3. **Client Hook Oluşturuldu** `useAuthCheck`
+
 - **Konum:** `src/hooks/useAuthCheck.ts`
 - **Amaç:** API route'u kolayca kullanmak
 
 ### 4. **Protected Route Component** `ProtectedRoute`
+
 - **Konum:** `src/components/ProtectedRoute.tsx`
 - **Amaç:** Sayfa koruma wrapper'ı
 
@@ -59,10 +64,7 @@ import { ProtectedRoute } from '@/components/ProtectedRoute';
 
 export default function ProfilePage() {
   return (
-    <ProtectedRoute 
-      requiredRole="user" 
-      redirectTo="/tr/auth"
-    >
+    <ProtectedRoute requiredRole="user" redirectTo="/tr/auth">
       <div>Profil sayfası - Sadece giriş yapmış kullanıcılar</div>
     </ProtectedRoute>
   );
@@ -103,7 +105,7 @@ async function checkAuth() {
 
 export default async function ServerPage() {
   const auth = await checkAuth();
-  
+
   if (!auth.authenticated) {
     redirect('/tr/auth');
   }
@@ -114,13 +116,13 @@ export default async function ServerPage() {
 
 ## 🎯 Performans İyileştirmeleri
 
-| Özellik | Öncesi (Middleware) | Sonrası (API Route) |
-|---------|---------------------|---------------------|
-| Edge Runtime Limit | ❌ Aşılıyor | ✅ Sorun yok |
-| Deploy Süresi | ❌ Timeout | ✅ Başarılı |
-| Middleware Boyutu | 🔴 Ağır | 🟢 Minimal |
-| Auth Performansı | 🟡 Edge sınırlı | 🟢 Serverless güçlü |
-| Caching | ❌ Kısıtlı | ✅ Esnek |
+| Özellik            | Öncesi (Middleware) | Sonrası (API Route) |
+| ------------------ | ------------------- | ------------------- |
+| Edge Runtime Limit | ❌ Aşılıyor         | ✅ Sorun yok        |
+| Deploy Süresi      | ❌ Timeout          | ✅ Başarılı         |
+| Middleware Boyutu  | 🔴 Ağır             | 🟢 Minimal          |
+| Auth Performansı   | 🟡 Edge sınırlı     | 🟢 Serverless güçlü |
+| Caching            | ❌ Kısıtlı          | ✅ Esnek            |
 
 ## 🔧 Cache Stratejisi (İsteğe Bağlı)
 
@@ -169,15 +171,11 @@ vercel --prod
 
 ## 🎉 Sonuç
 
-✅ Vercel edge runtime limiti sorunu çözüldü
-✅ Deploy başarılı olacak
-✅ Auth sistemi daha esnek
-✅ Performans iyileşti
-✅ Kolay test edilebilir API endpoint
+✅ Vercel edge runtime limiti sorunu çözüldü ✅ Deploy başarılı olacak ✅ Auth
+sistemi daha esnek ✅ Performans iyileşti ✅ Kolay test edilebilir API endpoint
 
 ## 📚 Ek Kaynaklar
 
 - [Vercel Edge Runtime Limits](https://vercel.com/docs/functions/edge-functions/limitations)
 - [Next.js Middleware Best Practices](https://nextjs.org/docs/app/building-your-application/routing/middleware)
 - [Supabase Auth Helpers](https://supabase.com/docs/guides/auth/auth-helpers/nextjs)
-

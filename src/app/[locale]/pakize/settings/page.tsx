@@ -1521,18 +1521,6 @@ export default function SettingsPage() {
                         </span>
                       </div>
                       <div className='flex justify-between col-span-1 md:col-span-2'>
-                        <span className='text-slate-400'>Webhook URL:</span>
-                        <span className='text-white text-xs break-all'>
-                          {shopierSettings.webhookUrl}
-                        </span>
-                      </div>
-                      <div className='flex justify-between col-span-1 md:col-span-2'>
-                        <span className='text-slate-400'>Callback URL:</span>
-                        <span className='text-white text-xs break-all'>
-                          {shopierSettings.callbackUrl}
-                        </span>
-                      </div>
-                      <div className='flex justify-between col-span-1 md:col-span-2'>
                         <span className='text-slate-400'>Success URL:</span>
                         <span className='text-white text-xs break-all'>
                           {shopierSettings.successUrl}
@@ -1542,6 +1530,12 @@ export default function SettingsPage() {
                         <span className='text-slate-400'>Cancel URL:</span>
                         <span className='text-white text-xs break-all'>
                           {shopierSettings.cancelUrl}
+                        </span>
+                      </div>
+                      <div className='flex justify-between col-span-1 md:col-span-2'>
+                        <span className='text-slate-400'>Webhook URL:</span>
+                        <span className='text-white text-xs break-all'>
+                          {shopierSettings.webhookUrl}
                         </span>
                       </div>
                     </div>
@@ -1694,41 +1688,10 @@ export default function SettingsPage() {
                       </div>
                       <div className='md:col-span-2'>
                         <label className='block text-sm text-slate-400 mb-2'>
-                          Webhook URL
-                        </label>
-                        <input
-                          type='url'
-                          value={shopierSettings.webhookUrl}
-                          onChange={e =>
-                            setShopierSettings({
-                              ...shopierSettings,
-                              webhookUrl: e.target.value,
-                            })
-                          }
-                          className='w-full px-3 py-2 admin-glass rounded-lg border-0 text-white placeholder-slate-400 focus:ring-2 focus:ring-purple-500/50 focus:outline-none'
-                          placeholder='Webhook URL girin'
-                        />
-                      </div>
-                      <div className='md:col-span-2'>
-                        <label className='block text-sm text-slate-400 mb-2'>
-                          Callback URL
-                        </label>
-                        <input
-                          type='url'
-                          value={shopierSettings.callbackUrl}
-                          onChange={e =>
-                            setShopierSettings({
-                              ...shopierSettings,
-                              callbackUrl: e.target.value,
-                            })
-                          }
-                          className='w-full px-3 py-2 admin-glass rounded-lg border-0 text-white placeholder-slate-400 focus:ring-2 focus:ring-purple-500/50 focus:outline-none'
-                          placeholder='Callback URL girin'
-                        />
-                      </div>
-                      <div className='md:col-span-2'>
-                        <label className='block text-sm text-slate-400 mb-2'>
                           Success URL
+                          <span className='ml-2 text-xs text-slate-500'>
+                            (Başarılı ödeme sonrası kullanıcı yönlendirmesi)
+                          </span>
                         </label>
                         <input
                           type='url'
@@ -1740,12 +1703,15 @@ export default function SettingsPage() {
                             })
                           }
                           className='w-full px-3 py-2 admin-glass rounded-lg border-0 text-white placeholder-slate-400 focus:ring-2 focus:ring-purple-500/50 focus:outline-none'
-                          placeholder='Success URL girin'
+                          placeholder='https://busbuskimki.com/payment/success'
                         />
                       </div>
                       <div className='md:col-span-2'>
                         <label className='block text-sm text-slate-400 mb-2'>
                           Cancel URL
+                          <span className='ml-2 text-xs text-slate-500'>
+                            (İptal durumunda kullanıcı yönlendirmesi)
+                          </span>
                         </label>
                         <input
                           type='url'
@@ -1757,7 +1723,28 @@ export default function SettingsPage() {
                             })
                           }
                           className='w-full px-3 py-2 admin-glass rounded-lg border-0 text-white placeholder-slate-400 focus:ring-2 focus:ring-purple-500/50 focus:outline-none'
-                          placeholder='Cancel URL girin'
+                          placeholder='https://busbuskimki.com/payment/cancel'
+                        />
+                      </div>
+                      <div className='md:col-span-2'>
+                        <label className='block text-sm text-slate-400 mb-2'>
+                          Webhook URL
+                          <span className='ml-2 text-xs text-slate-500'>
+                            (Backend webhook endpoint - Shopier Panel'de
+                            tanımlanmalı)
+                          </span>
+                        </label>
+                        <input
+                          type='url'
+                          value={shopierSettings.webhookUrl}
+                          onChange={e =>
+                            setShopierSettings({
+                              ...shopierSettings,
+                              webhookUrl: e.target.value,
+                            })
+                          }
+                          className='w-full px-3 py-2 admin-glass rounded-lg border-0 text-white placeholder-slate-400 focus:ring-2 focus:ring-purple-500/50 focus:outline-none'
+                          placeholder='https://busbuskimki.com/api/webhook/shopier'
                         />
                       </div>
                     </div>

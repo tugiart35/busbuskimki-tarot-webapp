@@ -86,8 +86,10 @@ ls -la .gemini/
 - `NEXT_PUBLIC_SITE_URL`: `https://sitenizin-adi.vercel.app` (veya özel alan
   adınız)
 - `NEXT_PUBLIC_CONTACT_PHONE`
-- `NEXT_PUBLIC_SHOPIER_CALLBACK_URL`:
-  `https://sitenizin-adi.vercel.app/payment/callback`
+- `NEXT_PUBLIC_SHOPIER_SUCCESS_URL`:
+  `https://sitenizin-adi.vercel.app/payment/success`
+- `NEXT_PUBLIC_SHOPIER_CANCEL_URL`:
+  `https://sitenizin-adi.vercel.app/payment/cancel`
 - `NEXT_PUBLIC_SHOPIER_WEBHOOK_URL`:
   `https://sitenizin-adi.vercel.app/api/webhook/shopier`
 

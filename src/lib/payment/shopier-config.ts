@@ -40,8 +40,9 @@ export interface ShopierConfig {
   merchantId: string;
   apiKey: string;
   apiSecret: string;
-  callbackUrl: string;
-  webhookUrl: string;
+  successUrl: string; // Başarılı ödeme sonrası kullanıcı yönlendirmesi
+  cancelUrl: string; // İptal durumunda kullanıcı yönlendirmesi
+  webhookUrl: string; // Backend webhook endpoint
   testMode: boolean;
 }
 
@@ -90,9 +91,12 @@ export const getShopierConfig = (): ShopierConfig => {
     merchantId: process.env.SHOPIER_MERCHANT_ID || '',
     apiKey: process.env.SHOPIER_API_KEY || '',
     apiSecret: process.env.SHOPIER_API_SECRET || '',
-    callbackUrl:
-      process.env.NEXT_PUBLIC_SHOPIER_CALLBACK_URL ||
-      `${process.env.NEXT_PUBLIC_SITE_URL}/payment/callback`,
+    successUrl:
+      process.env.NEXT_PUBLIC_SHOPIER_SUCCESS_URL ||
+      `${process.env.NEXT_PUBLIC_SITE_URL}/payment/success`,
+    cancelUrl:
+      process.env.NEXT_PUBLIC_SHOPIER_CANCEL_URL ||
+      `${process.env.NEXT_PUBLIC_SITE_URL}/payment/cancel`,
     webhookUrl:
       process.env.NEXT_PUBLIC_SHOPIER_WEBHOOK_URL ||
       `${process.env.NEXT_PUBLIC_SITE_URL}/api/webhook/shopier`,
@@ -256,8 +260,8 @@ export const createTestPayment = (
     description: 'Test ödeme',
     customerEmail: 'test@example.com',
     customerName: 'Test Kullanıcı',
-    returnUrl: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3111'}/payment/success`,
-    cancelUrl: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3111'}/payment/cancel`,
+    returnUrl: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://busbuskimki.com'}/payment/success`,
+    cancelUrl: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://busbuskimki.com'}/payment/cancel`,
     packageId,
     packageName: 'Test Paketi',
     credits: 100,

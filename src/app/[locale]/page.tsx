@@ -2,7 +2,7 @@
  * Ana Sayfa - Tarot Uygulaması
  * Kullanıcıları tarot sayfasına yönlendiren landing page
  * Auth durumuna göre giriş butonu veya kullanıcı menüsü gösterir
- * 
+ *
  * PERFORMANCE OPTIMIZATION:
  * - ISR (Incremental Static Regeneration) ile 5 dakikada bir yenileme
  * - Server-side'da readings sayısı cache'leniyor
@@ -45,7 +45,7 @@ async function getTotalReadings(): Promise<number> {
 
 export default async function HomePage({ params }: HomePageProps) {
   const { locale } = await params;
-  
+
   // Server-side'da readings sayısını çek (ISR ile cache'lenir)
   const totalReadings = await getTotalReadings();
 

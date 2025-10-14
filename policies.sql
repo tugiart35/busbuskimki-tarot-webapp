@@ -2,7 +2,7 @@
 -- DÜZELTİLMİŞ RLS POLİTİKALARI - SONSUZ DÖNGÜ SORUNU ÇÖZÜLDÜ
 -- ============================================================================
 -- Sorun: Admin politikaları profiles tablosunu sorgulayarak sonsuz döngü yaratıyordu
--- Çözüm: admin_users tablosunu kullanarak döngüsel bağımlılığı kırdık
+-- Çözüm: admins tablosunu kullanarak döngüsel bağımlılığı kırdık
 -- Tarih: 2025-01-11
 -- ============================================================================
 
@@ -14,85 +14,98 @@
 -- auth.role() returns token role: 'anon' | 'authenticated' | 'service_role'
 
 -- ============================================================================
--- ÖNCE PROBLEMLİ POLİTİKALARI TEMİZLE
+-- ÖNCE TÜM POLİTİKALARI TEMİZLE
 -- ============================================================================
 
--- Eski problemli politikaları kaldır
-DROP POLICY IF EXISTS "admins_read_self" ON admins;
+-- PROFILES policies cleanup
+DROP POLICY IF EXISTS profiles_select_self ON public.profiles;
+DROP POLICY IF EXISTS profiles_insert_self ON public.profiles;
+DROP POLICY IF EXISTS profiles_update_self ON public.profiles;
+DROP POLICY IF EXISTS profiles_admin_read ON public.profiles;
+DROP POLICY IF EXISTS profiles_admin_manage ON public.profiles;
+
+-- ADMINS policies cleanup
+DROP POLICY IF EXISTS admins_read_self ON public.admins;
+DROP POLICY IF EXISTS admins_select_self ON public.admins;
+DROP POLICY IF EXISTS admins_insert_admin ON public.admins;
+DROP POLICY IF EXISTS admins_update_admin ON public.admins;
+
+-- READINGS policies cleanup
+DROP POLICY IF EXISTS readings_owner_all ON public.readings;
+DROP POLICY IF EXISTS readings_admin_all ON public.readings;
 
 -- ============================================================================
 -- PROFILES POLİTİKALARI (DÜZELTİLDİ)
 -- ============================================================================
 
 -- PROFILES
-alter table public.profiles enable row level security;
+ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
 
 -- Read own profile
-create policy if not exists profiles_select_self
-on public.profiles for select
-using (auth.uid() = id);
+CREATE POLICY profiles_select_self
+ON public.profiles FOR SELECT
+USING (auth.uid() = id);
 
 -- Insert own profile (upsert on sign-up)
-create policy if not exists profiles_insert_self
-on public.profiles for insert
-with check (auth.uid() = id);
+CREATE POLICY profiles_insert_self
+ON public.profiles FOR INSERT
+WITH CHECK (auth.uid() = id);
 
 -- Update own profile
-create policy if not exists profiles_update_self
-on public.profiles for update
-using (auth.uid() = id)
-with check (auth.uid() = id);
+CREATE POLICY profiles_update_self
+ON public.profiles FOR UPDATE
+USING (auth.uid() = id)
+WITH CHECK (auth.uid() = id);
 
--- Admins can read all profiles (admin_users tablosunu kullanarak döngü kırıldı)
-create policy if not exists profiles_admin_read
-on public.profiles for select
-using (exists (select 1 from public.admin_users a where a.user_id = auth.uid()));
+-- Admins can read all profiles (admins tablosunu kullanarak döngü kırıldı)
+CREATE POLICY profiles_admin_read
+ON public.profiles FOR SELECT
+USING (EXISTS (SELECT 1 FROM public.admins a WHERE a.user_id = auth.uid()));
 
 -- Admins can manage all profiles
-create policy if not exists profiles_admin_manage
-on public.profiles for all
-using (exists (select 1 from public.admin_users a where a.user_id = auth.uid()))
-with check (exists (select 1 from public.admin_users a where a.user_id = auth.uid()));
+CREATE POLICY profiles_admin_manage
+ON public.profiles FOR ALL
+USING (EXISTS (SELECT 1 FROM public.admins a WHERE a.user_id = auth.uid()))
+WITH CHECK (EXISTS (SELECT 1 FROM public.admins a WHERE a.user_id = auth.uid()));
 
 -- ============================================================================
--- ADMIN_USERS POLİTİKALARI (DÜZELTİLDİ - SONSUZ DÖNGÜ KIRILDI)
+-- ADMINS POLİTİKALARI (DÜZELTİLDİ - SONSUZ DÖNGÜ KIRILDI)
 -- ============================================================================
 
--- ADMIN_USERS
-alter table public.admin_users enable row level security;
+-- ADMINS
+ALTER TABLE public.admins ENABLE ROW LEVEL SECURITY;
 
 -- Adminler kendi admin kayıtlarını görebilir (DÖNGÜ KIRILDI)
-create policy if not exists admin_users_select_self
-on public.admin_users for select
-using (user_id = auth.uid());
+CREATE POLICY admins_select_self
+ON public.admins FOR SELECT
+USING (user_id = auth.uid());
 
 -- Adminler yeni admin ekleyebilir (sadece mevcut adminler)
-create policy if not exists admin_users_insert_admin
-on public.admin_users for insert
-with check (exists (select 1 from public.admin_users a where a.user_id = auth.uid()));
+CREATE POLICY admins_insert_admin
+ON public.admins FOR INSERT
+WITH CHECK (EXISTS (SELECT 1 FROM public.admins a WHERE a.user_id = auth.uid()));
 
 -- Adminler admin kayıtlarını güncelleyebilir
-create policy if not exists admin_users_update_admin
-on public.admin_users for update
-using (exists (select 1 from public.admin_users a where a.user_id = auth.uid()))
-with check (exists (select 1 from public.admin_users a where a.user_id = auth.uid()));
+CREATE POLICY admins_update_admin
+ON public.admins FOR UPDATE
+USING (EXISTS (SELECT 1 FROM public.admins a WHERE a.user_id = auth.uid()))
+WITH CHECK (EXISTS (SELECT 1 FROM public.admins a WHERE a.user_id = auth.uid()));
 
 -- ============================================================================
 -- READINGS POLİTİKALARI
 -- ============================================================================
 
 -- READINGS
-alter table public.readings enable row level security;
+ALTER TABLE public.readings ENABLE ROW LEVEL SECURITY;
 
 -- Owner can CRUD own readings
-create policy if not exists readings_owner_all
-on public.readings for all
-using (auth.uid() = user_id)
-with check (auth.uid() = user_id);
+CREATE POLICY readings_owner_all
+ON public.readings FOR ALL
+USING (auth.uid() = user_id)
+WITH CHECK (auth.uid() = user_id);
 
 -- Admins can manage all readings
-create policy if not exists readings_admin_all
-on public.readings for all
-using (exists (select 1 from public.admin_users a where a.user_id = auth.uid()))
-with check (exists (select 1 from public.admin_users a where a.user_id = auth.uid()));
-
+CREATE POLICY readings_admin_all
+ON public.readings FOR ALL
+USING (EXISTS (SELECT 1 FROM public.admins a WHERE a.user_id = auth.uid()))
+WITH CHECK (EXISTS (SELECT 1 FROM public.admins a WHERE a.user_id = auth.uid()));

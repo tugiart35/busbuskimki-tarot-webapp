@@ -1,0 +1,69 @@
+# Analiz ve script dosyaları
+analyze-*.js
+*.sh
+manual-cleanup-strategy.js
+extract-cards.js
+fix-trailing-commas.js
+rebuild-blog-json.js
+package-merge.js
+debug-supabase-connection.js
+add-missing-cards.js
+
+# Log dosyaları
+*.log
+dev-server.log
+build-errors.log
+full-build-test.log
+
+# Test dosyaları
+/tests
+jest.config.js
+jest.setup.js
+lighthouse.config.js
+
+# Backup dosyaları
+*.backup
+*.broken
+middleware.ts.backup
+middleware.ts.broken
+next.config.js.backup
+src/middleware.ts.backup
+
+# SQL dosyaları (Supabase'de zaten var)
+*.sql
+/migrations
+
+# Markdown dokümantasyon dosyaları
+*.md
+*.mdc
+!README.md
+
+# JSON analiz ve rapor dosyaları
+*-analysis*.json
+*-report*.json
+translation-analysis-report.json
+smart-translation-analysis.json
+unused-translations.json
+test-batch-output.json
+performance-report.json
+image-path-*.json
+project-map.json
+RENAME-MAP.json
+URL-MAP.json
+
+# Geçici ve eski yapı dosyaları
+/new-structure
+refactor-moves.plan.json
+
+# pnpm (npm kullanıyorsunuz)
+pnpm-lock.yaml
+
+# Koruma scriptleri
+protect-files.sh
+transfer-project.sh
+
+# Edge Functions (bunlar Supabase'de)
+/functions
+
+# Diğer gereksiz dosyalar
+requirements-translate.txt

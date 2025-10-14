@@ -97,7 +97,7 @@ NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=abc123xyz456def789ghi
 npm run dev
 ```
 
-2. Tarayıcıda aç: `http://localhost:3111`
+2. Tarayıcıda aç: `http://busbuskimki.com`
 
 3. Sayfa kaynağını görüntüle (Ctrl+U veya Cmd+Option+U)
 
@@ -210,7 +210,7 @@ NEXT_PUBLIC_BING_SITE_VERIFICATION=xyz789abc456def123ghi
 npm run dev
 ```
 
-2. Tarayıcıda aç: `http://localhost:3111`
+2. Tarayıcıda aç: `http://busbuskimki.com`
 
 3. Sayfa kaynağını görüntüle
 
@@ -355,7 +355,7 @@ npm run dev
 
 ## 🔧 .env.local DOSYASI ÖRNEK
 
-Dosya konumu: `/Users/tugi/Desktop/TaraTarot/.env.local`
+Dosya konumu: `/Users/tugi/Desktop/busbuskimki/.env.local`
 
 ```bash
 # App
@@ -397,12 +397,12 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 
 1. **Vercel Dashboard'a Git:**
    - https://vercel.com/dashboard
-   - Projenizi seçin (TaraTarot)
+   - Projenizi seçin (busbuskimki)
 
 2. **Settings Sekmesine Git:**
 
    ```
-   Dashboard → TaraTarot → Settings
+   Dashboard → busbuskimki → Settings
    ```
 
 3. **Environment Variables'a Git:**

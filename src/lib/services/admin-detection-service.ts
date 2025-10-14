@@ -36,13 +36,14 @@ export class AdminDetectionService {
         }
       );
 
-      const { data: profile } = await supabase
-        .from('profiles')
-        .select('is_admin')
-        .eq('id', userId)
+      // Admins tablosundan kontrol et
+      const { data: adminRecord } = await supabase
+        .from('admins')
+        .select('user_id')
+        .eq('user_id', userId)
         .single();
 
-      return profile?.is_admin || false;
+      return !!adminRecord;
     } catch (error) {
       console.error('Admin detection error:', error);
       return false;

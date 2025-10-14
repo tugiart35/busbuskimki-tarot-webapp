@@ -1,6 +1,6 @@
 # 🚀 Google Search Console - Sitemap Submit Rehberi
 
-**Proje:** TaraTarot (BüşBüşKimKi)  
+**Proje:** busbuskimki (BüşBüşKimKi)  
 **Tarih:** 13 Ekim 2025  
 **Domain:** https://busbuskimki.com
 
@@ -85,7 +85,7 @@ NEXT_PUBLIC_BING_SITE_VERIFICATION=
 #### Production (Vercel Dashboard):
 
 1. Vercel Dashboard'a git: https://vercel.com
-2. Projenizi seçin: **TaraTarot**
+2. Projenizi seçin: **busbuskimki**
 3. **Settings** → **Environment Variables**
 4. Şu değişkenleri ekle:
 
@@ -610,7 +610,7 @@ Sitemap'inizi başarıyla submit ettiniz!
 **Hazırlayan:** AI SEO Uzmanı  
 **Tarih:** 13 Ekim 2025  
 **Versiyon:** 1.0  
-**Proje:** TaraTarot (BüşBüşKimKi)
+**Proje:** busbuskimki (BüşBüşKimKi)
 
 ---
 

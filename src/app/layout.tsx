@@ -70,10 +70,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           content={process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION || ''}
         />
 
-        {/* Google AdSense */}
+        {/* Google AdSense - YENİ KOD */}
         <script
           async
-          src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7105264375916972'
+          src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1429338163231803'
           crossOrigin='anonymous'
         />
 

@@ -13,14 +13,15 @@
 **Dosya:** `src/features/tarot-cards/lib/memory-optimization.ts:467`
 
 **Sorun:**
+
 ```typescript
 // ❌ MEMORY LEAK!
 export function initializeMemoryOptimization() {
   // ...
-  
+
   // Cleanup every 30 seconds
   setInterval(cleanup, 30000); // Bu interval asla temizlenmiyor!
-  
+
   return () => {
     monitor.stopMonitoring();
     // setInterval temizlenmedi!
@@ -29,11 +30,13 @@ export function initializeMemoryOptimization() {
 ```
 
 **Etki:**
+
 - Her çağrıldığında yeni bir interval oluşur
 - Eski interval'lar temizlenmez
 - Zamanla bellek dolar (her 30 saniyede bir gereksiz çalışır)
 
 **Çözüm:**
+
 ```typescript
 // ✅ Düzeltilmiş
 export function initializeMemoryOptimization() {
@@ -76,17 +79,20 @@ export function initializeMemoryOptimization() {
 ### 2. **Büyük Component'ler - Code Splitting Eksik**
 
 **Sorun:**
+
 - `createTarotReadingComponent.tsx`: **1,548 satır**
 - `admin/settings/page.tsx`: **2,294 satır**
 - `admin/readings/page.tsx`: **2,222 satır**
 - `dashboard/statistics/page.tsx`: **1,485 satır**
 
 **Etki:**
+
 - İlk yükleme yavaş
 - Bundle size büyük
 - Bellek kullanımı yüksek
 
 **Çözüm:**
+
 ```typescript
 // ❌ Tüm component yükleniyor
 import { HeavyAdminPanel } from './admin-panel';
@@ -107,10 +113,12 @@ const HeavyAdminPanel = dynamic(() => import('./admin-panel'), {
 **Dosya:** `src/features/tarot-cards/lib/card-data.ts` (1,878 satır)
 
 **Sorun:**
+
 - Tüm kart verileri bellekte tutuluyor
 - 78 kart × ~25 satır = ~1,950 satır veri
 
 **Çözüm:**
+
 ```typescript
 // ❌ Tüm kartlar bellekte
 import { allCards } from './card-data';
@@ -140,7 +148,7 @@ import { FixedSizeList } from 'react-window';
 useEffect(() => {
   window.addEventListener('focus', handleFocus);
   document.addEventListener('visibilitychange', handleVisibilityChange);
-  
+
   return () => {
     clearTimeout(debounceTimer);
     window.removeEventListener('focus', handleFocus);
@@ -157,7 +165,7 @@ useEffect(() => {
 // ✅ Interval temizleniyor
 useEffect(() => {
   const intervalId = setInterval(fetchMetrics, refreshInterval);
-  
+
   return () => {
     if (intervalId) {
       clearInterval(intervalId);
@@ -196,27 +204,30 @@ async function getTotalReadings() {
 
 ## 📊 Bellek Kullanımı Değerlendirmesi
 
-| Metrik | Değer | Durum | Açıklama |
-|--------|-------|-------|----------|
-| **Mevcut Kullanım** | 542.91MB | ✅ Mükemmel | Optimal seviyede |
-| **Kullanım Yüzdesi** | 13.3% | ✅ Çok İyi | Sorun yok |
-| **Memory Leak Riski** | Var | 🔴 Kritik | 1 adet tespit edildi |
-| **Code Splitting** | Kısmi | 🟡 Orta | İyileştirilebilir |
-| **Cleanup Pattern** | İyi | ✅ İyi | Çoğu yerde doğru |
+| Metrik                | Değer    | Durum       | Açıklama             |
+| --------------------- | -------- | ----------- | -------------------- |
+| **Mevcut Kullanım**   | 542.91MB | ✅ Mükemmel | Optimal seviyede     |
+| **Kullanım Yüzdesi**  | 13.3%    | ✅ Çok İyi  | Sorun yok            |
+| **Memory Leak Riski** | Var      | 🔴 Kritik   | 1 adet tespit edildi |
+| **Code Splitting**    | Kısmi    | 🟡 Orta     | İyileştirilebilir    |
+| **Cleanup Pattern**   | İyi      | ✅ İyi      | Çoğu yerde doğru     |
 
 ---
 
 ## 🎯 Öncelikli Aksiyon Planı
 
 ### Hemen Yapılmalı (Bu Hafta):
+
 1. ✅ **Memory leak düzeltme** - `memory-optimization.ts` (5 dk)
 
 ### Yakın Gelecek (Bu Ay):
+
 2. 🟡 **Code splitting** - Büyük component'leri böl (2-3 gün)
 3. 🟡 **Tarot card lazy loading** - İhtiyaca göre yükle (1 gün)
 4. 🟡 **Admin panel optimization** - Dynamic import ekle (1 gün)
 
 ### İsteğe Bağlı:
+
 5. 🟢 **Virtualization** - Uzun listeler için (2 gün)
 6. 🟢 **Bundle analyzer** - Gereksiz import'ları bul (1 gün)
 7. 🟢 **Image optimization** - Lazy loading + blur (1 gün)
@@ -261,7 +272,7 @@ export function initializeMemoryOptimization() {
 
   // ✅ CLEANUP FUNCTION - Tüm kaynakları temizle
   return () => {
-    clearInterval(intervalId);  // ← EKLENEN SATIRLAR
+    clearInterval(intervalId); // ← EKLENEN SATIRLAR
     monitor.stopMonitoring();
     // Eğer monitor.unsubscribe varsa:
     // subscription?.unsubscribe();
@@ -274,6 +285,7 @@ export function initializeMemoryOptimization() {
 ## 📈 Beklenen İyileştirmeler
 
 ### Kritik Düzeltme Sonrası:
+
 ```
 Memory leak riski: VAR → YOK
 Stability: %90 → %100
@@ -281,6 +293,7 @@ Long-term usage: Sorunlu → Stabil
 ```
 
 ### Code Splitting Sonrası:
+
 ```
 Initial bundle: 2.31MB → ~1.5MB (-35%)
 First load: 3.7s → ~2.5s (-32%)
@@ -292,6 +305,7 @@ Memory usage: 543MB → ~400MB (-26%)
 ## 🔍 İzleme ve Test
 
 ### Bellek İzleme Komutu:
+
 ```bash
 # Chrome DevTools ile
 1. chrome://inspect açın
@@ -303,6 +317,7 @@ Memory usage: 543MB → ~400MB (-26%)
 ```
 
 ### Memory Leak Testi:
+
 ```bash
 # Terminal'de
 node --expose-gc npm run dev
@@ -319,23 +334,27 @@ node --expose-gc npm run dev
 ## 🎉 Özet
 
 ### Mevcut Durum:
+
 - ✅ Bellek kullanımı sağlıklı (13.3%)
 - ✅ Çoğu cleanup doğru yapılmış
 - 🔴 **1 kritik memory leak var**
 - 🟡 Code splitting iyileştirilebilir
 
 ### Başarı Kriterleri:
+
 - ✅ Event listener'lar temizleniyor
 - ✅ Interval'ların çoğu temizleniyor
 - ✅ ISR cache kullanılıyor
 - ✅ Performance monitoring var
 
 ### Sonuç:
-**Genel olarak iyi optimize edilmiş bir proje!** Sadece 1 kritik sorun var (memory-optimization.ts), onu düzelttikten sonra production'a güvenle deploy edilebilir.
+
+**Genel olarak iyi optimize edilmiş bir proje!** Sadece 1 kritik sorun var
+(memory-optimization.ts), onu düzelttikten sonra production'a güvenle deploy
+edilebilir.
 
 ---
 
 **Oluşturulma:** 14 Ekim 2025  
 **Analiz Edilen Dosya:** 79 TypeScript/TSX dosyası  
 **Tespit Edilen Sorun:** 1 kritik, 3 orta seviye
-

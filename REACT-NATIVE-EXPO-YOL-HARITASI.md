@@ -1,4 +1,4 @@
-# 🚀 TaraTarot - React Native/Expo Geçiş Yol Haritası
+# 🚀 busbuskimki - React Native/Expo Geçiş Yol Haritası
 
 ## 📊 MEVCUT PROJE ANALİZİ
 
@@ -31,9 +31,9 @@
 
 ```bash
 # Yeni Expo projesi oluştur
-npx create-expo-app@latest TaraTarotMobile --template tabs
+npx create-expo-app@latest busbuskimkiMobile --template tabs
 
-cd TaraTarotMobile
+cd busbuskimkiMobile
 
 # Gerekli paketleri kur
 npx expo install expo-router
@@ -59,7 +59,7 @@ npm install expo-blur
 ### Adım 1.2: Proje Yapısını Oluşturma (1 Gün)
 
 ```
-TaraTarotMobile/
+busbuskimkiMobile/
 ├── app/                           # Expo Router (Next.js benzeri)
 │   ├── (tabs)/                   # Tab navigation
 │   │   ├── index.tsx             # Ana sayfa

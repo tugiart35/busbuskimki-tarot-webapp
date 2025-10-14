@@ -1,6 +1,11 @@
 import createMiddleware from 'next-intl/middleware';
 import { NextRequest, NextResponse } from 'next/server';
 import { locales, defaultLocale } from './src/lib/i18n/config';
+import { isAdminIpAllowed } from './src/lib/security/ip-whitelist';
+import {
+  checkAdminAccessRateLimit,
+  getClientIp,
+} from './src/lib/security/rate-limiter';
 
 // SEO-friendly URL mappings
 const urlMappings: Record<string, string> = {
@@ -36,8 +41,64 @@ const intlMiddleware = createMiddleware({
   localePrefix: 'always',
 });
 
-export default function middleware(request: NextRequest) {
+export default async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  // 🔒 GÜVENLIK: Admin panel koruması
+  if (pathname.includes('/pakize')) {
+    const locale = pathname.split('/')[1] || 'tr';
+
+    // Auth sayfası hariç tüm pakize rotalarını koru
+    if (!pathname.includes('/pakize/auth')) {
+      // 1. IP Whitelisting kontrolü
+      const clientIp = getClientIp(request);
+      if (!isAdminIpAllowed(clientIp)) {
+        console.warn(`🚫 Admin Access Denied: IP ${clientIp} not whitelisted`);
+        return NextResponse.json(
+          {
+            error: 'Access Denied',
+            message: 'Your IP address is not authorized to access this area.',
+            code: 'IP_NOT_WHITELISTED',
+          },
+          { status: 403 }
+        );
+      }
+
+      // 2. Rate Limiting kontrolü
+      const rateLimitResult = await checkAdminAccessRateLimit(clientIp);
+      if (!rateLimitResult.allowed) {
+        console.warn(`🚫 Admin Rate Limited: IP ${clientIp}`);
+        return NextResponse.json(
+          {
+            error: 'Too Many Requests',
+            message: `Too many requests. Please try again in ${rateLimitResult.retryAfter} seconds.`,
+            retryAfter: rateLimitResult.retryAfter,
+          },
+          {
+            status: 429,
+            headers: {
+              'Retry-After': String(rateLimitResult.retryAfter),
+            },
+          }
+        );
+      }
+
+      // 3. Session kontrolü (cookie bazlı)
+      const sessionToken =
+        request.cookies.get('sb-access-token') ||
+        request.cookies.get('sb-qtlokdkcerjrbrtphlrh-auth-token');
+
+      if (!sessionToken) {
+        console.warn(`🚫 Admin Access Denied: No session for IP ${clientIp}`);
+        // Redirect to auth page
+        return NextResponse.redirect(
+          new URL(`/${locale}/pakize/auth`, request.url)
+        );
+      }
+
+      console.log(`✅ Admin Access Allowed: IP ${clientIp}, Path: ${pathname}`);
+    }
+  }
 
   // First, apply SEO URL rewrites
   const mapping = urlMappings[pathname];

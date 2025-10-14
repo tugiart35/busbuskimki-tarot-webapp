@@ -1,8 +1,8 @@
 # ✅ Vercel Deployment Kontrol Listesi
 
-**Proje:** TaraTarot  
-**Tarih:** ****\_\_\_****  
-**Deploy Eden:** ****\_\_\_****
+**Proje:** busbuskimki  
+**Tarih:** \***\*\_\_\_\*\***  
+**Deploy Eden:** \***\*\_\_\_\*\***
 
 ---
 
@@ -54,7 +54,8 @@ Vercel Dashboard → Settings → Environment Variables
 
 ### Shopier URL'leri (Gerçek domain ile güncelleyin)
 
-- [ ] `NEXT_PUBLIC_SHOPIER_CALLBACK_URL`
+- [ ] `NEXT_PUBLIC_SHOPIER_SUCCESS_URL`
+- [ ] `NEXT_PUBLIC_SHOPIER_CANCEL_URL`
 - [ ] `NEXT_PUBLIC_SHOPIER_WEBHOOK_URL`
 
 ### Opsiyonel
@@ -67,7 +68,7 @@ Vercel Dashboard → Settings → Environment Variables
 ## 🛠️ 3. BUILD TEST (5 dk)
 
 ```bash
-cd /Users/tugi/Desktop/TaraTarot
+cd /Users/tugi/Desktop/busbuskimki
 
 # Dependencies
 npm install
@@ -132,7 +133,7 @@ vercel --prod
 - [ ] Building başladı
 - [ ] Build logs temiz (error yok)
 - [ ] Deployment tamamlandı
-- [ ] Production URL alındı: ****\_\_\_****
+- [ ] Production URL alındı: \***\*\_\_\_\*\***
 
 ---
 
@@ -202,7 +203,7 @@ vercel --prod
 ### Custom Domain
 
 - [ ] Vercel → Settings → Domains
-- [ ] Domain eklendi: ****\_\_\_****
+- [ ] Domain eklendi: \***\*\_\_\_\*\***
 - [ ] DNS kayıtları güncellendi
   - A Record: `76.76.21.21`
   - VEYA CNAME: `cname.vercel-dns.com`
@@ -211,7 +212,8 @@ vercel --prod
 ### Environment Variables Güncelleme (Domain değiştikten sonra)
 
 - [ ] `NEXT_PUBLIC_SITE_URL` güncellendi
-- [ ] `NEXT_PUBLIC_SHOPIER_CALLBACK_URL` güncellendi
+- [ ] `NEXT_PUBLIC_SHOPIER_SUCCESS_URL` güncellendi
+- [ ] `NEXT_PUBLIC_SHOPIER_CANCEL_URL` güncellendi
 - [ ] `NEXT_PUBLIC_SHOPIER_WEBHOOK_URL` güncellendi
 - [ ] **Redeploy yapıldı** (değişiklikler aktif olsun)
 
@@ -254,10 +256,10 @@ vercel logs --follow
 
 ### Deployment Bilgileri
 
-- **Deployment URL:** ****\_\_\_****
-- **Deployment ID:** ****\_\_\_****
-- **Deployment Time:** ****\_\_\_****
-- **Git Commit:** ****\_\_\_****
+- **Deployment URL:** \***\*\_\_\_\*\***
+- **Deployment ID:** \***\*\_\_\_\*\***
+- **Deployment Time:** \***\*\_\_\_\*\***
+- **Git Commit:** \***\*\_\_\_\*\***
 
 ### Test Sonuçları
 
@@ -303,8 +305,8 @@ Deployment başarılı sayılır:
 
 ### Deployment Onayı
 
-- **Deploy Eden:** ****\_\_\_****
-- **Tarih/Saat:** ****\_\_\_****
+- **Deploy Eden:** \***\*\_\_\_\*\***
+- **Tarih/Saat:** \***\*\_\_\_\*\***
 - **Durum:** ☐ BAŞARILI ☐ BAŞARISIZ
 
 ### Sonraki Adımlar

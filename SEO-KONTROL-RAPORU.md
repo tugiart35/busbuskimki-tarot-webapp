@@ -1,7 +1,7 @@
 # 🎯 SEO Kurulum Kontrol Raporu
 
 **Tarih:** 13 Ekim 2025  
-**Proje:** TaraTarot (BüşBüşKimKi)  
+**Proje:** busbuskimki (BüşBüşKimKi)  
 **Durum:** Google & Bing Kuruldu ✅
 
 ---
@@ -577,4 +577,4 @@ submit var!
 
 **Hazırlayan:** AI SEO Uzmanı  
 **Tarih:** 13 Ekim 2025  
-**Proje:** TaraTarot (BüşBüşKimKi)
+**Proje:** busbuskimki (BüşBüşKimKi)

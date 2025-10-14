@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/lib/supabase/client';
 import { Eye, Calendar, Clock, Star, TrendingUp, Filter } from 'lucide-react';
 
@@ -24,7 +24,7 @@ interface ReadingHistoryProps {
 
 export default function ReadingHistory({
   userId,
-  limit = 20,
+  limit: _limit = 20,
 }: ReadingHistoryProps) {
   const [readings, setReadings] = useState<Reading[]>([]);
   const [loading, setLoading] = useState(true);
@@ -40,11 +40,7 @@ export default function ReadingHistory({
     | 'problem-solving'
   >('all');
 
-  useEffect(() => {
-    fetchReadings();
-  }, [userId, filter]);
-
-  const fetchReadings = async () => {
+  const fetchReadings = useCallback(async () => {
     setLoading(true);
     try {
       // Admin kontrolü yap
@@ -58,7 +54,7 @@ export default function ReadingHistory({
 
       // Admin check'i kullan (linter hatası için)
       if (!adminCheck || adminCheck.length === 0) {
-        console.warn('Admin yetkisi bulunamadı');
+        // Admin yetkisi bulunamadı
       }
 
       // RLS politikalarını bypass etmek için farklı yaklaşım
@@ -88,11 +84,6 @@ export default function ReadingHistory({
           .order('created_at', { ascending: false })
           .limit(100);
 
-      console.log('🔍 Current user readings query result:', {
-        currentUserReadings,
-        currentUserError,
-      });
-
       // Eğer RLS hatası varsa veya veri yoksa, service role ile dene
       let allReadings, allError;
       if (
@@ -100,8 +91,6 @@ export default function ReadingHistory({
         !currentUserReadings ||
         currentUserReadings.length === 0
       ) {
-        console.log('🔍 No data or RLS error, trying with service role...');
-
         // Mevcut supabase client'ı kullan (service role client-side'da mevcut değil)
         const serviceSupabase = supabase;
 
@@ -131,59 +120,26 @@ export default function ReadingHistory({
 
         allReadings = data;
         allError = error;
-
-        console.log('🔍 Service role query result:', { data, error });
       } else {
         allReadings = currentUserReadings;
         allError = currentUserError;
       }
 
-      console.log('🔍 All readings in database:', allReadings?.length || 0);
-      console.log('🔍 All readings sample:', allReadings?.slice(0, 3));
-
-      // Veritabanında hangi user_id'ler var kontrol et
-      const uniqueUserIds = [
-        ...new Set(allReadings?.map((r: any) => r.user_id) || []),
-      ];
-      const uniqueStatuses = [
-        ...new Set(allReadings?.map((r: any) => r.status) || []),
-      ];
-      console.log('🔍 Unique user IDs in readings:', uniqueUserIds);
-      console.log('🔍 Unique statuses in readings:', uniqueStatuses);
-      console.log('🔍 Target user ID:', userId);
-      console.log(
-        '🔍 Is target user ID in database?',
-        uniqueUserIds.includes(userId)
-      );
-
       // Şimdi belirli kullanıcı için filtrele
       const userReadings =
         allReadings?.filter((reading: any) => reading.user_id === userId) || [];
-      console.log('🔍 User specific readings:', userReadings.length);
-      console.log('🔍 User readings sample:', userReadings.slice(0, 3));
 
       const data = userReadings;
       const error = allError;
 
-      console.log('📊 Supabase response:', { data, error });
-      console.log('📊 Data length:', data?.length || 0);
-      console.log('📊 Error details:', error);
-      console.log('📊 User ID being queried:', userId);
-      console.log('📊 Query limit:', limit);
-
       if (error) {
-        console.error('Supabase error fetching readings:', error);
         throw new Error(
           `Okuma verileri yüklenirken hata oluştu: ${error.message}`
         );
       }
 
-      console.log('Raw readings data:', data);
-
       // Veriyi formatla
       const formattedReadings = (data || []).map((reading: any) => {
-        console.log('Processing reading:', reading);
-
         // Cards verisi JSONB olarak geliyor, doğru şekilde parse et
         let cards_drawn: string[] = [];
         if (reading.cards) {
@@ -206,7 +162,6 @@ export default function ReadingHistory({
               );
             }
           } catch (e) {
-            console.warn('Error parsing cards:', e);
             cards_drawn = [];
           }
         }
@@ -220,7 +175,6 @@ export default function ReadingHistory({
                 ? JSON.parse(reading.metadata)
                 : reading.metadata;
           } catch (e) {
-            console.warn('Error parsing metadata:', e);
             metadata = {};
           }
         }
@@ -240,8 +194,6 @@ export default function ReadingHistory({
         };
       });
 
-      console.log('Formatted readings:', formattedReadings);
-
       // Filter readings based on user and type
       let filteredReadings = formattedReadings.filter(
         (reading: any) => reading.user_id === userId
@@ -253,19 +205,18 @@ export default function ReadingHistory({
         );
       }
 
-      console.log('Filtered readings:', filteredReadings);
       setReadings(filteredReadings);
     } catch (error) {
-      console.error('Error fetching readings:', error);
       setReadings([]);
-      // Hata durumunda kullanıcıya bilgi ver
-      if (error instanceof Error) {
-        console.error('Reading fetch error details:', error.message);
-      }
+      // Hata durumunda kullanıcıya bilgi ver (sessizce)
     } finally {
       setLoading(false);
     }
-  };
+  }, [userId, filter]);
+
+  useEffect(() => {
+    fetchReadings();
+  }, [fetchReadings]);
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('tr-TR', {

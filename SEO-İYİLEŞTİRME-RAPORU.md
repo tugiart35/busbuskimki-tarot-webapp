@@ -1,7 +1,7 @@
 # 🎯 SEO İyileştirme Uygulama Raporu
 
 **Tarih:** 13 Ekim 2025  
-**Proje:** TaraTarot (BüşBüşKimKi)  
+**Proje:** busbuskimki (BüşBüşKimKi)  
 **Uygulanan İyileştirmeler:** 3/5 Kritik İyileştirme
 
 ---

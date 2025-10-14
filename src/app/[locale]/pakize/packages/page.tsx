@@ -3,31 +3,32 @@ info:
 Bağlantılı dosyalar:
 - lib/supabase/client.ts: Supabase bağlantısı (gerekli)
 - app/[locale]/pakize/layout.tsx: Pakize layout (gerekli)
+- app/api/exchange-rate/route.ts: Döviz kuru API (gerekli)
 - app/globals.css: Admin CSS stilleri (gerekli)
 
 Dosyanın amacı:
 - Admin panelinde kredi paketlerini yönetmek
 - Paket oluşturma, düzenleme, silme işlemleri
 - Paket durumlarını aktif/pasif yapma
-- EUR/TRY fiyat görünümü
+- TRY ana para birimi, EUR güncel kurla hesaplanıyor
 
 Supabase değişkenleri ve tabloları:
-- packages: Kredi paketleri tablosu (id, name, description, credits, price_eur, price_try, active, shopier_product_id, created_at, updated_at)
+- packages: Kredi paketleri tablosu (id, name, description, credits, price_try, price_eur, active, shopier_product_id, created_at, updated_at)
+  * price_try: Ana fiyat (veritabanında saklanan)
+  * price_eur: Güncel kurla runtime'da hesaplanan (referans amaçlı DB'de tutuluyor)
 
-Geliştirme önerileri:
-- ✅ Interface Supabase şemasıyla uyumlu hale getirildi
-- ✅ Hata yönetimi ve kullanıcı geri bildirimi eklendi
-- ✅ Loading state'leri iyileştirildi
-- ✅ Responsive tasarım optimize edildi
-
-Tespit edilen hatalar:
-- ✅ Interface uyumsuzluğu düzeltildi
-- ✅ Hata mesajları eklendi
-- ✅ Başarı mesajları eklendi
+Özellikler:
+- ✅ TRY ana para birimi olarak kullanılıyor
+- ✅ EUR güncel Frankfurter API kuru ile dinamik hesaplanıyor
+- ✅ Real-time kur güncellemesi
+- ✅ Otomatik EUR dönüşümü
+- ✅ Responsive tasarım
+- ✅ Hata yönetimi ve kullanıcı geri bildirimi
 
 Kullanım durumu:
 - ✅ Gerekli: Admin paket yönetimi için
 - ✅ Production-ready: Tüm CRUD işlemleri çalışıyor
+- ✅ Güncel kur entegrasyonu aktif
 */
 
 'use client';
@@ -85,11 +86,14 @@ export default function PackagesPage() {
   // Exchange rate için state'ler
   const [exchangeRate, setExchangeRate] = useState<number | null>(null);
   const [exchangeRateLoading, setExchangeRateLoading] = useState(false);
-  const [autoConvertEnabled, setAutoConvertEnabled] = useState(true);
 
   useEffect(() => {
-    fetchPackages();
-    fetchExchangeRate();
+    const init = async () => {
+      await fetchExchangeRate();
+      await fetchPackages();
+    };
+    init();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Exchange rate çekme fonksiyonu
@@ -103,44 +107,31 @@ export default function PackagesPage() {
         setExchangeRate(data.rate);
       } else {
         console.warn('Exchange rate alınamadı:', data);
-        // Fallback değer
-        setExchangeRate(47.94);
+        // Fallback değer (2025 Ekim güncel yaklaşık kur)
+        setExchangeRate(38.5);
       }
     } catch (error) {
       console.error('Exchange rate hatası:', error);
-      // Fallback değer
-      setExchangeRate(47.94);
+      // Fallback değer (2025 Ekim güncel yaklaşık kur)
+      setExchangeRate(38.5);
     } finally {
       setExchangeRateLoading(false);
     }
   };
 
-  // TL'den EUR'ya otomatik dönüşüm
-  const convertTryToEur = async (tryAmount: number) => {
-    if (!autoConvertEnabled || tryAmount <= 0) {
+  // TL'den EUR'ya otomatik dönüşüm (güncel kur ile)
+  const convertTryToEur = (tryAmount: number) => {
+    if (tryAmount <= 0 || !exchangeRate) {
       return;
     }
 
-    try {
-      const response = await fetch('/api/exchange-rate', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ amount: tryAmount }),
-      });
+    // EUR'yu güncel kurla hesapla (TRY / kur)
+    const eurAmount = Math.round((tryAmount / exchangeRate) * 100) / 100;
 
-      const data = await response.json();
-
-      if (data.success && data.eurAmount) {
-        setFormData(prev => ({
-          ...prev,
-          price_eur: data.eurAmount,
-        }));
-      }
-    } catch (error) {
-      console.error('Currency conversion hatası:', error);
-    }
+    setFormData(prev => ({
+      ...prev,
+      price_eur: eurAmount,
+    }));
   };
 
   // Hata ve başarı mesajlarını temizleme fonksiyonu
@@ -179,21 +170,28 @@ export default function PackagesPage() {
         return;
       }
 
-      // Format packages safely
+      // Format packages safely - EUR'yu güncel kurla hesapla
+      const currentRate = exchangeRate || 38.5; // Fallback
       const formattedPackages = (data || []).map((pkg: any) => ({
         id: pkg.id || Date.now(),
         name: pkg.name || 'Unnamed Package',
         description: pkg.description || '',
         credits: pkg.credits || 0,
-        price_eur: pkg.price_eur || 0,
         price_try: pkg.price_try || 0,
+        // EUR'yu güncel kurla hesapla (TRY / kur)
+        price_eur: pkg.price_try
+          ? Math.round((pkg.price_try / currentRate) * 100) / 100
+          : 0,
         active: pkg.active !== false,
         created_at: pkg.created_at || new Date().toISOString(),
         updated_at: pkg.updated_at || new Date().toISOString(),
         shopier_product_id: pkg.shopier_product_id || '',
       }));
 
-      console.log('✅ Formatted packages:', formattedPackages);
+      console.log(
+        '✅ Formatted packages (EUR güncel kurla hesaplandı):',
+        formattedPackages
+      );
       setPackages(formattedPackages);
     } catch (error) {
       console.error('❌ Error fetching packages:', error);
@@ -219,21 +217,26 @@ export default function PackagesPage() {
       setActionLoading(false);
       return;
     }
-    if (formData.price_eur <= 0 || formData.price_try <= 0) {
-      setError("Fiyatlar 0'dan büyük olmalıdır");
+    if (formData.price_try <= 0) {
+      setError("TRY fiyatı 0'dan büyük olmalıdır");
       setActionLoading(false);
       return;
     }
 
     try {
-      const { data, error } = await supabase
+      // EUR'yu güncel kurla hesapla
+      const currentRate = exchangeRate || 38.5;
+      const calculatedEur =
+        Math.round((formData.price_try / currentRate) * 100) / 100;
+
+      const { error } = await supabase
         .from('packages')
         .insert({
           name: formData.name.trim(),
           description: formData.description.trim(),
           credits: formData.credits,
-          price_eur: formData.price_eur,
           price_try: formData.price_try,
+          price_eur: calculatedEur, // Hesaplanmış EUR değeri (referans için)
           active: formData.active,
         })
         .select();
@@ -242,7 +245,7 @@ export default function PackagesPage() {
         throw error;
       }
 
-      setPackages([...packages, data[0]]);
+      await fetchPackages(); // Yeniden yükle (EUR'yu güncel kurla hesaplamak için)
       setShowCreateModal(false);
       resetForm();
       setSuccess('Paket başarıyla oluşturuldu');
@@ -281,8 +284,8 @@ export default function PackagesPage() {
       setActionLoading(false);
       return;
     }
-    if (formData.price_eur <= 0 || formData.price_try <= 0) {
-      setError("Fiyatlar 0'dan büyük olmalıdır");
+    if (formData.price_try <= 0) {
+      setError("TRY fiyatı 0'dan büyük olmalıdır");
       setActionLoading(false);
       return;
     }
@@ -290,34 +293,34 @@ export default function PackagesPage() {
     try {
       console.log('📤 Supabase update isteği gönderiliyor...');
 
-      const { data, error } = await supabase
+      // EUR'yu güncel kurla hesapla
+      const currentRate = exchangeRate || 38.5;
+      const calculatedEur =
+        Math.round((formData.price_try / currentRate) * 100) / 100;
+
+      const { error } = await supabase
         .from('packages')
         .update({
           name: formData.name.trim(),
           description: formData.description.trim(),
           credits: formData.credits,
-          price_eur: formData.price_eur,
           price_try: formData.price_try,
+          price_eur: calculatedEur, // Hesaplanmış EUR değeri (referans için)
           active: formData.active,
         })
         .eq('id', selectedPackage.id)
         .select('*');
 
-      console.log('📥 Supabase response:', { data, error });
+      console.log('📥 Supabase response:', { error });
 
       if (error) {
         console.error('❌ Supabase error:', error);
         throw error;
       }
 
-      // Güncelleme başarılı olduğunu kontrol et
-      if (data && data.length > 0) {
-        console.log('✅ Paket güncellendi:', data[0]);
-      } else {
-        console.log(
-          '⚠️ Güncelleme başarılı ama data dönmedi, fetchPackages ile kontrol ediliyor...'
-        );
-      }
+      console.log(
+        '✅ Paket güncellendi, fetchPackages ile yeniden yükleniyor...'
+      );
 
       console.log('🔄 fetchPackages çağrılıyor...');
       await fetchPackages();
@@ -583,7 +586,7 @@ export default function PackagesPage() {
                 <div className='w-4 h-4 border-2 border-slate-400/30 border-t-slate-400 rounded-full animate-spin'></div>
               ) : (
                 <span className='text-white font-medium'>
-                  1 EUR = {exchangeRate ? exchangeRate.toFixed(2) : '47.94'} TRY
+                  1 EUR = {exchangeRate ? exchangeRate.toFixed(2) : '38.50'} TRY
                 </span>
               )}
             </div>
@@ -818,7 +821,7 @@ export default function PackagesPage() {
                 />
               </div>
 
-              <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
+              <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                 <div>
                   <label className='block text-sm font-medium text-slate-300 mb-2'>
                     Kredi Miktarı
@@ -839,68 +842,41 @@ export default function PackagesPage() {
 
                 <div>
                   <label className='block text-sm font-medium text-slate-300 mb-2'>
-                    Fiyat (EUR)
+                    Fiyat (TRY) 💸
                   </label>
                   <input
                     type='number'
                     step='0.01'
-                    value={formData.price_eur}
-                    onChange={e =>
-                      setFormData({
-                        ...formData,
-                        price_eur: parseFloat(e.target.value) || 0,
-                      })
-                    }
+                    value={formData.price_try}
+                    onChange={e => {
+                      const tryValue = parseFloat(e.target.value) || 0;
+                      setFormData({ ...formData, price_try: tryValue });
+                      // Otomatik EUR dönüşümü
+                      if (tryValue > 0 && exchangeRate) {
+                        convertTryToEur(tryValue);
+                      }
+                    }}
                     className='w-full p-3 admin-glass rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500'
                     min='0'
+                    placeholder='TRY fiyatı girin'
                   />
                 </div>
+              </div>
 
-                <div>
-                  <label className='block text-sm font-medium text-slate-300 mb-2'>
-                    Fiyat (TRY)
-                  </label>
-                  <div className='relative'>
-                    <input
-                      type='number'
-                      step='0.01'
-                      value={formData.price_try}
-                      onChange={e => {
-                        const tryValue = parseFloat(e.target.value) || 0;
-                        setFormData({ ...formData, price_try: tryValue });
-                        // Otomatik EUR dönüşümü
-                        if (autoConvertEnabled && tryValue > 0) {
-                          convertTryToEur(tryValue);
-                        }
-                      }}
-                      className='w-full p-3 admin-glass rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500'
-                      min='0'
-                    />
-                    {autoConvertEnabled && (
-                      <div className='absolute -top-6 right-0 text-xs text-green-400'>
-                        🔄 Otomatik dönüşüm
-                      </div>
-                    )}
+              {/* EUR Preview (Read-only) */}
+              {formData.price_try > 0 && exchangeRate && (
+                <div className='admin-glass rounded-lg p-4'>
+                  <div className='flex items-center justify-between'>
+                    <span className='text-sm text-slate-400'>
+                      💶 EUR Karşılığı (Güncel Kur: 1 EUR ={' '}
+                      {exchangeRate.toFixed(2)} TRY)
+                    </span>
+                    <span className='text-lg font-bold text-green-400'>
+                      €{formData.price_eur.toFixed(2)}
+                    </span>
                   </div>
                 </div>
-              </div>
-
-              {/* Auto Convert Toggle */}
-              <div className='flex items-center space-x-3'>
-                <input
-                  type='checkbox'
-                  id='auto-convert'
-                  checked={autoConvertEnabled}
-                  onChange={e => setAutoConvertEnabled(e.target.checked)}
-                  className='w-4 h-4 text-blue-600 rounded focus:ring-blue-500'
-                />
-                <label
-                  htmlFor='auto-convert'
-                  className='text-sm text-slate-300'
-                >
-                  TL yazıldığında EUR'yu otomatik hesapla
-                </label>
-              </div>
+              )}
 
               <div className='flex items-center space-x-3'>
                 <input
@@ -992,7 +968,7 @@ export default function PackagesPage() {
                 />
               </div>
 
-              <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
+              <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                 <div>
                   <label className='block text-sm font-medium text-slate-300 mb-2'>
                     Kredi Miktarı
@@ -1013,68 +989,41 @@ export default function PackagesPage() {
 
                 <div>
                   <label className='block text-sm font-medium text-slate-300 mb-2'>
-                    Fiyat (EUR)
+                    Fiyat (TRY) 💸
                   </label>
                   <input
                     type='number'
                     step='0.01'
-                    value={formData.price_eur}
-                    onChange={e =>
-                      setFormData({
-                        ...formData,
-                        price_eur: parseFloat(e.target.value) || 0,
-                      })
-                    }
+                    value={formData.price_try}
+                    onChange={e => {
+                      const tryValue = parseFloat(e.target.value) || 0;
+                      setFormData({ ...formData, price_try: tryValue });
+                      // Otomatik EUR dönüşümü
+                      if (tryValue > 0 && exchangeRate) {
+                        convertTryToEur(tryValue);
+                      }
+                    }}
                     className='w-full p-3 admin-glass rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500'
                     min='0'
+                    placeholder='TRY fiyatı girin'
                   />
                 </div>
+              </div>
 
-                <div>
-                  <label className='block text-sm font-medium text-slate-300 mb-2'>
-                    Fiyat (TRY)
-                  </label>
-                  <div className='relative'>
-                    <input
-                      type='number'
-                      step='0.01'
-                      value={formData.price_try}
-                      onChange={e => {
-                        const tryValue = parseFloat(e.target.value) || 0;
-                        setFormData({ ...formData, price_try: tryValue });
-                        // Otomatik EUR dönüşümü
-                        if (autoConvertEnabled && tryValue > 0) {
-                          convertTryToEur(tryValue);
-                        }
-                      }}
-                      className='w-full p-3 admin-glass rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500'
-                      min='0'
-                    />
-                    {autoConvertEnabled && (
-                      <div className='absolute -top-6 right-0 text-xs text-green-400'>
-                        🔄 Otomatik dönüşüm
-                      </div>
-                    )}
+              {/* EUR Preview (Read-only) */}
+              {formData.price_try > 0 && exchangeRate && (
+                <div className='admin-glass rounded-lg p-4'>
+                  <div className='flex items-center justify-between'>
+                    <span className='text-sm text-slate-400'>
+                      💶 EUR Karşılığı (Güncel Kur: 1 EUR ={' '}
+                      {exchangeRate.toFixed(2)} TRY)
+                    </span>
+                    <span className='text-lg font-bold text-green-400'>
+                      €{formData.price_eur.toFixed(2)}
+                    </span>
                   </div>
                 </div>
-              </div>
-
-              {/* Auto Convert Toggle */}
-              <div className='flex items-center space-x-3'>
-                <input
-                  type='checkbox'
-                  id='edit-auto-convert'
-                  checked={autoConvertEnabled}
-                  onChange={e => setAutoConvertEnabled(e.target.checked)}
-                  className='w-4 h-4 text-blue-600 rounded focus:ring-blue-500'
-                />
-                <label
-                  htmlFor='edit-auto-convert'
-                  className='text-sm text-slate-300'
-                >
-                  TL yazıldığında EUR'yu otomatik hesapla
-                </label>
-              </div>
+              )}
 
               <div className='flex items-center space-x-3'>
                 <input

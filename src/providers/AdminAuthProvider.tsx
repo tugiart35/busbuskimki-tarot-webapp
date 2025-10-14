@@ -64,19 +64,30 @@ export function AdminAuthProvider({ children }: { children: React.ReactNode }) {
         } = await supabase.auth.getSession();
 
         if (session?.user && mounted) {
-          // Admin kontrolü yap
+          // Admin kontrolü yap - önce admins tablosundan kontrol et
+          const { data: adminRecord } = await supabase
+            .from('admins')
+            .select('user_id')
+            .eq('user_id', session.user.id)
+            .single();
+
+          // Admin değilse hiçbir şey yapma
+          if (!adminRecord) {
+            return;
+          }
+
+          // Admin ise profile bilgilerini çek
           const { data: profile } = await supabase
             .from('profiles')
-            .select('id, email, is_admin, display_name')
+            .select('id, email, display_name')
             .eq('id', session.user.id)
-            .eq('is_admin', true)
             .single();
 
           if (profile && mounted) {
             setAdmin({
               id: profile.id,
               email: profile.email,
-              is_admin: profile.is_admin,
+              is_admin: true,
               display_name: profile.display_name,
             });
           }
@@ -103,19 +114,30 @@ export function AdminAuthProvider({ children }: { children: React.ReactNode }) {
       if (event === 'SIGNED_OUT') {
         setAdmin(null);
       } else if (event === 'SIGNED_IN' && session?.user) {
-        // Admin kontrolü yap
+        // Admin kontrolü yap - önce admins tablosundan kontrol et
+        const { data: adminRecord } = await supabase
+          .from('admins')
+          .select('user_id')
+          .eq('user_id', session.user.id)
+          .single();
+
+        // Admin değilse hiçbir şey yapma
+        if (!adminRecord) {
+          return;
+        }
+
+        // Admin ise profile bilgilerini çek
         const { data: profile } = await supabase
           .from('profiles')
-          .select('id, email, is_admin, display_name')
+          .select('id, email, display_name')
           .eq('id', session.user.id)
-          .eq('is_admin', true)
           .single();
 
         if (profile && mounted) {
           setAdmin({
             id: profile.id,
             email: profile.email,
-            is_admin: profile.is_admin,
+            is_admin: true,
             display_name: profile.display_name,
           });
         }
@@ -156,15 +178,14 @@ export function AdminAuthProvider({ children }: { children: React.ReactNode }) {
       }
 
       if (data.user) {
-        // Admin kontrolü yap
-        const { data: profile, error: profileError } = await supabase
-          .from('profiles')
-          .select('id, email, is_admin, display_name')
-          .eq('id', data.user.id)
-          .eq('is_admin', true)
+        // Admin kontrolü yap - önce admins tablosundan kontrol et
+        const { data: adminRecord, error: adminError } = await supabase
+          .from('admins')
+          .select('user_id')
+          .eq('user_id', data.user.id)
           .single();
 
-        if (profileError || !profile) {
+        if (adminError || !adminRecord) {
           await supabase.auth.signOut();
           return {
             success: false,
@@ -172,10 +193,25 @@ export function AdminAuthProvider({ children }: { children: React.ReactNode }) {
           };
         }
 
+        // Admin ise profile bilgilerini çek
+        const { data: profile, error: profileError } = await supabase
+          .from('profiles')
+          .select('id, email, display_name')
+          .eq('id', data.user.id)
+          .single();
+
+        if (profileError || !profile) {
+          await supabase.auth.signOut();
+          return {
+            success: false,
+            error: 'Profil bilgileri alınamadı.',
+          };
+        }
+
         const adminUser: AdminUser = {
           id: profile.id,
           email: profile.email,
-          is_admin: profile.is_admin,
+          is_admin: true,
           display_name: profile.display_name,
         };
 

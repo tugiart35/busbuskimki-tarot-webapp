@@ -16094,7 +16094,11 @@
       "creditsAddedDescription": "Krediler hesabınıza eklendi",
       "goToDashboard": "Dashboard'a Git",
       "packagePurchased": "{packageName} başarıyla satın alındı",
-      "title": "Ödeme Başarılı!"
+      "title": "Ödeme Başarılı!",
+      "autoRedirect": "Dashboard'a yönlendiriliyorsunuz",
+      "seconds": " saniye...",
+      "redirecting": "Yönlendiriliyor...",
+      "goToDashboardNow": "Hemen Dashboard'a Git"
     }
   },
   "problemSolving": {

@@ -4,12 +4,14 @@ import { Package } from '@/types/dashboard.types';
 import { getPackageStyle } from '@/utils/dashboard-utils';
 import { Star } from 'lucide-react';
 import Link from 'next/link';
+import { useCurrency } from '@/hooks/useCurrency';
 
 interface CreditPackagesProps {
   packages: Package[];
   handlePackagePurchase: (_pkg: Package) => Promise<void>;
   paymentLoading: boolean;
   translate: (_key: string, _fallback?: string) => string;
+  locale: string;
 }
 
 // Kredi paketleri bileşeni
@@ -18,7 +20,9 @@ export default function CreditPackages({
   handlePackagePurchase,
   paymentLoading,
   translate,
+  locale,
 }: CreditPackagesProps) {
+  const { currency, symbol, isLoading: currencyLoading } = useCurrency();
   return (
     <div className='mb-8'>
       <div className='flex items-center justify-between mb-6'>
@@ -27,7 +31,7 @@ export default function CreditPackages({
         </h2>
         {/* Tüm paketleri gör linki */}
         <Link
-          href='/dashboard/packages'
+          href={`/${locale}/dashboard/packages`}
           className='text-gold hover:text-gold/80 transition-colors text-sm flex items-center space-x-1'
         >
           <span>{translate('common.viewAll', 'Tümünü Gör')}</span>
@@ -40,6 +44,10 @@ export default function CreditPackages({
         {packages.map(pkg => {
           const style = getPackageStyle(pkg.credits); // Paket stilini al
           const IconComponent = style.icon; // İkon bileşenini al
+
+          // Para birimi seçimi
+          const price = currency === 'TRY' ? pkg.price_try : pkg.price_eur;
+          const pricePerCredit = price / pkg.credits;
 
           return (
             <div
@@ -79,9 +87,20 @@ export default function CreditPackages({
 
                 {/* Fiyat bilgisi */}
                 <div className='mb-6'>
-                  <div className='text-2xl font-bold text-text-celestial'>
-                    {pkg.price_try.toFixed(2)} TRY
-                  </div>
+                  {currencyLoading ? (
+                    <div className='text-xl text-text-celestial'>
+                      Yükleniyor...
+                    </div>
+                  ) : (
+                    <>
+                      <div className='text-2xl font-bold text-text-celestial'>
+                        {price.toFixed(2)} {symbol}
+                      </div>
+                      <div className='text-sm text-text-muted'>
+                        {pricePerCredit.toFixed(2)} {symbol}/kredi
+                      </div>
+                    </>
+                  )}
                 </div>
 
                 {/* Satın alma butonu */}

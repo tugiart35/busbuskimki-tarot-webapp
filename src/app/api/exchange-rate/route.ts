@@ -5,19 +5,21 @@ Bağlantılı dosyalar:
 - lib/utils/currency-utils.ts: Para birimi yardımcı fonksiyonları (gerekli)
 
 Dosyanın amacı:
-- TCMB API'sinden güncel döviz kurlarını çekmek
-- TL/EUR dönüşüm oranlarını sağlamak
+- Frankfurter API'sinden güncel döviz kurlarını çekmek (ECB verileri)
+- EUR/TRY dönüşüm oranlarını sağlamak
 - Cache ile performans optimizasyonu
 - Rate limiting ile API koruması
 
 API detayları:
-- TCMB XML API: https://www.tcmb.gov.tr/kurlar/today.xml
+- Frankfurter API: https://api.frankfurter.app/latest?from=EUR&to=TRY
+- Veri Kaynağı: Avrupa Merkez Bankası (ECB)
 - Cache süresi: 1 saat (3600 saniye)
 - Rate limit: 100 istek/saat
+- API Key: Gerekmiyor (tamamen ücretsiz)
 
 Geliştirme önerileri:
-- ✅ TCMB API entegrasyonu
-- ✅ XML parsing ve hata yönetimi
+- ✅ Frankfurter API entegrasyonu
+- ✅ JSON parsing ve hata yönetimi
 - ✅ Cache mekanizması
 - ✅ Rate limiting
 
@@ -27,9 +29,8 @@ Tespit edilen hatalar:
 
 Kullanım durumu:
 - ✅ Gerekli: Admin paket yönetimi için
-- ✅ Production-ready: TCMB resmi API kullanılıyor
+- ✅ Production-ready: ECB resmi verisi kullanılıyor
 */
-
 import { NextRequest, NextResponse } from 'next/server';
 import { getClientIP } from '@/lib/utils/ip-utils';
 // import { ApiBase } from '@/lib/api/shared/api-base';
@@ -69,50 +70,48 @@ function checkRateLimit(ip: string): boolean {
 // Client IP alma
 // getClientIP artık ip-utils'den import ediliyor
 
-// TCMB XML'den EUR kuru çekme
-async function fetchTCMBExchangeRate(): Promise<number> {
+// Frankfurter API'den EUR/TRY kuru çekme
+async function fetchExchangeRate(): Promise<number> {
   try {
-    const response = await fetch('https://www.tcmb.gov.tr/kurlar/today.xml', {
-      method: 'GET',
-      headers: {
-        'User-Agent': 'TarotApp/1.0',
-        Accept: 'application/xml, text/xml, */*',
-      },
-      signal: AbortSignal.timeout(10000), // 10 saniye timeout
-    });
-
-    if (!response.ok) {
-      throw new Error(`TCMB API error: ${response.status}`);
-    }
-
-    const xmlText = await response.text();
-
-    // XML parsing - EUR kuru için regex
-    const eurMatch = xmlText.match(
-      /<Currency CurrencyCode="EUR"[^>]*>[\s\S]*?<ForexSelling>([0-9.]+)<\/ForexSelling>/
+    // Frankfurter.app - Ücretsiz, API key gerektirmez, ECB verisi
+    const response = await fetch(
+      'https://api.frankfurter.app/latest?from=EUR&to=TRY',
+      {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+        },
+        signal: AbortSignal.timeout(10000), // 10 saniye timeout
+      }
     );
 
-    if (!eurMatch || !eurMatch[1]) {
-      throw new Error('EUR kuru bulunamadı');
+    if (!response.ok) {
+      throw new Error(`Frankfurter API error: ${response.status}`);
     }
 
-    const rate = parseFloat(eurMatch[1]);
+    const data = await response.json();
+
+    if (!data.rates || !data.rates.TRY) {
+      throw new Error('TRY kuru bulunamadı');
+    }
+
+    const rate = parseFloat(data.rates.TRY);
 
     if (isNaN(rate) || rate <= 0) {
-      throw new Error('Geçersiz EUR kuru');
+      throw new Error('Geçersiz TRY kuru');
     }
 
     return rate;
   } catch (error) {
-    console.error('TCMB API hatası:', error);
+    console.error('Frankfurter API hatası:', error);
     throw error;
   }
 }
 
 // Fallback exchange rate (güncel yaklaşık değer)
 function getFallbackExchangeRate(): number {
-  // 2024 Aralık için yaklaşık EUR/TRY kuru
-  return 47.94;
+  // 2025 Ekim için yaklaşık EUR/TRY kuru
+  return 38.5; // Bu değeri güncelleyin
 }
 
 // Cache kontrolü
@@ -160,13 +159,14 @@ export async function GET(request: NextRequest) {
       });
     }
 
-    // TCMB'den güncel kuru çek
+    // Frankfurter'den güncel kuru çek
     let rate: number;
-    let source = 'TCMB';
+    let source = 'Frankfurter (ECB)';
 
     try {
-      rate = await fetchTCMBExchangeRate();
+      rate = await fetchExchangeRate();
     } catch (error) {
+      console.warn('Frankfurter API başarısız, fallback kullanılıyor:', error);
       rate = getFallbackExchangeRate();
       source = 'Fallback';
     }
@@ -236,13 +236,17 @@ export async function POST(request: NextRequest) {
 
     // Cache kontrolü
     if (!isCacheValid() || !exchangeRateCache) {
-      // TCMB'den güncel kuru çek
+      // Frankfurter'den güncel kuru çek
       let rate: number;
-      let source = 'TCMB';
+      let source = 'Frankfurter (ECB)';
 
       try {
-        rate = await fetchTCMBExchangeRate();
+        rate = await fetchExchangeRate();
       } catch (error) {
+        console.warn(
+          'Frankfurter API başarısız, fallback kullanılıyor:',
+          error
+        );
         rate = getFallbackExchangeRate();
         source = 'Fallback';
       }

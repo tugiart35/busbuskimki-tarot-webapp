@@ -41,7 +41,7 @@ import type { Metadata, Viewport } from 'next';
 // Ana uygulama metadata'sı - SEO Optimized
 export const defaultMetadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3111'
+    process.env.NEXT_PUBLIC_SITE_URL || 'http://busbuskimki.com'
   ),
   title: 'Büşbüşkimki - Profesyonel Tarot Okuması ve Numeroloji Analizi',
   description:

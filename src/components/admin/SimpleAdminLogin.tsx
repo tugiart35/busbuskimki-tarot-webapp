@@ -28,7 +28,7 @@ export default function SimpleAdminLogin({ locale }: SimpleAdminLoginProps) {
 
       if (result.success) {
         // Admin sayfasına yönlendir
-        router.push(`/${locale}/admin`);
+        router.push(`/${locale}/pakize`);
         router.refresh(); // Sayfayı yenile
       } else {
         setError(result.error || 'Geçersiz email veya şifre');

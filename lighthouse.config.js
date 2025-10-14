@@ -8,15 +8,15 @@ module.exports = {
     collect: {
       // Test all tarot card pages
       url: [
-        'http://localhost:3000/tr/kartlar/joker',
-        'http://localhost:3000/tr/kartlar/buyucu',
-        'http://localhost:3000/tr/kartlar/yuksek-rahibe',
-        'http://localhost:3000/en/cards/the-fool',
-        'http://localhost:3000/en/cards/the-magician',
-        'http://localhost:3000/en/cards/the-high-priestess',
-        'http://localhost:3000/sr/kartice/joker',
-        'http://localhost:3000/sr/kartice/majstor',
-        'http://localhost:3000/sr/kartice/visoka-svestenica',
+        'http://busbuskimki.com/tr/kartlar/joker',
+        'http://busbuskimki.com/tr/kartlar/buyucu',
+        'http://busbuskimki.com/tr/kartlar/yuksek-rahibe',
+        'http://busbuskimki.com/en/cards/the-fool',
+        'http://busbuskimki.com/en/cards/the-magician',
+        'http://busbuskimki.com/en/cards/the-high-priestess',
+        'http://busbuskimki.com/sr/kartice/joker',
+        'http://busbuskimki.com/sr/kartice/majstor',
+        'http://busbuskimki.com/sr/kartice/visoka-svestenica',
       ],
       numberOfRuns: 3,
       settings: {

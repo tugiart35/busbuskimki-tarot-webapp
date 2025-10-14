@@ -1,6 +1,6 @@
 # 🎉 SEO İYİLEŞTİRMELERİ TAMAMLANDI!
 
-**Proje:** TaraTarot (BüşBüşKimKi)  
+**Proje:** busbuskimki (BüşBüşKimKi)  
 **Tarih:** 13 Ekim 2025  
 **Durum:** ✅ %100 TAMAMLANDI  
 **SEO Skoru:** ⭐⭐⭐⭐⭐ (5/5)
@@ -549,5 +549,5 @@ Vercel Dashboard → Environment Variables
 
 ---
 
-_Bu rapor, TaraTarot projesinin SEO iyileştirmelerinin tam listesini ve uygulama
-detaylarını içermektedir. Production'a deploy edilmeye hazırdır._
+_Bu rapor, busbuskimki projesinin SEO iyileştirmelerinin tam listesini ve
+uygulama detaylarını içermektedir. Production'a deploy edilmeye hazırdır._

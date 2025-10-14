@@ -41,10 +41,9 @@ export interface ShopierSettings {
   apiKey: string;
   apiSecret: string;
   testMode: boolean;
-  callbackUrl: string;
-  webhookUrl: string;
-  successUrl: string;
-  cancelUrl: string;
+  successUrl: string; // Başarılı ödeme sonrası kullanıcı yönlendirmesi
+  cancelUrl: string; // İptal durumunda kullanıcı yönlendirmesi
+  webhookUrl: string; // Backend webhook endpoint
 }
 
 export interface ShopierTestResult {
@@ -82,15 +81,13 @@ export class ShopierSystemManager {
         apiSecret: shopierData.api_secret || '',
         testMode:
           shopierData.test_mode === true || shopierData.test_mode === 'true',
-        callbackUrl:
-          shopierData.callback_url || 'http://localhost:3111/payment/callback',
-        webhookUrl:
-          shopierData.webhook_url ||
-          'http://localhost:3111/api/webhook/shopier',
         successUrl:
           shopierData.success_url || 'http://localhost:3111/payment/success',
         cancelUrl:
           shopierData.cancel_url || 'http://localhost:3111/payment/cancel',
+        webhookUrl:
+          shopierData.webhook_url ||
+          'http://localhost:3111/api/webhook/shopier',
       };
     } catch (error) {
       console.error('ShopierSystemManager.getShopierSettings error:', error);
@@ -116,14 +113,9 @@ export class ShopierSystemManager {
         { category: 'shopier', key: 'api_key', value: settings.apiKey },
         { category: 'shopier', key: 'api_secret', value: settings.apiSecret },
         { category: 'shopier', key: 'test_mode', value: settings.testMode },
-        {
-          category: 'shopier',
-          key: 'callback_url',
-          value: settings.callbackUrl,
-        },
-        { category: 'shopier', key: 'webhook_url', value: settings.webhookUrl },
         { category: 'shopier', key: 'success_url', value: settings.successUrl },
         { category: 'shopier', key: 'cancel_url', value: settings.cancelUrl },
+        { category: 'shopier', key: 'webhook_url', value: settings.webhookUrl },
       ];
 
       // Ayarları kaydet
@@ -148,7 +140,8 @@ export class ShopierSystemManager {
             shopierSettings: {
               merchantId: settings.merchantId,
               testMode: settings.testMode,
-              callbackUrl: settings.callbackUrl,
+              successUrl: settings.successUrl,
+              cancelUrl: settings.cancelUrl,
               webhookUrl: settings.webhookUrl,
             },
             timestamp: new Date().toISOString(),
@@ -297,14 +290,6 @@ export class ShopierSystemManager {
       errors.push('API Secret gerekli');
     }
 
-    if (!settings.callbackUrl.trim()) {
-      errors.push('Callback URL gerekli');
-    }
-
-    if (!settings.webhookUrl.trim()) {
-      errors.push('Webhook URL gerekli');
-    }
-
     if (!settings.successUrl.trim()) {
       errors.push('Success URL gerekli');
     }
@@ -313,22 +298,22 @@ export class ShopierSystemManager {
       errors.push('Cancel URL gerekli');
     }
 
+    if (!settings.webhookUrl.trim()) {
+      errors.push('Webhook URL gerekli');
+    }
+
     // URL format kontrolü
     const urlPattern = /^https?:\/\/.+/;
-    if (settings.callbackUrl && !urlPattern.test(settings.callbackUrl)) {
-      errors.push('Callback URL geçerli bir URL olmalı');
-    }
-
-    if (settings.webhookUrl && !urlPattern.test(settings.webhookUrl)) {
-      errors.push('Webhook URL geçerli bir URL olmalı');
-    }
-
     if (settings.successUrl && !urlPattern.test(settings.successUrl)) {
       errors.push('Success URL geçerli bir URL olmalı');
     }
 
     if (settings.cancelUrl && !urlPattern.test(settings.cancelUrl)) {
       errors.push('Cancel URL geçerli bir URL olmalı');
+    }
+
+    if (settings.webhookUrl && !urlPattern.test(settings.webhookUrl)) {
+      errors.push('Webhook URL geçerli bir URL olmalı');
     }
 
     return {
@@ -344,10 +329,9 @@ export class ShopierSystemManager {
       apiKey: '',
       apiSecret: '',
       testMode: true,
-      callbackUrl: 'http://localhost:3111/payment/callback',
-      webhookUrl: 'http://localhost:3111/api/webhook/shopier',
       successUrl: 'http://localhost:3111/payment/success',
       cancelUrl: 'http://localhost:3111/payment/cancel',
+      webhookUrl: 'http://localhost:3111/api/webhook/shopier',
     };
   }
 

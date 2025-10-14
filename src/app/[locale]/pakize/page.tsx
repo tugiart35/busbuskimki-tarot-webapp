@@ -116,7 +116,7 @@ export default function AdminDashboard() {
     ) {
       setIsRedirecting(true);
       // Admin girişi yapılmamış veya admin yetkisi yok, auth sayfasına yönlendiriliyor
-      router.push(`/${locale}/admin/auth`);
+      router.push(`/${locale}/pakize/auth`);
     }
   }, [authLoading, isAuthenticated, admin, isRedirecting, router, locale]);
 
@@ -354,7 +354,7 @@ export default function AdminDashboard() {
     {
       title: 'Detaylı İstatistikler',
       description: 'Kapsamlı analiz raporları ve grafikler',
-      href: `/${locale}/admin/analytics`,
+      href: `/${locale}/pakize/analytics`,
       icon: Activity,
       gradient: 'from-cyan-500 to-blue-600',
       emoji: '📊',
@@ -362,7 +362,7 @@ export default function AdminDashboard() {
     {
       title: 'Kullanıcı Yönetimi',
       description: 'Kullanıcı hesapları ve kredi işlemleri',
-      href: `/${locale}/admin/users`,
+      href: `/${locale}/pakize/users`,
       icon: UserPlus,
       gradient: 'from-green-500 to-emerald-600',
       emoji: '👥',
@@ -370,7 +370,7 @@ export default function AdminDashboard() {
     {
       title: 'Paket Yönetimi',
       description: 'Kredi paketleri ve fiyat düzenlemeleri',
-      href: `/${locale}/admin/packages`,
+      href: `/${locale}/pakize/packages`,
       icon: Package,
       gradient: 'from-orange-500 to-red-600',
       emoji: '💰',
@@ -378,7 +378,7 @@ export default function AdminDashboard() {
     {
       title: 'Sipariş Takibi',
       description: 'Aktif siparişler ve ödeme durumları',
-      href: `/${locale}/admin/orders`,
+      href: `/${locale}/pakize/orders`,
       icon: ShoppingCart,
       gradient: 'from-purple-500 to-pink-600',
       emoji: '🛒',
@@ -386,7 +386,7 @@ export default function AdminDashboard() {
     {
       title: 'Sistem Ayarları',
       description: 'Güvenlik, admin kullanıcıları ve konfigürasyon',
-      href: `/${locale}/admin/settings`,
+      href: `/${locale}/pakize/settings`,
       icon: Target,
       gradient: 'from-gray-500 to-slate-600',
       emoji: '🔧',
@@ -539,7 +539,7 @@ export default function AdminDashboard() {
                 Son Kayıtlar
               </h3>
               <a
-                href={`/${locale}/admin/users`}
+                href={`/${locale}/pakize/users`}
                 className='text-blue-400 hover:text-blue-300 text-sm font-medium admin-hover-scale'
               >
                 Tümünü Gör →

@@ -27,7 +27,7 @@ export default function AdminGuard({ children }: AdminGuardProps) {
     // Production ortamında normal kontrol
     if (!loading && !isAuthenticated && !isRedirecting && !admin) {
       setIsRedirecting(true);
-      router.push(`/${locale}/admin/auth`);
+      router.push(`/${locale}/pakize/auth`);
     }
   }, [loading, isAuthenticated, isRedirecting, router, locale, admin]);
 

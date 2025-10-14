@@ -2,13 +2,13 @@
 
 ## 🎯 Canonical URL Nedir?
 
-Canonical URL, arama motorlarına bir sayfanın "resmi" versiyonunu bildiren meta tag'dir. Özellikle çoklu dil sitelerinde kritik öneme sahiptir.
+Canonical URL, arama motorlarına bir sayfanın "resmi" versiyonunu bildiren meta
+tag'dir. Özellikle çoklu dil sitelerinde kritik öneme sahiptir.
 
 ## ✅ TEST SONUÇLARI
 
-**Son Test:** 14 Ekim 2025
-**Durum:** ✅ TÜM TESTLER BAŞARILI (31/31)
-**Başarı Oranı:** 100%
+**Son Test:** 14 Ekim 2025 **Durum:** ✅ TÜM TESTLER BAŞARILI (31/31) **Başarı
+Oranı:** 100%
 
 ```bash
 # Test komutu
@@ -24,6 +24,7 @@ Total Tests: 31 | Passed: 31 | Failed: 0
 ### 1. Ana Sayfa Canonical URLs ✅
 
 **Türkçe:**
+
 ```
 Canonical: https://busbuskimki.com/tr
 Hreflang x-default: https://busbuskimki.com/tr
@@ -33,6 +34,7 @@ Hreflang sr: https://busbuskimki.com/sr
 ```
 
 **İngilizce:**
+
 ```
 Canonical: https://busbuskimki.com/en
 Hreflang x-default: https://busbuskimki.com/tr
@@ -42,6 +44,7 @@ Hreflang sr: https://busbuskimki.com/sr
 ```
 
 **Sırpça:**
+
 ```
 Canonical: https://busbuskimki.com/sr
 Hreflang x-default: https://busbuskimki.com/tr
@@ -50,11 +53,13 @@ Hreflang en: https://busbuskimki.com/en
 Hreflang sr: https://busbuskimki.com/sr
 ```
 
-**NOT:** Canonical URL'ler gerçek route'ları kullanır (/tr, /en, /sr). SEO-friendly redirect'ler middleware tarafından yönetilir.
+**NOT:** Canonical URL'ler gerçek route'ları kullanır (/tr, /en, /sr).
+SEO-friendly redirect'ler middleware tarafından yönetilir.
 
 ### 2. Tarot Okuma Sayfaları ✅
 
 **Türkçe:**
+
 ```
 Canonical: https://busbuskimki.com/tr/tarotokumasi
 Hreflang x-default: https://busbuskimki.com/tr/tarotokumasi
@@ -64,11 +69,13 @@ Hreflang sr: https://busbuskimki.com/sr/tarotokumasi
 ```
 
 **İngilizce:**
+
 ```
 Canonical: https://busbuskimki.com/en/tarotokumasi
 ```
 
 **Sırpça:**
+
 ```
 Canonical: https://busbuskimki.com/sr/tarotokumasi
 ```
@@ -78,16 +85,19 @@ Canonical: https://busbuskimki.com/sr/tarotokumasi
 Kaynak: `src/lib/seo/numerology-seo-generator.ts:82-105`
 
 **Türkçe:**
+
 ```
 Canonical: https://busbuskimki.com/tr/numeroloji
 ```
 
 **İngilizce:**
+
 ```
 Canonical: https://busbuskimki.com/en/numerology
 ```
 
 **Sırpça:**
+
 ```
 Canonical: https://busbuskimki.com/sr/numerologija
 ```
@@ -95,18 +105,21 @@ Canonical: https://busbuskimki.com/sr/numerologija
 ### 4. Tarot Kart Sayfaları
 
 **Türkçe:**
+
 ```
 Canonical: https://busbuskimki.com/tr/kartlar/[slug]
 Örnek: https://busbuskimki.com/tr/kartlar/joker
 ```
 
 **İngilizce:**
+
 ```
 Canonical: https://busbuskimki.com/en/cards/[slug]
 Örnek: https://busbuskimki.com/en/cards/the-fool
 ```
 
 **Sırpça:**
+
 ```
 Canonical: https://busbuskimki.com/sr/kartice/[slug]
 Örnek: https://busbuskimki.com/sr/kartice/joker
@@ -117,6 +130,7 @@ Canonical: https://busbuskimki.com/sr/kartice/[slug]
 ### Otomatik Test Suite
 
 **Kullanım:**
+
 ```bash
 # Tüm canonical URL'leri test et
 node tests/canonical-url-validator.js
@@ -126,6 +140,7 @@ npm run test:canonical
 ```
 
 **Test edilen durumlar:**
+
 - ✅ Homepage canonical URL formatı
 - ✅ Hreflang tags (x-default, tr, en, sr)
 - ✅ Tarot canonical paths (tüm diller)
@@ -135,6 +150,7 @@ npm run test:canonical
 - ✅ sitemap.ts içerik kontrolü
 
 **Test Çıktısı:**
+
 ```
 ╔════════════════════════════════════════════════════╗
 ║     CANONICAL URL VALIDATION TEST SUITE         ║
@@ -199,6 +215,7 @@ Success Rate: 100.00%
 ### Deployment Sonrası Manuel Test
 
 #### 1. HTML Source Kontrolü
+
 ```bash
 # Ana sayfa TR
 curl https://busbuskimki.com/tr | grep -i "canonical"
@@ -214,6 +231,7 @@ curl https://busbuskimki.com/sr | grep -i "canonical"
 ```
 
 #### 2. Hreflang Kontrolü
+
 ```bash
 # Tüm hreflang tag'lerini göster
 curl https://busbuskimki.com/tr | grep -i "hreflang"
@@ -226,6 +244,7 @@ curl https://busbuskimki.com/tr | grep -i "hreflang"
 ```
 
 #### 3. Browser DevTools ile Test
+
 ```
 1. Chrome DevTools açın (F12)
 2. Elements tab'ına gidin
@@ -238,22 +257,27 @@ curl https://busbuskimki.com/tr | grep -i "hreflang"
 ### Online Araçlar ile Test
 
 #### 1. Google Rich Results Test
+
 ```
 https://search.google.com/test/rich-results
 ```
+
 - URL'yi girin
 - "Test URL" butonuna tıklayın
 - Canonical ve hreflang tag'lerini kontrol edin
 
 #### 2. Merkle Hreflang Tags Testing Tool
+
 ```
 https://technicalseo.com/tools/hreflang/
 ```
+
 - Site URL'sini girin
 - Hreflang implementation'ı analiz edin
 - Hatalar varsa gösterir
 
 #### 3. Screaming Frog SEO Spider
+
 ```
 1. Tool'u indirin: https://www.screamingfrogseoseo.com/seo-spider/
 2. Site'ı crawl edin: https://busbuskimki.com
@@ -295,33 +319,48 @@ https://technicalseo.com/tools/hreflang/
 ### Yaygın Hatalar ve Çözümleri
 
 #### ❌ Hata 1: Relative URL Kullanımı
+
 ```html
 <!-- YANLIŞ -->
-<link rel="canonical" href="/tr/anasayfa"/>
+<link rel="canonical" href="/tr/anasayfa" />
 
 <!-- DOĞRU -->
-<link rel="canonical" href="https://busbuskimki.com/tr/anasayfa"/>
+<link rel="canonical" href="https://busbuskimki.com/tr/anasayfa" />
 ```
 
 #### ❌ Hata 2: Trailing Slash Tutarsızlığı
+
 ```html
 <!-- Hep aynı formatta olmalı -->
-<link rel="canonical" href="https://busbuskimki.com/tr/anasayfa"/> ✓
-<link rel="canonical" href="https://busbuskimki.com/tr/anasayfa/"/> ✗
+<link rel="canonical" href="https://busbuskimki.com/tr/anasayfa" /> ✓
+<link rel="canonical" href="https://busbuskimki.com/tr/anasayfa/" /> ✗
 ```
 
 #### ❌ Hata 3: x-default Eksikliği
+
 ```html
 <!-- x-default mutlaka olmalı (genelde default dil) -->
-<link rel="alternate" hreflang="x-default" href="https://busbuskimki.com/tr/anasayfa"/> ✓
+<link
+  rel="alternate"
+  hreflang="x-default"
+  href="https://busbuskimki.com/tr/anasayfa"
+/>
+✓
 ```
 
 #### ❌ Hata 4: Self-referencing Hreflang Eksikliği
+
 ```html
 <!-- TR sayfasında TR için de hreflang olmalı -->
-<link rel="alternate" hreflang="tr" href="https://busbuskimki.com/tr/anasayfa"/> ✓
-<link rel="alternate" hreflang="en" href="https://busbuskimki.com/en/home"/> ✓
-<link rel="alternate" hreflang="sr" href="https://busbuskimki.com/sr/pocetna"/> ✓
+<link
+  rel="alternate"
+  hreflang="tr"
+  href="https://busbuskimki.com/tr/anasayfa"
+/>
+✓
+<link rel="alternate" hreflang="en" href="https://busbuskimki.com/en/home" /> ✓
+<link rel="alternate" hreflang="sr" href="https://busbuskimki.com/sr/pocetna" />
+✓
 ```
 
 ## 📊 Kod Konumları
@@ -329,23 +368,27 @@ https://technicalseo.com/tools/hreflang/
 ### Canonical URL Generator'lar
 
 1. **Ana Sayfa:** `src/lib/seo/page-seo-generator.ts:136`
+
 ```typescript
 const canonicalUrl = `${baseUrl}/${locale}${homePath}`;
 ```
 
 2. **Numeroloji:** `src/lib/seo/numerology-seo-generator.ts:82`
+
 ```typescript
-canonical: `${baseUrl}${data!.canonicalPath}`
+canonical: `${baseUrl}${data!.canonicalPath}`;
 ```
 
 3. **Enhanced Meta:** `src/lib/seo/enhanced-meta-generator.ts:63`
+
 ```typescript
-canonical: `${baseUrl}/${locale}/${localePrefix}/${slug}`
+canonical: `${baseUrl}/${locale}/${localePrefix}/${slug}`;
 ```
 
 ### Hreflang URLs
 
 **Kaynak:** `src/lib/seo/page-seo-generator.ts:138-144`
+
 ```typescript
 const hreflangUrls = {
   'x-default': `${baseUrl}/tr/anasayfa`,
@@ -393,6 +436,7 @@ const hreflangUrls = {
 ---
 
 **Dosya Konumları:**
+
 - Robots: `src/app/robots.ts`
 - Sitemap: `src/app/sitemap.ts`
 - Ana Sayfa SEO: `src/lib/seo/page-seo-generator.ts`

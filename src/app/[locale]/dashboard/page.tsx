@@ -53,6 +53,8 @@ import { useState } from 'react';
 import { useDashboardData } from '@/hooks/useDashboardData';
 // Dashboard aksiyonları için custom hook
 import { useDashboardActions } from '@/hooks/useDashboardActions';
+// Para birimi tespiti için custom hook
+import { useCurrency } from '@/hooks/useCurrency';
 // Dashboard UI bileşenleri
 import NavigationHeader from '@/components/dashboard/NavigationHeader';
 import WelcomeSection from '@/components/dashboard/WelcomeSection';
@@ -90,6 +92,9 @@ export default function DashboardPage() {
     loading,
   } = useDashboardData();
 
+  // Para birimi tespiti
+  const { currency } = useCurrency();
+
   // Dashboard aksiyonları hook'u
   const {
     profileModalOpen,
@@ -99,7 +104,7 @@ export default function DashboardPage() {
     openProfileModal,
     setProfileModalOpen,
     setSelectedReading,
-  } = useDashboardActions(profile, user, currentLocale, setProfile);
+  } = useDashboardActions(profile, user, currentLocale, setProfile, currency);
 
   // Mobil sidebar state'i
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -152,6 +157,7 @@ export default function DashboardPage() {
             handlePackagePurchase={handlePackagePurchase}
             paymentLoading={paymentLoading}
             translate={translate}
+            locale={currentLocale}
           />
 
           {/* Profile Management - Profil yönetimi bölümü */}

@@ -40,49 +40,49 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
   const getNavigation = (locale: string) => [
     {
       name: 'Dashboard',
-      href: `/${locale}/admin`,
+      href: `/${locale}/pakize`,
       icon: LayoutDashboard,
       gradient: 'from-blue-500 to-purple-600',
       description: t('admin.navigation.dashboard.description'),
     },
     {
       name: 'Kullanıcılar',
-      href: `/${locale}/admin/users`,
+      href: `/${locale}/pakize/users`,
       icon: Users,
       gradient: 'from-green-500 to-emerald-600',
       description: t('admin.navigation.users.description'),
     },
     {
       name: 'Okumalar',
-      href: `/${locale}/admin/readings`,
+      href: `/${locale}/pakize/readings`,
       icon: BarChart3,
       gradient: 'from-indigo-500 to-purple-600',
       description: 'Tarot okumaları ve analizler',
     },
     {
       name: 'Paketler',
-      href: `/${locale}/admin/packages`,
+      href: `/${locale}/pakize/packages`,
       icon: Package,
       gradient: 'from-orange-500 to-red-600',
       description: 'Kredi paketleri ve fiyatlar',
     },
     {
       name: t('admin.navigation.orders.name'),
-      href: `/${locale}/admin/orders`,
+      href: `/${locale}/pakize/orders`,
       icon: CreditCard,
       gradient: 'from-purple-500 to-pink-600',
       description: t('admin.navigation.orders.description'),
     },
     {
       name: t('admin.navigation.analytics.name'),
-      href: `/${locale}/admin/analytics`,
+      href: `/${locale}/pakize/analytics`,
       icon: TrendingUp,
       gradient: 'from-cyan-500 to-blue-600',
       description: 'Detaylı analitik raporlar',
     },
     {
       name: 'Ayarlar',
-      href: `/${locale}/admin/settings`,
+      href: `/${locale}/pakize/settings`,
       icon: Settings,
       gradient: 'from-gray-500 to-slate-600',
       description: t('admin.navigation.settings.description'),
@@ -114,7 +114,7 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
       });
 
       await logoutAdmin();
-      window.location.href = `/${locale}/admin/auth`;
+      window.location.href = `/${locale}/pakize/auth`;
     } catch (error) {
       // Logout failed
     }
@@ -136,7 +136,7 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
   // }
 
   // AdminGuard ile güvenlik kontrolü - sadece admin sayfaları için
-  if (pathname.includes('/admin/auth')) {
+  if (pathname.includes('/pakize/auth')) {
     // Auth sayfası için AdminGuard kullanma
     return <>{children}</>;
   }
@@ -259,7 +259,7 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
 
                   <div className='grid grid-cols-2 gap-2'>
                     <Link
-                      href={`/${locale}/admin`}
+                      href={`/${locale}/pakize`}
                       className='flex items-center justify-center p-2 bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-lg transition-transform duration-200 hover:scale-105 text-sm touch-target'
                     >
                       <ArrowLeft className='h-4 w-4 mr-1' />
@@ -362,7 +362,7 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
 
                 <div className='grid grid-cols-2 gap-2'>
                   <Link
-                    href={`/${locale}/admin`}
+                    href={`/${locale}/pakize`}
                     className='flex items-center justify-center p-2 bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-lg transition-transform duration-200 hover:scale-105 text-sm'
                   >
                     <ArrowLeft className='h-4 w-4 mr-1' />

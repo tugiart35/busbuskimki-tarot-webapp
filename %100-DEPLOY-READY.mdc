@@ -169,7 +169,7 @@ validateEnv();
 
 ```bash
 # Repository'e git
-cd /Users/tugi/Desktop/TaraTarot
+cd /Users/tugi/Desktop/busbuskimki
 
 # Backup oluştur
 git add -A
@@ -233,9 +233,9 @@ npm run build
 npm run dev
 
 # Her locale'i test et:
-# - http://localhost:3111/tr
-# - http://localhost:3111/en
-# - http://localhost:3111/sr
+# - http://busbuskimki.com/tr
+# - http://busbuskimki.com/en
+# - http://busbuskimki.com/sr
 
 # Kritik flow'ları test et:
 # - Login/Signup
@@ -343,7 +343,7 @@ Daha fazla bilgi için alt raporlara bakın:
 ### Tüm Patch'leri Uygula:
 
 ```bash
-cd /Users/tugi/Desktop/TaraTarot
+cd /Users/tugi/Desktop/busbuskimki
 APPLY=true ./deploy-audit/patches/APPLY.sh all
 ```
 

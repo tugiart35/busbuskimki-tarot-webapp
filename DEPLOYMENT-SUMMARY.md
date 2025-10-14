@@ -43,7 +43,7 @@ oluşturuldu
 
 ```bash
 # 1. Build test
-cd /Users/tugi/Desktop/TaraTarot
+cd /Users/tugi/Desktop/busbuskimki
 npm run build
 
 # 2. Vercel CLI
@@ -168,7 +168,7 @@ graph TD
 
 ```bash
 # Çözüm:
-cd /Users/tugi/Desktop/TaraTarot
+cd /Users/tugi/Desktop/busbuskimki
 npm install
 npm run build
 # Hataları düzeltin ve tekrar deneyin

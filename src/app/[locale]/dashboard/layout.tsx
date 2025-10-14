@@ -26,7 +26,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
 
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3111';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://busbuskimki.com';
 
   const seoData = {
     tr: {
@@ -209,7 +209,7 @@ export default function DashboardLayout({
         type='application/ld+json'
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
-            generateDashboardStructuredData('tr', 'http://localhost:3111')
+            generateDashboardStructuredData('tr', 'http://busbuskimki.com')
           ), // Default to Turkish
         }}
       />

@@ -50,12 +50,12 @@ import Link from 'next/link';
 import { supabase } from '@/lib/supabase/client';
 import { useAuth } from '@/hooks/auth/useAuth';
 import { useTranslations } from '@/hooks/useTranslations';
+import { useDashboardActions } from '@/hooks/useDashboardActions';
+import { useCurrency } from '@/hooks/useCurrency';
 import { BottomNavigation } from '@/features/shared/layout';
 import {
   Coins,
   Star,
-  Crown,
-  Check,
   ShoppingCart,
   CreditCard,
   Gift,
@@ -63,28 +63,8 @@ import {
   Clock,
   ArrowLeft,
 } from 'lucide-react';
-
-interface CreditPackage {
-  id: string;
-  name: string;
-  credits: number;
-  price: number;
-  currency: string;
-  description: string;
-  features: string[];
-  popular?: boolean;
-  icon: React.ReactNode;
-  color: string;
-  bgColor: string;
-  borderColor: string;
-}
-
-interface UserProfile {
-  id: string;
-  credit_balance?: number;
-  display_name?: string;
-  email?: string;
-}
+import type { Package, UserProfile } from '@/types/dashboard.types';
+import { getPackageStyle } from '@/utils/dashboard-utils';
 
 export default function PackagesPage() {
   const { user, loading: authLoading } = useAuth();
@@ -96,13 +76,23 @@ export default function PackagesPage() {
   const locale = pathname.split('/')[1] || 'tr';
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
-  const [purchasing, setPurchasing] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState<string | null>(null);
 
   // Supabase'den kredi paketlerini çek
-  const [creditPackages, setCreditPackages] = useState<CreditPackage[]>([]);
+  const [creditPackages, setCreditPackages] = useState<Package[]>([]);
   const [packagesLoading, setPackagesLoading] = useState(true);
+
+  // Para birimi tespiti
+  const { currency, symbol, isLoading: currencyLoading } = useCurrency();
+
+  // Dashboard actions hook - Shopier entegrasyonu için
+  const { handlePackagePurchase, paymentLoading } = useDashboardActions(
+    profile,
+    user,
+    locale,
+    setProfile,
+    currency
+  );
 
   // Supabase'den paketleri çek
   const fetchPackages = useCallback(async () => {
@@ -115,120 +105,31 @@ export default function PackagesPage() {
         .order('credits', { ascending: true });
 
       if (error) {
+        console.error('Paketler yükleme hatası:', error);
         return;
       }
 
-      // Supabase verilerini CreditPackage formatına dönüştür
-      const formattedPackages: CreditPackage[] = (data || []).map(
-        (pkg: any, index: number) => {
-          const isPopular = index === 1; // İkinci paket popüler olsun
+      // Supabase verilerini Package tipine dönüştür
+      const packages: Package[] = (data || []).map((pkg: any) => ({
+        id: pkg.id,
+        name: pkg.name,
+        credits: pkg.credits,
+        price_try: parseFloat(pkg.price_try),
+        price_usd: parseFloat(pkg.price_usd || 0),
+        price_eur: parseFloat(pkg.price_eur || 0),
+        description: pkg.description || '',
+        shopier_product_id: pkg.shopier_product_id || null,
+        active: pkg.active,
+        created_at: pkg.created_at,
+      }));
 
-          return {
-            id: pkg.id.toString(),
-            name: pkg.name,
-            credits: pkg.credits,
-            price: parseFloat(pkg.price_try), // TRY fiyatını kullan
-            currency: 'TRY',
-            description: pkg.description || '',
-            features: generateFeatures(pkg.credits),
-            popular: isPopular,
-            icon: getPackageIcon(pkg.credits),
-            color: getPackageColor(pkg.credits),
-            bgColor: getPackageBgColor(pkg.credits),
-            borderColor: getPackageBorderColor(pkg.credits),
-          };
-        }
-      );
-
-      setCreditPackages(formattedPackages);
+      setCreditPackages(packages);
     } catch (error) {
       console.error('Paketler yüklenirken hata:', error);
     } finally {
       setPackagesLoading(false);
     }
-  }, [t]);
-
-  // Kredi miktarına göre özellikler oluştur
-  const generateFeatures = useCallback(
-    (credits: number): string[] => {
-      const baseFeatures = [
-        t('dashboard.packages.featureNumerology', 'Numeroloji analizi'),
-        t('dashboard.packages.featureLove', 'Aşk açılımı'),
-      ];
-
-      if (credits >= 1000) {
-        return [
-          ...baseFeatures,
-          t(
-            'dashboard.packages.feature10Readings',
-            '10+ detaylı tarot okuması'
-          ),
-          t('dashboard.packages.featureCareer', 'Kariyer okuması'),
-          t('dashboard.packages.featureGeneral', 'Genel okuma'),
-          t('dashboard.packages.feature60Days', '60 gün geçerlilik'),
-          t('dashboard.packages.feature20Bonus', '%20 bonus kredi'),
-          t('dashboard.packages.featurePriority', 'Öncelikli destek'),
-        ];
-      } else if (credits >= 500) {
-        return [
-          ...baseFeatures,
-          t('dashboard.packages.feature5Readings', '5-6 detaylı tarot okuması'),
-          t('dashboard.packages.featureCareer', 'Kariyer okuması'),
-          t('dashboard.packages.feature30Days', '30 gün geçerlilik'),
-          t('dashboard.packages.feature10Bonus', '%10 bonus kredi'),
-        ];
-      } else {
-        return [
-          ...baseFeatures,
-          t('dashboard.packages.feature2Readings', '1-2 detaylı tarot okuması'),
-          t('dashboard.packages.feature7Days', '7 gün geçerlilik'),
-        ];
-      }
-    },
-    [t]
-  );
-
-  // Kredi miktarına göre ikon belirle
-  const getPackageIcon = (credits: number) => {
-    if (credits >= 1000) {
-      return <Crown className='h-8 w-8' />;
-    }
-    if (credits >= 500) {
-      return <Star className='h-8 w-8' />;
-    }
-    return <Coins className='h-8 w-8' />;
-  };
-
-  // Kredi miktarına göre renk belirle
-  const getPackageColor = (credits: number) => {
-    if (credits >= 1000) {
-      return 'text-purple-400';
-    }
-    if (credits >= 500) {
-      return 'text-gold';
-    }
-    return 'text-blue-400';
-  };
-
-  const getPackageBgColor = (credits: number) => {
-    if (credits >= 1000) {
-      return 'bg-purple-500/10';
-    }
-    if (credits >= 500) {
-      return 'bg-gold/10';
-    }
-    return 'bg-blue-500/10';
-  };
-
-  const getPackageBorderColor = (credits: number) => {
-    if (credits >= 1000) {
-      return 'border-purple-500/30';
-    }
-    if (credits >= 500) {
-      return 'border-gold/30';
-    }
-    return 'border-blue-500/30';
-  };
+  }, []);
 
   // Kullanıcı profilini çek
   const fetchUserProfile = useCallback(async () => {
@@ -276,93 +177,6 @@ export default function PackagesPage() {
       fetchPackages(); // Supabase'den paketleri çek
     }
   }, [authLoading, user, router, locale, fetchPackages, fetchUserProfile]);
-
-  // Paket satın alma işlemi
-  const purchasePackage = async (packageId: string) => {
-    if (!user || !profile) {
-      return;
-    }
-
-    const selectedPackage = creditPackages.find(pkg => pkg.id === packageId);
-    if (!selectedPackage) {
-      return;
-    }
-
-    try {
-      setPurchasing(packageId);
-      setError(null);
-      setSuccess(null);
-
-      // Bonus kredi hesapla (kredi miktarına göre)
-      const bonusCredits =
-        selectedPackage.credits >= 1000
-          ? 200
-          : selectedPackage.credits >= 500
-            ? 50
-            : 0;
-      const totalCredits = selectedPackage.credits + bonusCredits;
-
-      // Kredi bakiyesini güncelle
-      const newBalance = (profile.credit_balance || 0) + totalCredits;
-
-      const { error: updateError } = await supabase
-        .from('profiles')
-        .update({
-          credit_balance: newBalance,
-        })
-        .eq('id', user.id);
-
-      if (updateError) {
-        throw updateError;
-      }
-
-      // Transaction log oluştur
-      const { error: transactionError } = await supabase
-        .from('transactions')
-        .insert({
-          user_id: user.id,
-          type: 'purchase',
-          amount: selectedPackage.price,
-          delta_credits: totalCredits,
-          reason: `${selectedPackage.name} ${t('dashboard.packages.purchased', 'satın alındı')} (${selectedPackage.credits} ${t('dashboard.packages.credits', 'kredi')}${bonusCredits > 0 ? ` + ${bonusCredits} ${t('dashboard.packages.bonus', 'bonus')}` : ''})`,
-          ref_type: 'package_purchase',
-          ref_id: packageId,
-          description: `${selectedPackage.name} - ${totalCredits} ${t('dashboard.packages.credits', 'kredi')}`,
-        });
-
-      if (transactionError) {
-        console.warn('Transaction log oluşturulamadı:', transactionError);
-        // Transaction log hatası kritik değil, devam et
-      }
-
-      // Profili güncelle
-      setProfile(prev =>
-        prev ? { ...prev, credit_balance: newBalance } : null
-      );
-
-      // Başarı mesajı
-      setSuccess(
-        `${selectedPackage.name} ${t('dashboard.packages.purchaseSuccess', 'başarıyla satın alındı!')} ${totalCredits} ${t('dashboard.packages.credits', 'kredi')} ${t('dashboard.packages.addedToAccount', 'hesabınıza eklendi.')}`
-      );
-
-      // Global event dispatch et - dashboard'u güncelle
-      window.dispatchEvent(
-        new CustomEvent('creditBalanceChanged', {
-          detail: { newBalance },
-        })
-      );
-    } catch (error) {
-      console.error('Paket satın alma hatası:', error);
-      setError(
-        t(
-          'dashboard.packages.purchaseError',
-          'Paket satın alınırken bir hata oluştu. Lütfen tekrar deneyin.'
-        )
-      );
-    } finally {
-      setPurchasing(null);
-    }
-  };
 
   // Loading state
   if (authLoading || loading || packagesLoading) {
@@ -432,16 +246,7 @@ export default function PackagesPage() {
           )}
         </div>
 
-        {/* Success/Error Messages */}
-        {success && (
-          <div className='mb-8 p-4 bg-success/10 border border-success/30 rounded-lg'>
-            <div className='flex items-center space-x-2'>
-              <Check className='h-5 w-5 text-success' />
-              <p className='text-success'>{success}</p>
-            </div>
-          </div>
-        )}
-
+        {/* Error Messages */}
         {error && (
           <div className='mb-8 p-4 bg-danger/10 border border-danger/30 rounded-lg'>
             <div className='flex items-center space-x-2'>
@@ -454,87 +259,109 @@ export default function PackagesPage() {
         {/* Packages Grid */}
         <div className='grid md:grid-cols-3 gap-8 mb-12'>
           {creditPackages.length > 0 ? (
-            creditPackages.map(pkg => (
-              <div
-                key={pkg.id}
-                className={`relative card hover-lift p-8 ${
-                  pkg.popular ? 'ring-2 ring-gold/50' : ''
-                }`}
-              >
-                {/* Popular Badge */}
-                {pkg.popular && (
-                  <div className='absolute -top-4 left-1/2 transform -translate-x-1/2'>
-                    <div className='bg-gold text-cosmic-black px-4 py-1 rounded-full text-sm font-bold flex items-center space-x-1'>
-                      <Star className='h-4 w-4' />
-                      <span>
-                        {t('dashboard.packages.mostPopular', 'En Popüler')}
-                      </span>
-                    </div>
-                  </div>
-                )}
+            creditPackages.map((pkg, index) => {
+              const style = getPackageStyle(pkg.credits);
+              const IconComponent = style.icon;
+              const isPopular = index === 1; // İkinci paket popüler
 
-                {/* Package Icon */}
+              // Para birimi seçimi
+              const price = currency === 'TRY' ? pkg.price_try : pkg.price_eur;
+              const pricePerCredit = price / pkg.credits;
+
+              return (
                 <div
-                  className={`inline-flex p-4 rounded-lg ${pkg.bgColor} ${pkg.borderColor} border mb-6`}
-                >
-                  <div className={pkg.color}>{pkg.icon}</div>
-                </div>
-
-                {/* Package Info */}
-                <div className='text-center mb-6'>
-                  <h3 className='text-2xl font-bold text-text-celestial mb-2'>
-                    {pkg.name}
-                  </h3>
-                  <p className='text-text-mystic mb-4'>{pkg.description}</p>
-
-                  {/* Credits */}
-                  <div className='mb-4'>
-                    <div className='text-4xl font-bold text-gold mb-1'>
-                      {pkg.credits}
-                    </div>
-                    <div className='text-sm text-text-muted'>
-                      {t('dashboard.packages.credits', 'kredi')}
-                    </div>
-                  </div>
-
-                  {/* Price */}
-                  <div className='mb-6'>
-                    <div className='text-3xl font-bold text-text-celestial'>
-                      {pkg.price} {pkg.currency}
-                    </div>
-                    <div className='text-sm text-text-muted'>
-                      {Math.round((pkg.price / pkg.credits) * 100) / 100}{' '}
-                      {pkg.currency}/kredi
-                    </div>
-                  </div>
-                </div>
-
-                {/* Purchase Button */}
-                <button
-                  onClick={() => purchasePackage(pkg.id)}
-                  disabled={purchasing === pkg.id}
-                  className={`w-full btn ${
-                    pkg.popular ? 'btn-primary' : 'btn-secondary'
-                  } flex items-center justify-center space-x-2 ${
-                    purchasing === pkg.id ? 'opacity-50 cursor-not-allowed' : ''
+                  key={pkg.id}
+                  className={`relative card hover-lift p-8 ${
+                    isPopular ? 'ring-2 ring-gold/50' : ''
                   }`}
                 >
-                  {purchasing === pkg.id ? (
-                    <>
-                      <div className='animate-spin rounded-full h-4 w-4 border-b-2 border-white'></div>
-                      <span>
-                        {t('dashboard.packages.processing', 'İşleniyor...')}
-                      </span>
-                    </>
-                  ) : (
-                    <>
-                      <CreditCard className='h-4 w-4' />
-                      <span>{t('dashboard.packages.buyNow', 'Satın Al')}</span>
-                    </>
+                  {/* Popular Badge */}
+                  {isPopular && (
+                    <div className='absolute -top-4 left-1/2 transform -translate-x-1/2'>
+                      <div className='bg-gold text-cosmic-black px-4 py-1 rounded-full text-sm font-bold flex items-center space-x-1'>
+                        <Star className='h-4 w-4' />
+                        <span>
+                          {t('dashboard.packages.mostPopular', 'En Popüler')}
+                        </span>
+                      </div>
+                    </div>
                   )}
-                </button>
-              </div>
-            ))
+
+                  {/* Package Icon */}
+                  <div
+                    className={`inline-flex p-4 rounded-lg ${style.bgColor} border ${style.borderColor} mb-6`}
+                  >
+                    <IconComponent className={`h-8 w-8 ${style.iconColor}`} />
+                  </div>
+
+                  {/* Package Info */}
+                  <div className='text-center mb-6'>
+                    <h3 className='text-2xl font-bold text-text-celestial mb-2'>
+                      {pkg.name}
+                    </h3>
+                    <p className='text-text-mystic mb-4'>{pkg.description}</p>
+
+                    {/* Credits */}
+                    <div className='mb-4'>
+                      <div className='text-4xl font-bold text-gold mb-1'>
+                        {pkg.credits.toLocaleString()}
+                      </div>
+                      <div className='text-sm text-text-muted'>
+                        {t('dashboard.packages.credits', 'kredi')}
+                      </div>
+                    </div>
+
+                    {/* Price */}
+                    <div className='mb-6'>
+                      {currencyLoading ? (
+                        <div className='text-2xl text-text-celestial'>
+                          Yükleniyor...
+                        </div>
+                      ) : (
+                        <>
+                          <div className='text-3xl font-bold text-text-celestial'>
+                            {price.toFixed(2)} {symbol}
+                          </div>
+                          <div className='text-sm text-text-muted'>
+                            {pricePerCredit.toFixed(2)} {symbol}/kredi
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Purchase Button */}
+                  <button
+                    onClick={() => handlePackagePurchase(pkg)}
+                    disabled={paymentLoading}
+                    className={`w-full btn ${
+                      isPopular ? 'btn-primary' : 'btn-secondary'
+                    } flex items-center justify-center space-x-2 ${
+                      paymentLoading ? 'opacity-50 cursor-not-allowed' : ''
+                    }`}
+                  >
+                    {paymentLoading ? (
+                      <>
+                        <div className='animate-spin rounded-full h-4 w-4 border-b-2 border-white'></div>
+                        <span>
+                          {t(
+                            'dashboard.packages.processing',
+                            'Yönlendiriliyor...'
+                          )}
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        <CreditCard className='h-4 w-4' />
+                        <span>
+                          {t('dashboard.packages.buyNow', 'Satın Al')}
+                        </span>
+                      </>
+                    )}
+                  </button>
+                </div>
+              );
+            })
           ) : (
             <div className='col-span-full text-center py-12'>
               <div className='text-text-mystic text-lg'>

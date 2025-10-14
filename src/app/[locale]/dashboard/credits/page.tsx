@@ -493,7 +493,10 @@ export default function CreditsPage() {
             <p className='text-text-mystic mb-6'>
               {t('dashboard.creditHistory.startWithFirstPurchase')}
             </p>
-            <Link href={`/${locale}/packages`} className='btn btn-primary'>
+            <Link
+              href={`/${locale}/dashboard/packages`}
+              className='btn btn-primary'
+            >
               {t('dashboard.creditHistory.buyCredits')}
             </Link>
           </div>

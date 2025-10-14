@@ -1,7 +1,7 @@
-# 🔍 TaraTarot SEO Kapsamlı Analiz ve Optimizasyon Raporu
+# 🔍 busbuskimki SEO Kapsamlı Analiz ve Optimizasyon Raporu
 
 **Rapor Tarihi:** 13 Ekim 2025  
-**Proje:** TaraTarot (BüşBüşKimKi)  
+**Proje:** busbuskimki (BüşBüşKimKi)  
 **Domain:** https://busbuskimki.com  
 **Diller:** Türkçe (TR), İngilizce (EN), Sırpça (SR)  
 **Platform:** Next.js 15 + Supabase
@@ -12,10 +12,10 @@
 
 ### Genel SEO Skoru: ⭐⭐⭐⭐½ (4.5/5)
 
-TaraTarot projesi, modern SEO best practice'lerinin büyük çoğunluğunu başarıyla
-uygulamıştır. **Teknik SEO altyapısı oldukça sağlam** ve arama motorlarına
-optimize edilmiştir. Proje, 3 dil desteği, 234 dinamik kart sayfası ve kapsamlı
-structured data ile güçlü bir SEO temeline sahiptir.
+busbuskimki projesi, modern SEO best practice'lerinin büyük çoğunluğunu
+başarıyla uygulamıştır. **Teknik SEO altyapısı oldukça sağlam** ve arama
+motorlarına optimize edilmiştir. Proje, 3 dil desteği, 234 dinamik kart sayfası
+ve kapsamlı structured data ile güçlü bir SEO temeline sahiptir.
 
 ### Temel Güçlü Yönler
 
@@ -1350,7 +1350,7 @@ export async function GET() {
 
 ## 🎓 SONUÇ
 
-TaraTarot projesi, **SEO açısından çok güçlü bir temel**e sahiptir. Teknik
+busbuskimki projesi, **SEO açısından çok güçlü bir temel**e sahiptir. Teknik
 altyapı modern ve arama motorları için optimize edilmiştir.
 
 **Ana Artılar:**
@@ -1397,6 +1397,6 @@ Bu 3 iyileştirme yapıldığında, proje **SEO açısından %100 hazır** olaca
 
 ---
 
-_Bu rapor, TaraTarot projesinin mevcut SEO durumunu kapsamlı olarak analiz
+_Bu rapor, busbuskimki projesinin mevcut SEO durumunu kapsamlı olarak analiz
 etmektedir. Önerilen iyileştirmeler, organik arama trafiğini artırmak ve arama
 motoru görünürlüğünü maksimize etmek için tasarlanmıştır._

@@ -23,7 +23,7 @@
 ```bash
 npm i -g vercel
 vercel login
-cd /Users/tugi/Desktop/TaraTarot
+cd /Users/tugi/Desktop/busbuskimki
 vercel
 # Soruları cevapla
 # Environment variables ekle
@@ -45,7 +45,7 @@ git push origin main
 ### 1️⃣ Build Test (2 dk) ✅ Tamamlandı!
 
 ```bash
-cd /Users/tugi/Desktop/TaraTarot
+cd /Users/tugi/Desktop/busbuskimki
 npm run build
 ```
 

@@ -21,6 +21,7 @@ export default function PaymentSuccessPage() {
   >('pending');
   const [creditsAdded, setCreditsAdded] = useState(0);
   const [packageName, setPackageName] = useState('');
+  const [countdown, setCountdown] = useState(5);
 
   const checkPaymentStatus = useCallback(async () => {
     // Input validation for order_id
@@ -77,6 +78,23 @@ export default function PaymentSuccessPage() {
     checkPaymentStatus();
   }, [user, router, checkPaymentStatus]);
 
+  // Otomatik yönlendirme countdown timer
+  useEffect(() => {
+    if (paymentStatus === 'success' && countdown > 0) {
+      const timer = setTimeout(() => {
+        setCountdown(countdown - 1);
+      }, 1000);
+
+      return () => clearTimeout(timer);
+    }
+
+    if (paymentStatus === 'success' && countdown === 0) {
+      router.push('/dashboard');
+    }
+
+    return undefined;
+  }, [paymentStatus, countdown, router]);
+
   const handleGoToDashboard = () => {
     router.push('/dashboard');
   };
@@ -127,11 +145,36 @@ export default function PaymentSuccessPage() {
                   </p>
                 </div>
 
+                {/* Countdown Timer */}
+                <div className='mb-4 text-center'>
+                  <p className='text-sm text-text-mystic'>
+                    {countdown > 0 ? (
+                      <>
+                        {t(
+                          'payment.success.autoRedirect',
+                          "Dashboard'a yönlendiriliyorsunuz"
+                        )}
+                        <span className='text-gold font-bold ml-1'>
+                          {countdown}
+                        </span>
+                        {t('payment.success.seconds', ' saniye...')}
+                      </>
+                    ) : (
+                      t('payment.success.redirecting', 'Yönlendiriliyor...')
+                    )}
+                  </p>
+                </div>
+
                 <button
                   onClick={handleGoToDashboard}
                   className='w-full btn btn-primary flex items-center justify-center space-x-2'
                 >
-                  <span>{t('payment.success.goToDashboard')}</span>
+                  <span>
+                    {t(
+                      'payment.success.goToDashboardNow',
+                      "Hemen Dashboard'a Git"
+                    )}
+                  </span>
                   <ArrowRight className='h-4 w-4' />
                 </button>
               </>

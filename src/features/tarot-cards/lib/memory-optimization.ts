@@ -468,7 +468,7 @@ export function initializeMemoryOptimization() {
 
   // Cleanup function - MEMORY LEAK FIX: interval'i temizle
   return () => {
-    clearInterval(intervalId);  // ← EKLENEN SATIR
+    clearInterval(intervalId); // ← EKLENEN SATIR
     monitor.stopMonitoring();
   };
 }

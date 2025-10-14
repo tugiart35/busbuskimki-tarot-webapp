@@ -43,9 +43,34 @@ export default function PakizeAuthPage() {
     setSuccess('');
 
     try {
+      // 1. Rate limiting kontrolü
+      const rateLimitCheck = await fetch('/api/pakize/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password, success: false }),
+      });
+
+      const rateLimitData = await rateLimitCheck.json();
+
+      if (!rateLimitCheck.ok) {
+        if (rateLimitData.error === 'TOO_MANY_ATTEMPTS') {
+          setError(rateLimitData.message);
+          setLoading(false);
+          return;
+        }
+      }
+
+      // 2. Login denemesi
       const result = await loginAdmin(email, password);
 
       if (result.success) {
+        // Başarılı login sonrası rate limit sıfırla
+        await fetch('/api/pakize/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ success: true }),
+        });
+
         setSuccess('Giriş başarılı! Admin paneline yönlendiriliyorsunuz...');
         // Router otomatik olarak yönlendirecek (useEffect)
       } else {
@@ -63,7 +88,7 @@ export default function PakizeAuthPage() {
   // Eğer zaten admin kullanıcı ise dashboard'a yönlendir
   useEffect(() => {
     if (!authLoading && isAuthenticated) {
-      router.push(`/${locale}/admin`);
+      router.push(`/${locale}/pakize`);
     }
   }, [authLoading, isAuthenticated, router, locale]);
 

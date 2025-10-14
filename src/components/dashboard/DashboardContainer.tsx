@@ -100,10 +100,11 @@ const DashboardContainer: React.FC<DashboardContainerProps> = ({
           handlePackagePurchase={handlePackagePurchase}
           paymentLoading={paymentLoading}
           translate={translate}
+          locale={locale}
         />
       </section>
     ),
-    [packages, handlePackagePurchase, paymentLoading, translate]
+    [packages, handlePackagePurchase, paymentLoading, translate, locale]
   );
 
   const MemoizedProfileManagement = useMemo(
