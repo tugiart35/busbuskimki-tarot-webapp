@@ -25726,7 +25726,7 @@
         "privacyPolicy": {
           "title": "Secrecy Policy",
           "subtitle": "The preservation of your personal data is a priority for us, which explains how your data is collected, processed and protected.",
-          "lastUpdated": "Last Update: July 8, 2025",
+          "lastUpdated": "Last Update: October 15, 2025",
           "montenegroCompliant": "Montenegro PDPL Compatible",
           "sections": {
             "introduction": {
@@ -25832,7 +25832,7 @@
               "title": "13 Communication Information",
               "email": {
                 "title": "Email",
-                "address": "@busbusbuskimki.com"
+                "address": "inf@busbuskimki.com"
               },
               "address": {
                 "title": "Address",
@@ -25843,13 +25843,107 @@
                 "name": "BUSBUSKI CONSULTANCY AND DIGITAL AGENCY DOO",
                 "registration": "Recording: AZLP"
               }
+            },
+            "googleOAuth": {
+              "title": "14. Google Account Sign-In and Data Usage",
+              "intro": "Our platform offers the option to sign in with Google accounts for easy account creation. This section explains how user data accessed through Google APIs is collected, used, and protected.",
+              "accessedData": {
+                "title": "Google User Data Accessed",
+                "description": "When you sign in with your Google account, we access the following information:",
+                "items": {
+                  "email": {
+                    "title": "Email Address",
+                    "description": "Used for account creation, authentication, and communication with you."
+                  },
+                  "profile": {
+                    "title": "Basic Profile Information",
+                    "description": "Name, surname, and profile photo (optional) are used to personalize your experience on the platform."
+                  },
+                  "userId": {
+                    "title": "Google User ID",
+                    "description": "Used to uniquely identify your account and provide secure session management."
+                  }
+                },
+                "scope": "This data is securely obtained using the Google OAuth 2.0 protocol solely for authentication and account management purposes. We do not request access to any other Google data types (Gmail content, Google Drive files, calendar events, etc.)."
+              },
+              "dataUsage": {
+                "title": "Use of Google User Data",
+                "description": "Data obtained from your Google account is used only for the following purposes:",
+                "purposes": {
+                  "authentication": {
+                    "title": "Authentication and Account Creation",
+                    "description": "Your email address and Google user ID enable you to securely sign in to our platform and manage your account."
+                  },
+                  "personalization": {
+                    "title": "Service Personalization",
+                    "description": "Your name and profile photo (if provided) are used to provide a personalized experience on the platform."
+                  },
+                  "communication": {
+                    "title": "Communication and Notifications",
+                    "description": "Your email address is used to send important notifications related to your account (password reset, reading results, etc.)."
+                  },
+                  "serviceProvision": {
+                    "title": "Service Delivery",
+                    "description": "Used to provide tarot readings, numerology analyses, and other platform services specifically to you."
+                  }
+                },
+                "noCommercialUse": "User data obtained from Google is never sold, rented, or shared with third parties for commercial or marketing purposes."
+              },
+              "dataStorage": {
+                "title": "Data Storage and Security",
+                "description": "Data obtained from your Google account:",
+                "security": {
+                  "encryption": "Is securely stored in encrypted databases.",
+                  "access": "Is accessible only by authorized system processes.",
+                  "protection": "Is protected by technical and organizational security measures against unauthorized access, modification, or disclosure.",
+                  "infrastructure": "Your data is stored in Supabase infrastructure with industry-standard security protocols."
+                },
+                "retention": "Data obtained from Google is retained as long as your account is active. When you delete your account, all Google-sourced data is permanently deleted from our systems."
+              },
+              "dataSharing": {
+                "title": "Third-Party Data Sharing",
+                "description": "Data obtained from your Google account is not shared with third parties. Exceptions:",
+                "exceptions": {
+                  "legal": "Legal Obligations: In case of court order or legal requirement.",
+                  "consent": "Explicit Consent: Situations where we have obtained special permission from you.",
+                  "serviceProviders": "Service Providers: Only infrastructure services (like Supabase) can access within the framework of data processing agreements."
+                }
+              },
+              "userRights": {
+                "title": "User Rights and Control",
+                "description": "As users who sign in with a Google account:",
+                "rights": {
+                  "access": "You can request access to the Google-sourced data we store on our platform.",
+                  "correction": "You can request correction of incorrect or incomplete information.",
+                  "deletion": "You have the right to permanently delete your account and all your data.",
+                  "revoke": "You can cancel your Google account connection at any time from your Google account settings.",
+                  "export": "You can request a copy of your data."
+                },
+                "contact": "To exercise these rights, you can contact us at info@busbuskimki.com."
+              },
+              "googleCompliance": {
+                "title": "Google API Services Compliance",
+                "description": "Our platform is fully compliant with the Google API Services User Data Policy and Google API Terms of Service:",
+                "policies": {
+                  "limitedUse": "Limited Use Requirement: We use Google user data only for the disclosed purposes.",
+                  "noSale": "No Data Sale: We never sell Google user data.",
+                  "noAdvertising": "No Advertising: We do not use Google user data for advertising purposes.",
+                  "humanReview": "Human Review: Human access to Google data is only for technical support or security issues and with explicit user consent.",
+                  "secureTransfer": "Secure Transfer: All data transfers are protected with SSL/TLS encryption."
+                },
+                "links": {
+                  "userDataPolicy": "Google API Services User Data Policy: https://developers.google.com/terms/api-services-user-data-policy",
+                  "termsOfService": "Google API Terms of Service: https://developers.google.com/terms"
+                }
+              },
+              "updates": "This section is regularly reviewed and updated to comply with changes in Google API usage terms."
             }
           }
         },
         "termsOfUse": {
           "title": "Conditions of Use",
           "subtitle": "These conditions explain the rules and rights you must follow when you use our platform.",
-          "lastUpdated": "Last Update: July 8, 2025",
+          "lastUpdated": "Last Update: October 15, 2025",
           "montenegroCompliant": "Montenegro PDPL Compatible",
           "sections": {
             "general": {
@@ -25892,14 +25986,14 @@
             },
             "contact": {
               "title": "Communication 6",
-              "content": "For your questions, you can contact us at info@busbusbuskimki.com."
+              "content": "For your questions, you can contact us at infoinfo@busbuskimki.com."
             }
           }
         }
       },
       "contact": {
         "title": "Communication",
-        "email": "@busbusbuskimki.com",
+        "email": "info@busbuskimki.com",
         "phone": "+382 (67) 010176",
         "address": "Podgorica, Montenegro"
       },
@@ -45421,7 +45515,7 @@
       "privacyPolicy": {
         "title": "Secrecy Policy",
         "subtitle": "The preservation of your personal data is a priority for us, which explains how your data is collected, processed and protected.",
-        "lastUpdated": "Last Update: July 8, 2025",
+        "lastUpdated": "Last Update: October 15, 2025",
         "montenegroCompliant": "Montenegro PDPL Compatible",
         "sections": {
           "introduction": {
@@ -45527,7 +45621,7 @@
             "title": "13 Communication Information",
             "email": {
               "title": "Email",
-              "address": "@busbusbuskimki.com"
+              "address": "info@busbuskimki.com"
             },
             "address": {
               "title": "Address",
@@ -45544,7 +45638,7 @@
       "termsOfUse": {
         "title": "Conditions of Use",
         "subtitle": "These conditions explain the rules and rights you must follow when you use our platform.",
-        "lastUpdated": "Last Update: July 8, 2025",
+        "lastUpdated": "Last Update: October 15, 2025",
         "montenegroCompliant": "Montenegro PDPL Compatible",
         "sections": {
           "general": {
@@ -45587,14 +45681,14 @@
           },
           "contact": {
             "title": "Communication 6",
-            "content": "For your questions, you can contact us at info@busbusbuskimki.com."
+            "content": "For your questions, you can contact us at infoinfo@busbuskimki.com."
           }
         }
       }
     },
     "contact": {
       "title": "Communication",
-      "email": "@busbusbuskimki.com",
+      "email": "info@busbuskimki.com",
       "phone": "+382 (67) 010176",
       "address": "Podgorica, Montenegro"
     },
@@ -45715,7 +45809,7 @@
     "privacyPolicy": {
       "title": "Secrecy Policy",
       "subtitle": "The preservation of your personal data is a priority for us, which explains how your data is collected, processed and protected.",
-      "lastUpdated": "Last Update: July 8, 2025",
+      "lastUpdated": "Last Update: October 15, 2025",
       "montenegroCompliant": "Montenegro PDPL Compatible",
       "sections": {
         "introduction": {
@@ -45821,7 +45915,7 @@
           "title": "13 Communication Information",
           "email": {
             "title": "Email",
-            "address": "@busbusbuskimki.com"
+            "address": "info@busbuskimki.com"
           },
           "address": {
             "title": "Address",
@@ -45838,7 +45932,7 @@
     "termsOfUse": {
       "title": "Conditions of Use",
       "subtitle": "These conditions explain the rules and rights you must follow when you use our platform.",
-      "lastUpdated": "Last Update: July 8, 2025",
+      "lastUpdated": "Last Update: October 15, 2025",
       "montenegroCompliant": "Montenegro PDPL Compatible",
       "sections": {
         "general": {
@@ -45881,12 +45975,31 @@
         },
         "contact": {
           "title": "Communication 6",
-          "content": "For your questions, you can contact us at info@busbusbuskimki.com."
+          "content": "For your questions, you can contact us at infoinfo@busbuskimki.com."
         }
       }
     }
   },
   "password": {
     "rules": "Password must be at least 6 characters and contain one uppercase letter, one lowercase letter, and one number"
+  },
+  "cookieConsent": {
+    "title": "Cookie Preferences",
+    "description": "Our website uses cookies to improve your experience. You can choose which cookies you want to allow. For more information, please review our Cookie Policy.",
+    "acceptAll": "Accept All",
+    "rejectAll": "Reject All",
+    "settings": "Settings",
+    "settingsTitle": "Cookie Settings",
+    "necessary": "Necessary Cookies",
+    "necessaryDesc": "These cookies are required for the website to function properly and cannot be disabled.",
+    "analytics": "Analytics Cookies",
+    "analyticsDesc": "Help us understand site usage and improve user experience.",
+    "marketing": "Marketing Cookies",
+    "marketingDesc": "Used to show you more relevant advertisements.",
+    "required": "Required",
+    "savePreferences": "Save Preferences",
+    "cancel": "Cancel",
+    "close": "Close",
+    "back": "Back"
   }
 }

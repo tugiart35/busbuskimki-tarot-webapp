@@ -25726,7 +25726,7 @@
         "privacyPolicy": {
           "title": "Gizlilik Politikası",
           "subtitle": "Kişisel verilerinizin korunması bizim için önceliktir. Bu politika, verilerinizin nasıl toplandığını, işlendiğini ve korunduğunu açıklar.",
-          "lastUpdated": "Son Güncelleme: 8 Temmuz 2025",
+          "lastUpdated": "Son Güncelleme: 15 Ekim 2025",
           "montenegroCompliant": "Montenegro PDPL Uyumlu",
           "sections": {
             "introduction": {
@@ -25843,6 +25843,100 @@
                 "name": "BUSBUSKIMKI CONSULTANCY AND DIGITAL AGENCY DOO",
                 "registration": "Kaydı: AZLP"
               }
+            },
+            "googleOAuth": {
+              "title": "14. Google Hesabı ile Giriş ve Veri Kullanımı",
+              "intro": "Platformumuz, kullanıcıların kolayca hesap oluşturabilmesi için Google hesaplarıyla giriş yapma seçeneği sunar. Bu bölümde Google API'leri aracılığıyla erişilen kullanıcı verilerinin nasıl toplandığı, kullanıldığı ve korunduğu açıklanmaktadır.",
+              "accessedData": {
+                "title": "Erişim Sağlanan Google Kullanıcı Verileri",
+                "description": "Google hesabınız ile giriş yaptığınızda, aşağıdaki bilgilere erişim sağlarız:",
+                "items": {
+                  "email": {
+                    "title": "E-posta Adresi",
+                    "description": "Hesap oluşturma, kimlik doğrulama ve sizinle iletişim kurmak için kullanılır."
+                  },
+                  "profile": {
+                    "title": "Temel Profil Bilgileri",
+                    "description": "Ad, soyad ve profil fotoğrafı (opsiyonel) platformdaki kullanıcı deneyiminizi kişiselleştirmek için kullanılır."
+                  },
+                  "userId": {
+                    "title": "Google Kullanıcı Kimliği",
+                    "description": "Hesabınızı benzersiz şekilde tanımlamak ve güvenli oturum yönetimi sağlamak için kullanılır."
+                  }
+                },
+                "scope": "Bu veriler, yalnızca kimlik doğrulama ve hesap yönetimi amacıyla Google OAuth 2.0 protokolü kullanılarak güvenli bir şekilde alınır. Başka hiçbir Google veri türüne (Gmail içeriği, Google Drive dosyaları, takvim etkinlikleri vb.) erişim talep etmiyoruz."
+              },
+              "dataUsage": {
+                "title": "Google Kullanıcı Verilerinin Kullanımı",
+                "description": "Google hesabınızdan alınan veriler yalnızca aşağıdaki amaçlar için kullanılır:",
+                "purposes": {
+                  "authentication": {
+                    "title": "Kimlik Doğrulama ve Hesap Oluşturma",
+                    "description": "E-posta adresiniz ve Google kullanıcı kimliğiniz, platformumuza güvenli giriş yapmanızı ve hesabınızı yönetmenizi sağlar."
+                  },
+                  "personalization": {
+                    "title": "Hizmet Kişiselleştirmesi",
+                    "description": "Adınız ve profil fotoğrafınız (sağladıysanız), platformda kişiselleştirilmiş bir deneyim sunmak için kullanılır."
+                  },
+                  "communication": {
+                    "title": "İletişim ve Bildirimler",
+                    "description": "E-posta adresiniz, hesabınızla ilgili önemli bildirimler (şifre sıfırlama, okuma sonuçları vb.) göndermek için kullanılır."
+                  },
+                  "serviceProvision": {
+                    "title": "Hizmet Sunumu",
+                    "description": "Tarot okumaları, numeroloji analizleri ve diğer platform hizmetlerinin size özel olarak sunulması için kullanılır."
+                  }
+                },
+                "noCommercialUse": "Google'dan alınan kullanıcı verileri hiçbir şekilde ticari amaçlarla üçüncü taraflara satılmaz, kiralanmaz veya pazarlama amacıyla paylaşılmaz."
+              },
+              "dataStorage": {
+                "title": "Veri Depolama ve Güvenlik",
+                "description": "Google hesabınızdan alınan veriler:",
+                "security": {
+                  "encryption": "Şifrelenmiş veritabanlarında güvenli bir şekilde saklanır.",
+                  "access": "Yalnızca yetkili sistem süreçleri tarafından erişilebilir.",
+                  "protection": "Yetkisiz erişim, değişiklik veya ifşaya karşı teknik ve organizasyonel güvenlik önlemleriyle korunur.",
+                  "infrastructure": "Verileriniz, endüstri standardı güvenlik protokollerine sahip Supabase altyapısında saklanır."
+                },
+                "retention": "Google'dan alınan veriler, hesabınız aktif olduğu sürece saklanır. Hesabınızı sildiğinizde, tüm Google kaynaklı verileriniz de sistemlerimizden kalıcı olarak silinir."
+              },
+              "dataSharing": {
+                "title": "Üçüncü Taraflara Veri Paylaşımı",
+                "description": "Google hesabınızdan alınan veriler üçüncü taraflarla paylaşılmaz. İstisnalar:",
+                "exceptions": {
+                  "legal": "Yasal yükümlülükler: Mahkeme kararı veya yasal zorunluluk durumunda.",
+                  "consent": "Açık Onay: Sizden özel izin aldığımız durumlar.",
+                  "serviceProviders": "Hizmet Sağlayıcılar: Yalnızca altyapı hizmetleri (Supabase gibi) veri işleme sözleşmeleri çerçevesinde erişebilir."
+                }
+              },
+              "userRights": {
+                "title": "Kullanıcı Hakları ve Kontrol",
+                "description": "Google hesabı ile giriş yapan kullanıcılar olarak:",
+                "rights": {
+                  "access": "Platformumuzda sakladığımız Google kaynaklı verilerinize erişim talep edebilirsiniz.",
+                  "correction": "Yanlış veya eksik bilgilerin düzeltilmesini isteyebilirsiniz.",
+                  "deletion": "Hesabınızı ve tüm verilerinizi kalıcı olarak silme hakkına sahipsiniz.",
+                  "revoke": "Google hesabı bağlantınızı istediğiniz zaman Google hesap ayarlarınızdan iptal edebilirsiniz.",
+                  "export": "Verilerinizin bir kopyasını talep edebilirsiniz."
+                },
+                "contact": "Bu haklarınızı kullanmak için info@busbuskimki.com adresinden bizimle iletişime geçebilirsiniz."
+              },
+              "googleCompliance": {
+                "title": "Google API Hizmetleri Uyumluluk",
+                "description": "Platformumuz, Google API Hizmetleri Kullanıcı Veri Politikası ve Google API Hizmet Şartları'na tam uyumludur:",
+                "policies": {
+                  "limitedUse": "Sınırlı Kullanım Gereksinimi: Google kullanıcı verilerini yalnızca açıklanan amaçlar için kullanırız.",
+                  "noSale": "Veri Satışı Yasağı: Google kullanıcı verilerini hiçbir şekilde satmayız.",
+                  "noAdvertising": "Reklam Yasağı: Google kullanıcı verilerini reklam amaçlı kullanmayız.",
+                  "humanReview": "İnsan İncelemesi: Google verilerine insan tarafından erişim yalnızca teknik destek veya güvenlik sorunları için ve kullanıcının açık onayı ile yapılır.",
+                  "secureTransfer": "Güvenli Transfer: Tüm veri transferleri SSL/TLS şifrelemesi ile korunur."
+                },
+                "links": {
+                  "userDataPolicy": "Google API Hizmetleri Kullanıcı Veri Politikası: https://developers.google.com/terms/api-services-user-data-policy",
+                  "termsOfService": "Google API Hizmet Şartları: https://developers.google.com/terms"
+                }
+              },
+              "updates": "Bu bölüm, Google API kullanım koşullarındaki değişikliklere uyum sağlamak için düzenli olarak gözden geçirilir ve güncellenir."
             }
           }
         },
@@ -45888,5 +45982,24 @@
   },
   "password": {
     "rules": "Şifre en az 6 karakter olmalı, bir büyük harf, bir küçük harf ve bir rakam içermelidir"
+  },
+  "cookieConsent": {
+    "title": "Çerez Tercihleri",
+    "description": "Web sitemiz, deneyiminizi iyileştirmek için çerezler kullanmaktadır. Hangi çerezlere izin vermek istediğinizi seçebilirsiniz. Daha fazla bilgi için Çerez Politikamızı inceleyebilirsiniz.",
+    "acceptAll": "Tümünü Kabul Et",
+    "rejectAll": "Tümünü Reddet",
+    "settings": "Ayarlar",
+    "settingsTitle": "Çerez Ayarları",
+    "necessary": "Zorunlu Çerezler",
+    "necessaryDesc": "Bu çerezler web sitesinin düzgün çalışması için gereklidir ve devre dışı bırakılamaz.",
+    "analytics": "Analitik Çerezler",
+    "analyticsDesc": "Site kullanımını anlamamıza ve kullanıcı deneyimini geliştirmemize yardımcı olur.",
+    "marketing": "Reklam Çerezleri",
+    "marketingDesc": "Size daha ilgili reklamlar göstermek için kullanılır.",
+    "required": "Zorunlu",
+    "savePreferences": "Tercihleri Kaydet",
+    "cancel": "İptal",
+    "close": "Kapat",
+    "back": "Geri"
   }
 }

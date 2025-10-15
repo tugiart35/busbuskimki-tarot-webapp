@@ -37,6 +37,7 @@ import {
   useWebVitals,
   usePerformanceBudget,
 } from '@/components/performance/WebVitals';
+import CookieConsent from '@/components/shared/CookieConsent';
 
 interface LocaleLayoutClientProps {
   children: React.ReactNode;
@@ -121,6 +122,9 @@ export function LocaleLayoutClient({
 
       {/* Main Content */}
       <main className='pt-16'>{children}</main>
+
+      {/* Cookie Consent Banner */}
+      <CookieConsent />
 
       {/* Performance Monitoring */}
       <WebVitals />

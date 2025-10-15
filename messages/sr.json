@@ -25749,7 +25749,7 @@
         "privacyPolicy": {
           "title": "Politika privatnosti",
           "subtitle": "Zaštita ličnih podataka je prioritet za nas. Ova politika objašnjava kako se vaši podaci sakupljaju, obrađuju i zaštićeni.",
-          "lastUpdated": "Poslednje ažuriranje: 8. jula 2025",
+          "lastUpdated": "Poslednje ažuriranje: 15.  oktobar 2025",
           "montenegroCompliant": "Crna Gora PDPL kompatibilan",
           "sections": {
             "introduction": {
@@ -25866,13 +25866,107 @@
                 "name": "Busbuskimki konsultantska i digitalna agencija doo",
                 "registration": "Registracija: AZLP"
               }
+            },
+            "googleOAuth": {
+              "title": "14. Prijavljivanje putem Google naloga i korišćenje podataka",
+              "intro": "Naša platforma nudi opciju prijavljivanja putem Google naloga za lako kreiranje naloga. Ovaj odeljak objašnjava kako se prikupljaju, koriste i štite korisnički podaci pristupljeni putem Google API-ja.",
+              "accessedData": {
+                "title": "Google korisnički podaci kojima se pristupa",
+                "description": "Kada se prijavite sa svojim Google nalogom, pristupamo sledećim informacijama:",
+                "items": {
+                  "email": {
+                    "title": "Email adresa",
+                    "description": "Koristi se za kreiranje naloga, autentifikaciju i komunikaciju sa vama."
+                  },
+                  "profile": {
+                    "title": "Osnovne informacije o profilu",
+                    "description": "Ime, prezime i profilna fotografija (opciono) koriste se za personalizaciju vašeg iskustva na platformi."
+                  },
+                  "userId": {
+                    "title": "Google korisnički ID",
+                    "description": "Koristi se za jedinstvenu identifikaciju vašeg naloga i obezbeđivanje sigurnog upravljanja sesijom."
+                  }
+                },
+                "scope": "Ovi podaci se bezbedno pribavljaju korišćenjem Google OAuth 2.0 protokola isključivo u svrhe autentifikacije i upravljanja nalogom. Ne zahtevamo pristup bilo kojim drugim tipovima Google podataka (Gmail sadržaj, Google Drive datoteke, kalendarski događaji, itd.)."
+              },
+              "dataUsage": {
+                "title": "Korišćenje Google korisničkih podataka",
+                "description": "Podaci dobijeni iz vašeg Google naloga koriste se samo za sledeće svrhe:",
+                "purposes": {
+                  "authentication": {
+                    "title": "Autentifikacija i kreiranje naloga",
+                    "description": "Vaša email adresa i Google korisnički ID omogućavaju vam sigurnu prijavu na našu platformu i upravljanje vašim nalogom."
+                  },
+                  "personalization": {
+                    "title": "Personalizacija usluge",
+                    "description": "Vaše ime i profilna fotografija (ako ste ih naveli) koriste se za pružanje personalizovanog iskustva na platformi."
+                  },
+                  "communication": {
+                    "title": "Komunikacija i obaveštenja",
+                    "description": "Vaša email adresa se koristi za slanje važnih obaveštenja vezanih za vaš nalog (resetovanje lozinke, rezultati čitanja, itd.)."
+                  },
+                  "serviceProvision": {
+                    "title": "Pružanje usluga",
+                    "description": "Koristi se za pružanje tarot čitanja, numeroloških analiza i drugih usluga platforme specifično za vas."
+                  }
+                },
+                "noCommercialUse": "Korisnički podaci dobijeni od Google-a nikada se ne prodaju, ne iznajmljuju niti dele sa trećim stranama u komercijalne ili marketinške svrhe."
+              },
+              "dataStorage": {
+                "title": "Skladištenje podataka i bezbednost",
+                "description": "Podaci dobijeni iz vašeg Google naloga:",
+                "security": {
+                  "encryption": "Bezbedno se čuvaju u šifrovanim bazama podataka.",
+                  "access": "Dostupni su samo ovlašćenim sistemskim procesima.",
+                  "protection": "Zaštićeni su tehničkim i organizacionim bezbednosnim merama protiv neovlašćenog pristupa, izmene ili otkrivanja.",
+                  "infrastructure": "Vaši podaci se čuvaju u Supabase infrastrukturi sa industrijskim standardima bezbednosti."
+                },
+                "retention": "Podaci dobijeni od Google-a čuvaju se sve dok je vaš nalog aktivan. Kada obrišete svoj nalog, svi podaci poreklom od Google-a trajno se brišu iz naših sistema."
+              },
+              "dataSharing": {
+                "title": "Deljenje podataka sa trećim stranama",
+                "description": "Podaci dobijeni iz vašeg Google naloga ne dele se sa trećim stranama. Izuzeci:",
+                "exceptions": {
+                  "legal": "Zakonske obaveze: U slučaju sudskog naloga ili zakonske obaveze.",
+                  "consent": "Izričita saglasnost: Situacije u kojima smo dobili posebnu dozvolu od vas.",
+                  "serviceProviders": "Pružaoci usluga: Samo infrastrukturne usluge (poput Supabase) mogu pristupiti u okviru ugovora o obradi podataka."
+                }
+              },
+              "userRights": {
+                "title": "Korisnička prava i kontrola",
+                "description": "Kao korisnici koji se prijavljuju putem Google naloga:",
+                "rights": {
+                  "access": "Možete zatražiti pristup podacima poreklom od Google-a koje čuvamo na našoj platformi.",
+                  "correction": "Možete zatražiti ispravku netačnih ili nepotpunih informacija.",
+                  "deletion": "Imate pravo da trajno obrišete svoj nalog i sve svoje podatke.",
+                  "revoke": "Možete otkazati vezu sa Google nalogom u bilo kom trenutku iz podešavanja Google naloga.",
+                  "export": "Možete zatražiti kopiju svojih podataka."
+                },
+                "contact": "Da biste ostvarili ova prava, možete nas kontaktirati na info@busbuskimki.com."
+              },
+              "googleCompliance": {
+                "title": "Usklađenost sa Google API uslugama",
+                "description": "Naša platforma je u potpunosti usklađena sa Google API Services politikom korisničkih podataka i Google API uslovima korišćenja:",
+                "policies": {
+                  "limitedUse": "Zahtev za ograničenu upotrebu: Google korisničke podatke koristimo samo za otkrivene svrhe.",
+                  "noSale": "Zabrana prodaje podataka: Nikada ne prodajemo Google korisničke podatke.",
+                  "noAdvertising": "Zabrana oglašavanja: Ne koristimo Google korisničke podatke u reklamne svrhe.",
+                  "humanReview": "Ljudski pregled: Ljudski pristup Google podacima je samo za tehničku podršku ili bezbednosne probleme i uz izričitu saglasnost korisnika.",
+                  "secureTransfer": "Siguran prenos: Svi prenosi podataka zaštićeni su SSL/TLS enkripcijom."
+                },
+                "links": {
+                  "userDataPolicy": "Google API Services politika korisničkih podataka: https://developers.google.com/terms/api-services-user-data-policy",
+                  "termsOfService": "Google API uslovi korišćenja: https://developers.google.com/terms"
+                }
+              },
+              "updates": "Ovaj odeljak se redovno pregleda i ažurira kako bi bio usklađen sa promenama u uslovima korišćenja Google API-ja."
             }
           }
         },
         "termsOfUse": {
           "title": "Uslovi korišćenja",
           "subtitle": "Ovi uslovi objašnjavaju pravila koju morate da sledite i vaša prava kada koristite našu platformu.",
-          "lastUpdated": "Poslednje ažuriranje: 8. jula 2025",
+          "lastUpdated": "Poslednje ažuriranje: 15.  oktobar 2025",
           "montenegroCompliant": "Crna Gora PDPL kompatibilan",
           "sections": {
             "general": {
@@ -45444,7 +45538,7 @@
       "privacyPolicy": {
         "title": "Politika privatnosti",
         "subtitle": "Zaštita ličnih podataka je prioritet za nas. Ova politika objašnjava kako se vaši podaci sakupljaju, obrađuju i zaštićeni.",
-        "lastUpdated": "Poslednje ažuriranje: 8. jula 2025",
+        "lastUpdated": "Poslednje ažuriranje: 15.  oktobar 2025",
         "montenegroCompliant": "Crna Gora PDPL kompatibilan",
         "sections": {
           "introduction": {
@@ -45567,7 +45661,7 @@
       "termsOfUse": {
         "title": "Uslovi korišćenja",
         "subtitle": "Ovi uslovi objašnjavaju pravila koju morate da sledite i vaša prava kada koristite našu platformu.",
-        "lastUpdated": "Poslednje ažuriranje: 8. jula 2025",
+        "lastUpdated": "Poslednje ažuriranje: 15.  oktobar 2025",
         "montenegroCompliant": "Crna Gora PDPL kompatibilan",
         "sections": {
           "general": {
@@ -45738,7 +45832,7 @@
     "privacyPolicy": {
       "title": "Politika privatnosti",
       "subtitle": "Zaštita ličnih podataka je prioritet za nas. Ova politika objašnjava kako se vaši podaci sakupljaju, obrađuju i zaštićeni.",
-      "lastUpdated": "Poslednje ažuriranje: 8. jula 2025",
+      "lastUpdated": "Poslednje ažuriranje: 15.  oktobar 2025",
       "montenegroCompliant": "Crna Gora PDPL kompatibilan",
       "sections": {
         "introduction": {
@@ -45861,7 +45955,7 @@
     "termsOfUse": {
       "title": "Uslovi korišćenja",
       "subtitle": "Ovi uslovi objašnjavaju pravila koju morate da sledite i vaša prava kada koristite našu platformu.",
-      "lastUpdated": "Poslednje ažuriranje: 8. jula 2025",
+      "lastUpdated": "Poslednje ažuriranje: 15.  oktobar 2025",
       "montenegroCompliant": "Crna Gora PDPL kompatibilan",
       "sections": {
         "general": {
@@ -45911,5 +46005,24 @@
   },
   "password": {
     "rules": "Lozinka mora imati najmanje 6 karaktera i sadržati jedno veliko slovo, jedno malo slovo i jedan broj"
+  },
+  "cookieConsent": {
+    "title": "Podešavanja kolačića",
+    "description": "Naša veb lokacija koristi kolačiće da poboljša vaše iskustvo. Možete odabrati koje kolačiće želite da dozvolite. Za više informacija, molimo vas da pogledate našu Politiku kolačića.",
+    "acceptAll": "Prihvati sve",
+    "rejectAll": "Odbij sve",
+    "settings": "Podešavanja",
+    "settingsTitle": "Podešavanja kolačića",
+    "necessary": "Neophodni kolačići",
+    "necessaryDesc": "Ovi kolačići su potrebni da bi veb lokacija pravilno funkcionisala i ne mogu se onemogućiti.",
+    "analytics": "Analitički kolačići",
+    "analyticsDesc": "Pomažu nam da razumemo korišćenje sajta i poboljšamo korisničko iskustvo.",
+    "marketing": "Marketinški kolačići",
+    "marketingDesc": "Koriste se da vam prikažu relevantnije oglase.",
+    "required": "Obavezno",
+    "savePreferences": "Sačuvaj podešavanja",
+    "cancel": "Otkaži",
+    "close": "Zatvori",
+    "back": "Nazad"
   }
 }
