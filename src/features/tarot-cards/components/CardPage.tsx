@@ -35,6 +35,9 @@ export default function CardPage({ card, locale }: CardPageProps) {
     }
   };
 
+  // ✅ FAQ Schema'yı sadece geçerli FAQ varsa oluştur
+  const faqSchema = CardSEO.generateFAQStructuredData(seo);
+
   return (
     <div className='min-h-screen bg-white'>
       {/* Back Button */}
@@ -91,12 +94,17 @@ export default function CardPage({ card, locale }: CardPageProps) {
           ),
         }}
       />
-      <script
-        type='application/ld+json'
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(CardSEO.generateFAQStructuredData(seo)),
-        }}
-      />
+
+      {/* ✅ FAQ Schema - Sadece geçerli FAQ varsa render et */}
+      {faqSchema && (
+        <script
+          type='application/ld+json'
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(faqSchema),
+          }}
+        />
+      )}
+
       <script
         type='application/ld+json'
         dangerouslySetInnerHTML={{

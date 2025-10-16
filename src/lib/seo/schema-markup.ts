@@ -471,6 +471,7 @@ export function generateArticleSchema(article: {
   dateModified: string;
   authorName?: string;
   locale?: string;
+  url?: string; // ✅ Sayfa URL'si eklendi
 }) {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://busbuskimki.com';
 
@@ -499,7 +500,7 @@ export function generateArticleSchema(article: {
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': baseUrl,
+      '@id': article.url || baseUrl, // ✅ Özel sayfa URL'si kullanılıyor
     },
     inLanguage: article.locale || 'tr-TR',
   };
