@@ -375,7 +375,7 @@ export function isCardPage(pathname: string): boolean {
  */
 export function extractCardSlug(pathname: string): string | null {
   const match = pathname.match(/\/(tr|en|sr)\/(kartlar|cards|kartice)\/([^\/]+)/);
-  return match ? match[3] : null;
+  return match?.[3] ?? null;
 }
 
 /**
