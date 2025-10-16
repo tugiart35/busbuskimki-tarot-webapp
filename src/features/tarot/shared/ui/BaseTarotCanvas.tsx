@@ -163,7 +163,7 @@ export default function BaseTarotCanvas({
         />
         <Image
           src={config.backgroundImage}
-          alt={config.backgroundAlt}
+          alt={`${config.backgroundAlt} - Tarot falı açılımı için mistik arka plan görseli`}
           fill
           className='object-cover object-center opacity-60'
           priority={false}

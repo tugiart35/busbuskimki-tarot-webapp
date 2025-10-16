@@ -41,7 +41,7 @@ import type { Metadata, Viewport } from 'next';
 // Ana uygulama metadata'sı - SEO Optimized
 export const defaultMetadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || 'http://busbuskimki.com'
+    process.env.NEXT_PUBLIC_SITE_URL || 'https://busbuskimki.com'
   ),
   title: 'Büşbüşkimki - Profesyonel Tarot Okuması ve Numeroloji Analizi',
   description:
@@ -110,8 +110,12 @@ export const defaultMetadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
-  themeColor: '#6366f1',
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#6366f1' },
+    { media: '(prefers-color-scheme: dark)', color: '#1e1b4b' },
+  ],
 };
 
 // Sayfa başlığı oluşturucu fonksiyonu

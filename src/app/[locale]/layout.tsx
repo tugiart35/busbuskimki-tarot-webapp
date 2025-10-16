@@ -3,6 +3,7 @@ import {
   generateHomepageMetadata,
   generateHomepageStructuredData,
 } from '@/lib/seo/page-seo-generator';
+import { generateFAQSchema } from '@/lib/seo/schema-markup';
 import { LocaleLayoutClient } from '@/app/[locale]/LocaleLayoutClient';
 
 interface LocaleLayoutProps {
@@ -29,6 +30,7 @@ export default async function LocaleLayout({
 
   // Yeni SEO generator ile structured data oluştur
   const structuredData = generateHomepageStructuredData(locale);
+  const faqSchema = generateFAQSchema();
 
   return (
     <>
@@ -68,7 +70,7 @@ export default async function LocaleLayout({
       <script
         type='application/ld+json'
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(structuredData.faq),
+          __html: JSON.stringify(faqSchema),
         }}
       />
 

@@ -161,14 +161,17 @@ export class CardSEO {
   static generateFAQStructuredData(seo: any) {
     const faqItems = Array.isArray(seo.faq) ? seo.faq : [];
 
-    return {
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      mainEntity: faqItems.map((item: any) => {
-        // Handle both object and string formats
-        const question = typeof item === 'string' ? item : item?.question || '';
-        const answer =
-          typeof item === 'string' ? `Answer for ${item}` : item?.answer || '';
+    // Filter and map valid FAQ items
+    const validFaqItems = faqItems
+      .filter((item: any) => {
+        // Filter out invalid items
+        const question = typeof item === 'string' ? item : item?.question;
+        const answer = typeof item === 'string' ? '' : item?.answer;
+        return question && answer; // Both must exist
+      })
+      .map((item: any) => {
+        const question = typeof item === 'string' ? item : item.question;
+        const answer = typeof item === 'string' ? '' : item.answer;
 
         return {
           '@type': 'Question',
@@ -178,7 +181,17 @@ export class CardSEO {
             text: answer,
           },
         };
-      }),
+      });
+
+    // Only return FAQ schema if there are valid FAQ items
+    if (validFaqItems.length === 0) {
+      return null;
+    }
+
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: validFaqItems,
     };
   }
 

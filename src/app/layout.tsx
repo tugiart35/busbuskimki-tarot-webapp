@@ -31,14 +31,17 @@ import { Inter } from 'next/font/google';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from '@vercel/analytics/react';
 import { generateHomepageSchemas } from '@/lib/seo/schema-markup';
+import { WebVitals } from '@/components/WebVitals';
 
 // Optimize font loading with display swap and preload
 const inter = Inter({
-  subsets: ['latin'],
+  subsets: ['latin', 'latin-ext'], // Turkish characters support
   display: 'swap', // Prevent invisible text (FOIT)
   preload: true,
   variable: '--font-inter',
-  fallback: ['system-ui', 'arial'],
+  fallback: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'arial'],
+  adjustFontFallback: true, // Automatic font metric adjustments
+  weight: ['400', '500', '600', '700'], // Only load needed weights
 });
 
 // Next.js için metadata export'u
@@ -79,9 +82,23 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
         {/* Performance Optimization: Preconnect (daha hızlı DNS + TLS) */}
         <link rel='preconnect' href='https://fonts.googleapis.com' />
+        <link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin='anonymous' />
         <link rel='preconnect' href='https://www.google-analytics.com' />
         <link rel='preconnect' href='https://pagead2.googlesyndication.com' />
         <link rel='dns-prefetch' href='//connect.facebook.net' />
+
+        {/* Preload critical assets */}
+        <link
+          rel='preload'
+          href='/icons/icon.svg'
+          as='image'
+          type='image/svg+xml'
+        />
+        <link
+          rel='preload'
+          href='/favicon.ico'
+          as='image'
+        />
 
         {/* Schema.org JSON-LD Structured Data - Kritik SEO, head'de kalmalı */}
         {generateHomepageSchemas().map((schema, index) => (
@@ -98,6 +115,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         className='h-full overflow-x-hidden antialiased'
         style={{ backgroundColor: APP_CONFIG.theme.backgroundColor }}
       >
+        <WebVitals />
         {children}
         <Footer />
         <Analytics />

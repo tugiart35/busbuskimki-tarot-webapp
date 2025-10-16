@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
+import { getCardAlternateUrls } from '@/lib/i18n/card-url-mapper';
 
 interface LanguageSelectorProps {
   locale: string;
@@ -33,6 +34,19 @@ export function LanguageSelector({
 
   // Dil değiştirme fonksiyonu
   const handleLanguageChange = (newLocale: string) => {
+    // Önce kart sayfası mı kontrol et - kart sayfalarında özel slug çevirisi gerekli
+    const cardUrls = getCardAlternateUrls(pathname);
+    
+    if (cardUrls) {
+      // Kart sayfası - doğru çevrilmiş slug ile yönlendir
+      const newPath = cardUrls[newLocale as 'tr' | 'en' | 'sr'];
+      document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000; SameSite=Lax`;
+      router.push(newPath);
+      setIsOpen(false);
+      return;
+    }
+
+    // Diğer sayfalar için mevcut mantığı kullan
     let pathWithoutLocale = pathname;
 
     if (pathname.startsWith(`/${locale}/`)) {

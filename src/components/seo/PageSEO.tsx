@@ -9,6 +9,7 @@
 
 import React from 'react';
 import { generateHomepageStructuredData } from '@/lib/seo/page-seo-generator';
+import { generateFAQSchema } from '@/lib/seo/schema-markup';
 
 interface PageSEOProps {
   locale: string;
@@ -25,6 +26,7 @@ interface PageSEOProps {
 export function PageSEO({ locale }: PageSEOProps) {
   // Ana sayfa için structured data oluştur
   const structuredData = generateHomepageStructuredData(locale);
+  const faqSchema = generateFAQSchema();
 
   return (
     <>
@@ -64,7 +66,7 @@ export function PageSEO({ locale }: PageSEOProps) {
       <script
         type='application/ld+json'
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(structuredData.faq),
+          __html: JSON.stringify(faqSchema),
         }}
       />
     </>

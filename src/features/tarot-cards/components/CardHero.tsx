@@ -12,15 +12,15 @@ export function CardHero({ card, content, locale }: CardHeroProps) {
   const cardName = CardMapping.getCardNameForLocale(card, locale);
 
   return (
-    <section className='relative bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 text-white py-16 px-4'>
+    <article className='relative bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 text-white py-16 px-4'>
       <div className='max-w-6xl mx-auto'>
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-12 items-center'>
-          {/* Card Image */}
-          <div className='relative'>
+          {/* Card Image - Using figure/figcaption for semantic image markup */}
+          <figure className='relative'>
             <div className='relative w-full max-w-md mx-auto'>
               <Image
                 src={card.imageUrl}
-                alt={cardName}
+                alt={`${cardName} - ${card.arcanaType === 'major' ? 'Major Arcana' : 'Minor Arcana'} tarot kartı${card.number ? ` numara ${card.number}` : ''}, tarot falı ve anlam rehberi`}
                 width={400}
                 height={600}
                 className='rounded-lg shadow-2xl'
@@ -28,23 +28,26 @@ export function CardHero({ card, content, locale }: CardHeroProps) {
               />
               {/* Card Number Badge */}
               {card.arcanaType === 'major' && (
-                <div className='absolute -top-4 -right-4 bg-yellow-500 text-black font-bold text-xl px-3 py-1 rounded-full shadow-lg'>
+                <div className='absolute -top-4 -right-4 bg-yellow-500 text-black font-bold text-xl px-3 py-1 rounded-full shadow-lg' role='img' aria-label={`${locale === 'tr' ? 'Kart numarası' : locale === 'en' ? 'Card number' : 'Broj karte'} ${card.number || 0}`}>
                   {card.number || 0}
                 </div>
               )}
               {/* Minor Arcana Badge */}
               {card.arcanaType === 'minor' && card.suit && (
-                <div className='absolute -top-4 -right-4 bg-white text-black font-bold text-sm px-3 py-1 rounded-full shadow-lg'>
+                <div className='absolute -top-4 -right-4 bg-white text-black font-bold text-sm px-3 py-1 rounded-full shadow-lg' role='img' aria-label={`${card.suit.toUpperCase()} ${card.number}`}>
                   {card.suit.toUpperCase()} {card.number}
                 </div>
               )}
             </div>
-          </div>
+            <figcaption className='sr-only'>
+              {cardName} - {card.arcanaType === 'major' ? 'Major Arcana' : 'Minor Arcana'} {locale === 'tr' ? 'tarot kartı' : locale === 'en' ? 'tarot card' : 'tarot karta'}
+            </figcaption>
+          </figure>
 
-          {/* Card Content */}
+          {/* Card Content - Using header and section for semantic structure */}
           <div className='space-y-6'>
             {/* Card Title */}
-            <div>
+            <header>
               <h1 className='text-4xl lg:text-5xl font-bold mb-4'>
                 {cardName}
               </h1>
@@ -55,56 +58,58 @@ export function CardHero({ card, content, locale }: CardHeroProps) {
                     ? 'Major Arcana'
                     : 'Velika Arkana'}
               </p>
-            </div>
+            </header>
 
             {/* Card Description */}
-            <div className='prose prose-lg prose-invert max-w-none'>
+            <section className='prose prose-lg prose-invert max-w-none' aria-label={locale === 'tr' ? 'Kart açıklaması' : locale === 'en' ? 'Card description' : 'Opis karte'}>
               <p className='text-lg leading-relaxed'>
                 {content.short_description}
               </p>
-            </div>
+            </section>
 
-            {/* Card Keywords */}
+            {/* Card Keywords - Semantic list */}
             {content.keywords?.keywords_message && (
-              <div className='flex flex-wrap gap-2'>
-                {content.keywords.keywords_message
-                  .split(',')
-                  .slice(0, 6)
-                  .map((keyword, index) => (
-                    <span
-                      key={index}
-                      className='bg-white/20 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium'
-                    >
-                      {keyword.trim()}
-                    </span>
-                  ))}
-              </div>
+              <nav aria-label={locale === 'tr' ? 'Anahtar kelimeler' : locale === 'en' ? 'Keywords' : 'Ključne reči'}>
+                <ul className='flex flex-wrap gap-2' role='list'>
+                  {content.keywords.keywords_message
+                    .split(',')
+                    .slice(0, 6)
+                    .map((keyword, index) => (
+                      <li key={index}>
+                        <span className='bg-white/20 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium'>
+                          {keyword.trim()}
+                        </span>
+                      </li>
+                    ))}
+                </ul>
+              </nav>
             )}
 
-            {/* Reading Time */}
-            <div className='flex items-center space-x-2 text-purple-200'>
-              <svg className='w-5 h-5' fill='currentColor' viewBox='0 0 20 20'>
+            {/* Reading Time - With semantic time element */}
+            <aside className='flex items-center space-x-2 text-purple-200' aria-label={locale === 'tr' ? 'Okuma süresi' : locale === 'en' ? 'Reading time' : 'Vreme čitanja'}>
+              <svg className='w-5 h-5' fill='currentColor' viewBox='0 0 20 20' aria-hidden='true'>
                 <path
                   fillRule='evenodd'
                   d='M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z'
                   clipRule='evenodd'
                 />
               </svg>
-              <span>
+              <time>
                 {content.readingTime}{' '}
                 {locale === 'tr'
                   ? 'dakika okuma'
                   : locale === 'en'
                     ? 'min read'
                     : 'min čitanje'}
-              </span>
-            </div>
+              </time>
+            </aside>
 
-            {/* CTA Button */}
-            <div className='pt-4'>
+            {/* CTA Button - Semantic navigation */}
+            <nav className='pt-4'>
               <a
                 href='#meanings'
                 className='inline-flex items-center px-6 py-3 bg-yellow-500 hover:bg-yellow-600 text-black font-semibold rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl'
+                aria-label={locale === 'tr' ? 'Detaylı anlamlara git' : locale === 'en' ? 'Go to detailed meanings' : 'Idi na detaljna značenja'}
               >
                 {locale === 'tr'
                   ? 'Detaylı Anlamları Gör'
@@ -116,6 +121,7 @@ export function CardHero({ card, content, locale }: CardHeroProps) {
                   fill='none'
                   stroke='currentColor'
                   viewBox='0 0 24 24'
+                  aria-hidden='true'
                 >
                   <path
                     strokeLinecap='round'
@@ -125,16 +131,16 @@ export function CardHero({ card, content, locale }: CardHeroProps) {
                   />
                 </svg>
               </a>
-            </div>
+            </nav>
           </div>
         </div>
       </div>
 
       {/* Background Decoration */}
-      <div className='absolute inset-0 overflow-hidden pointer-events-none'>
+      <div className='absolute inset-0 overflow-hidden pointer-events-none' aria-hidden='true'>
         <div className='absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse'></div>
         <div className='absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse'></div>
       </div>
-    </section>
+    </article>
   );
 }

@@ -251,48 +251,6 @@ export function generateHomepageStructuredData(locale: string) {
         },
       ],
     },
-    faq: {
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      mainEntity: [
-        {
-          '@type': 'Question',
-          name:
-            locale === 'tr'
-              ? 'BüşBüşKimKi nedir?'
-              : locale === 'en'
-                ? 'What is BüşBüşKimKi?'
-                : 'Šta je BüşBüşKimKi?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text:
-              locale === 'tr'
-                ? 'BüşBüşKimKi, tarot ve numeroloji odaklı profesyonel rehberlik hizmetleri sunan bir platformdur.'
-                : locale === 'en'
-                  ? 'BüşBüşKimKi is a platform providing professional guidance focused on tarot and numerology.'
-                  : 'BüşBüşKimKi je platforma koja pruža profesionalno vođenje fokusirano na tarot i numerologiju.',
-          },
-        },
-        {
-          '@type': 'Question',
-          name:
-            locale === 'tr'
-              ? 'Hizmetler nasıl alınır?'
-              : locale === 'en'
-                ? 'How to book a service?'
-                : 'Kako se rezerviše usluga?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text:
-              locale === 'tr'
-                ? 'Web sitesi üzerinden kişisel tarot veya numeroloji seansınızı seçebilir ve rezervasyon oluşturabilirsiniz.'
-                : locale === 'en'
-                  ? 'You can select your personal tarot or numerology session on the website and make a reservation.'
-                  : 'Možete odabrati svoj lični tarot ili numerološki čas na sajtu i izvršiti rezervaciju.',
-          },
-        },
-      ],
-    },
   };
 
   return structuredData;

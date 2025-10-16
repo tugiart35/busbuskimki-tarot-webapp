@@ -222,14 +222,26 @@ const BaseCardRenderer = memo(function BaseCardRenderer({
       );
     }
 
+    // Generate descriptive alt text for SEO and accessibility
+    const getAltText = (): string => {
+      if (!card) return 'Tarot kartı arka yüzü';
+
+      const cardName = card.nameTr || card.name || 'Tarot Kartı';
+      const position = isReversed ? 'ters pozisyonda' : 'düz pozisyonda';
+      const arcana = card.suit === 'major' ? 'Major Arcana' : 'Minor Arcana';
+
+      return `${cardName} - ${arcana} tarot kartı ${position}`;
+    };
+
     return (
       <div className='relative w-full h-full'>
         <img
           src={imageSrc}
-          alt={card?.nameTr || 'Tarot Kartı'}
+          alt={getAltText()}
           className={`w-full h-full object-cover transition-transform duration-500 ${
             isReversed ? 'rotate-180' : ''
           }`}
+          loading='lazy'
           onError={e => {
             // Fallback olarak arka plan rengi göster
             e.currentTarget.style.display = 'none';

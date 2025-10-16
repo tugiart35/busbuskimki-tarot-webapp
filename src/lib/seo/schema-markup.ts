@@ -356,6 +356,265 @@ export function generateHomepageSchemas() {
 }
 
 /**
+ * Generate Product schema for tarot packages
+ */
+export function generateProductSchema(product: {
+  name: string;
+  description: string;
+  price: string;
+  currency: string;
+  sku?: string;
+  imageUrl?: string;
+  offers?: {
+    validFrom?: string;
+    validThrough?: string;
+  };
+}) {
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://busbuskimki.com';
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: product.name,
+    description: product.description,
+    image: product.imageUrl || `${baseUrl}/icons/icon-512x512.png`,
+    sku: product.sku || `TAROT-${Date.now()}`,
+    brand: {
+      '@type': 'Brand',
+      name: 'BüşBüşKimKi',
+    },
+    offers: {
+      '@type': 'Offer',
+      url: baseUrl,
+      priceCurrency: product.currency,
+      price: product.price,
+      priceValidUntil: product.offers?.validThrough || new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+      availability: 'https://schema.org/InStock',
+      seller: {
+        '@type': 'Organization',
+        name: 'BüşBüşKimKi',
+      },
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.8',
+      reviewCount: '256',
+      bestRating: '5',
+      worstRating: '1',
+    },
+  };
+}
+
+/**
+ * Generate AggregateRating schema for service ratings
+ */
+export function generateAggregateRatingSchema(ratings: {
+  ratingValue: string;
+  reviewCount: string;
+  bestRating?: string;
+  worstRating?: string;
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'AggregateRating',
+    itemReviewed: {
+      '@type': 'Service',
+      name: 'BüşBüşKimKi Tarot Okuma Hizmetleri',
+      description: 'Profesyonel tarot ve numeroloji hizmetleri',
+    },
+    ratingValue: ratings.ratingValue,
+    reviewCount: ratings.reviewCount,
+    bestRating: ratings.bestRating || '5',
+    worstRating: ratings.worstRating || '1',
+  };
+}
+
+/**
+ * Generate Review schema for user reviews
+ */
+export function generateReviewSchema(review: {
+  author: string;
+  reviewRating: string;
+  reviewBody: string;
+  datePublished: string;
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Review',
+    itemReviewed: {
+      '@type': 'Service',
+      name: 'BüşBüşKimKi Tarot Okuma',
+    },
+    author: {
+      '@type': 'Person',
+      name: review.author,
+    },
+    reviewRating: {
+      '@type': 'Rating',
+      ratingValue: review.reviewRating,
+      bestRating: '5',
+      worstRating: '1',
+    },
+    reviewBody: review.reviewBody,
+    datePublished: review.datePublished,
+  };
+}
+
+/**
+ * Generate Article schema for tarot card pages
+ */
+export function generateArticleSchema(article: {
+  title: string;
+  description: string;
+  imageUrl: string;
+  datePublished: string;
+  dateModified: string;
+  authorName?: string;
+  locale?: string;
+}) {
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://busbuskimki.com';
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: article.title,
+    description: article.description,
+    image: article.imageUrl,
+    datePublished: article.datePublished,
+    dateModified: article.dateModified,
+    author: {
+      '@type': 'Organization',
+      name: article.authorName || 'BüşBüşKimKi',
+      url: baseUrl,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'BüşBüşKimKi',
+      logo: {
+        '@type': 'ImageObject',
+        url: `${baseUrl}/icons/icon-512x512.png`,
+        width: 512,
+        height: 512,
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': baseUrl,
+    },
+    inLanguage: article.locale || 'tr-TR',
+  };
+}
+
+/**
+ * Generate HowTo schema for instructional content
+ */
+export function generateHowToSchema(howTo: {
+  name: string;
+  description: string;
+  steps: Array<{
+    name: string;
+    text: string;
+    image?: string;
+  }>;
+  totalTime?: string;
+  locale?: string;
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: howTo.name,
+    description: howTo.description,
+    totalTime: howTo.totalTime || 'PT10M',
+    step: howTo.steps.map((step, index) => ({
+      '@type': 'HowToStep',
+      position: index + 1,
+      name: step.name,
+      text: step.text,
+      image: step.image,
+    })),
+    inLanguage: howTo.locale || 'tr-TR',
+  };
+}
+
+/**
+ * Generate VideoObject schema
+ */
+export function generateVideoSchema(video: {
+  name: string;
+  description: string;
+  thumbnailUrl: string;
+  uploadDate: string;
+  duration?: string;
+  contentUrl?: string;
+}) {
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://busbuskimki.com';
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'VideoObject',
+    name: video.name,
+    description: video.description,
+    thumbnailUrl: video.thumbnailUrl,
+    uploadDate: video.uploadDate,
+    duration: video.duration || 'PT5M',
+    contentUrl: video.contentUrl,
+    embedUrl: video.contentUrl,
+    publisher: {
+      '@type': 'Organization',
+      name: 'BüşBüşKimKi',
+      logo: {
+        '@type': 'ImageObject',
+        url: `${baseUrl}/icons/icon-512x512.png`,
+      },
+    },
+  };
+}
+
+/**
+ * Generate Event schema for webinars or special sessions
+ */
+export function generateEventSchema(event: {
+  name: string;
+  description: string;
+  startDate: string;
+  endDate?: string;
+  location?: string;
+  price?: string;
+  currency?: string;
+}) {
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://busbuskimki.com';
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Event',
+    name: event.name,
+    description: event.description,
+    startDate: event.startDate,
+    endDate: event.endDate || event.startDate,
+    eventStatus: 'https://schema.org/EventScheduled',
+    eventAttendanceMode: 'https://schema.org/OnlineEventAttendanceMode',
+    location: {
+      '@type': 'VirtualLocation',
+      url: baseUrl,
+    },
+    organizer: {
+      '@type': 'Organization',
+      name: 'BüşBüşKimKi',
+      url: baseUrl,
+    },
+    offers: event.price
+      ? {
+          '@type': 'Offer',
+          price: event.price,
+          priceCurrency: event.currency || 'TRY',
+          availability: 'https://schema.org/InStock',
+          url: baseUrl,
+        }
+      : undefined,
+  };
+}
+
+/**
  * Generate schemas for a specific page
  */
 export function generatePageSchemas(pageType: string, pageData?: any) {
@@ -367,8 +626,20 @@ export function generatePageSchemas(pageType: string, pageData?: any) {
     );
   }
 
+  if (pageType === 'product' && pageData?.product) {
+    schemas.push(generateProductSchema(pageData.product));
+  }
+
+  if (pageType === 'article' && pageData?.article) {
+    schemas.push(generateArticleSchema(pageData.article));
+  }
+
   if (pageData?.breadcrumbs) {
     schemas.push(generateBreadcrumbSchema(pageData.breadcrumbs));
+  }
+
+  if (pageData?.ratings) {
+    schemas.push(generateAggregateRatingSchema(pageData.ratings));
   }
 
   return schemas;

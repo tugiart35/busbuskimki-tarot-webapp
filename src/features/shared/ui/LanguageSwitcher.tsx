@@ -29,6 +29,7 @@ Kullanım durumu:
 import { useLocale } from 'next-intl';
 import { useRouter, usePathname } from 'next/navigation';
 import { getLanguageSwitcherPaths } from '@/lib/i18n/paths';
+import { getCardAlternateUrls } from '@/lib/i18n/card-url-mapper';
 import { useState } from 'react';
 
 export function LanguageSwitcher() {
@@ -44,6 +45,19 @@ export function LanguageSwitcher() {
   }
 
   const handleLanguageChange = (newLocale: string) => {
+    // Önce kart sayfası mı kontrol et - kart sayfalarında özel slug çevirisi gerekli
+    const cardUrls = getCardAlternateUrls(pathname);
+    
+    if (cardUrls) {
+      // Kart sayfası - doğru çevrilmiş slug ile yönlendir
+      const newPath = cardUrls[newLocale as 'tr' | 'en' | 'sr'];
+      document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000; SameSite=Lax`;
+      router.push(newPath);
+      setIsOpen(false);
+      return;
+    }
+
+    // Diğer sayfalar için mevcut mantığı kullan
     const targetPath =
       languagePaths.paths[newLocale as keyof typeof languagePaths.paths];
     if (targetPath) {
