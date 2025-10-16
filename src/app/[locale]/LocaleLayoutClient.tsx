@@ -85,7 +85,7 @@ export function LocaleLayoutClient({
                 </div>
               </div>
               <span className='text-xl font-bold tracking-tight bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent'>
-                Büşbüşkiki
+                Büşbüşkimki
               </span>
             </Link>
 
