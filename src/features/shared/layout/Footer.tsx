@@ -163,6 +163,17 @@ const Footer = () => {
                     {t('footer.legal.refundPolicy', 'Geri Ödeme Politikası')}
                   </span>
                 </Link>
+                <Link
+                  href={`/${locale}/legal/moderation-policy`}
+                  className='text-sm text-gray-300 hover:text-white transition-all duration-300 hover:translate-x-1 group'
+                >
+                  <span className='group-hover:text-purple-300'>
+                    {t(
+                      'footer.legal.moderationPolicy',
+                      'İçerik Moderasyon Politikası'
+                    )}
+                  </span>
+                </Link>
               </div>
             </div>
 

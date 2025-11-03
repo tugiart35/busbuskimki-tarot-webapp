@@ -105,7 +105,7 @@ export function CardFAQ({ seo, locale }: CardFAQProps) {
               {locale === 'tr'
                 ? 'Tarot Okuması Yap'
                 : locale === 'en'
-                  ? 'Do Tarot Reading'
+                  ? 'Tarot Reading'
                   : 'Napravi Tarot Čitanje'}
               <svg
                 className='w-5 h-5 ml-2'

@@ -72,7 +72,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
 
-    // Numeroloji sayfaları
+    // Numeroloji sayfaları (gerçek route'lar - SEO Fix)
+    // NOT: /en/numerology ve /sr/numerologija rewrites, gerçek route hepsi /numeroloji
     {
       url: `${baseUrl}/tr/numeroloji`,
       lastModified: currentDate,
@@ -80,13 +81,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/en/numerology`,
+      url: `${baseUrl}/en/numeroloji`,
       lastModified: currentDate,
       changeFrequency: 'weekly' as const,
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/sr/numerologija`,
+      url: `${baseUrl}/sr/numeroloji`,
       lastModified: currentDate,
       changeFrequency: 'weekly' as const,
       priority: 0.9,

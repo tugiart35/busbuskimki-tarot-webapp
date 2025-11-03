@@ -1,10 +1,19 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
-import BottomNavigation from '@/features/shared/layout/BottomNavigation';
-import Footer from '@/features/shared/layout/Footer';
 import { getCardName as getLocalizedCardName } from '@/lib/tarot/card-names';
 import { COURT_CARDS } from '@/lib/tarot/card-utils';
+import { generateCardAltText } from '@/utils/seo-helpers';
+
+// Import all client-side widgets from centralized ClientWidgets
+import {
+  DailyCardWidget,
+  TrendingCardsWidget,
+  PageReactions,
+  CardStatsWidget,
+  GeneralComments,
+  ExpertCommentary,
+} from '@/components/shared/ClientWidgets';
 
 interface PageProps {
   params: Promise<{
@@ -342,6 +351,26 @@ export default async function CardsPage({ params }: PageProps) {
     return getLocalizedCardName(cardKey, currentLocale);
   };
 
+  const getEnhancedAltText = (cardKey: string, number?: number) => {
+    const cardName = getCardName(cardKey);
+    const arcanaType = majorArcanaCards.find(c => c.key === cardKey) ? 'major' : 'minor';
+    
+    return generateCardAltText(
+      {
+        ...(currentLocale === 'tr' && { nameTr: cardName }),
+        ...(currentLocale === 'en' && { nameEn: cardName }),
+        ...(currentLocale === 'sr' && { nameSr: cardName }),
+        type: arcanaType,
+        ...(number !== undefined && { number }),
+      },
+      currentLocale,
+      {
+        includeContext: true,
+        context: 'gallery',
+      }
+    );
+  };
+
   const getCardImage = (cardKey: string) => {
     // Major Arcana için - gerçek dosya isimlerini kullan
     const majorArcanaMapping: { [key: string]: string } = {
@@ -516,6 +545,17 @@ export default async function CardsPage({ params }: PageProps) {
         </div>
       </div>
 
+      {/* Daily Card Widget */}
+      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8'>
+        <DailyCardWidget locale={currentLocale} />
+      </div>
+
+      {/* Trending Cards Widget */}
+      <TrendingCardsWidget locale={currentLocale} limit={6} />
+
+      {/* Expert Commentary - General */}
+      <ExpertCommentary locale={currentLocale} isGeneral={true} />
+
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16'>
         {/* Major Arcana Section */}
         <section className='mb-20'>
@@ -543,7 +583,7 @@ export default async function CardsPage({ params }: PageProps) {
                 <div className='relative aspect-[2/3] overflow-hidden'>
                   <Image
                     src={getCardImage(card.key)}
-                    alt={getCardName(card.key)}
+                    alt={getEnhancedAltText(card.key, card.number)}
                     fill
                     className='object-cover group-hover:scale-110 transition-transform duration-700'
                   />
@@ -570,6 +610,15 @@ export default async function CardsPage({ params }: PageProps) {
             ))}
           </div>
         </section>
+
+        {/* Page Reactions - After Major Arcana */}
+        <div className='mb-16'>
+          <PageReactions 
+            pageId='cards-listing-major' 
+            locale={currentLocale}
+            title={currentLocale === 'tr' ? 'Major Arcana kartlarını nasıl buldunuz?' : currentLocale === 'en' ? 'How did you find the Major Arcana cards?' : 'Kako ste pronašli Major Arcana karte?'}
+          />
+        </div>
 
         {/* Minor Arcana Section */}
         <section>
@@ -653,7 +702,7 @@ export default async function CardsPage({ params }: PageProps) {
                       <div className='relative aspect-[2/3] overflow-hidden'>
                         <Image
                           src={getCardImage(card.key)}
-                          alt={getCardName(card.key)}
+                          alt={getEnhancedAltText(card.key)}
                           fill
                           className='object-cover group-hover:scale-110 transition-transform duration-500'
                         />
@@ -684,6 +733,50 @@ export default async function CardsPage({ params }: PageProps) {
               </div>
             );
           })}
+        </section>
+
+        {/* Most Popular Cards Stats */}
+        <section className='mb-20'>
+          <div className='text-center mb-12'>
+            <div className='inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-amber-100 to-orange-100 border border-amber-200 mb-6'>
+              <span className='text-amber-700 text-sm font-semibold'>
+                ⭐ {currentLocale === 'tr' ? 'En Popüler' : currentLocale === 'en' ? 'Most Popular' : 'Najpopularnije'}
+              </span>
+            </div>
+            <h2 className='text-4xl md:text-5xl font-bold text-gray-900 mb-6'>
+              {currentLocale === 'tr' ? 'En Çok İlgi Gören Kartlar' : currentLocale === 'en' ? 'Most Viewed Cards' : 'Najgledanije karte'}
+            </h2>
+            <p className='text-xl text-gray-600 max-w-3xl mx-auto'>
+              {currentLocale === 'tr' 
+                ? 'Topluluğumuzun en çok merak ettiği ve incelediği tarot kartları' 
+                : currentLocale === 'en'
+                  ? 'The tarot cards our community explores and studies the most'
+                  : 'Tarot karte koje naša zajednica najviše istražuje i proučava'}
+            </p>
+          </div>
+
+          <div className='grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6'>
+            <CardStatsWidget 
+              slug={currentLocale === 'tr' ? 'deli' : currentLocale === 'en' ? 'the-fool' : 'ludak'} 
+              locale={currentLocale} 
+            />
+            <CardStatsWidget 
+              slug={currentLocale === 'tr' ? 'asklar' : currentLocale === 'en' ? 'the-lovers' : 'ljubavnici'} 
+              locale={currentLocale} 
+            />
+            <CardStatsWidget 
+              slug={currentLocale === 'tr' ? 'buyucu' : currentLocale === 'en' ? 'the-magician' : 'magicar'} 
+              locale={currentLocale} 
+            />
+            <CardStatsWidget 
+              slug={currentLocale === 'tr' ? 'olum' : currentLocale === 'en' ? 'death' : 'smrt'} 
+              locale={currentLocale} 
+            />
+            <CardStatsWidget 
+              slug={currentLocale === 'tr' ? 'yildiz' : currentLocale === 'en' ? 'the-star' : 'zvezda'} 
+              locale={currentLocale} 
+            />
+          </div>
         </section>
 
         {/* CTA Section */}
@@ -728,8 +821,12 @@ export default async function CardsPage({ params }: PageProps) {
           </div>
         </section>
       </div>
-      <BottomNavigation />
-      <Footer />
+
+      {/* General Comments */}
+      <GeneralComments 
+        pageId='cards-listing' 
+        locale={currentLocale}
+      />
     </div>
   );
 }

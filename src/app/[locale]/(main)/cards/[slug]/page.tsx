@@ -2,8 +2,6 @@ import { notFound } from 'next/navigation';
 import CardPage from '@/features/tarot-cards/components/CardPage';
 import { CardData } from '@/features/tarot-cards/lib/card-data';
 import { CardSEO } from '@/features/tarot-cards/lib/card-seo';
-import BottomNavigation from '@/features/shared/layout/BottomNavigation';
-import Footer from '@/features/shared/layout/Footer';
 import { getTranslations } from 'next-intl/server';
 import { logger } from '@/lib/logger';
 import { getCardIdFromSlug, getCardAlternateFullUrls } from '@/lib/i18n/card-url-mapper';
@@ -174,13 +172,8 @@ export default async function CardPageRoute({ params }: PageProps) {
 
     // ✅ Schema'lar CardPage component'i içinde oluşturuluyor
     // Duplicate schema'dan kaçınmak için burada oluşturmuyoruz
-    return (
-      <>
-        <CardPage card={cardData} locale={locale as 'tr' | 'en' | 'sr'} />
-        <BottomNavigation />
-        <Footer />
-      </>
-    );
+    // ✅ Footer ve BottomNavigation layout'tan geliyor, burada tekrar eklemeye gerek yok
+    return <CardPage card={cardData} locale={locale as 'tr' | 'en' | 'sr'} slug={slug} />;
   } catch (error) {
     logger.error('Error loading card from cards route', error);
     notFound();

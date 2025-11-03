@@ -11,6 +11,46 @@ interface CardHeroProps {
 export function CardHero({ card, content, locale }: CardHeroProps) {
   const cardName = CardMapping.getCardNameForLocale(card, locale);
 
+  // Generate SEO-optimized ALT text for card images
+  const getCardAltText = (
+    name: string,
+    cardData: TarotCard,
+    lang: 'tr' | 'en' | 'sr'
+  ): string => {
+    const arcanaText =
+      cardData.arcanaType === 'major'
+        ? lang === 'tr'
+          ? 'Major Arcana'
+          : lang === 'en'
+            ? 'Major Arcana'
+            : 'Velika Arkana'
+        : lang === 'tr'
+          ? 'Minor Arcana'
+          : lang === 'en'
+            ? 'Minor Arcana'
+            : 'Mala Arkana';
+
+    const numberText = cardData.number
+      ? ` ${lang === 'tr' ? 'numara' : lang === 'en' ? 'number' : 'broj'} ${cardData.number}`
+      : '';
+
+    const seoKeywords =
+      lang === 'tr'
+        ? 'düz ve ters pozisyon yorumları, aşk, kariyer, para ve ruhsal rehberlik'
+        : lang === 'en'
+          ? 'upright and reversed position interpretations, love, career, money and spiritual guidance'
+          : 'uspravna i obrnuta pozicija tumačenja, ljubav, karijera, novac i duhovno vođstvo';
+
+    const meaningText =
+      lang === 'tr'
+        ? 'kartı anlamı'
+        : lang === 'en'
+          ? 'card meaning'
+          : 'karta značenje';
+
+    return `${name} tarot ${meaningText} - ${arcanaText}${numberText} - ${seoKeywords}`;
+  };
+
   return (
     <article className='relative bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 text-white py-16 px-4'>
       <div className='max-w-6xl mx-auto'>
@@ -20,7 +60,7 @@ export function CardHero({ card, content, locale }: CardHeroProps) {
             <div className='relative w-full max-w-md mx-auto'>
               <Image
                 src={card.imageUrl}
-                alt={`${cardName} - ${card.arcanaType === 'major' ? 'Major Arcana' : 'Minor Arcana'} tarot kartı${card.number ? ` numara ${card.number}` : ''}, tarot falı ve anlam rehberi`}
+                alt={getCardAltText(cardName, card, locale)}
                 width={400}
                 height={600}
                 className='rounded-lg shadow-2xl'
@@ -40,7 +80,7 @@ export function CardHero({ card, content, locale }: CardHeroProps) {
               )}
             </div>
             <figcaption className='sr-only'>
-              {cardName} - {card.arcanaType === 'major' ? 'Major Arcana' : 'Minor Arcana'} {locale === 'tr' ? 'tarot kartı' : locale === 'en' ? 'tarot card' : 'tarot karta'}
+              {getCardAltText(cardName, card, locale)}
             </figcaption>
           </figure>
 

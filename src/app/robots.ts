@@ -17,6 +17,7 @@ export default function robots(): MetadataRoute.Robots {
           '/payment/',
         ],
       },
+      // Traditional Search Engines
       {
         userAgent: 'Googlebot',
         allow: '/',
@@ -27,8 +28,61 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/',
         disallow: ['/api/', '/admin/', '/dashboard/', '/auth/confirm'],
       },
+      // 🤖 AI Crawlers - LLMO/GEO Optimization
+      {
+        userAgent: 'GPTBot', // ChatGPT web crawler
+        allow: '/',
+        disallow: ['/api/', '/admin/', '/dashboard/', '/auth/'],
+      },
+      {
+        userAgent: 'ChatGPT-User', // ChatGPT browsing feature
+        allow: '/',
+        disallow: ['/api/', '/admin/', '/dashboard/', '/auth/'],
+      },
+      {
+        userAgent: 'ClaudeBot', // Claude (Anthropic)
+        allow: '/',
+        disallow: ['/api/', '/admin/', '/dashboard/', '/auth/'],
+      },
+      {
+        userAgent: 'PerplexityBot', // Perplexity AI
+        allow: '/',
+        disallow: ['/api/', '/admin/', '/dashboard/', '/auth/'],
+      },
+      {
+        userAgent: 'Google-Extended', // Google Bard/Gemini training
+        allow: '/',
+        disallow: ['/api/', '/admin/', '/dashboard/', '/auth/'],
+      },
+      {
+        userAgent: 'anthropic-ai', // Claude web scraper
+        allow: '/',
+        disallow: ['/api/', '/admin/', '/dashboard/', '/auth/'],
+      },
+      {
+        userAgent: 'CCBot', // Common Crawl (AI training data)
+        allow: '/',
+        disallow: ['/api/', '/admin/', '/dashboard/', '/auth/'],
+      },
+      {
+        userAgent: 'cohere-ai', // Cohere AI
+        allow: '/',
+        disallow: ['/api/', '/admin/', '/dashboard/', '/auth/'],
+      },
+      {
+        userAgent: 'Omgilibot', // Omgili news aggregator
+        allow: '/',
+        disallow: ['/api/', '/admin/', '/dashboard/', '/auth/'],
+      },
+      {
+        userAgent: 'Bytespider', // ByteDance (TikTok)
+        allow: '/',
+        disallow: ['/api/', '/admin/', '/dashboard/', '/auth/'],
+      },
     ],
-    sitemap: `${baseUrl}/sitemap.xml`,
-    host: baseUrl,
+    sitemap: [
+      `${baseUrl}/sitemap.xml`,
+      `${baseUrl}/llms.txt`, // ✨ AI'lar için özel içerik haritası
+    ],
   };
 }

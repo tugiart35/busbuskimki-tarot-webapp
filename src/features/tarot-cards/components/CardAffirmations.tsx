@@ -11,7 +11,7 @@ export function CardAffirmations({
 }: CardAffirmationsProps) {
   const { affirmations } = content;
 
-  if (!affirmations || !affirmations.affirmation_list.length) return null;
+  if (!affirmations || !affirmations.affirmation_list || !affirmations.affirmation_list.length) return null;
 
   return (
     <section className='py-16 px-4 bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-900 text-white'>

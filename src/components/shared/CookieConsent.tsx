@@ -8,6 +8,7 @@ interface CookiePreferences {
   necessary: boolean;
   analytics: boolean;
   marketing: boolean;
+  advertising: boolean; // AdSense ve reklam çerezleri
 }
 
 const COOKIE_CONSENT_KEY = 'busbuskimki_cookie_consent';
@@ -21,6 +22,7 @@ export default function CookieConsent() {
     necessary: true,
     analytics: false,
     marketing: false,
+    advertising: false,
   });
 
   useEffect(() => {
@@ -40,6 +42,7 @@ export default function CookieConsent() {
       necessary: true,
       analytics: true,
       marketing: true,
+      advertising: true,
     };
     saveConsent(allAccepted);
   };
@@ -49,6 +52,7 @@ export default function CookieConsent() {
       necessary: true,
       analytics: false,
       marketing: false,
+      advertising: false,
     };
     saveConsent(onlyNecessary);
   };
@@ -71,6 +75,13 @@ export default function CookieConsent() {
     if (prefs.marketing) {
       // Enable marketing cookies
       console.log('Marketing cookies enabled');
+    }
+    if (prefs.advertising) {
+      // Enable AdSense and advertising cookies
+      console.log('AdSense and advertising enabled');
+      // AdSense script will check localStorage for consent before loading ads
+    } else {
+      console.log('AdSense and advertising disabled');
     }
   };
 
@@ -107,8 +118,16 @@ export default function CookieConsent() {
                   </button>
                 </div>
 
-                <p className='text-gray-300 text-sm mb-4 leading-relaxed'>
+                <p className='text-gray-300 text-sm mb-3 leading-relaxed'>
                   {t('cookieConsent.description')}
+                </p>
+
+                <p className='text-amber-200 text-xs mb-4 bg-amber-900/20 p-2 rounded border border-amber-500/30'>
+                  🔔{' '}
+                  {t(
+                    'cookieConsent.adsenseNotice',
+                    'Bu site Google AdSense kullanmaktadır. Reklamları görebilmek için çerez izni vermeniz gerekmektedir.'
+                  )}
                 </p>
 
                 <div className='flex flex-col gap-2'>
@@ -218,6 +237,37 @@ export default function CookieConsent() {
                             setPreferences({
                               ...preferences,
                               marketing: e.target.checked,
+                            })
+                          }
+                          className='sr-only peer'
+                        />
+                        <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-purple-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
+                      </label>
+                    </div>
+                  </div>
+
+                  {/* Advertising / AdSense Cookies */}
+                  <div className='p-4 bg-gradient-to-r from-amber-500/10 to-orange-500/10 rounded-xl border border-amber-500/20'>
+                    <div className='flex items-start justify-between mb-2'>
+                      <div className='flex-1'>
+                        <h3 className='text-lg font-semibold text-amber-300 mb-1'>
+                          {t('cookieConsent.advertising', 'Reklamlar (AdSense)')}
+                        </h3>
+                        <p className='text-sm text-gray-400'>
+                          {t(
+                            'cookieConsent.advertisingDesc',
+                            'Google AdSense ve üçüncü taraf reklam sağlayıcıları tarafından kullanılan çerezler. Kişiselleştirilmiş reklamlar için kullanılır.'
+                          )}
+                        </p>
+                      </div>
+                      <label className='relative inline-flex items-center cursor-pointer ml-4'>
+                        <input
+                          type='checkbox'
+                          checked={preferences.advertising}
+                          onChange={(e) =>
+                            setPreferences({
+                              ...preferences,
+                              advertising: e.target.checked,
                             })
                           }
                           className='sr-only peer'

@@ -38,6 +38,8 @@ import {
   usePerformanceBudget,
 } from '@/components/performance/WebVitals';
 import CookieConsent from '@/components/shared/CookieConsent';
+import DisclaimerBanner from '@/components/shared/DisclaimerBanner';
+import AgeVerificationModal from '@/components/shared/AgeVerificationModal';
 
 interface LocaleLayoutClientProps {
   children: React.ReactNode;
@@ -120,8 +122,14 @@ export function LocaleLayoutClient({
         </div>
       </header>
 
+      {/* Disclaimer Banner */}
+      <DisclaimerBanner locale={locale as 'tr' | 'en' | 'sr'} />
+
       {/* Main Content */}
       <main className='pt-16'>{children}</main>
+
+      {/* Age Verification Modal */}
+      <AgeVerificationModal locale={locale as 'tr' | 'en' | 'sr'} />
 
       {/* Cookie Consent Banner */}
       <CookieConsent />

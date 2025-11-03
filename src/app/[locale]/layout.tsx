@@ -30,7 +30,7 @@ export default async function LocaleLayout({
 
   // Yeni SEO generator ile structured data oluştur
   const structuredData = generateHomepageStructuredData(locale);
-  const faqSchema = generateFAQSchema();
+  const faqSchema = generateFAQSchema(locale);
 
   return (
     <>

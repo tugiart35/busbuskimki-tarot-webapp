@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { CardContent } from '@/types/tarot-cards';
 
 interface CardCombinationsProps {
@@ -5,13 +6,26 @@ interface CardCombinationsProps {
   locale: 'tr' | 'en' | 'sr';
 }
 
-export function CardCombinations({
-  content,
-  locale: _locale,
-}: CardCombinationsProps) {
+export function CardCombinations({ content, locale }: CardCombinationsProps) {
   const { card_combinations } = content;
 
-  if (!card_combinations || !card_combinations.combinations.length) return null;
+  if (!card_combinations || !card_combinations.combinations.length) {
+    return null;
+  }
+
+  const buildCardUrl = (slug?: string) => {
+    if (!slug) {
+      return null;
+    }
+    switch (locale) {
+      case 'tr':
+        return `/tr/kartlar/${slug}`;
+      case 'sr':
+        return `/sr/kartice/${slug}`;
+      default:
+        return `/en/cards/${slug}`;
+    }
+  };
 
   return (
     <section className='py-16 px-4 bg-white'>
@@ -31,9 +45,19 @@ export function CardCombinations({
                   {index + 1}
                 </div>
                 <div className='flex-1'>
-                  <h3 className='text-xl font-bold text-gray-800 mb-2'>
-                    {combo.card}
-                  </h3>
+                  {buildCardUrl(combo.slug) ? (
+                    <Link
+                      href={buildCardUrl(combo.slug)!}
+                      className='text-xl font-bold text-purple-600 hover:text-purple-800 transition-colors duration-200 mb-2 inline-flex items-center gap-2'
+                    >
+                      {combo.card}
+                      <span aria-hidden='true'>↗</span>
+                    </Link>
+                  ) : (
+                    <h3 className='text-xl font-bold text-gray-800 mb-2'>
+                      {combo.card}
+                    </h3>
+                  )}
                   <p className='text-gray-700 leading-relaxed'>
                     {combo.meaning}
                   </p>

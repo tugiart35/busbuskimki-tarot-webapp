@@ -8,6 +8,13 @@ export interface TarotCard {
   suit?: 'cups' | 'swords' | 'wands' | 'pentacles';
   number?: number;
   imageUrl: string;
+  additionalImages?: Array<{
+    url: string;
+    alt: string;
+    caption?: string;
+    type?: 'symbolism' | 'detail' | 'variation' | 'comparison';
+    priority?: boolean;
+  }>;
   slug: {
     tr: string;
     en: string;
@@ -41,12 +48,13 @@ export interface CardContent {
   };
   context: {
     mythology: string;
+    history?: string;
     celtic_cross?: {
       future: string;
       hidden_influences: string;
     };
   };
-  story: {
+  story?: {
     title: string;
     description: string;
     history: string;
@@ -57,7 +65,16 @@ export interface CardContent {
     cultural_title: string;
     cultural_message: string;
   };
-  keywords: {
+  symbolism?: Array<{
+    symbol: string;
+    meaning: string;
+  }>;
+  numerology?: {
+    number: number;
+    essence: string;
+    message: string;
+  };
+  keywords?: {
     keywords_title: string;
     keywords_message: string;
     positive_title: string;
@@ -80,12 +97,29 @@ export interface CardContent {
     combinations: Array<{
       card: string;
       meaning: string;
+      slug?: string;
     }>;
   };
   affirmations?: {
     title: string;
     affirmation_list: string[];
   };
+  psychologist_perspective?: {
+    title: string;
+    summary: string;
+    insights: string[];
+  };
+  image_gallery?: Array<{
+    src: string;
+    alt: string;
+    caption?: string;
+    priority?: boolean;
+    type?: 'symbolism' | 'detail' | 'variation' | 'comparison';
+  }>;
+  daily_practices?: Array<{
+    title: string;
+    description: string;
+  }>;
   cta: {
     main: string;
     micro: string;
@@ -93,6 +127,12 @@ export interface CardContent {
   faq: FAQItem[];
   related_cards: string[];
   imageUrl: string;
+  additionalImages?: Array<{
+    url: string;
+    alt: string;
+    caption?: string;
+    type?: 'symbolism' | 'detail' | 'variation' | 'comparison';
+  }>;
   readingTime?: number;
   createdAt: Date;
   updatedAt: Date;
@@ -146,9 +186,9 @@ export interface CardState {
 }
 
 export interface CardActions {
-  loadCard: (slug: string, locale: string) => Promise<void>;
-  loadRelatedCards: (cardId: string, arcanaType: string) => Promise<void>;
-  updateCard: (cardId: string, updates: Partial<TarotCard>) => Promise<void>;
+  loadCard: (_slug: string, _locale: string) => Promise<void>;
+  loadRelatedCards: (_cardId: string, _arcanaType: string) => Promise<void>;
+  updateCard: (_cardId: string, _updates: Partial<TarotCard>) => Promise<void>;
   clearError: () => void;
 }
 

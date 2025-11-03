@@ -7,50 +7,29 @@
 
 import { Metadata } from 'next';
 
-// SEO-friendly URL mapping'leri
+// GOOGLE SEO UYUMLU: Gerçek route'ları kullan (SEO alias'ları kaldırıldı)
+// Rewrite'lar next.config.js'ten kaldırıldı, direkt route kullanıyoruz
 const seoFriendlyPaths = {
   tr: {
-    '/': '/anasayfa',
-    '/anasayfa': '/anasayfa',
-    '/tarotokumasi': '/tarot-okuma',
-    '/tarot-okuma': '/tarot-okuma',
+    '/': '/',
+    '/tarotokumasi': '/tarotokumasi',
     '/numeroloji': '/numeroloji',
-    '/dashboard': '/panel',
-    '/panel': '/panel',
-    '/auth': '/giris',
-    '/giris': '/giris',
+    '/dashboard': '/dashboard',
+    '/auth': '/auth',
   },
   en: {
-    '/': '/home',
-    '/home': '/home',
-    '/anasayfa': '/home',
-    '/tarotokumasi': '/tarot-reading',
-    '/tarot-reading': '/tarot-reading',
-    '/tarot-okuma': '/tarot-reading',
-    '/numeroloji': '/numerology',
-    '/numerology': '/numerology',
+    '/': '/',
+    '/tarotokumasi': '/tarotokumasi',
+    '/numeroloji': '/numeroloji',
     '/dashboard': '/dashboard',
-    '/auth': '/login',
-    '/login': '/login',
+    '/auth': '/auth',
   },
   sr: {
-    '/': '/pocetna',
-    '/pocetna': '/pocetna',
-    '/anasayfa': '/pocetna',
-    '/home': '/pocetna',
-    '/tarotokumasi': '/tarot-citanje',
-    '/tarot-citanje': '/tarot-citanje',
-    '/tarot-okuma': '/tarot-citanje',
-    '/tarot-reading': '/tarot-citanje',
-    '/numeroloji': '/numerologija',
-    '/numerologija': '/numerologija',
-    '/numerology': '/numerologija',
-    '/dashboard': '/panel',
-    '/panel': '/panel',
-    '/auth': '/prijava',
-    '/prijava': '/prijava',
-    '/giris': '/prijava',
-    '/login': '/prijava',
+    '/': '/',
+    '/tarotokumasi': '/tarotokumasi',
+    '/numeroloji': '/numeroloji',
+    '/dashboard': '/dashboard',
+    '/auth': '/auth',
   },
 };
 
@@ -190,9 +169,8 @@ export function generateHomepageMetadata(locale: string): Metadata {
  */
 export function generateHomepageStructuredData(locale: string) {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://busbuskimki.com';
-  const localePaths = seoFriendlyPaths[locale as keyof typeof seoFriendlyPaths];
-  const homePath = localePaths?.['/'] || '/';
-  const currentUrl = `${baseUrl}/${locale}${homePath}`;
+  // GOOGLE SEO: Ana sayfa direkt /{locale} (SEO alias yok)
+  const currentUrl = `${baseUrl}/${locale}`;
 
   const structuredData = {
     organization: {

@@ -47,7 +47,7 @@ export const defaultMetadata: Metadata = {
   description:
     'Profesyonel tarot okuması ve numeroloji analizi ile geleceğinizi keşfedin. Aşk, kariyer ve yaşam sorularınıza mistik cevaplar bulun. Güvenilir mistik rehberlik hizmetleri.',
   keywords:
-    'tarot okuması, numeroloji, mistik rehberlik, aşk rehberliği, kariyer rehberliği, günlük rehberlik, ruhani danışmanlık, tarot kartları, sayıların sırrı, gelecek tahmini, kader analizi',
+    'tarot okuması, numeroloji, mistik rehberlik, aşk rehberliği, kariyer rehberliği, günlük rehberlik, ruhani rehberlik, tarot kartları, sayıların sırrı, gelecek tahmini, kader analizi',
   authors: [{ name: 'Büşbüşkimki - Mistik Rehberlik' }],
   creator: 'Büşbüşkimki',
   publisher: 'Büşbüşkimki',

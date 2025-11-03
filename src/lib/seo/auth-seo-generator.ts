@@ -37,12 +37,12 @@ const authSeoData: Record<
       'mistik rehberlik',
       'kişisel hesap',
     ],
-    canonicalPath: '/tr/giris',
+    canonicalPath: '/tr/auth',
     ogImage: '/assets/logo/social-og-auth.jpg',
     twitterImage: '/assets/logo/twitter-card-auth.jpg',
     breadcrumbs: [
-      { name: 'Anasayfa', url: `${baseUrl}/tr/anasayfa` },
-      { name: 'Giriş', url: `${baseUrl}/tr/giris` },
+      { name: 'Anasayfa', url: `${baseUrl}/tr` },
+      { name: 'Giriş', url: `${baseUrl}/tr/auth` },
     ],
     faq: [
       {
@@ -75,12 +75,12 @@ const authSeoData: Record<
       'mystical guidance',
       'personal account',
     ],
-    canonicalPath: '/en/login',
+    canonicalPath: '/en/auth',
     ogImage: '/assets/logo/social-og-auth.jpg',
     twitterImage: '/assets/logo/twitter-card-auth.jpg',
     breadcrumbs: [
-      { name: 'Home', url: `${baseUrl}/en/home` },
-      { name: 'Sign In', url: `${baseUrl}/en/login` },
+      { name: 'Home', url: `${baseUrl}/en` },
+      { name: 'Sign In', url: `${baseUrl}/en/auth` },
     ],
     faq: [
       {
@@ -113,12 +113,12 @@ const authSeoData: Record<
       'мистичко вођство',
       'лични налог',
     ],
-    canonicalPath: '/sr/prijava',
+    canonicalPath: '/sr/auth',
     ogImage: '/assets/logo/social-og-auth.jpg',
     twitterImage: '/assets/logo/twitter-card-auth.jpg',
     breadcrumbs: [
-      { name: 'Početna', url: `${baseUrl}/sr/pocetna` },
-      { name: 'Пријава', url: `${baseUrl}/sr/prijava` },
+      { name: 'Početna', url: `${baseUrl}/sr` },
+      { name: 'Пријава', url: `${baseUrl}/sr/auth` },
     ],
     faq: [
       {
@@ -198,6 +198,6 @@ export function generateAuthPageStructuredData(locale: string) {
     website: generateWebSiteSchema(),
     service: generateServiceSchema(),
     breadcrumb: generateBreadcrumbSchema(data!.breadcrumbs),
-    faq: generateFAQSchema(),
+    faq: generateFAQSchema(locale),
   };
 }

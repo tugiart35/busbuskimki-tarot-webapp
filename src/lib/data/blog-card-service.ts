@@ -24,12 +24,13 @@ interface BlogCardData {
   };
   context: {
     mythology: string;
+    history?: string;
     celtic_cross?: {
       future: string;
       hidden_influences: string;
     };
   };
-  story: {
+  story?: {
     title: string;
     description: string;
     history: string;
@@ -40,7 +41,7 @@ interface BlogCardData {
     cultural_title: string;
     cultural_message: string;
   };
-  keywords: {
+  keywords?: {
     keywords_title: string;
     keywords_message: string;
     positive_title: string;
@@ -64,10 +65,37 @@ interface BlogCardData {
       meaning: string;
     }>;
   };
-  affirmations?: {
+  affirmations?:
+    | {
+        title: string;
+        affirmation_list: string[];
+      }
+    | string[];
+  psychologist_perspective?: {
     title: string;
-    affirmation_list: string[];
+    summary: string;
+    insights: string[];
   };
+  symbolism?: Array<{
+    symbol: string;
+    meaning: string;
+  }>;
+  numerology?: {
+    number: number | string;
+    essence: string;
+    message: string;
+  };
+  image_gallery?: Array<{
+    src: string;
+    alt: string;
+    caption?: string;
+    priority?: boolean;
+    type?: 'symbolism' | 'detail' | 'variation' | 'comparison';
+  }>;
+  daily_practices?: Array<{
+    title: string;
+    description: string;
+  }>;
   cta: {
     main: string;
     micro: string;
@@ -75,6 +103,21 @@ interface BlogCardData {
   faq: Array<{ question: string; answer: string }>;
   related_cards: string[];
   imageUrl: string;
+  seo?: {
+    metaTitle?: string;
+    metaDescription?: string;
+    focusKeywords?: string[];
+    canonicalUrl?: string;
+    ogImage?: string;
+    twitterImage?: string;
+    faq?: Array<{ question: string; answer: string }>;
+  };
+  combinations?: Array<{
+    with: string;
+    theme?: string;
+    description?: string;
+    meaning?: string;
+  }>;
 }
 
 interface BlogCards {

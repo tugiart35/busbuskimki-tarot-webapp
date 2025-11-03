@@ -208,6 +208,6 @@ export function generateTarotPageStructuredData(
     website: generateWebSiteSchema(),
     service: generateServiceSchema(),
     breadcrumb: generateBreadcrumbSchema(data.breadcrumbs),
-    faq: generateFAQSchema(),
+    faq: generateFAQSchema(locale),
   };
 }

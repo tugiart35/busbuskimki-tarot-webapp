@@ -3,6 +3,9 @@
  * Provides rich snippets and enhanced search results
  */
 
+import fs from 'fs';
+import path from 'path';
+
 export interface OrganizationSchema {
   '@context': string;
   '@type': string;
@@ -241,51 +244,87 @@ export function generateBreadcrumbSchema(
 }
 
 /**
- * Generate FAQ schema for common questions
+ * Generate FAQ schema for common questions with i18n support
  */
-export function generateFAQSchema(): FAQSchema {
+export function generateFAQSchema(locale: string = 'tr'): FAQSchema {
+  try {
+    // Load messages from JSON file
+    const messagesPath = path.join(process.cwd(), 'messages', `${locale}.json`);
+    const messages = JSON.parse(fs.readFileSync(messagesPath, 'utf-8'));
+    
+    const faqData = messages.seo?.faq;
+    
+    if (!faqData) {
+      console.warn(`FAQ data not found for locale: ${locale}`);
+      return generateFallbackFAQSchema();
+    }
+
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: faqData.q1.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: faqData.q1.answer,
+          },
+        },
+        {
+          '@type': 'Question',
+          name: faqData.q2.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: faqData.q2.answer,
+          },
+        },
+        {
+          '@type': 'Question',
+          name: faqData.q3.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: faqData.q3.answer,
+          },
+        },
+        {
+          '@type': 'Question',
+          name: faqData.q4.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: faqData.q4.answer,
+          },
+        },
+        {
+          '@type': 'Question',
+          name: faqData.q5.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: faqData.q5.answer,
+          },
+        },
+      ],
+    };
+  } catch (error) {
+    console.error('Error generating FAQ schema:', error);
+    return generateFallbackFAQSchema();
+  }
+}
+
+/**
+ * Fallback FAQ schema in Turkish
+ */
+function generateFallbackFAQSchema(): FAQSchema {
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
     mainEntity: [
       {
         '@type': 'Question',
-        name: 'How does tarot reading work?',
+        name: 'Tarot okuması nasıl çalışır?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Tarot reading is a form of divination that uses a deck of tarot cards to gain insight into various aspects of life, including love, career, and personal growth. Our professional readers interpret the cards to provide guidance and clarity.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'What is numerology?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Numerology is the study of numbers and their influence on human life. By analyzing your birth date and name, numerology can reveal insights about your personality, life path, and future opportunities.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'Are the readings accurate?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'While tarot and numerology provide guidance and insights, the accuracy depends on various factors including the question asked, the interpretation, and how the guidance is applied to your life. Our readers are experienced professionals who provide thoughtful, personalized interpretations.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'How long does a reading take?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Reading times vary depending on the type of reading. Simple spreads take 5-10 minutes, while comprehensive readings can take 15-30 minutes. You can choose the reading type that fits your schedule and needs.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'Can I get a reading in my language?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Yes! Our service is available in Turkish, English, and Serbian. You can select your preferred language when starting a reading.',
+          text: 'Tarot okuması, tarot kartlarını kullanarak aşk, kariyer ve kişisel gelişim gibi hayatın çeşitli yönlerine dair içgörüler elde etme şeklidir.',
         },
       },
     ],
@@ -341,18 +380,6 @@ export function generateTarotReadingSchema(
       availability: 'https://schema.org/InStock',
     },
   };
-}
-
-/**
- * Generate all schemas for the homepage
- */
-export function generateHomepageSchemas() {
-  return [
-    generateOrganizationSchema(),
-    generateWebSiteSchema(),
-    generateServiceSchema(),
-    generateFAQSchema(),
-  ];
 }
 
 /**

@@ -30,8 +30,8 @@ import { defaultLocale } from '@/lib/i18n/config';
 import { Inter } from 'next/font/google';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from '@vercel/analytics/react';
-import { generateHomepageSchemas } from '@/lib/seo/schema-markup';
 import { WebVitals } from '@/components/WebVitals';
+import { GoogleAnalytics } from '@/components/analytics/GoogleAnalytics';
 
 // Optimize font loading with display swap and preload
 const inter = Inter({
@@ -99,22 +99,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           href='/favicon.ico'
           as='image'
         />
-
-        {/* Schema.org JSON-LD Structured Data - Kritik SEO, head'de kalmalı */}
-        {generateHomepageSchemas().map((schema, index) => (
-          <script
-            key={index}
-            type='application/ld+json'
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify(schema),
-            }}
-          />
-        ))}
       </head>
       <body
         className='h-full overflow-x-hidden antialiased'
         style={{ backgroundColor: APP_CONFIG.theme.backgroundColor }}
       >
+        <GoogleAnalytics />
         <WebVitals />
         {children}
         <Footer />

@@ -127,7 +127,7 @@ export function HomePageClient({
 
           {/* Services Showcase */}
           <section
-            className='grid md:grid-cols-2 gap-8 max-w-6xl w-full mb-16 animate-fadeIn'
+            className='grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl w-full mb-16 animate-fadeIn'
             aria-label='Hizmetlerimiz'
           >
             {/* Modern Tarot Service Card */}
@@ -209,6 +209,49 @@ export function HomePageClient({
                 </div>
                 <div className='text-white font-semibold group-hover:text-white/80 transition-colors text-lg flex items-center gap-2'>
                   {t('homepage.services.numerology.button')}
+                  <span className='group-hover:translate-x-1 transition-transform duration-300'>
+                    →
+                  </span>
+                </div>
+              </div>
+            </Link>
+
+            {/* Modern Psychological Tests Service Card */}
+            <Link
+              href={`/${locale}/testler`}
+              className='group relative overflow-hidden rounded-3xl bg-white/5 backdrop-blur-xl border border-white/20 p-8 transition-all duration-500 hover:scale-105 hover:bg-white/10 hover:border-white/30 shadow-2xl hover:shadow-3xl'
+            >
+              <div className='absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500' />
+              <div className='relative z-10'>
+                <div
+                  className='text-5xl mb-6 group-hover:scale-110 transition-transform duration-500 filter drop-shadow-lg'
+                  aria-hidden='true'
+                >
+                  🧠
+                </div>
+                <h2 className='text-3xl font-bold text-white mb-4 group-hover:text-white/90 transition-colors'>
+                  {t('homepage.services.tests.title')}
+                </h2>
+                <p className='text-white/80 leading-relaxed mb-6 text-lg'>
+                  {t('homepage.services.tests.description')}
+                </p>
+                <div className='flex flex-wrap gap-3 mb-6'>
+                  {(() => {
+                    const features = t('homepage.services.tests.features');
+                    return Array.isArray(features)
+                      ? features.map((feature: string, index: number) => (
+                          <span
+                            key={index}
+                            className='px-4 py-2 bg-white/10 backdrop-blur-sm text-white/90 text-sm rounded-full border border-white/20 hover:bg-white/20 transition-all duration-300'
+                          >
+                            {feature}
+                          </span>
+                        ))
+                      : null;
+                  })()}
+                </div>
+                <div className='text-white font-semibold group-hover:text-white/80 transition-colors text-lg flex items-center gap-2'>
+                  {t('homepage.services.tests.button')}
                   <span className='group-hover:translate-x-1 transition-transform duration-300'>
                     →
                   </span>

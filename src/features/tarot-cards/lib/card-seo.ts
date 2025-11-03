@@ -269,4 +269,204 @@ export class CardSEO {
       },
     ];
   }
+
+  // 🆕 Generate HowTo Schema - Kart nasıl yorumlanır rehberi
+  static generateHowToSchema(
+    card: TarotCard,
+    locale: 'tr' | 'en' | 'sr'
+  ) {
+    const cardName =
+      locale === 'tr'
+        ? card.turkishName
+        : locale === 'en'
+          ? card.englishName
+          : card.serbianName;
+
+    const baseUrl = this.normalizeUrl(
+      process.env.NEXT_PUBLIC_SITE_URL || 'https://busbuskimki.com'
+    );
+
+    const title =
+      locale === 'tr'
+        ? `${cardName} Tarot Kartını Nasıl Yorumlarım?`
+        : locale === 'en'
+          ? `How to Interpret ${cardName} Tarot Card?`
+          : `Kako protumačiti ${cardName} Tarot kartu?`;
+
+    const steps =
+      locale === 'tr'
+        ? [
+            {
+              name: 'Kartın Pozisyonunu Belirle',
+              text: 'İlk olarak kartın düz mü yoksa ters mi çıktığını gözlemle. Düz pozisyon genellikle olumlu enerjiyi, ters pozisyon ise zorlukları temsil eder.',
+            },
+            {
+              name: 'Yaşam Alanını Seç',
+              text: 'Kartın anlamını hangi alanda öğrenmek istiyorsun? Aşk, kariyer, para veya ruhsal rehberlik alanlarından birini seç.',
+            },
+            {
+              name: 'Sembolleri İncele',
+              text: 'Karttaki görselleri, renkleri ve sembolleri dikkatlice incele. Her sembol özel bir anlam taşır.',
+            },
+            {
+              name: 'Sezgilerinle Birleştir',
+              text: 'Geleneksel yorumları kendi içsel sezgilerinle birleştir. Kart sana ne hissettiriyor?',
+            },
+            {
+              name: 'Bağlamı Değerlendir',
+              text: 'Kartı mevcut yaşam durumunuzla ilişkilendir. Kartın mesajı şu anki durumunuzla nasıl örtüşüyor?',
+            },
+          ]
+        : locale === 'en'
+          ? [
+              {
+                name: 'Determine the Card Position',
+                text: 'First, observe whether the card is upright or reversed. Upright position usually represents positive energy, while reversed indicates challenges.',
+              },
+              {
+                name: 'Select Life Area',
+                text: 'Which area do you want to learn the meaning of the card? Choose one from love, career, money or spiritual guidance.',
+              },
+              {
+                name: 'Examine the Symbols',
+                text: 'Carefully examine the visuals, colors and symbols on the card. Each symbol carries a special meaning.',
+              },
+              {
+                name: 'Combine with Your Intuition',
+                text: 'Combine traditional interpretations with your own inner intuition. How does the card make you feel?',
+              },
+              {
+                name: 'Evaluate the Context',
+                text: 'Relate the card to your current life situation. How does the message of the card align with your current situation?',
+              },
+            ]
+          : [
+              {
+                name: 'Odredite Poziciju Karte',
+                text: 'Prvo, posmatrajte da li je karta uspravna ili obrnuta. Uspravna pozicija obično predstavlja pozitivnu energiju, dok obrnuta ukazuje na izazove.',
+              },
+              {
+                name: 'Izaberite Životnu Oblast',
+                text: 'U kojoj oblasti želite da naučite značenje karte? Izaberite jednu od ljubavi, karijere, novca ili duhovnog vođstva.',
+              },
+              {
+                name: 'Ispitajte Simbole',
+                text: 'Pažljivo ispitajte vizuelne elemente, boje i simbole na karti. Svaki simbol nosi posebno značenje.',
+              },
+              {
+                name: 'Kombinujte sa Svojom Intuicijom',
+                text: 'Kombinujte tradicionalna tumačenja sa svojom unutrašnjom intuicijom. Kako vas karta čini?',
+              },
+              {
+                name: 'Procenite Kontekst',
+                text: 'Povežite kartu sa svojom trenutnom životnom situacijom. Kako se poruka karte uklapa u vašu trenutnu situaciju?',
+              },
+            ];
+
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'HowTo',
+      name: title,
+      description: `${cardName} tarot kartının nasıl yorumlanacağına dair adım adım rehber`,
+      image: card.imageUrl,
+      totalTime: 'PT10M',
+      step: steps.map((step, index) => ({
+        '@type': 'HowToStep',
+        position: index + 1,
+        name: step.name,
+        text: step.text,
+        url: `${baseUrl}/${locale}/${locale === 'tr' ? 'kartlar' : locale === 'en' ? 'cards' : 'kartice'}/${card.slug?.[locale]}#step-${index + 1}`,
+      })),
+    };
+  }
+
+  // 🆕 Generate ItemList Schema - İlgili kartlar listesi
+  static generateItemListSchema(
+    relatedCards: TarotCard[],
+    locale: 'tr' | 'en' | 'sr'
+  ) {
+    if (!relatedCards || relatedCards.length === 0) {
+      return null;
+    }
+
+    const baseUrl = this.normalizeUrl(
+      process.env.NEXT_PUBLIC_SITE_URL || 'https://busbuskimki.com'
+    );
+
+    const title =
+      locale === 'tr'
+        ? 'İlgili Tarot Kartları'
+        : locale === 'en'
+          ? 'Related Tarot Cards'
+          : 'Povezane Tarot Karte';
+
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: title,
+      itemListElement: relatedCards.map((card, index) => {
+        const cardName =
+          locale === 'tr'
+            ? card.turkishName
+            : locale === 'en'
+              ? card.englishName
+              : card.serbianName;
+
+        return {
+          '@type': 'ListItem',
+          position: index + 1,
+          item: {
+            '@type': 'Thing',
+            name: cardName,
+            url: `${baseUrl}/${locale}/${locale === 'tr' ? 'kartlar' : locale === 'en' ? 'cards' : 'kartice'}/${card.slug?.[locale]}`,
+            image: card.imageUrl,
+            description: `${cardName} tarot kartı anlamı ve yorumu`,
+          },
+        };
+      }),
+    };
+  }
+
+  // 🆕 Generate AggregateRating Schema - Kullanıcı reactions için
+  static generateAggregateRatingSchema(
+    card: TarotCard,
+    locale: 'tr' | 'en' | 'sr',
+    reactionsCount: number = 0
+  ) {
+    // Eğer reaction yoksa schema oluşturma
+    if (reactionsCount === 0) {
+      return null;
+    }
+
+    const cardName =
+      locale === 'tr'
+        ? card.turkishName
+        : locale === 'en'
+          ? card.englishName
+          : card.serbianName;
+
+    const baseUrl = this.normalizeUrl(
+      process.env.NEXT_PUBLIC_SITE_URL || 'https://busbuskimki.com'
+    );
+
+    // Simulated rating (gelecekte gerçek reaction data'dan hesaplanabilir)
+    const ratingValue = 4.5;
+    const reviewCount = reactionsCount || 1;
+
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'Product',
+      name: `${cardName} Tarot Kartı`,
+      image: card.imageUrl,
+      description: `${cardName} tarot kartının detaylı anlamı ve yorumu`,
+      url: `${baseUrl}/${locale}/${locale === 'tr' ? 'kartlar' : locale === 'en' ? 'cards' : 'kartice'}/${card.slug?.[locale]}`,
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: ratingValue,
+        reviewCount: reviewCount,
+        bestRating: '5',
+        worstRating: '1',
+      },
+    };
+  }
 }

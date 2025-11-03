@@ -32,7 +32,7 @@ export function LanguageSelector({
     setMounted(true);
   }, []);
 
-  // Dil değiştirme fonksiyonu
+  // Dil değiştirme fonksiyonu - GOOGLE SEO UYUMLU
   const handleLanguageChange = (newLocale: string) => {
     // Önce kart sayfası mı kontrol et - kart sayfalarında özel slug çevirisi gerekli
     const cardUrls = getCardAlternateUrls(pathname);
@@ -46,7 +46,7 @@ export function LanguageSelector({
       return;
     }
 
-    // Diğer sayfalar için mevcut mantığı kullan
+    // Diğer sayfalar için basitleştirilmiş mantık
     let pathWithoutLocale = pathname;
 
     if (pathname.startsWith(`/${locale}/`)) {
@@ -55,80 +55,36 @@ export function LanguageSelector({
       pathWithoutLocale = '/';
     }
 
-    const seoFriendlyMappings = {
-      tr: {
-        '/': '/anasayfa',
-        '/anasayfa': '/anasayfa',
-        '/home': '/anasayfa',
-        '/pocetna': '/anasayfa',
-        '/tarotokumasi': '/tarot-okuma',
-        '/tarot-okuma': '/tarot-okuma',
-        '/tarot-reading': '/tarot-okuma', // İngilizce'den geçiş için
-        '/tarot-citanje': '/tarot-okuma', // Sırpça'dan geçiş için
-        '/numeroloji': '/numeroloji',
-        '/numerology': '/numeroloji',
-        '/numerologija': '/numeroloji',
-        '/dashboard': '/panel',
-        '/panel': '/panel',
-        '/auth': '/giris',
-        '/giris': '/giris',
-        '/login': '/giris',
-        '/prijava': '/giris',
-      },
-      en: {
-        '/': '/home',
-        '/home': '/home',
-        '/anasayfa': '/home',
-        '/pocetna': '/home',
-        '/tarotokumasi': '/tarot-reading',
-        '/tarot-reading': '/tarot-reading',
-        '/tarot-okuma': '/tarot-reading', // Türkçe'den geçiş için
-        '/tarot-citanje': '/tarot-reading', // Sırpça'dan geçiş için
-        '/numeroloji': '/numerology',
-        '/numerology': '/numerology',
-        '/numerologija': '/numerology',
-        '/dashboard': '/dashboard',
-        '/panel': '/dashboard',
-        '/auth': '/login',
-        '/login': '/login',
-        '/giris': '/login',
-        '/prijava': '/login',
-      },
-      sr: {
-        '/': '/pocetna',
-        '/pocetna': '/pocetna',
-        '/anasayfa': '/pocetna',
-        '/home': '/pocetna',
-        '/tarotokumasi': '/tarot-citanje',
-        '/tarot-citanje': '/tarot-citanje',
-        '/tarot-okuma': '/tarot-citanje', // Türkçe'den geçiş için
-        '/tarot-reading': '/tarot-citanje', // İngilizce'den geçiş için
-        '/numeroloji': '/numerologija',
-        '/numerologija': '/numerologija',
-        '/numerology': '/numerologija',
-        '/dashboard': '/panel',
-        '/panel': '/panel',
-        '/auth': '/prijava',
-        '/prijava': '/prijava',
-        '/giris': '/prijava',
-        '/login': '/prijava',
-      },
+    // GOOGLE SEO: Ana sayfa için SEO-friendly URL YOK, direkt /{locale} kullan
+    // Diğer sayfalar için gerçek route'ları kullan (rewrite'lar kaldırıldı)
+    const pageMapping: Record<string, string> = {
+      // Ana sayfa - direkt locale
+      '/': '/',
+      
+      // Gerçek route'lar (her dilde aynı)
+      '/tarotokumasi': '/tarotokumasi',
+      '/numeroloji': '/numeroloji',
+      '/dashboard': '/dashboard',
+      '/panel': '/dashboard',  // panel -> dashboard normalize
+      '/auth': '/auth',
+      '/giris': '/auth',      // giris -> auth normalize
+      '/login': '/auth',      // login -> auth normalize
+      '/prijava': '/auth',    // prijava -> auth normalize
+      
+      // Kart sayfaları (locale-specific)
+      '/kartlar': newLocale === 'tr' ? '/kartlar' : newLocale === 'en' ? '/cards' : '/kartice',
+      '/cards': newLocale === 'tr' ? '/kartlar' : newLocale === 'en' ? '/cards' : '/kartice',
+      '/kartice': newLocale === 'tr' ? '/kartlar' : newLocale === 'en' ? '/cards' : '/kartice',
+      
+      // Testler sayfası
+      '/testler': '/testler',
     };
 
-    const getSeoFriendlyPath = (locale: string, path: string): string => {
-      const mapping =
-        seoFriendlyMappings[locale as keyof typeof seoFriendlyMappings];
-      if (mapping && path in mapping) {
-        return mapping[path as keyof typeof mapping];
-      }
-      return path;
-    };
-
-    const seoFriendlyPath = getSeoFriendlyPath(newLocale, pathWithoutLocale);
-    const newPath =
-      seoFriendlyPath === '/'
-        ? `/${newLocale}${getSeoFriendlyPath(newLocale, '/')}`
-        : `/${newLocale}${seoFriendlyPath}`;
+    // Path mapping uygula
+    const normalizedPath = pageMapping[pathWithoutLocale] || pathWithoutLocale;
+    const newPath = normalizedPath === '/' 
+      ? `/${newLocale}` 
+      : `/${newLocale}${normalizedPath}`;
 
     document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000; SameSite=Lax`;
     router.push(newPath);

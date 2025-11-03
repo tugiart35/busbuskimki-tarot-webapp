@@ -176,7 +176,7 @@ export default async function CardPageRoute({ params }: PageProps) {
     // Duplicate schema'dan kaçınmak için burada oluşturmuyoruz
     return (
       <>
-        <CardPage card={cardData} locale={locale as 'tr' | 'en' | 'sr'} />
+        <CardPage card={cardData} locale={locale as 'tr' | 'en' | 'sr'} slug={slug} />
         <BottomNavigation />
         <Footer />
       </>

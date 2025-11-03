@@ -5,51 +5,63 @@ interface CardKeywordsProps {
   locale: 'tr' | 'en' | 'sr';
 }
 
-export function CardKeywords({ content, locale: _locale }: CardKeywordsProps) {
-  // Don't render if keywords data is missing
-  if (!content.keywords?.keywords_title) {
+export function CardKeywords({ content, locale }: CardKeywordsProps) {
+  // Extract keywords from symbolism if keywords structure doesn't exist
+  // If there's symbolism, use that as keywords source
+  const hasSymbolism = content.symbolism && content.symbolism.length > 0;
+  const hasNumerology = content.numerology;
+
+  if (!hasSymbolism && !hasNumerology) {
     return null;
   }
 
+  const title = {
+    tr: '🔑 Anahtar Semboller',
+    en: '🔑 Key Symbols',
+    sr: '🔑 Ključni Simboli',
+  };
+
+  const subtitle = {
+    tr: 'Bu kartın taşıdığı temel semboller ve enerji',
+    en: 'Core symbols and energy of this card',
+    sr: 'Osnovni simboli i energija ove karte',
+  };
+
+  // Get first 3 symbols as key aspects
+  const keySymbols = hasSymbolism ? content.symbolism!.slice(0, 3) : [];
+
   return (
     <section className='py-12 px-4 bg-white'>
-      {/* Keyword Categories */}
-      <div className='mt-2 grid grid-cols-1 md:grid-cols-3 gap-1'>
-        <div className='text-center p-4 bg-purple-50 rounded-lg'>
-          <div className='w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-3'>
-            <span className='text-white font-bold'>+</span>
-          </div>
-          <h4 className='font-semibold text-gray-900 mb-2'>
-            {content.keywords.positive_title}
-          </h4>
-          <p className='text-sm text-gray-600'>
-            {content.keywords.positive_message}
-          </p>
-        </div>
+      {/* Section Header */}
+      <div className='text-center mb-8'>
+        <h2 className='text-3xl lg:text-4xl font-bold text-gray-900 mb-4'>
+          {title[locale]}
+        </h2>
+        <p className='text-lg text-gray-600'>{subtitle[locale]}</p>
+      </div>
 
-        <div className='text-center p-4 bg-blue-50 rounded-lg'>
-          <div className='w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-3'>
-            <span className='text-white font-bold'>⚖️</span>
+      {/* Keyword Cards */}
+      <div className='max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6'>
+        {keySymbols.map((item, index) => (
+          <div
+            key={index}
+            className='text-center p-6 bg-gradient-to-br from-purple-50 to-indigo-50 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 border border-purple-100'
+          >
+            <div className='w-14 h-14 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4'>
+              <span className='text-white font-bold text-xl'>
+                {index === 0 ? '✨' : index === 1 ? '⚖️' : '🔮'}
+              </span>
+            </div>
+            <h4 className='font-bold text-gray-900 mb-3 text-lg'>
+              {item.symbol}
+            </h4>
+            <p className='text-sm text-gray-600 leading-relaxed'>
+              {item.meaning.length > 100
+                ? `${item.meaning.substring(0, 100)}...`
+                : item.meaning}
+            </p>
           </div>
-          <h4 className='font-semibold text-gray-900 mb-2'>
-            {content.keywords.balance_title}
-          </h4>
-          <p className='text-sm text-gray-600'>
-            {content.keywords.balance_message}
-          </p>
-        </div>
-
-        <div className='text-center p-4 bg-indigo-50 rounded-lg'>
-          <div className='w-12 h-12 bg-indigo-500 rounded-full flex items-center justify-center mx-auto mb-3'>
-            <span className='text-white font-bold'>🔮</span>
-          </div>
-          <h4 className='font-semibold text-gray-900 mb-2'>
-            {content.keywords.soul_title}
-          </h4>
-          <p className='text-sm text-gray-600'>
-            {content.keywords.soul_message}
-          </p>
-        </div>
+        ))}
       </div>
     </section>
   );

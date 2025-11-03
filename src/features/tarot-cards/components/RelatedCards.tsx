@@ -13,6 +13,46 @@ export function RelatedCards({ cards, locale }: RelatedCardsProps) {
     return null;
   }
 
+  // Generate SEO-optimized ALT text for card images
+  const getCardAltText = (
+    name: string,
+    cardData: TarotCard,
+    lang: 'tr' | 'en' | 'sr'
+  ): string => {
+    const arcanaText =
+      cardData.arcanaType === 'major'
+        ? lang === 'tr'
+          ? 'Major Arcana'
+          : lang === 'en'
+            ? 'Major Arcana'
+            : 'Velika Arkana'
+        : lang === 'tr'
+          ? 'Minor Arcana'
+          : lang === 'en'
+            ? 'Minor Arcana'
+            : 'Mala Arkana';
+
+    const numberText = cardData.number
+      ? ` ${lang === 'tr' ? 'numara' : lang === 'en' ? 'number' : 'broj'} ${cardData.number}`
+      : '';
+
+    const seoKeywords =
+      lang === 'tr'
+        ? 'düz ve ters pozisyon yorumları, aşk, kariyer, para ve ruhsal rehberlik'
+        : lang === 'en'
+          ? 'upright and reversed position interpretations, love, career, money and spiritual guidance'
+          : 'uspravna i obrnuta pozicija tumačenja, ljubav, karijera, novac i duhovno vođstvo';
+
+    const meaningText =
+      lang === 'tr'
+        ? 'kartı anlamı'
+        : lang === 'en'
+          ? 'card meaning'
+          : 'karta značenje';
+
+    return `${name} tarot ${meaningText} - ${arcanaText}${numberText} - ${seoKeywords}`;
+  };
+
   return (
     <section className='py-16 px-4 bg-white' aria-labelledby='related-cards-heading'>
       <div className='max-w-6xl mx-auto'>
@@ -48,7 +88,7 @@ export function RelatedCards({ cards, locale }: RelatedCardsProps) {
                     <figure className='relative aspect-[2/3] overflow-hidden'>
                       <Image
                         src={card.imageUrl}
-                        alt={`${cardName} - ${card.arcanaType === 'major' ? (locale === 'tr' ? 'Major Arcana' : locale === 'en' ? 'Major Arcana' : 'Velika Arkana') : (locale === 'tr' ? 'Minor Arcana' : locale === 'en' ? 'Minor Arcana' : 'Mala Arkana')} ${locale === 'tr' ? 'tarot kartı anlamları ve yorumları' : locale === 'en' ? 'tarot card meanings and interpretations' : 'značenja i tumačenja tarot karata'}`}
+                        alt={getCardAltText(cardName, card, locale)}
                         fill
                         className='object-cover group-hover:scale-105 transition-transform duration-300'
                         loading='lazy'

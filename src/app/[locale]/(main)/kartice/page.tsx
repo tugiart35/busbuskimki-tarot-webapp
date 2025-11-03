@@ -1,8 +1,16 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
-import BottomNavigation from '@/features/shared/layout/BottomNavigation';
-import Footer from '@/features/shared/layout/Footer';
+
+// Import all client-side widgets from centralized ClientWidgets
+import {
+  DailyCardWidget,
+  TrendingCardsWidget,
+  PageReactions,
+  CardStatsWidget,
+  GeneralComments,
+  ExpertCommentary,
+} from '@/components/shared/ClientWidgets';
 
 interface PageProps {
   params: Promise<{
@@ -472,6 +480,17 @@ export default async function CardsPage({ params }: PageProps) {
         </div>
       </div>
 
+      {/* Daily Card Widget */}
+      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8'>
+        <DailyCardWidget locale={currentLocale} />
+      </div>
+
+      {/* Trending Cards Widget */}
+      <TrendingCardsWidget locale={currentLocale} limit={6} />
+
+      {/* Expert Commentary - General */}
+      <ExpertCommentary locale={currentLocale} isGeneral={true} />
+
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16'>
         {/* Major Arcana Section */}
         <section className='mb-20'>
@@ -530,6 +549,15 @@ export default async function CardsPage({ params }: PageProps) {
             ))}
           </div>
         </section>
+
+        {/* Page Reactions - After Major Arcana */}
+        <div className='mb-16'>
+          <PageReactions 
+            pageId='cards-listing-major' 
+            locale={currentLocale}
+            title={currentLocale === 'tr' ? 'Major Arcana kartlarını nasıl buldunuz?' : currentLocale === 'en' ? 'How did you find the Major Arcana cards?' : 'Kako ste pronašli Major Arcana karte?'}
+          />
+        </div>
 
         {/* Minor Arcana Section */}
         <section>
@@ -650,6 +678,9 @@ export default async function CardsPage({ params }: PageProps) {
           })}
         </section>
 
+        {/* Card Stats Widget */}
+        <CardStatsWidget locale={currentLocale} />
+
         {/* CTA Section */}
         <section className='mt-20 relative overflow-hidden'>
           <div className='bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 rounded-3xl p-12 text-white text-center relative'>
@@ -704,8 +735,12 @@ export default async function CardsPage({ params }: PageProps) {
           </div>
         </section>
       </div>
-      <BottomNavigation />
-      <Footer />
+
+      {/* General Comments */}
+      <GeneralComments 
+        pageId='cards-listing' 
+        locale={currentLocale}
+      />
     </div>
   );
 }

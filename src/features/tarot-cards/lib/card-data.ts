@@ -2,6 +2,8 @@
 import { BlogCardService } from '@/lib/data/blog-card-service';
 import { CardPageData } from '@/types/tarot-cards';
 import { logger } from '@/lib/logger';
+import { getCardName } from '@/lib/tarot/card-names';
+import { CardMapping } from './card-mapping';
 
 export class CardData {
   // Get complete card data by slug and locale
@@ -1201,6 +1203,22 @@ export class CardData {
     const cardId = this.getCardIdFromSlug(slug, locale);
     const relatedCards = BlogCardService.getRelatedCards(cardId, locale, 4);
 
+    const additionalImages = this.mapImageGallery(blogCard.image_gallery);
+    const cardCombinations = this.mapCardCombinations(blogCard, locale);
+    const affirmations = this.mapAffirmations(blogCard, locale);
+    const dailyPractices = Array.isArray(blogCard.daily_practices)
+      ? blogCard.daily_practices
+      : [];
+    const symbolism = Array.isArray(blogCard.symbolism)
+      ? blogCard.symbolism
+      : undefined;
+    const numerology = blogCard.numerology;
+    const psychologistPerspective = blogCard.psychologist_perspective;
+    const imageGallery = Array.isArray(blogCard.image_gallery)
+      ? blogCard.image_gallery
+      : undefined;
+    const seoMeta = this.mapSEOData(blogCard, locale);
+
     const mappedCard = {
       id: slug,
       englishName: blogCard.name,
@@ -1215,6 +1233,7 @@ export class CardData {
       },
       createdAt: new Date(),
       updatedAt: new Date(),
+      ...(additionalImages ? { additionalImages } : {}),
     };
 
     const mappedContent = {
@@ -1309,10 +1328,17 @@ export class CardData {
               : 'Duhovna Poruka',
         soul_message: this.getBasicCardKeywords(locale).join(', '),
       },
-      associations: blogCard.associations,
-      card_combinations: blogCard.card_combinations,
-      affirmations: blogCard.affirmations,
-      cta: blogCard.cta,
+      ...(blogCard.associations && { associations: blogCard.associations }),
+      ...(cardCombinations && { card_combinations: cardCombinations }),
+      ...(affirmations && { affirmations: affirmations }),
+      ...(psychologistPerspective && { psychologist_perspective: psychologistPerspective }),
+      ...(symbolism && { symbolism }),
+      ...(numerology && { numerology }),
+      ...(blogCard.numerological_perspective && { numerological_perspective: blogCard.numerological_perspective }),
+      ...(dailyPractices && dailyPractices.length > 0 && { daily_practices: dailyPractices }),
+      ...(imageGallery && { image_gallery: imageGallery }),
+      ...(blogCard.closing_paragraph && { closing_paragraph: blogCard.closing_paragraph }),
+      cta: blogCard.cta || this.getDefaultCTA(locale),
       faq: Array.isArray(blogCard.faq) ? blogCard.faq : [],
       related_cards: Array.isArray(blogCard.related_cards)
         ? blogCard.related_cards
@@ -1327,13 +1353,13 @@ export class CardData {
       id: `${slug}-seo`,
       cardId: slug,
       locale: locale,
-      metaTitle: `${blogCard.name} — Tarot Kartı Anlamı | Busbuskimki`,
-      metaDescription: blogCard.short_description,
-      canonicalUrl: BlogCardService.getCardUrl(blogCard, locale),
-      ogImage: blogCard.imageUrl,
-      twitterImage: blogCard.imageUrl,
-      keywords: [],
-      faq: Array.isArray(blogCard.faq) ? blogCard.faq : [],
+      metaTitle: seoMeta.metaTitle,
+      metaDescription: seoMeta.metaDescription,
+      canonicalUrl: seoMeta.canonicalUrl,
+      ogImage: seoMeta.ogImage,
+      twitterImage: seoMeta.twitterImage,
+      keywords: seoMeta.keywords,
+      faq: seoMeta.faq,
       createdAt: new Date(),
       updatedAt: new Date(),
     };
@@ -1360,6 +1386,194 @@ export class CardData {
       seo: mappedSEO,
       relatedCards: mappedRelatedCards,
     };
+  }
+
+  private static mapImageGallery(
+    imageGallery?: Array<{
+      src: string;
+      alt: string;
+      caption?: string;
+      priority?: boolean;
+      type?: 'symbolism' | 'detail' | 'variation' | 'comparison';
+    }>
+  ) {
+    if (!Array.isArray(imageGallery) || imageGallery.length === 0) {
+      return undefined;
+    }
+
+    return imageGallery.map(image => ({
+      url: image.src,
+      alt: image.alt,
+      ...(image.caption !== undefined && { caption: image.caption }),
+      ...(image.type !== undefined && { type: image.type }),
+      ...(image.priority !== undefined && { priority: image.priority }),
+    }));
+  }
+
+  private static mapCardCombinations(
+    blogCard: any,
+    locale: 'tr' | 'en' | 'sr'
+  ) {
+    if (
+      blogCard.card_combinations &&
+      Array.isArray(blogCard.card_combinations.combinations) &&
+      blogCard.card_combinations.combinations.length > 0
+    ) {
+      const title =
+        blogCard.card_combinations.title ||
+        this.getDefaultCombinationsTitle(locale);
+
+      const combinations = blogCard.card_combinations.combinations.map(
+        (combo: any) => ({
+          card: combo.card || '',
+          meaning: combo.meaning || '',
+          slug: combo.slug || this.getCombinationSlug(combo, locale),
+        })
+      );
+
+      return {
+        title,
+        combinations,
+      };
+    }
+
+    if (
+      !Array.isArray(blogCard.combinations) ||
+      blogCard.combinations.length === 0
+    ) {
+      return undefined;
+    }
+
+    const title = this.getDefaultCombinationsTitle(locale);
+
+    const combinations = blogCard.combinations.map((combo: any) => {
+      const cardName = getCardName(combo.with || combo.card || '', locale);
+      const displayName = combo.theme
+        ? `${cardName} — ${combo.theme}`
+        : cardName;
+
+      return {
+        card: displayName,
+        meaning: combo.description || combo.meaning || '',
+        slug: this.getCombinationSlug(combo, locale),
+      };
+    });
+
+    return {
+      title,
+      combinations,
+    };
+  }
+
+  private static mapAffirmations(blogCard: any, locale: 'tr' | 'en' | 'sr') {
+    if (
+      blogCard.affirmations &&
+      Array.isArray(blogCard.affirmations.affirmation_list)
+    ) {
+      return blogCard.affirmations;
+    }
+
+    if (
+      !Array.isArray(blogCard.affirmations) ||
+      blogCard.affirmations.length === 0
+    ) {
+      return undefined;
+    }
+
+    return {
+      title: this.getDefaultAffirmationsTitle(locale),
+      affirmation_list: blogCard.affirmations,
+    };
+  }
+
+  private static getDefaultCombinationsTitle(locale: 'tr' | 'en' | 'sr') {
+    switch (locale) {
+      case 'tr':
+        return 'Kart Kombinasyonları';
+      case 'sr':
+        return 'Kombinacije Karata';
+      default:
+        return 'Card Combinations';
+    }
+  }
+
+  private static getDefaultAffirmationsTitle(locale: 'tr' | 'en' | 'sr') {
+    switch (locale) {
+      case 'tr':
+        return 'Günlük Olumlamalar';
+      case 'sr':
+        return 'Dnevne Afirmacije';
+      default:
+        return 'Daily Affirmations';
+    }
+  }
+
+  private static getCombinationSlug(combo: any, locale: 'tr' | 'en' | 'sr') {
+    const cardKey =
+      combo.with ||
+      combo.cardKey ||
+      (combo.slug ? CardMapping.getCardKeyFromSlug(combo.slug, locale) : null);
+
+    if (!cardKey) {
+      return undefined;
+    }
+
+    try {
+      return CardMapping.getCardSlugForLocale(cardKey, locale);
+    } catch (_error) {
+      return undefined;
+    }
+  }
+
+  private static mapSEOData(blogCard: any, locale: 'tr' | 'en' | 'sr') {
+    const defaultMetaTitle = `${blogCard.name} — Tarot Kartı Anlamı | Busbuskimki`;
+    const defaultMetaDescription = blogCard.short_description;
+    const canonicalUrl =
+      blogCard.seo?.canonicalUrl ||
+      BlogCardService.getCardUrl(blogCard, locale);
+
+    const ogImage = blogCard.seo?.ogImage || blogCard.imageUrl;
+    const twitterImage = blogCard.seo?.twitterImage || blogCard.imageUrl;
+
+    const keywords = Array.isArray(blogCard.seo?.focusKeywords)
+      ? blogCard.seo.focusKeywords
+      : [];
+
+    const faq = Array.isArray(blogCard.seo?.faq)
+      ? blogCard.seo.faq
+      : Array.isArray(blogCard.faq)
+        ? blogCard.faq
+        : [];
+
+    return {
+      metaTitle: blogCard.seo?.metaTitle || defaultMetaTitle,
+      metaDescription: blogCard.seo?.metaDescription || defaultMetaDescription,
+      canonicalUrl,
+      ogImage,
+      twitterImage,
+      keywords,
+      faq,
+    };
+  }
+
+  private static getDefaultCTA(locale: 'tr' | 'en' | 'sr') {
+    switch (locale) {
+      case 'tr':
+        return {
+          main: 'Tarot Açılımı Yap',
+          micro: 'Yeni bir tarot okuması başlat',
+        };
+      case 'sr':
+        return {
+          main: 'Započni Tarot Čitanje',
+          micro: 'Pokreni novo tarot čitanje',
+        };
+      default:
+        return {
+          main: 'Start a Tarot Reading',
+          micro: 'Begin a new tarot reading session',
+        };
+    }
   }
 
   private static getUprightMeaning(

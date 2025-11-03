@@ -37,8 +37,70 @@ const nextConfig = {
     ],
   },
 
+  // Webpack configuration for large bundles
+  webpack: (config, { isServer }) => {
+    // Increase chunk size limits for large message files
+    config.performance = {
+      ...config.performance,
+      maxAssetSize: 10000000, // 10MB (tr.json is very large)
+      maxEntrypointSize: 10000000, // 10MB
+    };
+
+    // Optimize chunks for better loading
+    if (!isServer) {
+      config.optimization = {
+        ...config.optimization,
+        splitChunks: {
+          chunks: 'all',
+          cacheGroups: {
+            default: false,
+            vendors: false,
+            // Separate large message files into their own chunks
+            messages: {
+              test: /[\\/]messages[\\/].*\.json$/,
+              name: 'messages',
+              priority: 10,
+              reuseExistingChunk: true,
+            },
+            // Common libraries
+            lib: {
+              test: /[\\/]node_modules[\\/]/,
+              name(module) {
+                // Safely extract package name from node_modules path
+                if (!module.context) return 'npm.common';
+                
+                const match = module.context.match(
+                  /[\\/]node_modules[\\/](.*?)([\\/]|$)/
+                );
+                
+                if (!match || !match[1]) return 'npm.common';
+                
+                const packageName = match[1].replace('@', '');
+                return `npm.${packageName}`;
+              },
+              priority: 5,
+              reuseExistingChunk: true,
+            },
+          },
+        },
+      };
+    }
+
+    return config;
+  },
+
   async headers() {
     return [
+      // SEO Fix: Root path için noindex header (yönlendirmeli sayfa hatası önleme)
+      {
+        source: '/',
+        headers: [
+          {
+            key: 'X-Robots-Tag',
+            value: 'noindex, nofollow',
+          },
+        ],
+      },
       {
         source: '/:path*',
         headers: [
@@ -108,10 +170,7 @@ const nextConfig = {
   async rewrites() {
     return [
       // Turkish SEO-friendly URLs
-      {
-        source: '/tr/anasayfa',
-        destination: '/tr',
-      },
+      // SEO Fix: Removed /tr/anasayfa rewrite to avoid redirect chains
       {
         source: '/tr/tarot-okuma',
         destination: '/tr/tarotokumasi',
@@ -130,10 +189,7 @@ const nextConfig = {
       },
 
       // English SEO-friendly URLs
-      {
-        source: '/en/home',
-        destination: '/en',
-      },
+      // SEO Fix: Removed /en/home rewrite to avoid redirect chains
       {
         source: '/en/tarot-reading',
         destination: '/en/tarotokumasi',
@@ -156,10 +212,7 @@ const nextConfig = {
       },
 
       // Serbian SEO-friendly URLs
-      {
-        source: '/sr/pocetna',
-        destination: '/sr',
-      },
+      // SEO Fix: Removed /sr/pocetna rewrite to avoid redirect chains
       {
         source: '/sr/tarot-citanje',
         destination: '/sr/tarotokumasi',

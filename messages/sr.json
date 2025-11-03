@@ -46024,5 +46024,14 @@
     "cancel": "Otkaži",
     "close": "Zatvori",
     "back": "Nazad"
+  },
+  "widgets": {
+    "trendingCards": {
+      "badge": "POPULARNO",
+      "title": "Najpopularnije Karte Ove Nedelje",
+      "subtitle": "Najčitanije i najomiljenije karte od strane zajednice",
+      "imageAlt": "popularna tarot karta",
+      "sortInfo": "Sortirano po angažovanju zajednice u poslednjih 7 dana"
+    }
   }
 }

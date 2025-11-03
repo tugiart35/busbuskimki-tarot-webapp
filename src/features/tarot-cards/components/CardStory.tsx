@@ -6,10 +6,22 @@ interface CardStoryProps {
 }
 
 export function CardStory({ content, locale }: CardStoryProps) {
-  // Don't render if story data is missing
-  if (!content.story?.title) {
+  // Don't render if no mythology data available
+  if (!content.context?.mythology) {
     return null;
   }
+
+  const title = {
+    tr: '📖 Kartın Hikayesi',
+    en: '📖 Card Story',
+    sr: '📖 Priča Karte',
+  };
+
+  const subtitle = {
+    tr: 'Bu kartın kökeni, mitolojisi ve tarihsel anlamı',
+    en: 'The origin, mythology and historical meaning of this card',
+    sr: 'Poreklo, mitologija i istorijsko značenje ove karte',
+  };
 
   return (
     <section className='py-16 px-4 bg-gradient-to-br from-indigo-50 to-purple-50'>
@@ -21,68 +33,52 @@ export function CardStory({ content, locale }: CardStoryProps) {
               <span className='text-3xl'>📖</span>
             </div>
             <h3 className='text-3xl font-bold text-gray-900 mb-4'>
-              {content.story.title}
+              {title[locale]}
             </h3>
-            <p className='text-lg text-gray-600'>
-              {locale === 'tr'
-                ? 'Bu kartın kökeni, mitolojisi ve tarihsel anlamı'
-                : locale === 'en'
-                  ? 'The origin, mythology and historical meaning of this card'
-                  : 'Poreklo, mitologija i istorijsko značenje ove karte'}
-            </p>
+            <p className='text-lg text-gray-600'>{subtitle[locale]}</p>
           </div>
 
-          {/* Story Content */}
-          <div className='prose prose-lg prose-gray max-w-none'>
-            <div className='bg-gradient-to-r from-purple-100 to-indigo-100 rounded-lg p-6 mb-6'>
-              <p className='text-gray-800 leading-relaxed text-lg mb-4'>
-                {content.story.description}
-              </p>
-              <p className='text-gray-700 leading-relaxed'>
-                {content.story.history}
+          {/* Mythology Content */}
+          <div className='prose prose-lg prose-gray max-w-none mb-6'>
+            <div className='bg-gradient-to-r from-purple-100 to-indigo-100 rounded-lg p-6'>
+              <div className='flex items-center mb-4'>
+                <div className='w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center mr-3'>
+                  <span className='text-white text-xl'>🌙</span>
+                </div>
+                <h4 className='text-xl font-bold text-gray-900'>
+                  {locale === 'tr'
+                    ? 'Mitolojik ve Sembolik Köken'
+                    : locale === 'en'
+                      ? 'Mythological and Symbolic Origin'
+                      : 'Mitološko i Simboličko Poreklo'}
+                </h4>
+              </div>
+              <p className='text-gray-800 leading-relaxed text-lg whitespace-pre-line'>
+                {content.context.mythology}
               </p>
             </div>
           </div>
 
-          {/* Historical Context */}
-          <div className='mt-8 grid grid-cols-1 md:grid-cols-2 gap-6'>
-            <div className='bg-purple-50 rounded-lg p-6'>
+          {/* Historical Origin from context */}
+          {content.context.history && (
+            <div className='mt-6 bg-gradient-to-r from-yellow-50 to-orange-50 rounded-lg p-6'>
               <div className='flex items-center mb-4'>
-                <div className='w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center mr-3'>
+                <div className='w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center mr-3'>
                   <span className='text-white font-bold'>🏛️</span>
                 </div>
                 <h4 className='text-xl font-bold text-gray-900'>
-                  {content.story.historytitle}
+                  {locale === 'tr'
+                    ? 'Tarihsel Köken'
+                    : locale === 'en'
+                      ? 'Historical Origin'
+                      : 'Istorijsko Poreklo'}
                 </h4>
               </div>
-              <p className='text-gray-700'>{content.story.history_message}</p>
+              <p className='text-gray-700 leading-relaxed whitespace-pre-line'>
+                {content.context.history}
+              </p>
             </div>
-
-            <div className='bg-indigo-50 rounded-lg p-6'>
-              <div className='flex items-center mb-4'>
-                <div className='w-10 h-10 bg-indigo-500 rounded-full flex items-center justify-center mr-3'>
-                  <span className='text-white font-bold'>🔮</span>
-                </div>
-                <h4 className='text-xl font-bold text-gray-900'>
-                  {content.story.mystic_title}
-                </h4>
-              </div>
-              <p className='text-gray-700'>{content.story.mystic_message}</p>
-            </div>
-          </div>
-
-          {/* Cultural Significance */}
-          <div className='mt-8 bg-gradient-to-r from-yellow-50 to-orange-50 rounded-lg p-6'>
-            <div className='flex items-center mb-4'>
-              <div className='w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center mr-3'>
-                <span className='text-white font-bold'>🌍</span>
-              </div>
-              <h4 className='text-xl font-bold text-gray-900'>
-                {content.story.cultural_title}
-              </h4>
-            </div>
-            <p className='text-gray-700'>{content.story.cultural_message}</p>
-          </div>
+          )}
         </div>
       </div>
     </section>

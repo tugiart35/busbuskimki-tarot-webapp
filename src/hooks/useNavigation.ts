@@ -45,55 +45,21 @@ export const languages = [
   { code: 'sr', name: 'Srpski', flag: '🇷🇸' },
 ];
 
-// SEO-friendly URL mapping'leri
-const getSeoFriendlyPath = (locale: string, path: string): string => {
-  const mappings = {
-    tr: {
-      '/': '/anasayfa',
-      '/tarotokumasi': '/tarot-okuma',
-      '/tarot-okuma': '/tarot-okuma',
-      '/tarot-reading': '/tarot-okuma', // İngilizce'den geçiş için
-      '/tarot-citanje': '/tarot-okuma', // Sırpça'dan geçiş için
-      '/numeroloji': '/numeroloji',
-      '/kartlar': '/kartlar',
-      '/dashboard': '/panel',
-      '/auth': '/giris',
-    },
-    en: {
-      '/': '/home',
-      '/tarotokumasi': '/tarot-reading',
-      '/tarot-reading': '/tarot-reading',
-      '/tarot-okuma': '/tarot-reading', // Türkçe'den geçiş için
-      '/tarot-citanje': '/tarot-reading', // Sırpça'dan geçiş için
-      '/numeroloji': '/numerology',
-      '/numerology': '/numerology',
-      '/cards': '/cards',
-      '/dashboard': '/dashboard',
-      '/auth': '/login',
-    },
-    sr: {
-      '/': '/pocetna',
-      '/tarotokumasi': '/tarot-citanje',
-      '/tarot-citanje': '/tarot-citanje',
-      '/tarot-okuma': '/tarot-citanje', // Türkçe'den geçiş için
-      '/tarot-reading': '/tarot-citanje', // İngilizce'den geçiş için
-      '/numeroloji': '/numerologija',
-      '/numerologija': '/numerologija',
-      '/numerology': '/numerologija',
-      '/kartice': '/kartice',
-      '/dashboard': '/panel',
-      '/auth': '/prijava',
-    },
+// GOOGLE SEO UYUMLU: Basit path normalize (SEO alias'ları kaldırıldı)
+const getSeoFriendlyPath = (path: string): string => {
+  // Sadece normalize mapping (panel -> dashboard, giris -> auth gibi)
+  const normalizeMapping: Record<string, string> = {
+    '/panel': '/dashboard',
+    '/giris': '/auth',
+    '/login': '/auth',
+    '/prijava': '/auth',
   };
-
-  const mapping = mappings[locale as keyof typeof mappings];
-  if (mapping && path in mapping) {
-    return mapping[path as keyof typeof mapping];
-  }
-  return path;
+  
+  return normalizeMapping[path] || path;
 };
 
 // Navigasyon öğelerini oluştur - auth durumuna göre dinamik
+// GOOGLE SEO UYUMLU: Gerçek route'ları kullan
 const getNavigationItems = (
   currentLocale: string,
   isAuthenticated: boolean,
@@ -102,25 +68,25 @@ const getNavigationItems = (
   const baseItems: NavigationItem[] = [
     {
       name: 'Tarot',
-      href: `/${currentLocale}${getSeoFriendlyPath(currentLocale, '/tarotokumasi')}`,
+      href: `/${currentLocale}/tarotokumasi`,  // Gerçek route
       icon: '⭐',
       activeIcon: '⭐',
     },
     {
       name: 'Numeroloji',
-      href: `/${currentLocale}${getSeoFriendlyPath(currentLocale, '/numeroloji')}`,
+      href: `/${currentLocale}/numeroloji`,    // Gerçek route
       icon: '🔢',
       activeIcon: '🔢',
     },
     {
       name: 'Kartlar',
-      href: `/${currentLocale}${getSeoFriendlyPath(currentLocale, currentLocale === 'tr' ? '/kartlar' : currentLocale === 'en' ? '/cards' : '/kartice')}`,
+      href: `/${currentLocale}${currentLocale === 'tr' ? '/kartlar' : currentLocale === 'en' ? '/cards' : '/kartice'}`,
       icon: '🃏',
       activeIcon: '🃏',
     },
     {
       name: 'Ana Sayfa',
-      href: `/${currentLocale}${getSeoFriendlyPath(currentLocale, '/')}`,
+      href: `/${currentLocale}`,              // Direkt locale (SEO alias yok)
       icon: '💛',
       activeIcon: '💛',
     },
@@ -140,14 +106,14 @@ const getNavigationItems = (
   if (isAuthenticated) {
     baseItems.push({
       name: 'Profil',
-      href: `/${currentLocale}${getSeoFriendlyPath(currentLocale, '/dashboard')}`,
+      href: `/${currentLocale}/dashboard`,    // Gerçek route
       icon: '👤',
       activeIcon: '👤',
     });
   } else {
     baseItems.push({
       name: 'Giriş Yap',
-      href: `/${currentLocale}${getSeoFriendlyPath(currentLocale, '/auth')}`,
+      href: `/${currentLocale}/auth`,         // Gerçek route
       icon: '🔑',
       activeIcon: '🔑',
     });
@@ -177,7 +143,7 @@ export function useNavigation() {
     [currentLocale]
   );
 
-  // Dil değiştirme fonksiyonu - SEO-friendly URL mapping ile
+  // Dil değiştirme fonksiyonu - GOOGLE SEO UYUMLU (basitleştirildi)
   const handleLanguageChange = (locale: string) => {
     try {
       // Mevcut path'i locale olmadan al
@@ -190,14 +156,13 @@ export function useNavigation() {
         pathWithoutLocale = '/';
       }
 
-      // SEO-friendly path mapping uygula
-      const seoFriendlyPath = getSeoFriendlyPath(locale, pathWithoutLocale);
-
-      // Yeni path oluştur - SEO-friendly URL kullan
-      const newPath =
-        seoFriendlyPath === '/'
-          ? `/${locale}${getSeoFriendlyPath(locale, '/')}`
-          : `/${locale}${seoFriendlyPath}`;
+      // Normalize path (panel -> dashboard, giris -> auth)
+      const normalizedPath = getSeoFriendlyPath(pathWithoutLocale);
+      
+      // Yeni path oluştur (gerçek route'ları kullan)
+      const newPath = normalizedPath === '/' 
+        ? `/${locale}` 
+        : `/${locale}${normalizedPath}`;
 
       // Cookie'yi güncelle
       document.cookie = `NEXT_LOCALE=${locale}; path=/; max-age=31536000; SameSite=Lax`;
@@ -206,8 +171,7 @@ export function useNavigation() {
       router.push(newPath);
     } catch (error) {
       // Fallback - ana sayfaya yönlendir
-      const fallbackPath = `/${locale}${getSeoFriendlyPath(locale, '/')}`;
-      router.push(fallbackPath);
+      router.push(`/${locale}`);
     }
   };
 

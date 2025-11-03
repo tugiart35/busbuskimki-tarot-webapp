@@ -96,12 +96,12 @@ const numerologyPageSeoData: Record<
       'personal guidance',
       'numerology reading',
     ],
-    canonicalPath: '/en/numerology',
+    canonicalPath: '/en/numeroloji', // SEO Fix: gerçek route kullan
     ogImage: '/assets/seo/og-image-numerology.jpg',
     twitterImage: '/assets/seo/twitter-image-numerology.jpg',
     breadcrumbs: [
       { name: 'Home', url: `${baseUrl}/en` },
-      { name: 'Numerology', url: `${baseUrl}/en/numerology` },
+      { name: 'Numerology', url: `${baseUrl}/en/numeroloji` }, // SEO Fix: gerçek route
     ],
     faq: [
       {
@@ -147,12 +147,12 @@ const numerologyPageSeoData: Record<
       'lično vođstvo',
       'numerološko čitanje',
     ],
-    canonicalPath: '/sr/numerologija',
+    canonicalPath: '/sr/numeroloji', // SEO Fix: gerçek route kullan
     ogImage: '/assets/seo/og-image-numerology.jpg',
     twitterImage: '/assets/seo/twitter-image-numerology.jpg',
     breadcrumbs: [
       { name: 'Početna', url: `${baseUrl}/sr` },
-      { name: 'Numerologija', url: `${baseUrl}/sr/numerologija` },
+      { name: 'Numerologija', url: `${baseUrl}/sr/numeroloji` }, // SEO Fix: gerçek route
     ],
     faq: [
       {
@@ -200,8 +200,8 @@ export function generateNumerologyPageMetadata(locale: string): Metadata {
       languages: {
         'x-default': `${baseUrl}/tr/numeroloji`,
         tr: `${baseUrl}/tr/numeroloji`,
-        en: `${baseUrl}/en/numerology`,
-        sr: `${baseUrl}/sr/numerologija`,
+        en: `${baseUrl}/en/numeroloji`, // SEO Fix: gerçek route kullan
+        sr: `${baseUrl}/sr/numeroloji`, // SEO Fix: gerçek route kullan
       },
     },
     openGraph: {
@@ -254,7 +254,7 @@ export function generateNumerologyPageStructuredData(
     website: generateWebSiteSchema(),
     service: generateServiceSchema(),
     breadcrumb: generateBreadcrumbSchema(data!.breadcrumbs),
-    faq: generateFAQSchema(),
+    faq: generateFAQSchema(locale),
   };
 }
 
