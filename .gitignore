@@ -95,3 +95,47 @@ Thumbs.db
 # src/features/tarot/ klasöründeki tüm dosyalar
 # src/lib/tarotspread/ klasöründeki tüm dosyalar
 # src/app/[locale]/(main)/numeroloji/ klasöründeki tüm dosyalar
+
+# ===================================================================
+# DEPLOY İÇİN GEREKSİZ DOSYALAR
+# ===================================================================
+
+# Development & Documentation files
+*.md
+!README.md
+!TAROT-ACILIMLARI-REHBERI.md
+
+# Backup files
+backups/
+*.backup
+*.backup-*
+*.broken_backup
+
+# Development data & reports
+data/
+output/
+qwen/
+docs/
+
+# SEO & Analysis Reports
+*-seo-report*.json
+*-seo-report.json
+seo-*.json
+seo-*.txt
+card-quality-report.json
+unused-translation-keys.json
+
+# Development scripts
+scripts/
+
+# Temporary & Test JSON files
+tarot-card-main.json
+tarot-fool-reordered.json
+
+# Temporary markdown files
+messages/adsense.md
+adsensecodex.md
+deli-kart-analiz-raporu.md
+
+# Development SQL migrations (Supabase'de yönetiliyor)
+migrations/
