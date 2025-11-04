@@ -289,7 +289,7 @@ export const position4Meanings: Moneyposition4Meaning[] = [
     group: 'Majör Arkana',
   },
   {
-    id: 'judgement_ma_pos4',
+    id: 'Judgement_ma_pos4',
     card: 'Judgement',
     position: 4,
     upright:

@@ -35,9 +35,9 @@ export function TrendingCardsWidget({
         setIsLoading(true);
         setError(null);
 
-        // API'den gerçek veriyi çek
+        // API'den gerçek veriyi çek (all-time toplam)
         const response = await fetch(
-          `/api/engagement/trending-cards?limit=${limit}&timeframe=week`
+          `/api/engagement/trending-cards?limit=${limit}`
         );
         const result = await response.json();
 

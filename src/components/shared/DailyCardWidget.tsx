@@ -132,10 +132,10 @@ export function DailyCardWidget({ locale }: DailyCardWidgetProps) {
         date: today,
       };
 
-      // Supabase'e kaydet
+      // Supabase'e kaydet (upsert ile - aynı gün için güncelleme yapar)
       const { error } = await supabase
         .from('daily_cards')
-        .insert({
+        .upsert({
           user_id: user.id,
           card_id: card.id,
           card_name: card.name,
@@ -144,6 +144,9 @@ export function DailyCardWidget({ locale }: DailyCardWidgetProps) {
           card_meaning: card.shortMeaning,
           date: today,
           locale,
+        }, {
+          onConflict: 'user_id,date', // Aynı user + date varsa güncelle
+          ignoreDuplicates: false
         });
 
       if (error) {

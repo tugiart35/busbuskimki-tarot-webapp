@@ -323,7 +323,7 @@ export const position7Meanings: RelationshipProblemsPositionMeaning[] = [
     group: 'Majör Arkana',
   },
   {
-    id: 'judgement_rc_pos7',
+    id: 'Judgement_rc_pos7',
     card: 'Judgement',
     position: 7,
     upright:

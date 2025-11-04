@@ -336,7 +336,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       'the-chariot',
       'strength',
       'the-hermit',
-      'wheel-of-fortune',
+      'the-wheel-of-fortune',
       'justice',
       'the-hanged-man',
       'death',
@@ -346,7 +346,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       'the-star',
       'the-moon',
       'the-sun',
-      'judgement',
+      'Judgement',
       'the-world',
       // Minor Arcana - Cups
       'ace-of-cups',

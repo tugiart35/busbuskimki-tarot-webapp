@@ -306,7 +306,7 @@ export const position1Meanings: RelationshipAnalysisPosition1Meaning[] = [
     group: 'Majör Arkana',
   },
   {
-    id: 'judgement_ra_pos1',
+    id: 'Judgement_ra_pos1',
     card: 'Judgement',
     position: 1,
     upright:

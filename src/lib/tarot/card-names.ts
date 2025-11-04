@@ -39,7 +39,7 @@ export const MAJOR_ARCANA_NAMES: Record<Locale, CardNames> = {
     'the-star': 'Yıldız',
     'the-moon': 'Ay',
     'the-sun': 'Güneş',
-    judgement: 'Yargı',
+    Judgement: 'Yargı',
     'the-world': 'Dünya',
   },
   en: {
@@ -63,7 +63,7 @@ export const MAJOR_ARCANA_NAMES: Record<Locale, CardNames> = {
     'the-star': 'The Star',
     'the-moon': 'The Moon',
     'the-sun': 'The Sun',
-    judgement: 'Judgement',
+    Judgement: 'Judgement',
     'the-world': 'The World',
   },
   sr: {
@@ -87,7 +87,7 @@ export const MAJOR_ARCANA_NAMES: Record<Locale, CardNames> = {
     'the-star': 'Zvezda',
     'the-moon': 'Mesec',
     'the-sun': 'Sunce',
-    judgement: 'Sud',
+    Judgement: 'Sud',
     'the-world': 'Svet',
   },
 };

@@ -64,7 +64,7 @@ function getCardImagePath(cardId: string): string {
     'the-star': 'XVII-Star',
     'the-moon': 'XVIII-Moon',
     'the-sun': 'XIX-Sun',
-    'judgement': 'XX-Judgement',
+    'Judgement': 'XX-Judgement',
     'the-world': 'XXI-World',
   };
 

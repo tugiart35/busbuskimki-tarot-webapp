@@ -287,7 +287,7 @@ export const position5Meanings: NewLoverposition5Meaning[] = [
     group: 'Majör Arkana',
   },
   {
-    id: 'judgement_ma_pos5',
+    id: 'Judgement_ma_pos5',
     card: 'Judgement',
     position: 5,
     upright:

@@ -302,7 +302,7 @@ export const position8Meanings: MoneyPosition8Meaning[] = [
     group: 'Majör Arkana',
   },
   {
-    id: 'judgement_ma_pos8',
+    id: 'Judgement_ma_pos8',
     card: 'Judgement',
     position: 8,
     upright:

@@ -37,7 +37,7 @@ export async function generateStaticParams() {
     'the-star',
     'the-moon',
     'the-sun',
-    'judgement',
+    'Judgement',
     'the-world',
 
     // Cups suit - English

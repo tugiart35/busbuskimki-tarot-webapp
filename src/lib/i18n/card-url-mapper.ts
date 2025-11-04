@@ -28,7 +28,7 @@ const SLUG_TO_CARD_ID: { [key: string]: string } = {
   'the-star': 'the-star',
   'the-moon': 'the-moon',
   'the-sun': 'the-sun',
-  'judgement': 'judgement',
+  'Judgement': 'Judgement',
   'the-world': 'the-world',
 
   // Turkish slugs
@@ -52,7 +52,7 @@ const SLUG_TO_CARD_ID: { [key: string]: string } = {
   'yildiz': 'the-star',
   'ay': 'the-moon',
   'gunes': 'the-sun',
-  'yargi': 'judgement',
+  'yargi': 'Judgement',
   'dunya': 'the-world',
 
   // Serbian slugs
@@ -75,7 +75,7 @@ const SLUG_TO_CARD_ID: { [key: string]: string } = {
   'zvezda': 'the-star',
   'mesec': 'the-moon',
   'sunce': 'the-sun',
-  'sud': 'judgement',
+  'sud': 'Judgement',
   'svet': 'the-world',
 
   // Cups suit - Turkish
@@ -295,7 +295,7 @@ const CARD_ID_TO_SLUGS: {
   'the-star': { tr: 'yildiz', en: 'the-star', sr: 'zvezda' },
   'the-moon': { tr: 'ay', en: 'the-moon', sr: 'mesec' },
   'the-sun': { tr: 'gunes', en: 'the-sun', sr: 'sunce' },
-  'judgement': { tr: 'yargi', en: 'judgement', sr: 'sud' },
+  'Judgement': { tr: 'yargi', en: 'Judgement', sr: 'sud' },
   'the-world': { tr: 'dunya', en: 'the-world', sr: 'svet' },
 
   // Cups

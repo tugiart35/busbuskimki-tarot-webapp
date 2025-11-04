@@ -51,38 +51,43 @@ export function CardHero({ card, content, locale }: CardHeroProps) {
     return `${name} tarot ${meaningText} - ${arcanaText}${numberText} - ${seoKeywords}`;
   };
 
+  // ✅ imageUrl'yi kontrol et ve fallback değeri sağla
+  const imageUrl = card.imageUrl || '/images/card-placeholder.webp';
+
   return (
     <article className='relative bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 text-white py-16 px-4'>
       <div className='max-w-6xl mx-auto'>
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-12 items-center'>
           {/* Card Image - Using figure/figcaption for semantic image markup */}
-          <figure className='relative'>
-            <div className='relative w-full max-w-md mx-auto'>
-              <Image
-                src={card.imageUrl}
-                alt={getCardAltText(cardName, card, locale)}
-                width={400}
-                height={600}
-                className='rounded-lg shadow-2xl'
-                priority
-              />
-              {/* Card Number Badge */}
-              {card.arcanaType === 'major' && (
-                <div className='absolute -top-4 -right-4 bg-yellow-500 text-black font-bold text-xl px-3 py-1 rounded-full shadow-lg' role='img' aria-label={`${locale === 'tr' ? 'Kart numarası' : locale === 'en' ? 'Card number' : 'Broj karte'} ${card.number || 0}`}>
-                  {card.number || 0}
-                </div>
-              )}
-              {/* Minor Arcana Badge */}
-              {card.arcanaType === 'minor' && card.suit && (
-                <div className='absolute -top-4 -right-4 bg-white text-black font-bold text-sm px-3 py-1 rounded-full shadow-lg' role='img' aria-label={`${card.suit.toUpperCase()} ${card.number}`}>
-                  {card.suit.toUpperCase()} {card.number}
-                </div>
-              )}
-            </div>
-            <figcaption className='sr-only'>
-              {getCardAltText(cardName, card, locale)}
-            </figcaption>
-          </figure>
+          {card.imageUrl && (
+            <figure className='relative'>
+              <div className='relative w-full max-w-md mx-auto'>
+                <Image
+                  src={imageUrl}
+                  alt={getCardAltText(cardName, card, locale)}
+                  width={400}
+                  height={600}
+                  className='rounded-lg shadow-2xl'
+                  priority
+                />
+                {/* Card Number Badge */}
+                {card.arcanaType === 'major' && (
+                  <div className='absolute -top-4 -right-4 bg-yellow-500 text-black font-bold text-xl px-3 py-1 rounded-full shadow-lg' role='img' aria-label={`${locale === 'tr' ? 'Kart numarası' : locale === 'en' ? 'Card number' : 'Broj karte'} ${card.number || 0}`}>
+                    {card.number || 0}
+                  </div>
+                )}
+                {/* Minor Arcana Badge */}
+                {card.arcanaType === 'minor' && card.suit && (
+                  <div className='absolute -top-4 -right-4 bg-white text-black font-bold text-sm px-3 py-1 rounded-full shadow-lg' role='img' aria-label={`${card.suit.toUpperCase()} ${card.number}`}>
+                    {card.suit.toUpperCase()} {card.number}
+                  </div>
+                )}
+              </div>
+              <figcaption className='sr-only'>
+                {getCardAltText(cardName, card, locale)}
+              </figcaption>
+            </figure>
+          )}
 
           {/* Card Content - Using header and section for semantic structure */}
           <div className='space-y-6'>

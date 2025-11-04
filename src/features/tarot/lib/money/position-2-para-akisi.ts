@@ -288,7 +288,7 @@ export const position2Meanings: Moneyposition2Meaning[] = [
     group: 'Majör Arkana',
   },
   {
-    id: 'judgement_ma_pos2',
+    id: 'Judgement_ma_pos2',
     card: 'Judgement',
     position: 2,
     upright:

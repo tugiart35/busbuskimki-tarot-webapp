@@ -287,7 +287,7 @@ export const position6Meanings: CareerPositionMeaning[] = [
     group: 'Majör Arkana',
   },
   {
-    id: 'judgement_pos6',
+    id: 'Judgement_pos6',
     card: 'Judgement',
     position: 6,
     upright:

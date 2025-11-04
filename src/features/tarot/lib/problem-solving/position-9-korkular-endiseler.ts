@@ -297,7 +297,7 @@ export const position9Meanings: ProblemSolvingPosition9Meaning[] = [
     group: 'Majör Arkana',
   },
   {
-    id: 'judgement_ps_pos9',
+    id: 'Judgement_ps_pos9',
     card: 'Judgement',
     position: 9,
     upright:

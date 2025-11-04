@@ -2,67 +2,20 @@
 
 /**
  * Client-side Widget Loader
- * 
- * Bu dosya tüm client-side widget'ları dynamic import ile yükler.
- * Next.js 15'te Server Component içinde `ssr: false` kullanılamaz,
- * ancak Client Component içinde kullanılabilir.
+ *
+ * Bu dosya tüm client-side widget'ları re-export eder.
+ * Dynamic import yerine doğrudan export kullanılır çünkü
+ * component'ler zaten 'use client' directive'ine sahip.
+ * Bu yaklaşım Next.js 15 + next-intl ile daha uyumlu çalışır.
  */
 
-import dynamic from 'next/dynamic';
+// Named exports
+export { DailyCardWidget } from './DailyCardWidget';
+export { TrendingCardsWidget } from './TrendingCardsWidget';
+export { PageReactions } from './PageReactions';
+export { GeneralComments } from './GeneralComments';
+export { ExpertCommentary } from './ExpertCommentary';
+export { ExpertCommentaryModal } from './ExpertCommentaryModal';
 
-// Loading fallback component
-const LoadingWidget = () => (
-  <div className="w-full p-8 bg-gray-50 rounded-xl animate-pulse">
-    <div className="h-4 bg-gray-200 rounded w-3/4 mb-4"></div>
-    <div className="h-4 bg-gray-200 rounded w-1/2"></div>
-  </div>
-);
-
-export const DailyCardWidget = dynamic(
-  () => import('@/components/shared/DailyCardWidget'),
-  { 
-    ssr: false,
-    loading: () => <LoadingWidget />
-  }
-);
-
-export const TrendingCardsWidget = dynamic(
-  () => import('@/components/shared/TrendingCardsWidget'),
-  { 
-    ssr: false,
-    loading: () => <LoadingWidget />
-  }
-);
-
-export const PageReactions = dynamic(
-  () => import('@/components/shared/PageReactions'),
-  { 
-    ssr: false,
-    loading: () => <LoadingWidget />
-  }
-);
-
-export const CardStatsWidget = dynamic(
-  () => import('@/components/shared/CardStatsWidget'),
-  { 
-    ssr: false,
-    loading: () => <LoadingWidget />
-  }
-);
-
-export const GeneralComments = dynamic(
-  () => import('@/components/shared/GeneralComments'),
-  { 
-    ssr: false,
-    loading: () => <LoadingWidget />
-  }
-);
-
-export const ExpertCommentary = dynamic(
-  () => import('@/components/shared/ExpertCommentary'),
-  { 
-    ssr: false,
-    loading: () => <LoadingWidget />
-  }
-);
-
+// Default export (CardStatsWidget uses export default)
+export { default as CardStatsWidget } from './CardStatsWidget';

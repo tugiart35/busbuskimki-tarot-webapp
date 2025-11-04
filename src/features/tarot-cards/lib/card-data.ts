@@ -1126,7 +1126,7 @@ export class CardData {
       yildiz: 'the-star',
       ay: 'the-moon',
       gunes: 'the-sun',
-      yargi: 'judgement',
+      yargi: 'Judgement',
       dunya: 'the-world',
 
       // Major Arcana - English
@@ -1150,7 +1150,7 @@ export class CardData {
       'the-star': 'the-star',
       'the-moon': 'the-moon',
       'the-sun': 'the-sun',
-      judgement: 'judgement',
+      Judgement: 'Judgement',
       'the-world': 'the-world',
 
       // Major Arcana - Serbian
@@ -1173,7 +1173,7 @@ export class CardData {
       zvezda: 'the-star',
       mesec: 'the-moon',
       sunce: 'the-sun',
-      sud: 'judgement',
+      sud: 'Judgement',
       svet: 'the-world',
     };
 

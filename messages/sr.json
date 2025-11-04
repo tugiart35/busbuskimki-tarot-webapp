@@ -1532,7 +1532,7 @@
           "context": "Rezultat će biti svetla i uspešna budućnost."
         }
       },
-      "judgement": {
+      "Judgement": {
         "position1": {
           "upright": "Sud znači svest i ponovno rođenje. Vaša trenutna karijera može vam ponuditi novi smer.",
           "reversed": "Reversirani sud ukazuje da imate poteškoća da se razbijate od prošlosti. Možda ste postali zatvorenik svojih starih odluka.",
@@ -4869,7 +4869,7 @@
           "context": "Sudbina ove veze je toplo i jarko sunce koje svakodnevno svetli."
         }
       },
-      "judgement": {
+      "Judgement": {
         "position1": {
           "upright": "Ova osoba je u važnom periodu računa i ponovnog rođenja u njegovom životu. Procjenjuje prošlost, oprašta i budi se i budi se na višom svrhu. Možda postoji druga šansa ili važna odluka u odnosima.",
           "reversed": "Revertra presuda ukazuje da ova osoba sudi sebe ili druge, a ne učenje iz prošlih grešaka ili izbegavajući važnu odluku. Može biti veoma kritičan prema sebi.",
@@ -7790,7 +7790,7 @@
           "context": "Idealan partner je taj koji donosi radost svojom iskrenošću."
         }
       },
-      "judgement": {
+      "Judgement": {
         "position1": {
           "upright": "Vaš brak će doživeti obnovu sa lekcijama prošlosti. Zaključak; Može postojati oproštaj i nova stranica.",
           "reversed": "Prebivanje prošlosti ili prekomerne samospropusnosti može komplikovati ishod braka. Regeneracija se može odložiti.",
@@ -12763,7 +12763,7 @@
           "context": "Vaše sposobnosti za donošenje novca povezane su sa otvorenom ili lažnom nadom."
         }
       },
-      "judgement": {
+      "Judgement": {
         "position1": {
           "upright": "Sud ukazuje na zabrinutost zbog tereta prošlih odluka. Možete se bojati da će stare greške uticati na vašu finansijsku budućnost.",
           "reversed": "Reversirani sud otkriva preterano samokritičnost i anksioznost krivice. Ne mogu da oprostimo da prošlost povećava anksioznost.",
@@ -18969,7 +18969,7 @@
         "related_cards": ["visoki sveštenik", "snaga", "budala"],
         "imageUrl": "/cards/rws/IX-Hermit.webp"
       },
-      "the-wheel-of-fortune": {
+      "wheel-of-fortune": {
         "name": "Točak sudbine - promena i ciklusa",
         "short_description": "Točak sudbine predstavlja cikluse života, promene i sudbine. Simbolizuje povratak sreće, nove mogućnosti i predaje se toku života.",
         "imageUrl": "/cards/rws/k-Vheeloffortune.webp",
@@ -19964,7 +19964,7 @@
         "related_cards": ["budala", "zvezda", "kampera"],
         "imageUrl": "/cards/rws/XIX-Sun.webp"
       },
-      "judgment": {
+      "Judgement": {
         "name": "Apokalipsa - buđenje, svest i ponovno rođenje",
         "short_description": "Doomsdai kartica je simbol duhovnog buđenja, suočavanje sa prošlošću i ponovnom rogodom. To je poziv da slušate svoj unutrašnji glas i prelazak na novu eru.",
         "meanings": {
@@ -20062,7 +20062,7 @@
           }
         ],
         "related_cards": ["smrt", "sunce", "svet"],
-        "imageUrl": "/cards/rws/kk-judgement.webp"
+        "imageUrl": "/cards/rws/kk-Judgement.webp"
       },
       "the-world": {
         "name": "Zemlja - završetak, celovitost i univerzalna harmonija",
@@ -26122,7 +26122,7 @@
       "justice": "Pravda",
       "death": "smrt",
       "temperance": "Temperatura",
-      "judgement": "presuda",
+      "Judgement": "presuda",
       "kariyerimde-degistiremedigim-taraflar": "Delovi moje karijere koje se ne mogu promeniti",
       "kariyerimde-yardimci-olacak": "Koje će mi promene pomoći u karijeri?",
       "gecmisimdeki-hangi-engeller": "Koje prepreke u mojoj prošlosti",
@@ -26956,7 +26956,7 @@
           "context": "Pozitivna energija podržava vašu želju koja se ostvari."
         }
       },
-      "judgement": {
+      "Judgement": {
         "position1": {
           "upright": "Sud označava rođenje nove veze sa zatvaranjem prošlosti.",
           "reversed": "Obrnuti sud, ostanak zaglavljen u prošlosti može ometati novi odnos.",
@@ -30466,7 +30466,7 @@
           "context": "Vaši strahovi se fokusiraju na gubitak uspeha ili nisu vidljivi."
         }
       },
-      "judgement": {
+      "Judgement": {
         "position1": {
           "upright": "U srcu problema može biti potreba da se suoči sa prošlošću, ponovnom rođenjem ili velikom odlukom, sud je čuo.",
           "reversed": "Reversed Sud, izbegavajući prošlost, ne preuzimanje odgovornosti ili samoobmana može biti izvor problema.",
@@ -34884,7 +34884,7 @@
           "context": "Budućnost odnosa biće ojačana radošću i otvorenom otvorenom. Potrebno je da se ne prekine od stvarnosti."
         }
       },
-      "judgement": {
+      "Judgement": {
         "position1": {
           "upright": "Sud kaže da je odnos trenutno u procesu sukoba i ponovne procene. Otvorene su stare sveske. Savet: Naučite oprostiti.",
           "reversed": "Preokrećeni sud ukazuje da nedostatak zatvaranja prošlosti i nedostatka samoodgovornosti soli su obveznica u trenutnoj situaciji. Simptom: Blame-odbrambeni ciklus.",
@@ -38560,7 +38560,7 @@
           "context": "Da traje: istina, a ne izlog; Zakažite redovno dobra vremena."
         }
       },
-      "judgement": {
+      "Judgement": {
         "position1": {
           "upright": "Sud kaže da su prošle odluke i sukob sada pozivaju na odgovornost. Ako se prošli datoteke nisu zatvorene, kontradikcija curi u sadašnjost.",
           "reversed": "Preokrećeni sud ukazuje da nedostatak samokritika ili prekomernog presude sprečava okretanje novog lista. Kada se odloži oprost, napetost se nastavlja.",
@@ -42692,7 +42692,7 @@
           "context": "Budući potencijalni i mogući ishodi"
         }
       },
-      "judgement": {
+      "Judgement": {
         "position1": {
           "upright": "Proces buđenja, oproštenja ili ponovnog rođenja u prošlosti je možda postavio temelje za sadašnju situaciju, rekao je sud.",
           "reversed": "Invertirani sud, prošli propuštene mogućnosti, nemogućnost oprosti ili utaja odgovornosti možda je oblikovala trenutnu situaciju.",
@@ -45387,7 +45387,7 @@
     "justice": "Pravda",
     "death": "smrt",
     "temperance": "Temperatura",
-    "judgement": "presuda",
+    "Judgement": "presuda",
     "kariyerimde-degistiremedigim-taraflar": "Delovi moje karijere koje se ne mogu promeniti",
     "kariyerimde-yardimci-olacak": "Koje će mi promene pomoći u karijeri?",
     "gecmisimdeki-hangi-engeller": "Koje prepreke u mojoj prošlosti",

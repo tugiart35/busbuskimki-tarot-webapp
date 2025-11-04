@@ -9,7 +9,7 @@ import {
   PageReactions,
   CardStatsWidget,
   GeneralComments,
-  ExpertCommentary,
+  ExpertCommentaryModal,
 } from '@/components/shared/ClientWidgets';
 
 interface PageProps {
@@ -96,7 +96,7 @@ export default async function CardsPage({ params }: PageProps) {
     { key: 'the-star', number: 17 },
     { key: 'the-moon', number: 18 },
     { key: 'the-sun', number: 19 },
-    { key: 'judgement', number: 20 },
+    { key: 'Judgement', number: 20 },
     { key: 'the-world', number: 21 },
   ];
 
@@ -227,7 +227,7 @@ export default async function CardsPage({ params }: PageProps) {
       'the-star': { tr: 'yildiz', en: 'the-star', sr: 'zvezda' },
       'the-moon': { tr: 'ay', en: 'the-moon', sr: 'mesec' },
       'the-sun': { tr: 'gunes', en: 'the-sun', sr: 'sunce' },
-      judgement: { tr: 'yargi', en: 'judgement', sr: 'sud' },
+      Judgement: { tr: 'yargi', en: 'Judgement', sr: 'sud' },
       'the-world': { tr: 'dunya', en: 'the-world', sr: 'svet' },
     };
 
@@ -366,7 +366,7 @@ export default async function CardsPage({ params }: PageProps) {
       'the-star': 'XVII-Star',
       'the-moon': 'XVIII-Moon',
       'the-sun': 'XIX-Sun',
-      judgement: 'XX-Judgement',
+      Judgement: 'XX-Judgement',
       'the-world': 'XXI-World',
     };
 
@@ -448,6 +448,9 @@ export default async function CardsPage({ params }: PageProps) {
 
   return (
     <div className='min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100'>
+      {/* Expert Commentary Modal - First Time Visitors */}
+      <ExpertCommentaryModal locale={currentLocale} />
+
       {/* Hero Section */}
       <div className='relative overflow-hidden bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900'>
         <div className='absolute inset-0 bg-black/20'></div>
@@ -456,11 +459,6 @@ export default async function CardsPage({ params }: PageProps) {
         </div>
         <div className='relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20'>
           <div className='text-center'>
-            <div className='inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6'>
-              <span className='text-white/90 text-sm font-medium'>
-                ✨ 78 Tarot Kartı
-              </span>
-            </div>
             <h1 className='text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent'>
               {t.title}
             </h1>
@@ -482,16 +480,8 @@ export default async function CardsPage({ params }: PageProps) {
         </div>
       </div>
 
-      {/* Daily Card Widget */}
-      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8'>
-        <DailyCardWidget locale={currentLocale} />
-      </div>
-
       {/* Trending Cards Widget */}
       <TrendingCardsWidget locale={currentLocale} limit={6} />
-
-      {/* Expert Commentary - General */}
-      <ExpertCommentary locale={currentLocale} isGeneral={true} />
 
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16'>
         {/* Major Arcana Section */}
@@ -554,11 +544,22 @@ export default async function CardsPage({ params }: PageProps) {
 
         {/* Page Reactions - After Major Arcana */}
         <div className='mb-16'>
-          <PageReactions 
-            pageId='cards-listing-major' 
+          <PageReactions
+            pageId='cards-listing-major'
             locale={currentLocale}
-            title={currentLocale === 'tr' ? 'Major Arcana kartlarını nasıl buldunuz?' : currentLocale === 'en' ? 'How did you find the Major Arcana cards?' : 'Kako ste pronašli Major Arcana karte?'}
+            title={
+              currentLocale === 'tr'
+                ? 'Major Arcana kartlarını nasıl buldunuz?'
+                : currentLocale === 'en'
+                  ? 'How did you find the Major Arcana cards?'
+                  : 'Kako ste pronašli Major Arcana karte?'
+            }
           />
+        </div>
+
+        {/* Daily Card Widget - Between Major and Minor Arcana */}
+        <div className='mb-20'>
+          <DailyCardWidget locale={currentLocale} />
         </div>
 
         {/* Minor Arcana Section */}
@@ -739,10 +740,7 @@ export default async function CardsPage({ params }: PageProps) {
       </div>
 
       {/* General Comments */}
-      <GeneralComments 
-        pageId='cards-listing' 
-        locale={currentLocale}
-      />
+      <GeneralComments pageId='cards-listing' locale={currentLocale} />
     </div>
   );
 }
