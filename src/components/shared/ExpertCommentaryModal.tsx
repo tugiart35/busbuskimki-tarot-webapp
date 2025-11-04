@@ -131,5 +131,3 @@ export function ExpertCommentaryModal({ locale }: ExpertCommentaryModalProps) {
     </>
   );
 }
-
-export default ExpertCommentaryModal;

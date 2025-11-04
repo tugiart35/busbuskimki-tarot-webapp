@@ -1,5 +1,3 @@
-'use client';
-
 /**
  * Client-side Widget Loader
  *

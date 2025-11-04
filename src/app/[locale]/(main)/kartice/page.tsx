@@ -9,7 +9,6 @@ import {
   PageReactions,
   CardStatsWidget,
   GeneralComments,
-  ExpertCommentaryModal,
 } from '@/components/shared/ClientWidgets';
 
 interface PageProps {
@@ -446,9 +445,6 @@ export default async function CardsPage({ params }: PageProps) {
 
   return (
     <div className='min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100'>
-      {/* Expert Commentary Modal - First Time Visitors */}
-      <ExpertCommentaryModal locale={currentLocale} />
-
       {/* Hero Section */}
       <div className='relative overflow-hidden bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900'>
         <div className='absolute inset-0 bg-black/20'></div>

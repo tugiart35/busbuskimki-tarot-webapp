@@ -64,7 +64,7 @@ export const CARD_QUALITY_SETTINGS = {
  * Kritik kartlar (ilk yüklenenler)
  */
 export const CRITICAL_CARDS = [
-  '/cards/CardBack.jpg',
+  '/cards/CardBack.webp',
   '/cards/rws/0-Fool.jpg',
   '/cards/rws/I-Magician.jpg',
   '/cards/rws/II-HighPriestess.jpg',
@@ -216,5 +216,5 @@ export function handleImageError(
   }
 
   // Default fallback
-  return '/cards/CardBack.jpg';
+  return '/cards/CardBack.webp';
 }
