@@ -147,35 +147,83 @@ const nextConfig = {
       {
         source: '/:path*',
         headers: [
+          // ✅ X-Frame-Options - Clickjacking koruması
           {
             key: 'X-Frame-Options',
             value: 'DENY',
           },
+          // ✅ X-Content-Type-Options - MIME sniffing koruması
           {
             key: 'X-Content-Type-Options',
             value: 'nosniff',
           },
+          // ✅ FIX: Referrer Policy - strict-origin-when-cross-origin kullan (Mozilla Observatory)
           {
             key: 'Referrer-Policy',
-            value: 'origin-when-cross-origin',
+            value: 'strict-origin-when-cross-origin',
           },
+          // ✅ X-XSS-Protection - XSS koruması
           {
             key: 'X-XSS-Protection',
             value: '1; mode=block',
           },
+          // ✅ Permissions Policy - Gereksiz API'leri devre dışı bırak
           {
             key: 'Permissions-Policy',
-            value: 'camera=(), microphone=(), geolocation=()',
+            value: 'camera=(), microphone=(), geolocation=(), interest-cohort=()',
           },
-          // SECURITY FIX: HSTS (HTTP Strict Transport Security)
-          // Lighthouse Best Practices improvement - forces HTTPS
+          // ✅ HSTS - HTTPS zorlaması (HTTP Strict Transport Security)
           {
             key: 'Strict-Transport-Security',
             value: 'max-age=63072000; includeSubDomains; preload',
           },
+          // ✅ FIX: Content Security Policy - Mozilla Observatory gereksinimi
+          // Tüm harici kaynaklar için izinler: Google Analytics, AdSense, Vercel, Supabase
+          {
+            key: 'Content-Security-Policy',
+            value: [
+              "default-src 'self'",
+              // Script Sources - Inline scripts, eval, Google Analytics, AdSense, Vercel
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://pagead2.googlesyndication.com https://va.vercel-scripts.com https://*.vercel-insights.com https://googleads.g.doubleclick.net https://adservice.google.com",
+              // Style Sources - Inline styles, Google Fonts
+              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+              // Image Sources - Self, data URIs, HTTPS, Blob, Google Ads, Supabase
+              "img-src 'self' data: https: blob: https://pagead2.googlesyndication.com https://www.google-analytics.com https://*.supabase.co https://googleads.g.doubleclick.net",
+              // Font Sources - Self, data URIs, Google Fonts
+              "font-src 'self' data: https://fonts.gstatic.com",
+              // Connect Sources - API calls, Supabase, Analytics, Vercel
+              "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://www.google-analytics.com https://va.vercel-scripts.com https://*.vercel-insights.com https://region1.google-analytics.com",
+              // Frame Sources - Google Ads için
+              "frame-src 'self' https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://tpc.googlesyndication.com",
+              // Child Sources - Bazı tarayıcılar için
+              "child-src 'self' https://pagead2.googlesyndication.com",
+              // Object/Embed - Devre dışı (güvenlik)
+              "object-src 'none'",
+              // Base URI - Self only
+              "base-uri 'self'",
+              // Form Action - Self only
+              "form-action 'self'",
+              // Frame Ancestors - Hiçbiri (X-Frame-Options ile uyumlu)
+              "frame-ancestors 'none'",
+              // Upgrade HTTP to HTTPS
+              "upgrade-insecure-requests",
+            ].join('; '),
+          },
+          // ✅ Cross-Origin Policies - Modern browser güvenliği
+          {
+            key: 'Cross-Origin-Embedder-Policy',
+            value: 'unsafe-none', // Google Ads için gerekli
+          },
+          {
+            key: 'Cross-Origin-Opener-Policy',
+            value: 'same-origin-allow-popups', // Google Ads için gerekli
+          },
+          {
+            key: 'Cross-Origin-Resource-Policy',
+            value: 'cross-origin',
+          },
         ],
       },
-      // ... existing cache headers ...
     ];
   
     // Production ortamında indexing'e açıkça izin ver
