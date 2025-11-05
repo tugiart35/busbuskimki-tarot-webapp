@@ -62,6 +62,8 @@ Yapılan veya önerilen geliştirmeler:
 'use client';
 
 import { useState, Suspense } from 'react';
+import Link from 'next/link';
+import { useParams } from 'next/navigation';
 import { BottomNavigation } from '@/features/shared/layout';
 import { TarotCard } from '@/features/tarot/lib/full-tarot-deck';
 import { tarotSpreads } from '@/lib/constants/tarotSpreads';
@@ -73,6 +75,8 @@ import { useTranslations } from '@/hooks/useTranslations';
 
 export default function TarotPage() {
   const { t } = useTranslations();
+  const params = useParams();
+  const locale = params?.locale as string || 'tr';
   const [selectedSpread, setSelectedSpread] = useState('love-spread');
   const [showDescription, setShowDescription] = useState(true); // Açıklama gösterilsin mi?
   const [lastReading, setLastReading] = useState<{
@@ -115,6 +119,36 @@ export default function TarotPage() {
           onSpreadSelect={handleSpreadSelect}
           showDescription={showDescription}
         />
+        
+        {/* SEO Enhancement: Direct Links to Individual Spread Pages */}
+        <section className='mb-8 border-t border-slate-700 pt-8'>
+          <h2 className='text-2xl font-bold text-white mb-6 text-center'>
+            {t('tarot.allSpreads')}
+          </h2>
+          <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
+            {tarotSpreads.map(spread => (
+              <Link
+                key={spread.id}
+                href={`/${locale}/tarotokumasi/${spread.id}`}
+                className='group p-4 bg-slate-800/50 rounded-lg hover:bg-slate-700/70 transition-all duration-200 border border-slate-700 hover:border-purple-500'
+              >
+                <div className='text-4xl mb-3 group-hover:scale-110 transition-transform duration-200'>
+                  {spread.icon}
+                </div>
+                <h3 className='text-white font-medium text-sm group-hover:text-purple-400 transition-colors'>
+                  {t(spread.name)}
+                </h3>
+                <p className='text-gray-500 text-xs mt-1 line-clamp-2'>
+                  {t(spread.description)}
+                </p>
+                <span className='text-xs text-purple-400 mt-2 inline-block'>
+                  {spread.cardCount} {t('tarot.cards')} →
+                </span>
+              </Link>
+            ))}
+          </div>
+        </section>
+
         <div className='mb-8'>
           {CurrentComponent ? (
             <Suspense

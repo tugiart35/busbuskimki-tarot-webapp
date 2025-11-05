@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { supabase } from '@/lib/supabase/client';
 import { useAuth } from '@/hooks/auth/useAuth';
 import { useTranslations } from '@/hooks/useTranslations';
@@ -17,10 +18,22 @@ import {
   Heart,
   ArrowLeft,
 } from 'lucide-react';
-import ReadingDetailModal from '@/features/shared/ui/ReadingDetailModal';
 import { BottomNavigation } from '@/features/shared/layout';
 import { READING_CREDITS } from '@/lib/constants/reading-credits';
 import { getReadingFormat, getFormatInfo } from '@/utils/dashboard-utils';
+
+// PERFORMANCE: Lazy load heavy modal component
+const ReadingDetailModal = dynamic(
+  () => import('@/features/shared/ui/ReadingDetailModal'),
+  {
+    loading: () => (
+      <div className='fixed inset-0 flex items-center justify-center bg-black/50 z-50'>
+        <div className='animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500'></div>
+      </div>
+    ),
+    ssr: false, // Modal is client-only, no SSR needed
+  }
+);
 
 interface Reading {
   id: string;

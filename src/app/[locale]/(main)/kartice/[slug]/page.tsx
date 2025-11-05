@@ -162,6 +162,12 @@ export async function generateMetadata({ params }: PageProps) {
 export default async function CardPageRoute({ params }: PageProps) {
   const { locale, slug } = await params;
 
+  // ✅ Validate slug format - prevent multiple consecutive hyphens
+  if (!slug || /--+/.test(slug)) {
+    logger.warn(`Invalid slug detected: ${slug}`);
+    notFound();
+  }
+
   try {
     const cardData = await CardData.getCardBySlug(
       slug,

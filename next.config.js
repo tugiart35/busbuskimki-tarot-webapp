@@ -1,4 +1,4 @@
-const withNextIntl = require('next-intl/plugin')('./src/lib/i18n/config.ts');
+const withNextIntl = require('next-intl/plugin')('./src/i18n/request.ts');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -34,6 +34,8 @@ const nextConfig = {
       'lucide-react',
       'react-icons',
       'framer-motion',
+      'next-intl', // PERFORMANCE: Tree-shaking for i18n
+      '@supabase/supabase-js', // PERFORMANCE: Tree-shaking for Supabase
     ],
   },
 
@@ -52,17 +54,67 @@ const nextConfig = {
         ...config.optimization,
         splitChunks: {
           chunks: 'all',
+          maxInitialRequests: 25, // PERFORMANCE: Allow more parallel chunk loading
+          minSize: 20000, // PERFORMANCE: Minimum chunk size (20KB)
           cacheGroups: {
             default: false,
             vendors: false,
-            // Separate large message files into their own chunks
-            messages: {
-              test: /[\\/]messages[\\/].*\.json$/,
-              name: 'messages',
-              priority: 10,
+            // PERFORMANCE: Framework chunk - React/Next.js core (highest priority)
+            framework: {
+              test: /[\\/]node_modules[\\/](react|react-dom|next|scheduler)[\\/]/,
+              name: 'framework',
+              priority: 40,
+              enforce: true,
               reuseExistingChunk: true,
             },
-            // Common libraries
+            // PERFORMANCE: Analytics chunk - Vercel tracking
+            analytics: {
+              test: /[\\/]node_modules[\\/](@vercel[\\/]analytics|@vercel[\\/]speed-insights|web-vitals)[\\/]/,
+              name: 'npm.analytics',
+              priority: 35,
+              enforce: true,
+              reuseExistingChunk: true,
+            },
+            // PERFORMANCE: Supabase chunk - Database client
+            supabase: {
+              test: /[\\/]node_modules[\\/]@supabase[\\/]/,
+              name: 'npm.supabase',
+              priority: 30,
+              enforce: true,
+              reuseExistingChunk: true,
+            },
+            // PERFORMANCE: Icons chunk - react-icons library
+            reactIcons: {
+              test: /[\\/]node_modules[\\/]react-icons[\\/]/,
+              name: 'npm.react-icons',
+              priority: 20,
+              enforce: true,
+              reuseExistingChunk: true,
+            },
+            // CRITICAL FIX: Locale-based message splitting
+            // Split each language into separate chunks for better caching and parallel loading
+            messagesTr: {
+              test: /[\\/]messages[\\/]tr\.json$/,
+              name: 'messages-tr',
+              priority: 15,
+              enforce: true,
+              reuseExistingChunk: true,
+            },
+            messagesEn: {
+              test: /[\\/]messages[\\/]en\.json$/,
+              name: 'messages-en',
+              priority: 15,
+              enforce: true,
+              reuseExistingChunk: true,
+            },
+            messagesSr: {
+              test: /[\\/]messages[\\/]sr\.json$/,
+              name: 'messages-sr',
+              priority: 15,
+              enforce: true,
+              reuseExistingChunk: true,
+            },
+            // PERFORMANCE: Common libraries - shared dependencies
             lib: {
               test: /[\\/]node_modules[\\/]/,
               name(module) {
@@ -79,6 +131,7 @@ const nextConfig = {
                 return `npm.${packageName}`;
               },
               priority: 5,
+              minChunks: 2, // PERFORMANCE: Must be used in at least 2 places
               reuseExistingChunk: true,
             },
           },
@@ -113,6 +166,12 @@ const nextConfig = {
           {
             key: 'Permissions-Policy',
             value: 'camera=(), microphone=(), geolocation=()',
+          },
+          // SECURITY FIX: HSTS (HTTP Strict Transport Security)
+          // Lighthouse Best Practices improvement - forces HTTPS
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=63072000; includeSubDomains; preload',
           },
         ],
       },

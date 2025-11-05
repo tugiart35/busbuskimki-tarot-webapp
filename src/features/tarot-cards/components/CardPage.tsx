@@ -133,15 +133,18 @@ export default function CardPage({ card, locale, slug }: CardPageProps) {
       {/* 16. İlgili Kartlar */}
       <RelatedCards cards={relatedCards} locale={locale} />
 
-      {/* Structured Data */}
-      <script
-        type='application/ld+json'
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(
-            CardSEO.generateStructuredData(cardData, seo, locale)
-          ),
-        }}
-      />
+      {/* ✅ Main Structured Data - Only render if valid */}
+      {(() => {
+        const structuredData = CardSEO.generateStructuredData(cardData, seo, locale);
+        return structuredData ? (
+          <script
+            type='application/ld+json'
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(structuredData),
+            }}
+          />
+        ) : null;
+      })()}
 
       {/* ✅ FAQ Schema - Sadece geçerli FAQ varsa render et */}
       {faqSchema && (
@@ -153,22 +156,31 @@ export default function CardPage({ card, locale, slug }: CardPageProps) {
         />
       )}
 
-      <script
-        type='application/ld+json'
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(
-            CardSEO.generateBreadcrumbStructuredData(cardData, locale)
-          ),
-        }}
-      />
+      {/* ✅ Breadcrumb Schema - Only render if valid */}
+      {(() => {
+        const breadcrumbData = CardSEO.generateBreadcrumbStructuredData(cardData, locale);
+        return breadcrumbData ? (
+          <script
+            type='application/ld+json'
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(breadcrumbData),
+            }}
+          />
+        ) : null;
+      })()}
 
-      {/* 🆕 HowTo Schema - Kart yorumlama rehberi */}
-      <script
-        type='application/ld+json'
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(CardSEO.generateHowToSchema(cardData, locale)),
-        }}
-      />
+      {/* ✅ HowTo Schema - Only render if valid */}
+      {(() => {
+        const howToData = CardSEO.generateHowToSchema(cardData, locale);
+        return howToData ? (
+          <script
+            type='application/ld+json'
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(howToData),
+            }}
+          />
+        ) : null;
+      })()}
 
       {/* 🆕 ItemList Schema - İlgili kartlar */}
       {relatedCards && relatedCards.length > 0 && (
@@ -182,15 +194,18 @@ export default function CardPage({ card, locale, slug }: CardPageProps) {
         />
       )}
 
-      {/* 🆕 AggregateRating Schema - Kullanıcı reactions (gelecekte gerçek data ile) */}
-      <script
-        type='application/ld+json'
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(
-            CardSEO.generateAggregateRatingSchema(cardData, locale, 0)
-          ),
-        }}
-      />
+      {/* ✅ AggregateRating Schema - Only render if valid */}
+      {(() => {
+        const ratingData = CardSEO.generateAggregateRatingSchema(cardData, locale, 0);
+        return ratingData ? (
+          <script
+            type='application/ld+json'
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(ratingData),
+            }}
+          />
+        ) : null;
+      })()}
     </div>
   );
 }

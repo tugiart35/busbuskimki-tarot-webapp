@@ -34,6 +34,7 @@ import { WebVitals } from '@/components/WebVitals';
 import { GoogleAnalytics } from '@/components/analytics/GoogleAnalytics';
 
 // Optimize font loading with display swap and preload
+// PERFORMANCE FIX: Reduced font weights from 4 to 2 (-50% font requests)
 const inter = Inter({
   subsets: ['latin', 'latin-ext'], // Turkish characters support
   display: 'swap', // Prevent invisible text (FOIT)
@@ -41,7 +42,7 @@ const inter = Inter({
   variable: '--font-inter',
   fallback: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'arial'],
   adjustFontFallback: true, // Automatic font metric adjustments
-  weight: ['400', '500', '600', '700'], // Only load needed weights
+  weight: ['400', '600'], // OPTIMIZED: Only regular and semibold (was 400,500,600,700)
 });
 
 // Next.js için metadata export'u

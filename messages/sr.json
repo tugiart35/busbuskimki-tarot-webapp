@@ -11700,7 +11700,11 @@
         "loadingSpread": "Učitavanje proširenja ...",
         "selectSpread": "Izaberite tarot širenje",
         "selectSpreadDescription": "Izaberite vrstu čitanja da biste započeli odvijanje."
-      }
+      },
+      "allSpreads": "Sva Širenja",
+      "otherSpreads": "Druga Širenja",
+      "backToAllSpreads": "Nazad na Sva Širenja",
+      "cards": "karte"
     },
     "profile": {
       "updateError": "Greška u ažuriranju profila",

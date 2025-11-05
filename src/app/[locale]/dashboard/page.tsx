@@ -64,10 +64,17 @@ import ProfileManagement from '@/components/dashboard/ProfileManagement';
 import RecentActivity from '@/components/dashboard/RecentActivity';
 // Alt navigasyon bileşeni
 import BottomNavigation from '@/features/shared/layout/BottomNavigation';
-// Okuma detay modal bileşeni
-import ReadingDetailModal from '@/features/shared/ui/ReadingDetailModal';
-// Profil düzenleme modal bileşeni
-import ProfileModal from '@/components/dashboard/ProfileModal';
+import dynamic from 'next/dynamic';
+
+// PERFORMANCE: Lazy load heavy modal components
+const ReadingDetailModal = dynamic(
+  () => import('@/features/shared/ui/ReadingDetailModal'),
+  { ssr: false }
+);
+const ProfileModal = dynamic(
+  () => import('@/components/dashboard/ProfileModal'),
+  { ssr: false }
+);
 // i18n hook'u - şu an kullanılmıyor
 // import { useTranslations } from '@/hooks/useTranslations';
 

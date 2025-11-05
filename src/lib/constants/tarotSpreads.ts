@@ -33,61 +33,56 @@ Gereklilik ve Kullanım Durumu:
 - findSpreadById, findPositionById: Gerekli, açılım ve pozisyon bulma işlemleri için kullanılır.
 - MODÜLERLEŞTIRME: Yeni modüler fonksiyonlar eklendi, eski fonksiyonlar korundu.
 */
+'use client';
+
 import dynamic from 'next/dynamic';
 
+// Note: ssr: false removed for Next.js 15 compatibility
+// Components will be lazy-loaded on client side anyway since they're used in client components
 const LoveReading = dynamic(
-  () => import('@/features/tarot/components/Love-Spread/LoveTarot'),
-  { ssr: false }
+  () => import('@/features/tarot/components/Love-Spread/LoveTarot')
 );
 
 const CareerReading = dynamic(
-  () => import('@/features/tarot/components/Career-Spread/CareerTarot'),
-  { ssr: false }
+  () => import('@/features/tarot/components/Career-Spread/CareerTarot')
 );
 
 const ProblemSolvingReading = dynamic(
   () =>
-    import('@/features/tarot/components/Problem-Solving/ProblemSolvingTarot'),
-  { ssr: false }
+    import('@/features/tarot/components/Problem-Solving/ProblemSolvingTarot')
 );
 
 const SituationAnalysisReading = dynamic(
   () =>
     import(
       '@/features/tarot/components/Situation-Analysis/SituationAnalysisTarot'
-    ),
-  { ssr: false }
+    )
 );
 
 const RelationshipAnalysisReading = dynamic(
   () =>
     import(
       '@/features/tarot/components/Relationship-Analysis/RelationshipAnalysisTarot'
-    ),
-  { ssr: false }
+    )
 );
 
 const RelationshipProblemsReading = dynamic(
   () =>
     import(
       '@/features/tarot/components/Relationship-Problems/RelationshipProblemsTarot'
-    ),
-  { ssr: false }
+    )
 );
 
 const MarriageReading = dynamic(
-  () => import('@/features/tarot/components/Marriage/MarriageTarot'),
-  { ssr: false }
+  () => import('@/features/tarot/components/Marriage/MarriageTarot')
 );
 
 const NewLoverReading = dynamic(
-  () => import('@/features/tarot/components/New-Lover/NewLoverTarot'),
-  { ssr: false }
+  () => import('@/features/tarot/components/New-Lover/NewLoverTarot')
 );
 
 const MoneyReading = dynamic(
-  () => import('@/features/tarot/components/Money-Spread/MoneyTarot'),
-  { ssr: false }
+  () => import('@/features/tarot/components/Money-Spread/MoneyTarot')
 );
 
 // Tarot kart pozisyonu interface'i

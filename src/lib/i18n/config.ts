@@ -25,9 +25,6 @@ Kullanım durumu:
 - Aktif kullanımda
 */
 
-import { notFound } from 'next/navigation';
-import { getRequestConfig } from 'next-intl/server';
-
 // Desteklenen diller
 export const locales = ['tr', 'en', 'sr'] as const;
 export type Locale = (typeof locales)[number];
@@ -53,17 +50,3 @@ export const localeConfig = {
     timezone: 'Europe/Podgorica',
   },
 } as const;
-
-// next-intl yapılandırması
-export default getRequestConfig(async ({ locale }) => {
-  // Desteklenmeyen dil kontrolü
-  if (!locale || !locales.includes(locale as Locale)) {
-    notFound();
-  }
-
-  return {
-    locale,
-    messages: (await import(`../../../messages/${locale}.json`)).default,
-    timeZone: localeConfig[locale as Locale].timezone,
-  };
-});

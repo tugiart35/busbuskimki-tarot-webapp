@@ -1,0 +1,225 @@
+name: Lighthouse CI
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+  schedule:
+    # Her gün saat 02:00'de çalıştır
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+    inputs:
+      device:
+        description: 'Test cihazı (desktop, mobile, both)'
+        required: false
+        default: 'both'
+        type: choice
+        options:
+          - desktop
+          - mobile
+          - both
+
+jobs:
+  lighthouse-desktop:
+    name: Lighthouse Desktop Audit
+    runs-on: ubuntu-latest
+    if: |
+      github.event_name != 'workflow_dispatch' ||
+      github.event.inputs.device == 'desktop' ||
+      github.event.inputs.device == 'both'
+    
+    steps:
+      - name: Checkout kod
+        uses: actions/checkout@v4
+      
+      - name: Node.js kurulumu
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Bağımlılıkları yükle
+        run: npm ci
+      
+      - name: Projeyi build et
+        run: npm run build
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+      
+      - name: Lighthouse CI Desktop
+        run: |
+          npm run lighthouse:ci:desktop
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+      
+      - name: Raporları yükle (Desktop)
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lighthouse-desktop-reports
+          path: .lighthouseci/
+          retention-days: 30
+      
+      - name: Desktop sonuçlarını yorumla
+        uses: treosh/lighthouse-ci-action@v11
+        if: github.event_name == 'pull_request'
+        with:
+          urls: |
+            http://localhost:3000
+            http://localhost:3000/tr
+            http://localhost:3000/tr/tarot/love-spread
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+          configPath: ./lighthouserc.js
+
+  lighthouse-mobile:
+    name: Lighthouse Mobile Audit
+    runs-on: ubuntu-latest
+    if: |
+      github.event_name != 'workflow_dispatch' ||
+      github.event.inputs.device == 'mobile' ||
+      github.event.inputs.device == 'both'
+    
+    steps:
+      - name: Checkout kod
+        uses: actions/checkout@v4
+      
+      - name: Node.js kurulumu
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Bağımlılıkları yükle
+        run: npm ci
+      
+      - name: Projeyi build et
+        run: npm run build
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+      
+      - name: Lighthouse CI Mobile
+        run: |
+          npm run lighthouse:ci:mobile
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+      
+      - name: Raporları yükle (Mobile)
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lighthouse-mobile-reports
+          path: .lighthouseci/
+          retention-days: 30
+      
+      - name: Mobile sonuçlarını yorumla
+        uses: treosh/lighthouse-ci-action@v11
+        if: github.event_name == 'pull_request'
+        with:
+          urls: |
+            http://localhost:3000
+            http://localhost:3000/tr
+            http://localhost:3000/tr/tarot/love-spread
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+          configPath: ./.lighthouserc-mobile.js
+
+  lighthouse-report:
+    name: Lighthouse Rapor Özeti
+    runs-on: ubuntu-latest
+    needs: [lighthouse-desktop, lighthouse-mobile]
+    if: always()
+    
+    steps:
+      - name: Checkout kod
+        uses: actions/checkout@v4
+      
+      - name: Desktop raporları indir
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: lighthouse-desktop-reports
+          path: ./reports/desktop
+      
+      - name: Mobile raporları indir
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: lighthouse-mobile-reports
+          path: ./reports/mobile
+      
+      - name: Özet rapor oluştur
+        run: |
+          echo "# 🔍 Lighthouse Audit Özeti" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Tarih:** $(date '+%Y-%m-%d %H:%M:%S')" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ -d "./reports/desktop" ]; then
+            echo "## 🖥️ Desktop Raporları" >> $GITHUB_STEP_SUMMARY
+            find ./reports/desktop -name "*.html" -type f >> $GITHUB_STEP_SUMMARY || true
+          fi
+          
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ -d "./reports/mobile" ]; then
+            echo "## 📱 Mobile Raporları" >> $GITHUB_STEP_SUMMARY
+            find ./reports/mobile -name "*.html" -type f >> $GITHUB_STEP_SUMMARY || true
+          fi
+      
+      - name: Slack bildirimi (isteğe bağlı)
+        if: failure()
+        run: |
+          echo "Lighthouse testleri başarısız! Lütfen raporları kontrol edin."
+
+  # PWA Kontrolü
+  pwa-check:
+    name: PWA Uyumluluk Kontrolü
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout kod
+        uses: actions/checkout@v4
+      
+      - name: Node.js kurulumu
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Bağımlılıkları yükle
+        run: npm ci
+      
+      - name: Projeyi build et
+        run: npm run build
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+      
+      - name: PWA kontrolü
+        run: |
+          npx lighthouse http://localhost:3000 \
+            --only-categories=pwa \
+            --output=json \
+            --output-path=./pwa-report.json \
+            --chrome-flags="--headless --no-sandbox" &
+          
+          npm start &
+          sleep 10
+          
+          # PWA skorunu kontrol et
+          PWA_SCORE=$(node -p "require('./pwa-report.json').categories.pwa.score")
+          echo "PWA Skoru: $PWA_SCORE"
+          
+          if [ $(echo "$PWA_SCORE < 0.8" | bc) -eq 1 ]; then
+            echo "⚠️ PWA skoru düşük: $PWA_SCORE"
+            exit 1
+          fi
+

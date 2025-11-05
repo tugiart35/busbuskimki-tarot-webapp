@@ -25,6 +25,20 @@ Kullanım durumu:
 */
 
 import { MetadataRoute } from 'next';
+import { locales } from '@/lib/i18n/config';
+
+// Spread IDs for sitemap generation (must match tarotSpreads.ts)
+const SPREAD_IDS = [
+  'love-spread',
+  'career-spread',
+  'problem-solving-spread',
+  'situation-analysis-spread',
+  'relationship-analysis-spread',
+  'relationship-problems-spread',
+  'marriage-spread',
+  'new-lover-spread',
+  'money-spread',
+];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://busbuskimki.com';
@@ -71,6 +85,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly' as const,
       priority: 0.9,
     },
+
+    // Tarot spread sayfaları (9 spreads × 3 locales = 27 pages) - SEO Enhancement
+    // Individual pages for each tarot spread type
+    ...SPREAD_IDS.flatMap(spreadId =>
+      locales.map(locale => ({
+        url: `${baseUrl}/${locale}/tarotokumasi/${spreadId}`,
+        lastModified: currentDate,
+        changeFrequency: 'weekly' as const,
+        priority: 0.8,
+      }))
+    ),
 
     // Numeroloji sayfaları (gerçek route'lar - SEO Fix)
     // NOT: /en/numerology ve /sr/numerologija rewrites, gerçek route hepsi /numeroloji

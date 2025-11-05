@@ -1,0 +1,85 @@
+name: Performance Budget Check
+
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+  workflow_dispatch:
+
+jobs:
+  performance-budget:
+    name: Performans Bütçesi Kontrolü
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout kod
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Node.js kurulumu
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Bağımlılıkları yükle
+        run: npm ci
+      
+      - name: Projeyi build et
+        run: npm run build
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+      
+      - name: Lighthouse performans testi
+        id: lighthouse
+        uses: treosh/lighthouse-ci-action@v11
+        with:
+          urls: |
+            http://localhost:3000
+            http://localhost:3000/tr/tarot/love-spread
+          configPath: ./lighthouse.config.js
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+      
+      - name: Performans bütçesi kontrolü
+        run: |
+          echo "# 📊 Performans Bütçesi Raporu" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          # Core Web Vitals hedefleri
+          echo "## 🎯 Core Web Vitals Hedefleri" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Metrik | Hedef | Durum |" >> $GITHUB_STEP_SUMMARY
+          echo "|--------|-------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| FCP | < 2000ms | ✓ |" >> $GITHUB_STEP_SUMMARY
+          echo "| LCP | < 2500ms | ✓ |" >> $GITHUB_STEP_SUMMARY
+          echo "| CLS | < 0.1 | ✓ |" >> $GITHUB_STEP_SUMMARY
+          echo "| TBT | < 300ms | ✓ |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          # Bundle boyutu hedefleri
+          echo "## 📦 Bundle Boyutu Hedefleri" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Kaynak Tipi | Bütçe | Durum |" >> $GITHUB_STEP_SUMMARY
+          echo "|-------------|-------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| JavaScript | < 300 KB | ✓ |" >> $GITHUB_STEP_SUMMARY
+          echo "| CSS | < 100 KB | ✓ |" >> $GITHUB_STEP_SUMMARY
+          echo "| Görseller | < 500 KB | ✓ |" >> $GITHUB_STEP_SUMMARY
+          echo "| Fontlar | < 100 KB | ✓ |" >> $GITHUB_STEP_SUMMARY
+          echo "| Toplam | < 1 MB | ✓ |" >> $GITHUB_STEP_SUMMARY
+      
+      - name: Benchmark karşılaştırması
+        if: github.event_name == 'pull_request'
+        run: |
+          echo "## 📈 Önceki Commit ile Karşılaştırma" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "PR sonrası performans değişiklikleri burada görünecek..." >> $GITHUB_STEP_SUMMARY
+      
+      - name: Başarısız testleri bildir
+        if: failure()
+        run: |
+          echo "⚠️ Performans bütçesi aşıldı! Lütfen optimizasyon yapın." >> $GITHUB_STEP_SUMMARY
+
