@@ -27,22 +27,47 @@ import { defaultMetadata, viewport } from '@/lib/config/metadata';
 import { APP_CONFIG } from '@/lib/config/app-config';
 import { HeadTags, Footer } from '@/features/shared/layout';
 import { defaultLocale } from '@/lib/i18n/config';
-import { Inter } from 'next/font/google';
+import { Inter, Playfair_Display, Cinzel } from 'next/font/google';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from '@vercel/analytics/react';
 import { WebVitals } from '@/components/WebVitals';
 import { GoogleAnalytics } from '@/components/analytics/GoogleAnalytics';
 
-// Optimize font loading with display swap and preload
-// PERFORMANCE FIX: Reduced font weights from 4 to 2 (-50% font requests)
+// ✅ PERFORMANCE FIX: All fonts optimized with Next.js font loader
+// Benefits: Eliminates CLS, auto-subsetting, display swap, metric fallbacks
+
+// Inter - Body text
 const inter = Inter({
   subsets: ['latin', 'latin-ext'], // Turkish characters support
   display: 'swap', // Prevent invisible text (FOIT)
   preload: true,
   variable: '--font-inter',
-  fallback: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'arial'],
+  fallback: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
   adjustFontFallback: true, // Automatic font metric adjustments
-  weight: ['400', '600'], // OPTIMIZED: Only regular and semibold (was 400,500,600,700)
+  weight: ['400', '600'], // OPTIMIZED: Only regular and semibold
+});
+
+// Playfair Display - Headings & mystical elements
+const playfair = Playfair_Display({
+  subsets: ['latin', 'latin-ext'], // Turkish characters support
+  display: 'swap',
+  preload: true,
+  variable: '--font-playfair',
+  fallback: ['Georgia', 'Times New Roman', 'serif'],
+  adjustFontFallback: true,
+  weight: ['400', '500', '600', '700'],
+  style: ['normal', 'italic'], // Support for italic text
+});
+
+// Cinzel - Dashboard specific font
+const cinzel = Cinzel({
+  subsets: ['latin'],
+  display: 'swap',
+  preload: true,
+  variable: '--font-cinzel',
+  fallback: ['Georgia', 'Times New Roman', 'serif'],
+  adjustFontFallback: true,
+  weight: ['400', '500', '600', '700'],
 });
 
 // Next.js için metadata export'u
@@ -56,7 +81,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang={defaultLocale}
-      className={`h-full ${inter.className}`}
+      className={`h-full ${inter.variable} ${playfair.variable} ${cinzel.variable}`}
       data-scroll-behavior='smooth'
     >
       <head>

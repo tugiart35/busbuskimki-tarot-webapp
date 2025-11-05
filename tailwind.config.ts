@@ -121,11 +121,12 @@ const config: Config = {
       },
 
       // Enhanced typography with mystical fonts
+      // ✅ PERFORMANCE FIX: Using CSS variables from Next.js font optimization
       fontFamily: {
-        mystical: ['Playfair Display', 'serif'], // For headings and mystical elements
-        mystic: ['Cinzel', 'serif'], // Dashboard specific font
-        body: ['Inter', 'system-ui', 'sans-serif'], // For body text
-        mono: ['JetBrains Mono', 'monospace'], // For code/technical elements
+        mystical: ['var(--font-playfair)', 'Georgia', 'serif'], // For headings and mystical elements
+        mystic: ['var(--font-cinzel)', 'Georgia', 'serif'], // Dashboard specific font
+        body: ['var(--font-inter)', 'system-ui', 'sans-serif'], // For body text
+        mono: ['ui-monospace', 'monospace'], // For code/technical elements
       },
 
       // Enhanced mystical animations
