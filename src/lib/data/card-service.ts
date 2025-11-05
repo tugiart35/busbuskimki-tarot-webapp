@@ -99,6 +99,12 @@ export class CardService {
   }
 
   static getCardSlug(card: TarotCard, locale: 'tr' | 'en' | 'sr'): string {
+    // Güvenlik kontrolü: names objesi ve ilgili dil eksikse card.id'yi döndür
+    if (!card.names || !card.names[locale]) {
+      console.warn(`Missing name for locale ${locale} in card:`, card.id);
+      return card.id; // Fallback olarak card ID'yi kullan
+    }
+    
     const name = card.names[locale].toLowerCase();
     // Handle special characters for Turkish and Serbian
     return name

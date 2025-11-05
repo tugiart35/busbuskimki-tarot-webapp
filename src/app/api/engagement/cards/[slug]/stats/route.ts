@@ -54,7 +54,19 @@ export async function PATCH(
 ) {
   try {
     const { slug } = await params;
-    const body = await request.json();
+    
+    // Request body'yi güvenli bir şekilde parse et
+    let body;
+    try {
+      const text = await request.text();
+      body = text ? JSON.parse(text) : {};
+    } catch (parseError) {
+      return NextResponse.json(
+        { success: false, error: 'Invalid JSON body' },
+        { status: 400 }
+      );
+    }
+
     const { action } = body;
 
     if (action !== 'increment_view') {
