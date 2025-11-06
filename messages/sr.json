@@ -46047,6 +46047,752 @@
     "close": "Zatvori",
     "back": "Nazad"
   },
+  "psychTests": {
+    "page": {
+      "title": "Psihološki Testovi",
+      "subtitle": "Upoznajte sebe bolje, otkrijte svoju ličnost",
+      "scientificBasis": {
+        "title": "📚 Naučni Temelj Naših Testova",
+        "mbti": "Myers-Briggs Type Indicator zasniva se na teoriji psiholoških tipova Carla Junga i koristi ga godišnje više od 2 miliona ljudi širom sveta.",
+        "enneagram": "Zasnovan na istraživanjima Enneagram Institute i International Enneagram Association, to je sistem za analizu motivacije i obrazaca ponašanja.",
+        "bigFive": "Prihvaćen kao najvalidniji i najpouzdaniji model ličnosti moderne psihologije. Podržan sa preko 50 godina istraživanja i hiljadama akademskih publikacija.",
+        "seaStorm": "Vrši analizu podsvesti metodom Kokologije (projektivna psihologija). Otkriva vaš arhetip psihološke otpornosti procenjujući vaše reakcije u kriznim trenucima. Analiza zasnovana na arhetipovima Vođe, Iscелitelja, Mudraca ili Tragača.",
+        "nameEnergy": "Izračunava numeričke vibracije slova u vašem imenu pomoću Pitagorinog numerološkog sistema i uparuje ih sa Rider-Waite tarot simbolizmom. Svako slovo nosi specifičnu energiju; ova energija se kombinuje sa tarot kartom koja simbolizuje vaše lično putovanje.",
+        "stressTest": "Naučni test procene stresa zasnovan na DASS21 (Depression Anxiety Stress Scales) skali. Razvijen od strane Lovibond & Lovibond (1995) i široko korišćen, ova skala procenjuje vaš nivo stresa i nudi personalizovane sugestije za meditaciju.",
+        "loveVibration": "Zasnovan na klasičnoj astrologiji i tarot literaturi, analizira planetarne energije Venere (romantika), Marsa (strast) i Merkura (komunikacija). Povezan sa tarot kartama, pomaže vam da otkrijete vašu ličnu ljubavnu energiju.",
+        "friendGroup": "Nudi zabavnu i povezivu analizu društvenih uloga zasnovanu na istraživanjima socijalne psihologije i grupne dinamike.",
+        "disclaimer": "Ovi testovi su namenjeni ličnom razvoju, zabavi i podizanju svesti. Ne treba ih koristiti umesto profesionalne psihološke procene ili astrološkog savetovanja."
+      }
+    },
+    "common": {
+      "startTest": "Započni Test",
+      "newTest": "Novi Test",
+      "testHistory": "Istorija Testova",
+      "cancelTest": "Otkaži Test",
+      "shareWithFriends": "Podeli sa Prijateljima",
+      "yourResult": "Vaš Rezultat",
+      "detailedAnalysis": "Detaljna analiza vašeg testa",
+      "questions": "pitanja",
+      "question": "Pitanje"
+    },
+    "tests": {
+      "stress": {
+        "title": "Test Nivoa Stresa",
+        "description": "Procenite svoj nivo stresa i primite personalizovane preporuke za meditaciju. Naučna procena zasnovana na DASS21.",
+        "icon": "🧘",
+        "questions": {
+          "q1": "U poslednjoj nedelji, osećao/la sam se napeto i pod stresom.",
+          "q2": "U poslednjoj nedelji, imao/la sam teškoća da radim stvari koje su mi inače lake.",
+          "q3": "U poslednjoj nedelji, lako sam se razdražio/la ili naljutio/la.",
+          "q4": "U poslednjoj nedelji, imao/la sam teškoća sa disanjem (ubrzano disanje, nedostatak vazduha).",
+          "q5": "U poslednjoj nedelji, osećao/la sam anksioznost i zabrinutost.",
+          "q6": "U poslednjoj nedelji, doživeo/la sam prekomerno znojenje ili drhtanje ruku.",
+          "q7": "U poslednjoj nedelji, doživeo/la sam strah i paniku.",
+          "q8": "U poslednjoj nedelji, imao/la sam teškoća sa koncentracijom.",
+          "q9": "U poslednjoj nedelji, imao/la sam probleme sa spavanjem (nesanica, česta buđenja).",
+          "q10": "U poslednjoj nedelji, osećao/la sam se nemirno i nelagodno.",
+          "q11": "U poslednjoj nedelji, doživeo/la sam lupanje srca.",
+          "q12": "U poslednjoj nedelji, osećao/la sam se krajnje umorno i iscrpljeno.",
+          "q13": "U poslednjoj nedelji, imao/la sam teškoća u donošenju odluka.",
+          "q14": "U poslednjoj nedelji, doživeo/la sam glavobolje ili napetost mišića.",
+          "q15": "U poslednjoj nedelji, nisam mogao/la da uživam u svakodnevnim aktivnostima."
+        },
+        "answers": {
+          "notAtAll": "Nimalo",
+          "somewhat": "Donekle",
+          "considerably": "Prilično",
+          "veryMuch": "Veoma mnogo"
+        }
+      },
+      "loveVibration": {
+        "title": "Vaša Energija Ljubavi (Vibracija Ljubavi)",
+        "description": "Otkrijte svoju energiju ljubavi kroz astrološke planete i tarot karte! Venera, Mars, Merkur... Sa kojom kosmičkom energijom vibrirate?",
+        "icon": "✨",
+        "questions": {
+          "q1": {
+            "text": "Šta najviše tražite i želite u vezama?",
+            "answers": {
+              "venus": { "text": "Romantiku, harmoniju i lepotu", "meaning": "Energija Venere" },
+              "mars": { "text": "Strast, uzbuđenje i snažnu vezu", "meaning": "Energija Marsa" },
+              "mercury": { "text": "Duboke razgovore i mentalnu povezanost", "meaning": "Energija Merkura" },
+              "moon": { "text": "Emocionalnu dubinu i duhovnu vezu", "meaning": "Energija Meseca" }
+            }
+          },
+          "q2": {
+            "text": "Kako izražavate svoju ljubav?",
+            "answers": {
+              "venus": { "text": "Romantičnim gestovima i poklonima", "meaning": "Energija Venere" },
+              "mars": { "text": "Intenzivnim emocijama i fizičkom bliskošću", "meaning": "Energija Marsa" },
+              "mercury": { "text": "Rečima i dubokim razgovorima", "meaning": "Energija Merkura" },
+              "moon": { "text": "Intuitivnim razumevanjem i empatijom", "meaning": "Energija Meseca" }
+            }
+          },
+          "q3": {
+            "text": "Kakav bi bio vaš idealan sastanak?",
+            "answers": {
+              "venus": { "text": "Romantična večera, svetlost sveća", "meaning": "Energija Venere" },
+              "mars": { "text": "Uzbudljiva aktivnost, adrenalin", "meaning": "Energija Marsa" },
+              "mercury": { "text": "Kafa i satima razgovor", "meaning": "Energija Merkura" },
+              "moon": { "text": "Šetnja prirodom, tihi trenutak", "meaning": "Energija Meseca" }
+            }
+          },
+          "q4": {
+            "text": "Šta je najvažnije u vezi?",
+            "answers": {
+              "venus": { "text": "Harmonija i ravnoteža", "meaning": "Energija Venere" },
+              "mars": { "text": "Strast i želja", "meaning": "Energija Marsa" },
+              "mercury": { "text": "Komunikacija i razumevanje", "meaning": "Energija Merkura" },
+              "moon": { "text": "Emocionalna veza i intuicija", "meaning": "Energija Meseca" }
+            }
+          },
+          "q5": {
+            "text": "Kako se ponašate tokom konflikta?",
+            "answers": {
+              "venus": { "text": "Tražim mirno rešenje", "meaning": "Energija Venere" },
+              "mars": { "text": "Govorim direktno i otvoreno", "meaning": "Energija Marsa" },
+              "mercury": { "text": "Pokušavam da razgovaram i razumem", "meaning": "Energija Merkura" },
+              "moon": { "text": "Osećam svoje emocije, čekam", "meaning": "Energija Meseca" }
+            }
+          },
+          "q6": {
+            "text": "Koja je vaša snaga u ljubavi?",
+            "answers": {
+              "venus": { "text": "Saosećanje i romantika", "meaning": "Energija Venere" },
+              "mars": { "text": "Hrabrost i odlučnost", "meaning": "Energija Marsa" },
+              "mercury": { "text": "Komunikacija i razumevanje", "meaning": "Energija Merkura" },
+              "moon": { "text": "Intuicija i empatija", "meaning": "Energija Meseca" }
+            }
+          },
+          "q7": {
+            "text": "Na šta se fokusirate kada se povežete sa voljenom osobom?",
+            "answers": {
+              "venus": { "text": "Lepe trenutke i mir", "meaning": "Energija Venere" },
+              "mars": { "text": "Strast i intenzitet", "meaning": "Energija Marsa" },
+              "mercury": { "text": "Razmenu ideja i razgovor", "meaning": "Energija Merkura" },
+              "moon": { "text": "Emocionalnu rezonancu", "meaning": "Energija Meseca" }
+            }
+          }
+        }
+      },
+      "friendEnergy": {
+        "title": "Vaša Energija u Grupi Prijatelja",
+        "description": "Koju ulogu igrate u svojoj grupi prijatelja? Drama Kraljica, Mudri Mentor ili Spontani Istraživač? Otkrijte sada! 🎭",
+        "icon": "👥",
+        "questions": {
+          "q1": {
+            "text": "Čemu vam prijatelji najviše dolaze?",
+            "answers": {
+              "wiseMentor": { "text": "Da dobiju savet", "meaning": "Mudri Mentor" },
+              "therapist": { "text": "Da ispričaju svoje probleme", "meaning": "Prijatelj Terapeut" },
+              "comedian": { "text": "Da se zabave", "meaning": "Komičar" },
+              "momFriend": { "text": "Da dobiju pomoć", "meaning": "Mama Grupe" }
+            }
+          },
+          "q2": {
+            "text": "Kako obično budete u grupnim četovima?",
+            "answers": {
+              "dramaQueen": { "text": "Šaljem najviše poruka", "meaning": "Drama Kraljica" },
+              "comedian": { "text": "Delim mimove i viceve", "meaning": "Komičar" },
+              "quietPower": { "text": "Tiho čitam, malo pišem", "meaning": "Tiha Snaga" },
+              "peacekeeper": { "text": "Pokušavam da uravnotežim sve", "meaning": "Mirotvorac" }
+            }
+          },
+          "q3": {
+            "text": "Šta radite kada se napravi plan u poslednjem trenutku?",
+            "answers": {
+              "spontaneousExplorer": { "text": "Kažem \"Idemo!\"", "meaning": "Spontani Istraživač" },
+              "partyStarter": { "text": "Odmah organizujem", "meaning": "Pokretač Žurke" },
+              "wiseMentor": { "text": "Razmišljam da li je logično", "meaning": "Mudri Mentor" },
+              "momFriend": { "text": "Proveravam da li su svi spremni", "meaning": "Mama Grupe" }
+            }
+          },
+          "q4": {
+            "text": "Šta biste uradili da se svađa desi u vašoj grupi?",
+            "answers": {
+              "peacekeeper": { "text": "Odmah posredujem", "meaning": "Mirotvorac" },
+              "dramaQueen": { "text": "Saznajem detalje", "meaning": "Drama Kraljica" },
+              "therapist": { "text": "Slušam obe strane", "meaning": "Prijatelj Terapeut" },
+              "quietPower": { "text": "Ne mešam se, posmatram", "meaning": "Tiha Snaga" }
+            }
+          },
+          "q5": {
+            "text": "Kako bi vas prijatelji opisali?",
+            "answers": {
+              "comedian": { "text": "Smešno i zabavno", "meaning": "Komičar" },
+              "wiseMentor": { "text": "Pametno i logično", "meaning": "Mudri Mentor" },
+              "adventurer": { "text": "Hrabro i avanturističko", "meaning": "Lovac na Adrenalin" },
+              "momFriend": { "text": "Zaštitničko i brižno", "meaning": "Mama Grupe" }
+            }
+          },
+          "q6": {
+            "text": "Koja je vaša omiljena vrsta aktivnosti?",
+            "answers": {
+              "adventurer": { "text": "Aktivnosti pune adrenalina", "meaning": "Lovac na Adrenalin" },
+              "partyStarter": { "text": "Društveni događaji i žurke", "meaning": "Pokretač Žurke" },
+              "quietPower": { "text": "Mirne i male grupe", "meaning": "Tiha Snaga" },
+              "therapist": { "text": "Duboki razgovori", "meaning": "Prijatelj Terapeut" }
+            }
+          },
+          "q7": {
+            "text": "Koja je vaša uloga kada postoji problem u vašoj grupi?",
+            "answers": {
+              "wiseMentor": { "text": "Nudim rešenja", "meaning": "Mudri Mentor" },
+              "comedian": { "text": "Pokušavam da olakšam atmosferu", "meaning": "Komičar" },
+              "momFriend": { "text": "Brinem se o svima pojedinačno", "meaning": "Mama Grupe" },
+              "peacekeeper": { "text": "Pokušavam da održim mir", "meaning": "Mirotvorac" }
+            }
+          },
+          "q8": {
+            "text": "Kako ste na društvenim mrežama?",
+            "answers": {
+              "dramaQueen": { "text": "Delim svaki trenutak", "meaning": "Drama Kraljica" },
+              "quietPower": { "text": "Pasivan sam korisnik", "meaning": "Tiha Snaga" },
+              "partyStarter": { "text": "Delim događaje i aktivnosti", "meaning": "Pokretač Žurke" },
+              "comedian": { "text": "Delim smešan sadržaj", "meaning": "Komičar" }
+            }
+          },
+          "q9": {
+            "text": "Kada se sastajete sa prijateljima, generalno?",
+            "answers": {
+              "spontaneousExplorer": { "text": "Donosim trenutne odluke", "meaning": "Spontani Istraživač" },
+              "momFriend": { "text": "Planiram svaki detalj", "meaning": "Mama Grupe" },
+              "partyStarter": { "text": "Organizujem", "meaning": "Pokretač Žurke" },
+              "quietPower": { "text": "Gde god da idemo, idem", "meaning": "Tiha Snaga" }
+            }
+          },
+          "q10": {
+            "text": "Koji zadatak vam obično dodele u grupi prijatelja?",
+            "answers": {
+              "wiseMentor": { "text": "Donošenje odluka", "meaning": "Mudri Mentor" },
+              "therapist": { "text": "Slušanje svih", "meaning": "Prijatelj Terapeut" },
+              "adventurer": { "text": "Stvari koje zahtevaju hrabrost", "meaning": "Lovac na Adrenalin" },
+              "comedian": { "text": "Nasmejavanje grupe", "meaning": "Komičar" }
+            }
+          }
+        }
+      },
+      "enneagram": {
+        "title": "Enneagram Test Ličnosti",
+        "description": "Otkrijte koji ste od devet različitih tipova ličnosti. Razumejte svoje motivacije, strahove i obrasce ponašanja.",
+        "icon": "⭐",
+        "questions": {
+          "q1": "Veoma mi je važno da se stvari rade kako treba",
+          "q2": "Mogu biti kritičan/na prema sebi i drugima",
+          "q3": "Visoki standardi me motivišu",
+          "q4": "Nalazim veliku sreću u pomaganju drugima",
+          "q5": "Važno je da me ljudi vole i cene",
+          "q6": "Potrebe drugih stavljam ispred svojih",
+          "q7": "Biti uspešan i postići svoje ciljeve me motiviše",
+          "q8": "Važno mi je kako me drugi vide",
+          "q9": "Produktivnost i postizanje rezultata me čini srećnim/om",
+          "q10": "Biti jedinstven/a i različit/a mi je važno",
+          "q11": "Živim i želim da duboko izrazim svoje emocije",
+          "q12": "Osećam se drugačije i posebno od drugih",
+          "q13": "Prikupljanje informacija i učenje me ispunjava",
+          "q14": "Treba mi da budem sam/a i zaštitim svoj prostor",
+          "q15": "Uživam u dubinskoj analizi tema",
+          "q16": "Sigurnost i stabilnost su mi veoma važni",
+          "q17": "Lojalnost i pouzdanost su moje najvažnije vrednosti",
+          "q18": "Unapred razmišljam o mogućim problemima i pravim planove",
+          "q19": "Nova iskustva i avanture me uzbuđuju",
+          "q20": "Želim da uživam u životu i zabavim se",
+          "q21": "Volim da imam više opcija i mogućnosti",
+          "q22": "Biti jak/a i imati kontrolu je važno",
+          "q23": "Želim da branim pravdu i zaštitim slabe",
+          "q24": "Preferiram da budem direktan/na i otvoren/a",
+          "q25": "Mir i harmonija su moje najvažnije vrednosti",
+          "q26": "Preferiram da izbegavam konflikte",
+          "q27": "Mogu videti i prihvatiti svačije gledište"
+        },
+        "answers": {
+          "stronglyAgree": "Potpuno se slažem",
+          "agree": "Slažem se",
+          "disagree": "Ne slažem se"
+        }
+      },
+      "bigFive": {
+        "title": "Big Five (OCEAN) Test Ličnosti",
+        "description": "Otkrijte vaših 5 osnovnih dimenzija ličnosti: Otvorenost, Savesnost, Ekstraverzija, Saradljivost i Neuroticizam",
+        "icon": "🌊",
+        "questions": {
+          "q1": "Uživam u novim i različitim iskustvima",
+          "q2": "Mislim da imam snažnu maštu",
+          "q3": "Umetnost, muzika ili literatura me interesuje",
+          "q4": "Uživam u razmišljanju o filozofskim i apstraktnim temama",
+          "q5": "Preferiram da generiram nove ideje umesto tradicionalnih metoda",
+          "q6": "Volim da držim sve organizovano i uredno",
+          "q7": "Postupam planirano i programirano",
+          "q8": "Završavam svoje zadatke na vreme i kompletno",
+          "q9": "Obraćam pažnju na detalje",
+          "q10": "Radim disciplinovano da bih postigao/la svoje ciljeve",
+          "q11": "Osećam se energično u društvenim okruženjima",
+          "q12": "Uživam u upoznavanju novih ljudi",
+          "q13": "Preferiram da učestvujem u grupnim aktivnostima",
+          "q14": "Imam pričljivu i aktivnu ličnost",
+          "q15": "Dobijam energiju od druženja sa ljudima",
+          "q16": "Uživam u pomaganju ljudima",
+          "q17": "Pokušavam da razumem osećanja drugih",
+          "q18": "Imam kooperativnu i harmoničnu prirodu",
+          "q19": "Sklona/a sam da verujem ljudima",
+          "q20": "Cenim dobrotu i razumevanje",
+          "q21": "Sklona/a sam da se brinem u stresnim situacijama",
+          "q22": "Moje raspoloženje se često menja",
+          "q23": "Ima trenutaka kada se osećam napeto",
+          "q24": "Čak i mali problemi mogu da me uznemiravaju",
+          "q25": "Imam emocionalno osetljivu ličnost"
+        },
+        "answers": {
+          "stronglyAgree": "Potpuno se slažem",
+          "agree": "Slažem se",
+          "neutral": "Neutralan/na",
+          "disagree": "Ne slažem se",
+          "stronglyDisagree": "Uopšte se ne slažem"
+        }
+      },
+      "personality": {
+        "title": "Analiza Ličnosti",
+        "description": "Otkrijte skrivene aspekte svog karaktera",
+        "icon": "👤",
+        "questions": {
+          "q1": {
+            "text": "Šetate šumom i vidite kuću. Kako izgleda vrata ove kuće?",
+            "answers": {
+              "open": {
+                "text": "Potpuno otvorena",
+                "meaning": "Imate društvenu i ekstrovertnu ličnost. Ne ustručavate se da upoznajete nove ljude i živite život punim plućima."
+              },
+              "closed": {
+                "text": "Zatvorena",
+                "meaning": "Introvertni ste i štitite svoj lični prostor. Preferirate da gradite bliske odnose sa ljudima od poverenja."
+              },
+              "halfOpen": {
+                "text": "Poluotvorena",
+                "meaning": "Imate uravnotežen pristup. Dok ste društveni, znate i kako da zaštitite svoj lični prostor."
+              }
+            }
+          },
+          "q2": {
+            "text": "Kada napustite kuću, nailazite na stazu. Kako izgleda ova staza?",
+            "answers": {
+              "straight": {
+                "text": "Prava i široka",
+                "meaning": "Fokusirani ste i odlučni u svojim ciljevima. Implementirate svoje planove korak po korak."
+              },
+              "curved": {
+                "text": "Krivudava i uska",
+                "meaning": "Imate fleksibilnu i prilagodljivu prirodu. Lako se prilagođavate promenama."
+              },
+              "uphill": {
+                "text": "Uzbrdo",
+                "meaning": "Borbeni ste i odlučni. Teškoće vas ne obeshrabruju, već vas motivišu."
+              }
+            }
+          },
+          "q3": {
+            "text": "Dok hodate putem, vidite lokvu. Šta radite?",
+            "answers": {
+              "jump": {
+                "text": "Preskačem je",
+                "meaning": "Ne bojite se rizika i hrabri ste. Otvoreni ste za nova iskustva."
+              },
+              "walkAround": {
+                "text": "Obiđem je",
+                "meaning": "Krećete se pažljivo i planirano. Preferirate da minimizirate rizike."
+              },
+              "stepIn": {
+                "text": "Zagazim u nju",
+                "meaning": "Prirodni ste i spontani. Prepuštate se toku života."
+              }
+            }
+          }
+        }
+      },
+      "mbti": {
+        "title": "MBTI Test Ličnosti",
+        "description": "Otkrijte koji ste od 16 tipova ličnosti",
+        "icon": "🧠",
+        "questions": {
+          "q1": {
+            "text": "Kako se osećate u društvenim okruženjima?",
+            "answers": {
+              "e": { "text": "Energično i živahno", "meaning": "Ekstrovertan/a (E)" },
+              "i": { "text": "Iscrpljujuće i umorno", "meaning": "Introvertan/a (I)" }
+            }
+          },
+          "q2": {
+            "text": "Kako pristupate novom projektu?",
+            "answers": {
+              "e": { "text": "Razgovaram i razmenjujem ideje sa drugima", "meaning": "Ekstrovertan/a (E)" },
+              "i": { "text": "Prvo razmislim o tome sam/a", "meaning": "Introvertan/a (I)" }
+            }
+          },
+          "q3": {
+            "text": "Na šta se fokusirate prilikom donošenja odluka?",
+            "answers": {
+              "s": { "text": "Konkretne činjenice i detalje", "meaning": "Čulni/a (S)" },
+              "n": { "text": "Mogućnosti i veliku sliku", "meaning": "Intuitivni/a (N)" }
+            }
+          },
+          "q4": {
+            "text": "Koju metodu preferirate prilikom rešavanja problema?",
+            "answers": {
+              "s": { "text": "Dokazane metode", "meaning": "Čulni/a (S)" },
+              "n": { "text": "Kreativna rešenja", "meaning": "Intuitivni/a (N)" }
+            }
+          },
+          "q5": {
+            "text": "Na šta se oslanjate prilikom donošenja važnih odluka?",
+            "answers": {
+              "t": { "text": "Logiku i analizu", "meaning": "Misaoni/a (T)" },
+              "f": { "text": "Emocije i vrednosti", "meaning": "Osećajni/a (F)" }
+            }
+          },
+          "q6": {
+            "text": "Kako se ponašate u konfliktnim situacijama?",
+            "answers": {
+              "t": { "text": "Pokušavam da budem pravedan/na i objektivan/na", "meaning": "Misaoni/a (T)" },
+              "f": { "text": "Razmatram svačija osećanja", "meaning": "Osećajni/a (F)" }
+            }
+          },
+          "q7": {
+            "text": "Kako organizujete svoj svakodnevni život?",
+            "answers": {
+              "j": { "text": "Planirano i organizovano", "meaning": "Sudijski/a (J)" },
+              "p": { "text": "Fleksibilno i spontano", "meaning": "Perceptivni/a (P)" }
+            }
+          },
+          "q8": {
+            "text": "Šta radite kada se rokovi približavaju?",
+            "answers": {
+              "j": { "text": "Pokušavam da završim rano", "meaning": "Sudijski/a (J)" },
+              "p": { "text": "Čekam do poslednjeg trenutka", "meaning": "Perceptivni/a (P)" }
+            }
+          },
+          "q9": {
+            "text": "Kako pristupate učenju nečeg novog?",
+            "answers": {
+              "s": { "text": "Korak po korak, sa praktičnim primenama", "meaning": "Čulni/a (S)" },
+              "n": { "text": "Razumevanje koncepata i teorija", "meaning": "Intuitivni/a (N)" }
+            }
+          },
+          "q10": {
+            "text": "Kako razmišljate o budućnosti?",
+            "answers": {
+              "s": { "text": "Fokusiram se na trenutnu situaciju", "meaning": "Čulni/a (S)" },
+              "n": { "text": "Zamišljam buduće mogućnosti", "meaning": "Intuitivni/a (N)" }
+            }
+          },
+          "q11": {
+            "text": "Kako pristupate rešavanju tuđih problema?",
+            "answers": {
+              "t": { "text": "Nudim logična rešenja", "meaning": "Misaoni/a (T)" },
+              "f": { "text": "Pružam emocionalnu podršku", "meaning": "Osećajni/a (F)" }
+            }
+          },
+          "q12": {
+            "text": "Za šta preferirate da budete cenjeni?",
+            "answers": {
+              "t": { "text": "Priznanje mojih sposobnosti", "meaning": "Misaoni/a (T)" },
+              "f": { "text": "Ценјење моје ličnosti", "meaning": "Osećajni/a (F)" }
+            }
+          },
+          "q13": {
+            "text": "Kako se ponašate na društvenim događajima?",
+            "answers": {
+              "e": { "text": "Pokušavam da upoznam nove ljude", "meaning": "Ekstrovertan/a (E)" },
+              "i": { "text": "Provodim vreme sa ljudima koje poznajem", "meaning": "Introvertan/a (I)" }
+            }
+          },
+          "q14": {
+            "text": "Odakle dobijate svoju energiju?",
+            "answers": {
+              "e": { "text": "Od interakcije sa drugima", "meaning": "Ekstrovertan/a (E)" },
+              "i": { "text": "Od provodenja vremena sam/a", "meaning": "Introvertan/a (I)" }
+            }
+          },
+          "q15": {
+            "text": "Kako pristupate detaljima?",
+            "answers": {
+              "s": { "text": "Pažljivo i pedantno", "meaning": "Čulni/a (S)" },
+              "n": { "text": "Fokusiram se na opšti okvir", "meaning": "Intuitivni/a (N)" }
+            }
+          },
+          "q16": {
+            "text": "Koliko ste kreativni?",
+            "answers": {
+              "s": { "text": "Proizvodim praktična i realistična rešenja", "meaning": "Čulni/a (S)" },
+              "n": { "text": "Razvijam originalne i inovativne ideje", "meaning": "Intuitivni/a (N)" }
+            }
+          },
+          "q17": {
+            "text": "Kako reagujete na promene?",
+            "answers": {
+              "j": { "text": "Preferiram planirane promene", "meaning": "Sudijski/a (J)" },
+              "p": { "text": "Volim spontane promene", "meaning": "Perceptivni/a (P)" }
+            }
+          },
+          "q18": {
+            "text": "Šta mislite o rutinskim zadacima?",
+            "answers": {
+              "j": { "text": "Sigurni i utešni", "meaning": "Sudijski/a (J)" },
+              "p": { "text": "Dosadni i ograničavajući", "meaning": "Perceptivni/a (P)" }
+            }
+          },
+          "q19": {
+            "text": "Koliko ste dobri u razumevanju tuđih emocija?",
+            "answers": {
+              "f": { "text": "Veoma dobar/a u razumevanju i empatiji", "meaning": "Osećajni/a (F)" },
+              "t": { "text": "Tražim logična objašnjenja", "meaning": "Misaoni/a (T)" }
+            }
+          },
+          "q20": {
+            "text": "Šta je važnije: biti u pravu ili biti srećan/na?",
+            "answers": {
+              "t": { "text": "Biti u pravu je važnije", "meaning": "Misaoni/a (T)" },
+              "f": { "text": "Biti srećan/na je važnije", "meaning": "Osećajni/a (F)" }
+            }
+          }
+        }
+      },
+      "stormPersonality": {
+        "title": "Test Ličnosti u Oluji: Ko Ste u Teškim Vremenima?",
+        "description": "Usred oluje ste... Da li preuzimate kontrolu ili se okrećete svojoj unutrašnjoj snazi? Ovaj psihološki test otkriva kako se nosite sa krizom u vašoj podsvesti.",
+        "icon": "🌊",
+        "resultTitle": "Vaša Energija u Oluji",
+        "quote": "Nijedna oluja ne traje večno. Ono što je važno nisu talasi, već kako upravljate svojim jedrima.",
+        "reflectionTitle": "Duboka Refleksija",
+        "reflection": "Ovaj test vam pomaže da otkrijete kako se ponašate u kriznim trenutcima u svojoj podsvesti. Oluja simbolizuje haos u vašem unutrašnjem svetu; brod je vaša svest. Neki preuzimaju kormilo i bore se, drugi nalaze mir u tišini. Svaka reakcija je vredna.",
+        "archetypeNote": "Krizni trenuci otkrivaju najdublje aspekte vaše ličnosti. Pokazuje koji arhetip aktivirate u suočavanju sa stresom: Vođa, Iscелитель, Mudrac ili Tragač.",
+        "shareTitle": "Podelite sa Prijateljima",
+        "shareDescription": "Kako se vaši prijatelji ponašaju u oluji? Neka i oni otkriju!",
+        "shareText": "Ja sam onaj/ona koji ostaje miran/na u olujama 🌊 Ko ste vi? Otkrijte sa Testom Ličnosti u Oluji:",
+        "shareHint": "Podelite ovaj test sa prijateljima, neka i oni otkriju!",
+        "questions": {
+          "q1": {
+            "text": "Na brodu ste i more se iznenada uzburka. Vidite tamne oblake na horizontu. Koja je vaša prva misao?",
+            "answers": {
+              "hope": {
+                "text": "I ovo će proći, moram biti strpljiv/a dok se oluja ne smiri.",
+                "meaning": "Strpljivi ste i otporni. U teškim vremenima, verujete u prolaznost vremena umesto da paniči te. Vaša snaga leži u vašoj smirenosti."
+              },
+              "fear": {
+                "text": "Ovo je loše, definitivno ćemo potonuti!",
+                "meaning": "Vaš osećaj zabrinutosti je intenzivan, ali ova svest vas čini opreznim. Prepoznavanje vaših strahova je prvi korak ka njihovoj transformaciji."
+              },
+              "plan": {
+                "text": "Moram odmah napraviti plan, možemo promeniti kurs.",
+                "meaning": "Kontrola i strategija su u vašoj prirodi. Čak i u teškim situacijama, počinjete tražiti rešenja; ovo vas čini prirodnim vođom."
+              }
+            }
+          },
+          "q2": {
+            "text": "Oluja se pojačava. Posada je zabrinuta. Šta radite?",
+            "answers": {
+              "lead": {
+                "text": "Preuzimam kormilo i dajem komande.",
+                "meaning": "Vođa u vama se budi u kriznim trenucima. Čak i pod stresom, vaša sposobnost jasnog razmišljanja je visoka; dajete samopouzdanje onima oko vas."
+              },
+              "support": {
+                "text": "Podižem ljudima moral, pomažem im da ostanu mirni.",
+                "meaning": "Empatični ste i ujedinjujući. Za vas, kriza nije samo test već način da osnažite druge. Nosite duhovno vođstvo."
+              },
+              "retreat": {
+                "text": "Povlačim se u sebe, molim se ili regulišem disanje.",
+                "meaning": "Oluja je za vas unutrašnji simbol. Prvo smirite svoje srce, zatim se okrećete spoljnom svetu. Ovo je intuitivna mudrost."
+              }
+            }
+          },
+          "q3": {
+            "text": "Na trenutak, nebo se razdvaja, munja udara u horizont. Šta osećate u tom trenutku?",
+            "answers": {
+              "awe": {
+                "text": "Osećam divljenje prema moći prirode.",
+                "meaning": "Imate duboko poštovanje prema životu. Moć vas ne plaši, inspiriše vas. Imate srce koje može videti lepotu čak i u oluji."
+              },
+              "fear": {
+                "text": "Uplašen/a sam ali ne mogu da se pomeram.",
+                "meaning": "Doživljavate svoje strahove umesto da ih potiskujete. Ovo je znak hrabrosti. Osećanje je oblik vaše otpornosti."
+              },
+              "focus": {
+                "text": "Munja me podseća na moj cilj: preživeti.",
+                "meaning": "Vaš um se fokusira na cilj čak i u krizi. Ovo je karakteristika ljudi koji mogu funkcionisati pod stresom."
+              }
+            }
+          },
+          "q4": {
+            "text": "Oluja konačno počinje da se smiruje. Sunce prodire kroz oblake. Šta radite?",
+            "answers": {
+              "thankful": {
+                "text": "Udišem duboko i zahvaljujem.",
+                "meaning": "Znate kako da izvučete značenje iz teškoća. Svaka oluja je za vas proces duhovnog prečišćavanja. Vaša svest zahvalnosti je jaka."
+              },
+              "analyze": {
+                "text": "Analiziram šta se desilo i gledam šta mogu poboljšati.",
+                "meaning": "Vaša refleksivna sposobnost razmišljanja je visoka. Vaša iskustva vidite kao prilike za rast. Ovo je pokazatelj vaše psihološke zrelosti."
+              },
+              "moveOn": {
+                "text": "Vraćam brod na kurs i krećem napred.",
+                "meaning": "Život je putovanje koje se za vas ne zaustavlja. Doživljavate svoje emocije ali se ne zaglavljujete. Imate jaku sposobnost oporavka."
+              }
+            }
+          }
+        }
+      },
+      "nameTarot": {
+        "title": "Vaša Tarot Karta po Energiji Imena",
+        "description": "Sa kojom tarot kartom vas povezuje skrivena energija vašeg imena? Izračunajte svoju numerološku vibraciju, otkrijte kartu koja simbolizuje vašu sudbinu. Pitagorina numerologija i Rider-Waite tarot.",
+        "icon": "🔮",
+        "inputTitle": "✨ Napišite Svoje Ime, Otkrijte Svoju Energiju ✨",
+        "inputSubtitle": "Dekodiramo skrivenu energiju vašeg imena sa Pitagorinom numerologijom",
+        "inputLabel": "Vaše Ime:",
+        "inputPlaceholder": "Primer: Sara",
+        "inputButton": "🔮 Pokažite Mi Moju Tarot Kartu",
+        "inputHint": "💡 <strong>Napomena:</strong> Samo napišite svoje ime. Prezime nije potrebno. Posebni karakteri su podržani.",
+        "resultTitle": "Vaša Tarot Karta",
+        "resultSubtitle": "Numerološka Analiza Energije",
+        "numerologyTitle": "Numerološki Proračun",
+        "numerologySubtitle": "Numerička vibracija vašeg imena",
+        "keywordsTitle": "Ključne Reči",
+        "adviceTitle": "Tarot Vođstvo",
+        "elementTitle": "Element",
+        "astrologyTitle": "Astrologija",
+        "cards": {
+          "1": {
+            "card": "Mađioničar",
+            "cardTurkish": "Mađioničar",
+            "emoji": "🪄",
+            "theme": "Početak i Kreativnost",
+            "message": "Imate moć da kreirate svoju sopstvenu stvarnost. Vaše reči su magija, vaša namera je vaš kompas.",
+            "description": "Karta Mađioničara je simbol manifestacije i potencijala. Vaša energija nosi moć pretvaranja snova u stvarnost. Vaša kreativnost je bezgranična, vaše mogućnosti su beskonačne.",
+            "keyWords": "[\"Kreativnost\", \"Manifestacija\", \"Moć\", \"Novi počeci\"]",
+            "advice": "Koristite svoj unutrašnji potencijal. Jasno postavite svoju nameru i preduzmite akciju. Svi resursi koji su vam potrebni su spremni za vas.",
+            "element": "Vazduh",
+            "astrology": "Merkur"
+          },
+          "2": {
+            "card": "Visoka Sveštenica",
+            "cardTurkish": "Visoka Sveštenica",
+            "emoji": "🌙",
+            "theme": "Intuicija i Skrivena Mudrost",
+            "message": "Odgovori su skriveni u tišini. Slušajte svoju intuiciju.",
+            "description": "Visoka Sveštenica je vodič unutrašnje mudrosti i intuicije. Vaša energija oseća nevidljive istine. Vaša duhovna dubina vas uvek vodi pravim putem.",
+            "keyWords": "[\"Intuicija\", \"Misterija\", \"Unutrašnje znanje\", \"Duhovnost\"]",
+            "advice": "Verujte svom unutrašnjem glasu. Meditacija i tišina će vam doneti jasnoću. Otvorite vrata skrivene mudrosti.",
+            "element": "Voda",
+            "astrology": "Mesec"
+          },
+          "3": {
+            "card": "Carica",
+            "cardTurkish": "Carica",
+            "emoji": "👑",
+            "theme": "Obilje i Produktivnost",
+            "message": "Hranite svet svojom kreativnošću i srcem.",
+            "description": "Carica je simbol obilja i plodnosti. Vaša energija raste i hrani sve oko vas. Vi ste izvor ljubavi i kreativnosti.",
+            "keyWords": "[\"Obilje\", \"Ljubav\", \"Kreativnost\", \"Priroda\"]",
+            "advice": "Pokažite saosećanje prema sebi i drugima. Posvetite vreme svojim kreativnim projektima. Ojačajte svoju vezu sa prirodom.",
+            "element": "Zemlja",
+            "astrology": "Venera"
+          },
+          "4": {
+            "card": "Car",
+            "cardTurkish": "Car",
+            "emoji": "🛡️",
+            "theme": "Red i Autoritet",
+            "message": "Postavite svoje granice, implementirajte svoje planove. Moć je u vama.",
+            "description": "Car je predstavnik strukture i autoriteta. Vaša energija uspostavlja red i vodi. Vaša odlučnost vas nosi na vrh.",
+            "keyWords": "[\"Autoritet\", \"Red\", \"Struktura\", \"Odlučnost\"]",
+            "advice": "Napravite jasne planove i implementirajte ih. Zaštitite svoje granice. Koristite svoje liderske kvalitete.",
+            "element": "Vatra",
+            "astrology": "Ovan"
+          },
+          "5": {
+            "card": "Hijerofant",
+            "cardTurkish": "Hijerofant",
+            "emoji": "📿",
+            "theme": "Mudrost i Vera",
+            "message": "Vaše tradicije i uverenja vas uzemljuju.",
+            "description": "Hijerofant je učitelj i duhovni vodič. Vaša energija deli znanje i vodi druge. Vaše duhovne vrednosti vas jačaju.",
+            "keyWords": "[\"Mudrost\", \"Podučavanje\", \"Vera\", \"Tradicija\"]",
+            "advice": "Podelite ono što ste naučili. Povežite se sa svojim duhovnim vrednostima. Budite mentor ili učite od mentora.",
+            "element": "Zemlja",
+            "astrology": "Bik"
+          },
+          "6": {
+            "card": "Ljubavnici",
+            "cardTurkish": "Ljubavnici",
+            "emoji": "💕",
+            "theme": "Izbor i Harmonija",
+            "message": "Pronađite ravnotežu srca i uma; otvorite put ljubavi.",
+            "description": "Ljubavnici su karta izbora i ujedinjenja. Vaša energija traži harmoniju i ravnotežu. Vaši odnosi i vrednosti su vaša snaga.",
+            "keyWords": "[\"Ljubav\", \"Izbor\", \"Harmonija\", \"Vrednosti\"]",
+            "advice": "Uspostavite ravnotežu srca i uma. Donosite svesne izbore. Hranite svoje odnose.",
+            "element": "Vazduh",
+            "astrology": "Blizanci"
+          },
+          "7": {
+            "card": "Kočija",
+            "cardTurkish": "Kočija",
+            "emoji": "🏹",
+            "theme": "Odlučnost i Kretanje",
+            "message": "Preuzmite kontrolu, krenite ka svom cilju.",
+            "description": "Kočija je karta pobede i odlučnosti. Vaša energija prevazilazi prepreke i dostiže svoj cilj. Vaša snaga volje je bezgranična.",
+            "keyWords": "[\"Pobeda\", \"Odlučnost\", \"Kretanje\", \"Kontrola\"]",
+            "advice": "Fokusirajte se na svoj cilj. Krenite napred uprkos teškoćama. Koristite svoju snagu volje.",
+            "element": "Voda",
+            "astrology": "Rak"
+          },
+          "8": {
+            "card": "Snaga",
+            "cardTurkish": "Snaga",
+            "emoji": "🦁",
+            "theme": "Unutrašnja Otpornost",
+            "message": "Svaku teškoću prevazilazite nežnom hrabrošću.",
+            "description": "Karta Snage je unutrašnja hrabrost i saosećanje. Vaša energija je meka ali čvrsta. Sve postižete sa strpljenjem.",
+            "keyWords": "[\"Hrabrost\", \"Saosećanje\", \"Strpljenje\", \"Unutrašnja snaga\"]",
+            "advice": "Otkrijte svoju unutrašnju snagu. Budite strpljivi. Pristupite sa saosećanjem ali stojte čvrsto.",
+            "element": "Vatra",
+            "astrology": "Lav"
+          },
+          "9": {
+            "card": "Pustinjak",
+            "cardTurkish": "Pustinjak",
+            "emoji": "🕯️",
+            "theme": "Unutrašnja Potraga",
+            "message": "Pronalazite svoj put sa sopstvenom svetlošću.",
+            "description": "Pustinjak je karta unutrašnjeg putovanja i prosvetljenja. Vaša energija traži odgovore u dubinama. Pronalazite snagu u samoći.",
+            "keyWords": "[\"Introspekcija\", \"Potraga\", \"Samoća\", \"Prosvetljenje\"]",
+            "advice": "Okrenite se ka unutra. Cenite svoje vreme nasamo. Pronađite svoj put sa sopstvenom svetlošću.",
+            "element": "Zemlja",
+            "astrology": "Devica"
+          },
+          "11": {
+            "card": "Pravda",
+            "cardTurkish": "Pravda",
+            "emoji": "⚖️",
+            "theme": "Ravnoteža i Karma",
+            "message": "Istina na vagama univerzuma vas uzdiže.",
+            "description": "Pravda je karta ravnoteže i istine. Vaša energija je ispravna i pravedna. Održavate svoju karmičku ravnotežu.",
+            "keyWords": "[\"Pravda\", \"Ravnoteža\", \"Istina\", \"Karma\"]",
+            "advice": "Budite pravedni. Donosite uravnotežene odluke. Verujte u pravdu univerzuma.",
+            "element": "Vazduh",
+            "astrology": "Vaga"
+          },
+          "22": {
+            "card": "Svet",
+            "cardTurkish": "Svet",
+            "emoji": "🌍",
+            "theme": "Završetak i Celovitost",
+            "message": "Jedan ciklus je završen, stupate u novi.",
+            "description": "Karta Sveta je završetak i uspeh. Vaša energija traži celovitost i savršenstvo. U harmoniji ste sa univerzumom.",
+            "keyWords": "[\"Završetak\", \"Uspeh\", \"Celovitost\", \"Univerzalnost\"]",
+            "advice": "Proslavite svoja dostignuća. Završite ciklus. Budite spremni za nove početke.",
+            "element": "Zemlja",
+            "astrology": "Saturn"
+          }
+        }
+      }
+    }
+  },
   "widgets": {
     "trendingCards": {
       "badge": "POPULARNO",

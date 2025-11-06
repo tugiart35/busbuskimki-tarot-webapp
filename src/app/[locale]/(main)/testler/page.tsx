@@ -17,6 +17,7 @@
 import { KokolojiTest } from '@/features/psychological-tests';
 import { DynamicBottomNavigation as BottomNavigation } from './DynamicTestComponents';
 import type { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 
 // SEO Metadata - E-E-A-T Uyumlu
 export const metadata: Metadata = {
@@ -93,7 +94,10 @@ export const metadata: Metadata = {
   },
 };
 
-export default function TestlerPage() {
+export default async function TestlerPage() {
+  // Çevirileri al
+  const t = await getTranslations('psychTests.page.scientificBasis');
+
   // Structured Data (Schema.org) - E-E-A-T için
   const structuredData = {
     '@context': 'https://schema.org',
@@ -305,76 +309,49 @@ export default function TestlerPage() {
 
       {/* Main Content */}
       <div className='relative z-10 container mx-auto px-4 py-12 max-w-4xl'>
-      
-
         <KokolojiTest />
 
         {/* E-E-A-T: Authoritativeness - Kaynak Bilgisi */}
         <div className='mt-12 bg-white/5 rounded-xl p-6 border border-white/10'>
-          <h2 className='text-xl font-bold text-white mb-4'>
-            📚 Testlerimizin Bilimsel Temeli
-          </h2>
+          <h2 className='text-xl font-bold text-white mb-4'>{t('title')}</h2>
           <div className='space-y-3 text-sm text-white/70'>
             <p>
-              <strong className='text-white'>MBTI:</strong> Myers-Briggs Type
-              Indicator, Carl Jung'un psikolojik tipler teorisine dayanır ve
-              dünya çapında 2 milyondan fazla kişi tarafından yıllık olarak
-              kullanılmaktadır.
+              <strong className='text-white'>MBTI:</strong> {t('mbti')}
             </p>
             <p>
-              <strong className='text-white'>Enneagram:</strong> Enneagram
-              Institute ve International Enneagram Association'ın
-              araştırmalarına dayanan, motivasyon ve davranış kalıpları analiz
-              sistemidir.
+              <strong className='text-white'>Enneagram:</strong>{' '}
+              {t('enneagram')}
             </p>
             <p>
-              <strong className='text-white'>Big Five (OCEAN):</strong> Modern
-              psikolojinin en geçerli ve güvenilir kişilik modeli olarak kabul
-              edilir. 50 yılı aşkın araştırma ve binlerce akademik yayın
-              tarafından desteklenmektedir.
+              <strong className='text-white'>Big Five (OCEAN):</strong>{' '}
+              {t('bigFive')}
             </p>
             <p>
               <strong className='text-white'>Deniz Fırtınası Testi:</strong>{' '}
-              Kokoloji (projektif psikoloji) yöntemi ile bilinçaltı analizi
-              yapar. Kriz anlarında gösterdiğiniz tepkileri değerlendirerek
-              psikolojik dayanıklılık arketipinizi ortaya çıkarır. Lider,
-              Şifacı, Bilge veya Arayıcı arketiplerine dayalı bir analizdir.
+              {t('seaStorm')}
             </p>
             <p>
               <strong className='text-white'>
                 İsim Enerjine Göre Tarot Kartın:
               </strong>{' '}
-              Pythagoras numerolojisi sistemi ile adınızdaki harflerin sayısal
-              titreşimlerini hesaplar ve Rider-Waite tarot sembolizmi ile
-              eşleştirir. Her harf belirli bir enerji taşır; bu enerji, kişisel
-              yolculuğunuzu simgeleyen bir tarot kartıyla birleşir.
+              {t('nameEnergy')}
             </p>
             <p>
-              <strong className='text-white'>Stres Düzeyi Testi:</strong> DASS21
-              (Depression Anxiety Stress Scales) ölçeğine dayanan bilimsel bir
-              stres değerlendirme testidir. Lovibond & Lovibond (1995)
-              tarafından geliştirilmiş ve yaygın olarak kullanılan bu ölçek,
-              stres seviyenizi değerlendirir ve kişiselleştirilmiş meditasyon
-              önerileri sunar.
+              <strong className='text-white'>Stres Düzeyi Testi:</strong>{' '}
+              {t('stressTest')}
             </p>
             <p>
               <strong className='text-white'>
                 Aşk Enerjisi (Love Vibration):
               </strong>{' '}
-              Klasik astroloji ve tarot literatürüne dayanan, Venüs (romantizm),
-              Mars (tutku) ve Merkür (iletişim) gezegen enerjilerini analiz
-              eder. Tarot kartları ile ilişkilendirilerek kişisel aşk enerjinizi
-              keşfetmenizi sağlar.
+              {t('loveVibration')}
             </p>
             <p>
               <strong className='text-white'>Arkadaş Grubu Enerjisi:</strong>{' '}
-              Sosyal psikoloji ve grup dinamikleri araştırmalarına dayanan,
-              eğlenceli ve ilişkilendirilebilir sosyal rol analizi sunar.
+              {t('friendGroup')}
             </p>
             <p className='text-xs text-white/50 mt-4'>
-              <strong>Not:</strong> Bu testler kişisel gelişim, eğlence ve
-              farkındalık amaçlıdır. Profesyonel psikolojik değerlendirme veya
-              astrolojik danışmanlık yerine kullanılmamalıdır.
+              <strong>Not:</strong> {t('disclaimer')}
             </p>
           </div>
         </div>
