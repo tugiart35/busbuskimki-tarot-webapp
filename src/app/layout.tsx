@@ -20,6 +20,7 @@ Güncellemeler:
 */
 
 import { ReactNode } from 'react';
+import dynamic from 'next/dynamic';
 import './globals.css';
 
 // Modüler dosyalardan import'lar
@@ -30,8 +31,16 @@ import { defaultLocale } from '@/lib/i18n/config';
 import { Inter } from 'next/font/google';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from '@vercel/analytics/react';
-import { WebVitals } from '@/components/WebVitals';
-import { GoogleAnalytics } from '@/components/analytics/GoogleAnalytics';
+
+// Analytics components - lazy load for better performance
+// Named exports için .then() ile extract edelim
+const WebVitals = dynamic(() => 
+  import('@/components/WebVitals').then(mod => mod.WebVitals)
+);
+
+const GoogleAnalytics = dynamic(() => 
+  import('@/components/analytics/GoogleAnalytics').then(mod => mod.GoogleAnalytics)
+);
 
 // Optimize font loading with display swap and preload
 const inter = Inter({
@@ -76,6 +85,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         {/* Google AdSense - YENİ KOD */}
         <script
           async
+          defer
           src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1429338163231803'
           crossOrigin='anonymous'
         />

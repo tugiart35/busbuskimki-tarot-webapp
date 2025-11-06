@@ -37,9 +37,12 @@ import {
   useWebVitals,
   usePerformanceBudget,
 } from '@/components/performance/WebVitals';
-import CookieConsent from '@/components/shared/CookieConsent';
-import DisclaimerBanner from '@/components/shared/DisclaimerBanner';
-import AgeVerificationModal from '@/components/shared/AgeVerificationModal';
+// Dynamic imports for non-critical layout widgets (performance optimization)
+import {
+  DynamicCookieConsent as CookieConsent,
+  DynamicDisclaimerBanner as DisclaimerBanner,
+  DynamicAgeVerificationModal as AgeVerificationModal,
+} from '@/components/shared/DynamicLayoutWidgets';
 
 interface LocaleLayoutClientProps {
   children: React.ReactNode;

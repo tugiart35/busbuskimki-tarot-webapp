@@ -54,55 +54,16 @@ export const localeConfig = {
   },
 } as const;
 
-// Tüm namespace dosyaları
-const NAMESPACE_FILES = [
-  'common',
-  'dashboard',
-  'auth',
-  'tarot',
-  'tarot-spreads',
-  'cards',
-  'numerology',
-  'payment',
-  'admin',
-  'legal',
-  'home',
-  'tests',
-  'misc',
-];
-
-// Namespace yükleme helper'ı
-async function loadAllNamespaces(locale: Locale) {
-  const messages: Record<string, any> = {};
-  
-  // Tüm namespace'leri yükle
-  // Webpack otomatik olarak bunları separate chunks'a böler
-  for (const ns of NAMESPACE_FILES) {
-    try {
-      const nsMessages = (await import(`../../../messages/${locale}/${ns}.json`)).default;
-      Object.assign(messages, nsMessages);
-    } catch (error) {
-      console.error(`Failed to load namespace: ${ns} for locale: ${locale}`, error);
-    }
-  }
-  
-  return messages;
-}
-
 // next-intl yapılandırması
-export default getRequestConfig(async ({ locale, requestLocale }) => {
+export default getRequestConfig(async ({ locale }) => {
   // Desteklenmeyen dil kontrolü
   if (!locale || !locales.includes(locale as Locale)) {
     notFound();
   }
 
-  // Tüm namespace'leri yükle
-  // Next.js build optimization otomatik olarak code-splitting yapar
-  const messages = await loadAllNamespaces(locale as Locale);
-
   return {
     locale,
-    messages,
+    messages: (await import(`../../../messages/${locale}.json`)).default,
     timeZone: localeConfig[locale as Locale].timezone,
   };
 });

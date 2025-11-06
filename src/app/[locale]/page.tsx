@@ -12,11 +12,23 @@
 import { HomePageClient } from './HomePageClient';
 import { createClient } from '@supabase/supabase-js';
 
-// ISR: Her 5 dakikada bir (300 saniye) statik sayfayı yenile
-export const revalidate = 300;
+// ISR Performance Optimization
+export const revalidate = 3600; // 1 saat (daha az server processing)
+export const dynamic = 'force-static'; // Full static generation
+export const dynamicParams = true; // tr, en, sr için static generation
+export const fetchCache = 'force-cache'; // Aggressive caching
 
 interface HomePageProps {
   params: Promise<{ locale: string }>;
+}
+
+// Static generation için locale params
+export async function generateStaticParams() {
+  return [
+    { locale: 'tr' },
+    { locale: 'en' },
+    { locale: 'sr' },
+  ];
 }
 
 // Server-side'da readings sayısını çek (cache'lenmiş)
