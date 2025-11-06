@@ -56,18 +56,16 @@ export default function NumerologyPage({ params }: NumerologyPageProps) {
     // Güvenlik: Input sanitization
     const sanitizedValue = sanitizeNumerologyInput(value);
 
-    // Validation kontrolü
+    // Gerçek zamanlı validation sadece tarih için (format önemli)
     if (field === 'birthDate' || field === 'targetDate') {
       if (sanitizedValue && !validateDateInput(sanitizedValue)) {
         setSecurityError(t('numerology.page.errors.invalidDateFormat'));
         return;
       }
-    } else if (field === 'fullName') {
-      if (sanitizedValue && !validateNameInput(sanitizedValue)) {
-        setSecurityError(t('numerology.page.errors.invalidNameFormat'));
-        return;
-      }
     }
+    
+    // İsim validation'ı kaldırıldı - kullanıcı yazabilsin
+    // Validation sadece form submit'te yapılacak
 
     setSecurityError(null);
     setFormData(prev => ({ ...prev, [field]: sanitizedValue }));
@@ -81,18 +79,15 @@ export default function NumerologyPage({ params }: NumerologyPageProps) {
     // Güvenlik: Input sanitization
     const sanitizedValue = sanitizeNumerologyInput(value);
 
-    // Validation kontrolü
+    // Gerçek zamanlı validation sadece tarih için
     if (field === 'birthDate') {
       if (sanitizedValue && !validateDateInput(sanitizedValue)) {
         setSecurityError(t('numerology.page.errors.invalidDateFormat'));
         return;
       }
-    } else if (field === 'fullName') {
-      if (sanitizedValue && !validateNameInput(sanitizedValue)) {
-        setSecurityError(t('numerology.page.errors.invalidNameFormat'));
-        return;
-      }
     }
+    
+    // İsim validation'ı kaldırıldı - kullanıcı yazabilsin
 
     setSecurityError(null);
     setFormData(prev => ({
