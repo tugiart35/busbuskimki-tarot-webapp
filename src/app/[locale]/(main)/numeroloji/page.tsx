@@ -7,6 +7,7 @@
 import { use, useState } from 'react';
 import { DynamicBottomNavigation } from './DynamicNumerologyComponents';
 import { NumerologyPageSkeleton } from './NumerologyPageSkeleton';
+import DatePicker from '@/components/DatePicker';
 import { calculateNumerology } from '@/lib/numerology/calculators';
 import { NumerologyType, NumerologyResult } from '@/lib/numerology/types';
 import {
@@ -437,18 +438,14 @@ export default function NumerologyPage({ params }: NumerologyPageProps) {
                     <span className='text-lg'>📅</span>
                     {t('numerology.page.form.birthDate')}
                   </label>
-                  <div className='relative'>
-                    <input
-                      type='date'
-                      value={formData.birthDate}
-                      onChange={e =>
-                        handleInputChange('birthDate', e.target.value)
-                      }
-                      className='w-full px-4 py-4 rounded-xl bg-white/20 border border-white/30 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all duration-300 text-white placeholder-gray-400 hover:bg-white/25'
-                      required
-                    />
-                    <div className='absolute inset-0 rounded-xl bg-gradient-to-r from-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none'></div>
-                  </div>
+                  <DatePicker
+                    value={formData.birthDate}
+                    onChange={value => handleInputChange('birthDate', value)}
+                    placeholder='GG.AA.YYYY'
+                    error={!!securityError}
+                    minDate={new Date(1900, 0, 1)}
+                    maxDate={new Date()}
+                  />
                 </div>
               )}
 
@@ -483,14 +480,13 @@ export default function NumerologyPage({ params }: NumerologyPageProps) {
                   <label className='block text-sm font-semibold mb-3 text-gray-200'>
                     📅 {t('numerology.page.form.birthDate')}
                   </label>
-                  <input
-                    type='date'
+                  <DatePicker
                     value={formData.birthDate}
-                    onChange={e =>
-                      handleInputChange('birthDate', e.target.value)
-                    }
-                    className='w-full px-4 py-3 rounded-xl bg-white/20 border border-white/30 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all duration-300 text-white'
-                    required
+                    onChange={value => handleInputChange('birthDate', value)}
+                    placeholder='GG.AA.YYYY'
+                    error={!!securityError}
+                    minDate={new Date(1900, 0, 1)}
+                    maxDate={new Date()}
                   />
                 </div>
               )}
@@ -502,14 +498,13 @@ export default function NumerologyPage({ params }: NumerologyPageProps) {
                     <label className='block text-sm font-semibold mb-3 text-gray-200'>
                       📅 {t('numerology.page.form.birthDate')}
                     </label>
-                    <input
-                      type='date'
+                    <DatePicker
                       value={formData.birthDate}
-                      onChange={e =>
-                        handleInputChange('birthDate', e.target.value)
-                      }
-                      className='w-full px-4 py-3 rounded-xl bg-white/20 border border-white/30 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all duration-300 text-white'
-                      required
+                      onChange={value => handleInputChange('birthDate', value)}
+                      placeholder='GG.AA.YYYY'
+                      error={!!securityError}
+                      minDate={new Date(1900, 0, 1)}
+                      maxDate={new Date()}
                     />
                   </div>
                   <div>
@@ -536,14 +531,13 @@ export default function NumerologyPage({ params }: NumerologyPageProps) {
                   <label className='block text-sm font-semibold mb-3 text-gray-200'>
                     📅 {t('numerology.page.form.birthDate')}
                   </label>
-                  <input
-                    type='date'
+                  <DatePicker
                     value={formData.birthDate}
-                    onChange={e =>
-                      handleInputChange('birthDate', e.target.value)
-                    }
-                    className='w-full px-4 py-3 rounded-xl bg-white/20 border border-white/30 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all duration-300 text-white'
-                    required
+                    onChange={value => handleInputChange('birthDate', value)}
+                    placeholder='GG.AA.YYYY'
+                    error={!!securityError}
+                    minDate={new Date(1900, 0, 1)}
+                    maxDate={new Date()}
                   />
                 </div>
               )}
@@ -555,28 +549,26 @@ export default function NumerologyPage({ params }: NumerologyPageProps) {
                     <label className='block text-sm font-semibold mb-3 text-gray-200'>
                       📅 {t('numerology.page.form.birthDate')}
                     </label>
-                    <input
-                      type='date'
+                    <DatePicker
                       value={formData.birthDate}
-                      onChange={e =>
-                        handleInputChange('birthDate', e.target.value)
-                      }
-                      className='w-full px-4 py-3 rounded-xl bg-white/20 border border-white/30 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all duration-300 text-white'
-                      required
+                      onChange={value => handleInputChange('birthDate', value)}
+                      placeholder='GG.AA.YYYY'
+                      error={!!securityError}
+                      minDate={new Date(1900, 0, 1)}
+                      maxDate={new Date()}
                     />
                   </div>
                   <div>
                     <label className='block text-sm font-semibold mb-3 text-gray-200'>
                       🎯 {t('numerology.page.form.targetDate')}
                     </label>
-                    <input
-                      type='date'
+                    <DatePicker
                       value={formData.targetDate}
-                      onChange={e =>
-                        handleInputChange('targetDate', e.target.value)
-                      }
-                      className='w-full px-4 py-3 rounded-xl bg-white/20 border border-white/30 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all duration-300 text-white'
-                      required
+                      onChange={value => handleInputChange('targetDate', value)}
+                      placeholder='GG.AA.YYYY'
+                      error={!!securityError}
+                      minDate={new Date(1900, 0, 1)}
+                      maxDate={new Date(2100, 11, 31)}
                     />
                   </div>
                 </div>
@@ -615,18 +607,15 @@ export default function NumerologyPage({ params }: NumerologyPageProps) {
                         <label className='block text-sm font-semibold mb-2 text-gray-200'>
                           {t('numerology.page.form.birthDate')}
                         </label>
-                        <input
-                          type='date'
+                        <DatePicker
                           value={formData.personA.birthDate}
-                          onChange={e =>
-                            handlePersonInputChange(
-                              'personA',
-                              'birthDate',
-                              e.target.value
-                            )
+                          onChange={value =>
+                            handlePersonInputChange('personA', 'birthDate', value)
                           }
-                          className='w-full px-4 py-3 rounded-xl bg-white/20 border border-white/30 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all duration-300 text-white'
-                          required
+                          placeholder='GG.AA.YYYY'
+                          error={!!securityError}
+                          minDate={new Date(1900, 0, 1)}
+                          maxDate={new Date()}
                         />
                       </div>
                     </div>
@@ -662,18 +651,15 @@ export default function NumerologyPage({ params }: NumerologyPageProps) {
                         <label className='block text-sm font-semibold mb-2 text-gray-200'>
                           {t('numerology.page.form.birthDate')}
                         </label>
-                        <input
-                          type='date'
+                        <DatePicker
                           value={formData.personB.birthDate}
-                          onChange={e =>
-                            handlePersonInputChange(
-                              'personB',
-                              'birthDate',
-                              e.target.value
-                            )
+                          onChange={value =>
+                            handlePersonInputChange('personB', 'birthDate', value)
                           }
-                          className='w-full px-4 py-3 rounded-xl bg-white/20 border border-white/30 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all duration-300 text-white'
-                          required
+                          placeholder='GG.AA.YYYY'
+                          error={!!securityError}
+                          minDate={new Date(1900, 0, 1)}
+                          maxDate={new Date()}
                         />
                       </div>
                     </div>
