@@ -4,7 +4,7 @@
 
 'use client';
 
-import { useState, useEffect } from 'react';
+import { use, useState } from 'react';
 import { DynamicBottomNavigation } from './DynamicNumerologyComponents';
 import { NumerologyPageSkeleton } from './NumerologyPageSkeleton';
 import { calculateNumerology } from '@/lib/numerology/calculators';
@@ -26,9 +26,7 @@ interface NumerologyPageProps {
 
 export default function NumerologyPage({ params }: NumerologyPageProps) {
   const { t } = useTranslations();
-  const [resolvedParams, setResolvedParams] = useState<{
-    locale: string;
-  } | null>(null);
+  const resolvedParams = use(params);
   const [activeTab, setActiveTab] = useState<
     | 'life-path'
     | 'expression-destiny'
@@ -53,18 +51,6 @@ export default function NumerologyPage({ params }: NumerologyPageProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [securityError, setSecurityError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const resolveParams = async () => {
-      const resolvedParamsData = await params;
-      setResolvedParams(resolvedParamsData);
-    };
-    resolveParams();
-  }, [params]);
-
-  if (!resolvedParams) {
-    return <NumerologyPageSkeleton />;
-  }
 
   const handleInputChange = (field: string, value: string) => {
     // Güvenlik: Input sanitization
