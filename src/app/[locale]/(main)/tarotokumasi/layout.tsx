@@ -4,6 +4,20 @@ import {
   generateTarotPageStructuredData,
 } from '@/lib/seo/tarot-seo-generator';
 
+// Performance Optimization: ISR + Static Generation
+export const revalidate = 3600; // 1 saat cache
+export const dynamic = 'force-static'; // Full static generation
+export const fetchCache = 'force-cache'; // Aggressive caching
+
+// Static generation için locale params
+export async function generateStaticParams() {
+  return [
+    { locale: 'tr' },
+    { locale: 'en' },
+    { locale: 'sr' },
+  ];
+}
+
 // SEO Metadata generation for Tarot Reading page using tarotsayfasi.md data
 export async function generateMetadata({
   params,

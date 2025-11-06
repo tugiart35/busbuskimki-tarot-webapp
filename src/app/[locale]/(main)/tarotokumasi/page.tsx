@@ -62,6 +62,8 @@ Yapılan veya önerilen geliştirmeler:
 'use client';
 
 import { useState, Suspense } from 'react';
+import { useParams } from 'next/navigation';
+import Link from 'next/link';
 import { BottomNavigation } from '@/features/shared/layout';
 import { TarotCard } from '@/features/tarot/lib/full-tarot-deck';
 import { tarotSpreads } from '@/lib/constants/tarotSpreads';
@@ -73,6 +75,8 @@ import { useTranslations } from '@/hooks/useTranslations';
 
 export default function TarotPage() {
   const { t } = useTranslations();
+  const params = useParams();
+  const locale = params?.locale as string;
   const [selectedSpread, setSelectedSpread] = useState('love-spread');
   const [showDescription, setShowDescription] = useState(true); // Açıklama gösterilsin mi?
   const [lastReading, setLastReading] = useState<{
@@ -150,6 +154,55 @@ export default function TarotPage() {
           lastReading={lastReading}
           currentSpreadId={selectedSpread}
         />
+
+        {/* SEO-Friendly Spread Links Grid */}
+        <div className='mt-16'>
+          <h2 className='text-2xl md:text-3xl font-bold text-white mb-8 text-center'>
+            {t('tarot.page.allSpreads')}
+          </h2>
+          <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-6'>
+            {tarotSpreads.map(spread => (
+              <Link
+                key={spread.id}
+                href={`/${locale}/tarotokumasi/${spread.id}`}
+                className='group bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:bg-white/10 hover:border-white/20 hover:scale-105 transition-all duration-300'
+              >
+                <div className='flex items-center gap-4 mb-4'>
+                  <span className='text-4xl group-hover:scale-110 transition-transform'>
+                    {spread.icon}
+                  </span>
+                  <div>
+                    <h3 className='text-xl font-bold text-white group-hover:text-purple-300 transition-colors'>
+                      {t(spread.name)}
+                    </h3>
+                    <p className='text-sm text-gray-400 mt-1'>
+                      {spread.cardCount} {t('tarot.spread.cards')}
+                    </p>
+                  </div>
+                </div>
+                <p className='text-gray-400 text-sm line-clamp-2 mb-4'>
+                  {t(spread.description)}
+                </p>
+                <div className='flex items-center gap-2 text-purple-400 text-sm font-semibold'>
+                  {t('tarot.page.startReading')}
+                  <svg
+                    className='w-4 h-4 group-hover:translate-x-1 transition-transform'
+                    fill='none'
+                    stroke='currentColor'
+                    viewBox='0 0 24 24'
+                  >
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth={2}
+                      d='M9 5l7 7-7 7'
+                    />
+                  </svg>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
       </main>
       <BottomNavigation />
     </div>
