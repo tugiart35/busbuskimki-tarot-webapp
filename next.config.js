@@ -11,6 +11,9 @@ const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
 
+  // Source maps for better debugging and Lighthouse analysis
+  productionBrowserSourceMaps: true,
+
   // Transpile problematic packages for Next.js 15
   transpilePackages: ['react-icons', '@supabase/supabase-js', '@supabase/ssr'],
 
@@ -34,7 +37,16 @@ const nextConfig = {
       'lucide-react',
       'react-icons',
       'framer-motion',
+      'recharts', // Chart library optimization
+      '@supabase/supabase-js', // Supabase optimization
+      'react-hook-form', // Form library optimization
     ],
+
+    // CSS optimization (Next.js 15 experimental)
+    optimizeCss: true,
+
+    // Server component HMR cache (development speed)
+    serverComponentsHmrCache: true,
   },
 
   // Webpack configuration for large bundles

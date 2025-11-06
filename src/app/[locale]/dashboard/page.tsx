@@ -59,15 +59,17 @@ import { useCurrency } from '@/hooks/useCurrency';
 import NavigationHeader from '@/components/dashboard/NavigationHeader';
 import WelcomeSection from '@/components/dashboard/WelcomeSection';
 import StatsCards from '@/components/dashboard/StatsCards';
-import CreditPackages from '@/components/dashboard/CreditPackages';
-import ProfileManagement from '@/components/dashboard/ProfileManagement';
-import RecentActivity from '@/components/dashboard/RecentActivity';
+// Dynamic imports for performance optimization (lazy loading)
+import {
+  DynamicCreditPackages as CreditPackages,
+  DynamicProfileManagement as ProfileManagement,
+  DynamicRecentActivity as RecentActivity,
+  DynamicProfileModal as ProfileModal,
+} from '@/components/dashboard/DynamicDashboardWidgets';
 // Alt navigasyon bileşeni
 import BottomNavigation from '@/features/shared/layout/BottomNavigation';
 // Okuma detay modal bileşeni
 import ReadingDetailModal from '@/features/shared/ui/ReadingDetailModal';
-// Profil düzenleme modal bileşeni
-import ProfileModal from '@/components/dashboard/ProfileModal';
 // i18n hook'u - şu an kullanılmıyor
 // import { useTranslations } from '@/hooks/useTranslations';
 

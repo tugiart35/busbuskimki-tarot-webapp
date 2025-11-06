@@ -59,7 +59,12 @@
     "performance:build": "npm run build && npm run performance:monitor",
     "analyze": "ANALYZE=true npm run build",
     "analyze:server": "BUNDLE_ANALYZE=server npm run build",
-    "analyze:browser": "BUNDLE_ANALYZE=browser npm run build"
+    "analyze:browser": "BUNDLE_ANALYZE=browser npm run build",
+    "lighthouse": "node scripts/lighthouse-audit.js --index 0",
+    "lighthouse:all": "node scripts/lighthouse-audit-all.js",
+    "lighthouse:mobile": "node scripts/lighthouse-audit.js --index 0 --mobile",
+    "lighthouse:desktop": "node scripts/lighthouse-audit.js --index 0 --desktop",
+    "lighthouse:list": "node scripts/lighthouse-audit.js --list"
   },
   "dependencies": {
     "@fingerprintjs/fingerprintjs": "^5.0.1",
