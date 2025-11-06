@@ -67,10 +67,19 @@ const nextConfig = {
           cacheGroups: {
             default: false,
             vendors: false,
-            // Separate large message files into their own chunks
+            // Separate translation files per locale into their own chunks
+            // Her dil (tr, en, sr) ayrı chunk olacak
             messages: {
               test: /[\\/]messages[\\/].*\.json$/,
-              name: 'messages',
+              name(module) {
+                // messages/tr.json -> i18n-tr
+                const match = module.resource.match(/messages[\\/](.*)\.json$/);
+                if (match) {
+                  const locale = match[1]; // tr, en, or sr
+                  return `i18n-${locale}`;
+                }
+                return 'i18n-common';
+              },
               priority: 10,
               reuseExistingChunk: true,
             },
