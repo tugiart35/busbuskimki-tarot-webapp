@@ -104,8 +104,8 @@ export function sanitizeNumerologyInput(input: string): string {
   sanitized = sanitized.replace(/vbscript:/gi, '');
   sanitized = sanitized.replace(/on\w+\s*=/gi, '');
 
-  // Sadece harf, rakam, boşluk, tire ve nokta karakterlerine izin ver
-  sanitized = sanitized.replace(/[^a-zA-Z0-9\s\-\.]/g, '');
+  // Sadece harf (Türkçe dahil), rakam, boşluk, tire ve nokta karakterlerine izin ver
+  sanitized = sanitized.replace(/[^a-zA-ZçğıöşüÇĞIİÖŞÜ0-9\s\-\.]/g, '');
 
   // Çoklu boşlukları tek boşluğa çevir
   sanitized = sanitized.replace(/\s+/g, ' ').trim();
