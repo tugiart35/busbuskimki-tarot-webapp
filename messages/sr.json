@@ -16738,7 +16738,29 @@
     "ogDescription": "Pouzdani i saosećajni komentari koji su dobri za vaše srce. Dobijte uputstva o ljubavi, karijeri, zdravlju i još mnogo toga.",
     "ogImage": "/images/og-image.webp",
     "ogTitle": "Busbuskimki Tarot - Lečenje tarot čitanja",
-    "title": "Busbuskimki Tarot - Lečenje tarot čitanja"
+    "title": "Busbuskimki Tarot - Lečenje tarot čitanja",
+    "faq": {
+      "q1": {
+        "question": "Kako funkcioniše čitanje tarota?",
+        "answer": "Čitanje tarota je metoda dobijanja uvida u različite aspekte života kao što su ljubav, karijera i lični razvoj korišćenjem tarot karata. Naši profesionalni čitači tumače karte pružajući smernice i jasnoću."
+      },
+      "q2": {
+        "question": "Šta je numerologija?",
+        "answer": "Numerologija je nauka koja proučava uticaj brojeva na ljudski život. Analiziranjem vašeg datuma rođenja i imena, može otkriti uvide o vašoj ličnosti, životnom putu i budućim prilikama."
+      },
+      "q3": {
+        "question": "Koliko su tačna čitanja?",
+        "answer": "Dok tarot i numerologija pružaju smernice i uvide, tačnost zavisi od različitih faktora kao što su postavljeno pitanje, tumačenje i kako primenite smernice u svom životu. Naši čitači su iskusni profesionalci koji pružaju pažljiva, personalizovana tumačenja."
+      },
+      "q4": {
+        "question": "Koliko dugo traje čitanje?",
+        "answer": "Trajanje čitanja varira u zavisnosti od vrste čitanja. Jednostavni rasporedi traju 5-10 minuta, dok sveobuhvatna čitanja mogu trajati 15-30 minuta. Možete izabrati vrstu čitanja koja odgovara vašem rasporedu i potrebama."
+      },
+      "q5": {
+        "question": "Mogu li dobiti čitanje na svom jeziku?",
+        "answer": "Da! Naša usluga je dostupna na srpskom, turskom i engleskom jeziku. Možete izabrati željeni jezik kada započnete čitanje."
+      }
+    }
   },
   "settings": {
     "accountDeleteError": "Došlo je do greške prilikom brisanja računa.",
