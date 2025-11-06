@@ -192,7 +192,8 @@
 }
 
 .react-datepicker__time-list {
-  @apply scrollbar-thin scrollbar-thumb-purple-500 scrollbar-track-slate-700;
+  scrollbar-width: thin;
+  scrollbar-color: rgb(168, 85, 247) rgb(51, 65, 85);
 }
 
 /* Portal (Mobile) */
