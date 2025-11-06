@@ -15,7 +15,7 @@
 */
 
 import { KokolojiTest } from '@/features/psychological-tests';
-import { BottomNavigation } from '@/features/shared/layout';
+import { DynamicBottomNavigation as BottomNavigation } from './DynamicTestComponents';
 import type { Metadata } from 'next';
 
 // SEO Metadata - E-E-A-T Uyumlu
@@ -305,26 +305,7 @@ export default function TestlerPage() {
 
       {/* Main Content */}
       <div className='relative z-10 container mx-auto px-4 py-12 max-w-4xl'>
-        {/* SEO-Optimized Header */}
-        <div className='text-center mb-12'>
-          <h1 className='text-4xl md:text-5xl font-bold text-white mb-4'>
-            <span className='bg-gradient-to-r from-white via-white/90 to-white/80 bg-clip-text text-transparent'>
-              Psikolojik Testler
-            </span>
-          </h1>
-          <p className='text-lg text-white/70 max-w-2xl mx-auto mb-6'>
-            Kendinizi daha iyi tanıyın, kişiliğinizi keşfedin
-          </p>
-
-          {/* E-E-A-T: Expertise ve Trustworthiness */}
-          <div className='bg-white/5 rounded-lg p-4 border border-white/10 max-w-2xl mx-auto'>
-            <p className='text-sm text-white/60'>
-              Bilimsel kişilik psikolojisi literatürüne dayanan, ücretsiz ve
-              güvenilir testler. MBTI, Enneagram ve Big Five gibi dünya çapında
-              kabul görmüş yöntemlerle kişilik analizinizi yapın.
-            </p>
-          </div>
-        </div>
+      
 
         <KokolojiTest />
 
