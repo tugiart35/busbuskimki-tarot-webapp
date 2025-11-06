@@ -11,6 +11,7 @@ import { calculateNumerology } from '@/lib/numerology/calculators';
 import { NumerologyType, NumerologyResult } from '@/lib/numerology/types';
 import {
   sanitizeNumerologyInput,
+  sanitizeNumerologyInputRealtime,
   validateDateInput,
   validateNameInput,
   sanitizeForDisplay,
@@ -53,8 +54,8 @@ export default function NumerologyPage({ params }: NumerologyPageProps) {
   const [securityError, setSecurityError] = useState<string | null>(null);
 
   const handleInputChange = (field: string, value: string) => {
-    // Güvenlik: Input sanitization
-    const sanitizedValue = sanitizeNumerologyInput(value);
+    // ✅ REAL-TIME sanitization (boşlukları korur)
+    const sanitizedValue = sanitizeNumerologyInputRealtime(value);
 
     // Gerçek zamanlı validation sadece tarih için (format önemli)
     if (field === 'birthDate' || field === 'targetDate') {
@@ -76,8 +77,8 @@ export default function NumerologyPage({ params }: NumerologyPageProps) {
     field: 'fullName' | 'birthDate',
     value: string
   ) => {
-    // Güvenlik: Input sanitization
-    const sanitizedValue = sanitizeNumerologyInput(value);
+    // ✅ REAL-TIME sanitization (boşlukları korur)
+    const sanitizedValue = sanitizeNumerologyInputRealtime(value);
 
     // Gerçek zamanlı validation sadece tarih için
     if (field === 'birthDate') {
@@ -96,74 +97,140 @@ export default function NumerologyPage({ params }: NumerologyPageProps) {
     }));
   };
 
+  // ✅ Utility function: Split full name into firstName and lastName
+  const splitFullName = (fullName: string): { firstName: string; lastName: string } => {
+    const trimmed = fullName.trim();
+    
+    if (!trimmed) {
+      return { firstName: '', lastName: '' };
+    }
+    
+    // Boşluğa göre ayır (çoklu boşlukları handle et)
+    const parts = trimmed.split(/\s+/);
+    
+    if (parts.length === 1) {
+      // Tek isim - lastName boş
+      return { firstName: parts[0] || '', lastName: '' };
+    }
+    
+    // İlk kelime firstName, geri kalanı lastName
+    const firstName = parts[0] || '';
+    const lastName = parts.slice(1).join(' ');
+    
+    return { firstName, lastName };
+  };
+
   const handleCalculate = async () => {
     setLoading(true);
     setError(null);
     setSecurityError(null);
 
     try {
-      // Rate limiting kontrolü
+      // ✅ 1. Rate limiting kontrolü
       if (!checkRateLimit('numerology-form', 10, 60000)) {
         setError(t('numerology.page.errors.rateLimitExceeded'));
         setLoading(false);
         return;
       }
-      // Gerekli alanları kontrol et
+
+      // ✅ 2. Submit-time sanitization (TRIM dahil)
+      const sanitizedFormData = {
+        fullName: sanitizeNumerologyInput(formData.fullName),
+        birthDate: sanitizeNumerologyInput(formData.birthDate),
+        targetDate: sanitizeNumerologyInput(formData.targetDate),
+        personA: {
+          fullName: sanitizeNumerologyInput(formData.personA.fullName),
+          birthDate: sanitizeNumerologyInput(formData.personA.birthDate),
+        },
+        personB: {
+          fullName: sanitizeNumerologyInput(formData.personB.fullName),
+          birthDate: sanitizeNumerologyInput(formData.personB.birthDate),
+        },
+      };
+
+      // ✅ 3. Name validation
+      if (
+        (activeTab === 'expression-destiny' ||
+         activeTab === 'soul-urge' ||
+         activeTab === 'personality' ||
+         activeTab === 'maturity') &&
+        sanitizedFormData.fullName &&
+        !validateNameInput(sanitizedFormData.fullName)
+      ) {
+        setError(t('numerology.page.errors.invalidNameFormat'));
+        setLoading(false);
+        return;
+      }
+
+      if (activeTab === 'compatibility') {
+        if (sanitizedFormData.personA.fullName && !validateNameInput(sanitizedFormData.personA.fullName)) {
+          setError(t('numerology.page.errors.invalidNameFormat'));
+          setLoading(false);
+          return;
+        }
+        if (sanitizedFormData.personB.fullName && !validateNameInput(sanitizedFormData.personB.fullName)) {
+          setError(t('numerology.page.errors.invalidNameFormat'));
+          setLoading(false);
+          return;
+        }
+      }
+
+      // ✅ 4. Gerekli alanları kontrol et (sanitized data kullan)
       const input: any = {};
 
-      if (activeTab === 'life-path' && formData.birthDate) {
-        input.birthDate = formData.birthDate;
+      if (activeTab === 'life-path' && sanitizedFormData.birthDate) {
+        input.birthDate = sanitizedFormData.birthDate;
       } else if (
         (activeTab === 'expression-destiny' ||
           activeTab === 'soul-urge' ||
           activeTab === 'personality') &&
-        formData.fullName
+        sanitizedFormData.fullName
       ) {
-        // fullName'i firstName ve lastName'e böl
-        const nameParts = formData.fullName.trim().split(' ');
-        input.firstName = nameParts[0] || '';
-        input.lastName = nameParts.slice(1).join(' ') || '';
-      } else if (activeTab === 'birthday-number' && formData.birthDate) {
-        input.birthDate = formData.birthDate;
+        // ✅ fullName'i firstName ve lastName'e böl (splitFullName utility)
+        const { firstName, lastName } = splitFullName(sanitizedFormData.fullName);
+        input.firstName = firstName;
+        input.lastName = lastName;
+      } else if (activeTab === 'birthday-number' && sanitizedFormData.birthDate) {
+        input.birthDate = sanitizedFormData.birthDate;
       } else if (
         activeTab === 'maturity' &&
-        formData.birthDate &&
-        formData.fullName
+        sanitizedFormData.birthDate &&
+        sanitizedFormData.fullName
       ) {
-        input.birthDate = formData.birthDate;
-        // fullName'i firstName ve lastName'e böl
-        const nameParts = formData.fullName.trim().split(' ');
-        input.firstName = nameParts[0] || '';
-        input.lastName = nameParts.slice(1).join(' ') || '';
-      } else if (activeTab === 'pinnacles-challenges' && formData.birthDate) {
-        input.birthDate = formData.birthDate;
+        input.birthDate = sanitizedFormData.birthDate;
+        // ✅ fullName'i firstName ve lastName'e böl
+        const { firstName, lastName } = splitFullName(sanitizedFormData.fullName);
+        input.firstName = firstName;
+        input.lastName = lastName;
+      } else if (activeTab === 'pinnacles-challenges' && sanitizedFormData.birthDate) {
+        input.birthDate = sanitizedFormData.birthDate;
       } else if (
         activeTab === 'personal-cycles' &&
-        formData.birthDate &&
-        formData.targetDate
+        sanitizedFormData.birthDate &&
+        sanitizedFormData.targetDate
       ) {
-        input.birthDate = formData.birthDate;
-        input.targetDate = formData.targetDate;
+        input.birthDate = sanitizedFormData.birthDate;
+        input.targetDate = sanitizedFormData.targetDate;
       } else if (
         activeTab === 'compatibility' &&
-        formData.personA.fullName &&
-        formData.personA.birthDate &&
-        formData.personB.fullName &&
-        formData.personB.birthDate
+        sanitizedFormData.personA.fullName &&
+        sanitizedFormData.personA.birthDate &&
+        sanitizedFormData.personB.fullName &&
+        sanitizedFormData.personB.birthDate
       ) {
-        // PersonA için fullName'i firstName ve lastName'e böl
-        const personANameParts = formData.personA.fullName.trim().split(' ');
-        const personBNameParts = formData.personB.fullName.trim().split(' ');
+        // ✅ PersonA ve PersonB için fullName'i split et
+        const personAName = splitFullName(sanitizedFormData.personA.fullName);
+        const personBName = splitFullName(sanitizedFormData.personB.fullName);
 
         input.personA = {
-          firstName: personANameParts[0] || '',
-          lastName: personANameParts.slice(1).join(' ') || '',
-          birthDate: formData.personA.birthDate,
+          firstName: personAName.firstName,
+          lastName: personAName.lastName,
+          birthDate: sanitizedFormData.personA.birthDate,
         };
         input.personB = {
-          firstName: personBNameParts[0] || '',
-          lastName: personBNameParts.slice(1).join(' ') || '',
-          birthDate: formData.personB.birthDate,
+          firstName: personBName.firstName,
+          lastName: personBName.lastName,
+          birthDate: sanitizedFormData.personB.birthDate,
         };
       } else {
         setError(t('numerology.page.errors.requiredFields'));

@@ -88,10 +88,12 @@ export function validateUrl(url: string): boolean {
 }
 
 /**
- * Numeroloji input sanitization
- * İsim ve tarih girişlerini güvenli hale getirir
+ * Real-time numeroloji input sanitization (kullanıcı yazarken)
+ * - Tehlikeli karakterleri kaldırır
+ * - Boşlukları KORUR (trim() YAPMAZ)
+ * - Çoklu boşlukları tek boşluğa çevirir
  */
-export function sanitizeNumerologyInput(input: string): string {
+export function sanitizeNumerologyInputRealtime(input: string): string {
   if (!input || typeof input !== 'string') {
     return '';
   }
@@ -108,10 +110,23 @@ export function sanitizeNumerologyInput(input: string): string {
   sanitized = sanitized.replace(/[^a-zA-ZçğıöşüÇĞIİÖŞÜ0-9\s\-\.]/g, '');
 
   // Çoklu boşlukları tek boşluğa çevir
-  sanitized = sanitized.replace(/\s+/g, ' ').trim();
+  sanitized = sanitized.replace(/\s{2,}/g, ' ');
 
+  // ⚠️ NO TRIM! Kullanıcı yazıyor, boşlukları korumalıyız
   // Maksimum uzunluk kontrolü
   return sanitized.substring(0, 100);
+}
+
+/**
+ * Submit-time numeroloji input sanitization
+ * İsim ve tarih girişlerini güvenli hale getirir (trim dahil)
+ */
+export function sanitizeNumerologyInput(input: string): string {
+  // Real-time sanitization yap, ardından trim ekle
+  const realtimeSanitized = sanitizeNumerologyInputRealtime(input);
+  
+  // ✅ Submit'te trim yapılır
+  return realtimeSanitized.trim();
 }
 
 /**

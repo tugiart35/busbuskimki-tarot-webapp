@@ -88,7 +88,7 @@ export default function NumerologyForm({ locale }: NumerologyFormProps) {
             {activeTab === 'life-path' && (
               <div>
                 <label className='block text-sm font-semibold mb-3 text-gray-200'>
-                  📅 Doğum Tarihi (YYYY-AA-GG)
+                  📅 Doğum Tarihi (GG-AA-YYYY)
                 </label>
                 <input
                   type='date'
