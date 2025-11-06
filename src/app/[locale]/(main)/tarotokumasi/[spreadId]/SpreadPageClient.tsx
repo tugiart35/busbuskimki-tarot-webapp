@@ -102,49 +102,6 @@ export default function SpreadPageClient({
                 </div>
               </div>
 
-              {/* Stats Cards - Spread-Specific Info */}
-              <div className='grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mt-6 sm:mt-8'>
-                <div className='flex items-center gap-3 px-3 sm:px-4 py-3 sm:py-4 bg-white/10 backdrop-blur-xl rounded-xl border border-white/20 hover:bg-white/15 hover:scale-105 transition-all'>
-                  <span className='text-xl sm:text-2xl'>🎴</span>
-                  <div>
-                    <p className='text-xs text-gray-400'>Kart Sayısı</p>
-                    <p className='text-white font-bold text-sm sm:text-base'>
-                      {currentSpread.cardCount} Kart
-                    </p>
-                  </div>
-                </div>
-
-                <div className='flex items-center gap-3 px-3 sm:px-4 py-3 sm:py-4 bg-white/10 backdrop-blur-xl rounded-xl border border-white/20 hover:bg-white/15 hover:scale-105 transition-all'>
-                  <span className='text-xl sm:text-2xl'>🎯</span>
-                  <div>
-                    <p className='text-xs text-gray-400'>Pozisyonlar</p>
-                    <p className='text-white font-bold text-xs sm:text-sm leading-tight'>
-                      {currentSpread.positions.length} Farklı Bakış
-                    </p>
-                  </div>
-                </div>
-
-                <div className='flex items-center gap-3 px-3 sm:px-4 py-3 sm:py-4 bg-white/10 backdrop-blur-xl rounded-xl border border-white/20 hover:bg-white/15 hover:scale-105 transition-all'>
-                  <span className='text-xl sm:text-2xl'>💎</span>
-                  <div>
-                    <p className='text-xs text-gray-400'>Detay Seviyesi</p>
-                    <p className='text-white font-bold text-xs sm:text-sm'>
-                      {currentSpread.cardCount >= 7 ? 'Detaylı' : 'Kompakt'}
-                    </p>
-                  </div>
-                </div>
-
-                <div className='flex items-center gap-3 px-3 sm:px-4 py-3 sm:py-4 bg-white/10 backdrop-blur-xl rounded-xl border border-white/20 hover:bg-white/15 hover:scale-105 transition-all'>
-                  <span className='text-xl sm:text-2xl'>⚡</span>
-                  <div>
-                    <p className='text-xs text-gray-400'>Yanıt</p>
-                    <p className='text-white font-bold text-xs sm:text-sm'>
-                      Anında + Uzman
-                    </p>
-                  </div>
-                </div>
-              </div>
-
               {/* What You'll Discover - Positions Preview */}
               <div className='mt-6 sm:mt-8 p-5 sm:p-6 bg-gradient-to-r from-purple-900/30 to-pink-900/30 backdrop-blur-sm border border-purple-500/30 rounded-2xl'>
                 <h3 className='text-sm sm:text-lg font-bold text-white mb-4 sm:mb-5 flex items-center gap-2'>
