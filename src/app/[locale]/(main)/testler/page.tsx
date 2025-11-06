@@ -19,6 +19,12 @@ import { DynamicBottomNavigation as BottomNavigation } from './DynamicTestCompon
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
+interface PageProps {
+  params: Promise<{
+    locale: string;
+  }>;
+}
+
 // SEO Metadata - E-E-A-T Uyumlu
 export const metadata: Metadata = {
   title: 'Deniz Fırtınası Testi, İsim Enerjisi, MBTI | busbuskimki',
@@ -94,7 +100,10 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function TestlerPage() {
+export default async function TestlerPage({ params }: PageProps) {
+  // Locale'i params'tan al
+  const { locale } = await params;
+  
   // Çevirileri al
   const t = await getTranslations('psychTests.page.scientificBasis');
 
