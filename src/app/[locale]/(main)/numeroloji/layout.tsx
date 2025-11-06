@@ -4,6 +4,20 @@ import {
   generateNumerologyPageStructuredData,
 } from '@/lib/seo/numerology-seo-generator';
 
+// ISR Configuration for optimal performance
+export const revalidate = 3600; // 1 hour cache
+export const dynamic = 'force-static'; // Full static generation
+export const fetchCache = 'force-cache'; // Aggressive caching
+
+// Static generation for all locales
+export async function generateStaticParams() {
+  return [
+    { locale: 'tr' },
+    { locale: 'en' },
+    { locale: 'sr' },
+  ];
+}
+
 // SEO Metadata generation for Numerology page using numeroloji.md data
 export async function generateMetadata({
   params,
