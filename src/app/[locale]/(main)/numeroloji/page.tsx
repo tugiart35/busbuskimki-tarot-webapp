@@ -6,7 +6,6 @@
 
 import { use, useState } from 'react';
 import { DynamicBottomNavigation } from './DynamicNumerologyComponents';
-import { NumerologyPageSkeleton } from './NumerologyPageSkeleton';
 import DatePicker from '@/components/DatePicker';
 import { calculateNumerology } from '@/lib/numerology/calculators';
 import { NumerologyType, NumerologyResult } from '@/lib/numerology/types';
@@ -138,7 +137,7 @@ export default function NumerologyPage({ params }: NumerologyPageProps) {
       const sanitizedFormData = {
         fullName: sanitizeNumerologyInput(formData.fullName),
         birthDate: sanitizeNumerologyInput(formData.birthDate),
-        targetDate: sanitizeNumerologyInput(formData.targetDate),
+        targetDate: formData.targetDate ? sanitizeNumerologyInput(formData.targetDate) : '',
         personA: {
           fullName: sanitizeNumerologyInput(formData.personA.fullName),
           birthDate: sanitizeNumerologyInput(formData.personA.birthDate),
@@ -563,7 +562,7 @@ export default function NumerologyPage({ params }: NumerologyPageProps) {
                       🎯 {t('numerology.page.form.targetDate')}
                     </label>
                     <DatePicker
-                      value={formData.targetDate}
+                      value={formData.targetDate || ''}
                       onChange={value => handleInputChange('targetDate', value)}
                       placeholder='GG.AA.YYYY'
                       error={!!securityError}

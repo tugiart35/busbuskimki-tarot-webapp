@@ -24,6 +24,17 @@ import { CardComments } from '@/components/shared/CardComments';
 import Link from 'next/link';
 import { FaArrowLeft } from 'react-icons/fa';
 
+// BottomNavigation - Client Component
+import dynamic from 'next/dynamic';
+const DynamicBottomNavigation = dynamic(
+  () => import('@/features/shared/layout/BottomNavigation'),
+  {
+    loading: () => (
+      <div className="fixed bottom-0 left-0 right-0 h-16 bg-slate-900/95 backdrop-blur-md border-t border-slate-700 animate-pulse" />
+    )
+  }
+);
+
 interface CardPageProps {
   card: CardPageData;
   locale: 'tr' | 'en' | 'sr';
@@ -191,6 +202,9 @@ export default function CardPage({ card, locale, slug }: CardPageProps) {
           ),
         }}
       />
+
+      {/* Bottom Navigation */}
+      <DynamicBottomNavigation />
     </div>
   );
 }

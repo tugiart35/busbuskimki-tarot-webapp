@@ -11,6 +11,9 @@ import {
   GeneralComments,
 } from '@/components/shared/ClientWidgets';
 
+// BottomNavigation import
+import { DynamicBottomNavigation } from './[slug]/DynamicCardComponents';
+
 interface PageProps {
   params: Promise<{
     locale: string;
@@ -737,6 +740,9 @@ export default async function CardsPage({ params }: PageProps) {
 
       {/* General Comments */}
       <GeneralComments pageId='cards-listing' locale={currentLocale} />
+
+      {/* Bottom Navigation */}
+      <DynamicBottomNavigation />
     </div>
   );
 }

@@ -103,9 +103,12 @@ export const metadata: Metadata = {
 export default async function TestlerPage({ params }: PageProps) {
   // Locale'i params'tan al
   const { locale } = await params;
-  
+
   // Çevirileri al
-  const t = await getTranslations('psychTests.page.scientificBasis');
+  const t = await getTranslations({
+    locale,
+    namespace: 'psychTests.page.scientificBasis',
+  });
 
   // Structured Data (Schema.org) - E-E-A-T için
   const structuredData = {

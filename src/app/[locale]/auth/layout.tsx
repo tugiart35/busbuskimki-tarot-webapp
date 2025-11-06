@@ -4,6 +4,10 @@ import {
   generateAuthPageStructuredData,
 } from '@/lib/seo/auth-seo-generator';
 
+// ISR Configuration for Auth page
+export const revalidate = 3600; // 1 hour cache
+export const fetchCache = 'force-cache'; // Aggressive caching
+
 // SEO Metadata generation for Auth page
 export async function generateMetadata({
   params,
