@@ -5,7 +5,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import BottomNavigation from '@/features/shared/layout/BottomNavigation';
+import { DynamicBottomNavigation } from './DynamicNumerologyComponents';
 import { calculateNumerology } from '@/lib/numerology/calculators';
 import { NumerologyType, NumerologyResult } from '@/lib/numerology/types';
 import {
@@ -912,7 +912,7 @@ export default function NumerologyPage({ params }: NumerologyPageProps) {
       )}
 
       {/* Bottom Navigation */}
-      <BottomNavigation />
+      <DynamicBottomNavigation />
     </div>
   );
 }
