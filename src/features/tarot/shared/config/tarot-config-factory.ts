@@ -476,6 +476,10 @@ const createFormI18nKeys = (spreadId: string): FormI18nKeys => ({
     widowed: `${spreadId}.form.relationshipStatusOptions.widowed`,
     prefer_not_to_say: `${spreadId}.form.relationshipStatusOptions.prefer_not_to_say`,
   },
+  partnerInfo: `${spreadId}.form.partnerInfo`,
+  partnerName: `${spreadId}.form.partnerName`,
+  partnerBirthDate: `${spreadId}.form.partnerBirthDate`,
+  partnerBirthDateUnknown: `${spreadId}.form.partnerBirthDateUnknown`,
   email: `${spreadId}.form.email`,
   phone: `${spreadId}.form.phone`,
   communicationMethod: `${spreadId}.form.communicationMethod`,
@@ -549,6 +553,7 @@ export interface CreateTarotConfigParams {
   customCreditKeys?: Partial<CreditKeys>;
   backgroundImage?: string;
   backgroundAlt?: string;
+  requiresPartnerInfo?: boolean;
   t?: (key: string) => string; // i18n fonksiyonu (optional, fallback varsa)
 }
 
@@ -578,6 +583,7 @@ export function createTarotConfig(
     customCreditKeys,
     backgroundImage,
     backgroundAlt,
+    requiresPartnerInfo = false,
     t,
   } = params;
 
@@ -612,6 +618,8 @@ export function createTarotConfig(
     surnameMinLength: `${namespace}.validation.surnameMinLength`,
     birthDateRequired: `${namespace}.validation.birthDateRequired`,
     relationshipStatusRequired: `${namespace}.validation.relationshipStatusRequired`,
+    partnerNameRequired: `${namespace}.validation.partnerNameRequired`,
+    partnerBirthDateRequired: `${namespace}.validation.partnerBirthDateRequired`,
     emailInvalid: `${namespace}.validation.emailInvalid`,
     questionMinLength: `${namespace}.validation.questionMinLength`,
     ...customValidationKeys,
@@ -695,6 +703,7 @@ export function createTarotConfig(
     readingType,
     supabaseReadingType: supabaseReadingTypeValue,
     creditKeyPrefix: creditPrefix,
+    requiresPartnerInfo,
     creditKeys: defaultCreditKeys,
     validationKeys: defaultValidationKeys,
     i18nKeys: mergeI18nKeys(defaultI18nKeys, customI18nKeys),
@@ -745,6 +754,7 @@ export function createLoveConfig(t?: (key: string) => string): TarotConfig {
     creditKeyPrefix: 'LOVE_SPREAD',
     backgroundImage: '/new-lover.png',
     backgroundAlt: 'Love Tarot Reading background',
+    requiresPartnerInfo: true,
     ...(t && { t }),
   });
 }
@@ -810,13 +820,14 @@ export function createMarriageConfig(t?: (key: string) => string): TarotConfig {
     translationNamespace: 'marriage',
     summaryKey: 'marriageSpread',
     positionsLayout: MARRIAGE_POSITIONS_LAYOUT,
-    theme: 'pink',
-    icon: '💒',
+    theme: 'purple',
+    icon: '💍',
     readingType: 'MARRIAGE_SPREAD',
     supabaseReadingType: 'marriage', // Veritabanında mevcut enum değeri
     creditKeyPrefix: 'MARRIAGE',
     backgroundImage: '/new-lover.png',
     backgroundAlt: 'Marriage Tarot Reading background',
+    requiresPartnerInfo: true,
     ...(t && { t }),
   });
 }
@@ -867,6 +878,7 @@ export function createRelationshipProblemsConfig(
     creditKeyPrefix: 'RELATIONSHIP_PROBLEMS',
     backgroundImage: '/new-lover.png',
     backgroundAlt: 'Relationship Problems Tarot Reading background',
+    requiresPartnerInfo: true,
     ...(t && { t }),
   });
 }
@@ -890,6 +902,7 @@ export function createNewLoverConfig(t?: (key: string) => string): TarotConfig {
     creditKeyPrefix: 'NEW_LOVER',
     backgroundImage: '/new-lover.png',
     backgroundAlt: 'New Lover Tarot Reading background',
+    requiresPartnerInfo: true,
     ...(t && { t }),
   });
 }

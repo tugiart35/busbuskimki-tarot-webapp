@@ -4335,11 +4335,19 @@
       "phonePlaceholder": "+90 5KSKS KSKSKS KSKS KSKS",
       "phoneRequired": "Telefonski broj je potreban za VhatsApp",
       "questions": "✨ Ljubavna pitanja o objašnjenju ✨",
+      "partnerInfo": "Podaci o partneru",
+      "partnerName": "Ime partnera",
+      "partnerBirthDate": "Datum rođenja partnera",
+      "partnerBirthDateUnknown": "Ne znam datum rođenja partnera",
       "saveAndOpen": "Snimite za čitanje i otvorene kartice 💕",
       "saving": "Snimanje ...",
       "understandingQuestion": "Šta želite da razumete ili čujete iz ove ekspanzije?",
       "whatsappCommunication": "Vhatsapp"
+    },    "validation": {
+      "partnerNameRequired": "Potrebno je ime partnera",
+      "partnerBirthDateRequired": "Potrebno je navesti datum rođenja partnera"
     },
+
     "meanings": {
       "thefool": {
         "position1": {
@@ -6493,6 +6501,10 @@
       "personalInfo": "Vaše lične podatke",
       "phone": "Telefonski broj",
       "questions": "Pitanja",
+      "partnerInfo": "Podaci o partneru",
+      "partnerName": "Ime partnera",
+      "partnerBirthDate": "Datum rođenja partnera",
+      "partnerBirthDateUnknown": "Ne znam datum rođenja partnera",
       "saveAndOpen": "Spremite i otvorite",
       "saveError": "Došlo je do greške prilikom čuvanja čitanja",
       "saveReading": "Sačuvati čitanje",
@@ -6505,7 +6517,11 @@
       "understandingQuestion": "Koje biste područja braka voleli da bolje razumete?",
       "understandingRequired": "Potrebno je razumevanje",
       "whatsappCommunication": "Vhatsapp"
+    },    "validation": {
+      "partnerNameRequired": "Potrebno je ime partnera",
+      "partnerBirthDateRequired": "Potrebno je navesti datum rođenja partnera"
     },
+
     "info": {
       "close": "Zatvoriti",
       "description": "Ova ekspanzija pokazuje vaš bračni potencijal, vaš idealan supružnik i kako će vaše bračno putovanje napredovati. To je posebna ekspanzija prilagođena knjizi Silvia Abraha.",
@@ -15745,6 +15761,10 @@
       "nameRequired": "Potrebno je ime",
       "personalInfo": "Lične informacije",
       "questions": "Vaša pitanja proširenja",
+      "partnerInfo": "Podaci o partneru",
+      "partnerName": "Ime partnera",
+      "partnerBirthDate": "Datum rođenja partnera",
+      "partnerBirthDateUnknown": "Ne znam datum rođenja partnera",
       "saveAndOpen": "Spremite i otvorite",
       "saveError": "Došlo je do greške prilikom čuvanja čitanja",
       "saveReading": "Sačuvati čitanje",
@@ -15757,7 +15777,11 @@
       "understandingQuestion": "prazan",
       "understandingRequired": "Potrebno je razumevanje",
       "whatsappCommunication": "Vhatsapp"
+    },    "validation": {
+      "partnerNameRequired": "Potrebno je ime partnera",
+      "partnerBirthDateRequired": "Potrebno je navesti datum rođenja partnera"
     },
+
     "interpretation": {
       "conclusion": "Ovo tumačenje će vas voditi na vašem ljubavnom putovanju. Budite strpljivi i verujte da će vam prava osoba doći.",
       "intro": "Ova ekspanzija pruža važne informacije o vašoj budućoj ljubavnoj vezi. Svaka kartica osvetljava vaše ljubavno putovanje iz druge perspektive.",
@@ -16789,6 +16813,9 @@
     "email": "E-mail",
     "filePrefix": "tarot-čitanje",
     "firstName": "Naziv",
+    "partnerName": "Ime partnera",
+    "partnerBirthDate": "Datum rođenja partnera",
+    "birthDateUnknown": "Nepoznato",
     "generalSpread": "Opšta širina",
     "interpretation": "Mistična interpretacija",
     "interpretationDesc": "Značenje i smernice Tarot kartica",
@@ -16979,11 +17006,19 @@
       "lastName": "vaše prezime",
       "personalInfo": "Vaše lične podatke",
       "questions": "Problemi sa vezama Odnos pitanja objašnjenja 💔",
+      "partnerInfo": "Podaci o partneru",
+      "partnerName": "Ime partnera",
+      "partnerBirthDate": "Datum rođenja partnera",
+      "partnerBirthDateUnknown": "Ne znam datum rođenja partnera",
       "saveAndOpen": "💔 Sačuvajte i otvorite kartice",
       "saving": "Snimanje ...",
       "understandingQuestion": "Šta želite da razumete sa ovim analizama problema sa vezama?",
       "whatsappCommunication": "Vhatsapp"
+    },    "validation": {
+      "partnerNameRequired": "Potrebno je ime partnera",
+      "partnerBirthDateRequired": "Potrebno je navesti datum rođenja partnera"
     },
+
     "messeages": {
       "readingSaveError": "Došlo je do greške prilikom čuvanja čitanja.",
       "readingSavedSuccess": "Vaše čitanje je uspešno sačuvano!",

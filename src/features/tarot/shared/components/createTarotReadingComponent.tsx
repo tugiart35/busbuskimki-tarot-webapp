@@ -628,6 +628,7 @@ export function createTarotReadingComponent({
 
       // Form verileri
       personalInfo,
+      partnerInfo,
       communicationMethod,
       questions,
       formErrors,
@@ -638,6 +639,7 @@ export function createTarotReadingComponent({
 
       // Form güncelleme fonksiyonları
       updatePersonalInfo,
+      updatePartnerInfo,
       updateCommunicationMethod,
       updateQuestion,
       validateDetailedForm,
@@ -1023,6 +1025,7 @@ export function createTarotReadingComponent({
             },
             questions: {
               personalInfo,
+              ...(config.requiresPartnerInfo ? { partnerInfo } : {}),
               userQuestions: questions,
             },
             metadata: {
@@ -1239,11 +1242,13 @@ export function createTarotReadingComponent({
           }
           onClose={() => setSelectedReadingType(null)}
           personalInfo={personalInfo}
+          partnerInfo={partnerInfo}
           communicationMethod={communicationMethod}
           questions={questions}
           formErrors={formErrors}
           isSaving={isSaving}
           onUpdatePersonalInfo={updatePersonalInfo}
+          onUpdatePartnerInfo={updatePartnerInfo}
           onUpdateCommunicationMethod={updateCommunicationMethod}
           onUpdateQuestion={updateQuestion}
           onSaveForm={handleSaveDetailedFormClick}

@@ -76,6 +76,31 @@ function parseQuestions(
     );
   }
 
+  // Partner bilgileri - sadece requiresPartnerInfo true ise göster
+  const partnerInfo = questionsPayload.partnerInfo;
+  if (partnerInfo && config?.requiresPartnerInfo) {
+    if (partnerInfo.name) {
+      personalInfoEntries.push({
+        label:
+          (formKeys && translate(formKeys.partnerName)) ||
+          translate('readingModal.partnerName', 'Partner İsmi'),
+        value: partnerInfo.name,
+      });
+    }
+
+    if (partnerInfo.birthDate || partnerInfo.birthDateUnknown) {
+      const birthDateValue = partnerInfo.birthDateUnknown
+        ? translate('readingModal.birthDateUnknown', 'Bilinmiyor')
+        : partnerInfo.birthDate;
+      personalInfoEntries.push({
+        label:
+          (formKeys && translate(formKeys.partnerBirthDate)) ||
+          translate('readingModal.partnerBirthDate', 'Partner Doğum Tarihi'),
+        value: birthDateValue ?? '-',
+      });
+    }
+  }
+
   const userQuestions =
     questionsPayload.userQuestions ||
     questionsPayload.questions ||

@@ -8,6 +8,7 @@ import type {
   CanvasI18nKeys as SchemaCanvasI18nKeys,
   CreditKeys as SchemaCreditKeys,
   PersonalInfo as SchemaPersonalInfo,
+  PartnerInfo as SchemaPartnerInfo,
   Questions as SchemaQuestions,
   FormErrors as SchemaFormErrors,
   ModalStates as SchemaModalStates,
@@ -24,6 +25,7 @@ export type FormI18nKeys = SchemaFormI18nKeys;
 export type CanvasI18nKeys = SchemaCanvasI18nKeys;
 export type CreditKeys = SchemaCreditKeys;
 export type PersonalInfo = SchemaPersonalInfo;
+export type PartnerInfo = SchemaPartnerInfo;
 export type Questions = SchemaQuestions;
 export type FormErrors = SchemaFormErrors;
 export type ModalStates = SchemaModalStates;

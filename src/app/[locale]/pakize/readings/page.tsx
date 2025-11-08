@@ -1297,6 +1297,52 @@ export default function ReadingsPage() {
                         </div>
                       )}
 
+                      {/* Partner Bilgileri - sadece varsa göster */}
+                      {selectedReading.questions?.partnerInfo && (
+                        <div className='mb-8'>
+                          <div className='flex items-center space-x-2 mb-4'>
+                            <Heart className='h-5 w-5 text-pink-400' />
+                            <h5 className='text-lg font-semibold text-white'>
+                              Partner Bilgileri
+                            </h5>
+                          </div>
+                          <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+                            {selectedReading.questions.partnerInfo.name && (
+                              <div className='admin-glass rounded-xl p-4 border border-slate-700/30'>
+                                <div className='flex items-center space-x-2 mb-2'>
+                                  <div className='w-2 h-2 bg-pink-400 rounded-full'></div>
+                                  <p className='text-slate-400 text-sm font-medium'>
+                                    Partner İsmi
+                                  </p>
+                                </div>
+                                <p className='text-white font-semibold text-lg'>
+                                  {selectedReading.questions.partnerInfo.name}
+                                </p>
+                              </div>
+                            )}
+                            {(selectedReading.questions.partnerInfo.birthDate ||
+                              selectedReading.questions.partnerInfo
+                                .birthDateUnknown) && (
+                              <div className='admin-glass rounded-xl p-4 border border-slate-700/30'>
+                                <div className='flex items-center space-x-2 mb-2'>
+                                  <Calendar className='h-4 w-4 text-pink-400' />
+                                  <p className='text-slate-400 text-sm font-medium'>
+                                    Partner Doğum Tarihi
+                                  </p>
+                                </div>
+                                <p className='text-white font-medium'>
+                                  {selectedReading.questions.partnerInfo
+                                    .birthDateUnknown
+                                    ? 'Bilinmiyor'
+                                    : selectedReading.questions.partnerInfo
+                                        .birthDate || '-'}
+                                </p>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      )}
+
                       {/* Kullanıcı Soruları - Tüm olası formatları destekler */}
                       {selectedReading.questions && (
                         <div className='mb-8'>

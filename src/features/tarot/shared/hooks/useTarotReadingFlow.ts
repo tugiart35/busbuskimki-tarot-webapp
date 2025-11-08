@@ -37,6 +37,11 @@ export interface UseTarotReadingFlowReturn {
     phone: string;
     countryCode: string;
   };
+  partnerInfo: {
+    name: string;
+    birthDate: string;
+    birthDateUnknown: boolean;
+  };
   communicationMethod: 'email' | 'whatsapp';
   questions: {
     concern: string;
@@ -54,6 +59,8 @@ export interface UseTarotReadingFlowReturn {
     concern: string;
     understanding: string;
     emotional: string;
+    partnerName: string;
+    partnerBirthDate: string;
     general: string;
   };
   modalStates: {
@@ -78,6 +85,10 @@ export interface UseTarotReadingFlowReturn {
     field: 'name' | 'surname' | 'birthDate' | 'birthDateUnknown' | 'relationshipStatus' | 'email' | 'phone' | 'countryCode',
     value: string | boolean
   ) => void;
+  updatePartnerInfo: (
+    field: 'name' | 'birthDate' | 'birthDateUnknown',
+    value: string | boolean
+  ) => void;
   updateCommunicationMethod: (method: 'email' | 'whatsapp') => void;
   updateQuestion: (
     field: 'concern' | 'understanding' | 'emotional',
@@ -93,6 +104,13 @@ export interface UseTarotReadingFlowReturn {
       email: string;
       phone: string;
       countryCode: string;
+    }>
+  >;
+  setPartnerInfo: React.Dispatch<
+    React.SetStateAction<{
+      name: string;
+      birthDate: string;
+      birthDateUnknown: boolean;
     }>
   >;
   setQuestions: React.Dispatch<
@@ -114,6 +132,8 @@ export interface UseTarotReadingFlowReturn {
       concern: string;
       understanding: string;
       emotional: string;
+      partnerName: string;
+      partnerBirthDate: string;
       general: string;
     }>
   >;
@@ -165,6 +185,7 @@ export function useTarotReadingFlow({
   // Form State Hook
   const formState = useTarotFormState({
     validationKeys: config.validationKeys,
+    requiresPartnerInfo: Boolean(config.requiresPartnerInfo),
   });
 
   // Reading Type Selection Handler
@@ -196,6 +217,7 @@ export function useTarotReadingFlow({
 
     // Form State
     personalInfo: formState.personalInfo,
+    partnerInfo: formState.partnerInfo,
     communicationMethod: formState.communicationMethod,
     questions: formState.questions,
     formErrors: formState.formErrors,
@@ -211,9 +233,11 @@ export function useTarotReadingFlow({
 
     // Form Actions
     updatePersonalInfo: formState.updatePersonalInfo,
+    updatePartnerInfo: formState.updatePartnerInfo,
     updateCommunicationMethod: formState.updateCommunicationMethod,
     updateQuestion: formState.updateQuestion,
     setPersonalInfo: formState.setPersonalInfo,
+    setPartnerInfo: formState.setPartnerInfo,
     setQuestions: formState.setQuestions,
     setFormErrors: formState.setFormErrors,
     setModalStates: formState.setModalStates,

@@ -79,6 +79,10 @@ export const FormI18nKeysSchema = z.object({
   saveAndOpen: z.string().min(1),
   clearAll: z.string().min(1).optional(),
   placeholders: FormPlaceholdersSchema.optional(),
+  partnerInfo: z.string().min(1),
+  partnerName: z.string().min(1),
+  partnerBirthDate: z.string().min(1),
+  partnerBirthDateUnknown: z.string().min(1),
 });
 
 /**
@@ -107,6 +111,8 @@ export const ValidationKeysSchema = z.object({
   surnameMinLength: z.string().min(1),
   birthDateRequired: z.string().min(1),
   relationshipStatusRequired: z.string().min(1),
+  partnerNameRequired: z.string().min(1),
+  partnerBirthDateRequired: z.string().min(1),
   emailInvalid: z.string().min(1),
   questionMinLength: z.string().min(1),
 });
@@ -168,12 +174,14 @@ export const TarotConfigSchema = z.object({
   icon: z.string().min(1),
   backgroundImage: z.string().min(1),
   backgroundAlt: z.string().min(1),
+  requiresPartnerInfo: z.boolean().optional(),
   readingType: z.string().min(1),
-  supabaseReadingType: z.string().min(1),
-  creditKeyPrefix: z.string().min(1),
-  creditKeys: CreditKeysSchema,
+  supabaseReadingType: z.string().min(1).optional(),
+  creditKeyPrefix: z.string().min(1).optional(),
   validationKeys: ValidationKeysSchema,
   i18nKeys: I18nKeysSchema,
+  creditKeys: CreditKeysSchema.optional(),
+  t: z.any().optional(),
 });
 
 /**
@@ -184,6 +192,12 @@ export const PersonalInfoSchema = z.object({
   surname: z.string().min(1),
   birthDate: z.string().min(1),
   email: z.string().email(),
+});
+
+export const PartnerInfoSchema = z.object({
+  name: z.string().min(1),
+  birthDate: z.string().min(1),
+  birthDateUnknown: z.boolean(),
 });
 
 /**
@@ -202,10 +216,15 @@ export const FormErrorsSchema = z.object({
   name: z.string(),
   surname: z.string(),
   birthDate: z.string(),
+  relationshipStatus: z.string(),
   email: z.string(),
+  phone: z.string(),
+  countryCode: z.string(),
   concern: z.string(),
   understanding: z.string(),
   emotional: z.string(),
+  partnerName: z.string(),
+  partnerBirthDate: z.string(),
   general: z.string(),
 });
 

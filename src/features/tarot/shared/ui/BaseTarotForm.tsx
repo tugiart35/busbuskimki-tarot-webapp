@@ -20,6 +20,11 @@ export interface BaseTarotFormProps {
     phone: string;
     countryCode?: string;
   };
+  partnerInfo?: {
+    name: string;
+    birthDate: string;
+    birthDateUnknown: boolean;
+  };
   communicationMethod: 'email' | 'whatsapp';
   questions: {
     concern: string;
@@ -37,11 +42,17 @@ export interface BaseTarotFormProps {
     concern: string;
     understanding: string;
     emotional: string;
+    partnerName?: string;
+    partnerBirthDate?: string;
     general: string;
   };
   isSaving: boolean;
   onUpdatePersonalInfo: (
     field: 'name' | 'surname' | 'birthDate' | 'birthDateUnknown' | 'relationshipStatus' | 'email' | 'phone' | 'countryCode',
+    value: string | boolean
+  ) => void;
+  onUpdatePartnerInfo?: (
+    field: 'name' | 'birthDate' | 'birthDateUnknown',
     value: string | boolean
   ) => void;
   onUpdateCommunicationMethod: (method: 'email' | 'whatsapp') => void;
@@ -64,11 +75,13 @@ export default function BaseTarotForm({
   isOpen,
   onClose,
   personalInfo,
+  partnerInfo,
   communicationMethod,
   questions,
   formErrors,
   isSaving,
   onUpdatePersonalInfo,
+  onUpdatePartnerInfo,
   onUpdateCommunicationMethod,
   onUpdateQuestion,
   onSaveForm,
@@ -120,6 +133,9 @@ export default function BaseTarotForm({
       personalInfo.name ||
       personalInfo.email ||
       personalInfo.phone ||
+      (config.requiresPartnerInfo &&
+        partnerInfo &&
+        (partnerInfo.name || partnerInfo.birthDate || partnerInfo.birthDateUnknown)) ||
       questions.concern ||
       questions.understanding ||
       questions.emotional;
@@ -141,7 +157,9 @@ export default function BaseTarotForm({
     config.translationNamespace,
     onClose,
     personalInfo,
+    partnerInfo,
     questions,
+    config.requiresPartnerInfo,
     translate,
   ]);
 
@@ -297,6 +315,93 @@ export default function BaseTarotForm({
               </p>
             )}
           </div>
+
+          {config.requiresPartnerInfo && partnerInfo && onUpdatePartnerInfo && (
+            <div
+              className={`space-y-4 pt-4 border-t ${themeClasses.sectionBorder}`}
+            >
+              <h3 className={`${themeClasses.titleText} text-base font-semibold`}>
+                {translate(formKeys.partnerInfo)}
+              </h3>
+
+              <div>
+                <label
+                  className={`block text-sm font-medium ${themeClasses.labelText} mb-2`}
+                >
+                  {translate(formKeys.partnerName)} *
+                </label>
+                <input
+                  type='text'
+                  value={partnerInfo.name}
+                  onChange={event =>
+                    onUpdatePartnerInfo('name', event.target.value)
+                  }
+                  className={`w-full px-4 py-3 bg-slate-800/80 border ${
+                    formErrors.partnerName
+                      ? 'border-red-500'
+                      : themeClasses.inputBorder
+                  } rounded-lg text-white placeholder-gray-400 focus:outline-none ${themeClasses.focusRing} transition-all`}
+                />
+                {formErrors.partnerName && (
+                  <p className='text-red-400 text-xs mt-1'>
+                    {formErrors.partnerName}
+                  </p>
+                )}
+              </div>
+
+              <div>
+                <label
+                  className={`block text-sm font-medium ${themeClasses.labelText} mb-2`}
+                >
+                  {translate(formKeys.partnerBirthDate)} *
+                </label>
+                <div className='space-y-2'>
+                  <input
+                    type='date'
+                    value={partnerInfo.birthDate}
+                    onChange={event =>
+                      onUpdatePartnerInfo('birthDate', event.target.value)
+                    }
+                    disabled={partnerInfo.birthDateUnknown}
+                    className={`w-full px-4 py-3 bg-slate-800/80 border ${
+                      formErrors.partnerBirthDate
+                        ? 'border-red-500'
+                        : themeClasses.inputBorder
+                    } rounded-lg text-white focus:outline-none ${themeClasses.focusRing} transition-all ${
+                      partnerInfo.birthDateUnknown
+                        ? 'opacity-50 cursor-not-allowed'
+                        : ''
+                    }`}
+                  />
+                  <div className='flex items-center'>
+                    <input
+                      type='checkbox'
+                      id='partnerBirthDateUnknown'
+                      checked={partnerInfo.birthDateUnknown}
+                      onChange={event =>
+                        onUpdatePartnerInfo(
+                          'birthDateUnknown',
+                          event.target.checked
+                        )
+                      }
+                      className='w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded focus:ring-blue-500 focus:ring-2'
+                    />
+                    <label
+                      htmlFor='partnerBirthDateUnknown'
+                      className={`ml-2 text-sm ${themeClasses.labelText} cursor-pointer`}
+                    >
+                      {translate(formKeys.partnerBirthDateUnknown)}
+                    </label>
+                  </div>
+                </div>
+                {formErrors.partnerBirthDate && (
+                  <p className='text-red-400 text-xs mt-1'>
+                    {formErrors.partnerBirthDate}
+                  </p>
+                )}
+              </div>
+            </div>
+          )}
 
           {/* İletişim Tercihi - Minimal Tasarım */}
           <div className='space-y-4'>

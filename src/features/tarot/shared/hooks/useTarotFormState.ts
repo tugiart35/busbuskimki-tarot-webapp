@@ -14,6 +14,12 @@ export interface PersonalInfo {
   countryCode: string;
 }
 
+export interface PartnerInfo {
+  name: string;
+  birthDate: string;
+  birthDateUnknown: boolean;
+}
+
 export interface Questions {
   concern: string;
   understanding: string;
@@ -31,6 +37,8 @@ export interface FormErrors {
   concern: string;
   understanding: string;
   emotional: string;
+  partnerName: string;
+  partnerBirthDate: string;
   general: string;
 }
 
@@ -48,17 +56,21 @@ export interface ValidationKeys {
   surnameMinLength: string;
   birthDateRequired: string;
   relationshipStatusRequired: string;
+  partnerNameRequired: string;
+  partnerBirthDateRequired: string;
   emailInvalid: string;
   questionMinLength: string;
 }
 
 export interface UseTarotFormStateProps {
   validationKeys: ValidationKeys;
+  requiresPartnerInfo?: boolean;
 }
 
 export interface UseTarotFormStateReturn {
   // State
   personalInfo: PersonalInfo;
+  partnerInfo: PartnerInfo;
   communicationMethod: 'email' | 'whatsapp';
   questions: Questions;
   formErrors: FormErrors;
@@ -66,9 +78,11 @@ export interface UseTarotFormStateReturn {
 
   // Actions
   updatePersonalInfo: (field: keyof PersonalInfo, value: string | boolean) => void;
+  updatePartnerInfo: (field: keyof PartnerInfo, value: string | boolean) => void;
   updateCommunicationMethod: (method: 'email' | 'whatsapp') => void;
   updateQuestion: (field: keyof Questions, value: string) => void;
   setPersonalInfo: React.Dispatch<React.SetStateAction<PersonalInfo>>;
+  setPartnerInfo: React.Dispatch<React.SetStateAction<PartnerInfo>>;
   setQuestions: React.Dispatch<React.SetStateAction<Questions>>;
   setFormErrors: React.Dispatch<React.SetStateAction<FormErrors>>;
   setModalStates: React.Dispatch<React.SetStateAction<ModalStates>>;
@@ -87,6 +101,7 @@ export interface UseTarotFormStateReturn {
 
 export function useTarotFormState({
   validationKeys,
+  requiresPartnerInfo = false,
 }: UseTarotFormStateProps): UseTarotFormStateReturn {
   const { t } = useTranslations();
 
@@ -100,6 +115,12 @@ export function useTarotFormState({
     email: '',
     phone: '',
     countryCode: '',
+  });
+
+  const [partnerInfo, setPartnerInfo] = useState<PartnerInfo>({
+    name: '',
+    birthDate: '',
+    birthDateUnknown: false,
   });
 
   const [communicationMethod, setCommunicationMethod] = useState<
@@ -123,6 +144,8 @@ export function useTarotFormState({
     concern: '',
     understanding: '',
     emotional: '',
+    partnerName: '',
+    partnerBirthDate: '',
     general: '',
   });
 
@@ -146,6 +169,28 @@ export function useTarotFormState({
         setPersonalInfo(prev => ({ ...prev, birthDate: '' }));
         setFormErrors(errors => ({ ...errors, birthDate: '' }));
       }
+    },
+    []
+  );
+
+  const updatePartnerInfo = useCallback(
+    (field: keyof PartnerInfo, value: string | boolean) => {
+      setPartnerInfo(prev => {
+        const next = { ...prev, [field]: value } as PartnerInfo;
+        if (field === 'birthDateUnknown' && value === true) {
+          next.birthDate = '';
+        }
+        return next;
+      });
+
+      setFormErrors(errors => ({
+        ...errors,
+        general: '',
+        ...(field === 'name' ? { partnerName: '' } : {}),
+        ...(field === 'birthDate' || field === 'birthDateUnknown'
+          ? { partnerBirthDate: '' }
+          : {}),
+      }));
     },
     []
   );
@@ -181,6 +226,18 @@ export function useTarotFormState({
     if (!personalInfo.relationshipStatus.trim()) {
       errors.relationshipStatus = t(validationKeys.relationshipStatusRequired);
       hasError = true;
+    }
+
+    if (requiresPartnerInfo) {
+      if (!partnerInfo.name.trim() || partnerInfo.name.trim().length < 3) {
+        errors.partnerName = t(validationKeys.partnerNameRequired);
+        hasError = true;
+      }
+
+      if (!partnerInfo.birthDateUnknown && !partnerInfo.birthDate.trim()) {
+        errors.partnerBirthDate = t(validationKeys.partnerBirthDateRequired);
+        hasError = true;
+      }
     }
 
     // Email validation (Email seçilirse gerekli)
@@ -228,7 +285,7 @@ export function useTarotFormState({
 
     setFormErrors(prev => ({ ...prev, ...errors }));
     return !hasError;
-  }, [personalInfo, questions, communicationMethod, validationKeys, t]);
+  }, [personalInfo, partnerInfo, questions, communicationMethod, validationKeys, requiresPartnerInfo, t]);
 
   // Modal helper functions
   const closeInfoModal = useCallback(() => {
@@ -273,6 +330,7 @@ export function useTarotFormState({
   return {
     // State
     personalInfo,
+    partnerInfo,
     communicationMethod,
     questions,
     formErrors,
@@ -280,9 +338,11 @@ export function useTarotFormState({
 
     // Actions
     updatePersonalInfo,
+    updatePartnerInfo,
     updateCommunicationMethod,
     updateQuestion,
     setPersonalInfo,
+    setPartnerInfo,
     setQuestions,
     setFormErrors,
     setModalStates,
