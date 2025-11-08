@@ -61,7 +61,12 @@ export default function TarotSpreadSelector({
           {spreads.map(spread => (
             <button
               key={spread.id}
-              onClick={() => onSpreadSelect(spread.id)}
+              type='button'
+              onClick={e => {
+                e.preventDefault();
+                e.stopPropagation();
+                onSpreadSelect(spread.id);
+              }}
               className={`group relative flex items-center gap-3 px-4 py-2 rounded-2xl font-medium transition-all duration-500 transform hover:scale-105 ${
                 selectedSpread === spread.id
                   ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-2xl shadow-purple-500/25'
@@ -114,7 +119,12 @@ export default function TarotSpreadSelector({
               {spreads.map(spread => (
                 <button
                   key={spread.id}
-                  onClick={() => onSpreadSelect(spread.id)}
+                  type='button'
+                  onClick={e => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    onSpreadSelect(spread.id);
+                  }}
                   className={`flex-shrink-0 flex items-center gap-2 px-4 py-3 rounded-xl font-medium transition-all duration-300 ${
                     selectedSpread === spread.id
                       ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg'
@@ -193,7 +203,12 @@ export default function TarotSpreadSelector({
                     spreads.find(s => s.id === selectedSpread)!.positions
                       .length > 4 && (
                       <button
-                        onClick={() => setShowAllPositions(!showAllPositions)}
+                        type='button'
+                        onClick={e => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          setShowAllPositions(!showAllPositions);
+                        }}
                         className='text-xs text-purple-400 hover:text-purple-300 col-span-full text-center mt-2 transition-colors duration-200 cursor-pointer underline decoration-dotted underline-offset-2'
                       >
                         {showAllPositions

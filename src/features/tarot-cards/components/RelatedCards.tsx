@@ -54,11 +54,17 @@ export function RelatedCards({ cards, locale }: RelatedCardsProps) {
   };
 
   return (
-    <section className='py-16 px-4 bg-white' aria-labelledby='related-cards-heading'>
+    <section
+      className='py-16 px-4 bg-white'
+      aria-labelledby='related-cards-heading'
+    >
       <div className='max-w-6xl mx-auto'>
         {/* Section Header */}
         <header className='text-center mb-12'>
-          <h2 id='related-cards-heading' className='text-3xl font-bold text-gray-900 mb-4'>
+          <h2
+            id='related-cards-heading'
+            className='text-3xl font-bold text-gray-900 mb-4'
+          >
             {locale === 'tr'
               ? 'İlgili Kartlar'
               : locale === 'en'
@@ -75,7 +81,10 @@ export function RelatedCards({ cards, locale }: RelatedCardsProps) {
         </header>
 
         {/* Related Cards Grid */}
-        <ul className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6' role='list'>
+        <ul
+          className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'
+          role='list'
+        >
           {cards.map((card, index) => {
             const cardName = CardMapping.getCardNameForLocale(card, locale);
             const cardUrl = CardMapping.getCardUrlForLocale(card, locale);
@@ -93,30 +102,30 @@ export function RelatedCards({ cards, locale }: RelatedCardsProps) {
                         className='object-cover group-hover:scale-105 transition-transform duration-300'
                         loading='lazy'
                       />
-                    {/* Card Type Badge */}
-                    <div className='absolute top-2 left-2'>
-                      <span className='bg-black/70 text-white text-xs px-2 py-1 rounded-full'>
-                        {card.arcanaType === 'major'
-                          ? locale === 'tr'
-                            ? 'Major'
-                            : locale === 'en'
+                      {/* Card Type Badge */}
+                      <div className='absolute top-2 left-2'>
+                        <span className='bg-black/70 text-white text-xs px-2 py-1 rounded-full'>
+                          {card.arcanaType === 'major'
+                            ? locale === 'tr'
                               ? 'Major'
-                              : 'Velika'
-                          : locale === 'tr'
-                            ? 'Minor'
-                            : locale === 'en'
+                              : locale === 'en'
+                                ? 'Major'
+                                : 'Velika'
+                            : locale === 'tr'
                               ? 'Minor'
-                              : 'Mala'}
-                      </span>
-                    </div>
-                    {/* Card Number Badge */}
-                    {card.arcanaType === 'major' && card.number && (
-                      <div className='absolute top-2 right-2'>
-                        <span className='bg-yellow-500 text-black text-xs font-bold px-2 py-1 rounded-full'>
-                          {card.number}
+                              : locale === 'en'
+                                ? 'Minor'
+                                : 'Mala'}
                         </span>
                       </div>
-                    )}
+                      {/* Card Number Badge */}
+                      {card.arcanaType === 'major' && card.number && (
+                        <div className='absolute top-2 right-2'>
+                          <span className='bg-yellow-500 text-black text-xs font-bold px-2 py-1 rounded-full'>
+                            {card.number}
+                          </span>
+                        </div>
+                      )}
                       {/* Minor Arcana Badge */}
                       {card.arcanaType === 'minor' && card.suit && (
                         <div className='absolute top-2 right-2'>
@@ -126,7 +135,8 @@ export function RelatedCards({ cards, locale }: RelatedCardsProps) {
                         </div>
                       )}
                       <figcaption className='sr-only'>
-                        {cardName} - {card.arcanaType === 'major' ? 'Major' : 'Minor'} Arcana
+                        {cardName} -{' '}
+                        {card.arcanaType === 'major' ? 'Major' : 'Minor'} Arcana
                       </figcaption>
                     </figure>
 

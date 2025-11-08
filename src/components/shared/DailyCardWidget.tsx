@@ -24,7 +24,11 @@ const SAMPLE_CARDS = [
     id: 'the-fool',
     name: { tr: 'Deli (Joker)', en: 'The Fool', sr: 'Joker' },
     imageUrl: '/cards/rws/0-Fool.webp',
-    url: { tr: '/tr/kartlar/joker', en: '/en/cards/the-fool', sr: '/sr/kartice/joker' },
+    url: {
+      tr: '/tr/kartlar/joker',
+      en: '/en/cards/the-fool',
+      sr: '/sr/kartice/joker',
+    },
     shortMeaning: {
       tr: 'Yeni başlangıçlar, cesaret ve saf potansiyel',
       en: 'New beginnings, courage and pure potential',
@@ -35,7 +39,11 @@ const SAMPLE_CARDS = [
     id: 'the-magician',
     name: { tr: 'Büyücü', en: 'The Magician', sr: 'Čarobnjak' },
     imageUrl: '/cards/rws/I-Magician.webp',
-    url: { tr: '/tr/kartlar/buyucu', en: '/en/cards/the-magician', sr: '/sr/kartice/carobnjak' },
+    url: {
+      tr: '/tr/kartlar/buyucu',
+      en: '/en/cards/the-magician',
+      sr: '/sr/kartice/carobnjak',
+    },
     shortMeaning: {
       tr: 'Yaratıcılık, beceri ve tezahür gücü',
       en: 'Creativity, skill and manifestation power',
@@ -57,8 +65,10 @@ export function DailyCardWidget({ locale }: DailyCardWidgetProps) {
 
   const checkTodaysCard = async () => {
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-      
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
       if (!user) {
         setIsLoading(false);
         return;
@@ -93,19 +103,25 @@ export function DailyCardWidget({ locale }: DailyCardWidgetProps) {
   };
 
   const drawCard = async () => {
-    if (hasDrawnToday) return;
+    if (hasDrawnToday) {
+      return;
+    }
 
     setIsDrawing(true);
 
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-      
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
       if (!user) {
-        alert(locale === 'tr' 
-          ? 'Kart çekmek için giriş yapmalısınız.' 
-          : locale === 'en' 
-          ? 'You must log in to draw a card.'
-          : 'Morate se prijaviti da biste izvukli kartu.');
+        alert(
+          locale === 'tr'
+            ? 'Kart çekmek için giriş yapmalısınız.'
+            : locale === 'en'
+              ? 'You must log in to draw a card.'
+              : 'Morate se prijaviti da biste izvukli kartu.'
+        );
         setIsDrawing(false);
         return;
       }
@@ -133,9 +149,8 @@ export function DailyCardWidget({ locale }: DailyCardWidgetProps) {
       };
 
       // Supabase'e kaydet (upsert ile - aynı gün için güncelleme yapar)
-      const { error } = await supabase
-        .from('daily_cards')
-        .upsert({
+      const { error } = await supabase.from('daily_cards').upsert(
+        {
           user_id: user.id,
           card_id: card.id,
           card_name: card.name,
@@ -144,10 +159,12 @@ export function DailyCardWidget({ locale }: DailyCardWidgetProps) {
           card_meaning: card.shortMeaning,
           date: today,
           locale,
-        }, {
+        },
+        {
           onConflict: 'user_id,date', // Aynı user + date varsa güncelle
-          ignoreDuplicates: false
-        });
+          ignoreDuplicates: false,
+        }
+      );
 
       if (error) {
         console.error('Error saving daily card:', error);
@@ -163,32 +180,52 @@ export function DailyCardWidget({ locale }: DailyCardWidgetProps) {
   };
 
   const getTitle = () => {
-    if (locale === 'tr') return 'Bugünün Kartı';
-    if (locale === 'en') return 'Card of the Day';
+    if (locale === 'tr') {
+      return 'Bugünün Kartı';
+    }
+    if (locale === 'en') {
+      return 'Card of the Day';
+    }
     return 'Karta Dana';
   };
 
   const getButtonText = () => {
-    if (locale === 'tr') return 'Kartını Çek';
-    if (locale === 'en') return 'Draw Your Card';
+    if (locale === 'tr') {
+      return 'Kartını Çek';
+    }
+    if (locale === 'en') {
+      return 'Draw Your Card';
+    }
     return 'Izvuci Kartu';
   };
 
   const getDescription = () => {
-    if (locale === 'tr') return 'Günlük rehberliğiniz için bir kart çekin';
-    if (locale === 'en') return 'Draw a card for your daily guidance';
+    if (locale === 'tr') {
+      return 'Günlük rehberliğiniz için bir kart çekin';
+    }
+    if (locale === 'en') {
+      return 'Draw a card for your daily guidance';
+    }
     return 'Izvucite kartu za vaše dnevno vođstvo';
   };
 
   const getAlreadyDrawnText = () => {
-    if (locale === 'tr') return 'Bugün zaten kartınızı çektiniz. Yarın tekrar deneyin!';
-    if (locale === 'en') return 'You already drew your card today. Try again tomorrow!';
+    if (locale === 'tr') {
+      return 'Bugün zaten kartınızı çektiniz. Yarın tekrar deneyin!';
+    }
+    if (locale === 'en') {
+      return 'You already drew your card today. Try again tomorrow!';
+    }
     return 'Već ste izvukli kartu danas. Pokušajte ponovo sutra!';
   };
 
   const getViewDetailsText = () => {
-    if (locale === 'tr') return 'Detaylı Anlam';
-    if (locale === 'en') return 'View Details';
+    if (locale === 'tr') {
+      return 'Detaylı Anlam';
+    }
+    if (locale === 'en') {
+      return 'View Details';
+    }
     return 'Pogledaj Detalje';
   };
 
@@ -198,7 +235,11 @@ export function DailyCardWidget({ locale }: DailyCardWidgetProps) {
         <div className='text-center py-12'>
           <div className='animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto'></div>
           <p className='mt-4 text-purple-100'>
-            {locale === 'tr' ? 'Yükleniyor...' : locale === 'en' ? 'Loading...' : 'Učitavanje...'}
+            {locale === 'tr'
+              ? 'Yükleniyor...'
+              : locale === 'en'
+                ? 'Loading...'
+                : 'Učitavanje...'}
           </p>
         </div>
       </div>
@@ -251,7 +292,11 @@ export function DailyCardWidget({ locale }: DailyCardWidgetProps) {
                       d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
                     ></path>
                   </svg>
-                  {locale === 'tr' ? 'Çekiliyor...' : locale === 'en' ? 'Drawing...' : 'Izvlačenje...'}
+                  {locale === 'tr'
+                    ? 'Çekiliyor...'
+                    : locale === 'en'
+                      ? 'Drawing...'
+                      : 'Izvlačenje...'}
                 </span>
               ) : (
                 getButtonText()

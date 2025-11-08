@@ -29,7 +29,11 @@ export function generateCardAltText(
     context?: 'gallery' | 'reading' | 'detail';
   }
 ): string {
-  const { isReversed = false, includeContext = true, context = 'detail' } = options || {};
+  const {
+    isReversed = false,
+    includeContext = true,
+    context = 'detail',
+  } = options || {};
 
   // Kart adını dile göre al
   const cardName =
@@ -201,11 +205,7 @@ export function generateIconAltText(
   locale: 'tr' | 'en' | 'sr' = 'tr'
 ): string {
   const iconText =
-    locale === 'tr'
-      ? 'ikonu'
-      : locale === 'en'
-        ? 'icon'
-        : 'ikona';
+    locale === 'tr' ? 'ikonu' : locale === 'en' ? 'icon' : 'ikona';
 
   return `${iconName} ${iconText}`;
 }
@@ -230,7 +230,9 @@ export function generateOGImageAltText(
 /**
  * Kart arka yüzü için alt text
  */
-export function generateCardBackAltText(locale: 'tr' | 'en' | 'sr' = 'tr'): string {
+export function generateCardBackAltText(
+  locale: 'tr' | 'en' | 'sr' = 'tr'
+): string {
   return locale === 'tr'
     ? 'Tarot kartı arka yüzü - Kapalı kart'
     : locale === 'en'

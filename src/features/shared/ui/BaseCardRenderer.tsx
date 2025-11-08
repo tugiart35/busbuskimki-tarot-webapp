@@ -224,7 +224,9 @@ const BaseCardRenderer = memo(function BaseCardRenderer({
 
     // Generate descriptive alt text for SEO and accessibility
     const getAltText = (): string => {
-      if (!card) return 'Tarot kartı arka yüzü';
+      if (!card) {
+        return 'Tarot kartı arka yüzü';
+      }
 
       const cardName = card.nameTr || card.name || 'Tarot Kartı';
       const position = isReversed ? 'ters pozisyonda' : 'düz pozisyonda';

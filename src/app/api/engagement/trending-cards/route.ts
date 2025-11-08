@@ -34,7 +34,9 @@ export async function GET(request: NextRequest) {
     // Temel sorgu
     let query = supabase
       .from('card_stats')
-      .select('card_slug, view_count, reaction_count, comment_count, last_viewed_at');
+      .select(
+        'card_slug, view_count, reaction_count, comment_count, last_viewed_at'
+      );
 
     // Zaman filtresini uygula (eğer varsa)
     if (dateFilter) {
@@ -64,7 +66,7 @@ export async function GET(request: NextRequest) {
     // Reaksiyonlar daha değerli olduğu için 2 ile çarpılıyor
     const statsWithScore: CardStat[] = cardStats.map(card => ({
       ...card,
-      popularity_score: (card.view_count || 0) + ((card.reaction_count || 0) * 2),
+      popularity_score: (card.view_count || 0) + (card.reaction_count || 0) * 2,
     }));
 
     // Popülerlik skoruna göre sırala ve limit kadar al
@@ -89,4 +91,3 @@ export async function GET(request: NextRequest) {
     );
   }
 }
-

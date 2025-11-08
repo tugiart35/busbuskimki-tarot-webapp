@@ -38,7 +38,11 @@ const REACTIONS: Reaction[] = [
   },
   {
     emoji: '🎯',
-    label: { tr: 'Tam İstediğim', en: 'Exactly What I Needed', sr: 'Tačno Ono Što Mi Treba' },
+    label: {
+      tr: 'Tam İstediğim',
+      en: 'Exactly What I Needed',
+      sr: 'Tačno Ono Što Mi Treba',
+    },
     count: 0,
   },
 ];
@@ -58,7 +62,9 @@ export function PageReactions({ pageId, locale, title }: PageReactionsProps) {
 
   // Load reactions from API
   useEffect(() => {
-    if (!fingerprint) return;
+    if (!fingerprint) {
+      return;
+    }
 
     const loadReactions = async () => {
       try {
@@ -87,7 +93,9 @@ export function PageReactions({ pageId, locale, title }: PageReactionsProps) {
   }, [pageId, fingerprint]);
 
   const handleReaction = async (emoji: string) => {
-    if (!fingerprint) return;
+    if (!fingerprint) {
+      return;
+    }
 
     // Optimistic update
     const isRemoving = userReaction === emoji;
@@ -123,11 +131,14 @@ export function PageReactions({ pageId, locale, title }: PageReactionsProps) {
 
     // Send to API
     try {
-      const response = await fetch(`/api/engagement/pages/${pageId}/reactions`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ emoji, fingerprint }),
-      });
+      const response = await fetch(
+        `/api/engagement/pages/${pageId}/reactions`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ emoji, fingerprint }),
+        }
+      );
 
       const result = await response.json();
 
@@ -149,14 +160,22 @@ export function PageReactions({ pageId, locale, title }: PageReactionsProps) {
   };
 
   const getDefaultTitle = () => {
-    if (locale === 'tr') return 'Bu sayfayı nasıl buldunuz?';
-    if (locale === 'en') return 'How did you find this page?';
+    if (locale === 'tr') {
+      return 'Bu sayfayı nasıl buldunuz?';
+    }
+    if (locale === 'en') {
+      return 'How did you find this page?';
+    }
     return 'Kako ste pronašli ovu stranicu?';
   };
 
   const getThanksMessage = () => {
-    if (locale === 'tr') return 'Geri bildiriminiz için teşekkürler!';
-    if (locale === 'en') return 'Thanks for your feedback!';
+    if (locale === 'tr') {
+      return 'Geri bildiriminiz için teşekkürler!';
+    }
+    if (locale === 'en') {
+      return 'Thanks for your feedback!';
+    }
     return 'Hvala na povratnim informacijama!';
   };
 
@@ -169,11 +188,17 @@ export function PageReactions({ pageId, locale, title }: PageReactionsProps) {
         <div className='w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4'>
           <span className='text-3xl'>💭</span>
         </div>
-        <h3 className='text-2xl font-bold text-gray-900 mb-2'>{displayTitle}</h3>
+        <h3 className='text-2xl font-bold text-gray-900 mb-2'>
+          {displayTitle}
+        </h3>
         {userReaction && (
           <p className='text-sm text-purple-600 font-medium animate-fade-in flex items-center justify-center gap-2'>
             <svg className='w-5 h-5' fill='currentColor' viewBox='0 0 20 20'>
-              <path fillRule='evenodd' d='M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z' clipRule='evenodd' />
+              <path
+                fillRule='evenodd'
+                d='M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z'
+                clipRule='evenodd'
+              />
             </svg>
             {getThanksMessage()}
           </p>
@@ -182,7 +207,7 @@ export function PageReactions({ pageId, locale, title }: PageReactionsProps) {
 
       {/* Reactions */}
       <div className='flex flex-wrap justify-center gap-4'>
-        {reactions.map((reaction) => {
+        {reactions.map(reaction => {
           const isSelected = userReaction === reaction.emoji;
           const isAnimating = animatingEmoji === reaction.emoji;
 
@@ -208,7 +233,9 @@ export function PageReactions({ pageId, locale, title }: PageReactionsProps) {
               </span>
 
               {/* Label */}
-              <span className={`text-xs font-semibold whitespace-nowrap ${isSelected ? 'text-white' : 'text-gray-700'}`}>
+              <span
+                className={`text-xs font-semibold whitespace-nowrap ${isSelected ? 'text-white' : 'text-gray-700'}`}
+              >
                 {reaction.label[locale]}
               </span>
 
@@ -234,8 +261,8 @@ export function PageReactions({ pageId, locale, title }: PageReactionsProps) {
         {locale === 'tr'
           ? '👆 Tepkinizi değiştirmek için aynı simgeye tekrar tıklayın'
           : locale === 'en'
-          ? '👆 Click the same icon again to change your reaction'
-          : '👆 Kliknite na istu ikonicu ponovo da promenite svoju reakciju'}
+            ? '👆 Click the same icon again to change your reaction'
+            : '👆 Kliknite na istu ikonicu ponovo da promenite svoju reakciju'}
       </p>
     </div>
   );

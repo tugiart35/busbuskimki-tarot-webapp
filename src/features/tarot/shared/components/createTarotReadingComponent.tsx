@@ -21,6 +21,9 @@ import {
   BaseCardRenderer,
 } from '@/features/shared/ui';
 
+// Fast delivery info card - satış odaklı teslimat bilgisi
+import FastDeliveryInfoCard from '../../components/FastDeliveryInfoCard';
+
 // Tarot özel UI bileşenleri - modal, canvas, yorumlama ve form
 import {
   BaseTarotModal,
@@ -569,7 +572,8 @@ export function createTarotReadingComponent({
   return function TarotReadingComponent({
     onComplete,
     onPositionChange,
-    onReadingTypeSelected,
+    onReadingTypeSelected: _onReadingTypeSelected,
+    initialReadingType,
   }: TarotReadingProps) {
     // Konfigürasyon ve tema stilleri - memo ile optimize edilmiş
     const config = useMemo(() => getConfig(), []);
@@ -579,6 +583,16 @@ export function createTarotReadingComponent({
     const router = useRouter();
     const pathname = usePathname();
     const { t } = useTranslations();
+
+    // Locale bilgisini pathname'den al
+    const locale = useMemo(() => {
+      const pathLocale = pathname?.split('/')[1];
+      return (
+        pathLocale === 'tr' || pathLocale === 'en' || pathLocale === 'sr'
+          ? pathLocale
+          : 'tr'
+      ) as 'tr' | 'en' | 'sr';
+    }, [pathname]);
 
     // Kullanıcı auth ve toast bildirimleri
     const { user } = useAuth();
@@ -651,6 +665,22 @@ export function createTarotReadingComponent({
 
     // Başlangıç zamanı - okuma süresini hesaplamak için
     const [startTime] = useState(() => Date.now());
+
+    // initialReadingType varsa otomatik olarak okuma tipini seç ve form ekranına geç
+    useEffect(() => {
+      if (initialReadingType && !selectedReadingType) {
+        const readingTypeValue =
+          initialReadingType === 'detailed'
+            ? READING_TYPES.DETAILED
+            : READING_TYPES.WRITTEN;
+        setSelectedReadingType(readingTypeValue);
+        // Form kaydedilmiş gibi davran (kredi kontrolü olmadan)
+        setDetailedFormSaved(true);
+        // Info modal'ı gösterme
+        setModalStates(prev => ({ ...prev, showInfoModal: false }));
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [initialReadingType]);
 
     // Çeviri namespace'i ve mesaj anahtarları
     const namespace = config.translationNamespace;
@@ -1050,19 +1080,14 @@ export function createTarotReadingComponent({
       }
     };
 
-    // Okuma tipi seçimi - callback ile birlikte
+    // Okuma tipi seçimi - callback kaldırıldı (açıklama kapatma mantığı gereksiz)
     const handleReadingTypeSelectWithCallback = (
       type: ReadingType | string
     ) => {
       try {
         handleReadingTypeSelect(type);
-
-        // React state güncellemesinin tamamlanmasını bekle
-        setTimeout(() => {
-          if (onReadingTypeSelected) {
-            onReadingTypeSelected();
-          }
-        }, 0);
+        // onReadingTypeSelected callback'i kaldırıldı - açıklama kapatma mantığı gereksiz
+        // Açıklama kullanıcı kart seçmeye başladığında veya başka bir mantıkla kapatılabilir
       } catch {
         showToast(
           'Okuma tipi seçiminde bir hata oluştu. Lütfen tekrar deneyin.',
@@ -1074,7 +1099,8 @@ export function createTarotReadingComponent({
     // Kart seçimi - okuma tipi seçilmiş mi kontrol eder
     const handleCardSelectGuarded = (card: TarotCard) => {
       try {
-        if (!selectedReadingType) {
+        // initialReadingType varsa direkt kart seçimine izin ver
+        if (!selectedReadingType && !initialReadingType) {
           showToast(t(messages.selectReadingTypeFirst), 'info');
           return;
         }
@@ -1088,7 +1114,9 @@ export function createTarotReadingComponent({
     };
 
     // Kart seçim izni - basit okuma veya form kaydedilmiş detaylı/yazılı okuma
+    // initialReadingType varsa direkt kart seçimine izin ver (kredi kontrolü olmadan)
     const canSelectCards =
+      (initialReadingType !== null && initialReadingType !== undefined) ||
       selectedReadingType === READING_TYPES.SIMPLE ||
       ((selectedReadingType === READING_TYPES.DETAILED ||
         selectedReadingType === READING_TYPES.WRITTEN) &&
@@ -1256,7 +1284,14 @@ export function createTarotReadingComponent({
             </div>
           </div>
         )}
-
+        {/* Fast Delivery Info - Kompakt bilgi kutusu */}
+        <div className='flex justify-center mt-3'>
+          <FastDeliveryInfoCard
+            selectedReadingType={selectedReadingType}
+            readingTypes={READING_TYPES}
+            locale={locale}
+          />
+        </div>
         {/* Tarot canvas - kart yayılımı ve seçim alanı */}
         <BaseTarotCanvas
           config={config}
@@ -1299,8 +1334,9 @@ export function createTarotReadingComponent({
             </div>
           )}
         {/* Okuma tipi seçici - henüz tip seçilmemişse gösterilir */}
-        {selectedReadingType === null && (
-          <div className='flex justify-center mb-6'>
+        {/* initialReadingType varsa okuma tipi seçimini atla */}
+        {selectedReadingType === null && !initialReadingType && (
+          <div className='flex flex-col items-center mb-6'>
             <BaseReadingTypeSelector
               selectedType={selectedReadingType}
               onTypeSelect={handleReadingTypeSelectWithCallback}
@@ -1312,6 +1348,18 @@ export function createTarotReadingComponent({
             />
           </div>
         )}
+
+        {/* Fast Delivery Info - Okuma tipi seçildiğinde de göster (SIMPLE hariç) */}
+        {selectedReadingType !== null &&
+          selectedReadingType !== READING_TYPES.SIMPLE && (
+            <div className='flex justify-center mb-4'>
+              <FastDeliveryInfoCard
+                selectedReadingType={selectedReadingType}
+                readingTypes={READING_TYPES}
+                locale={locale}
+              />
+            </div>
+          )}
 
         {/* Okuma tipi değiştir butonu - tip seçildikten sonra gösterilir */}
         {selectedReadingType !== null && (

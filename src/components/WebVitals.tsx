@@ -16,7 +16,7 @@ import { useReportWebVitals } from 'next/web-vitals';
 import { useEffect } from 'react';
 
 export function WebVitals() {
-  useReportWebVitals((metric) => {
+  useReportWebVitals(metric => {
     // Production'da Vercel Analytics otomatik olarak topluyor
     // Ayrıca kendi analytics sistemimize de gönderebiliriz
 
@@ -72,7 +72,7 @@ export function WebVitals() {
       process.env.NODE_ENV === 'development'
     ) {
       try {
-        const observer = new PerformanceObserver((list) => {
+        const observer = new PerformanceObserver(list => {
           for (const entry of list.getEntries()) {
             if (entry.duration > 50) {
               console.warn(

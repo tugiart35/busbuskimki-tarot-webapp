@@ -13,7 +13,7 @@ export const dynamicParams = false; // Only generate defined spreads
  */
 export async function generateStaticParams() {
   const spreadIds = getAllSpreadIds();
-  
+
   return spreadIds.map(spreadId => ({
     spreadId,
   }));
@@ -29,10 +29,10 @@ export default async function SpreadPage({
   params: Promise<{ locale: string; spreadId: string }>;
 }) {
   const { locale, spreadId } = await params;
-  
+
   // Verify spread exists
   const spread = tarotSpreads.find(s => s.id === spreadId);
-  
+
   if (!spread) {
     return (
       <div className='flex flex-col min-h-screen pb-16 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900'>
@@ -50,6 +50,6 @@ export default async function SpreadPage({
       </div>
     );
   }
-  
+
   return <SpreadPageClient locale={locale} spreadId={spreadId} />;
 }

@@ -8,7 +8,9 @@ interface CardAssociationsProps {
 export function CardAssociations({ content, locale }: CardAssociationsProps) {
   const { associations } = content;
 
-  if (!associations) return null;
+  if (!associations) {
+    return null;
+  }
 
   const iconMap = {
     astrology: '✨',

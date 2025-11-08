@@ -6,7 +6,7 @@ interface ChartProps {
   onRender?: (chart: any) => void;
 }
 
-// Simplified chart component  
+// Simplified chart component
 export function DynamicChart({ data: _data }: ChartProps) {
   return <div>Chart component simplified for production</div>;
 }

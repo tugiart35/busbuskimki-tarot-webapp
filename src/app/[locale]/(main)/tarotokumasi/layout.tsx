@@ -11,11 +11,7 @@ export const fetchCache = 'force-cache'; // Aggressive caching
 
 // Static generation için locale params
 export async function generateStaticParams() {
-  return [
-    { locale: 'tr' },
-    { locale: 'en' },
-    { locale: 'sr' },
-  ];
+  return [{ locale: 'tr' }, { locale: 'en' }, { locale: 'sr' }];
 }
 
 // SEO Metadata generation for Tarot Reading page using tarotsayfasi.md data

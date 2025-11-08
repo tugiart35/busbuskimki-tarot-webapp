@@ -61,8 +61,10 @@ export function CardComments({ cardId, locale }: CardCommentsProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (!newComment.trim() || !authorName.trim() || !fingerprint) return;
+
+    if (!newComment.trim() || !authorName.trim() || !fingerprint) {
+      return;
+    }
 
     // Validation
     if (authorName.trim().length < 2 || authorName.trim().length > 50) {
@@ -109,7 +111,7 @@ export function CardComments({ cardId, locale }: CardCommentsProps) {
         // Reset form
         setNewComment('');
         setAuthorName('');
-        
+
         // Show success message
         setSuccessMessage(
           locale === 'tr'
@@ -121,14 +123,23 @@ export function CardComments({ cardId, locale }: CardCommentsProps) {
         setTimeout(() => setSuccessMessage(''), 5000);
       } else {
         setSuccessMessage(
-          result.error || (locale === 'tr' ? 'Bir hata oluştu.' : locale === 'en' ? 'An error occurred.' : 'Došlo je do greške.')
+          result.error ||
+            (locale === 'tr'
+              ? 'Bir hata oluştu.'
+              : locale === 'en'
+                ? 'An error occurred.'
+                : 'Došlo je do greške.')
         );
         setTimeout(() => setSuccessMessage(''), 3000);
       }
     } catch (error) {
       console.error('Error submitting comment:', error);
       setSuccessMessage(
-        locale === 'tr' ? 'Yorum gönderilemedi.' : locale === 'en' ? 'Failed to submit comment.' : 'Komentar nije poslat.'
+        locale === 'tr'
+          ? 'Yorum gönderilemedi.'
+          : locale === 'en'
+            ? 'Failed to submit comment.'
+            : 'Komentar nije poslat.'
       );
       setTimeout(() => setSuccessMessage(''), 3000);
     } finally {
@@ -137,41 +148,62 @@ export function CardComments({ cardId, locale }: CardCommentsProps) {
   };
 
   const getTitle = () => {
-    if (locale === 'tr') return 'Yorumlar';
-    if (locale === 'en') return 'Comments';
+    if (locale === 'tr') {
+      return 'Yorumlar';
+    }
+    if (locale === 'en') {
+      return 'Comments';
+    }
     return 'Komentari';
   };
 
   const getPlaceholder = () => {
-    if (locale === 'tr') return 'Düşüncelerinizi paylaşın...';
-    if (locale === 'en') return 'Share your thoughts...';
+    if (locale === 'tr') {
+      return 'Düşüncelerinizi paylaşın...';
+    }
+    if (locale === 'en') {
+      return 'Share your thoughts...';
+    }
     return 'Podelite svoja razmišljanja...';
   };
 
   const getNamePlaceholder = () => {
-    if (locale === 'tr') return 'Adınız';
-    if (locale === 'en') return 'Your Name';
+    if (locale === 'tr') {
+      return 'Adınız';
+    }
+    if (locale === 'en') {
+      return 'Your Name';
+    }
     return 'Vaše Ime';
   };
 
   const getSubmitText = () => {
-    if (locale === 'tr') return 'Yorum Gönder';
-    if (locale === 'en') return 'Submit Comment';
+    if (locale === 'tr') {
+      return 'Yorum Gönder';
+    }
+    if (locale === 'en') {
+      return 'Submit Comment';
+    }
     return 'Pošalji Komentar';
   };
 
   const getNoCommentsText = () => {
-    if (locale === 'tr')
+    if (locale === 'tr') {
       return 'Henüz yorum yok. İlk yorumu siz yapın!';
-    if (locale === 'en') return 'No comments yet. Be the first to comment!';
+    }
+    if (locale === 'en') {
+      return 'No comments yet. Be the first to comment!';
+    }
     return 'Još nema komentara. Budite prvi koji će komentarisati!';
   };
 
   const getInfoText = () => {
-    if (locale === 'tr')
+    if (locale === 'tr') {
       return 'Tüm yorumlar moderasyon onayından sonra yayınlanır.';
-    if (locale === 'en')
+    }
+    if (locale === 'en') {
       return 'All comments are published after moderation approval.';
+    }
     return 'Svi komentari se objavljuju nakon odobrenja moderacije.';
   };
 
@@ -190,15 +222,17 @@ export function CardComments({ cardId, locale }: CardCommentsProps) {
         <div className='bg-gradient-to-br from-purple-50 to-indigo-50 rounded-xl p-6 mb-8 border border-purple-200'>
           {/* Success/Error Message */}
           {successMessage && (
-            <div className={`mb-4 p-3 rounded-lg ${
-              successMessage.startsWith('✅') 
-                ? 'bg-green-100 text-green-800 border border-green-300' 
-                : 'bg-red-100 text-red-800 border border-red-300'
-            }`}>
+            <div
+              className={`mb-4 p-3 rounded-lg ${
+                successMessage.startsWith('✅')
+                  ? 'bg-green-100 text-green-800 border border-green-300'
+                  : 'bg-red-100 text-red-800 border border-red-300'
+              }`}
+            >
               {successMessage}
             </div>
           )}
-          
+
           <form onSubmit={handleSubmit} className='space-y-4'>
             {/* Name Input */}
             <div>
@@ -212,7 +246,7 @@ export function CardComments({ cardId, locale }: CardCommentsProps) {
                 id='author-name'
                 type='text'
                 value={authorName}
-                onChange={(e) => setAuthorName(e.target.value)}
+                onChange={e => setAuthorName(e.target.value)}
                 className='w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200'
                 placeholder={getNamePlaceholder()}
                 required
@@ -226,13 +260,17 @@ export function CardComments({ cardId, locale }: CardCommentsProps) {
                 htmlFor='comment-text'
                 className='block text-sm font-medium text-gray-700 mb-2'
               >
-                {locale === 'tr' ? 'Yorumunuz' : locale === 'en' ? 'Your Comment' : 'Vaš Komentar'}{' '}
+                {locale === 'tr'
+                  ? 'Yorumunuz'
+                  : locale === 'en'
+                    ? 'Your Comment'
+                    : 'Vaš Komentar'}{' '}
                 <span className='text-red-500'>*</span>
               </label>
               <textarea
                 id='comment-text'
                 value={newComment}
-                onChange={(e) => setNewComment(e.target.value)}
+                onChange={e => setNewComment(e.target.value)}
                 rows={4}
                 className='w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 resize-none'
                 placeholder={getPlaceholder()}
@@ -247,7 +285,9 @@ export function CardComments({ cardId, locale }: CardCommentsProps) {
             {/* Submit Button */}
             <button
               type='submit'
-              disabled={isSubmitting || !newComment.trim() || !authorName.trim()}
+              disabled={
+                isSubmitting || !newComment.trim() || !authorName.trim()
+              }
               className='w-full sm:w-auto px-8 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed'
             >
               {isSubmitting ? (
@@ -272,7 +312,11 @@ export function CardComments({ cardId, locale }: CardCommentsProps) {
                       d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
                     ></path>
                   </svg>
-                  {locale === 'tr' ? 'Gönderiliyor...' : locale === 'en' ? 'Submitting...' : 'Slanje...'}
+                  {locale === 'tr'
+                    ? 'Gönderiliyor...'
+                    : locale === 'en'
+                      ? 'Submitting...'
+                      : 'Slanje...'}
                 </span>
               ) : (
                 getSubmitText()
@@ -303,7 +347,7 @@ export function CardComments({ cardId, locale }: CardCommentsProps) {
               </p>
             </div>
           ) : (
-            comments.map((comment) => (
+            comments.map(comment => (
               <article
                 key={comment.id}
                 className='bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-purple-300 transition-colors duration-200'
@@ -318,7 +362,11 @@ export function CardComments({ cardId, locale }: CardCommentsProps) {
                     </h4>
                     <time className='text-xs text-gray-500'>
                       {new Date(comment.date).toLocaleDateString(
-                        locale === 'tr' ? 'tr-TR' : locale === 'en' ? 'en-US' : 'sr-RS'
+                        locale === 'tr'
+                          ? 'tr-TR'
+                          : locale === 'en'
+                            ? 'en-US'
+                            : 'sr-RS'
                       )}
                     </time>
                   </div>
@@ -332,4 +380,3 @@ export function CardComments({ cardId, locale }: CardCommentsProps) {
     </section>
   );
 }
-

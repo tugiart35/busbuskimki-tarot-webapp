@@ -1,12 +1,12 @@
 /**
  * Dynamic Dashboard Widgets
- * 
+ *
  * Bu dosya dashboard component'lerini lazy loading ile yükler.
  * Performans optimizasyonu için oluşturuldu.
- * 
+ *
  * Faydaları:
  * - Initial bundle boyutunu küçültür
- * - İlk sayfa yükleme hızını artırır  
+ * - İlk sayfa yükleme hızını artırır
  * - Kullanıcı etkileşimine göre yükleme yapar
  */
 
@@ -16,24 +16,27 @@ import dynamic from 'next/dynamic';
 
 // Loading spinner component
 const LoadingSpinner = () => (
-  <div className="animate-pulse">
-    <div className="h-32 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
+  <div className='animate-pulse'>
+    <div className='h-32 bg-gray-200 dark:bg-gray-700 rounded-lg'></div>
   </div>
 );
 
 // Kart tipi loading
 const LoadingCard = () => (
-  <div className="animate-pulse space-y-4">
-    <div className="h-24 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
-    <div className="h-24 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
+  <div className='animate-pulse space-y-4'>
+    <div className='h-24 bg-gray-200 dark:bg-gray-700 rounded-lg'></div>
+    <div className='h-24 bg-gray-200 dark:bg-gray-700 rounded-lg'></div>
   </div>
 );
 
 // Liste tipi loading
 const LoadingList = () => (
-  <div className="animate-pulse space-y-3">
-    {[1, 2, 3].map((i) => (
-      <div key={i} className="h-16 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
+  <div className='animate-pulse space-y-3'>
+    {[1, 2, 3].map(i => (
+      <div
+        key={i}
+        className='h-16 bg-gray-200 dark:bg-gray-700 rounded-lg'
+      ></div>
     ))}
   </div>
 );
@@ -43,13 +46,10 @@ const LoadingList = () => (
  * Paket satın alma arayüzü - kullanıcı etkileşimine göre yüklenir
  * SSR: false - Client-side only (ödeme işlemleri için)
  */
-export const DynamicCreditPackages = dynamic(
-  () => import('./CreditPackages'),
-  {
-    loading: () => <LoadingCard />,
-    ssr: false, // Client-side only - ödeme widget'ları için
-  }
-);
+export const DynamicCreditPackages = dynamic(() => import('./CreditPackages'), {
+  loading: () => <LoadingCard />,
+  ssr: false, // Client-side only - ödeme widget'ları için
+});
 
 /**
  * Profile Management Component
@@ -69,13 +69,10 @@ export const DynamicProfileManagement = dynamic(
  * Son aktiviteler listesi - SEO için server-side render edilir
  * SSR: true - İçerik önemli ve SEO'ya katkı sağlar
  */
-export const DynamicRecentActivity = dynamic(
-  () => import('./RecentActivity'),
-  {
-    loading: () => <LoadingList />,
-    ssr: true, // Server-side render - SEO için önemli
-  }
-);
+export const DynamicRecentActivity = dynamic(() => import('./RecentActivity'), {
+  loading: () => <LoadingList />,
+  ssr: true, // Server-side render - SEO için önemli
+});
 
 /**
  * Stats Cards Component
@@ -92,17 +89,14 @@ export const DynamicRecentActivity = dynamic(
 // );
 
 /**
- * Profile Modal Component  
+ * Profile Modal Component
  * Profil düzenleme modal'ı - sadece açıldığında yüklenir
  * SSR: false - Modal client-side component
  */
-export const DynamicProfileModal = dynamic(
-  () => import('./ProfileModal'),
-  {
-    loading: () => <LoadingSpinner />,
-    ssr: false,
-  }
-);
+export const DynamicProfileModal = dynamic(() => import('./ProfileModal'), {
+  loading: () => <LoadingSpinner />,
+  ssr: false,
+});
 
 /**
  * Navigation Header Component
@@ -117,4 +111,3 @@ export const DynamicProfileModal = dynamic(
  * İlk görünen içerik olduğu için dynamic yapma
  */
 // NOT: WelcomeSection'ı dynamic yapmıyoruz - LCP için önemli
-

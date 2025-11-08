@@ -64,7 +64,7 @@ export class AdminDetectionService {
   /**
    * Admin kullanıcı için özel log mesajı
    */
-      static logAdminAccess(_userId?: string, _isAdmin?: boolean): void {
-        // Admin access logging disabled in production
-      }
+  static logAdminAccess(_userId?: string, _isAdmin?: boolean): void {
+    // Admin access logging disabled in production
+  }
 }

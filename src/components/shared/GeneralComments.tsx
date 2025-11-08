@@ -15,7 +15,11 @@ interface GeneralCommentsProps {
   title?: string;
 }
 
-export function GeneralComments({ pageId: _pageId, locale, title }: GeneralCommentsProps) {
+export function GeneralComments({
+  pageId: _pageId,
+  locale,
+  title,
+}: GeneralCommentsProps) {
   const [comments] = useState<Comment[]>([]);
   const [newComment, setNewComment] = useState('');
   const [authorName, setAuthorName] = useState('');
@@ -24,7 +28,9 @@ export function GeneralComments({ pageId: _pageId, locale, title }: GeneralComme
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!newComment.trim() || !authorName.trim()) return;
+    if (!newComment.trim() || !authorName.trim()) {
+      return;
+    }
 
     setIsSubmitting(true);
 
@@ -37,7 +43,7 @@ export function GeneralComments({ pageId: _pageId, locale, title }: GeneralComme
     // });
 
     // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
     // Reset form
     setNewComment('');
@@ -53,45 +59,69 @@ export function GeneralComments({ pageId: _pageId, locale, title }: GeneralComme
           : 'Vaš komentar je poslat na moderaciju. Pojaviće se nakon odobrenja. 🎉'
     );
 
-    console.log('📊 [General Comment Submitted]', { authorName, commentLength: newComment.length });
+    console.log('📊 [General Comment Submitted]', {
+      authorName,
+      commentLength: newComment.length,
+    });
   };
 
   const getDefaultTitle = () => {
-    if (locale === 'tr') return 'Tarot Kartları Hakkında Düşünceleriniz';
-    if (locale === 'en') return 'Your Thoughts About Tarot Cards';
+    if (locale === 'tr') {
+      return 'Tarot Kartları Hakkında Düşünceleriniz';
+    }
+    if (locale === 'en') {
+      return 'Your Thoughts About Tarot Cards';
+    }
     return 'Vaša Mišljenja o Tarot Kartama';
   };
 
   const getPlaceholder = () => {
-    if (locale === 'tr') return 'Tarot kartları hakkında düşüncelerinizi paylaşın...';
-    if (locale === 'en') return 'Share your thoughts about tarot cards...';
+    if (locale === 'tr') {
+      return 'Tarot kartları hakkında düşüncelerinizi paylaşın...';
+    }
+    if (locale === 'en') {
+      return 'Share your thoughts about tarot cards...';
+    }
     return 'Podelite svoja razmišljanja o tarot kartama...';
   };
 
   const getNamePlaceholder = () => {
-    if (locale === 'tr') return 'Adınız';
-    if (locale === 'en') return 'Your Name';
+    if (locale === 'tr') {
+      return 'Adınız';
+    }
+    if (locale === 'en') {
+      return 'Your Name';
+    }
     return 'Vaše Ime';
   };
 
   const getSubmitText = () => {
-    if (locale === 'tr') return 'Yorum Gönder';
-    if (locale === 'en') return 'Submit Comment';
+    if (locale === 'tr') {
+      return 'Yorum Gönder';
+    }
+    if (locale === 'en') {
+      return 'Submit Comment';
+    }
     return 'Pošalji Komentar';
   };
 
   const getNoCommentsText = () => {
-    if (locale === 'tr')
+    if (locale === 'tr') {
       return 'Henüz yorum yok. Tarot deneyimlerinizi ilk paylaşan siz olun!';
-    if (locale === 'en') return 'No comments yet. Be the first to share your tarot experience!';
+    }
+    if (locale === 'en') {
+      return 'No comments yet. Be the first to share your tarot experience!';
+    }
     return 'Još nema komentara. Budite prvi koji će podeliti svoje tarot iskustvo!';
   };
 
   const getInfoText = () => {
-    if (locale === 'tr')
+    if (locale === 'tr') {
       return 'Tüm yorumlar moderasyon onayından sonra yayınlanır. Saygılı ve yapıcı yorumlar bekliyoruz.';
-    if (locale === 'en')
+    }
+    if (locale === 'en') {
       return 'All comments are published after moderation approval. We expect respectful and constructive comments.';
+    }
     return 'Svi komentari se objavljuju nakon odobrenja moderacije. Očekujemo poštovane i konstruktivne komentare.';
   };
 
@@ -108,7 +138,9 @@ export function GeneralComments({ pageId: _pageId, locale, title }: GeneralComme
           <h2 className='text-3xl lg:text-4xl font-bold text-gray-900 mb-3'>
             {displayTitle}
           </h2>
-          <p className='text-sm text-gray-600 max-w-2xl mx-auto'>{getInfoText()}</p>
+          <p className='text-sm text-gray-600 max-w-2xl mx-auto'>
+            {getInfoText()}
+          </p>
         </div>
 
         {/* Comment Form */}
@@ -126,7 +158,7 @@ export function GeneralComments({ pageId: _pageId, locale, title }: GeneralComme
                 id='author-name-general'
                 type='text'
                 value={authorName}
-                onChange={(e) => setAuthorName(e.target.value)}
+                onChange={e => setAuthorName(e.target.value)}
                 className='w-full px-4 py-3 rounded-xl border-2 border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200'
                 placeholder={getNamePlaceholder()}
                 required
@@ -140,13 +172,17 @@ export function GeneralComments({ pageId: _pageId, locale, title }: GeneralComme
                 htmlFor='comment-text-general'
                 className='block text-sm font-semibold text-gray-700 mb-2'
               >
-                {locale === 'tr' ? 'Yorumunuz' : locale === 'en' ? 'Your Comment' : 'Vaš Komentar'}{' '}
+                {locale === 'tr'
+                  ? 'Yorumunuz'
+                  : locale === 'en'
+                    ? 'Your Comment'
+                    : 'Vaš Komentar'}{' '}
                 <span className='text-red-500'>*</span>
               </label>
               <textarea
                 id='comment-text-general'
                 value={newComment}
-                onChange={(e) => setNewComment(e.target.value)}
+                onChange={e => setNewComment(e.target.value)}
                 rows={5}
                 className='w-full px-4 py-3 rounded-xl border-2 border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 resize-none'
                 placeholder={getPlaceholder()}
@@ -158,7 +194,11 @@ export function GeneralComments({ pageId: _pageId, locale, title }: GeneralComme
                   {newComment.length}/1000
                 </p>
                 <p className='text-xs text-gray-400'>
-                  {locale === 'tr' ? 'Maksimum 1000 karakter' : locale === 'en' ? 'Maximum 1000 characters' : 'Maksimalno 1000 karaktera'}
+                  {locale === 'tr'
+                    ? 'Maksimum 1000 karakter'
+                    : locale === 'en'
+                      ? 'Maximum 1000 characters'
+                      : 'Maksimalno 1000 karaktera'}
                 </p>
               </div>
             </div>
@@ -166,7 +206,9 @@ export function GeneralComments({ pageId: _pageId, locale, title }: GeneralComme
             {/* Submit Button */}
             <button
               type='submit'
-              disabled={isSubmitting || !newComment.trim() || !authorName.trim()}
+              disabled={
+                isSubmitting || !newComment.trim() || !authorName.trim()
+              }
               className='w-full px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold rounded-xl shadow-lg hover:shadow-2xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed transform hover:-translate-y-1'
             >
               {isSubmitting ? (
@@ -191,13 +233,27 @@ export function GeneralComments({ pageId: _pageId, locale, title }: GeneralComme
                       d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
                     ></path>
                   </svg>
-                  {locale === 'tr' ? 'Gönderiliyor...' : locale === 'en' ? 'Submitting...' : 'Slanje...'}
+                  {locale === 'tr'
+                    ? 'Gönderiliyor...'
+                    : locale === 'en'
+                      ? 'Submitting...'
+                      : 'Slanje...'}
                 </span>
               ) : (
                 <span className='flex items-center justify-center gap-2'>
                   {getSubmitText()}
-                  <svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                    <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M14 5l7 7m0 0l-7 7m7-7H3' />
+                  <svg
+                    className='w-5 h-5'
+                    fill='none'
+                    stroke='currentColor'
+                    viewBox='0 0 24 24'
+                  >
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth={2}
+                      d='M14 5l7 7m0 0l-7 7m7-7H3'
+                    />
                   </svg>
                 </span>
               )}
@@ -226,15 +282,15 @@ export function GeneralComments({ pageId: _pageId, locale, title }: GeneralComme
                 {getNoCommentsText()}
               </p>
               <p className='text-sm text-gray-400'>
-                {locale === 'tr' 
+                {locale === 'tr'
                   ? 'Tarot deneyimlerinizi, sorularınızı veya önerilerinizi paylaşabilirsiniz.'
                   : locale === 'en'
-                  ? 'You can share your tarot experiences, questions or suggestions.'
-                  : 'Možete podeliti svoja tarot iskustva, pitanja ili predloge.'}
+                    ? 'You can share your tarot experiences, questions or suggestions.'
+                    : 'Možete podeliti svoja tarot iskustva, pitanja ili predloge.'}
               </p>
             </div>
           ) : (
-            comments.map((comment) => (
+            comments.map(comment => (
               <article
                 key={comment.id}
                 className='bg-white rounded-2xl shadow-lg p-6 border-2 border-gray-100 hover:border-purple-300 transition-all duration-200'
@@ -249,13 +305,19 @@ export function GeneralComments({ pageId: _pageId, locale, title }: GeneralComme
                     </h4>
                     <time className='text-xs text-gray-500'>
                       {new Date(comment.date).toLocaleDateString(
-                        locale === 'tr' ? 'tr-TR' : locale === 'en' ? 'en-US' : 'sr-RS',
+                        locale === 'tr'
+                          ? 'tr-TR'
+                          : locale === 'en'
+                            ? 'en-US'
+                            : 'sr-RS',
                         { year: 'numeric', month: 'long', day: 'numeric' }
                       )}
                     </time>
                   </div>
                 </header>
-                <p className='text-gray-700 leading-relaxed text-base'>{comment.text}</p>
+                <p className='text-gray-700 leading-relaxed text-base'>
+                  {comment.text}
+                </p>
               </article>
             ))
           )}

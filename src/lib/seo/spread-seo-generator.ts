@@ -11,33 +11,41 @@ const baseUrl = 'https://busbuskimki.com';
 /**
  * Spread-specific SEO data (hardcoded for server-side generation)
  */
-const spreadSeoData: Record<string, {
-  tr: { title: string; description: string };
-  en: { title: string; description: string };
-  sr: { title: string; description: string };
-}> = {
+const spreadSeoData: Record<
+  string,
+  {
+    tr: { title: string; description: string };
+    en: { title: string; description: string };
+    sr: { title: string; description: string };
+  }
+> = {
   'love-spread': {
     tr: {
       title: 'Aşk Tarot Açılımı',
-      description: 'Aşk hayatınız hakkında 4 kartlık profesyonel tarot açılımı. Uzman tarot okuyucularımızla detaylı yorum ve rehberlik alın.',
+      description:
+        'Aşk hayatınız hakkında 4 kartlık profesyonel tarot açılımı. Uzman tarot okuyucularımızla detaylı yorum ve rehberlik alın.',
     },
     en: {
       title: 'Love Tarot Spread',
-      description: 'Professional 4-card tarot reading about your love life. Get detailed interpretations and guidance from expert tarot readers.',
+      description:
+        'Professional 4-card tarot reading about your love life. Get detailed interpretations and guidance from expert tarot readers.',
     },
     sr: {
       title: 'Tarot Čitanje Ljubavi',
-      description: 'Profesionalno tarot čitanje sa 4 karte o vašem ljubavnom životu.',
+      description:
+        'Profesionalno tarot čitanje sa 4 karte o vašem ljubavnom životu.',
     },
   },
   'career-spread': {
     tr: {
       title: 'Kariyer Tarot Açılımı',
-      description: 'Kariyer ve iş hayatınız için 7 kartlık profesyonel tarot açılımı. Meslek yolculuğunuzda rehberlik alın.',
+      description:
+        'Kariyer ve iş hayatınız için 7 kartlık profesyonel tarot açılımı. Meslek yolculuğunuzda rehberlik alın.',
     },
     en: {
       title: 'Career Tarot Spread',
-      description: 'Professional 7-card tarot reading for your career and work life. Get guidance on your professional journey.',
+      description:
+        'Professional 7-card tarot reading for your career and work life. Get guidance on your professional journey.',
     },
     sr: {
       title: 'Tarot Čitanje Karijere',
@@ -47,11 +55,13 @@ const spreadSeoData: Record<string, {
   'problem-solving-spread': {
     tr: {
       title: 'Problem Çözme Tarot Açılımı',
-      description: '10 kartlık detaylı problem çözme açılımı. Karşılaştığınız zorluklar için çözüm yolları keşfedin.',
+      description:
+        '10 kartlık detaylı problem çözme açılımı. Karşılaştığınız zorluklar için çözüm yolları keşfedin.',
     },
     en: {
       title: 'Problem Solving Tarot Spread',
-      description: 'Detailed 10-card problem-solving spread. Discover solutions to your challenges.',
+      description:
+        'Detailed 10-card problem-solving spread. Discover solutions to your challenges.',
     },
     sr: {
       title: 'Tarot Rešavanje Problema',
@@ -61,11 +71,13 @@ const spreadSeoData: Record<string, {
   'situation-analysis-spread': {
     tr: {
       title: 'Durum Analizi Tarot Açılımı',
-      description: '7 kartlık kapsamlı durum analizi. Mevcut durumunuzu tüm yönleriyle anlayın.',
+      description:
+        '7 kartlık kapsamlı durum analizi. Mevcut durumunuzu tüm yönleriyle anlayın.',
     },
     en: {
       title: 'Situation Analysis Tarot Spread',
-      description: 'Comprehensive 7-card situation analysis. Understand your current situation from all angles.',
+      description:
+        'Comprehensive 7-card situation analysis. Understand your current situation from all angles.',
     },
     sr: {
       title: 'Tarot Analiza Situacije',
@@ -75,11 +87,13 @@ const spreadSeoData: Record<string, {
   'relationship-analysis-spread': {
     tr: {
       title: 'İlişki Analizi Tarot Açılımı',
-      description: 'İlişkinizi 7 kartla derinlemesine analiz edin. Dinamiklerinizi ve potansiyelinizi keşfedin.',
+      description:
+        'İlişkinizi 7 kartla derinlemesine analiz edin. Dinamiklerinizi ve potansiyelinizi keşfedin.',
     },
     en: {
       title: 'Relationship Analysis Tarot Spread',
-      description: 'Deep analysis of your relationship with 7 cards. Discover dynamics and potential.',
+      description:
+        'Deep analysis of your relationship with 7 cards. Discover dynamics and potential.',
     },
     sr: {
       title: 'Tarot Analiza Veze',
@@ -89,11 +103,13 @@ const spreadSeoData: Record<string, {
   'relationship-problems-spread': {
     tr: {
       title: 'İlişki Sorunları Tarot Açılımı',
-      description: '9 kartlık ilişki sorunları açılımı. Zorlukları aşın ve çözüm yolları bulun.',
+      description:
+        '9 kartlık ilişki sorunları açılımı. Zorlukları aşın ve çözüm yolları bulun.',
     },
     en: {
       title: 'Relationship Problems Tarot Spread',
-      description: '9-card relationship problems spread. Overcome difficulties and find solutions.',
+      description:
+        '9-card relationship problems spread. Overcome difficulties and find solutions.',
     },
     sr: {
       title: 'Tarot Problemi u Vezi',
@@ -103,11 +119,13 @@ const spreadSeoData: Record<string, {
   'marriage-spread': {
     tr: {
       title: 'Evlilik Tarot Açılımı',
-      description: '10 kartlık evlilik açılımı. Evlilik yolculuğunuz için derinlemesine rehberlik.',
+      description:
+        '10 kartlık evlilik açılımı. Evlilik yolculuğunuz için derinlemesine rehberlik.',
     },
     en: {
       title: 'Marriage Tarot Spread',
-      description: '10-card marriage spread. In-depth guidance for your marriage journey.',
+      description:
+        '10-card marriage spread. In-depth guidance for your marriage journey.',
     },
     sr: {
       title: 'Tarot Čitanje Braka',
@@ -117,11 +135,13 @@ const spreadSeoData: Record<string, {
   'new-lover-spread': {
     tr: {
       title: 'Yeni Aşk Tarot Açılımı',
-      description: '6 kartlık yeni aşk açılımı. Yeni bir ilişki için içgörüler ve rehberlik.',
+      description:
+        '6 kartlık yeni aşk açılımı. Yeni bir ilişki için içgörüler ve rehberlik.',
     },
     en: {
       title: 'New Love Tarot Spread',
-      description: '6-card new love spread. Insights and guidance for a new relationship.',
+      description:
+        '6-card new love spread. Insights and guidance for a new relationship.',
     },
     sr: {
       title: 'Tarot Nova Ljubav',
@@ -131,11 +151,13 @@ const spreadSeoData: Record<string, {
   'money-spread': {
     tr: {
       title: 'Para ve Finans Tarot Açılımı',
-      description: '8 kartlık finans açılımı. Para, zenginlik ve maddi durum hakkında rehberlik.',
+      description:
+        '8 kartlık finans açılımı. Para, zenginlik ve maddi durum hakkında rehberlik.',
     },
     en: {
       title: 'Money & Finance Tarot Spread',
-      description: '8-card finance spread. Guidance on money, wealth, and financial situation.',
+      description:
+        '8-card finance spread. Guidance on money, wealth, and financial situation.',
     },
     sr: {
       title: 'Tarot Novac i Finansije',
@@ -331,7 +353,8 @@ export function generateSpreadStructuredData(spreadId: string, locale: string) {
       name: currentLocale.title,
       description: currentLocale.description,
       url: `${baseUrl}/${locale}/tarotokumasi/${spreadId}`,
-      inLanguage: locale === 'tr' ? 'tr-TR' : locale === 'en' ? 'en-US' : 'sr-RS',
+      inLanguage:
+        locale === 'tr' ? 'tr-TR' : locale === 'en' ? 'en-US' : 'sr-RS',
       mainEntity: {
         '@type': 'Service',
         name: currentLocale.title,
@@ -384,4 +407,3 @@ export function getAllSpreadIds(): string[] {
 export function getSpreadById(spreadId: string) {
   return tarotSpreads.find(s => s.id === spreadId);
 }
-

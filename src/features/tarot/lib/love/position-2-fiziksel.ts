@@ -1445,22 +1445,32 @@ export const getI18nPosition2Meaning = (
     upright: i18nUpright || originalMeaning.upright,
     reversed: i18nReversed || originalMeaning.reversed,
     keywords: (() => {
-      if (!i18nKeywords) {
+      if (!i18nKeywords || i18nKeywords === `love.meanings.${cardKey}.position2.keywords`) {
+        // i18n key'i çevrilmemişse (key'in kendisi dönerse) orijinal keywords'i kullan
         return originalMeaning.keywords;
       }
-      try {
-        const parsed = JSON.parse(i18nKeywords);
-        if (Array.isArray(parsed)) {
-          return parsed;
+      // Eğer i18nKeywords bir JSON string gibi görünüyorsa ([] ile başlıyorsa) parse et
+      if (i18nKeywords.trim().startsWith('[') || i18nKeywords.trim().startsWith('{')) {
+        try {
+          const parsed = JSON.parse(i18nKeywords);
+          if (Array.isArray(parsed)) {
+            return parsed;
+          }
+          return originalMeaning.keywords;
+        } catch (error) {
+          console.error(
+            `[Love Position 2] Failed to parse keywords for ${cardName}:`,
+            error
+          );
+          return originalMeaning.keywords;
         }
-        return originalMeaning.keywords;
-      } catch (error) {
-        console.error(
-          `[Love Position 2] Failed to parse keywords for ${cardName}:`,
-          error
-        );
-        return originalMeaning.keywords;
       }
+      // Eğer i18nKeywords bir string ise (ama JSON değilse), virgülle ayrılmış array olabilir
+      if (typeof i18nKeywords === 'string' && i18nKeywords.includes(',')) {
+        return i18nKeywords.split(',').map(k => k.trim()).filter(Boolean);
+      }
+      // Diğer durumlarda orijinal keywords'i kullan
+      return originalMeaning.keywords;
     })(),
     context: i18nContext || originalMeaning.context,
     group: i18nGroup || originalMeaning.group,

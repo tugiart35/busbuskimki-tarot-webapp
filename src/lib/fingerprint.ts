@@ -16,23 +16,23 @@ export async function getFingerprint(): Promise<string> {
     try {
       // Initialize FingerprintJS
       const fp = await FingerprintJS.load();
-      
+
       // Get visitor identifier
       const result = await fp.get();
-      
+
       return result.visitorId;
     } catch (error) {
       console.error('Error generating fingerprint:', error);
-      
+
       // Fallback to a simple client-side ID stored in localStorage
       const fallbackKey = 'user_fallback_id';
       let fallbackId = localStorage.getItem(fallbackKey);
-      
+
       if (!fallbackId) {
         fallbackId = `fallback_${Date.now()}_${Math.random().toString(36).substring(2, 15)}`;
         localStorage.setItem(fallbackKey, fallbackId);
       }
-      
+
       return fallbackId;
     }
   })();
@@ -46,5 +46,3 @@ export async function getFingerprint(): Promise<string> {
 export function resetFingerprint() {
   fingerprintPromise = null;
 }
-
-

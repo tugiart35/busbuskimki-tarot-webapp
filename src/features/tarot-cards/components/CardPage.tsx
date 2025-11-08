@@ -30,8 +30,8 @@ const DynamicBottomNavigation = dynamic(
   () => import('@/features/shared/layout/BottomNavigation'),
   {
     loading: () => (
-      <div className="fixed bottom-0 left-0 right-0 h-16 bg-slate-900/95 backdrop-blur-md border-t border-slate-700 animate-pulse" />
-    )
+      <div className='fixed bottom-0 left-0 right-0 h-16 bg-slate-900/95 backdrop-blur-md border-t border-slate-700 animate-pulse' />
+    ),
   }
 );
 

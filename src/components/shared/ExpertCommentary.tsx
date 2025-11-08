@@ -26,7 +26,13 @@ export function ExpertCommentary({
           : '✨ Büşbüşkimki Komentar: Tarot i Unutrašnje Otkriće';
     }
 
-    const cardTitle = cardName || (locale === 'tr' ? 'Bu Kart' : locale === 'en' ? 'This Card' : 'Ova Karta');
+    const cardTitle =
+      cardName ||
+      (locale === 'tr'
+        ? 'Bu Kart'
+        : locale === 'en'
+          ? 'This Card'
+          : 'Ova Karta');
     return locale === 'tr'
       ? `✨ Büşbüşkimki Yorumu: ${cardTitle}`
       : locale === 'en'
@@ -43,7 +49,12 @@ export function ExpertCommentary({
           : 'Tarot je vekovima bio univerzalni alat mudrosti koji vodi ljude na njihovim unutrašnjim putovanjima. Svaka karta odražava različite aspekte naših životnih iskustava i unutrašnjih dinamika. U Büşbüşkimki, vidimo tarot karte ne samo kao alat za gatanje, već kao put za samootkrivanje, introspektivu i razvoj svesti. Karte funkcionišu kao ogledalo koje odražava naše emocionalno i mentalno stanje, pomažući nam da otkrijemo naše unutrašnje konflikte i potencijal. Svako čitanje je prilika da pronađete odgovore unutar sebe.';
     }
 
-    if (cardName && (cardName.includes('Deli') || cardName?.includes('Fool') || cardName?.includes('Joker'))) {
+    if (
+      cardName &&
+      (cardName.includes('Deli') ||
+        cardName?.includes('Fool') ||
+        cardName?.includes('Joker'))
+    ) {
       return locale === 'tr'
         ? 'Deli kartı, yeni başlangıçların ve bilinmeyene adım atmanın cesaret gerektiren yolculuğunu temsil eder. Bilinmeyene atılan adım, çoğu zaman belirsizlik ve heyecanı aynı anda getirir. Bu kart, hayatımızda "kontrolü bırakma" ve akışa güvenme ihtiyacını işaret eder. Deli, yalnızca spontane davranmayı değil, yeni deneyimlere açık olmayı ve hayata güvenmeyi anlatır.\n\nRisk ile özgürlük arasındaki çizgideyiz. Plan yapmadan hareket ettiğimizde düşebiliriz, fakat bazen tam da o düşüş bizi yeniden doğurur. Kendimize şunu sorabiliriz: "Bugün kendim için küçük de olsa hangi yeni adımı atabilirim?"\n\nDeli, iç çocuğumuzu, merakımızı ve yaratıcı potansiyelimizi temsil eder. Yetişkin sorumluluklarının ağırlığı altında unuttuğumuz o saf keşif duygusu... İşte Deli tam da bunu hatırlatır: Hayat ciddi olmayı gerektirirken, aynı zamanda oyunbaz ve meraklı kalmayı da unutmamalıyız.'
         : locale === 'en'
@@ -73,10 +84,18 @@ export function ExpertCommentary({
               </div>
               <div>
                 <p className='text-purple-100 text-sm font-medium uppercase tracking-wide'>
-                  {locale === 'tr' ? 'BÜŞBÜŞKIMKI YORUMU' : locale === 'en' ? 'BÜŞBÜŞKIMKI COMMENTARY' : 'BÜŞBÜŞKIMKI KOMENTAR'}
+                  {locale === 'tr'
+                    ? 'BÜŞBÜŞKIMKI YORUMU'
+                    : locale === 'en'
+                      ? 'BÜŞBÜŞKIMKI COMMENTARY'
+                      : 'BÜŞBÜŞKIMKI KOMENTAR'}
                 </p>
                 <p className='text-white text-xs'>
-                  {locale === 'tr' ? 'İçsel Keşif ve Farkındalık Rehberi' : locale === 'en' ? 'Inner Discovery and Awareness Guide' : 'Vodič za Unutrašnje Otkriće i Svest'}
+                  {locale === 'tr'
+                    ? 'İçsel Keşif ve Farkındalık Rehberi'
+                    : locale === 'en'
+                      ? 'Inner Discovery and Awareness Guide'
+                      : 'Vodič za Unutrašnje Otkriće i Svest'}
                 </p>
               </div>
             </div>
@@ -126,7 +145,11 @@ export function ExpertCommentary({
             <div className='mt-8 bg-gradient-to-r from-purple-50 to-indigo-50 rounded-xl p-6 border border-purple-200'>
               <p className='text-sm text-gray-700 text-center'>
                 <strong className='text-purple-700'>
-                  {locale === 'tr' ? '💡 Unutmayın:' : locale === 'en' ? '💡 Remember:' : '💡 Zapamtite:'}
+                  {locale === 'tr'
+                    ? '💡 Unutmayın:'
+                    : locale === 'en'
+                      ? '💡 Remember:'
+                      : '💡 Zapamtite:'}
                 </strong>{' '}
                 {locale === 'tr'
                   ? 'Tarot, eğlence ve kişisel gelişim amaçlıdır. Profesyonel yaşam tavsiyesi yerine geçmez.'

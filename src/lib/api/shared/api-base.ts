@@ -294,8 +294,8 @@ export class ApiBase {
   /**
    * Request logging
    */
-      static logRequest(_request: NextRequest, _context: string): void {
-        // Request logging disabled in production for performance
+  static logRequest(_request: NextRequest, _context: string): void {
+    // Request logging disabled in production for performance
   }
 }
 

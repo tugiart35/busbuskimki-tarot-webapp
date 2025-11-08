@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import {
   fetchCurrentSystemPerformance,
   fetchAllPerformanceMetrics,
@@ -70,7 +70,7 @@ export function usePerformanceMonitor(refreshInterval = 60000) {
   }, [refreshInterval]);
 
   // Performans metriklerini manuel olarak yenileme fonksiyonu
-  const refreshMetrics = async () => {
+  const refreshMetrics = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -91,7 +91,7 @@ export function usePerformanceMonitor(refreshInterval = 60000) {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   return {
     currentMetrics,

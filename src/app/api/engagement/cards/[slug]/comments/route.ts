@@ -61,7 +61,10 @@ export async function POST(
     // Validate inputs
     if (!author_name || author_name.length < 2 || author_name.length > 50) {
       return NextResponse.json(
-        { success: false, error: 'Author name must be between 2-50 characters' },
+        {
+          success: false,
+          error: 'Author name must be between 2-50 characters',
+        },
         { status: 400 }
       );
     }
@@ -113,7 +116,9 @@ export async function POST(
       is_approved: false, // Requires admin approval
     });
 
-    if (error) throw error;
+    if (error) {
+      throw error;
+    }
 
     // Update comment count in stats
     await updateCommentCount(slug, supabase);
@@ -121,7 +126,8 @@ export async function POST(
     return NextResponse.json({
       success: true,
       data: {
-        message: 'Comment submitted successfully. It will appear after approval.',
+        message:
+          'Comment submitted successfully. It will appear after approval.',
       },
     });
   } catch (error) {
@@ -144,16 +150,12 @@ async function updateCommentCount(slug: string, supabase: any) {
   const count = comments?.length || 0;
 
   // Upsert stats
-  await supabase
-    .from('card_stats')
-    .upsert(
-      {
-        card_slug: slug,
-        comment_count: count,
-        updated_at: new Date().toISOString(),
-      },
-      { onConflict: 'card_slug' }
-    );
+  await supabase.from('card_stats').upsert(
+    {
+      card_slug: slug,
+      comment_count: count,
+      updated_at: new Date().toISOString(),
+    },
+    { onConflict: 'card_slug' }
+  );
 }
-
-

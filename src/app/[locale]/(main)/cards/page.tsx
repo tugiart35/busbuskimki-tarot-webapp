@@ -356,8 +356,10 @@ export default async function CardsPage({ params }: PageProps) {
 
   const getEnhancedAltText = (cardKey: string, number?: number) => {
     const cardName = getCardName(cardKey);
-    const arcanaType = majorArcanaCards.find(c => c.key === cardKey) ? 'major' : 'minor';
-    
+    const arcanaType = majorArcanaCards.find(c => c.key === cardKey)
+      ? 'major'
+      : 'minor';
+
     return generateCardAltText(
       {
         ...(currentLocale === 'tr' && { nameTr: cardName }),
@@ -613,10 +615,16 @@ export default async function CardsPage({ params }: PageProps) {
 
         {/* Page Reactions - After Major Arcana */}
         <div className='mb-16'>
-          <PageReactions 
-            pageId='cards-listing-major' 
+          <PageReactions
+            pageId='cards-listing-major'
             locale={currentLocale}
-            title={currentLocale === 'tr' ? 'Major Arcana kartlarını nasıl buldunuz?' : currentLocale === 'en' ? 'How did you find the Major Arcana cards?' : 'Kako ste pronašli Major Arcana karte?'}
+            title={
+              currentLocale === 'tr'
+                ? 'Major Arcana kartlarını nasıl buldunuz?'
+                : currentLocale === 'en'
+                  ? 'How did you find the Major Arcana cards?'
+                  : 'Kako ste pronašli Major Arcana karte?'
+            }
           />
         </div>
 
@@ -740,15 +748,24 @@ export default async function CardsPage({ params }: PageProps) {
           <div className='text-center mb-12'>
             <div className='inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-amber-100 to-orange-100 border border-amber-200 mb-6'>
               <span className='text-amber-700 text-sm font-semibold'>
-                ⭐ {currentLocale === 'tr' ? 'En Popüler' : currentLocale === 'en' ? 'Most Popular' : 'Najpopularnije'}
+                ⭐{' '}
+                {currentLocale === 'tr'
+                  ? 'En Popüler'
+                  : currentLocale === 'en'
+                    ? 'Most Popular'
+                    : 'Najpopularnije'}
               </span>
             </div>
             <h2 className='text-4xl md:text-5xl font-bold text-gray-900 mb-6'>
-              {currentLocale === 'tr' ? 'En Çok İlgi Gören Kartlar' : currentLocale === 'en' ? 'Most Viewed Cards' : 'Najgledanije karte'}
+              {currentLocale === 'tr'
+                ? 'En Çok İlgi Gören Kartlar'
+                : currentLocale === 'en'
+                  ? 'Most Viewed Cards'
+                  : 'Najgledanije karte'}
             </h2>
             <p className='text-xl text-gray-600 max-w-3xl mx-auto'>
-              {currentLocale === 'tr' 
-                ? 'Topluluğumuzun en çok merak ettiği ve incelediği tarot kartları' 
+              {currentLocale === 'tr'
+                ? 'Topluluğumuzun en çok merak ettiği ve incelediği tarot kartları'
                 : currentLocale === 'en'
                   ? 'The tarot cards our community explores and studies the most'
                   : 'Tarot karte koje naša zajednica najviše istražuje i proučava'}
@@ -756,25 +773,55 @@ export default async function CardsPage({ params }: PageProps) {
           </div>
 
           <div className='grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6'>
-            <CardStatsWidget 
-              slug={currentLocale === 'tr' ? 'deli' : currentLocale === 'en' ? 'the-fool' : 'ludak'} 
-              locale={currentLocale} 
+            <CardStatsWidget
+              slug={
+                currentLocale === 'tr'
+                  ? 'deli'
+                  : currentLocale === 'en'
+                    ? 'the-fool'
+                    : 'ludak'
+              }
+              locale={currentLocale}
             />
-            <CardStatsWidget 
-              slug={currentLocale === 'tr' ? 'asklar' : currentLocale === 'en' ? 'the-lovers' : 'ljubavnici'} 
-              locale={currentLocale} 
+            <CardStatsWidget
+              slug={
+                currentLocale === 'tr'
+                  ? 'asklar'
+                  : currentLocale === 'en'
+                    ? 'the-lovers'
+                    : 'ljubavnici'
+              }
+              locale={currentLocale}
             />
-            <CardStatsWidget 
-              slug={currentLocale === 'tr' ? 'buyucu' : currentLocale === 'en' ? 'the-magician' : 'magicar'} 
-              locale={currentLocale} 
+            <CardStatsWidget
+              slug={
+                currentLocale === 'tr'
+                  ? 'buyucu'
+                  : currentLocale === 'en'
+                    ? 'the-magician'
+                    : 'magicar'
+              }
+              locale={currentLocale}
             />
-            <CardStatsWidget 
-              slug={currentLocale === 'tr' ? 'olum' : currentLocale === 'en' ? 'death' : 'smrt'} 
-              locale={currentLocale} 
+            <CardStatsWidget
+              slug={
+                currentLocale === 'tr'
+                  ? 'olum'
+                  : currentLocale === 'en'
+                    ? 'death'
+                    : 'smrt'
+              }
+              locale={currentLocale}
             />
-            <CardStatsWidget 
-              slug={currentLocale === 'tr' ? 'yildiz' : currentLocale === 'en' ? 'the-star' : 'zvezda'} 
-              locale={currentLocale} 
+            <CardStatsWidget
+              slug={
+                currentLocale === 'tr'
+                  ? 'yildiz'
+                  : currentLocale === 'en'
+                    ? 'the-star'
+                    : 'zvezda'
+              }
+              locale={currentLocale}
             />
           </div>
         </section>
@@ -823,10 +870,7 @@ export default async function CardsPage({ params }: PageProps) {
       </div>
 
       {/* General Comments */}
-      <GeneralComments 
-        pageId='cards-listing' 
-        locale={currentLocale}
-      />
+      <GeneralComments pageId='cards-listing' locale={currentLocale} />
 
       {/* Bottom Navigation */}
       <DynamicBottomNavigation />

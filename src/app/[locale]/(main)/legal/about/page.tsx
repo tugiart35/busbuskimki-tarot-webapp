@@ -163,7 +163,9 @@ export default function About() {
               <div className='w-16 h-16 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full flex items-center justify-center mx-auto mb-4'>
                 <FaShieldAlt className='w-8 h-8 text-white' />
               </div>
-              <h3 className='text-lg font-semibold text-purple-300 mb-2'>Platform</h3>
+              <h3 className='text-lg font-semibold text-purple-300 mb-2'>
+                Platform
+              </h3>
               <p className='text-cosmic-200'>{t('aboutPage.platform.name')}</p>
             </div>
 
@@ -174,7 +176,9 @@ export default function About() {
               <h3 className='text-lg font-semibold text-green-300 mb-2'>
                 Location
               </h3>
-              <p className='text-cosmic-200'>{t('aboutPage.platform.location')}</p>
+              <p className='text-cosmic-200'>
+                {t('aboutPage.platform.location')}
+              </p>
             </div>
 
             <div className='card p-6 text-center'>
@@ -199,7 +203,9 @@ export default function About() {
               <h3 className='text-lg font-semibold text-amber-300 mb-2'>
                 Established
               </h3>
-              <p className='text-cosmic-200'>{t('aboutPage.platform.established')}</p>
+              <p className='text-cosmic-200'>
+                {t('aboutPage.platform.established')}
+              </p>
             </div>
           </div>
         </section>

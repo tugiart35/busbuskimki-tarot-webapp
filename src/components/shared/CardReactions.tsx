@@ -57,7 +57,9 @@ export function CardReactions({ cardId, locale = 'tr' }: CardReactionsProps) {
 
   // Load reactions from API
   useEffect(() => {
-    if (!fingerprint) return;
+    if (!fingerprint) {
+      return;
+    }
 
     const loadReactions = async () => {
       try {
@@ -86,7 +88,9 @@ export function CardReactions({ cardId, locale = 'tr' }: CardReactionsProps) {
   }, [cardId, fingerprint]);
 
   const handleReaction = async (emoji: string) => {
-    if (!fingerprint) return;
+    if (!fingerprint) {
+      return;
+    }
 
     // Optimistic update
     const isRemoving = userReaction === emoji;
@@ -122,11 +126,14 @@ export function CardReactions({ cardId, locale = 'tr' }: CardReactionsProps) {
 
     // Send to API
     try {
-      const response = await fetch(`/api/engagement/cards/${cardId}/reactions`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ emoji, fingerprint }),
-      });
+      const response = await fetch(
+        `/api/engagement/cards/${cardId}/reactions`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ emoji, fingerprint }),
+        }
+      );
 
       const result = await response.json();
 
@@ -145,14 +152,22 @@ export function CardReactions({ cardId, locale = 'tr' }: CardReactionsProps) {
   };
 
   const getTitle = () => {
-    if (locale === 'tr') return 'Bu içeriği nasıl buldunuz?';
-    if (locale === 'en') return 'How did you find this content?';
+    if (locale === 'tr') {
+      return 'Bu içeriği nasıl buldunuz?';
+    }
+    if (locale === 'en') {
+      return 'How did you find this content?';
+    }
     return 'Kako ste pronašli ovaj sadržaj?';
   };
 
   const getThanksMessage = () => {
-    if (locale === 'tr') return 'Tepkiniz için teşekkürler!';
-    if (locale === 'en') return 'Thanks for your feedback!';
+    if (locale === 'tr') {
+      return 'Tepkiniz için teşekkürler!';
+    }
+    if (locale === 'en') {
+      return 'Thanks for your feedback!';
+    }
     return 'Hvala na povratnim informacijama!';
   };
 
@@ -170,7 +185,7 @@ export function CardReactions({ cardId, locale = 'tr' }: CardReactionsProps) {
 
       {/* Reactions */}
       <div className='flex flex-wrap justify-center gap-3'>
-        {reactions.map((reaction) => {
+        {reactions.map(reaction => {
           const isSelected = userReaction === reaction.emoji;
           const isAnimating = animatingEmoji === reaction.emoji;
 
@@ -233,4 +248,3 @@ export function CardReactions({ cardId, locale = 'tr' }: CardReactionsProps) {
     </div>
   );
 }
-

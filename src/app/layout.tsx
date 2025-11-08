@@ -34,12 +34,14 @@ import { Analytics } from '@vercel/analytics/react';
 
 // Analytics components - lazy load for better performance
 // Named exports için .then() ile extract edelim
-const WebVitals = dynamic(() => 
+const WebVitals = dynamic(() =>
   import('@/components/WebVitals').then(mod => mod.WebVitals)
 );
 
-const GoogleAnalytics = dynamic(() => 
-  import('@/components/analytics/GoogleAnalytics').then(mod => mod.GoogleAnalytics)
+const GoogleAnalytics = dynamic(() =>
+  import('@/components/analytics/GoogleAnalytics').then(
+    mod => mod.GoogleAnalytics
+  )
 );
 
 // Optimize font loading with display swap and preload
@@ -48,7 +50,14 @@ const inter = Inter({
   display: 'swap', // Prevent invisible text (FOIT)
   preload: true,
   variable: '--font-inter',
-  fallback: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'arial'],
+  fallback: [
+    'system-ui',
+    '-apple-system',
+    'BlinkMacSystemFont',
+    'Segoe UI',
+    'Roboto',
+    'arial',
+  ],
   adjustFontFallback: true, // Automatic font metric adjustments
   weight: ['400', '500', '600', '700'], // Only load needed weights
 });
@@ -92,7 +101,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
         {/* Performance Optimization: Preconnect (daha hızlı DNS + TLS) */}
         <link rel='preconnect' href='https://fonts.googleapis.com' />
-        <link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin='anonymous' />
+        <link
+          rel='preconnect'
+          href='https://fonts.gstatic.com'
+          crossOrigin='anonymous'
+        />
         <link rel='preconnect' href='https://www.google-analytics.com' />
         <link rel='preconnect' href='https://pagead2.googlesyndication.com' />
         <link rel='dns-prefetch' href='//connect.facebook.net' />
@@ -104,11 +117,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           as='image'
           type='image/svg+xml'
         />
-        <link
-          rel='preload'
-          href='/favicon.ico'
-          as='image'
-        />
+        <link rel='preload' href='/favicon.ico' as='image' />
       </head>
       <body
         className='h-full overflow-x-hidden antialiased'

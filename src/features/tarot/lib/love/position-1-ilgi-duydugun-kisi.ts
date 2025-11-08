@@ -1253,18 +1253,24 @@ export const getI18nPosition1Meaning = (
     upright: i18nUpright || originalMeaning.upright,
     reversed: i18nReversed || originalMeaning.reversed,
     keywords: (() => {
-      if (!i18nKeywords) {
+      if (!i18nKeywords || i18nKeywords === `love.meanings.${cardKey}.position1.keywords`) {
         return originalMeaning.keywords;
       }
-      try {
-        const parsed = JSON.parse(i18nKeywords);
-        if (Array.isArray(parsed)) {
-          return parsed;
+      if (i18nKeywords.trim().startsWith('[') || i18nKeywords.trim().startsWith('{')) {
+        try {
+          const parsed = JSON.parse(i18nKeywords);
+          if (Array.isArray(parsed)) {
+            return parsed;
+          }
+          return originalMeaning.keywords;
+        } catch (error) {
+          return originalMeaning.keywords;
         }
-        return originalMeaning.keywords;
-      } catch (error) {
-        return originalMeaning.keywords;
       }
+      if (typeof i18nKeywords === 'string' && i18nKeywords.includes(',')) {
+        return i18nKeywords.split(',').map(k => k.trim()).filter(Boolean);
+      }
+      return originalMeaning.keywords;
     })(),
     context: i18nContext || originalMeaning.context,
     group: i18nGroup || originalMeaning.group,

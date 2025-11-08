@@ -72,13 +72,21 @@ export function CardHero({ card, content, locale }: CardHeroProps) {
                 />
                 {/* Card Number Badge */}
                 {card.arcanaType === 'major' && (
-                  <div className='absolute -top-4 -right-4 bg-yellow-500 text-black font-bold text-xl px-3 py-1 rounded-full shadow-lg' role='img' aria-label={`${locale === 'tr' ? 'Kart numarası' : locale === 'en' ? 'Card number' : 'Broj karte'} ${card.number || 0}`}>
+                  <div
+                    className='absolute -top-4 -right-4 bg-yellow-500 text-black font-bold text-xl px-3 py-1 rounded-full shadow-lg'
+                    role='img'
+                    aria-label={`${locale === 'tr' ? 'Kart numarası' : locale === 'en' ? 'Card number' : 'Broj karte'} ${card.number || 0}`}
+                  >
                     {card.number || 0}
                   </div>
                 )}
                 {/* Minor Arcana Badge */}
                 {card.arcanaType === 'minor' && card.suit && (
-                  <div className='absolute -top-4 -right-4 bg-white text-black font-bold text-sm px-3 py-1 rounded-full shadow-lg' role='img' aria-label={`${card.suit.toUpperCase()} ${card.number}`}>
+                  <div
+                    className='absolute -top-4 -right-4 bg-white text-black font-bold text-sm px-3 py-1 rounded-full shadow-lg'
+                    role='img'
+                    aria-label={`${card.suit.toUpperCase()} ${card.number}`}
+                  >
                     {card.suit.toUpperCase()} {card.number}
                   </div>
                 )}
@@ -106,7 +114,16 @@ export function CardHero({ card, content, locale }: CardHeroProps) {
             </header>
 
             {/* Card Description */}
-            <section className='prose prose-lg prose-invert max-w-none' aria-label={locale === 'tr' ? 'Kart açıklaması' : locale === 'en' ? 'Card description' : 'Opis karte'}>
+            <section
+              className='prose prose-lg prose-invert max-w-none'
+              aria-label={
+                locale === 'tr'
+                  ? 'Kart açıklaması'
+                  : locale === 'en'
+                    ? 'Card description'
+                    : 'Opis karte'
+              }
+            >
               <p className='text-lg leading-relaxed'>
                 {content.short_description}
               </p>
@@ -114,7 +131,15 @@ export function CardHero({ card, content, locale }: CardHeroProps) {
 
             {/* Card Keywords - Semantic list */}
             {content.keywords?.keywords_message && (
-              <nav aria-label={locale === 'tr' ? 'Anahtar kelimeler' : locale === 'en' ? 'Keywords' : 'Ključne reči'}>
+              <nav
+                aria-label={
+                  locale === 'tr'
+                    ? 'Anahtar kelimeler'
+                    : locale === 'en'
+                      ? 'Keywords'
+                      : 'Ključne reči'
+                }
+              >
                 <ul className='flex flex-wrap gap-2' role='list'>
                   {content.keywords.keywords_message
                     .split(',')
@@ -131,8 +156,22 @@ export function CardHero({ card, content, locale }: CardHeroProps) {
             )}
 
             {/* Reading Time - With semantic time element */}
-            <aside className='flex items-center space-x-2 text-purple-200' aria-label={locale === 'tr' ? 'Okuma süresi' : locale === 'en' ? 'Reading time' : 'Vreme čitanja'}>
-              <svg className='w-5 h-5' fill='currentColor' viewBox='0 0 20 20' aria-hidden='true'>
+            <aside
+              className='flex items-center space-x-2 text-purple-200'
+              aria-label={
+                locale === 'tr'
+                  ? 'Okuma süresi'
+                  : locale === 'en'
+                    ? 'Reading time'
+                    : 'Vreme čitanja'
+              }
+            >
+              <svg
+                className='w-5 h-5'
+                fill='currentColor'
+                viewBox='0 0 20 20'
+                aria-hidden='true'
+              >
                 <path
                   fillRule='evenodd'
                   d='M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z'
@@ -154,7 +193,13 @@ export function CardHero({ card, content, locale }: CardHeroProps) {
               <a
                 href='#meanings'
                 className='inline-flex items-center px-6 py-3 bg-yellow-500 hover:bg-yellow-600 text-black font-semibold rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl'
-                aria-label={locale === 'tr' ? 'Detaylı anlamlara git' : locale === 'en' ? 'Go to detailed meanings' : 'Idi na detaljna značenja'}
+                aria-label={
+                  locale === 'tr'
+                    ? 'Detaylı anlamlara git'
+                    : locale === 'en'
+                      ? 'Go to detailed meanings'
+                      : 'Idi na detaljna značenja'
+                }
               >
                 {locale === 'tr'
                   ? 'Detaylı Anlamları Gör'
@@ -182,7 +227,10 @@ export function CardHero({ card, content, locale }: CardHeroProps) {
       </div>
 
       {/* Background Decoration */}
-      <div className='absolute inset-0 overflow-hidden pointer-events-none' aria-hidden='true'>
+      <div
+        className='absolute inset-0 overflow-hidden pointer-events-none'
+        aria-hidden='true'
+      >
         <div className='absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse'></div>
         <div className='absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse'></div>
       </div>

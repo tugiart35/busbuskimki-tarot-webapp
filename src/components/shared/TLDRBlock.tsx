@@ -1,9 +1,9 @@
 /**
  * TL;DR Block Component - AI-Friendly Content Summarization
- * 
+ *
  * AI language modelleri (ChatGPT, Claude, Perplexity) için optimize edilmiş
  * özet içerik bloğu. Hızlı bilgi erişimi ve snippet oluşturma için tasarlandı.
- * 
+ *
  * LLMO/GEO Optimization: Bu component, içeriğin AI'lar tarafından daha kolay
  * anlaşılması ve özetlenmesi için yapılandırılmış veri sunar.
  */
@@ -19,60 +19,73 @@ interface TLDRBlockProps {
   className?: string;
 }
 
-export function TLDRBlock({ 
-  summary, 
-  keyPoints, 
+export function TLDRBlock({
+  summary,
+  keyPoints,
   locale = 'tr',
-  className = '' 
+  className = '',
 }: TLDRBlockProps) {
-  const title = locale === 'tr' ? '📝 Özet (TL;DR)' : 
-                locale === 'en' ? '📝 Summary (TL;DR)' : 
-                '📝 Резиме (TL;DR)';
+  const title =
+    locale === 'tr'
+      ? '📝 Özet (TL;DR)'
+      : locale === 'en'
+        ? '📝 Summary (TL;DR)'
+        : '📝 Резиме (TL;DR)';
 
-  const label = locale === 'tr' ? 'Ana Noktalar:' :
-                locale === 'en' ? 'Key Points:' :
-                'Кључне тачке:';
+  const label =
+    locale === 'tr'
+      ? 'Ana Noktalar:'
+      : locale === 'en'
+        ? 'Key Points:'
+        : 'Кључне тачке:';
 
   return (
-    <div 
+    <div
       className={`bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 rounded-xl p-6 mb-8 border border-purple-200 dark:border-purple-800 ${className}`}
-      itemScope 
-      itemType="https://schema.org/Summary"
+      itemScope
+      itemType='https://schema.org/Summary'
     >
-      <h2 className="text-2xl font-bold mb-4 text-purple-900 dark:text-purple-100 flex items-center gap-2">
+      <h2 className='text-2xl font-bold mb-4 text-purple-900 dark:text-purple-100 flex items-center gap-2'>
         {title}
       </h2>
-      
+
       {/* Kısa Özet */}
-      <p 
-        className="text-lg mb-5 text-gray-800 dark:text-gray-200 leading-relaxed font-medium"
-        itemProp="description"
+      <p
+        className='text-lg mb-5 text-gray-800 dark:text-gray-200 leading-relaxed font-medium'
+        itemProp='description'
       >
         {summary}
       </p>
-      
+
       {/* Ana Noktalar */}
-      <div className="space-y-1">
-        <p className="text-sm font-semibold text-purple-700 dark:text-purple-300 mb-2">
+      <div className='space-y-1'>
+        <p className='text-sm font-semibold text-purple-700 dark:text-purple-300 mb-2'>
           {label}
         </p>
-        <ul className="space-y-2" itemProp="itemListElement" itemScope itemType="https://schema.org/ItemList">
+        <ul
+          className='space-y-2'
+          itemProp='itemListElement'
+          itemScope
+          itemType='https://schema.org/ItemList'
+        >
           {keyPoints.map((point, idx) => (
-            <li 
-              key={idx} 
-              className="flex items-start gap-3"
-              itemProp="itemListElement"
-              itemScope 
-              itemType="https://schema.org/ListItem"
+            <li
+              key={idx}
+              className='flex items-start gap-3'
+              itemProp='itemListElement'
+              itemScope
+              itemType='https://schema.org/ListItem'
             >
-              <span className="text-purple-600 dark:text-purple-400 mt-1 text-lg font-bold">✓</span>
-              <span 
-                className="text-gray-700 dark:text-gray-300 flex-1"
-                itemProp="name"
+              <span className='text-purple-600 dark:text-purple-400 mt-1 text-lg font-bold'>
+                ✓
+              </span>
+              <span
+                className='text-gray-700 dark:text-gray-300 flex-1'
+                itemProp='name'
               >
                 {point}
               </span>
-              <meta itemProp="position" content={String(idx + 1)} />
+              <meta itemProp='position' content={String(idx + 1)} />
             </li>
           ))}
         </ul>
@@ -83,7 +96,7 @@ export function TLDRBlock({
 
 /**
  * Kullanım Örneği:
- * 
+ *
  * ```tsx
  * <TLDRBlock
  *   summary="Joker kartı, yeni başlangıçları, saf potansiyeli ve sınırsız olasılıkları temsil eder."
@@ -97,4 +110,3 @@ export function TLDRBlock({
  * />
  * ```
  */
-

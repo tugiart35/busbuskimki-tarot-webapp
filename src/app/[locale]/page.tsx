@@ -24,11 +24,7 @@ interface HomePageProps {
 
 // Static generation için locale params
 export async function generateStaticParams() {
-  return [
-    { locale: 'tr' },
-    { locale: 'en' },
-    { locale: 'sr' },
-  ];
+  return [{ locale: 'tr' }, { locale: 'en' }, { locale: 'sr' }];
 }
 
 // Server-side'da readings sayısını çek (cache'lenmiş)

@@ -11,7 +11,9 @@ export function CardPsychologistPerspective({
 }: CardPsychologistPerspectiveProps) {
   const { psychologist_perspective } = content;
 
-  if (!psychologist_perspective?.title) return null;
+  if (!psychologist_perspective?.title) {
+    return null;
+  }
 
   return (
     <section className='py-16 px-4 bg-gradient-to-br from-amber-50 to-orange-50'>
@@ -32,28 +34,27 @@ export function CardPsychologistPerspective({
         </div>
 
         {/* Insights */}
-        {psychologist_perspective.insights && 
-         psychologist_perspective.insights.length > 0 && (
-          <div className='space-y-6'>
-            {psychologist_perspective.insights.map((insight, index) => (
-              <div
-                key={index}
-                className='bg-white rounded-xl p-6 shadow-lg border-l-4 border-amber-500 hover:shadow-xl transition-shadow duration-300'
-              >
-                <div className='flex items-start gap-4'>
-                  <div className='w-8 h-8 bg-amber-500 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0 mt-1'>
-                    {index + 1}
+        {psychologist_perspective.insights &&
+          psychologist_perspective.insights.length > 0 && (
+            <div className='space-y-6'>
+              {psychologist_perspective.insights.map((insight, index) => (
+                <div
+                  key={index}
+                  className='bg-white rounded-xl p-6 shadow-lg border-l-4 border-amber-500 hover:shadow-xl transition-shadow duration-300'
+                >
+                  <div className='flex items-start gap-4'>
+                    <div className='w-8 h-8 bg-amber-500 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0 mt-1'>
+                      {index + 1}
+                    </div>
+                    <p className='text-gray-700 leading-relaxed flex-1'>
+                      {insight}
+                    </p>
                   </div>
-                  <p className='text-gray-700 leading-relaxed flex-1'>
-                    {insight}
-                  </p>
                 </div>
-              </div>
-            ))}
-          </div>
-        )}
+              ))}
+            </div>
+          )}
       </div>
     </section>
   );
 }
-

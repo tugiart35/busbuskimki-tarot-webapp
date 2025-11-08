@@ -14,7 +14,10 @@ interface Stats {
   comment_count: number;
 }
 
-export default function CardStatsWidget({ slug, locale }: CardStatsWidgetProps) {
+export default function CardStatsWidget({
+  slug,
+  locale,
+}: CardStatsWidgetProps) {
   const [stats, setStats] = useState<Stats>({
     view_count: 0,
     reaction_count: 0,
@@ -62,26 +65,42 @@ export default function CardStatsWidget({ slug, locale }: CardStatsWidgetProps) 
   }, [slug]);
 
   const getTitle = () => {
-    if (locale === 'tr') return 'İstatistikler';
-    if (locale === 'en') return 'Statistics';
+    if (locale === 'tr') {
+      return 'İstatistikler';
+    }
+    if (locale === 'en') {
+      return 'Statistics';
+    }
     return 'Statistike';
   };
 
   const getViewsLabel = () => {
-    if (locale === 'tr') return 'Görüntülenme';
-    if (locale === 'en') return 'Views';
+    if (locale === 'tr') {
+      return 'Görüntülenme';
+    }
+    if (locale === 'en') {
+      return 'Views';
+    }
     return 'Pregledi';
   };
 
   const getReactionsLabel = () => {
-    if (locale === 'tr') return 'Reaksiyon';
-    if (locale === 'en') return 'Reactions';
+    if (locale === 'tr') {
+      return 'Reaksiyon';
+    }
+    if (locale === 'en') {
+      return 'Reactions';
+    }
     return 'Reakcije';
   };
 
   const getCommentsLabel = () => {
-    if (locale === 'tr') return 'Yorum';
-    if (locale === 'en') return 'Comments';
+    if (locale === 'tr') {
+      return 'Yorum';
+    }
+    if (locale === 'en') {
+      return 'Comments';
+    }
     return 'Komentari';
   };
 
@@ -111,9 +130,7 @@ export default function CardStatsWidget({ slug, locale }: CardStatsWidgetProps) 
   return (
     <div className='bg-gradient-to-br from-purple-50 to-indigo-50 rounded-xl p-6 border border-purple-200'>
       {/* Header */}
-      <h3 className='text-lg font-bold text-gray-900 mb-4'>
-        📊 {getTitle()}
-      </h3>
+      <h3 className='text-lg font-bold text-gray-900 mb-4'>📊 {getTitle()}</h3>
 
       {/* Stats Grid */}
       <div className='grid grid-cols-3 gap-4'>

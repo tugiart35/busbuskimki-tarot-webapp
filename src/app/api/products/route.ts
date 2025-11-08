@@ -1,9 +1,9 @@
 /**
  * Products API - AI Shopping Agents & External Integrations
- * 
+ *
  * Bu endpoint, AI alışveriş ajanları ve harici servisler için
  * ürün kataloğu sunar. LLMO/GEO optimizasyonu kapsamında eklendi.
- * 
+ *
  * Desteklenen kullanım senaryoları:
  * - ChatGPT, Claude gibi AI asistanların ürün önerileri
  * - Price comparison websites
@@ -32,7 +32,8 @@ const PRODUCTS: Product[] = [
   {
     id: 'tarot-reading-3-card',
     name: 'Temel Tarot Okuması (3 Kart)',
-    description: 'AI destekli 3 kartlık tarot okuması ile geçmiş-şimdi-gelecek analizi. Groq llama-3.3-70b modeli ile anlık yorumlama.',
+    description:
+      'AI destekli 3 kartlık tarot okuması ile geçmiş-şimdi-gelecek analizi. Groq llama-3.3-70b modeli ile anlık yorumlama.',
     price: 99,
     currency: 'TRY',
     category: 'tarot-reading',
@@ -49,7 +50,8 @@ const PRODUCTS: Product[] = [
   {
     id: 'love-spread',
     name: 'Aşk Açılımı (5 Kart)',
-    description: 'İlişki dinamikleri ve duygusal durum analizi için özel tasarlanmış 5 kartlık açılım.',
+    description:
+      'İlişki dinamikleri ve duygusal durum analizi için özel tasarlanmış 5 kartlık açılım.',
     price: 149,
     currency: 'TRY',
     category: 'tarot-reading',
@@ -66,7 +68,8 @@ const PRODUCTS: Product[] = [
   {
     id: 'career-spread',
     name: 'Kariyer Açılımı (5 Kart)',
-    description: 'İş hayatı, profesyonel gelişim ve fırsatlar için kariyer odaklı tarot okuması.',
+    description:
+      'İş hayatı, profesyonel gelişim ve fırsatlar için kariyer odaklı tarot okuması.',
     price: 149,
     currency: 'TRY',
     category: 'tarot-reading',
@@ -82,22 +85,20 @@ const PRODUCTS: Product[] = [
   {
     id: 'situation-analysis',
     name: 'Durum Analizi (3 Kart)',
-    description: 'Genel durum değerlendirmesi için hızlı ve etkili 3 kartlık açılım.',
+    description:
+      'Genel durum değerlendirmesi için hızlı ve etkili 3 kartlık açılım.',
     price: 99,
     currency: 'TRY',
     category: 'tarot-reading',
     availability: 'in_stock',
     url: 'https://busbuskimki.com/tr/tarotokumasi/situation-analysis',
-    features: [
-      'Genel durum analizi',
-      'Hızlı sonuç',
-      'Pratik öneriler',
-    ],
+    features: ['Genel durum analizi', 'Hızlı sonuç', 'Pratik öneriler'],
   },
   {
     id: 'new-lover',
     name: 'Yeni İlişki Açılımı (7 Kart)',
-    description: 'Yeni bir ilişkinin potansiyelini değerlendiren detaylı 7 kartlık açılım.',
+    description:
+      'Yeni bir ilişkinin potansiyelini değerlendiren detaylı 7 kartlık açılım.',
     price: 199,
     currency: 'TRY',
     category: 'tarot-reading',
@@ -113,7 +114,8 @@ const PRODUCTS: Product[] = [
   {
     id: 'relationship-problems',
     name: 'İlişki Sorunları Açılımı (6 Kart)',
-    description: 'Mevcut ilişki sorunlarını analiz eden ve çözüm önerileri sunan özel açılım.',
+    description:
+      'Mevcut ilişki sorunlarını analiz eden ve çözüm önerileri sunan özel açılım.',
     price: 179,
     currency: 'TRY',
     category: 'tarot-reading',
@@ -129,7 +131,8 @@ const PRODUCTS: Product[] = [
   {
     id: 'numerology-basic',
     name: 'Temel Numeroloji Analizi',
-    description: 'Doğum tarihi ve isim bazlı numeroloji hesaplaması ve yorumlama.',
+    description:
+      'Doğum tarihi ve isim bazlı numeroloji hesaplaması ve yorumlama.',
     price: 79,
     currency: 'TRY',
     category: 'numerology',
@@ -146,13 +149,13 @@ const PRODUCTS: Product[] = [
 
 /**
  * GET /api/products
- * 
+ *
  * Query Parameters:
  * - type: 'reading' | 'numerology' | 'all' (default: 'all')
  * - category: 'tarot-reading' | 'numerology' | 'premium'
  * - minPrice: number
  * - maxPrice: number
- * 
+ *
  * Response:
  * {
  *   success: true,
@@ -204,7 +207,8 @@ export async function GET(request: NextRequest) {
       {
         status: 200,
         headers: {
-          'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
+          'Cache-Control':
+            'public, s-maxage=3600, stale-while-revalidate=86400',
           'Content-Type': 'application/json',
         },
       }
@@ -225,11 +229,11 @@ export async function GET(request: NextRequest) {
 
 /**
  * POST /api/products
- * 
+ *
  * Body: {
  *   productIds: string[]
  * }
- * 
+ *
  * Birden fazla ürünü ID ile getir
  */
 export async function POST(request: NextRequest) {
@@ -284,4 +288,3 @@ export async function OPTIONS() {
     },
   });
 }
-

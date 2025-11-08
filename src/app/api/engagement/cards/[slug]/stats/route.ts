@@ -86,7 +86,9 @@ export async function PATCH(
       { onConflict: 'card_slug' }
     );
 
-    if (error) throw error;
+    if (error) {
+      throw error;
+    }
 
     return NextResponse.json({
       success: true,
@@ -100,5 +102,3 @@ export async function PATCH(
     );
   }
 }
-
-

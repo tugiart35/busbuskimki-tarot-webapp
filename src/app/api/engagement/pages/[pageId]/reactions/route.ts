@@ -112,7 +112,9 @@ export async function POST(
           .delete()
           .eq('id', existingReaction.id);
 
-        if (error) throw error;
+        if (error) {
+          throw error;
+        }
 
         return NextResponse.json({
           success: true,
@@ -126,7 +128,9 @@ export async function POST(
         .update({ emoji })
         .eq('id', existingReaction.id);
 
-      if (error) throw error;
+      if (error) {
+        throw error;
+      }
 
       return NextResponse.json({
         success: true,
@@ -141,7 +145,9 @@ export async function POST(
       user_fingerprint: fingerprint,
     });
 
-    if (error) throw error;
+    if (error) {
+      throw error;
+    }
 
     return NextResponse.json({
       success: true,
@@ -155,5 +161,3 @@ export async function POST(
     );
   }
 }
-
-

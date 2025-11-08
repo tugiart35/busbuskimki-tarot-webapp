@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 /**
  * Schema Validation API
  * Tests Schema.org structured data using Google Rich Results Test
- * 
+ *
  * Usage:
  * POST /api/seo/validate-schema
  * Body: { url: 'https://busbuskimki.com/tr/kartlar/joker' }
@@ -47,7 +47,8 @@ export async function POST(request: NextRequest) {
       data: {
         url,
         richResultsTestUrl: richResultsApiUrl,
-        message: 'Schema validation initiated. Check the Rich Results Test URL for detailed analysis.',
+        message:
+          'Schema validation initiated. Check the Rich Results Test URL for detailed analysis.',
         recommendations: [
           'Ensure all required Schema.org properties are present',
           'Validate JSON-LD syntax',
@@ -107,5 +108,3 @@ export async function GET() {
     },
   });
 }
-
-

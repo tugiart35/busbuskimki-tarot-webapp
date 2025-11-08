@@ -84,10 +84,7 @@ export default function AdSenseAd({
   }
 
   return (
-    <div
-      className={`adsense-ad-container relative ${className}`}
-      style={style}
-    >
+    <div className={`adsense-ad-container relative ${className}`} style={style}>
       {/* Loading placeholder */}
       {showPlaceholder && (
         <div className='absolute inset-0 bg-gray-100 dark:bg-gray-800 animate-pulse rounded-lg flex items-center justify-center'>
@@ -125,4 +122,3 @@ export default function AdSenseAd({
     </div>
   );
 }
-

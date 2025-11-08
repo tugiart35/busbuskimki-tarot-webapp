@@ -39,10 +39,12 @@ import { supabase } from '@/lib/supabase/client';
 import { logError, logSupabaseError } from '@/lib/logger';
 import { useToast } from '@/hooks/useToast';
 import Toast from '@/features/shared/ui/Toast';
-import { useReadingCards } from '@/hooks/useReadingCards';
+import {
+  useReadingCards,
+  type NormalizedTarotReadingType,
+} from '@/hooks/useReadingCards';
 import { useTarotDeck } from '@/features/tarot/lib/full-tarot-deck';
 import type { TarotCard } from '@/types/tarot';
-import type { NormalizedTarotReadingType } from '@/hooks/useReadingCards';
 import type { Reading as DashboardReading } from '@/types/dashboard.types';
 import {
   CardSkeleton,
@@ -645,7 +647,6 @@ export default function ReadingsPage() {
       minute: '2-digit',
     });
   };
-
   const totalPages = Math.ceil(totalCount / readingsPerPage);
 
   if (loading) {
@@ -693,6 +694,11 @@ export default function ReadingsPage() {
               <RefreshCw className='h-4 w-4' />
               <span className='hidden sm:inline'>Yenile</span>
             </button>
+          </div>
+
+          <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3'>
+            <div className='inline-flex rounded-xl bg-slate-900/60 p-1 border border-slate-700/60 w-full sm:w-auto'></div>
+            <div className='flex items-center gap-3'></div>
           </div>
         </div>
 

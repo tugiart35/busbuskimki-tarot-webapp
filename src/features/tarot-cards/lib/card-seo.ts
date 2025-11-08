@@ -271,10 +271,7 @@ export class CardSEO {
   }
 
   // 🆕 Generate HowTo Schema - Kart nasıl yorumlanır rehberi
-  static generateHowToSchema(
-    card: TarotCard,
-    locale: 'tr' | 'en' | 'sr'
-  ) {
+  static generateHowToSchema(card: TarotCard, locale: 'tr' | 'en' | 'sr') {
     const cardName =
       locale === 'tr'
         ? card.turkishName

@@ -2,10 +2,16 @@ import { notFound } from 'next/navigation';
 import CardPage from '@/features/tarot-cards/components/CardPage';
 import { CardData } from '@/features/tarot-cards/lib/card-data';
 import { CardSEO } from '@/features/tarot-cards/lib/card-seo';
-import { DynamicBottomNavigation as BottomNavigation, DynamicFooter as Footer } from './DynamicCardComponents';
+import {
+  DynamicBottomNavigation as BottomNavigation,
+  DynamicFooter as Footer,
+} from './DynamicCardComponents';
 import { getTranslations } from 'next-intl/server';
 import { logger } from '@/lib/logger';
-import { getCardIdFromSlug, getCardAlternateFullUrls } from '@/lib/i18n/card-url-mapper';
+import {
+  getCardIdFromSlug,
+  getCardAlternateFullUrls,
+} from '@/lib/i18n/card-url-mapper';
 
 interface PageProps {
   params: Promise<{
@@ -142,9 +148,9 @@ export async function generateMetadata({ params }: PageProps) {
         ? {
             canonical: alternateUrls[locale as 'tr' | 'en' | 'sr'],
             languages: {
-              'tr': alternateUrls.tr,
-              'en': alternateUrls.en,
-              'sr': alternateUrls.sr,
+              tr: alternateUrls.tr,
+              en: alternateUrls.en,
+              sr: alternateUrls.sr,
             },
           }
         : undefined,
@@ -175,7 +181,11 @@ export default async function CardPageRoute({ params }: PageProps) {
     // Duplicate schema'dan kaçınmak için burada oluşturmuyoruz
     return (
       <>
-        <CardPage card={cardData} locale={locale as 'tr' | 'en' | 'sr'} slug={slug} />
+        <CardPage
+          card={cardData}
+          locale={locale as 'tr' | 'en' | 'sr'}
+          slug={slug}
+        />
         <BottomNavigation />
         <Footer />
       </>

@@ -64,7 +64,7 @@ export default function NumerologyPage({ params }: NumerologyPageProps) {
         return;
       }
     }
-    
+
     // İsim validation'ı kaldırıldı - kullanıcı yazabilsin
     // Validation sadece form submit'te yapılacak
 
@@ -87,7 +87,7 @@ export default function NumerologyPage({ params }: NumerologyPageProps) {
         return;
       }
     }
-    
+
     // İsim validation'ı kaldırıldı - kullanıcı yazabilsin
 
     setSecurityError(null);
@@ -98,25 +98,27 @@ export default function NumerologyPage({ params }: NumerologyPageProps) {
   };
 
   // ✅ Utility function: Split full name into firstName and lastName
-  const splitFullName = (fullName: string): { firstName: string; lastName: string } => {
+  const splitFullName = (
+    fullName: string
+  ): { firstName: string; lastName: string } => {
     const trimmed = fullName.trim();
-    
+
     if (!trimmed) {
       return { firstName: '', lastName: '' };
     }
-    
+
     // Boşluğa göre ayır (çoklu boşlukları handle et)
     const parts = trimmed.split(/\s+/);
-    
+
     if (parts.length === 1) {
       // Tek isim - lastName boş
       return { firstName: parts[0] || '', lastName: '' };
     }
-    
+
     // İlk kelime firstName, geri kalanı lastName
     const firstName = parts[0] || '';
     const lastName = parts.slice(1).join(' ');
-    
+
     return { firstName, lastName };
   };
 
@@ -137,7 +139,9 @@ export default function NumerologyPage({ params }: NumerologyPageProps) {
       const sanitizedFormData = {
         fullName: sanitizeNumerologyInput(formData.fullName),
         birthDate: sanitizeNumerologyInput(formData.birthDate),
-        targetDate: formData.targetDate ? sanitizeNumerologyInput(formData.targetDate) : '',
+        targetDate: formData.targetDate
+          ? sanitizeNumerologyInput(formData.targetDate)
+          : '',
         personA: {
           fullName: sanitizeNumerologyInput(formData.personA.fullName),
           birthDate: sanitizeNumerologyInput(formData.personA.birthDate),
@@ -151,9 +155,9 @@ export default function NumerologyPage({ params }: NumerologyPageProps) {
       // ✅ 3. Name validation
       if (
         (activeTab === 'expression-destiny' ||
-         activeTab === 'soul-urge' ||
-         activeTab === 'personality' ||
-         activeTab === 'maturity') &&
+          activeTab === 'soul-urge' ||
+          activeTab === 'personality' ||
+          activeTab === 'maturity') &&
         sanitizedFormData.fullName &&
         !validateNameInput(sanitizedFormData.fullName)
       ) {
@@ -163,12 +167,18 @@ export default function NumerologyPage({ params }: NumerologyPageProps) {
       }
 
       if (activeTab === 'compatibility') {
-        if (sanitizedFormData.personA.fullName && !validateNameInput(sanitizedFormData.personA.fullName)) {
+        if (
+          sanitizedFormData.personA.fullName &&
+          !validateNameInput(sanitizedFormData.personA.fullName)
+        ) {
           setError(t('numerology.page.errors.invalidNameFormat'));
           setLoading(false);
           return;
         }
-        if (sanitizedFormData.personB.fullName && !validateNameInput(sanitizedFormData.personB.fullName)) {
+        if (
+          sanitizedFormData.personB.fullName &&
+          !validateNameInput(sanitizedFormData.personB.fullName)
+        ) {
           setError(t('numerology.page.errors.invalidNameFormat'));
           setLoading(false);
           return;
@@ -187,10 +197,15 @@ export default function NumerologyPage({ params }: NumerologyPageProps) {
         sanitizedFormData.fullName
       ) {
         // ✅ fullName'i firstName ve lastName'e böl (splitFullName utility)
-        const { firstName, lastName } = splitFullName(sanitizedFormData.fullName);
+        const { firstName, lastName } = splitFullName(
+          sanitizedFormData.fullName
+        );
         input.firstName = firstName;
         input.lastName = lastName;
-      } else if (activeTab === 'birthday-number' && sanitizedFormData.birthDate) {
+      } else if (
+        activeTab === 'birthday-number' &&
+        sanitizedFormData.birthDate
+      ) {
         input.birthDate = sanitizedFormData.birthDate;
       } else if (
         activeTab === 'maturity' &&
@@ -199,10 +214,15 @@ export default function NumerologyPage({ params }: NumerologyPageProps) {
       ) {
         input.birthDate = sanitizedFormData.birthDate;
         // ✅ fullName'i firstName ve lastName'e böl
-        const { firstName, lastName } = splitFullName(sanitizedFormData.fullName);
+        const { firstName, lastName } = splitFullName(
+          sanitizedFormData.fullName
+        );
         input.firstName = firstName;
         input.lastName = lastName;
-      } else if (activeTab === 'pinnacles-challenges' && sanitizedFormData.birthDate) {
+      } else if (
+        activeTab === 'pinnacles-challenges' &&
+        sanitizedFormData.birthDate
+      ) {
         input.birthDate = sanitizedFormData.birthDate;
       } else if (
         activeTab === 'personal-cycles' &&
@@ -315,10 +335,22 @@ export default function NumerologyPage({ params }: NumerologyPageProps) {
   return (
     <div className='min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white'>
       {/* Animated Background */}
-      <div className='absolute inset-0 overflow-hidden' style={{ willChange: 'transform' }}>
-        <div className='absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse' style={{ willChange: 'transform, opacity' }}></div>
-        <div className='absolute -bottom-40 -left-40 w-80 h-80 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse' style={{ willChange: 'transform, opacity' }}></div>
-        <div className='absolute top-40 left-1/2 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse' style={{ willChange: 'transform, opacity' }}></div>
+      <div
+        className='absolute inset-0 overflow-hidden'
+        style={{ willChange: 'transform' }}
+      >
+        <div
+          className='absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse'
+          style={{ willChange: 'transform, opacity' }}
+        ></div>
+        <div
+          className='absolute -bottom-40 -left-40 w-80 h-80 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse'
+          style={{ willChange: 'transform, opacity' }}
+        ></div>
+        <div
+          className='absolute top-40 left-1/2 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse'
+          style={{ willChange: 'transform, opacity' }}
+        ></div>
       </div>
 
       <div className='container mx-auto px-4 py-8 relative z-10'>
@@ -609,7 +641,11 @@ export default function NumerologyPage({ params }: NumerologyPageProps) {
                         <DatePicker
                           value={formData.personA.birthDate}
                           onChange={value =>
-                            handlePersonInputChange('personA', 'birthDate', value)
+                            handlePersonInputChange(
+                              'personA',
+                              'birthDate',
+                              value
+                            )
                           }
                           placeholder='GG.AA.YYYY'
                           error={!!securityError}
@@ -653,7 +689,11 @@ export default function NumerologyPage({ params }: NumerologyPageProps) {
                         <DatePicker
                           value={formData.personB.birthDate}
                           onChange={value =>
-                            handlePersonInputChange('personB', 'birthDate', value)
+                            handlePersonInputChange(
+                              'personB',
+                              'birthDate',
+                              value
+                            )
                           }
                           placeholder='GG.AA.YYYY'
                           error={!!securityError}

@@ -54,7 +54,7 @@ const getSeoFriendlyPath = (path: string): string => {
     '/login': '/auth',
     '/prijava': '/auth',
   };
-  
+
   return normalizeMapping[path] || path;
 };
 
@@ -68,13 +68,13 @@ const getNavigationItems = (
   const baseItems: NavigationItem[] = [
     {
       name: 'Tarot',
-      href: `/${currentLocale}/tarotokumasi`,  // Gerçek route
+      href: `/${currentLocale}/tarotokumasi`, // Gerçek route
       icon: '⭐',
       activeIcon: '⭐',
     },
     {
       name: 'Numeroloji',
-      href: `/${currentLocale}/numeroloji`,    // Gerçek route
+      href: `/${currentLocale}/numeroloji`, // Gerçek route
       icon: '🔢',
       activeIcon: '🔢',
     },
@@ -86,7 +86,7 @@ const getNavigationItems = (
     },
     {
       name: 'Ana Sayfa',
-      href: `/${currentLocale}`,              // Direkt locale (SEO alias yok)
+      href: `/${currentLocale}`, // Direkt locale (SEO alias yok)
       icon: '💛',
       activeIcon: '💛',
     },
@@ -106,14 +106,14 @@ const getNavigationItems = (
   if (isAuthenticated) {
     baseItems.push({
       name: 'Profil',
-      href: `/${currentLocale}/dashboard`,    // Gerçek route
+      href: `/${currentLocale}/dashboard`, // Gerçek route
       icon: '👤',
       activeIcon: '👤',
     });
   } else {
     baseItems.push({
       name: 'Giriş Yap',
-      href: `/${currentLocale}/auth`,         // Gerçek route
+      href: `/${currentLocale}/auth`, // Gerçek route
       icon: '🔑',
       activeIcon: '🔑',
     });
@@ -158,11 +158,10 @@ export function useNavigation() {
 
       // Normalize path (panel -> dashboard, giris -> auth)
       const normalizedPath = getSeoFriendlyPath(pathWithoutLocale);
-      
+
       // Yeni path oluştur (gerçek route'ları kullan)
-      const newPath = normalizedPath === '/' 
-        ? `/${locale}` 
-        : `/${locale}${normalizedPath}`;
+      const newPath =
+        normalizedPath === '/' ? `/${locale}` : `/${locale}${normalizedPath}`;
 
       // Cookie'yi güncelle
       document.cookie = `NEXT_LOCALE=${locale}; path=/; max-age=31536000; SameSite=Lax`;

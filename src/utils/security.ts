@@ -124,7 +124,7 @@ export function sanitizeNumerologyInputRealtime(input: string): string {
 export function sanitizeNumerologyInput(input: string): string {
   // Real-time sanitization yap, ardından trim ekle
   const realtimeSanitized = sanitizeNumerologyInputRealtime(input);
-  
+
   // ✅ Submit'te trim yapılır
   return realtimeSanitized.trim();
 }

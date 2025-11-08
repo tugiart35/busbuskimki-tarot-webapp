@@ -28,24 +28,41 @@ export default function SpreadPageClient({
   const CurrentComponent = currentSpread?.component;
 
   // Handle reading completion
-  const handleReadingComplete = (
+  const handleReadingComplete = async (
     cards: TarotCard[],
     interpretation: string
   ) => {
+    // Normal akış: lastReading'e kaydet
     setLastReading({
       cards,
       interpretation,
-      spreadId,
+      spreadId: spreadId,
     });
   };
 
-  // Handle reading type selection
-  const handleReadingTypeSelected = () => {
-    // Optional: Add analytics or other logic
-  };
+  // onReadingTypeSelected callback'i kaldırıldı - açıklama kapatma mantığı gereksiz
 
   if (!currentSpread) {
-    return null;
+    return (
+      <div className='flex flex-col min-h-screen pb-16 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900'>
+        <main className='flex-1 px-4 sm:px-6 py-6 sm:py-8 flex items-center justify-center'>
+          <div className='text-center'>
+            <div className='text-gray-400 mb-4'>
+              <span className='text-4xl sm:text-6xl'>🔮</span>
+            </div>
+            <p className='text-gray-300 text-base sm:text-lg mb-4'>
+              Açılım bulunamadı
+            </p>
+            <Link
+              href={`/${locale}/tarotokumasi`}
+              className='inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors'
+            >
+              Tüm Açılımları Gör
+            </Link>
+          </div>
+        </main>
+      </div>
+    );
   }
 
   return (
@@ -133,7 +150,8 @@ export default function SpreadPageClient({
                 {currentSpread.positions.length > 4 && (
                   <div className='mt-4 text-center'>
                     <p className='text-xs text-purple-300 font-medium'>
-                      + {currentSpread.positions.length - 4} pozisyon daha keşfedilecek...
+                      + {currentSpread.positions.length - 4} pozisyon daha
+                      keşfedilecek...
                     </p>
                   </div>
                 )}
@@ -159,7 +177,7 @@ export default function SpreadPageClient({
             >
               <CurrentComponent
                 onComplete={handleReadingComplete}
-                onReadingTypeSelected={handleReadingTypeSelected}
+                // onReadingTypeSelected prop'u kaldırıldı - açıklama kapatma mantığı gereksiz
               />
             </Suspense>
           ) : (

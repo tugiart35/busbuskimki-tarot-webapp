@@ -164,4 +164,5 @@ export interface TarotReadingProps {
   onComplete?: (_cards: TarotCard[], _interpretation: string) => void;
   onPositionChange?: (_title: string) => void;
   onReadingTypeSelected?: () => void;
+  initialReadingType?: 'detailed' | 'written' | null;
 }

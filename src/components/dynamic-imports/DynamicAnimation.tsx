@@ -7,8 +7,6 @@ interface AnimationProps {
 }
 
 // Simplified animation component
-export function DynamicAnimation({
-  children,
-}: AnimationProps) {
+export function DynamicAnimation({ children }: AnimationProps) {
   return <div>{children}</div>;
 }

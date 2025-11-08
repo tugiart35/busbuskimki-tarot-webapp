@@ -7,17 +7,19 @@ import {
   FaUser,
   FaComment,
   FaCheckCircle,
-  FaSpinner
+  FaSpinner,
 } from 'react-icons/fa';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    message: ''
+    message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitStatus, setSubmitStatus] = useState<
+    'idle' | 'success' | 'error'
+  >('idle');
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -31,7 +33,7 @@ export default function Contact() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(formData),
       });
 
       const data = await response.json();
@@ -52,10 +54,12 @@ export default function Contact() {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData(prev => ({
       ...prev,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     }));
   };
 
@@ -82,7 +86,9 @@ export default function Contact() {
             <div className='bg-gradient-to-r from-green-500/10 to-emerald-500/10 p-4 rounded-lg border border-green-500/20 mb-6'>
               <div className='flex items-center space-x-2 text-green-300'>
                 <FaCheckCircle className='w-5 h-5' />
-                <span className='font-semibold'>Mesajınız başarıyla gönderildi!</span>
+                <span className='font-semibold'>
+                  Mesajınız başarıyla gönderildi!
+                </span>
               </div>
               <p className='text-cosmic-200 text-sm mt-1'>
                 En kısa sürede size dönüş yapacağız.
@@ -111,7 +117,7 @@ export default function Contact() {
                 disabled={isSubmitting}
               />
             </div>
-            
+
             <div className='relative'>
               <FaEnvelope className='absolute left-3 top-1/2 transform -translate-y-1/2 text-cosmic-400 w-4 h-4' />
               <input
@@ -125,7 +131,7 @@ export default function Contact() {
                 disabled={isSubmitting}
               />
             </div>
-            
+
             <div className='relative'>
               <FaComment className='absolute left-3 top-3 text-cosmic-400 w-4 h-4' />
               <textarea
@@ -139,7 +145,7 @@ export default function Contact() {
                 disabled={isSubmitting}
               />
             </div>
-            
+
             <button
               type='submit'
               disabled={isSubmitting}

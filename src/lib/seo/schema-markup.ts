@@ -251,9 +251,9 @@ export function generateFAQSchema(locale: string = 'tr'): FAQSchema {
     // Load messages from JSON file
     const messagesPath = path.join(process.cwd(), 'messages', `${locale}.json`);
     const messages = JSON.parse(fs.readFileSync(messagesPath, 'utf-8'));
-    
+
     const faqData = messages.seo?.faq;
-    
+
     if (!faqData) {
       console.warn(`FAQ data not found for locale: ${locale}`);
       return generateFallbackFAQSchema();
@@ -415,7 +415,11 @@ export function generateProductSchema(product: {
       url: baseUrl,
       priceCurrency: product.currency,
       price: product.price,
-      priceValidUntil: product.offers?.validThrough || new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+      priceValidUntil:
+        product.offers?.validThrough ||
+        new Date(Date.now() + 365 * 24 * 60 * 60 * 1000)
+          .toISOString()
+          .split('T')[0],
       availability: 'https://schema.org/InStock',
       seller: {
         '@type': 'Organization',

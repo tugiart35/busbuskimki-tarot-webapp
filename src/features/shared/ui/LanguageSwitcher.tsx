@@ -47,7 +47,7 @@ export function LanguageSwitcher() {
   const handleLanguageChange = (newLocale: string) => {
     // Önce kart sayfası mı kontrol et - kart sayfalarında özel slug çevirisi gerekli
     const cardUrls = getCardAlternateUrls(pathname);
-    
+
     if (cardUrls) {
       // Kart sayfası - doğru çevrilmiş slug ile yönlendir
       const newPath = cardUrls[newLocale as 'tr' | 'en' | 'sr'];

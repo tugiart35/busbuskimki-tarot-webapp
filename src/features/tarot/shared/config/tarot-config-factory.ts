@@ -526,6 +526,7 @@ export interface CreateTarotConfigParams {
   summaryKey?: string;
   spreadName?: string;
   positionsLayout: readonly PositionLayout[];
+  positionsInfo?: readonly PositionInfo[]; // Optional: eğer verilmezse i18n'den çekilir
   theme: TarotTheme;
   icon: string;
   readingType: string;
@@ -554,6 +555,7 @@ export function createTarotConfig(
     summaryKey,
     spreadName,
     positionsLayout,
+    positionsInfo: providedPositionsInfo,
     theme,
     icon,
     readingType,
@@ -574,8 +576,17 @@ export function createTarotConfig(
 
   const formI18nKeys = createFormI18nKeys(namespace);
 
-  // Position bilgilerini i18n'den çek (eğer t fonksiyonu varsa)
-  const positionsInfo = t ? getPositionsFromI18n(spreadKey, cardCount, t) : [];
+  // Position bilgilerini i18n'den çek (eğer t fonksiyonu varsa) veya sağlanan positionsInfo'yu kullan
+  const positionsInfo = providedPositionsInfo?.length
+    ? providedPositionsInfo
+    : t
+      ? getPositionsFromI18n(spreadKey, cardCount, t)
+      : Array.from({ length: cardCount }, (_, i) => ({
+          id: i + 1,
+          title: `Pozisyon ${i + 1}`,
+          desc: '',
+          description: '',
+        }));
 
   const defaultCreditKeys: CreditKeys = {
     detailed: `${creditPrefix}_DETAILED`,

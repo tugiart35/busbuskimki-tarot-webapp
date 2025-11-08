@@ -30,6 +30,7 @@ export interface BaseTarotFormProps {
     birthDate: string;
     email: string;
     phone: string;
+    countryCode: string;
     concern: string;
     understanding: string;
     emotional: string;
@@ -47,6 +48,12 @@ export interface BaseTarotFormProps {
   ) => void;
   onSaveForm: () => void;
   className?: string;
+  variant?: 'modal' | 'inline';
+  questionLabels?: {
+    concern?: string;
+    understanding?: string;
+    emotional?: string;
+  };
 }
 
 export default function BaseTarotForm({
@@ -63,6 +70,8 @@ export default function BaseTarotForm({
   onUpdateQuestion,
   onSaveForm,
   className = '',
+  variant = 'modal',
+  questionLabels,
 }: BaseTarotFormProps) {
   const { t } = useTranslations();
   const themeClasses = getThemeClasses(config.theme);
@@ -138,18 +147,14 @@ export default function BaseTarotForm({
     return null;
   }
 
-  return (
+  const modalClass = variant === 'modal'
+    ? 'bg-slate-900/95 border shadow-2xl w-full max-w-md max-h-[90vh]'
+    : 'bg-slate-900/70 border w-full';
+
+  const formContent = (
     <div
-      className='fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4'
-      onClick={event => {
-        if (event.target === event.currentTarget) {
-          handleClose();
-        }
-      }}
+      className={`${modalClass} ${themeClasses.border} rounded-2xl flex flex-col ${className}`}
     >
-      <div
-        className={`bg-slate-900/95 border ${themeClasses.border} rounded-2xl shadow-2xl w-full max-w-md max-h-[90vh] flex flex-col ${className}`}
-      >
         <div
           className={`flex items-center justify-between p-6 border-b ${themeClasses.headerBorder} flex-shrink-0`}
         >
@@ -320,7 +325,7 @@ export default function BaseTarotForm({
                       }`}
                     >
                       {communicationMethod === 'email' && (
-                        <div className='w-full h-full rounded-full bg-white scale-50'></div>
+                        <div className='w-full h-full rounded-full bg-white' style={{ transform: 'scale(0.5)' }}></div>
                       )}
                     </div>
                   </div>
@@ -371,7 +376,7 @@ export default function BaseTarotForm({
                       }`}
                     >
                       {communicationMethod === 'whatsapp' && (
-                        <div className='w-full h-full rounded-full bg-white scale-50'></div>
+                        <div className='w-full h-full rounded-full bg-white' style={{ transform: 'scale(0.5)' }}></div>
                       )}
                     </div>
                   </div>
@@ -593,7 +598,9 @@ export default function BaseTarotForm({
                 <label
                   className={`block text-sm font-medium ${themeClasses.labelText} mb-2`}
                 >
-                  {translate(formKeys.concernQuestion)} *
+                  {questionLabels?.concern ||
+                    translate(formKeys.concernQuestion)}
+                  <span className='text-red-400'> *</span>
                 </label>
                 <textarea
                   value={questions.concern}
@@ -619,7 +626,8 @@ export default function BaseTarotForm({
                 <label
                   className={`block text-sm font-medium ${themeClasses.labelText} mb-2`}
                 >
-                  {translate(formKeys.understandingQuestion)}
+                  {questionLabels?.understanding ||
+                    translate(formKeys.understandingQuestion)}
                 </label>
                 <textarea
                   value={questions.understanding}
@@ -647,7 +655,8 @@ export default function BaseTarotForm({
                 <label
                   className={`block text-sm font-medium ${themeClasses.labelText} mb-2`}
                 >
-                  {translate(formKeys.emotionalQuestion)}
+                  {questionLabels?.emotional ||
+                    translate(formKeys.emotionalQuestion)}
                 </label>
                 <textarea
                   value={questions.emotional}
@@ -688,7 +697,7 @@ export default function BaseTarotForm({
           >
             {isSaving ? (
               <div className='flex items-center justify-center'>
-                <div className='w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2'></div>
+                <div className='w-5 h-5 border-2 border-white border-opacity-30 border-t-white rounded-full animate-spin mr-2'></div>
                 {translate(formKeys.saving, 'Kaydediliyor...')}
               </div>
             ) : (
@@ -696,7 +705,24 @@ export default function BaseTarotForm({
             )}
           </button>
         </div>
-      </div>
+    </div>
+  );
+
+  if (variant === 'inline') {
+    return formContent;
+  }
+
+  return (
+    <div
+      className='fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm p-4'
+      style={{ backgroundColor: 'rgba(0, 0, 0, 0.7)' }}
+      onClick={event => {
+        if (event.target === event.currentTarget) {
+          handleClose();
+        }
+      }}
+    >
+      {formContent}
     </div>
   );
 }

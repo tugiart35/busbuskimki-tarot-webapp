@@ -16,7 +16,7 @@ export interface CardMetadata {
 export function getCardMetadataBySlug(slug: string): CardMetadata | null {
   // Her dil için kartı kontrol et
   const locales: ('tr' | 'en' | 'sr')[] = ['tr', 'en', 'sr'];
-  
+
   for (const locale of locales) {
     const card = CardService.getCardBySlug(slug, locale);
     if (card) {
@@ -32,7 +32,7 @@ export function getCardMetadataBySlug(slug: string): CardMetadata | null {
       };
     }
   }
-  
+
   return null;
 }
 
@@ -52,19 +52,19 @@ function getCardImagePath(cardId: string): string {
     'the-hierophant': 'V-Hierophant',
     'the-lovers': 'VI-Lovers',
     'the-chariot': 'VII-Chariot',
-    'strength': 'VIII-Strength',
+    strength: 'VIII-Strength',
     'the-hermit': 'IX-Hermit',
     'wheel-of-fortune': 'X-WheelOfFortune',
-    'justice': 'XI-Justice',
+    justice: 'XI-Justice',
     'the-hanged-man': 'XII-HangedMan',
-    'death': 'XIII-Death',
-    'temperance': 'XIV-Temperance',
+    death: 'XIII-Death',
+    temperance: 'XIV-Temperance',
     'the-devil': 'XV-Devil',
     'the-tower': 'XVI-Tower',
     'the-star': 'XVII-Star',
     'the-moon': 'XVIII-Moon',
     'the-sun': 'XIX-Sun',
-    'Judgement': 'XX-Judgement',
+    Judgement: 'XX-Judgement',
     'the-world': 'XXI-World',
   };
 
@@ -76,10 +76,10 @@ function getCardImagePath(cardId: string): string {
   const suit = cardId.includes('cups')
     ? 'Cups'
     : cardId.includes('pentacles')
-    ? 'Pentacles'
-    : cardId.includes('swords')
-    ? 'Swords'
-    : 'Wands';
+      ? 'Pentacles'
+      : cardId.includes('swords')
+        ? 'Swords'
+        : 'Wands';
 
   let cardName = '';
   if (cardId.includes('ace')) {
@@ -95,17 +95,17 @@ function getCardImagePath(cardId: string): string {
   } else {
     // Sayı kartları için
     const numbers: { [key: string]: string } = {
-      'two': 'Two',
-      'three': 'Three',
-      'four': 'Four',
-      'five': 'Five',
-      'six': 'Six',
-      'seven': 'Seven',
-      'eight': 'Eight',
-      'nine': 'Nine',
-      'ten': 'Ten',
+      two: 'Two',
+      three: 'Three',
+      four: 'Four',
+      five: 'Five',
+      six: 'Six',
+      seven: 'Seven',
+      eight: 'Eight',
+      nine: 'Nine',
+      ten: 'Ten',
     };
-    
+
     for (const [key, value] of Object.entries(numbers)) {
       if (cardId.includes(key)) {
         cardName = value;
@@ -123,7 +123,7 @@ function getCardImagePath(cardId: string): string {
  */
 export function getAllCardsMetadata(): CardMetadata[] {
   const allCards = CardService.getAllCards();
-  
+
   return allCards.map(card => ({
     id: card.id,
     name: card.names,
@@ -135,4 +135,3 @@ export function getAllCardsMetadata(): CardMetadata[] {
     },
   }));
 }
-

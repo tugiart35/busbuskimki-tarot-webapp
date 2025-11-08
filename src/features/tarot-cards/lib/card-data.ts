@@ -1331,13 +1331,20 @@ export class CardData {
       ...(blogCard.associations && { associations: blogCard.associations }),
       ...(cardCombinations && { card_combinations: cardCombinations }),
       ...(affirmations && { affirmations: affirmations }),
-      ...(psychologistPerspective && { psychologist_perspective: psychologistPerspective }),
+      ...(psychologistPerspective && {
+        psychologist_perspective: psychologistPerspective,
+      }),
       ...(symbolism && { symbolism }),
       ...(numerology && { numerology }),
-      ...(blogCard.numerological_perspective && { numerological_perspective: blogCard.numerological_perspective }),
-      ...(dailyPractices && dailyPractices.length > 0 && { daily_practices: dailyPractices }),
+      ...(blogCard.numerological_perspective && {
+        numerological_perspective: blogCard.numerological_perspective,
+      }),
+      ...(dailyPractices &&
+        dailyPractices.length > 0 && { daily_practices: dailyPractices }),
       ...(imageGallery && { image_gallery: imageGallery }),
-      ...(blogCard.closing_paragraph && { closing_paragraph: blogCard.closing_paragraph }),
+      ...(blogCard.closing_paragraph && {
+        closing_paragraph: blogCard.closing_paragraph,
+      }),
       cta: blogCard.cta || this.getDefaultCTA(locale),
       faq: Array.isArray(blogCard.faq) ? blogCard.faq : [],
       related_cards: Array.isArray(blogCard.related_cards)

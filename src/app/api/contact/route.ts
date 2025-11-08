@@ -8,17 +8,23 @@ export async function POST(request: NextRequest) {
 
     // Validation
     const requiredFields = ['name', 'email', 'message'];
-    const validationResult = ApiBase.validateRequiredFields(body, requiredFields);
-    
+    const validationResult = ApiBase.validateRequiredFields(
+      body,
+      requiredFields
+    );
+
     if (!validationResult.success) {
       return validationResult.error;
     }
 
     if (!ApiBase.validateEmail(email)) {
-      return ApiBase.error({
-        code: 'INVALID_EMAIL',
-        message: 'Geçersiz email adresi'
-      }, 400);
+      return ApiBase.error(
+        {
+          code: 'INVALID_EMAIL',
+          message: 'Geçersiz email adresi',
+        },
+        400
+      );
     }
 
     // Email gönder - basit versiyon
@@ -38,38 +44,40 @@ export async function POST(request: NextRequest) {
       smtp_user: process.env.SMTP_USER || '',
       smtp_password: process.env.SMTP_PASS || '',
       from_email: process.env.SMTP_FROM || 'noreply@busbuskimki.com',
-      from_name: 'Büşbüşkimki İletişim Formu'
+      from_name: 'Büşbüşkimki İletişim Formu',
     };
 
     // Mevcut email API'sini kullan
-    const emailResponse = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/email/send`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        to: 'info@busbuskimki.com',
-        subject: `İletişim Formu: ${name}`,
-        body: emailContent,
-        smtpSettings
-      })
-    });
+    const emailResponse = await fetch(
+      `${process.env.NEXT_PUBLIC_SITE_URL}/api/email/send`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          to: 'info@busbuskimki.com',
+          subject: `İletişim Formu: ${name}`,
+          body: emailContent,
+          smtpSettings,
+        }),
+      }
+    );
 
     if (!emailResponse.ok) {
       throw new Error('Email gönderilemedi');
     }
 
-    return ApiBase.success(
-      { email, name },
-      'Mesajınız başarıyla gönderildi'
-    );
-
+    return ApiBase.success({ email, name }, 'Mesajınız başarıyla gönderildi');
   } catch (error) {
     ApiBase.logError(error, 'Contact Form API');
-    return ApiBase.error({
-      code: 'CONTACT_FORM_ERROR',
-      message: 'Mesaj gönderilemedi. Lütfen tekrar deneyin.'
-    }, 500);
+    return ApiBase.error(
+      {
+        code: 'CONTACT_FORM_ERROR',
+        message: 'Mesaj gönderilemedi. Lütfen tekrar deneyin.',
+      },
+      500
+    );
   }
 }
 

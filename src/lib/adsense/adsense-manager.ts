@@ -22,11 +22,15 @@ interface CookiePreferences {
  * Kullanıcının AdSense için onay verip vermediğini kontrol eder
  */
 export function hasAdSenseConsent(): boolean {
-  if (typeof window === 'undefined') return false;
+  if (typeof window === 'undefined') {
+    return false;
+  }
 
   try {
     const preferences = localStorage.getItem(COOKIE_PREFERENCES_KEY);
-    if (!preferences) return false;
+    if (!preferences) {
+      return false;
+    }
 
     const parsed: CookiePreferences = JSON.parse(preferences);
     return parsed.advertising === true;
@@ -39,7 +43,9 @@ export function hasAdSenseConsent(): boolean {
  * Ad blocker olup olmadığını tespit eder
  */
 export async function detectAdBlocker(): Promise<boolean> {
-  if (typeof window === 'undefined') return false;
+  if (typeof window === 'undefined') {
+    return false;
+  }
 
   try {
     // Test element oluştur
@@ -55,7 +61,7 @@ export async function detectAdBlocker(): Promise<boolean> {
     document.body.appendChild(testAd);
 
     // Element'in görünürlüğünü kontrol et
-    await new Promise((resolve) => setTimeout(resolve, 100));
+    await new Promise(resolve => setTimeout(resolve, 100));
 
     const isBlocked =
       testAd.offsetHeight === 0 ||
@@ -79,7 +85,9 @@ export async function detectAdBlocker(): Promise<boolean> {
  * AdSense script'inin yüklenip yüklenmediğini kontrol eder
  */
 export function isAdSenseLoaded(): boolean {
-  if (typeof window === 'undefined') return false;
+  if (typeof window === 'undefined') {
+    return false;
+  }
   return typeof (window as any).adsbygoogle !== 'undefined';
 }
 
@@ -142,7 +150,9 @@ export function trackAdPerformance(
   metric: 'impression' | 'viewable' | 'click',
   value?: number
 ): void {
-  if (!hasAdSenseConsent()) return;
+  if (!hasAdSenseConsent()) {
+    return;
+  }
 
   const performanceData = {
     adSlot,
@@ -197,9 +207,10 @@ export function validateAdEnvironment(): {
 /**
  * Responsive ad boyutlarını hesaplar
  */
-export function getResponsiveAdSize(
-  containerWidth: number
-): { width: number; height: number } {
+export function getResponsiveAdSize(containerWidth: number): {
+  width: number;
+  height: number;
+} {
   if (containerWidth >= 970) {
     return { width: 970, height: 250 }; // Large leaderboard
   } else if (containerWidth >= 728) {
@@ -257,7 +268,9 @@ export class AdSenseLoadMonitor {
   }
 
   startMonitoring(): void {
-    if (this.isMonitoring) return;
+    if (this.isMonitoring) {
+      return;
+    }
 
     this.isMonitoring = true;
     this.loadStartTime = Date.now();
@@ -266,12 +279,16 @@ export class AdSenseLoadMonitor {
   }
 
   stopMonitoring(success: boolean): void {
-    if (!this.isMonitoring || !this.loadStartTime) return;
+    if (!this.isMonitoring || !this.loadStartTime) {
+      return;
+    }
 
     const loadTime = Date.now() - this.loadStartTime;
     this.isMonitoring = false;
 
-    console.log(`AdSense load completed in ${loadTime}ms (Success: ${success})`);
+    console.log(
+      `AdSense load completed in ${loadTime}ms (Success: ${success})`
+    );
 
     // Analytics'e gönder
     if (typeof window !== 'undefined' && (window as any).gtag) {
@@ -296,4 +313,3 @@ export function canRenderAd(): boolean {
 
   return true;
 }
-

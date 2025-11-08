@@ -91,34 +91,34 @@ export default function DisclaimerBanner({ locale }: DisclaimerBannerProps) {
       aria-live='polite'
     >
       {/* Banner Container */}
-      <div className="bg-gradient-to-r from-amber-900/95 via-orange-900/95 to-amber-900/95 backdrop-blur-lg border-b-2 border-amber-500/50 shadow-2xl shadow-amber-500/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-          <div className="flex items-start justify-between gap-4">
+      <div className='bg-gradient-to-r from-amber-900/95 via-orange-900/95 to-amber-900/95 backdrop-blur-lg border-b-2 border-amber-500/50 shadow-2xl shadow-amber-500/20'>
+        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3'>
+          <div className='flex items-start justify-between gap-4'>
             {/* Icon + Content */}
-            <div className="flex items-start gap-3 flex-1 min-w-0">
+            <div className='flex items-start gap-3 flex-1 min-w-0'>
               {/* Warning Icon */}
-              <div className="flex-shrink-0 mt-0.5">
-                <div className="w-8 h-8 bg-gradient-to-br from-amber-400/20 to-orange-400/20 rounded-lg flex items-center justify-center border border-amber-500/30">
-                  <FaExclamationTriangle className="w-4 h-4 text-amber-300" />
+              <div className='flex-shrink-0 mt-0.5'>
+                <div className='w-8 h-8 bg-gradient-to-br from-amber-400/20 to-orange-400/20 rounded-lg flex items-center justify-center border border-amber-500/30'>
+                  <FaExclamationTriangle className='w-4 h-4 text-amber-300' />
                 </div>
               </div>
 
               {/* Text Content */}
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="text-lg">{content.icon}</span>
-                  <h3 className="text-sm font-bold text-amber-100">
+              <div className='flex-1 min-w-0'>
+                <div className='flex items-center gap-2 mb-1'>
+                  <span className='text-lg'>{content.icon}</span>
+                  <h3 className='text-sm font-bold text-amber-100'>
                     {content.title}
                   </h3>
                 </div>
-                <p className="text-xs sm:text-sm text-amber-50/90 leading-relaxed mb-2">
+                <p className='text-xs sm:text-sm text-amber-50/90 leading-relaxed mb-2'>
                   {content.message}
                 </p>
 
                 {/* Age Notice */}
-                <div className="flex items-center gap-2 mb-2">
-                  <FaInfoCircle className="w-3 h-3 text-amber-300 flex-shrink-0" />
-                  <p className="text-xs text-amber-200/80 font-medium">
+                <div className='flex items-center gap-2 mb-2'>
+                  <FaInfoCircle className='w-3 h-3 text-amber-300 flex-shrink-0' />
+                  <p className='text-xs text-amber-200/80 font-medium'>
                     {content.ageNotice}
                   </p>
                 </div>
@@ -126,9 +126,9 @@ export default function DisclaimerBanner({ locale }: DisclaimerBannerProps) {
                 {/* Learn More Link */}
                 <Link
                   href={`/${locale}/legal/disclaimer`}
-                  className="inline-flex items-center gap-1 text-xs font-medium text-amber-300 hover:text-amber-100 transition-colors underline"
+                  className='inline-flex items-center gap-1 text-xs font-medium text-amber-300 hover:text-amber-100 transition-colors underline'
                 >
-                  <FaInfoCircle className="w-3 h-3" />
+                  <FaInfoCircle className='w-3 h-3' />
                   {content.learnMore}
                 </Link>
               </div>
@@ -137,18 +137,18 @@ export default function DisclaimerBanner({ locale }: DisclaimerBannerProps) {
             {/* Close Button */}
             <button
               onClick={handleDismiss}
-              className="flex-shrink-0 group p-2 bg-amber-800/30 hover:bg-amber-700/40 rounded-lg transition-all duration-200 border border-amber-500/20 hover:border-amber-500/40"
+              className='flex-shrink-0 group p-2 bg-amber-800/30 hover:bg-amber-700/40 rounded-lg transition-all duration-200 border border-amber-500/20 hover:border-amber-500/40'
               aria-label={content.close}
             >
-              <FaTimes className="w-4 h-4 text-amber-200 group-hover:text-white transition-colors" />
+              <FaTimes className='w-4 h-4 text-amber-200 group-hover:text-white transition-colors' />
             </button>
           </div>
 
           {/* Mobile: Dismiss Text */}
-          <div className="sm:hidden mt-2 text-center">
+          <div className='sm:hidden mt-2 text-center'>
             <button
               onClick={handleDismiss}
-              className="text-xs text-amber-300 hover:text-amber-100 font-medium underline"
+              className='text-xs text-amber-300 hover:text-amber-100 font-medium underline'
             >
               {content.close}
             </button>
@@ -158,4 +158,3 @@ export default function DisclaimerBanner({ locale }: DisclaimerBannerProps) {
     </div>
   );
 }
-

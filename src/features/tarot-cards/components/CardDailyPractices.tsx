@@ -11,7 +11,11 @@ export function CardDailyPractices({
 }: CardDailyPracticesProps) {
   const { daily_practices } = content;
 
-  if (!daily_practices || !Array.isArray(daily_practices) || daily_practices.length === 0) {
+  if (
+    !daily_practices ||
+    !Array.isArray(daily_practices) ||
+    daily_practices.length === 0
+  ) {
     return null;
   }
 
@@ -23,7 +27,7 @@ export function CardDailyPractices({
 
   const sectionSubtitle = {
     tr: 'Bu kartın enerjisini günlük hayatınıza entegre etmek için pratik öneriler',
-    en: 'Practical suggestions to integrate this card\'s energy into your daily life',
+    en: "Practical suggestions to integrate this card's energy into your daily life",
     sr: 'Praktični predlozi za integraciju energije ove karte u vaš svakodnevni život',
   };
 
@@ -65,4 +69,3 @@ export function CardDailyPractices({
     </section>
   );
 }
-

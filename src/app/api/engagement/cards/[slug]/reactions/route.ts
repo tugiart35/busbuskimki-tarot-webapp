@@ -112,7 +112,9 @@ export async function POST(
           .delete()
           .eq('id', existingReaction.id);
 
-        if (error) throw error;
+        if (error) {
+          throw error;
+        }
 
         // Update stats
         await updateReactionCount(slug, supabase);
@@ -129,7 +131,9 @@ export async function POST(
         .update({ emoji })
         .eq('id', existingReaction.id);
 
-      if (error) throw error;
+      if (error) {
+        throw error;
+      }
 
       return NextResponse.json({
         success: true,
@@ -144,7 +148,9 @@ export async function POST(
       user_fingerprint: fingerprint,
     });
 
-    if (error) throw error;
+    if (error) {
+      throw error;
+    }
 
     // Update stats
     await updateReactionCount(slug, supabase);
@@ -172,16 +178,12 @@ async function updateReactionCount(slug: string, supabase: any) {
   const count = reactions?.length || 0;
 
   // Upsert stats
-  await supabase
-    .from('card_stats')
-    .upsert(
-      {
-        card_slug: slug,
-        reaction_count: count,
-        updated_at: new Date().toISOString(),
-      },
-      { onConflict: 'card_slug' }
-    );
+  await supabase.from('card_stats').upsert(
+    {
+      card_slug: slug,
+      reaction_count: count,
+      updated_at: new Date().toISOString(),
+    },
+    { onConflict: 'card_slug' }
+  );
 }
-
-

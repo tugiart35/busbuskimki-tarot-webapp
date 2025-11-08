@@ -1,6 +1,6 @@
 /**
  * Card URL Mapper - Kart sayfaları için dil alternatifleri oluşturur
- * 
+ *
  * Bu dosya, kart sayfalarında dil değiştirme işlemlerinde doğru slug'ları kullanmak için
  * slug mapping'lerini sağlar.
  */
@@ -16,67 +16,67 @@ const SLUG_TO_CARD_ID: { [key: string]: string } = {
   'the-hierophant': 'the-hierophant',
   'the-lovers': 'the-lovers',
   'the-chariot': 'the-chariot',
-  'strength': 'strength',
+  strength: 'strength',
   'the-hermit': 'the-hermit',
   'wheel-of-fortune': 'wheel-of-fortune',
-  'justice': 'justice',
+  justice: 'justice',
   'the-hanged-man': 'the-hanged-man',
-  'death': 'death',
-  'temperance': 'temperance',
+  death: 'death',
+  temperance: 'temperance',
   'the-devil': 'the-devil',
   'the-tower': 'the-tower',
   'the-star': 'the-star',
   'the-moon': 'the-moon',
   'the-sun': 'the-sun',
-  'Judgement': 'Judgement',
+  Judgement: 'Judgement',
   'the-world': 'the-world',
 
   // Turkish slugs
-  'joker': 'the-fool',
+  joker: 'the-fool',
   'yuksek-rahibe': 'the-high-priestess',
-  'buyucu': 'the-magician',
-  'imparatorice': 'the-empress',
-  'imparator': 'the-emperor',
-  'basrahip': 'the-hierophant',
-  'asiklar': 'the-lovers',
+  buyucu: 'the-magician',
+  imparatorice: 'the-empress',
+  imparator: 'the-emperor',
+  basrahip: 'the-hierophant',
+  asiklar: 'the-lovers',
   'savas-arabasi': 'the-chariot',
-  'guc': 'strength',
-  'ermis': 'the-hermit',
+  guc: 'strength',
+  ermis: 'the-hermit',
   'kader-carki': 'wheel-of-fortune',
-  'adalet': 'justice',
+  adalet: 'justice',
   'asili-adam': 'the-hanged-man',
-  'olum': 'death',
-  'olcululuk': 'temperance',
-  'seytan': 'the-devil',
-  'kule': 'the-tower',
-  'yildiz': 'the-star',
-  'ay': 'the-moon',
-  'gunes': 'the-sun',
-  'yargi': 'Judgement',
-  'dunya': 'the-world',
+  olum: 'death',
+  olcululuk: 'temperance',
+  seytan: 'the-devil',
+  kule: 'the-tower',
+  yildiz: 'the-star',
+  ay: 'the-moon',
+  gunes: 'the-sun',
+  yargi: 'Judgement',
+  dunya: 'the-world',
 
   // Serbian slugs
   'visoka-svestenica': 'the-high-priestess',
-  'carobnjak': 'the-magician',
-  'carica': 'the-empress',
-  'car': 'the-emperor',
-  'prvosveštenica': 'the-hierophant',
-  'ljubavnici': 'the-lovers',
+  carobnjak: 'the-magician',
+  carica: 'the-empress',
+  car: 'the-emperor',
+  prvosveštenica: 'the-hierophant',
+  ljubavnici: 'the-lovers',
   'ratna-kolica': 'the-chariot',
-  'snaga': 'strength',
-  'pustinjak': 'the-hermit',
+  snaga: 'strength',
+  pustinjak: 'the-hermit',
   'kolo-srece': 'wheel-of-fortune',
-  'pravda': 'justice',
-  'obeseni': 'the-hanged-man',
-  'smrt': 'death',
-  'umerenost': 'temperance',
-  'djavol': 'the-devil',
-  'kula': 'the-tower',
-  'zvezda': 'the-star',
-  'mesec': 'the-moon',
-  'sunce': 'the-sun',
-  'sud': 'Judgement',
-  'svet': 'the-world',
+  pravda: 'justice',
+  obeseni: 'the-hanged-man',
+  smrt: 'death',
+  umerenost: 'temperance',
+  djavol: 'the-devil',
+  kula: 'the-tower',
+  zvezda: 'the-star',
+  mesec: 'the-moon',
+  sunce: 'the-sun',
+  sud: 'Judgement',
+  svet: 'the-world',
 
   // Cups suit - Turkish
   'kupalar-asi': 'ace-of-cups',
@@ -276,91 +276,287 @@ const CARD_ID_TO_SLUGS: {
   [cardId: string]: { tr: string; en: string; sr: string };
 } = {
   'the-fool': { tr: 'joker', en: 'the-fool', sr: 'joker' },
-  'the-high-priestess': { tr: 'yuksek-rahibe', en: 'the-high-priestess', sr: 'visoka-svestenica' },
+  'the-high-priestess': {
+    tr: 'yuksek-rahibe',
+    en: 'the-high-priestess',
+    sr: 'visoka-svestenica',
+  },
   'the-magician': { tr: 'buyucu', en: 'the-magician', sr: 'carobnjak' },
   'the-empress': { tr: 'imparatorice', en: 'the-empress', sr: 'carica' },
   'the-emperor': { tr: 'imparator', en: 'the-emperor', sr: 'car' },
-  'the-hierophant': { tr: 'basrahip', en: 'the-hierophant', sr: 'prvosveštenica' },
+  'the-hierophant': {
+    tr: 'basrahip',
+    en: 'the-hierophant',
+    sr: 'prvosveštenica',
+  },
   'the-lovers': { tr: 'asiklar', en: 'the-lovers', sr: 'ljubavnici' },
   'the-chariot': { tr: 'savas-arabasi', en: 'the-chariot', sr: 'ratna-kolica' },
-  'strength': { tr: 'guc', en: 'strength', sr: 'snaga' },
+  strength: { tr: 'guc', en: 'strength', sr: 'snaga' },
   'the-hermit': { tr: 'ermis', en: 'the-hermit', sr: 'pustinjak' },
-  'wheel-of-fortune': { tr: 'kader-carki', en: 'wheel-of-fortune', sr: 'kolo-srece' },
-  'justice': { tr: 'adalet', en: 'justice', sr: 'pravda' },
+  'wheel-of-fortune': {
+    tr: 'kader-carki',
+    en: 'wheel-of-fortune',
+    sr: 'kolo-srece',
+  },
+  justice: { tr: 'adalet', en: 'justice', sr: 'pravda' },
   'the-hanged-man': { tr: 'asili-adam', en: 'the-hanged-man', sr: 'obeseni' },
-  'death': { tr: 'olum', en: 'death', sr: 'smrt' },
-  'temperance': { tr: 'olcululuk', en: 'temperance', sr: 'umerenost' },
+  death: { tr: 'olum', en: 'death', sr: 'smrt' },
+  temperance: { tr: 'olcululuk', en: 'temperance', sr: 'umerenost' },
   'the-devil': { tr: 'seytan', en: 'the-devil', sr: 'djavol' },
   'the-tower': { tr: 'kule', en: 'the-tower', sr: 'kula' },
   'the-star': { tr: 'yildiz', en: 'the-star', sr: 'zvezda' },
   'the-moon': { tr: 'ay', en: 'the-moon', sr: 'mesec' },
   'the-sun': { tr: 'gunes', en: 'the-sun', sr: 'sunce' },
-  'Judgement': { tr: 'yargi', en: 'Judgement', sr: 'sud' },
+  Judgement: { tr: 'yargi', en: 'Judgement', sr: 'sud' },
   'the-world': { tr: 'dunya', en: 'the-world', sr: 'svet' },
 
   // Cups
   'ace-of-cups': { tr: 'kupalar-asi', en: 'ace-of-cups', sr: 'kupa-as' },
   'two-of-cups': { tr: 'kupalar-ikili', en: 'two-of-cups', sr: 'kupa-dvojka' },
-  'three-of-cups': { tr: 'kupalar-uclu', en: 'three-of-cups', sr: 'kupa-trojka' },
-  'four-of-cups': { tr: 'kupalar-dortlu', en: 'four-of-cups', sr: 'kupa-cetvorka' },
-  'five-of-cups': { tr: 'kupalar-besli', en: 'five-of-cups', sr: 'kupa-petica' },
-  'six-of-cups': { tr: 'kupalar-altili', en: 'six-of-cups', sr: 'kupa-sestica' },
-  'seven-of-cups': { tr: 'kupalar-yedili', en: 'seven-of-cups', sr: 'kupa-sedmica' },
-  'eight-of-cups': { tr: 'kupalar-sekizli', en: 'eight-of-cups', sr: 'kupa-osmica' },
-  'nine-of-cups': { tr: 'kupalar-dokuzlu', en: 'nine-of-cups', sr: 'kupa-devetka' },
+  'three-of-cups': {
+    tr: 'kupalar-uclu',
+    en: 'three-of-cups',
+    sr: 'kupa-trojka',
+  },
+  'four-of-cups': {
+    tr: 'kupalar-dortlu',
+    en: 'four-of-cups',
+    sr: 'kupa-cetvorka',
+  },
+  'five-of-cups': {
+    tr: 'kupalar-besli',
+    en: 'five-of-cups',
+    sr: 'kupa-petica',
+  },
+  'six-of-cups': {
+    tr: 'kupalar-altili',
+    en: 'six-of-cups',
+    sr: 'kupa-sestica',
+  },
+  'seven-of-cups': {
+    tr: 'kupalar-yedili',
+    en: 'seven-of-cups',
+    sr: 'kupa-sedmica',
+  },
+  'eight-of-cups': {
+    tr: 'kupalar-sekizli',
+    en: 'eight-of-cups',
+    sr: 'kupa-osmica',
+  },
+  'nine-of-cups': {
+    tr: 'kupalar-dokuzlu',
+    en: 'nine-of-cups',
+    sr: 'kupa-devetka',
+  },
   'ten-of-cups': { tr: 'kupalar-onlu', en: 'ten-of-cups', sr: 'kupa-desetka' },
   'page-of-cups': { tr: 'kupalar-prensi', en: 'page-of-cups', sr: 'kupa-paz' },
-  'knight-of-cups': { tr: 'kupalar-sovalyesi', en: 'knight-of-cups', sr: 'kupa-vitez' },
-  'queen-of-cups': { tr: 'kupalar-kralicesi', en: 'queen-of-cups', sr: 'kupa-kraljica' },
+  'knight-of-cups': {
+    tr: 'kupalar-sovalyesi',
+    en: 'knight-of-cups',
+    sr: 'kupa-vitez',
+  },
+  'queen-of-cups': {
+    tr: 'kupalar-kralicesi',
+    en: 'queen-of-cups',
+    sr: 'kupa-kraljica',
+  },
   'king-of-cups': { tr: 'kupalar-krali', en: 'king-of-cups', sr: 'kupa-kralj' },
 
   // Swords
   'ace-of-swords': { tr: 'kiliclar-asi', en: 'ace-of-swords', sr: 'mace-as' },
-  'two-of-swords': { tr: 'kiliclar-ikili', en: 'two-of-swords', sr: 'mace-dvojka' },
-  'three-of-swords': { tr: 'kiliclar-uclu', en: 'three-of-swords', sr: 'mace-trojka' },
-  'four-of-swords': { tr: 'kiliclar-dortlu', en: 'four-of-swords', sr: 'mace-cetvorka' },
-  'five-of-swords': { tr: 'kiliclar-besli', en: 'five-of-swords', sr: 'mace-petica' },
-  'six-of-swords': { tr: 'kiliclar-altili', en: 'six-of-swords', sr: 'mace-sestica' },
-  'seven-of-swords': { tr: 'kiliclar-yedili', en: 'seven-of-swords', sr: 'mace-sedmica' },
-  'eight-of-swords': { tr: 'kiliclar-sekizli', en: 'eight-of-swords', sr: 'mace-osmica' },
-  'nine-of-swords': { tr: 'kiliclar-dokuzlu', en: 'nine-of-swords', sr: 'mace-devetka' },
-  'ten-of-swords': { tr: 'kiliclar-onlu', en: 'ten-of-swords', sr: 'mace-desetka' },
-  'page-of-swords': { tr: 'kiliclar-prensi', en: 'page-of-swords', sr: 'mace-paz' },
-  'knight-of-swords': { tr: 'kiliclar-sovalyesi', en: 'knight-of-swords', sr: 'mace-vitez' },
-  'queen-of-swords': { tr: 'kiliclar-kralicesi', en: 'queen-of-swords', sr: 'mace-kraljica' },
-  'king-of-swords': { tr: 'kiliclar-krali', en: 'king-of-swords', sr: 'mace-kralj' },
+  'two-of-swords': {
+    tr: 'kiliclar-ikili',
+    en: 'two-of-swords',
+    sr: 'mace-dvojka',
+  },
+  'three-of-swords': {
+    tr: 'kiliclar-uclu',
+    en: 'three-of-swords',
+    sr: 'mace-trojka',
+  },
+  'four-of-swords': {
+    tr: 'kiliclar-dortlu',
+    en: 'four-of-swords',
+    sr: 'mace-cetvorka',
+  },
+  'five-of-swords': {
+    tr: 'kiliclar-besli',
+    en: 'five-of-swords',
+    sr: 'mace-petica',
+  },
+  'six-of-swords': {
+    tr: 'kiliclar-altili',
+    en: 'six-of-swords',
+    sr: 'mace-sestica',
+  },
+  'seven-of-swords': {
+    tr: 'kiliclar-yedili',
+    en: 'seven-of-swords',
+    sr: 'mace-sedmica',
+  },
+  'eight-of-swords': {
+    tr: 'kiliclar-sekizli',
+    en: 'eight-of-swords',
+    sr: 'mace-osmica',
+  },
+  'nine-of-swords': {
+    tr: 'kiliclar-dokuzlu',
+    en: 'nine-of-swords',
+    sr: 'mace-devetka',
+  },
+  'ten-of-swords': {
+    tr: 'kiliclar-onlu',
+    en: 'ten-of-swords',
+    sr: 'mace-desetka',
+  },
+  'page-of-swords': {
+    tr: 'kiliclar-prensi',
+    en: 'page-of-swords',
+    sr: 'mace-paz',
+  },
+  'knight-of-swords': {
+    tr: 'kiliclar-sovalyesi',
+    en: 'knight-of-swords',
+    sr: 'mace-vitez',
+  },
+  'queen-of-swords': {
+    tr: 'kiliclar-kralicesi',
+    en: 'queen-of-swords',
+    sr: 'mace-kraljica',
+  },
+  'king-of-swords': {
+    tr: 'kiliclar-krali',
+    en: 'king-of-swords',
+    sr: 'mace-kralj',
+  },
 
   // Wands
   'ace-of-wands': { tr: 'asalar-asi', en: 'ace-of-wands', sr: 'stap-as' },
   'two-of-wands': { tr: 'asalar-ikili', en: 'two-of-wands', sr: 'stap-dvojka' },
-  'three-of-wands': { tr: 'asalar-uclu', en: 'three-of-wands', sr: 'stap-trojka' },
-  'four-of-wands': { tr: 'asalar-dortlu', en: 'four-of-wands', sr: 'stap-cetvorka' },
-  'five-of-wands': { tr: 'asalar-besli', en: 'five-of-wands', sr: 'stap-petica' },
-  'six-of-wands': { tr: 'asalar-altili', en: 'six-of-wands', sr: 'stap-sestica' },
-  'seven-of-wands': { tr: 'asalar-yedili', en: 'seven-of-wands', sr: 'stap-sedmica' },
-  'eight-of-wands': { tr: 'asalar-sekizli', en: 'eight-of-wands', sr: 'stap-osmica' },
-  'nine-of-wands': { tr: 'asalar-dokuzlu', en: 'nine-of-wands', sr: 'stap-devetka' },
+  'three-of-wands': {
+    tr: 'asalar-uclu',
+    en: 'three-of-wands',
+    sr: 'stap-trojka',
+  },
+  'four-of-wands': {
+    tr: 'asalar-dortlu',
+    en: 'four-of-wands',
+    sr: 'stap-cetvorka',
+  },
+  'five-of-wands': {
+    tr: 'asalar-besli',
+    en: 'five-of-wands',
+    sr: 'stap-petica',
+  },
+  'six-of-wands': {
+    tr: 'asalar-altili',
+    en: 'six-of-wands',
+    sr: 'stap-sestica',
+  },
+  'seven-of-wands': {
+    tr: 'asalar-yedili',
+    en: 'seven-of-wands',
+    sr: 'stap-sedmica',
+  },
+  'eight-of-wands': {
+    tr: 'asalar-sekizli',
+    en: 'eight-of-wands',
+    sr: 'stap-osmica',
+  },
+  'nine-of-wands': {
+    tr: 'asalar-dokuzlu',
+    en: 'nine-of-wands',
+    sr: 'stap-devetka',
+  },
   'ten-of-wands': { tr: 'asalar-onlu', en: 'ten-of-wands', sr: 'stap-desetka' },
   'page-of-wands': { tr: 'asalar-prensi', en: 'page-of-wands', sr: 'stap-paz' },
-  'knight-of-wands': { tr: 'asalar-sovalyesi', en: 'knight-of-wands', sr: 'stap-vitez' },
-  'queen-of-wands': { tr: 'asalar-kralicesi', en: 'queen-of-wands', sr: 'stap-kraljica' },
-  'king-of-wands': { tr: 'asalar-krali', en: 'king-of-wands', sr: 'stap-kralj' },
+  'knight-of-wands': {
+    tr: 'asalar-sovalyesi',
+    en: 'knight-of-wands',
+    sr: 'stap-vitez',
+  },
+  'queen-of-wands': {
+    tr: 'asalar-kralicesi',
+    en: 'queen-of-wands',
+    sr: 'stap-kraljica',
+  },
+  'king-of-wands': {
+    tr: 'asalar-krali',
+    en: 'king-of-wands',
+    sr: 'stap-kralj',
+  },
 
   // Pentacles
-  'ace-of-pentacles': { tr: 'yildizlar-asi', en: 'ace-of-pentacles', sr: 'novcic-as' },
-  'two-of-pentacles': { tr: 'yildizlar-ikili', en: 'two-of-pentacles', sr: 'novcic-dvojka' },
-  'three-of-pentacles': { tr: 'yildizlar-uclu', en: 'three-of-pentacles', sr: 'novcic-trojka' },
-  'four-of-pentacles': { tr: 'yildizlar-dortlu', en: 'four-of-pentacles', sr: 'novcic-cetvorka' },
-  'five-of-pentacles': { tr: 'yildizlar-besli', en: 'five-of-pentacles', sr: 'novcic-petica' },
-  'six-of-pentacles': { tr: 'yildizlar-altili', en: 'six-of-pentacles', sr: 'novcic-sestica' },
-  'seven-of-pentacles': { tr: 'yildizlar-yedili', en: 'seven-of-pentacles', sr: 'novcic-sedmica' },
-  'eight-of-pentacles': { tr: 'yildizlar-sekizli', en: 'eight-of-pentacles', sr: 'novcic-osmica' },
-  'nine-of-pentacles': { tr: 'yildizlar-dokuzlu', en: 'nine-of-pentacles', sr: 'novcic-devetka' },
-  'ten-of-pentacles': { tr: 'yildizlar-onlu', en: 'ten-of-pentacles', sr: 'novcic-desetka' },
-  'page-of-pentacles': { tr: 'yildizlar-prensi', en: 'page-of-pentacles', sr: 'novcic-paz' },
-  'knight-of-pentacles': { tr: 'yildizlar-sovalyesi', en: 'knight-of-pentacles', sr: 'novcic-vitez' },
-  'queen-of-pentacles': { tr: 'yildizlar-kralicesi', en: 'queen-of-pentacles', sr: 'novcic-kraljica' },
-  'king-of-pentacles': { tr: 'yildizlar-krali', en: 'king-of-pentacles', sr: 'novcic-kralj' },
+  'ace-of-pentacles': {
+    tr: 'yildizlar-asi',
+    en: 'ace-of-pentacles',
+    sr: 'novcic-as',
+  },
+  'two-of-pentacles': {
+    tr: 'yildizlar-ikili',
+    en: 'two-of-pentacles',
+    sr: 'novcic-dvojka',
+  },
+  'three-of-pentacles': {
+    tr: 'yildizlar-uclu',
+    en: 'three-of-pentacles',
+    sr: 'novcic-trojka',
+  },
+  'four-of-pentacles': {
+    tr: 'yildizlar-dortlu',
+    en: 'four-of-pentacles',
+    sr: 'novcic-cetvorka',
+  },
+  'five-of-pentacles': {
+    tr: 'yildizlar-besli',
+    en: 'five-of-pentacles',
+    sr: 'novcic-petica',
+  },
+  'six-of-pentacles': {
+    tr: 'yildizlar-altili',
+    en: 'six-of-pentacles',
+    sr: 'novcic-sestica',
+  },
+  'seven-of-pentacles': {
+    tr: 'yildizlar-yedili',
+    en: 'seven-of-pentacles',
+    sr: 'novcic-sedmica',
+  },
+  'eight-of-pentacles': {
+    tr: 'yildizlar-sekizli',
+    en: 'eight-of-pentacles',
+    sr: 'novcic-osmica',
+  },
+  'nine-of-pentacles': {
+    tr: 'yildizlar-dokuzlu',
+    en: 'nine-of-pentacles',
+    sr: 'novcic-devetka',
+  },
+  'ten-of-pentacles': {
+    tr: 'yildizlar-onlu',
+    en: 'ten-of-pentacles',
+    sr: 'novcic-desetka',
+  },
+  'page-of-pentacles': {
+    tr: 'yildizlar-prensi',
+    en: 'page-of-pentacles',
+    sr: 'novcic-paz',
+  },
+  'knight-of-pentacles': {
+    tr: 'yildizlar-sovalyesi',
+    en: 'knight-of-pentacles',
+    sr: 'novcic-vitez',
+  },
+  'queen-of-pentacles': {
+    tr: 'yildizlar-kralicesi',
+    en: 'queen-of-pentacles',
+    sr: 'novcic-kraljica',
+  },
+  'king-of-pentacles': {
+    tr: 'yildizlar-krali',
+    en: 'king-of-pentacles',
+    sr: 'novcic-kralj',
+  },
 };
 
 /**
@@ -374,13 +570,15 @@ export function isCardPage(pathname: string): boolean {
  * Verilen pathname'den kart slug'ını çıkarır
  */
 export function extractCardSlug(pathname: string): string | null {
-  const match = pathname.match(/\/(tr|en|sr)\/(kartlar|cards|kartice)\/([^\/]+)/);
+  const match = pathname.match(
+    /\/(tr|en|sr)\/(kartlar|cards|kartice)\/([^\/]+)/
+  );
   return match?.[3] ?? null;
 }
 
 /**
  * Bir kart sayfası için tüm dillerdeki URL'leri döndürür
- * 
+ *
  * @param pathname - Mevcut pathname (örn: /tr/kartlar/imparatorice)
  * @returns Tüm dillerdeki URL'ler veya null (kart sayfası değilse)
  */
@@ -454,4 +652,3 @@ export function getCardAlternateFullUrls(cardId: string): {
     sr: `${baseUrl}/sr/kartice/${slugs.sr}`,
   };
 }
-

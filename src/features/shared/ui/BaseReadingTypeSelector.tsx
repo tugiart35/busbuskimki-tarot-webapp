@@ -213,7 +213,16 @@ export default function BaseReadingTypeSelector({
   // };
 
   // Sesli/yazılı okuma seçildiğinde çağrılacak fonksiyon
-  const handleReadingTypeClick = (type: string) => {
+  const handleReadingTypeClick = (
+    type: string,
+    event?: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    // Sayfa yenilenmesini önle
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
     if (type === readingTypes.DETAILED || type === readingTypes.WRITTEN) {
       // Kullanıcı giriş yapmamışsa butonları devre dışı bırak
       if (!isAuthenticated) {
@@ -262,7 +271,12 @@ export default function BaseReadingTypeSelector({
       >
         {/* Basit Okuma - Her zaman açık */}
         <button
-          onClick={() => onTypeSelect(readingTypes.SIMPLE)}
+          type='button'
+          onClick={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            onTypeSelect(readingTypes.SIMPLE);
+          }}
           disabled={disabled}
           className={`px-2 sm:px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all duration-150 focus:outline-none focus:ring-2 ${currentTheme.simpleButton.focus} disabled:opacity-50 disabled:cursor-not-allowed
             ${
@@ -284,7 +298,8 @@ export default function BaseReadingTypeSelector({
 
         {/* Sesli Okuma - Kullanıcı giriş yapmışsa ve kredi yeterliyse aktif */}
         <button
-          onClick={() => handleReadingTypeClick(readingTypes.DETAILED)}
+          type='button'
+          onClick={e => handleReadingTypeClick(readingTypes.DETAILED, e)}
           disabled={
             disabled ||
             !isAuthenticated ||
@@ -329,7 +344,8 @@ export default function BaseReadingTypeSelector({
 
         {/* Yazılı Okuma - Kullanıcı giriş yapmışsa ve kredi yeterliyse aktif */}
         <button
-          onClick={() => handleReadingTypeClick(readingTypes.WRITTEN)}
+          type='button'
+          onClick={e => handleReadingTypeClick(readingTypes.WRITTEN, e)}
           disabled={
             disabled ||
             !isAuthenticated ||

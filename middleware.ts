@@ -31,11 +31,13 @@ export default async function middleware(request: NextRequest) {
     'Omgilibot',
     'Bytespider',
   ];
-  
+
   const detectedBot = aiBots.find(bot => userAgent.includes(bot));
   if (detectedBot) {
     const clientIp = getClientIp(request);
-    console.log(`🤖 [AI BOT] ${detectedBot} - IP: ${clientIp} - URL: ${pathname}`);
+    console.log(
+      `🤖 [AI BOT] ${detectedBot} - IP: ${clientIp} - URL: ${pathname}`
+    );
   }
 
   // 🔒 GÜVENLIK: Admin panel koruması
@@ -99,7 +101,5 @@ export default async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    '/((?!api|_next|_vercel|.*\\..*).*)',
-  ],
+  matcher: ['/((?!api|_next|_vercel|.*\\..*).*)'],
 };

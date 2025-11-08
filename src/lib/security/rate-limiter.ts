@@ -95,11 +95,17 @@ export function getClientIp(request: Request): string {
   const realIp = request.headers.get('x-real-ip');
   const cfConnectingIp = request.headers.get('cf-connecting-ip');
 
-  if (cfConnectingIp) return cfConnectingIp;
-  if (realIp) return realIp;
+  if (cfConnectingIp) {
+    return cfConnectingIp;
+  }
+  if (realIp) {
+    return realIp;
+  }
   if (forwardedFor) {
     const ip = forwardedFor.split(',')[0]?.trim();
-    if (ip) return ip;
+    if (ip) {
+      return ip;
+    }
   }
 
   return 'unknown';

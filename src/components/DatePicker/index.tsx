@@ -15,7 +15,7 @@ interface DatePickerProps {
 
 /**
  * Basit Manuel Tarih Input Componenti
- * 
+ *
  * Özellikler:
  * - Manuel giriş: GG.AA.YYYY formatı
  * - Otomatik formatlama (15031990 → 15.03.1990)
@@ -52,10 +52,10 @@ export default function DatePicker({
   const formatDateInput = (input: string): string => {
     // Remove all non-numeric characters
     const numbers = input.replace(/\D/g, '');
-    
+
     // Limit to 8 digits (DDMMYYYY)
     const limited = numbers.slice(0, 8);
-    
+
     // Auto-format: DD.MM.YYYY
     let formatted = '';
     for (let i = 0; i < limited.length; i++) {
@@ -64,30 +64,40 @@ export default function DatePicker({
       }
       formatted += limited[i];
     }
-    
+
     return formatted;
   };
 
   // Validate date format and range
   const validateDate = (dateStr: string): boolean => {
     // Handle undefined/empty
-    if (!dateStr) return false;
-    
+    if (!dateStr) {
+      return false;
+    }
+
     // Check format: GG.AA.YYYY
     const regex = /^(\d{2})\.(\d{2})\.(\d{4})$/;
     const match = dateStr.match(regex);
-    
-    if (!match) return false;
-    
+
+    if (!match) {
+      return false;
+    }
+
     const day = parseInt(match[1]!, 10);
     const month = parseInt(match[2]!, 10);
     const year = parseInt(match[3]!, 10);
-    
+
     // Basic validation
-    if (month < 1 || month > 12) return false;
-    if (day < 1 || day > 31) return false;
-    if (year < 1900 || year > 2100) return false;
-    
+    if (month < 1 || month > 12) {
+      return false;
+    }
+    if (day < 1 || day > 31) {
+      return false;
+    }
+    if (year < 1900 || year > 2100) {
+      return false;
+    }
+
     // Check if date is valid (e.g., not 31.02.2020)
     const date = new Date(year, month - 1, day);
     if (
@@ -97,11 +107,15 @@ export default function DatePicker({
     ) {
       return false;
     }
-    
+
     // Check min/max range
-    if (minDate && date < minDate) return false;
-    if (maxDate && date > maxDate) return false;
-    
+    if (minDate && date < minDate) {
+      return false;
+    }
+    if (maxDate && date > maxDate) {
+      return false;
+    }
+
     return true;
   };
 
@@ -109,13 +123,15 @@ export default function DatePicker({
   const convertToISO = (dateStr: string): string => {
     const regex = /^(\d{2})\.(\d{2})\.(\d{4})$/;
     const match = dateStr.match(regex);
-    
-    if (!match) return '';
-    
+
+    if (!match) {
+      return '';
+    }
+
     const day = match[1];
     const month = match[2];
     const year = match[3];
-    
+
     return `${year}-${month}-${day}`;
   };
 
@@ -123,9 +139,9 @@ export default function DatePicker({
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const raw = e.target.value;
     const formatted = formatDateInput(raw);
-    
+
     setDisplayValue(formatted);
-    
+
     // If complete date (10 chars: DD.MM.YYYY)
     if (formatted.length === 10) {
       if (validateDate(formatted)) {
@@ -144,9 +160,9 @@ export default function DatePicker({
     e.preventDefault();
     const pasted = e.clipboardData.getData('text');
     const formatted = formatDateInput(pasted);
-    
+
     setDisplayValue(formatted);
-    
+
     if (formatted.length === 10 && validateDate(formatted)) {
       const isoDate = convertToISO(formatted);
       onChange(isoDate);
@@ -168,7 +184,7 @@ export default function DatePicker({
     ) {
       return;
     }
-    
+
     // Ensure that it is a number
     if (
       (e.shiftKey || e.keyCode < 48 || e.keyCode > 57) &&
@@ -222,4 +238,3 @@ export default function DatePicker({
     </div>
   );
 }
-

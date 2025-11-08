@@ -31,32 +31,33 @@ function buildLanguagePath(
     // ⚠️ GOOGLE SEO UYUMLU: Rewrite'lar kaldırıldı
     // Ana sayfa: direkt /{locale} kullan
     // Diğer sayfalar: gerçek route'ları kullan (SEO alias'ları kaldırıldı)
-    // 
+    //
     // Örnek: Kullanıcı /tr'deyken dili EN'e çevirirse → /en
     //        Kullanıcı /tr/tarotokumasi'ndayken dili EN'e çevirirse → /en/tarotokumasi
     //
     // NOT: next.config.js'teki rewrites kaldırıldı, direkt route kullanıyoruz
-    
+
     const pageMapping: Record<string, string> = {
       '/': '/',
       '/tarotokumasi': '/tarotokumasi',
       '/numeroloji': '/numeroloji',
       '/dashboard': '/dashboard',
-      '/panel': '/dashboard',  // normalize
+      '/panel': '/dashboard', // normalize
       '/auth': '/auth',
-      '/giris': '/auth',       // normalize
-      '/login': '/auth',       // normalize
-      '/prijava': '/auth',     // normalize
+      '/giris': '/auth', // normalize
+      '/login': '/auth', // normalize
+      '/prijava': '/auth', // normalize
       '/testler': '/testler',
     };
 
     // Normalize path
     const normalizedPath = pageMapping[pathWithoutLocale] || pathWithoutLocale;
-    
+
     // Yeni path oluştur
-    const newPath = normalizedPath === '/' 
-      ? `/${nextLocale}` 
-      : `/${nextLocale}${normalizedPath}`;
+    const newPath =
+      normalizedPath === '/'
+        ? `/${nextLocale}`
+        : `/${nextLocale}${normalizedPath}`;
 
     // Cookie ile locale'i kaydet
     if (typeof document !== 'undefined') {

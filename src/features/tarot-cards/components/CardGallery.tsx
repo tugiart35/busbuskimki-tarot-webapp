@@ -28,22 +28,24 @@ export function CardGallery({ card, locale }: CardGalleryProps) {
   };
 
   const nextImage = () => {
-    setSelectedImageIndex(
-      (prev) => (prev + 1) % card.additionalImages!.length
-    );
+    setSelectedImageIndex(prev => (prev + 1) % card.additionalImages!.length);
   };
 
   const prevImage = () => {
     setSelectedImageIndex(
-      (prev) =>
+      prev =>
         (prev - 1 + card.additionalImages!.length) %
         card.additionalImages!.length
     );
   };
 
   const getGalleryTitle = () => {
-    if (locale === 'tr') return 'Kart Galeri ve Detaylar';
-    if (locale === 'en') return 'Card Gallery and Details';
+    if (locale === 'tr') {
+      return 'Kart Galeri ve Detaylar';
+    }
+    if (locale === 'en') {
+      return 'Card Gallery and Details';
+    }
     return 'Galerija i Detalji Karte';
   };
 
@@ -127,7 +129,7 @@ export function CardGallery({ card, locale }: CardGalleryProps) {
                     className='object-cover group-hover:scale-110 transition-transform duration-300'
                     loading='lazy'
                   />
-                  
+
                   {/* Type Badge */}
                   {image.type && (
                     <div className='absolute top-3 left-3'>
@@ -209,7 +211,7 @@ export function CardGallery({ card, locale }: CardGalleryProps) {
 
           {/* Previous Button */}
           <button
-            onClick={(e) => {
+            onClick={e => {
               e.stopPropagation();
               prevImage();
             }}
@@ -240,45 +242,46 @@ export function CardGallery({ card, locale }: CardGalleryProps) {
           {/* Image Container */}
           <div
             className='relative max-w-5xl max-h-[90vh] w-full'
-            onClick={(e) => e.stopPropagation()}
+            onClick={e => e.stopPropagation()}
           >
-            {card.additionalImages && card.additionalImages[selectedImageIndex] && (
-              <>
-                <div className='relative aspect-[4/5] w-full'>
-                  <Image
-                    src={card.additionalImages[selectedImageIndex].url}
-                    alt={card.additionalImages[selectedImageIndex].alt}
-                    fill
-                    className='object-contain'
-                    priority
-                  />
-                </div>
+            {card.additionalImages &&
+              card.additionalImages[selectedImageIndex] && (
+                <>
+                  <div className='relative aspect-[4/5] w-full'>
+                    <Image
+                      src={card.additionalImages[selectedImageIndex].url}
+                      alt={card.additionalImages[selectedImageIndex].alt}
+                      fill
+                      className='object-contain'
+                      priority
+                    />
+                  </div>
 
-                {/* Image Info */}
-                <div className='bg-black/80 text-white p-4 rounded-lg mt-4'>
-                  {card.additionalImages[selectedImageIndex].type && (
-                    <span className='inline-block bg-purple-600 text-white text-xs font-semibold px-3 py-1 rounded-full mb-2'>
-                      {getTypeLabel(
-                        card.additionalImages[selectedImageIndex].type!
-                      )}
-                    </span>
-                  )}
-                  {card.additionalImages[selectedImageIndex].caption && (
-                    <p className='text-sm leading-relaxed'>
-                      {card.additionalImages[selectedImageIndex].caption}
+                  {/* Image Info */}
+                  <div className='bg-black/80 text-white p-4 rounded-lg mt-4'>
+                    {card.additionalImages[selectedImageIndex].type && (
+                      <span className='inline-block bg-purple-600 text-white text-xs font-semibold px-3 py-1 rounded-full mb-2'>
+                        {getTypeLabel(
+                          card.additionalImages[selectedImageIndex].type!
+                        )}
+                      </span>
+                    )}
+                    {card.additionalImages[selectedImageIndex].caption && (
+                      <p className='text-sm leading-relaxed'>
+                        {card.additionalImages[selectedImageIndex].caption}
+                      </p>
+                    )}
+                    <p className='text-xs text-gray-400 mt-2'>
+                      {selectedImageIndex + 1} / {card.additionalImages.length}
                     </p>
-                  )}
-                  <p className='text-xs text-gray-400 mt-2'>
-                    {selectedImageIndex + 1} / {card.additionalImages.length}
-                  </p>
-                </div>
-              </>
-            )}
+                  </div>
+                </>
+              )}
           </div>
 
           {/* Next Button */}
           <button
-            onClick={(e) => {
+            onClick={e => {
               e.stopPropagation();
               nextImage();
             }}
@@ -306,4 +309,3 @@ export function CardGallery({ card, locale }: CardGalleryProps) {
     </>
   );
 }
-

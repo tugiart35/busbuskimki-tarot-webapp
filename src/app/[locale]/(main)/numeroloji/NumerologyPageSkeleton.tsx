@@ -2,7 +2,10 @@ export function NumerologyPageSkeleton() {
   return (
     <div className='min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white'>
       {/* Background - same structure to prevent CLS */}
-      <div className='absolute inset-0 overflow-hidden' style={{ willChange: 'transform' }}>
+      <div
+        className='absolute inset-0 overflow-hidden'
+        style={{ willChange: 'transform' }}
+      >
         <div className='absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full opacity-10 blur-xl'></div>
         <div className='absolute -bottom-40 -left-40 w-80 h-80 bg-pink-500 rounded-full opacity-10 blur-xl'></div>
       </div>
@@ -16,8 +19,11 @@ export function NumerologyPageSkeleton() {
 
         {/* Tabs Skeleton */}
         <div className='flex gap-3 justify-center mb-8'>
-          {[1,2,3,4].map(i => (
-            <div key={i} className='h-12 w-32 bg-white/10 rounded-2xl animate-pulse' />
+          {[1, 2, 3, 4].map(i => (
+            <div
+              key={i}
+              className='h-12 w-32 bg-white/10 rounded-2xl animate-pulse'
+            />
           ))}
         </div>
 
@@ -31,4 +37,3 @@ export function NumerologyPageSkeleton() {
     </div>
   );
 }
-

@@ -45,7 +45,9 @@ export default function PrivacyPolicy() {
             <div className='w-1 h-1 bg-cosmic-400 rounded-full'></div>
             <div className='flex items-center space-x-2'>
               <FaCheckCircle className='w-4 h-4 text-green-400' />
-              <span>{t('blog.footer.legalPages.privacyPolicy.lastUpdated')}</span>
+              <span>
+                {t('blog.footer.legalPages.privacyPolicy.lastUpdated')}
+              </span>
             </div>
           </div>
           <p className='text-cosmic-300 max-w-2xl mx-auto leading-relaxed'>
@@ -203,7 +205,9 @@ export default function PrivacyPolicy() {
                 <FaLock className='w-5 h-5 text-purple-300' />
               </div>
               <h2 className='text-2xl font-bold text-golden-300'>
-                {t('blog.footer.legalPages.privacyPolicy.sections.security.title')}
+                {t(
+                  'blog.footer.legalPages.privacyPolicy.sections.security.title'
+                )}
               </h2>
             </div>
             <div className='grid md:grid-cols-3 gap-4'>
@@ -261,7 +265,9 @@ export default function PrivacyPolicy() {
                 <FaShieldAlt className='w-5 h-5 text-red-300' />
               </div>
               <h2 className='text-2xl font-bold text-golden-300'>
-                {t('blog.footer.legalPages.privacyPolicy.sections.dataBreach.title')}
+                {t(
+                  'blog.footer.legalPages.privacyPolicy.sections.dataBreach.title'
+                )}
               </h2>
             </div>
             <div className='space-y-4'>
@@ -300,11 +306,15 @@ export default function PrivacyPolicy() {
                 <FaUserShield className='w-5 h-5 text-purple-300' />
               </div>
               <h2 className='text-2xl font-bold text-golden-300'>
-                {t('blog.footer.legalPages.privacyPolicy.sections.userRights.title')}
+                {t(
+                  'blog.footer.legalPages.privacyPolicy.sections.userRights.title'
+                )}
               </h2>
             </div>
             <p className='text-cosmic-200 leading-relaxed mb-6'>
-              {t('blog.footer.legalPages.privacyPolicy.sections.userRights.content')}
+              {t(
+                'blog.footer.legalPages.privacyPolicy.sections.userRights.content'
+              )}
             </p>
             <div className='grid md:grid-cols-2 gap-4 mb-6'>
               <div className='bg-gradient-to-r from-green-500/10 to-emerald-500/10 p-4 rounded-lg border border-green-500/20'>
@@ -420,7 +430,9 @@ export default function PrivacyPolicy() {
                 <FaEye className='w-5 h-5 text-purple-300' />
               </div>
               <h2 className='text-2xl font-bold text-golden-300'>
-                {t('blog.footer.legalPages.privacyPolicy.sections.cookies.title')}
+                {t(
+                  'blog.footer.legalPages.privacyPolicy.sections.cookies.title'
+                )}
               </h2>
             </div>
             <div className='grid md:grid-cols-2 gap-4'>
@@ -459,12 +471,16 @@ export default function PrivacyPolicy() {
                 <FaCheckCircle className='w-5 h-5 text-purple-300' />
               </div>
               <h2 className='text-2xl font-bold text-golden-300'>
-                {t('blog.footer.legalPages.privacyPolicy.sections.changes.title')}
+                {t(
+                  'blog.footer.legalPages.privacyPolicy.sections.changes.title'
+                )}
               </h2>
             </div>
             <div className='bg-gradient-to-r from-blue-500/10 to-cyan-500/10 p-4 rounded-lg border border-blue-500/20'>
               <p className='text-cosmic-200'>
-                {t('blog.footer.legalPages.privacyPolicy.sections.changes.content')}
+                {t(
+                  'blog.footer.legalPages.privacyPolicy.sections.changes.content'
+                )}
               </p>
             </div>
           </section>
@@ -475,7 +491,9 @@ export default function PrivacyPolicy() {
                 <FaUserShield className='w-5 h-5 text-purple-300' />
               </div>
               <h2 className='text-2xl font-bold text-golden-300'>
-                {t('blog.footer.legalPages.privacyPolicy.sections.contact.title')}
+                {t(
+                  'blog.footer.legalPages.privacyPolicy.sections.contact.title'
+                )}
               </h2>
             </div>
             <div className='bg-gradient-to-r from-purple-500/10 to-indigo-500/10 p-6 rounded-lg border border-purple-500/20'>
@@ -549,7 +567,9 @@ export default function PrivacyPolicy() {
               </h2>
             </div>
             <p className='text-cosmic-200 leading-relaxed mb-6'>
-              {t('blog.footer.legalPages.privacyPolicy.sections.googleOAuth.intro')}
+              {t(
+                'blog.footer.legalPages.privacyPolicy.sections.googleOAuth.intro'
+              )}
             </p>
 
             {/* Erişilen Veriler */}
@@ -757,37 +777,52 @@ export default function PrivacyPolicy() {
                 <div className='bg-gradient-to-r from-red-500/10 to-pink-500/10 p-4 rounded-lg border border-red-500/20'>
                   <p className='text-cosmic-200'>
                     <strong className='text-red-300'>
-                      {t(
-                        'blog.footer.legalPages.privacyPolicy.sections.googleOAuth.dataSharing.exceptions.legal'
-                      ).split(':')[0]}:
+                      {
+                        t(
+                          'blog.footer.legalPages.privacyPolicy.sections.googleOAuth.dataSharing.exceptions.legal'
+                        ).split(':')[0]
+                      }
+                      :
                     </strong>{' '}
-                    {t(
-                      'blog.footer.legalPages.privacyPolicy.sections.googleOAuth.dataSharing.exceptions.legal'
-                    ).split(':')[1]}
+                    {
+                      t(
+                        'blog.footer.legalPages.privacyPolicy.sections.googleOAuth.dataSharing.exceptions.legal'
+                      ).split(':')[1]
+                    }
                   </p>
                 </div>
                 <div className='bg-gradient-to-r from-green-500/10 to-emerald-500/10 p-4 rounded-lg border border-green-500/20'>
                   <p className='text-cosmic-200'>
                     <strong className='text-green-300'>
-                      {t(
-                        'blog.footer.legalPages.privacyPolicy.sections.googleOAuth.dataSharing.exceptions.consent'
-                      ).split(':')[0]}:
+                      {
+                        t(
+                          'blog.footer.legalPages.privacyPolicy.sections.googleOAuth.dataSharing.exceptions.consent'
+                        ).split(':')[0]
+                      }
+                      :
                     </strong>{' '}
-                    {t(
-                      'blog.footer.legalPages.privacyPolicy.sections.googleOAuth.dataSharing.exceptions.consent'
-                    ).split(':')[1]}
+                    {
+                      t(
+                        'blog.footer.legalPages.privacyPolicy.sections.googleOAuth.dataSharing.exceptions.consent'
+                      ).split(':')[1]
+                    }
                   </p>
                 </div>
                 <div className='bg-gradient-to-r from-blue-500/10 to-cyan-500/10 p-4 rounded-lg border border-blue-500/20'>
                   <p className='text-cosmic-200'>
                     <strong className='text-blue-300'>
-                      {t(
-                        'blog.footer.legalPages.privacyPolicy.sections.googleOAuth.dataSharing.exceptions.serviceProviders'
-                      ).split(':')[0]}:
+                      {
+                        t(
+                          'blog.footer.legalPages.privacyPolicy.sections.googleOAuth.dataSharing.exceptions.serviceProviders'
+                        ).split(':')[0]
+                      }
+                      :
                     </strong>{' '}
-                    {t(
-                      'blog.footer.legalPages.privacyPolicy.sections.googleOAuth.dataSharing.exceptions.serviceProviders'
-                    ).split(':')[1]}
+                    {
+                      t(
+                        'blog.footer.legalPages.privacyPolicy.sections.googleOAuth.dataSharing.exceptions.serviceProviders'
+                      ).split(':')[1]
+                    }
                   </p>
                 </div>
               </div>
@@ -915,9 +950,11 @@ export default function PrivacyPolicy() {
               <div className='bg-gradient-to-r from-indigo-500/10 to-purple-500/10 p-4 rounded-lg border border-indigo-500/20'>
                 <p className='text-cosmic-200 text-sm mb-2'>
                   <strong className='text-golden-300'>
-                    {t(
-                      'blog.footer.legalPages.privacyPolicy.sections.googleOAuth.googleCompliance.policies.limitedUse'
-                    ).split(':')[0]}
+                    {
+                      t(
+                        'blog.footer.legalPages.privacyPolicy.sections.googleOAuth.googleCompliance.policies.limitedUse'
+                      ).split(':')[0]
+                    }
                     :
                   </strong>
                 </p>

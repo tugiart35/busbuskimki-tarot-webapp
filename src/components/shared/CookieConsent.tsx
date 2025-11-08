@@ -85,7 +85,9 @@ export default function CookieConsent() {
     }
   };
 
-  if (!isVisible) return null;
+  if (!isVisible) {
+    return null;
+  }
 
   return (
     <div className='fixed bottom-4 right-4 z-50 max-w-md w-full pointer-events-auto'>
@@ -205,7 +207,7 @@ export default function CookieConsent() {
                         <input
                           type='checkbox'
                           checked={preferences.analytics}
-                          onChange={(e) =>
+                          onChange={e =>
                             setPreferences({
                               ...preferences,
                               analytics: e.target.checked,
@@ -233,7 +235,7 @@ export default function CookieConsent() {
                         <input
                           type='checkbox'
                           checked={preferences.marketing}
-                          onChange={(e) =>
+                          onChange={e =>
                             setPreferences({
                               ...preferences,
                               marketing: e.target.checked,
@@ -251,7 +253,10 @@ export default function CookieConsent() {
                     <div className='flex items-start justify-between mb-2'>
                       <div className='flex-1'>
                         <h3 className='text-lg font-semibold text-amber-300 mb-1'>
-                          {t('cookieConsent.advertising', 'Reklamlar (AdSense)')}
+                          {t(
+                            'cookieConsent.advertising',
+                            'Reklamlar (AdSense)'
+                          )}
                         </h3>
                         <p className='text-sm text-gray-400'>
                           {t(
@@ -264,7 +269,7 @@ export default function CookieConsent() {
                         <input
                           type='checkbox'
                           checked={preferences.advertising}
-                          onChange={(e) =>
+                          onChange={e =>
                             setPreferences({
                               ...preferences,
                               advertising: e.target.checked,

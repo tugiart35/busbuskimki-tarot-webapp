@@ -1,14 +1,14 @@
 /**
  * Dynamic Layout Widgets
- * 
+ *
  * Bu dosya her sayfada yüklenen layout widget'larını lazy loading ile optimize eder.
  * Pattern: AdminLazyComponents.tsx ile aynı (proven pattern)
- * 
+ *
  * Faydaları:
  * - Initial bundle boyutunu ~40 KB azaltır
  * - FCP ve LCP'yi 150-200ms iyileştirir
  * - Non-critical component'leri kullanıcı etkileşimine göre yükler
- * 
+ *
  * Güvenlik:
  * - Tüm component'ler client-side only (ssr: false)
  * - localStorage kullanımı güvenli (client-only)
@@ -25,22 +25,19 @@ const EmptyFallback = () => null;
 /**
  * Cookie Consent Component
  * Kullanıcı çerez tercihlerini yönetir
- * 
+ *
  * SSR: false - localStorage kullanıyor
  * Loading: null - Görünmeden yüklenir, UX etkilenmez
  */
-export const DynamicCookieConsent = dynamic(
-  () => import('./CookieConsent'),
-  {
-    loading: () => <EmptyFallback />,
-    ssr: false, // localStorage requires client-side
-  }
-);
+export const DynamicCookieConsent = dynamic(() => import('./CookieConsent'), {
+  loading: () => <EmptyFallback />,
+  ssr: false, // localStorage requires client-side
+});
 
 /**
  * Disclaimer Banner Component
  * Yasal uyarı banner'ı
- * 
+ *
  * Props: locale (tr | en | sr)
  * SSR: false - localStorage + delayed display (1s timeout)
  * Loading: null - 1 saniye delay zaten var, yükleme gösterilmez
@@ -56,7 +53,7 @@ export const DynamicDisclaimerBanner = dynamic(
 /**
  * Age Verification Modal Component
  * Yaş doğrulama modal'ı
- * 
+ *
  * Props: locale (tr | en | sr)
  * SSR: false - localStorage kullanıyor
  * Loading: null - Modal açılana kadar görünmez
@@ -74,4 +71,3 @@ export const DynamicAgeVerificationModal = dynamic(
  * Sebep: Performance monitoring mümkün olduğunca erken başlamalı
  * Vercel Analytics ve SpeedInsights da direkt import edilmeli
  */
-

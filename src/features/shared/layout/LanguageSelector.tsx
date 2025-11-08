@@ -36,7 +36,7 @@ export function LanguageSelector({
   const handleLanguageChange = (newLocale: string) => {
     // Önce kart sayfası mı kontrol et - kart sayfalarında özel slug çevirisi gerekli
     const cardUrls = getCardAlternateUrls(pathname);
-    
+
     if (cardUrls) {
       // Kart sayfası - doğru çevrilmiş slug ile yönlendir
       const newPath = cardUrls[newLocale as 'tr' | 'en' | 'sr'];
@@ -60,31 +60,47 @@ export function LanguageSelector({
     const pageMapping: Record<string, string> = {
       // Ana sayfa - direkt locale
       '/': '/',
-      
+
       // Gerçek route'lar (her dilde aynı)
       '/tarotokumasi': '/tarotokumasi',
       '/numeroloji': '/numeroloji',
       '/dashboard': '/dashboard',
-      '/panel': '/dashboard',  // panel -> dashboard normalize
+      '/panel': '/dashboard', // panel -> dashboard normalize
       '/auth': '/auth',
-      '/giris': '/auth',      // giris -> auth normalize
-      '/login': '/auth',      // login -> auth normalize
-      '/prijava': '/auth',    // prijava -> auth normalize
-      
+      '/giris': '/auth', // giris -> auth normalize
+      '/login': '/auth', // login -> auth normalize
+      '/prijava': '/auth', // prijava -> auth normalize
+
       // Kart sayfaları (locale-specific)
-      '/kartlar': newLocale === 'tr' ? '/kartlar' : newLocale === 'en' ? '/cards' : '/kartice',
-      '/cards': newLocale === 'tr' ? '/kartlar' : newLocale === 'en' ? '/cards' : '/kartice',
-      '/kartice': newLocale === 'tr' ? '/kartlar' : newLocale === 'en' ? '/cards' : '/kartice',
-      
+      '/kartlar':
+        newLocale === 'tr'
+          ? '/kartlar'
+          : newLocale === 'en'
+            ? '/cards'
+            : '/kartice',
+      '/cards':
+        newLocale === 'tr'
+          ? '/kartlar'
+          : newLocale === 'en'
+            ? '/cards'
+            : '/kartice',
+      '/kartice':
+        newLocale === 'tr'
+          ? '/kartlar'
+          : newLocale === 'en'
+            ? '/cards'
+            : '/kartice',
+
       // Testler sayfası
       '/testler': '/testler',
     };
 
     // Path mapping uygula
     const normalizedPath = pageMapping[pathWithoutLocale] || pathWithoutLocale;
-    const newPath = normalizedPath === '/' 
-      ? `/${newLocale}` 
-      : `/${newLocale}${normalizedPath}`;
+    const newPath =
+      normalizedPath === '/'
+        ? `/${newLocale}`
+        : `/${newLocale}${normalizedPath}`;
 
     document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000; SameSite=Lax`;
     router.push(newPath);
