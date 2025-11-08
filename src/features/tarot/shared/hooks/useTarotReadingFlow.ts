@@ -31,6 +31,8 @@ export interface UseTarotReadingFlowReturn {
     name: string;
     surname: string;
     birthDate: string;
+    birthDateUnknown: boolean;
+    relationshipStatus: string;
     email: string;
     phone: string;
     countryCode: string;
@@ -45,6 +47,7 @@ export interface UseTarotReadingFlowReturn {
     name: string;
     surname: string;
     birthDate: string;
+    relationshipStatus: string;
     email: string;
     phone: string;
     countryCode: string;
@@ -72,8 +75,8 @@ export interface UseTarotReadingFlowReturn {
 
   // Form Actions
   updatePersonalInfo: (
-    field: 'name' | 'surname' | 'birthDate' | 'email' | 'phone' | 'countryCode',
-    value: string
+    field: 'name' | 'surname' | 'birthDate' | 'birthDateUnknown' | 'relationshipStatus' | 'email' | 'phone' | 'countryCode',
+    value: string | boolean
   ) => void;
   updateCommunicationMethod: (method: 'email' | 'whatsapp') => void;
   updateQuestion: (
@@ -85,6 +88,8 @@ export interface UseTarotReadingFlowReturn {
       name: string;
       surname: string;
       birthDate: string;
+      birthDateUnknown: boolean;
+      relationshipStatus: string;
       email: string;
       phone: string;
       countryCode: string;
@@ -102,6 +107,7 @@ export interface UseTarotReadingFlowReturn {
       name: string;
       surname: string;
       birthDate: string;
+      relationshipStatus: string;
       email: string;
       phone: string;
       countryCode: string;

@@ -14,6 +14,8 @@ export interface BaseTarotFormProps {
     name: string;
     surname: string;
     birthDate: string;
+    birthDateUnknown: boolean;
+    relationshipStatus: string;
     email: string;
     phone: string;
     countryCode?: string;
@@ -28,6 +30,7 @@ export interface BaseTarotFormProps {
     name: string;
     surname: string;
     birthDate: string;
+    relationshipStatus: string;
     email: string;
     phone: string;
     countryCode: string;
@@ -38,8 +41,8 @@ export interface BaseTarotFormProps {
   };
   isSaving: boolean;
   onUpdatePersonalInfo: (
-    field: 'name' | 'surname' | 'birthDate' | 'email' | 'phone' | 'countryCode',
-    value: string
+    field: 'name' | 'surname' | 'birthDate' | 'birthDateUnknown' | 'relationshipStatus' | 'email' | 'phone' | 'countryCode',
+    value: string | boolean
   ) => void;
   onUpdateCommunicationMethod: (method: 'email' | 'whatsapp') => void;
   onUpdateQuestion: (
@@ -115,7 +118,6 @@ export default function BaseTarotForm({
   const handleClose = useCallback(() => {
     const hasUserInput =
       personalInfo.name ||
-      personalInfo.surname ||
       personalInfo.email ||
       personalInfo.phone ||
       questions.concern ||
@@ -194,54 +196,26 @@ export default function BaseTarotForm({
 
       <div className='flex-1 overflow-y-auto px-6 py-4'>
         <div className='space-y-4'>
-          <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
-            <div>
-              <label
-                className={`block text-sm font-medium ${themeClasses.labelText} mb-2`}
-              >
-                {translate(formKeys.firstName)} *
-              </label>
-              <input
-                type='text'
-                value={personalInfo.name}
-                onChange={event =>
-                  onUpdatePersonalInfo('name', event.target.value)
-                }
-                placeholder={getPlaceholder(placeholders.firstName)}
-                className={`w-full px-4 py-3 bg-slate-800/80 border ${
-                  formErrors.name ? 'border-red-500' : themeClasses.inputBorder
-                } rounded-lg text-white placeholder-gray-400 focus:outline-none ${themeClasses.focusRing} transition-all`}
-              />
-              {formErrors.name && (
-                <p className='text-red-400 text-xs mt-1'>{formErrors.name}</p>
-              )}
-            </div>
-
-            <div>
-              <label
-                className={`block text-sm font-medium ${themeClasses.labelText} mb-2`}
-              >
-                {translate(formKeys.lastName)} *
-              </label>
-              <input
-                type='text'
-                value={personalInfo.surname}
-                onChange={event =>
-                  onUpdatePersonalInfo('surname', event.target.value)
-                }
-                placeholder={getPlaceholder(placeholders.lastName)}
-                className={`w-full px-4 py-3 bg-slate-800/80 border ${
-                  formErrors.surname
-                    ? 'border-red-500'
-                    : themeClasses.inputBorder
-                } rounded-lg text-white placeholder-gray-400 focus:outline-none ${themeClasses.focusRing} transition-all`}
-              />
-              {formErrors.surname && (
-                <p className='text-red-400 text-xs mt-1'>
-                  {formErrors.surname}
-                </p>
-              )}
-            </div>
+          <div>
+            <label
+              className={`block text-sm font-medium ${themeClasses.labelText} mb-2`}
+            >
+              {translate(formKeys.firstName)} *
+            </label>
+            <input
+              type='text'
+              value={personalInfo.name}
+              onChange={event =>
+                onUpdatePersonalInfo('name', event.target.value)
+              }
+              placeholder={getPlaceholder(placeholders.firstName)}
+              className={`w-full px-4 py-3 bg-slate-800/80 border ${
+                formErrors.name ? 'border-red-500' : themeClasses.inputBorder
+              } rounded-lg text-white placeholder-gray-400 focus:outline-none ${themeClasses.focusRing} transition-all`}
+            />
+            {formErrors.name && (
+              <p className='text-red-400 text-xs mt-1'>{formErrors.name}</p>
+            )}
           </div>
 
           <div>
@@ -250,21 +224,76 @@ export default function BaseTarotForm({
             >
               {translate(formKeys.birthDate)} *
             </label>
-            <input
-              type='date'
-              value={personalInfo.birthDate}
-              onChange={event =>
-                onUpdatePersonalInfo('birthDate', event.target.value)
-              }
-              className={`w-full px-4 py-3 bg-slate-800/80 border ${
-                formErrors.birthDate
-                  ? 'border-red-500'
-                  : themeClasses.inputBorder
-              } rounded-lg text-white focus:outline-none ${themeClasses.focusRing} transition-all`}
-            />
+            <div className='space-y-2'>
+              <input
+                type='date'
+                value={personalInfo.birthDate}
+                onChange={event =>
+                  onUpdatePersonalInfo('birthDate', event.target.value)
+                }
+                disabled={personalInfo.birthDateUnknown}
+                className={`w-full px-4 py-3 bg-slate-800/80 border ${
+                  formErrors.birthDate
+                    ? 'border-red-500'
+                    : themeClasses.inputBorder
+                } rounded-lg text-white focus:outline-none ${themeClasses.focusRing} transition-all ${
+                  personalInfo.birthDateUnknown ? 'opacity-50 cursor-not-allowed' : ''
+                }`}
+              />
+              <div className='flex items-center'>
+                <input
+                  type='checkbox'
+                  id='birthDateUnknown'
+                  checked={personalInfo.birthDateUnknown}
+                  onChange={event =>
+                    onUpdatePersonalInfo('birthDateUnknown', event.target.checked)
+                  }
+                  className='w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded focus:ring-blue-500 focus:ring-2'
+                />
+                <label
+                  htmlFor='birthDateUnknown'
+                  className={`ml-2 text-sm ${themeClasses.labelText} cursor-pointer`}
+                >
+                  {translate(formKeys.birthDateUnknown)}
+                </label>
+              </div>
+            </div>
             {formErrors.birthDate && (
               <p className='text-red-400 text-xs mt-1'>
                 {formErrors.birthDate}
+              </p>
+            )}
+          </div>
+
+          <div>
+            <label
+              className={`block text-sm font-medium ${themeClasses.labelText} mb-2`}
+            >
+              {translate(formKeys.relationshipStatus)} *
+            </label>
+            <select
+              value={personalInfo.relationshipStatus}
+              onChange={event =>
+                onUpdatePersonalInfo('relationshipStatus', event.target.value)
+              }
+              className={`w-full px-4 py-3 bg-slate-800/80 border ${
+                formErrors.relationshipStatus
+                  ? 'border-red-500'
+                  : themeClasses.inputBorder
+              } rounded-lg text-white focus:outline-none ${themeClasses.focusRing} transition-all`}
+            >
+              <option value=''>{translate(formKeys.selectRelationshipStatus)}</option>
+              <option value='single'>{translate(formKeys.relationshipStatusOptions.single)}</option>
+              <option value='in_relationship'>{translate(formKeys.relationshipStatusOptions.in_relationship)}</option>
+              <option value='married'>{translate(formKeys.relationshipStatusOptions.married)}</option>
+              <option value='separated'>{translate(formKeys.relationshipStatusOptions.separated)}</option>
+              <option value='divorced'>{translate(formKeys.relationshipStatusOptions.divorced)}</option>
+              <option value='widowed'>{translate(formKeys.relationshipStatusOptions.widowed)}</option>
+              <option value='prefer_not_to_say'>{translate(formKeys.relationshipStatusOptions.prefer_not_to_say)}</option>
+            </select>
+            {formErrors.relationshipStatus && (
+              <p className='text-red-400 text-xs mt-1'>
+                {formErrors.relationshipStatus}
               </p>
             )}
           </div>

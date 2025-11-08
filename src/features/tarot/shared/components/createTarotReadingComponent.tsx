@@ -759,7 +759,6 @@ export function createTarotReadingComponent({
           // Form verileri dolu mu kontrol et
           if (
             personalInfo.name ||
-            personalInfo.surname ||
             personalInfo.email ||
             questions.concern ||
             questions.understanding ||

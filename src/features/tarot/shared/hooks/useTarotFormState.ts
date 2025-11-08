@@ -7,6 +7,8 @@ export interface PersonalInfo {
   name: string;
   surname: string;
   birthDate: string;
+  birthDateUnknown: boolean;
+  relationshipStatus: string;
   email: string;
   phone: string;
   countryCode: string;
@@ -22,6 +24,7 @@ export interface FormErrors {
   name: string;
   surname: string;
   birthDate: string;
+  relationshipStatus: string;
   email: string;
   phone: string;
   countryCode: string;
@@ -44,6 +47,7 @@ export interface ValidationKeys {
   nameMinLength: string;
   surnameMinLength: string;
   birthDateRequired: string;
+  relationshipStatusRequired: string;
   emailInvalid: string;
   questionMinLength: string;
 }
@@ -61,7 +65,7 @@ export interface UseTarotFormStateReturn {
   modalStates: ModalStates;
 
   // Actions
-  updatePersonalInfo: (field: keyof PersonalInfo, value: string) => void;
+  updatePersonalInfo: (field: keyof PersonalInfo, value: string | boolean) => void;
   updateCommunicationMethod: (method: 'email' | 'whatsapp') => void;
   updateQuestion: (field: keyof Questions, value: string) => void;
   setPersonalInfo: React.Dispatch<React.SetStateAction<PersonalInfo>>;
@@ -91,6 +95,8 @@ export function useTarotFormState({
     name: '',
     surname: '',
     birthDate: '',
+    birthDateUnknown: false,
+    relationshipStatus: '',
     email: '',
     phone: '',
     countryCode: '',
@@ -110,6 +116,7 @@ export function useTarotFormState({
     name: '',
     surname: '',
     birthDate: '',
+    relationshipStatus: '',
     email: '',
     phone: '',
     countryCode: '',
@@ -130,9 +137,15 @@ export function useTarotFormState({
 
   // Form update functions
   const updatePersonalInfo = useCallback(
-    (field: keyof PersonalInfo, value: string) => {
+    (field: keyof PersonalInfo, value: string | boolean) => {
       setPersonalInfo(prev => ({ ...prev, [field]: value }));
       setFormErrors(errors => ({ ...errors, [field]: '', general: '' }));
+      
+      // Eğer "doğum tarihimi bilmiyorum" seçildiyse, doğum tarihini temizle
+      if (field === 'birthDateUnknown' && value === true) {
+        setPersonalInfo(prev => ({ ...prev, birthDate: '' }));
+        setFormErrors(errors => ({ ...errors, birthDate: '' }));
+      }
     },
     []
   );
@@ -156,18 +169,17 @@ export function useTarotFormState({
       hasError = true;
     }
 
-    // Surname validation
-    if (
-      !personalInfo.surname.trim() ||
-      personalInfo.surname.trim().length < 3
-    ) {
-      errors.surname = t(validationKeys.surnameMinLength);
+    // Surname validation - Kaldırıldı, artık formda surname alanı yok
+
+    // Birth date validation - Eğer "bilmiyorum" seçilmediyse zorunlu
+    if (!personalInfo.birthDateUnknown && !personalInfo.birthDate) {
+      errors.birthDate = t(validationKeys.birthDateRequired);
       hasError = true;
     }
 
-    // Birth date validation
-    if (!personalInfo.birthDate) {
-      errors.birthDate = t(validationKeys.birthDateRequired);
+    // Relationship status validation
+    if (!personalInfo.relationshipStatus.trim()) {
+      errors.relationshipStatus = t(validationKeys.relationshipStatusRequired);
       hasError = true;
     }
 
