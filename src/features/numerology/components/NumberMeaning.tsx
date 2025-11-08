@@ -6,6 +6,7 @@
  */
 
 import type { NumberMeaning } from '@/lib/numerology/meanings';
+import { useTranslations } from '@/hooks/useTranslations';
 import { NumerologyErrorBoundary } from '@/components/numerology/NumerologyErrorBoundary';
 
 interface NumberMeaningProps {
@@ -13,22 +14,24 @@ interface NumberMeaningProps {
 }
 
 export function NumberMeaning({ meaning }: NumberMeaningProps) {
-  const getColorClasses = (color: string) => {
-    const colorMap: Record<string, string> = {
-      Kırmızı: 'from-red-500 to-red-600',
-      Turuncu: 'from-orange-500 to-orange-600',
-      Sarı: 'from-yellow-500 to-yellow-600',
-      Yeşil: 'from-green-500 to-green-600',
-      Mavi: 'from-blue-500 to-blue-600',
-      İndigo: 'from-indigo-500 to-indigo-600',
-      Mor: 'from-purple-500 to-purple-600',
-      Pembe: 'from-pink-500 to-pink-600',
-      Altın: 'from-yellow-400 to-yellow-500',
-      Gümüş: 'from-gray-400 to-gray-500',
-      Platin: 'from-gray-300 to-gray-400',
-      Kristal: 'from-blue-200 to-purple-200',
+  const { t } = useTranslations();
+
+  const getColorClasses = (number: number) => {
+    const colorMap: Record<number, string> = {
+      1: 'from-red-500 to-red-600',
+      2: 'from-orange-500 to-orange-600',
+      3: 'from-yellow-500 to-yellow-600',
+      4: 'from-green-500 to-green-600',
+      5: 'from-blue-500 to-blue-600',
+      6: 'from-indigo-500 to-indigo-600',
+      7: 'from-purple-500 to-purple-600',
+      8: 'from-pink-500 to-pink-600',
+      9: 'from-amber-400 to-yellow-500',
+      11: 'from-slate-300 to-slate-400',
+      22: 'from-zinc-300 to-zinc-400',
+      33: 'from-sky-200 to-purple-200',
     };
-    return colorMap[color] || 'from-gray-500 to-gray-600';
+    return colorMap[number] || 'from-gray-500 to-gray-600';
   };
 
   return (
@@ -39,10 +42,10 @@ export function NumberMeaning({ meaning }: NumberMeaningProps) {
           <div className='text-center mb-8'>
             <div className='relative inline-block mb-4'>
               <div
-                className={`absolute inset-0 bg-gradient-to-r ${getColorClasses(meaning.color)} rounded-full blur-lg opacity-50`}
+                className={`absolute inset-0 bg-gradient-to-r ${getColorClasses(meaning.number)} rounded-full blur-lg opacity-50`}
               ></div>
               <div
-                className={`relative inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r ${getColorClasses(meaning.color)} rounded-full shadow-xl`}
+                className={`relative inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r ${getColorClasses(meaning.number)} rounded-full shadow-xl`}
               >
                 <span className='text-3xl font-bold text-white'>
                   {meaning.number}
@@ -76,7 +79,7 @@ export function NumberMeaning({ meaning }: NumberMeaningProps) {
             <div className='bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-2xl p-6 border border-green-500/20'>
               <h3 className='text-xl font-bold text-green-400 mb-4 flex items-center'>
                 <span className='mr-2'>✨</span>
-                Güçlü Yönleriniz
+                {t('numerology.result.positiveTraits')}
               </h3>
               <ul className='space-y-2'>
                 {meaning.positiveTraits.map((trait, index) => (
@@ -95,7 +98,7 @@ export function NumberMeaning({ meaning }: NumberMeaningProps) {
             <div className='bg-gradient-to-br from-orange-500/10 to-red-500/10 rounded-2xl p-6 border border-orange-500/20'>
               <h3 className='text-xl font-bold text-orange-400 mb-4 flex items-center'>
                 <span className='mr-2'>⚠️</span>
-                Dikkat Edilmesi Gerekenler
+                {t('numerology.result.challenges')}
               </h3>
               <ul className='space-y-2'>
                 {meaning.challenges.map((challenge, index) => (
@@ -117,7 +120,7 @@ export function NumberMeaning({ meaning }: NumberMeaningProps) {
             <div className='bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-2xl p-6 border border-purple-500/20'>
               <h3 className='text-xl font-bold text-purple-400 mb-3 flex items-center'>
                 <span className='mr-2'>🛤️</span>
-                Yaşam Rehberliği
+                {t('numerology.result.lifeGuidance')}
               </h3>
               <p className='text-gray-300 leading-relaxed'>
                 {meaning.lifeGuidance}
@@ -128,7 +131,7 @@ export function NumberMeaning({ meaning }: NumberMeaningProps) {
             <div className='bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-2xl p-6 border border-blue-500/20'>
               <h3 className='text-xl font-bold text-blue-400 mb-3 flex items-center'>
                 <span className='mr-2'>💼</span>
-                Kariyer Önerileri
+                {t('numerology.result.careerAdvice')}
               </h3>
               <p className='text-gray-300 leading-relaxed'>
                 {meaning.careerAdvice}
@@ -139,7 +142,7 @@ export function NumberMeaning({ meaning }: NumberMeaningProps) {
             <div className='bg-gradient-to-r from-pink-500/10 to-rose-500/10 rounded-2xl p-6 border border-pink-500/20'>
               <h3 className='text-xl font-bold text-pink-400 mb-3 flex items-center'>
                 <span className='mr-2'>💖</span>
-                İlişki Önerileri
+                {t('numerology.result.relationshipAdvice')}
               </h3>
               <p className='text-gray-300 leading-relaxed'>
                 {meaning.relationshipAdvice}
@@ -150,7 +153,7 @@ export function NumberMeaning({ meaning }: NumberMeaningProps) {
             <div className='bg-gradient-to-r from-indigo-500/10 to-purple-500/10 rounded-2xl p-6 border border-indigo-500/20'>
               <h3 className='text-xl font-bold text-indigo-400 mb-3 flex items-center'>
                 <span className='mr-2'>🔮</span>
-                Ruhsal Mesaj
+                {t('numerology.result.spiritualMessage')}
               </h3>
               <p className='text-gray-300 leading-relaxed'>
                 {meaning.spiritualMessage}
@@ -161,15 +164,21 @@ export function NumberMeaning({ meaning }: NumberMeaningProps) {
           {/* Additional Info */}
           <div className='mt-8 grid grid-cols-1 md:grid-cols-3 gap-4'>
             <div className='text-center p-4 bg-white/5 rounded-xl'>
-              <div className='text-sm text-gray-400 mb-1'>Renk</div>
+              <div className='text-sm text-gray-400 mb-1'>
+                {t('numerology.result.color')}
+              </div>
               <div className='font-semibold text-white'>{meaning.color}</div>
             </div>
             <div className='text-center p-4 bg-white/5 rounded-xl'>
-              <div className='text-sm text-gray-400 mb-1'>Element</div>
+              <div className='text-sm text-gray-400 mb-1'>
+                {t('numerology.result.element')}
+              </div>
               <div className='font-semibold text-white'>{meaning.element}</div>
             </div>
             <div className='text-center p-4 bg-white/5 rounded-xl'>
-              <div className='text-sm text-gray-400 mb-1'>Gezegen</div>
+              <div className='text-sm text-gray-400 mb-1'>
+                {t('numerology.result.planet')}
+              </div>
               <div className='font-semibold text-white'>{meaning.planet}</div>
             </div>
           </div>

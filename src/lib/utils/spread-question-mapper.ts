@@ -51,10 +51,7 @@ export function getSpreadQuestionMap(
       emotional: 'Bu problem hakkında nasıl hissediyorsunuz?',
       understanding: 'Bu problem çözme açılımı ile neyi anlamak istiyorsunuz?',
     };
-  } else if (
-    type.includes('situation-analysis') ||
-    type.includes('durum')
-  ) {
+  } else if (type.includes('situation-analysis') || type.includes('durum')) {
     return {
       concern: 'Mevcut durumunuzda sizi en çok endişelendiren konu nedir?',
       emotional: 'Şu anki durumunuz hakkında nasıl hissediyorsunuz?',
@@ -88,7 +85,8 @@ export function getSpreadQuestionMap(
     return {
       concern: 'İlişkinizdeki sorunlar hakkında ne düşünüyorsunuz?',
       emotional: 'İlişki sorunları hakkında nasıl hissediyorsunuz?',
-      understanding: 'Bu ilişki sorunları açılımı ile neyi anlamak istiyorsunuz?',
+      understanding:
+        'Bu ilişki sorunları açılımı ile neyi anlamak istiyorsunuz?',
     };
   } else if (type.includes('general') || type.includes('genel')) {
     return {
@@ -112,4 +110,3 @@ function getDefaultQuestions(): SpreadQuestionMap {
     understanding: 'Bu açılım ile neyi anlamak istiyorsunuz?',
   };
 }
-

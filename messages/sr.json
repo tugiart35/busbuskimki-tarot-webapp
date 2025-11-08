@@ -4225,6 +4225,10 @@
     "title": "Busbuskimki"
   },
   "homepage": {
+    "alert": {
+      "description": "Naši iskusni čitaoci odmah počinju da rade nakon vaše prijave; rezultat vam šaljemo putem e-pošte ili WhatsApp-a.",
+      "title": "Vaše tarot čitanje je spremno za 2-4 sata"
+    },
     "features": {
       "authentic": {
         "description": "Tradicionalne metode tarota i numerologije",
@@ -15827,6 +15831,279 @@
       null,
       "Oni sa rođendanom 33 su nosioci bezuslovne ljubavi, saosećanje i isceljenja energije. Oni su ljudi koji žive za dobro od drugih i osećaju dubok osećaj odgovornosti i žrtve. Inspirišu ljude, omekšavaju srca i vodile zajednice.\n\nMeđutim, ova velika energija može stvoriti pritisak odgovornosti. Kada nauče da se izražavaju, a da ne izgaraju, ostavljaju trajnu oceli marku na svetu i doprinose izlečenju kolektiva."
     ],
+    "numberDetails": {
+      "1": {
+        "keywords": ["Vodeća uloga", "Nezavisnost", "Kreativnost", "Snaga", "Odlučnost"],
+        "positiveTraits": [
+          "Prirodan lider i pokretač",
+          "Samostalno i originalno razmišljanje",
+          "Hrabra kreativnost",
+          "Upornost i istrajnost",
+          "Visoko samopouzdanje"
+        ],
+        "challenges": [
+          "Može delovati previše dominantno",
+          "Teško prihvata druga mišljenja",
+          "Nestrpljenje i naglost",
+          "Sklonost da radi isključivo sam"
+        ],
+        "lifeGuidance": "Budi pionir sopstvenog puta, ali neguj zajedničke odluke i aktivno slušanje.",
+        "careerAdvice": "Liderske pozicije, preduzetništvo i kreativni projekti daju ti prostor da zasijaš.",
+        "relationshipAdvice": "Poštuj nezavisnost partnera i gradite vizije zajedno.",
+        "spiritualMessage": "Tvoja svetlost inspiriše druge – vodi primerom i čuvaj srčanu hrabrost.",
+        "color": "Crvena",
+        "element": "Vatra",
+        "planet": "Sunce"
+      },
+      "2": {
+        "keywords": ["Saradnja", "Ravnoteža", "Diplomatija", "Osetljivost", "Harmonija"],
+        "positiveTraits": [
+          "Izuzetna empatija i razumevanje",
+          "Prirodni medijator i graditelj mira",
+          "Timski igrač koji stvara sklad",
+          "Taktičan i pažljiv pristup",
+          "Duboka emotivna intuicija"
+        ],
+        "challenges": [
+          "Preterana osetljivost",
+          "Teško donosi odluke",
+          "Lako potpada pod tuđi uticaj",
+          "Izbegava sukobe po svaku cenu"
+        ],
+        "lifeGuidance": "Neguj sopstvene granice dok gradiš harmoniju sa drugima.",
+        "careerAdvice": "Savjetovanje, diplomatija, umetnost, terapija i svi oblici timskog rada su tvoje polje.",
+        "relationshipAdvice": "Stvaraj ravnotežu između davanja i primanja, razgovarajte otvoreno.",
+        "spiritualMessage": "Mir koji širiš spolja počinje iznutra – njeguj svoj unutrašnji centar.",
+        "color": "Narandžasta",
+        "element": "Voda",
+        "planet": "Mesec"
+      },
+      "3": {
+        "keywords": ["Kreativnost", "Komunikacija", "Radost", "Društvenost", "Umetnost"],
+        "positiveTraits": [
+          "Bogata mašta i izražajnost",
+          "Harizma u komunikaciji",
+          "Optimistična i vedra energija",
+          "Inspirativan osećaj za humor",
+          "Umetnički dodir u svemu što radi"
+        ],
+        "challenges": [
+          "Sklonost površnosti",
+          "Pažnja se lako rasipa",
+          "Preterana potreba za potvrdom okoline",
+          "Emocionalni usponi i padovi"
+        ],
+        "lifeGuidance": "Usmeri svoju kreativnost prema projektima koji imaju dubinu i smisao.",
+        "careerAdvice": "Pisanje, scena, marketing, dizajn i zabava hrane tvoj izraz.",
+        "relationshipAdvice": "Delite iskrene razgovore i zajedničke kreativne trenutke.",
+        "spiritualMessage": "Tvoja radost je molitva – širi svetlost kroz stvaralaštvo.",
+        "color": "Žuta",
+        "element": "Vatra",
+        "planet": "Jupiter"
+      },
+      "4": {
+        "keywords": ["Praktičnost", "Red", "Stabilnost", "Rad", "Upornost"],
+        "positiveTraits": [
+          "Pouzdanost i odgovornost",
+          "Sistematičan i organizovan pristup",
+          "Istrajnost i disciplina",
+          "Fokus na dugoročne ciljeve",
+          "Stvara sigurne temelje"
+        ],
+        "challenges": [
+          "Krutost i oslanjanje na rutinu",
+          "Otpor prema promenama",
+          "Perfekcionizam",
+          "Teškoće da se opusti"
+        ],
+        "lifeGuidance": "Drži se strukture, ali ostavi prostor za fleksibilnost i igru.",
+        "careerAdvice": "Finansije, inženjerstvo, administracija, gradnja i vođenje timova nagrađuju tvoju istrajnost.",
+        "relationshipAdvice": "Pruži sigurnost partneru, ali neguj zajedničku spontanost.",
+        "spiritualMessage": "Stabilne navike su tvoja duhovna praksa – strpljenjem rasteš.",
+        "color": "Zelena",
+        "element": "Zemlja",
+        "planet": "Uran"
+      },
+      "5": {
+        "keywords": ["Sloboda", "Promena", "Avantura", "Raznolikost", "Putovanje"],
+        "positiveTraits": [
+          "Radoznao i hrabar duh",
+          "Brzo se prilagođava novom",
+          "Unosi energiju u svaku sredinu",
+          "Misli izvan okvira",
+          "Širi mrežu iskustava i ljudi"
+        ],
+        "challenges": ["Nestalan fokus", "Strah od obaveze", "Preterani nemir", "Impulsivne odluke"],
+        "lifeGuidance": "Sloboda cveta kada je podržana svesnom odgovornošću.",
+        "careerAdvice": "Putovanja, mediji, prodaja, startap okruženja i istraživanje odgovaraju tvojoj dinamici.",
+        "relationshipAdvice": "Delite avanture, ali definišite jasne zajedničke ciljeve.",
+        "spiritualMessage": "Nove horizonte posmatraj kao duhovne učionice – svaka promena je lekcija.",
+        "color": "Plava",
+        "element": "Vazduh",
+        "planet": "Merkur"
+      },
+      "6": {
+        "keywords": ["Briga", "Porodica", "Harmonija", "Odgovornost", "Ljubav"],
+        "positiveTraits": [
+          "Toplina i saosećanje",
+          "Veran i odan pratilac",
+          "Stvara dom pun harmonije",
+          "Estetski i negujući pristup",
+          "Spreman da podrži zajednicu"
+        ],
+        "challenges": [
+          "Preuzima previše odgovornosti",
+          "Zanemaruje sopstvene potrebe",
+          "Perfekcionizam i kritičnost",
+          "Teško postavlja granice"
+        ],
+        "lifeGuidance": "Voli druge, ali podjednako neguj sebe i svoje granice.",
+        "careerAdvice": "Obrazovanje, medicina, dizajn, savetovanje i socijalni rad donose ti ispunjenje.",
+        "relationshipAdvice": "Neka nežnost i otvoren razgovor budu temelji vašeg odnosa.",
+        "spiritualMessage": "Servis i ljubav su tvoja duhovna praksa – prati glas srca.",
+        "color": "Indigo",
+        "element": "Zemlja",
+        "planet": "Venera"
+      },
+      "7": {
+        "keywords": ["Mudrost", "Introspekcija", "Analiza", "Duhovnost", "Mistik"],
+        "positiveTraits": [
+          "Duboko promišlja i istražuje",
+          "Snažna intuicija i percepcija",
+          "Voli tišinu i povlačenje",
+          "Traži skrivena značenja",
+          "Prirodni učitelj učenja iznutra"
+        ],
+        "challenges": [
+          "Može delovati udaljeno",
+          "Ponekad sumnjičav i rezervisan",
+          "Pretjerana analiza",
+          "Teško se uklapa u praktičan ritam"
+        ],
+        "lifeGuidance": "Podeli svoje uvide sa onima koji te vole – mudrost raste u razmeni.",
+        "careerAdvice": "Istraživanje, psihologija, duhovni rad, nauka i savetovanje su tvoj teren.",
+        "relationshipAdvice": "Otvaraj srce postepeno i deli unutrašnji svet sa partnerom.",
+        "spiritualMessage": "Tišina i meditacija su tvoja polazna tačka – veruj unutrašnjem glasu.",
+        "color": "Ljubičasta",
+        "element": "Voda",
+        "planet": "Neptun"
+      },
+      "8": {
+        "keywords": ["Moć", "Organizacija", "Uspeh", "Stabilnost", "Liderstvo"],
+        "positiveTraits": [
+          "Jak osećaj za strategiju i strukturu",
+          "Odlučnost i istrajnost",
+          "Prirodni autoritet",
+          "Fokus na rezultate i stabilnost",
+          "Veliki kapacitet za manifestaciju"
+        ],
+        "challenges": [
+          "Težnja ka kontroli",
+          "Prevelik oslonac na materijalno",
+          "Krutost i nedostatak fleksibilnosti",
+          "Emocionalna distanca"
+        ],
+        "lifeGuidance": "Koristi moć za zajedničko dobro i poveži uspeh sa vrednostima srca.",
+        "careerAdvice": "Biznis, finansije, menadžment, preduzetništvo i vođenje velikih projekata oslikavaju tvoju snagu.",
+        "relationshipAdvice": "Neguj partnerstvo kao savez ravnopravnih – delite ciljeve i odgovornost.",
+        "spiritualMessage": "Prava snaga dolazi iz ravnoteže materije i duha – ostani veran svom integritetu.",
+        "color": "Roze",
+        "element": "Zemlja",
+        "planet": "Saturn"
+      },
+      "9": {
+        "keywords": ["Humanost", "Velikodušnost", "Intuicija", "Umetnost", "Završetak"],
+        "positiveTraits": [
+          "Saosećajno i veliko srce",
+          "Inspirativan idealista",
+          "Kreativan i umetnički izraz",
+          "Spaja ljude i ideje",
+          "Pruža podršku i vođstvo zajednici"
+        ],
+        "challenges": [
+          "Ponekad previše sanjalački",
+          "Teško ostaje praktičan",
+          "Zaboravlja na lične potrebe",
+          "Teško pušta prošlost"
+        ],
+        "lifeGuidance": "Služi čovečanstvu, ali čuvaj sopstvenu energiju i granice.",
+        "careerAdvice": "Humanitarni rad, umetnost, obrazovanje i duhovno vodstvo donose ti smisao.",
+        "relationshipAdvice": "Delite velike snove i ustvarite zajedničke projekte koji pomažu drugima.",
+        "spiritualMessage": "Svet treba tvoju empatiju – dozvoli ljubavi da te vodi.",
+        "color": "Zlatna",
+        "element": "Vatra",
+        "planet": "Mars"
+      },
+      "11": {
+        "keywords": ["Intuicija", "Inspiracija", "Vodič", "Vizija", "Spiritualnost"],
+        "positiveTraits": [
+          "Povišena senzitivnost i intuicija",
+          "Prirodni duhovni mentor",
+          "Karizmatična i inspirišuća energija",
+          "Sposobnost da vidi širu sliku",
+          "Daje smisao kroz nadahnuće"
+        ],
+        "challenges": [
+          "Prevelik idealizam i očekivanja",
+          "Nedostatak prizemljenosti",
+          "Emocionalna preosetljivost",
+          "Unutrašnji nemir i anksioznost"
+        ],
+        "lifeGuidance": "Spusti svoje vizije u svakodnevni život – svet želi da ih doživi.",
+        "careerAdvice": "Učitelj, terapeut, umetnik, vizionar i duhovni vodič su tvoje prirodne uloge.",
+        "relationshipAdvice": "Gradite duhovno partnerstvo zasnovano na poverenju i iskrenosti.",
+        "spiritualMessage": "Tvoja misija je da širiš svetlost – deli svoje uvide hrabro i saosećajno.",
+        "color": "Srebrna",
+        "element": "Vazduh",
+        "planet": "Uran"
+      },
+      "22": {
+        "keywords": ["Glavni graditelj", "Praktičnost", "Velike vizije", "Manifestacija", "Služba"],
+        "positiveTraits": [
+          "Spaja ideje i konkretne rezultate",
+          "Organizovan i disciplinovan",
+          "Sposoban da vodi velike timove",
+          "Razmišlja dugoročno i globalno",
+          "Radi za dobrobit zajednice"
+        ],
+        "challenges": [
+          "Nosi prevelik teret odgovornosti",
+          "Teško odustaje od savršenstva",
+          "Može postati previše autoritativan",
+          "Zaboravlja lične potrebe"
+        ],
+        "lifeGuidance": "Ostvari velike projekte uz balans rada, odmora i unutrašnje stabilnosti.",
+        "careerAdvice": "Arhitektura, menadžment, društveni projekti, startapovi i humanitarne inicijative traže tvoju snagu.",
+        "relationshipAdvice": "Sanjajte i gradite zajedno – partnerstvo je temelj tvoje misije.",
+        "spiritualMessage": "Graditi svetlost na zemlji je tvoj poziv – radi s ljubavlju i širim dobrom.",
+        "color": "Platina",
+        "element": "Zemlja",
+        "planet": "Saturn"
+      },
+      "33": {
+        "keywords": ["Učitelj ljubavi", "Saosećanje", "Isceljenje", "Služba", "Univerzalnost"],
+        "positiveTraits": [
+          "Bezgranična empatija i požrtvovanost",
+          "Prirodni duhovni učitelj",
+          "Inspirativan primer nežnosti i snage",
+          "Stvara siguran prostor za druge",
+          "Uzdiže zajednicu ljubavlju"
+        ],
+        "challenges": [
+          "Preuzima tuđe brige na sebe",
+          "Zaboravlja na sopstveno punjenje",
+          "Perfekcionizam koji iscrpljuje",
+          "Oseća pritisak visoke misije"
+        ],
+        "lifeGuidance": "Služi i isceljuj, ali neguj ličnu regeneraciju i jasne granice.",
+        "careerAdvice": "Mentorstvo, terapija, duhovni rad, umetnost i humanitarne misije prikazuju tvoju širinu.",
+        "relationshipAdvice": "Delite misiju ljubavi i budite podrška jedno drugom u napredovanju.",
+        "spiritualMessage": "Tvoja duša je učitelj bezuslovne ljubavi – širi je smireno i istrajno.",
+        "color": "Kristal",
+        "element": "Voda",
+        "planet": "Neptun"
+      }
+    },
     "calculators": {
       "birthdayNumber": "Rođendan",
       "compatibility": "Analiza kompatibilnosti",
@@ -16185,6 +16462,20 @@
       null,
       "Ljudi sa ličnošću broj 33 predstavljaju saosećajne, poučno i isceljujuće slike spolja. Nose auru bezuslovne ljubavi, razumevanja i poverenja oko njih. Ljudi ih vide kao vodiči, podržavaju i izvore mudrosti.\n\nMeđutim, ova energija ponekad može da stvori sliku previše samo-žrtvovanja, samozapuštanja ili preterano odgovorne. Kada ostanu u ravnoteži, oni postaju jaka ličnost koja obojica dovodi ocjeljujuće onima oko njih i nadahnjuju."
     ],
+    "soulUrgeMeanings": {
+      "1": "Ljudi sa brojem Duševne želje 1 imaju snažnu želju za individualnošću i liderstvom u svom unutrašnjem svetu. Njihova duša se hrani potrebom za nezavisnošću, samopouzdanjem i crtanjem sopstvenog puta. Postoji konstantna iskra koja gori u njima; ova iskra ih vodi ka novim počecima, kreativnim projektima i pionirskim idejama. Ljudi sa ovim brojem nose duboku želju da snažno izraze svoj identitet, vode druge i ostave trag na svetu.\n\nU najdubljim slojevima njihove duše, postoji motivacija da se dokažu i uspeju. Ova motivacija ih konstantno gura napred, ohrabrujući ih da traže nove prilike i preuzimaju rizike. Nose snažnu energiju kreativnosti i inovativnosti u svom unutrašnjem svetu. Međutim, ova snažna želja za individualnošću ponekad može da se manifestuje kao usamljenost, samocentričnost ili poteškoće u saradnji sa drugima.\n\nDuhovna želja ovog broja je da osoba u potpunosti realizuje svoj potencijal i postane inspirativni lider. Njihove unutrašnje motivacije ih konstantno guraju da rastu, uče i razvijaju se. Kada su uravnoteženi, ova unutrašnja moć stvara pozitivnu transformaciju kako u njihovim sopstvenim životima tako i u životima drugih.",
+      "2": "Ljudi sa brojem Duševne želje 2 imaju duboku želju za harmonijom, ravnotežom i izgradnjom odnosa u svom unutrašnjem svetu. Njihova duša se hrani potragom za ljubavlju, razumevanjem i mirom. Imaju snažnu empatiju i osetljivost u sebi; ove kvalitete ih vode da razumeju i podržavaju emocije drugih. Ljudi sa ovim brojem nose duboku želju da izgrade sigurne, mirne i harmonične odnose, reše konflikte i donesu mir.\n\nU najdubljim slojevima njihove duše, postoji motivacija da izgrade duboke veze sa drugima i žive u međusobnom razumevanju. Ova motivacija ih konstantno ohrabruje da saraduju, formiraju partnerstva i rade zajedno. Nose snažnu energiju saosećanja i podrške u svom unutrašnjem svetu. Međutim, ova snažna potraga za harmonijom ponekad može da se manifestuje kao zanemarivanje sopstvenih potreba, zavisnost ili neodlučnost.\n\nDuhovna želja ovog broja je da osoba živi u harmoniji kako sa sobom tako i sa drugima i donese mir u svoju okolinu. Njihove unutrašnje motivacije ih konstantno guraju da traže ravnotežu, donose mir i dele ljubav. Kada su uravnoteženi, ova unutrašnja moć stvara trajnu harmoniju kako u njihovim sopstvenim životima tako i u njihovim odnosima.",
+      "3": "Ljudi sa brojem Duševne želje 3 imaju snažnu želju za kreativnošću, izražavanjem i radošću u svom unutrašnjem svetu. Njihova duša se hrani umetnošću, komunikacijom i društvenom interakcijom. Postoji konstantna kreativna iskra koja gori u njima; ova iskra ih vodi da se izraze, stvaraju lepotu i inspirišu druge. Ljudi sa ovim brojem nose duboku želju da realizuju svoj kreativni potencijal, izraze svoje emocije kroz umetnost i donesu radost u svoju okolinu.\n\nU najdubljim slojevima njihove duše, postoji motivacija da ispune život lepotom i značenjem. Ova motivacija ih konstantno ohrabruje da kreiraju nove projekte, dele svoje ideje i grade društvene veze. Nose snažnu energiju komunikacije i deljenja u svom unutrašnjem svetu. Međutim, ova snažna želja za kreativnošću ponekad može da se manifestuje kao neorganizovanost, površnost ili nedostatak discipline.\n\nDuhovna želja ovog broja je da osoba predstavi svoju kreativnost svetu i doda lepotu i radost u živote drugih. Njihove unutrašnje motivacije ih konstantno guraju da se izražavaju, stvaraju umetnost i inspirišu. Kada su uravnoteženi, ova unutrašnja moć stvara kreativnu transformaciju kako u njihovim sopstvenim životima tako i u njihovoj okolini.",
+      "4": "Ljudi sa brojem Duševne želje 4 imaju snažnu želju za redom, stabilnošću i sigurnošću u svom unutrašnjem svetu. Njihova duša se hrani potrebom za disciplinom, odgovornošću i izgradnjom strukture. Postoji konstantna energija organizacije i planiranja koja gori u njima; ova energija ih vodi da postave čvrste temelje, kreiraju trajne projekte i izgrade pouzdan život. Ljudi sa ovim brojem nose duboku želju da kreiraju stabilnost u svojim životima, izgrade sigurnu budućnost i ispune svoje odgovornosti.\n\nU najdubljim slojevima njihove duše, postoji motivacija da organizuju život i dovedu ga pod kontrolu. Ova motivacija ih konstantno ohrabruje da planiraju, grade sisteme i žive uredan život. Nose snažnu energiju strpljenja i istrajnosti u svom unutrašnjem svetu. Međutim, ova snažna želja za redom ponekad može da se manifestuje kao krutost, nedostatak fleksibilnosti ili otpor promenama.\n\nDuhovna želja ovog broja je da osoba izgradi čvrst temelj u svom životu i kreira sigurnu budućnost kako za sebe tako i za svoje voljene. Njihove unutrašnje motivacije ih konstantno guraju da rade, preuzimaju odgovornost i kreiraju trajne vrednosti. Kada su uravnoteženi, ova unutrašnja moć stvara pouzdanu strukturu kako u njihovim sopstvenim životima tako i u njihovoj okolini.",
+      "5": "Ljudi sa brojem Duševne želje 5 imaju snažnu želju za slobodom, avanturom i promenom u svom unutrašnjem svetu. Njihova duša se hrani potragom za novim iskustvima, otkrićima i slobodom. Postoji konstantna strast za avanturom i istraživanjem koja gori u njima; ova strast ih vodi ka novim mestima, novim ljudima i novim idejama. Ljudi sa ovim brojem nose duboku želju da žive svoju slobodu, guraju granice i u potpunosti dožive život.\n\nU najdubljim slojevima njihove duše, postoji motivacija da izbegnu rutinu i konstantno traže novinu. Ova motivacija ih konstantno ohrabruje da se kreću, uče nove stvari i budu otvoreni za promene. Nose snažnu energiju radoznalosti i istraživanja u svom unutrašnjem svetu. Međutim, ova snažna želja za slobodom ponekad može da se manifestuje kao nestrpljivost, neodlučnost ili strah od obaveze.\n\nDuhovna želja ovog broja je da osoba živi svoj život slobodno i uživa u svim iskustvima. Njihove unutrašnje motivacije ih konstantno guraju da krenu u nove avanture, uče i rastu. Kada su uravnoteženi, ova unutrašnja moć stvara dinamičnu transformaciju kako u njihovim sopstvenim životima tako i u njihovoj okolini.",
+      "6": "Ljudi sa brojem Duševne želje 6 imaju snažnu želju za ljubavlju, saosećanjem i odgovornošću u svom unutrašnjem svetu. Njihova duša se hrani potrebom za porodicom, odnosima i službom. Postoji konstantna energija ljubavi i zaštite koja gori u njima; ova energija ih vodi da pomažu drugima, kreiraju lepotu i donesu harmoniju. Ljudi sa ovim brojem nose duboku želju da zaštite svoje voljene, služe društvu i kreiraju lepotu.\n\nU najdubljim slojevima njihove duše, postoji motivacija da pokažu saosećanje i podršku drugima. Ova motivacija ih konstantno ohrabruje da pomažu, preuzimaju odgovornost i kreiraju harmoniju. Nose snažan estetski osećaj i razumevanje lepote u svom unutrašnjem svetu. Međutim, ova snažna želja za ljubavlju ponekad može da se manifestuje kao prekomerna žrtva, samozanemarivanje ili preuzimanje tuđih problema.\n\nDuhovna želja ovog broja je da osoba kreira ljubav i harmoniju kako za sebe tako i za druge. Njihove unutrašnje motivacije ih konstantno guraju da pokažu saosećanje, kreiraju lepotu i služe. Kada su uravnoteženi, ova unutrašnja moć stvara isceljujuću transformaciju kako u njihovim sopstvenim životima tako i u njihovoj okolini.",
+      "7": "Ljudi sa brojem Duševne želje 7 imaju snažnu želju za mudrošću, duhovnošću i unutrašnjim otkrićem u svom unutrašnjem svetu. Njihova duša se hrani potrebom da traže istinu, duboko razmišljaju i slede duhovne potrage. Postoji konstantna strast za istraživanjem i učenjem koja gori u njima; ova strast ih vodi da propituju značenje života, traže nevidljive istine i otkrivaju unutrašnju mudrost. Ljudi sa ovim brojem nose duboku želju da razumeju svoj unutrašnji svet, otkriju duhovne istine i steknu mudrost.\n\nU najdubljim slojevima njihove duše, postoji motivacija da reše misterije života i pronađu istinu. Ova motivacija ih konstantno ohrabruje da uče, istražuju i okreću se unutra. Nose snažnu intuitivnu i duhovnu energiju u svom unutrašnjem svetu. Međutim, ova snažna potraga za mudrošću ponekad može da se manifestuje kao usamljenost, skepticizam ili povlačenje od drugih.\n\nDuhovna želja ovog broja je da osoba otkrije svoju unutrašnju mudrost i pronađe istinu. Njihove unutrašnje motivacije ih konstantno guraju da uče, istražuju i razvijaju se duhovno. Kada su uravnoteženi, ova unutrašnja moć stvara prosvetljujuću transformaciju kako u njihovim sopstvenim životima tako i u njihovoj okolini.",
+      "8": "Ljudi sa brojem Duševne želje 8 imaju snažnu želju za moći, uspehom i materijalnim postignućem u svom unutrašnjem svetu. Njihova duša se hrani potrebom za liderstvom, organizacijom i postizanjem uspeha. Postoji konstantna strast za ambicijom i uspehom koja gori u njima; ova strast ih vodi da postignu svoje ciljeve, steknu moć i postignu materijalni uspeh. Ljudi sa ovim brojem nose duboku želju da realizuju svoj potencijal, dođu do liderstvenih pozicija i kreiraju materijalni prosperitet.\n\nU najdubljim slojevima njihove duše, postoji motivacija da ostave trag na svetu i uspeju. Ova motivacija ih konstantno ohrabruje da rade, razvijaju strategije i fokusiraju se na svoje ciljeve. Nose snažnu energiju odlučnosti i istrajnosti u svom unutrašnjem svetu. Međutim, ova snažna želja za uspehom ponekad može da se manifestuje kao prekomerna ambicija, želja za kontrolom ili materijalna zavisnost.\n\nDuhovna želja ovog broja je da osoba uspe kako u materijalnom tako i u duhovnom svetu i koristi moć sa pravdom. Njihove unutrašnje motivacije ih konstantno guraju da se razvijaju, postignu uspeh i vode. Kada su uravnoteženi, ova unutrašnja moć stvara moćnu transformaciju kako u njihovim sopstvenim životima tako i u njihovoj okolini.",
+      "9": "Ljudi sa brojem Duševne želje 9 imaju snažnu želju za saosećanjem, idealizmom i službom čovečanstvu u svom unutrašnjem svetu. Njihova duša se hrani potrebom za univerzalnom ljubavlju, žrtvovanjem i doprinosom društvu. Postoji konstantna strast za saosećanjem i službom koja gori u njima; ova strast ih vodi da pomažu drugima, učine svet boljim mestom i kreiraju lepotu. Ljudi sa ovim brojem nose duboku želju da služe čovečanstvu, pokažu saosećanje i ostave pozitivan trag na svetu.\n\nU najdubljim slojevima njihove duše, postoji motivacija da šire univerzalnu ljubav i dodirnu živote drugih. Ova motivacija ih konstantno ohrabruje da pomažu, uče i vode. Nose snažnu umetničku i kreativnu energiju u svom unutrašnjem svetu. Međutim, ova snažna želja za službom ponekad može da se manifestuje kao prekomerna žrtva, idealizam ili samozanemarivanje.\n\nDuhovna želja ovog broja je da osoba donese saosećanje i ljubav svetu i služi čovečanstvu. Njihove unutrašnje motivacije ih konstantno guraju da pomažu, uče i kreiraju lepotu. Kada su uravnoteženi, ova unutrašnja moć stvara transformativnu transformaciju kako u njihovim sopstvenim životima tako i u njihovoj okolini.",
+      "11": "Ljudi sa brojem Duševne želje 11 imaju snažnu želju za duhovnošću, intuicijom i inspiracijom u svom unutrašnjem svetu. Njihova duša se hrani potrebom za višom svešću, duhovnom potragom i vođstvom. Postoji konstantna duhovna iskra koja gori u njima; ova iskra ih vodi da traže istinu, slušaju svoju intuiciju i inspirišu druge. Ljudi sa ovim brojem nose duboku želju da realizuju svoj duhovni potencijal, dođu do viših nivoa svesti i vode druge.\n\nU najdubljim slojevima njihove duše, postoji motivacija da otkriju božanske istine i podele duhovnu mudrost. Ova motivacija ih konstantno gura da uče, meditiraju i razvijaju se duhovno. Nose snažnu intuitivnu i telepatičku energiju u svom unutrašnjem svetu. Međutim, ova snažna duhovna želja ponekad može da se manifestuje kao anksioznost, nemir ili neravnoteža.\n\nDuhovna želja ovog broja je da osoba otkrije svoju duhovnu mudrost i inspiriše druge. Njihove unutrašnje motivacije ih konstantno guraju da se razvijaju duhovno, uče i vode. Kada su uravnoteženi, ova unutrašnja moć stvara prosvetljujuću transformaciju kako u njihovim sopstvenim životima tako i u njihovoj okolini.",
+      "22": "Ljudi sa brojem Duševne želje 22 imaju snažnu želju za vizijom, izgradnjom i kreiranjem trajnog nasleđa u svom unutrašnjem svetu. Njihova duša se hrani potrebom za velikim projektima, konkretnim postignućima i ostavljanjem traga na svetu. Postoji konstantna energija osnivanja i izgradnje koja gori u njima; ova energija ih vodi da pretvore velike snove u stvarnost, izgrade trajne strukture i daju konkretne doprinose društvu. Ljudi sa ovim brojem nose duboku želju da ostave trajno nasleđe na svetu, realizuju velike projekte i postignu kako materijalni tako i duhovni uspeh.\n\nU najdubljim slojevima njihove duše, postoji motivacija da pretvore snove u stvarnost i kreiraju trajne vrednosti na svetu. Ova motivacija ih konstantno ohrabruje da rade, planiraju i grade. Nose snažnu energiju discipline i vizije u svom unutrašnjem svetu. Međutim, ova snažna želja za izgradnjom ponekad može da se manifestuje kao teška odgovornost, želja za kontrolom ili perfekcionizam.\n\nDuhovna želja ovog broja je da osoba pretvori svoje velike snove u stvarnost i ostavi trajno nasleđe na svetu. Njihove unutrašnje motivacije ih konstantno guraju da rade, grade i postignu uspeh. Kada su uravnoteženi, ova unutrašnja moć stvara moćnu transformaciju kako u njihovim sopstvenim životima tako i u njihovoj okolini.",
+      "33": "Ljudi sa brojem Duševne želje 33 imaju snažnu želju za bezuslovnom ljubavlju, saosećanjem i isceljenjem u svom unutrašnjem svetu. Njihova duša se hrani potrebom za univerzalnom službom, učenjem i isceljenjem. Postoji konstantna energija saosećanja i isceljenja koja gori u njima; ova energija ih vodi da pomažu drugima, uče i isceljuju. Ljudi sa ovim brojem nose duboku želju da pokažu bezuslovnu ljubav čovečanstvu, pruže isceljenje i vode društvo.\n\nU najdubljim slojevima njihove duše, postoji motivacija da šire univerzalnu ljubav i pomognu drugima da se izleče. Ova motivacija ih konstantno ohrabruje da služe, uče i isceljuju. Nose snažnu energiju saosećanja i učenja u svom unutrašnjem svetu. Međutim, ova snažna želja za službom ponekad može da se manifestuje kao prekomerna žrtva, iscrpljenost ili samozanemarivanje.\n\nDuhovna želja ovog broja je da osoba donese bezuslovnu ljubav i isceljenje svetu i uči čovečanstvo. Njihove unutrašnje motivacije ih konstantno guraju da služe, uče i isceljuju. Kada su uravnoteženi, ova unutraşnja moć stvara transformativno isceljenje kako u njihovim sopstvenim životima tako i u njihovoj okolini."
+    },
     "pinnaclesMeanings": [
       null,
       "Peak 1 označava da je tema nezavisnosti i rukovodstva snažno istaknuta u životu osobe. Tokom ovog perioda, osoba pravi nove početke i preuzima podebljane korake da bi se granila sopstveni put. Spark koji gori unutar stvara mogućnosti za pojedinačna dostignuća i preduzetništvo.\n\nMeđutim, postoji rizik od djeluje i samocentričnog ili autoritarnog tokom ovog perioda. Učenje saradnje sa drugima, proširiti viziju i balansiranje nezavisnosti i harmonijom najbolje donosi potencijal ovog vrhnja.",

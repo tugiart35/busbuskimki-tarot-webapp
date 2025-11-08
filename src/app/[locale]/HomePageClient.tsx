@@ -37,6 +37,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { BottomNavigation } from '@/features/shared/layout';
 import { useTranslations } from '@/hooks/useTranslations';
+import FastDeliveryInfoCard from '@/features/tarot/components/FastDeliveryInfoCard';
 
 interface HomePageClientProps {
   locale: string;
@@ -124,7 +125,17 @@ export function HomePageClient({
               {t('homepage.hero.description')}
             </p>
           </header>
-
+          {/* Delivery Time Alert */}
+          <FastDeliveryInfoCard
+            selectedReadingType={null}
+            readingTypes={{
+              SIMPLE: 'simple',
+              DETAILED: 'detailed',
+              WRITTEN: 'written',
+            }}
+            locale={locale as 'tr' | 'en' | 'sr'}
+            className='mb-12'
+          />
           {/* Services Showcase */}
           <section
             className='grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl w-full mb-16 animate-fadeIn'

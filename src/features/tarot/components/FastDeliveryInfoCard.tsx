@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useTranslations } from '@/hooks/useTranslations';
 import { Zap } from 'lucide-react';
 
 interface FastDeliveryInfoCardProps {
@@ -21,9 +20,7 @@ export default function FastDeliveryInfoCard({
   locale = 'tr',
   className = '',
 }: FastDeliveryInfoCardProps) {
-  const { t } = useTranslations();
   const [isVisible, setIsVisible] = useState(false);
-  const [userTimezone, setUserTimezone] = useState<string>('');
   const [workHours, setWorkHours] = useState<{ start: string; end: string }>({
     start: '',
     end: '',
@@ -47,7 +44,6 @@ export default function FastDeliveryInfoCard({
 
     try {
       const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-      setUserTimezone(timezone);
 
       // Türkiye saati (Europe/Istanbul) 12:00-19:00
       const turkeyTimezone = 'Europe/Istanbul';
@@ -58,13 +54,19 @@ export default function FastDeliveryInfoCard({
       const now = new Date();
 
       // Türkiye'deki şu anki saat
-      const turkeyHour = parseInt(
-        now.toLocaleString('en-US', {
+      const turkeyHourStr = now
+        .toLocaleString('en-US', {
           timeZone: turkeyTimezone,
           hour: '2-digit',
           hour12: false,
-        }).split(':')[0]
-      );
+        })
+        .split(':')[0];
+
+      if (!turkeyHourStr) {
+        throw new Error('Failed to get Turkey hour');
+      }
+
+      const turkeyHour = parseInt(turkeyHourStr);
 
       // Çalışma saatleri içinde miyiz?
       const currentlyActive =
@@ -83,9 +85,26 @@ export default function FastDeliveryInfoCard({
           minute: '2-digit',
           hour12: false,
         });
-        const [datePart, timePart] = turkeyNowStr.split(', ');
-        const [month, day, year] = datePart.split('/');
-        const [hour, minute] = timePart.split(':');
+        const parts = turkeyNowStr.split(', ');
+        const datePart = parts[0];
+        const timePart = parts[1];
+
+        if (!datePart || !timePart) {
+          throw new Error('Failed to parse date/time');
+        }
+
+        const dateParts = datePart.split('/');
+        const timeParts = timePart.split(':');
+
+        const month = dateParts[0];
+        const day = dateParts[1];
+        const year = dateParts[2];
+        const hour = timeParts[0];
+        const minute = timeParts[1];
+
+        if (!month || !day || !year || !hour || !minute) {
+          throw new Error('Failed to parse date/time components');
+        }
 
         const turkeyNowDate = new Date(
           Date.UTC(
@@ -113,7 +132,8 @@ export default function FastDeliveryInfoCard({
           turkeyCloseTime.setUTCDate(turkeyCloseTime.getUTCDate() + 1);
         }
 
-        const msUntilClose = turkeyCloseTime.getTime() - turkeyNowDate.getTime();
+        const msUntilClose =
+          turkeyCloseTime.getTime() - turkeyNowDate.getTime();
         const hoursUntilClose = Math.floor(msUntilClose / (1000 * 60 * 60));
         const minutesUntilClose = Math.floor(
           (msUntilClose % (1000 * 60 * 60)) / (1000 * 60)
@@ -146,7 +166,15 @@ export default function FastDeliveryInfoCard({
         month: '2-digit',
         day: '2-digit',
       });
-      const [month2, day2, year2] = todayStr.split('/');
+      const todayParts = todayStr.split('/');
+      const month2 = todayParts[0];
+      const day2 = todayParts[1];
+      const year2 = todayParts[2];
+
+      if (!month2 || !day2 || !year2) {
+        throw new Error('Failed to parse today date');
+      }
+
       const turkeyToday = new Date(
         Date.UTC(parseInt(year2), parseInt(month2) - 1, parseInt(day2))
       );
@@ -158,7 +186,7 @@ export default function FastDeliveryInfoCard({
       turkeyEndUTC.setUTCHours(turkeyEndHour, 0, 0, 0);
 
       // Kullanıcının saat dilimine çevir - format helper kullan
-      const formatTime = (utcDate: Date, tz: string, loc: string) => {
+      const formatTime = (utcDate: Date, tz: string) => {
         // UTC tarihini kullanıcının saat dilimine çevir
         const formatter = new Intl.DateTimeFormat('en-US', {
           timeZone: tz,
@@ -169,8 +197,8 @@ export default function FastDeliveryInfoCard({
         return formatter.format(utcDate);
       };
 
-      const userStartStr = formatTime(turkeyStartUTC, timezone, locale);
-      const userEndStr = formatTime(turkeyEndUTC, timezone, locale);
+      const userStartStr = formatTime(turkeyStartUTC, timezone);
+      const userEndStr = formatTime(turkeyEndUTC, timezone);
 
       setWorkHours({
         start: userStartStr,
@@ -180,7 +208,6 @@ export default function FastDeliveryInfoCard({
       // Kartı göster (smooth animasyon için kısa bir gecikme)
       setTimeout(() => setIsVisible(true), 100);
     } catch (error) {
-      console.error('Timezone detection error:', error);
       // Fallback: Türkiye saati göster
       setWorkHours({ start: '12:00', end: '19:00' });
       setIsActive(true);
@@ -275,4 +302,3 @@ export default function FastDeliveryInfoCard({
     </div>
   );
 }
-

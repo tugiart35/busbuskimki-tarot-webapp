@@ -77,6 +77,23 @@ export default function NumerologyResultPage({
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const splitFullName = (value?: string) => {
+    if (!value) {
+      return { firstName: '', lastName: '' };
+    }
+    const parts = value.trim().split(/\s+/).filter(Boolean);
+    if (parts.length === 0) {
+      return { firstName: '', lastName: '' };
+    }
+    if (parts.length === 1) {
+      return { firstName: parts[0], lastName: parts[0] };
+    }
+    return {
+      firstName: parts.slice(0, -1).join(' '),
+      lastName: parts.slice(-1).join(' '),
+    };
+  };
+
   useEffect(() => {
     const calculateResult = () => {
       try {
@@ -134,15 +151,27 @@ export default function NumerologyResultPage({
           targetDate,
         };
 
+        if (fullName) {
+          const nameParts = splitFullName(fullName);
+          input.firstName = nameParts.firstName;
+          input.lastName = nameParts.lastName;
+        }
+
         // Uyum analizi için özel parametreler
         if (type === 'compatibility') {
+          const personANameParts = splitFullName(personA_fullName);
+          const personBNameParts = splitFullName(personB_fullName);
           input.personA = {
             fullName: personA_fullName,
             birthDate: personA_birthDate,
+            firstName: personANameParts.firstName,
+            lastName: personANameParts.lastName,
           };
           input.personB = {
             fullName: personB_fullName,
             birthDate: personB_birthDate,
+            firstName: personBNameParts.firstName,
+            lastName: personBNameParts.lastName,
           };
         }
 
@@ -226,7 +255,7 @@ export default function NumerologyResultPage({
     );
   }
 
-  const numberMeaning = getNumberMeaning(result.number);
+  const numberMeaning = getNumberMeaning(result.number, locale);
 
   return (
     <div className='min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white'>

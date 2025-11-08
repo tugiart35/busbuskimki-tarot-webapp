@@ -10,20 +10,23 @@ import {
   getExpressionNumberMeaning,
   getPersonalityNumberMeaning,
   getMaturityNumberMeaning,
-  getPinnacleNumberMeaning,
-  getChallengeNumberMeaning,
+  getPinnacleNumberMeaningSafe,
+  getChallengeNumberMeaningSafe,
   getPersonalYearNumberMeaning,
   getCompatibilityNumberMeaning,
+  getSoulUrgeNumberMeaning,
 } from './meanings';
 import {
   sumNameValues,
   sumVowelValues,
   sumConsonantValues,
   sumDateDigits,
+  sumDigits,
+  reduceToSingle,
+  reduceWithMasters,
   reduceToSingleDigit,
   extractDateParts,
   getBirthdayNumber,
-  getAbsoluteDifference,
 } from './normalize';
 
 /**
@@ -38,7 +41,7 @@ export function calculateLifePath(
   const number = reduceToSingleDigit(sum);
   const isMasterNumber = MASTER_NUMBERS.includes(number as any);
 
-  const lifePathMeaning = getLifePathNumberMeaning(number);
+  const lifePathMeaning = getLifePathNumberMeaning(number, locale);
 
   // Fallback açıklama
   const fallbackDescription =
@@ -71,7 +74,7 @@ export function calculateExpressionDestiny(
   const number = reduceToSingleDigit(sum);
   const isMasterNumber = MASTER_NUMBERS.includes(number as any);
 
-  const expressionMeaning = getExpressionNumberMeaning(number);
+  const expressionMeaning = getExpressionNumberMeaning(number, locale);
 
   // Name normalization not needed for this calculation
 
@@ -96,22 +99,72 @@ export function calculateExpressionDestiny(
  * İsmin sesli harflerinin değerlerini toplar
  */
 export function calculateSoulUrge(
-  firstName: string,
-  lastName: string
+  fullNameOrFirstName: string,
+  lastNameOrLocale?: string,
+  maybeLocale?: string
 ): NumerologyResult {
-  // İsim ve soyisimi birleştir
-  const fullName = `${firstName} ${lastName}`.trim();
+  const SUPPORTED_LOCALES = ['tr', 'en', 'sr'];
+  const DEFAULT_LOCALE = 'tr';
+
+  let firstName = fullNameOrFirstName ?? '';
+  let lastName = '';
+  let locale = DEFAULT_LOCALE;
+
+  if (typeof maybeLocale === 'string') {
+    locale = maybeLocale;
+    lastName = lastNameOrLocale ?? '';
+  } else if (typeof lastNameOrLocale === 'string') {
+    const lowered = lastNameOrLocale.toLowerCase();
+    if (SUPPORTED_LOCALES.includes(lowered)) {
+      locale = lowered;
+    } else {
+      lastName = lastNameOrLocale;
+    }
+  }
+
+  firstName = firstName.trim();
+  lastName = (lastName ?? '').trim();
+
+  if (!lastName && firstName.includes(' ')) {
+    const parts = firstName.split(/\s+/).filter(Boolean);
+    if (parts.length > 1) {
+      firstName = parts.slice(0, -1).join(' ');
+      lastName = parts.slice(-1).join(' ');
+    } else {
+      firstName = parts[0] ?? '';
+    }
+  }
+
+  const fullName = [firstName, lastName].filter(Boolean).join(' ').trim();
   const sum = sumVowelValues(fullName);
   const number = reduceToSingleDigit(sum);
   const isMasterNumber = MASTER_NUMBERS.includes(number as any);
 
-  // Name normalization not needed for this calculation
-  // Vowel calculation not needed for this function
+  const localeStr = locale?.toLowerCase?.().split('-')[0];
+  const normalizedLocale: string =
+    localeStr && SUPPORTED_LOCALES.includes(localeStr as any)
+      ? localeStr
+      : DEFAULT_LOCALE;
+
+  // Ruh Arzusu sayısı için detaylı açıklamayı al
+  const soulUrgeMeaning = getSoulUrgeNumberMeaning(number, normalizedLocale);
+
+  // Eğer detaylı açıklama varsa onu kullan, yoksa genel açıklamayı kullan
+  const descriptions: Record<string, string> = {
+    tr: 'İç dünyanızı ve gerçek arzularınızı gösterir.',
+    en: 'Reveals your inner motivations and true soul desires.',
+    sr: 'Otkriva vaše unutrašnje motivacije i želje duše.',
+  };
+
+  const finalDescription = (soulUrgeMeaning ??
+    descriptions[normalizedLocale] ??
+    descriptions[DEFAULT_LOCALE] ??
+    descriptions.tr) as string;
 
   return {
     number,
     isMasterNumber,
-    description: 'İç dünyanızı ve gerçek arzularınızı gösterir.',
+    description: finalDescription,
     type: 'soul-urge',
   };
 }
@@ -135,7 +188,7 @@ export function calculatePersonality(
   // Consonant calculation not needed for this function
 
   // Kişilik sayısı anlamını al
-  const personalityMeaning = getPersonalityNumberMeaning(number);
+  const personalityMeaning = getPersonalityNumberMeaning(number, locale);
   let description =
     'Dışarıdan nasıl algılandığınızı ve ilk izlenim kimyanızı gösterir.';
 
@@ -171,7 +224,7 @@ export function calculateBirthdayNumber(
   const isMasterNumber = MASTER_NUMBERS.includes(number as any);
 
   // Lokalizasyon için doğum günü anlamını al
-  const birthdayMeaning = getBirthdayNumberMeaning(number);
+  const birthdayMeaning = getBirthdayNumberMeaning(number, locale);
 
   // Fallback açıklama
   const fallbackDescription =
@@ -203,7 +256,7 @@ export function calculateMaturity(
   const isMasterNumber = MASTER_NUMBERS.includes(number as any);
 
   // Olgunluk sayısı anlamını al
-  const maturityMeaning = getMaturityNumberMeaning(number);
+  const maturityMeaning = getMaturityNumberMeaning(number, locale);
   let description =
     '35+ yaş sonrası ana temanızı ve olgunluk döneminizdeki odaklanma alanınızı gösterir.';
 
@@ -226,99 +279,113 @@ export function calculateMaturity(
   };
 }
 
-/**
- * Zirveler ve Zorluklar hesaplar
- * Hayatı dönemlere böler
- */
+function lifePathSingleDigit(year: number, month: number, day: number): number {
+  // Life Path tek haneye (11/22 burada tek haneye indirgenir; dönem hesabı böyle yapılır)
+  const total = sumDigits(year) + sumDigits(month) + sumDigits(day);
+  return reduceToSingle(total);
+}
+
+function formatPeriodLabel(
+  locale: string,
+  start: number,
+  end?: number
+): string {
+  const loc = (locale?.toLowerCase?.().split('-')[0] ?? 'tr') as
+    | 'tr'
+    | 'en'
+    | 'sr';
+  if (!end && end !== 0) {
+    return loc === 'en'
+      ? `Age ${start}+`
+      : loc === 'sr'
+        ? `${start}+ godina`
+        : `${start}+ yaş`;
+  }
+  return loc === 'en'
+    ? `Age ${start}–${end}`
+    : loc === 'sr'
+      ? `${start}–${end} godina`
+      : `${start}–${end} yaş`;
+}
+
 export function calculatePinnaclesChallenges(
   birthDate: string,
   locale: string = 'tr'
 ): NumerologyResult {
+  if (!birthDate || typeof birthDate !== 'string' || birthDate.trim() === '') {
+    throw new Error('Doğum tarihi gerekli ve geçerli bir format olmalı');
+  }
+
   const { month, day, year } = extractDateParts(birthDate);
 
-  // Zirveler
-  const pinnacle1 = reduceToSingleDigit(month + day);
-  const pinnacle2 = reduceToSingleDigit(day + year);
-  const pinnacle3 = reduceToSingleDigit(pinnacle1 + pinnacle2);
-  const pinnacle4 = reduceToSingleDigit(month + year);
+  // Bileşenleri tek haneye indir (master koruması burada yok)
+  const m = reduceToSingle(sumDigits(month));
+  const d = reduceToSingle(sumDigits(day));
+  const y = reduceToSingle(sumDigits(year));
 
-  // Zorluklar
-  const challenge1 = reduceToSingleDigit(getAbsoluteDifference(month, day));
-  const challenge2 = reduceToSingleDigit(getAbsoluteDifference(day, year));
-  const challenge3 = reduceToSingleDigit(
-    getAbsoluteDifference(challenge1, challenge2)
-  );
-  const challenge4 = reduceToSingleDigit(getAbsoluteDifference(month, year));
+  // Yaşam Yolu (tek hane) → dönem sonları
+  const lp = lifePathSingleDigit(year, month, day);
+  const firstEnd = 36 - lp; // 27..35 aralığı
+  const secondEnd = firstEnd + 9; // +9 yıl
+  const thirdEnd = secondEnd + 9; // +9 yıl
 
-  // Zirve açıklamalarını al
-  const pinnacle1Meaning = getPinnacleNumberMeaning(pinnacle1);
-  const pinnacle2Meaning = getPinnacleNumberMeaning(pinnacle2);
-  const pinnacle3Meaning = getPinnacleNumberMeaning(pinnacle3);
-  const pinnacle4Meaning = getPinnacleNumberMeaning(pinnacle4);
+  // Zirveler (sonuç 11/22/33 ise koru)
+  const p1 = reduceWithMasters(m + d);
+  const p2 = reduceWithMasters(d + y);
+  const p3 = reduceWithMasters(reduceToSingle(p1) + reduceToSingle(p2));
+  const p4 = reduceWithMasters(m + y);
 
-  // Zorluk açıklamalarını al
-  const challenge1Meaning = getChallengeNumberMeaning(challenge1);
-  const challenge2Meaning = getChallengeNumberMeaning(challenge2);
-  const challenge3Meaning = getChallengeNumberMeaning(challenge3);
-  const challenge4Meaning = getChallengeNumberMeaning(challenge4);
+  // Zorluklar (0–8; master yok)
+  const c1 = reduceToSingle(Math.abs(m - d));
+  const c2 = reduceToSingle(Math.abs(d - y));
+  const c3 = reduceToSingle(Math.abs(c1 - c2));
+  const c4 = reduceToSingle(Math.abs(m - y));
+
+  // Açıklamalar (senin mevcut getter’larınla)
+  const pinnacle1Meaning = getPinnacleNumberMeaningSafe(p1, locale);
+  const pinnacle2Meaning = getPinnacleNumberMeaningSafe(p2, locale);
+  const pinnacle3Meaning = getPinnacleNumberMeaningSafe(p3, locale);
+  const pinnacle4Meaning = getPinnacleNumberMeaningSafe(p4, locale);
+
+  const challenge1Meaning = getChallengeNumberMeaningSafe(c1, locale);
+  const challenge2Meaning = getChallengeNumberMeaningSafe(c2, locale);
+  const challenge3Meaning = getChallengeNumberMeaningSafe(c3, locale);
+  const challenge4Meaning = getChallengeNumberMeaningSafe(c4, locale);
+
+  const periodLabels = [
+    formatPeriodLabel(locale, 0, firstEnd),
+    formatPeriodLabel(locale, firstEnd + 1, secondEnd),
+    formatPeriodLabel(locale, secondEnd + 1, thirdEnd),
+    formatPeriodLabel(locale, thirdEnd + 1),
+  ] as const;
+  const [period1, period2, period3, period4] = periodLabels;
 
   const pinnacles = [
-    {
-      period: '0-27 yaş',
-      number: pinnacle1,
-      description: pinnacle1Meaning || 'İlk dönem teması',
-    },
-    {
-      period: '28-36 yaş',
-      number: pinnacle2,
-      description: pinnacle2Meaning || 'İkinci dönem teması',
-    },
-    {
-      period: '37-45 yaş',
-      number: pinnacle3,
-      description: pinnacle3Meaning || 'Üçüncü dönem teması',
-    },
-    {
-      period: '46+ yaş',
-      number: pinnacle4,
-      description: pinnacle4Meaning || 'Son dönem teması',
-    },
+    { period: period1, number: p1, description: pinnacle1Meaning ?? '' },
+    { period: period2, number: p2, description: pinnacle2Meaning ?? '' },
+    { period: period3, number: p3, description: pinnacle3Meaning ?? '' },
+    { period: period4, number: p4, description: pinnacle4Meaning ?? '' },
   ];
 
   const challenges = [
-    {
-      period: '0-27 yaş',
-      number: challenge1,
-      description: challenge1Meaning || 'İlk dönem sınavı',
-    },
-    {
-      period: '28-36 yaş',
-      number: challenge2,
-      description: challenge2Meaning || 'İkinci dönem sınavı',
-    },
-    {
-      period: '37-45 yaş',
-      number: challenge3,
-      description: challenge3Meaning || 'Üçüncü dönem sınavı',
-    },
-    {
-      period: '46+ yaş',
-      number: challenge4,
-      description: challenge4Meaning || 'Son dönem sınavı',
-    },
+    { period: period1, number: c1, description: challenge1Meaning ?? '' },
+    { period: period2, number: c2, description: challenge2Meaning ?? '' },
+    { period: period3, number: c3, description: challenge3Meaning ?? '' },
+    { period: period4, number: c4, description: challenge4Meaning ?? '' },
   ];
 
-  // Ana açıklama
-  let description =
-    'Hayatınızı dönemlere böler ve her dönemin teması ile sınavını gösterir.';
-  const fallbackDescriptions: Record<string, string> = {
-    en: 'Divides your life into periods and shows the theme and challenge of each period.',
-    sr: 'Deli vaš život na periode i pokazuje temu i izazov svakog perioda.',
+  const loc = locale?.toLowerCase?.().split('-')[0] ?? 'tr';
+  const descMap = {
+    tr: 'Hayatını dört döneme ayırır; her dönemin teması (Zirve) ve sınavı (Zorluk) gösterilir.',
+    en: 'Divides life into four periods and shows each period’s theme (Pinnacle) and lesson (Challenge).',
+    sr: 'Deli život na četiri perioda i pokazuje temu (Vrh) i izazov svakog perioda.',
   };
-  description = fallbackDescriptions[locale] || description;
+  const localeKey: keyof typeof descMap =
+    loc === 'en' || loc === 'sr' ? (loc as 'en' | 'sr') : 'tr';
+  const description = descMap[localeKey];
 
   return {
-    number: 0, // Bu analiz için ana sayı yok
+    number: 0,
     isMasterNumber: false,
     description,
     type: 'pinnacles-challenges',
@@ -326,7 +393,6 @@ export function calculatePinnaclesChallenges(
     challenges,
   };
 }
-
 /**
  * Kişisel döngüler hesaplar
  * Yıllık, aylık, günlük enerji takvimi
@@ -336,6 +402,8 @@ export function calculatePersonalCycles(
   targetDate: string,
   locale: string = 'tr'
 ): NumerologyResult {
+  const normalizedLocale = locale?.toLowerCase?.().split('-')[0] ?? 'tr';
+
   const { month: birthMonth, day: birthDay } = extractDateParts(birthDate);
   const { month: targetMonth, day: targetDay } = extractDateParts(targetDate);
 
@@ -351,7 +419,10 @@ export function calculatePersonalCycles(
   const personalDay = reduceToSingleDigit(personalMonth + targetDay);
 
   // Kişisel yıl açıklamasını al
-  const personalYearMeaning = getPersonalYearNumberMeaning(personalYear);
+  const personalYearMeaning = getPersonalYearNumberMeaning(
+    personalYear,
+    locale
+  );
 
   // Ana açıklama
   let description = 'Yıllık, aylık ve günlük enerji takviminizi gösterir.';
@@ -359,11 +430,17 @@ export function calculatePersonalCycles(
     en: 'Shows your annual, monthly, and daily energy calendar.',
     sr: 'Pokazuje vaš godišnji, mesečni i dnevni energetski kalendar.',
   };
-  description = fallbackDescriptions[locale] || description;
+  description = fallbackDescriptions[normalizedLocale] || description;
 
   // Kişisel yıl açıklaması varsa ekle
   if (personalYearMeaning) {
-    description += `\n\n**Kişisel Yıl ${personalYear}:**\n${personalYearMeaning}`;
+    const yearTitleMap: Record<string, string> = {
+      tr: `**Kişisel Yıl ${personalYear}:**`,
+      en: `**Personal Year ${personalYear}:**`,
+      sr: `**Lična Godina ${personalYear}:**`,
+    };
+    const yearTitle = yearTitleMap[normalizedLocale] ?? yearTitleMap.tr;
+    description += `\n\n${yearTitle}\n${personalYearMeaning}`;
   }
 
   return {
@@ -387,86 +464,188 @@ export function calculateCompatibility(
   locale: string = 'tr'
 ): NumerologyResult {
   // Her kişi için ana sayıları hesapla
-  const lifePathA = calculateLifePath(personA.birthDate);
+  const lifePathA = calculateLifePath(personA.birthDate, locale);
   const expressionA = calculateExpressionDestiny(
     personA.firstName,
-    personA.lastName
+    personA.lastName,
+    locale
   );
-  const soulUrgeA = calculateSoulUrge(personA.firstName, personA.lastName);
+  const soulUrgeA = calculateSoulUrge(
+    personA.firstName,
+    personA.lastName,
+    locale
+  );
   const personalityA = calculatePersonality(
     personA.firstName,
-    personA.lastName
+    personA.lastName,
+    locale
   );
 
-  const lifePathB = calculateLifePath(personB.birthDate);
+  const lifePathB = calculateLifePath(personB.birthDate, locale);
   const expressionB = calculateExpressionDestiny(
     personB.firstName,
-    personB.lastName
+    personB.lastName,
+    locale
   );
-  const soulUrgeB = calculateSoulUrge(personB.firstName, personB.lastName);
+  const soulUrgeB = calculateSoulUrge(
+    personB.firstName,
+    personB.lastName,
+    locale
+  );
   const personalityB = calculatePersonality(
     personB.firstName,
-    personB.lastName
+    personB.lastName,
+    locale
   );
+
+  const normalizedLocale = locale?.toLowerCase?.().split('-')[0] ?? 'tr';
 
   // Uyum skorunu hesapla
   let score = 0;
   const notes: string[] = [];
 
   // Yaşam yolu uyumu
+  const lifePathNotes: Record<
+    'tr' | 'en' | 'sr',
+    { exact: string; close: string; diff: string }
+  > = {
+    tr: {
+      exact: 'Aynı yaşam yolu sayısı - güçlü anlayış',
+      close: 'Uyumlu yaşam yolu sayıları',
+      diff: 'Farklı yaşam yolu sayıları - çeşitlilik',
+    },
+    en: {
+      exact: 'Same life path number - strong understanding',
+      close: 'Harmonious life path numbers',
+      diff: 'Different life path numbers - diversity',
+    },
+    sr: {
+      exact: 'Isti broj životnog puta - snažno razumevanje',
+      close: 'Kompatibilni brojevi životnog puta',
+      diff: 'Različiti brojevi životnog puta - raznovrsnost',
+    },
+  };
+  const expressionNotes: Record<
+    'tr' | 'en' | 'sr',
+    { exact: string; close: string; diff: string }
+  > = {
+    tr: {
+      exact: 'Aynı ifade sayısı - benzer yetenekler',
+      close: 'Uyumlu ifade sayıları',
+      diff: 'Farklı ifade sayıları - tamamlayıcılık',
+    },
+    en: {
+      exact: 'Same expression number - similar talents',
+      close: 'Harmonious expression numbers',
+      diff: 'Different expression numbers - complementarity',
+    },
+    sr: {
+      exact: 'Isti broj izraza - slični talenti',
+      close: 'Kompatibilni brojevi izraza',
+      diff: 'Različiti brojevi izraza - komplementarnost',
+    },
+  };
+  const soulUrgeNotes: Record<
+    'tr' | 'en' | 'sr',
+    { exact: string; close: string; diff: string }
+  > = {
+    tr: {
+      exact: 'Aynı ruh arzusu - derin bağlantı',
+      close: 'Uyumlu ruh arzuları',
+      diff: 'Farklı ruh arzuları - denge',
+    },
+    en: {
+      exact: 'Same soul urge - deep connection',
+      close: 'Harmonious soul urges',
+      diff: 'Different soul urges - balance',
+    },
+    sr: {
+      exact: 'Ista želja duše - duboka veza',
+      close: 'Kompatibilne želje duše',
+      diff: 'Različite želje duše - ravnoteža',
+    },
+  };
+  const personalityNotes: Record<
+    'tr' | 'en' | 'sr',
+    { exact: string; close: string; diff: string }
+  > = {
+    tr: {
+      exact: 'Aynı kişilik sayısı - benzer dış görünüm',
+      close: 'Uyumlu kişilik sayıları',
+      diff: 'Farklı kişilik sayıları - çekicilik',
+    },
+    en: {
+      exact: 'Same personality number - similar outward vibe',
+      close: 'Harmonious personality numbers',
+      diff: 'Different personality numbers - attraction',
+    },
+    sr: {
+      exact: 'Isti broj ličnosti - sličan spoljašnji utisak',
+      close: 'Kompatibilni brojevi ličnosti',
+      diff: 'Različiti brojevi ličnosti - privlačnost',
+    },
+  };
+
+  const noteLocale: 'tr' | 'en' | 'sr' =
+    normalizedLocale === 'en' || normalizedLocale === 'sr'
+      ? normalizedLocale
+      : 'tr';
+
   if (lifePathA.number === lifePathB.number) {
     score += 25;
-    notes.push('Aynı yaşam yolu sayısı - güçlü anlayış');
+    notes.push(lifePathNotes[noteLocale].exact);
   } else if (Math.abs(lifePathA.number - lifePathB.number) <= 1) {
     score += 20;
-    notes.push('Uyumlu yaşam yolu sayıları');
+    notes.push(lifePathNotes[noteLocale].close);
   } else {
     score += 10;
-    notes.push('Farklı yaşam yolu sayıları - çeşitlilik');
+    notes.push(lifePathNotes[noteLocale].diff);
   }
 
   // İfade uyumu
   if (expressionA.number === expressionB.number) {
     score += 25;
-    notes.push('Aynı ifade sayısı - benzer yetenekler');
+    notes.push(expressionNotes[noteLocale].exact);
   } else if (Math.abs(expressionA.number - expressionB.number) <= 1) {
     score += 20;
-    notes.push('Uyumlu ifade sayıları');
+    notes.push(expressionNotes[noteLocale].close);
   } else {
     score += 10;
-    notes.push('Farklı ifade sayıları - tamamlayıcılık');
+    notes.push(expressionNotes[noteLocale].diff);
   }
 
   // Ruh arzusu uyumu
   if (soulUrgeA.number === soulUrgeB.number) {
     score += 25;
-    notes.push('Aynı ruh arzusu - derin bağlantı');
+    notes.push(soulUrgeNotes[noteLocale].exact);
   } else if (Math.abs(soulUrgeA.number - soulUrgeB.number) <= 1) {
     score += 20;
-    notes.push('Uyumlu ruh arzuları');
+    notes.push(soulUrgeNotes[noteLocale].close);
   } else {
     score += 10;
-    notes.push('Farklı ruh arzuları - denge');
+    notes.push(soulUrgeNotes[noteLocale].diff);
   }
 
   // Kişilik uyumu
   if (personalityA.number === personalityB.number) {
     score += 25;
-    notes.push('Aynı kişilik sayısı - benzer dış görünüm');
+    notes.push(personalityNotes[noteLocale].exact);
   } else if (Math.abs(personalityA.number - personalityB.number) <= 1) {
     score += 20;
-    notes.push('Uyumlu kişilik sayıları');
+    notes.push(personalityNotes[noteLocale].close);
   } else {
     score += 10;
-    notes.push('Farklı kişilik sayıları - çekicilik');
+    notes.push(personalityNotes[noteLocale].diff);
   }
 
   // Genel uyum sayısı
   const compatibilityNumber = reduceToSingleDigit(score);
 
   // Uyum sayısı açıklamasını al
-  const compatibilityMeaning =
-    getCompatibilityNumberMeaning(compatibilityNumber);
+  const compatibilityMeaning = getCompatibilityNumberMeaning(
+    compatibilityNumber,
+    locale
+  );
 
   // Ana açıklama
   let description = 'İki kişi arasındaki numerolojik uyumu analiz eder.';
@@ -474,11 +653,18 @@ export function calculateCompatibility(
     en: 'Analyzes the numerological compatibility between two people.',
     sr: 'Analizira numerološku kompatibilnost između dve osobe.',
   };
-  description = fallbackDescriptions[locale] || description;
+  description = fallbackDescriptions[normalizedLocale] || description;
 
   // Uyum sayısı açıklaması varsa ekle
   if (compatibilityMeaning) {
-    description += `\n\n**Uyum Sayısı ${compatibilityNumber}:**\n${compatibilityMeaning}`;
+    const compatibilityTitleMap: Record<string, string> = {
+      tr: `**Uyum Sayısı ${compatibilityNumber}:**`,
+      en: `**Compatibility Number ${compatibilityNumber}:**`,
+      sr: `**Broj Kompatibilnosti ${compatibilityNumber}:**`,
+    };
+    const compatibilityTitle =
+      compatibilityTitleMap[normalizedLocale] ?? compatibilityTitleMap.tr;
+    description += `\n\n${compatibilityTitle}\n${compatibilityMeaning}`;
   }
 
   return {
@@ -529,7 +715,7 @@ export function calculateNumerology(
       if (!input.firstName || !input.lastName) {
         throw new Error('İsim ve soyisim gerekli');
       }
-      return calculateSoulUrge(input.firstName, input.lastName);
+      return calculateSoulUrge(input.firstName, input.lastName, locale);
 
     case 'personality':
       if (!input.firstName || !input.lastName) {
@@ -547,10 +733,11 @@ export function calculateNumerology(
       if (!input.birthDate || !input.firstName || !input.lastName) {
         throw new Error('Doğum tarihi, isim ve soyisim gerekli');
       }
-      const lifePath = calculateLifePath(input.birthDate);
+      const lifePath = calculateLifePath(input.birthDate, locale);
       const expression = calculateExpressionDestiny(
         input.firstName,
-        input.lastName
+        input.lastName,
+        locale
       );
       return calculateMaturity(lifePath.number, expression.number, locale);
 

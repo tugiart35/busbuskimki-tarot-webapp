@@ -1,6 +1,6 @@
 /**
  * Spread ID Mapping Utility
- * 
+ *
  * Supabase'deki numeric spread_id ile tarotSpreads'teki string id'leri
  * arasında mapping yapar.
  */
@@ -65,9 +65,7 @@ export async function mapSpreadIdToTarotSpreadId(
 /**
  * tarotSpreads string id'sini Supabase category'sine çevirir
  */
-export function mapSpreadIdToCategory(
-  spreadId: string
-): string | null {
+export function mapSpreadIdToCategory(spreadId: string): string | null {
   const spread = tarotSpreads.find(s => s.id === spreadId);
   if (!spread) {
     return null;
@@ -115,4 +113,3 @@ export async function getSpreadIdFromSupabase(
     return null;
   }
 }
-

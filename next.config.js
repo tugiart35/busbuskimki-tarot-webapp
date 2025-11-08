@@ -89,13 +89,13 @@ const nextConfig = {
               name(module) {
                 // Safely extract package name from node_modules path
                 if (!module.context) return 'npm.common';
-                
+
                 const match = module.context.match(
                   /[\\/]node_modules[\\/](.*?)([\\/]|$)/
                 );
-                
+
                 if (!match || !match[1]) return 'npm.common';
-                
+
                 const packageName = match[1].replace('@', '');
                 return `npm.${packageName}`;
               },
@@ -139,16 +139,20 @@ const nextConfig = {
       },
       // ... existing cache headers ...
     ];
-  
+
     // Production ortamında indexing'e açıkça izin ver
     // Vercel'in preview deployment'larda otomatik noindex eklemesini override et
-    if (process.env.NODE_ENV === 'production' && process.env.VERCEL_ENV === 'production') {
+    if (
+      process.env.NODE_ENV === 'production' &&
+      process.env.VERCEL_ENV === 'production'
+    ) {
       headers[0].headers.push({
         key: 'X-Robots-Tag',
-        value: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
+        value:
+          'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
       });
     }
-  
+
     return headers;
   },
 

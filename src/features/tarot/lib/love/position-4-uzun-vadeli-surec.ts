@@ -1453,10 +1453,16 @@ export const getI18nPosition4Meaning = (
     upright: i18nUpright || originalMeaning.upright,
     reversed: i18nReversed || originalMeaning.reversed,
     keywords: (() => {
-      if (!i18nKeywords || i18nKeywords === `love.meanings.${cardKey}.position4.keywords`) {
+      if (
+        !i18nKeywords ||
+        i18nKeywords === `love.meanings.${cardKey}.position4.keywords`
+      ) {
         return originalMeaning.keywords;
       }
-      if (i18nKeywords.trim().startsWith('[') || i18nKeywords.trim().startsWith('{')) {
+      if (
+        i18nKeywords.trim().startsWith('[') ||
+        i18nKeywords.trim().startsWith('{')
+      ) {
         try {
           const parsed = JSON.parse(i18nKeywords);
           if (Array.isArray(parsed)) {
@@ -1472,7 +1478,10 @@ export const getI18nPosition4Meaning = (
         }
       }
       if (typeof i18nKeywords === 'string' && i18nKeywords.includes(',')) {
-        return i18nKeywords.split(',').map(k => k.trim()).filter(Boolean);
+        return i18nKeywords
+          .split(',')
+          .map(k => k.trim())
+          .filter(Boolean);
       }
       return originalMeaning.keywords;
     })(),

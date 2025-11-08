@@ -35,7 +35,6 @@ export default function NumerologyPage({ params }: NumerologyPageProps) {
     | 'personality'
     | 'birthday-number'
     | 'maturity'
-    | 'pinnacles-challenges'
     | 'personal-cycles'
     | 'compatibility'
   >('life-path');
@@ -220,11 +219,6 @@ export default function NumerologyPage({ params }: NumerologyPageProps) {
         input.firstName = firstName;
         input.lastName = lastName;
       } else if (
-        activeTab === 'pinnacles-challenges' &&
-        sanitizedFormData.birthDate
-      ) {
-        input.birthDate = sanitizedFormData.birthDate;
-      } else if (
         activeTab === 'personal-cycles' &&
         sanitizedFormData.birthDate &&
         sanitizedFormData.targetDate
@@ -314,11 +308,6 @@ export default function NumerologyPage({ params }: NumerologyPageProps) {
       id: 'maturity' as const,
       label: t('numerology.page.tabs.maturity'),
       icon: '🌳',
-    },
-    {
-      id: 'pinnacles-challenges' as const,
-      label: t('numerology.page.tabs.pinnaclesChallenges'),
-      icon: '⛰️',
     },
     {
       id: 'personal-cycles' as const,
@@ -452,8 +441,6 @@ export default function NumerologyPage({ params }: NumerologyPageProps) {
                   t('numerology.page.descriptions.birthdayNumber')}
                 {activeTab === 'maturity' &&
                   t('numerology.page.descriptions.maturity')}
-                {activeTab === 'pinnacles-challenges' &&
-                  t('numerology.page.descriptions.pinnaclesChallenges')}
                 {activeTab === 'personal-cycles' &&
                   t('numerology.page.descriptions.personalCycles')}
                 {activeTab === 'compatibility' &&
@@ -553,23 +540,6 @@ export default function NumerologyPage({ params }: NumerologyPageProps) {
                       required
                     />
                   </div>
-                </div>
-              )}
-
-              {/* Pinnacles & Challenges - Birth Date */}
-              {activeTab === 'pinnacles-challenges' && (
-                <div>
-                  <label className='block text-sm font-semibold mb-3 text-gray-200'>
-                    📅 {t('numerology.page.form.birthDate')}
-                  </label>
-                  <DatePicker
-                    value={formData.birthDate}
-                    onChange={value => handleInputChange('birthDate', value)}
-                    placeholder='GG.AA.YYYY'
-                    error={!!securityError}
-                    minDate={new Date(1900, 0, 1)}
-                    maxDate={new Date()}
-                  />
                 </div>
               )}
 

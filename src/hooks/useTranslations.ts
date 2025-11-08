@@ -28,22 +28,12 @@ Kullanım durumu:
 
 import { usePathname } from 'next/navigation';
 import { useMemo, useCallback } from 'react';
-
-// Dil dosyalarını import et
-import trMessages from '../../messages/tr.json';
-import enMessages from '../../messages/en.json';
-import srMessages from '../../messages/sr.json';
-
-// Dil dosyaları mapping
-const messages = {
-  tr: trMessages,
-  en: enMessages,
-  sr: srMessages,
-};
-
-// Desteklenen diller
-const supportedLocales = ['tr', 'en', 'sr'] as const;
-type Locale = (typeof supportedLocales)[number];
+import {
+  getFallbackMessages,
+  getLocaleMessages,
+  isSupportedLocale,
+  type Locale,
+} from '@/lib/i18n/messages';
 
 // Nested key'leri çözmek için helper fonksiyon
 function getNestedValue(obj: Record<string, unknown>, path: string): string {
@@ -66,13 +56,17 @@ export function useTranslations() {
       return 'tr';
     }
     const locale = pathname.split('/')[1] as Locale;
-    return supportedLocales.includes(locale) ? locale : 'tr';
+    return isSupportedLocale(locale) ? locale : 'tr';
   }, [pathname]);
 
   // Messages kontrolü
   const currentMessages = useMemo(() => {
-    return messages[currentLocale] || messages.tr || {};
+    return getLocaleMessages(currentLocale);
   }, [currentLocale]);
+
+  const fallbackMessages = useMemo(() => {
+    return getFallbackMessages();
+  }, []);
 
   // Çeviri fonksiyonu - stable referans için useCallback kullan
   const t = useCallback(
@@ -92,7 +86,7 @@ export function useTranslations() {
           result = message;
         } else if (currentLocale !== 'tr') {
           // Fallback olarak Türkçe'yi dene
-          const fallbackMessage = getNestedValue(messages.tr, key);
+          const fallbackMessage = getNestedValue(fallbackMessages, key);
           if (fallbackMessage && typeof fallbackMessage === 'string') {
             result = fallbackMessage;
           } else {
