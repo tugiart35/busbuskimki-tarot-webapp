@@ -40,6 +40,7 @@ interface EmailData {
   to: string;
   subject: string;
   html: string;
+  text?: string;
   attachments?: Array<{
     filename: string;
     content: Buffer;
@@ -105,6 +106,7 @@ class EmailService {
         to: emailData.to,
         subject: emailData.subject,
         html: emailData.html,
+        ...(emailData.text && { text: emailData.text }),
         attachments: emailData.attachments,
       };
 
@@ -125,8 +127,8 @@ class EmailService {
   async sendTarotReadingPDF(
     userEmail: string,
     readingData: any,
-    _pdfBuffer: Buffer,
-    _fileName: string
+    _pdfBuffer: Buffer | undefined,
+    _fileName: string | undefined
   ): Promise<boolean> {
     // Sadece güzel e-posta template'i - PDF gönderimi yok
     const htmlTemplate = this.generateEmailTemplate(readingData, userEmail);

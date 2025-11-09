@@ -71,10 +71,10 @@ export function useTarotSaveState({
   const { t } = useTranslations();
 
   const detailedCredits = useReadingCredits(
-    resolveCreditKey(config.creditKeys.detailed)
+    resolveCreditKey(config.creditKeys?.detailed || 'DEFAULT_DETAILED')
   );
   const writtenCredits = useReadingCredits(
-    resolveCreditKey(config.creditKeys.written)
+    resolveCreditKey(config.creditKeys?.written || 'DEFAULT_WRITTEN')
   );
 
   const requestDetailedFormSave = useCallback(() => {

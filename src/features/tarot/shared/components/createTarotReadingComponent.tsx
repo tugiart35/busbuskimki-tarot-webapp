@@ -628,7 +628,6 @@ export function createTarotReadingComponent({
 
       // Form verileri
       personalInfo,
-      partnerInfo,
       communicationMethod,
       questions,
       formErrors,
@@ -639,7 +638,6 @@ export function createTarotReadingComponent({
 
       // Form güncelleme fonksiyonları
       updatePersonalInfo,
-      updatePartnerInfo,
       updateCommunicationMethod,
       updateQuestion,
       validateDetailedForm,
@@ -1025,7 +1023,6 @@ export function createTarotReadingComponent({
             },
             questions: {
               personalInfo,
-              ...(config.requiresPartnerInfo ? { partnerInfo } : {}),
               userQuestions: questions,
             },
             metadata: {
@@ -1059,17 +1056,18 @@ export function createTarotReadingComponent({
           // Başarı modalını göster
           setModalStates(prev => ({ ...prev, showSuccessModal: true }));
 
-          // 1.5 saniye sonra dashboard'a yönlendir
+          // 1.5 saniye sonra tarotokumasi sayfasına yönlendir
           setTimeout(() => {
             setModalStates(prev => ({ ...prev, showSuccessModal: false }));
             try {
-              // Locale-aware dashboard yönlendirmesi
               const currentLocale = pathname?.split('/')[1] || 'tr';
-              router.push(`/${currentLocale}/dashboard`);
+              const actualSpreadId = getActualSpreadId(config.spreadId);
+              router.push(`/${currentLocale}/tarotokumasi/${actualSpreadId}`);
             } catch {
               // Fallback: window.location kullan
               const currentLocale = pathname?.split('/')[1] || 'tr';
-              window.location.href = `/${currentLocale}/dashboard`;
+              const actualSpreadId = getActualSpreadId(config.spreadId);
+              window.location.href = `/${currentLocale}/tarotokumasi/${actualSpreadId}`;
             }
           }, 1500);
 
@@ -1242,13 +1240,11 @@ export function createTarotReadingComponent({
           }
           onClose={() => setSelectedReadingType(null)}
           personalInfo={personalInfo}
-          partnerInfo={partnerInfo}
           communicationMethod={communicationMethod}
           questions={questions}
           formErrors={formErrors}
           isSaving={isSaving}
           onUpdatePersonalInfo={updatePersonalInfo}
-          onUpdatePartnerInfo={updatePartnerInfo}
           onUpdateCommunicationMethod={updateCommunicationMethod}
           onUpdateQuestion={updateQuestion}
           onSaveForm={handleSaveDetailedFormClick}
@@ -1597,4 +1593,23 @@ export function createTarotReadingComponent({
       </div>
     );
   };
+}
+
+// Yardımcı fonksiyon: Config spread ID'sini gerçek spread ID'sine çevir
+function getActualSpreadId(configSpreadId: string): string {
+  // Önce tam eşleşmeyi dene
+  const foundSpread = tarotSpreads.find(s => s.id === configSpreadId);
+  if (foundSpread) {
+    return configSpreadId;
+  }
+  
+  // Eğer bulunamazsa, -spread suffix'i ekleyerek dene
+  const spreadWithSuffix = `${configSpreadId}-spread`;
+  const foundWithSuffix = tarotSpreads.find(s => s.id === spreadWithSuffix);
+  if (foundWithSuffix) {
+    return spreadWithSuffix;
+  }
+  
+  // Hala bulunamazsa, configSpreadId'yi kullan (fallback)
+  return configSpreadId;
 }

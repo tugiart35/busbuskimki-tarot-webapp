@@ -72,31 +72,51 @@ export async function POST(request: NextRequest) {
 
     const userEmail = userData.user.email;
 
-    // PDF oluştur - Gerçek veri formatını düzelt
-    // Supabase'den gelen veriyi PDF formatına çevir
-    const pdfData = {
-      id: readingData.id,
-      reading_type: readingData.reading_type,
-      title: readingData.title || 'Tarot Açılımı',
-      spread_name: readingData.spread_name || '',
-      cards: readingData.cards || [],
-      interpretation: readingData.interpretation || '',
-      questions: readingData.questions || {},
-      status: readingData.status || 'completed',
-      created_at: readingData.created_at || new Date().toISOString(),
-      cost_credits: readingData.cost_credits || 50,
-      admin_notes: readingData.admin_notes || '',
-    };
+    // PDF oluştur - Hata durumunda PDF olmadan devam et
+    let pdfBuffer: Buffer | null = null;
+    let fileName: string | null = null;
+    
+    try {
+      const pdfData = {
+        id: readingData.id,
+        reading_type: readingData.reading_type,
+        title: readingData.title || 'Tarot Açılımı',
+        spread_name: readingData.spread_name || '',
+        cards: readingData.cards || [],
+        interpretation: readingData.interpretation || '',
+        questions: readingData.questions || {},
+        status: readingData.status || 'completed',
+        created_at: readingData.created_at || new Date().toISOString(),
+        cost_credits: readingData.cost_credits || 50,
+        admin_notes: readingData.admin_notes || '',
+      };
 
-    const pdfBuffer = await pdfGeneratorService.generateReadingPDF(pdfData);
+      pdfBuffer = await pdfGeneratorService.generateReadingPDF(pdfData);
+      fileName = `tarot-okuma-${readingId.slice(0, 8)}-${new Date().toISOString().split('T')[0]}.pdf`;
+    } catch (pdfError) {
+      // PDF oluşturma hatası - PDF olmadan devam et
+      console.warn('⚠️ PDF oluşturulamadı, PDF olmadan email gönderilecek:', pdfError);
+      // pdfBuffer null kalacak, email servisi PDF olmadan gönderecek
+    }
 
-    // Email gönder
-    const fileName = `tarot-okuma-${readingId.slice(0, 8)}-${new Date().toISOString().split('T')[0]}.pdf`;
+    // Email gönder - PDF varsa ekle, yoksa PDF olmadan gönder
     const success = await emailService.sendTarotReadingPDF(
       userEmail,
-      pdfData,
-      pdfBuffer,
-      fileName
+      {
+        id: readingData.id,
+        reading_type: readingData.reading_type,
+        title: readingData.title || 'Tarot Açılımı',
+        spread_name: readingData.spread_name || '',
+        cards: readingData.cards || [],
+        interpretation: readingData.interpretation || '',
+        questions: readingData.questions || {},
+        status: readingData.status || 'completed',
+        created_at: readingData.created_at || new Date().toISOString(),
+        cost_credits: readingData.cost_credits || 50,
+        admin_notes: readingData.admin_notes || '',
+      },
+      pdfBuffer || undefined, // PDF yoksa undefined
+      fileName || undefined
     );
 
     if (success) {

@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, Suspense } from 'react';
+import { useState, Suspense, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { BottomNavigation } from '@/features/shared/layout';
 import { TarotCard } from '@/features/tarot/lib/full-tarot-deck';
@@ -8,7 +9,8 @@ import { tarotSpreads } from '@/lib/constants/tarotSpreads';
 import { LastReadingSummary } from '@/features/tarot/components';
 import { useTranslations } from '@/hooks/useTranslations';
 
-export default function SpreadPageClient({
+// Token'i almak için wrapper component
+function SpreadPageContent({
   locale,
   spreadId,
 }: {
@@ -16,12 +18,59 @@ export default function SpreadPageClient({
   spreadId: string;
 }) {
   const { t } = useTranslations();
+  const searchParams = useSearchParams();
+  const token = searchParams.get('token');
 
   const [lastReading, setLastReading] = useState<{
     cards: TarotCard[];
     interpretation: string;
     spreadId: string;
   } | null>(null);
+  
+  const [initialReadingType, setInitialReadingType] = useState<'detailed' | 'written' | null>(null);
+  const [tokenValidating, setTokenValidating] = useState(!!token);
+  const [tokenError, setTokenError] = useState<string | null>(null);
+
+  // Token doğrulama
+  useEffect(() => {
+    if (!token) {
+      setTokenValidating(false);
+      return;
+    }
+
+    const validateToken = async () => {
+      try {
+        const response = await fetch(`/api/reading-sessions/validate?token=${token}`);
+        const data = await response.json();
+
+        if (!response.ok) {
+          setTokenError(data.error || 'Token doğrulanamadı');
+          setTokenValidating(false);
+          return;
+        }
+
+        // Token geçerli, reading type'ı ayarla
+        if (data.readingType === 'detailed' || data.readingType === 'written') {
+          setInitialReadingType(data.readingType);
+        }
+
+        // Spread ID kontrolü (eğer token'daki spreadKey farklıysa uyar)
+        if (data.spreadKey && data.spreadKey !== spreadId) {
+          console.warn(
+            `Token'daki spread key (${data.spreadKey}) mevcut spread ID (${spreadId}) ile eşleşmiyor`
+          );
+        }
+
+        setTokenValidating(false);
+      } catch (error) {
+        console.error('Token doğrulama hatası:', error);
+        setTokenError('Token doğrulanırken bir hata oluştu');
+        setTokenValidating(false);
+      }
+    };
+
+    validateToken();
+  }, [token, spreadId]);
 
   // Find the spread
   const currentSpread = tarotSpreads.find(s => s.id === spreadId);
@@ -41,6 +90,46 @@ export default function SpreadPageClient({
   };
 
   // onReadingTypeSelected callback'i kaldırıldı - açıklama kapatma mantığı gereksiz
+
+  // Token doğrulama yükleniyor
+  if (tokenValidating) {
+    return (
+      <div className='flex flex-col min-h-screen pb-16 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900'>
+        <main className='flex-1 px-4 sm:px-6 py-6 sm:py-8 flex items-center justify-center'>
+          <div className='text-center'>
+            <div className='animate-spin rounded-full h-12 w-12 sm:h-16 sm:w-16 border-b-2 border-purple-500 mx-auto mb-4'></div>
+            <p className='text-gray-300 text-base sm:text-lg'>
+              Okuma linki doğrulanıyor...
+            </p>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  // Token hatası
+  if (tokenError) {
+    return (
+      <div className='flex flex-col min-h-screen pb-16 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900'>
+        <main className='flex-1 px-4 sm:px-6 py-6 sm:py-8 flex items-center justify-center'>
+          <div className='text-center max-w-md'>
+            <div className='text-gray-400 mb-4'>
+              <span className='text-4xl sm:text-6xl'>⚠️</span>
+            </div>
+            <p className='text-gray-300 text-base sm:text-lg mb-4'>
+              {tokenError}
+            </p>
+            <Link
+              href={`/${locale}/tarotokumasi`}
+              className='inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors'
+            >
+              Tüm Açılımları Gör
+            </Link>
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   if (!currentSpread) {
     return (
@@ -177,6 +266,7 @@ export default function SpreadPageClient({
             >
               <CurrentComponent
                 onComplete={handleReadingComplete}
+                initialReadingType={initialReadingType}
                 // onReadingTypeSelected prop'u kaldırıldı - açıklama kapatma mantığı gereksiz
               />
             </Suspense>
@@ -200,114 +290,146 @@ export default function SpreadPageClient({
           />
         </div>
 
-        {/* Related spreads - Modern glassmorphic cards */}
-        <div className='max-w-6xl mx-auto mt-12 sm:mt-16'>
-          <div className='flex flex-col sm:flex-row items-center justify-between mb-6 sm:mb-8 gap-4'>
-            <h2 className='text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent'>
-              İlgili Açılımlar
-            </h2>
-            <Link
-              href={`/${locale}/tarotokumasi`}
-              className='inline-flex items-center gap-2 text-sm text-purple-400 hover:text-purple-300 transition-colors group'
-            >
-              Tümünü Gör
-              <svg
-                className='w-4 h-4 group-hover:translate-x-1 transition-transform'
-                fill='none'
-                stroke='currentColor'
-                viewBox='0 0 24 24'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  strokeWidth={2}
-                  d='M9 5l7 7-7 7'
-                />
-              </svg>
-            </Link>
-          </div>
-
-          <div className='grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6'>
-            {tarotSpreads
-              .filter(s => s.id !== spreadId)
-              .slice(0, 3)
-              .map(spread => (
+        {/* Related spreads - Token varsa gizle, normal sayfada göster */}
+        {!token && (
+          <>
+            <div className='max-w-6xl mx-auto mt-12 sm:mt-16'>
+              <div className='flex flex-col sm:flex-row items-center justify-between mb-6 sm:mb-8 gap-4'>
+                <h2 className='text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent'>
+                  İlgili Açılımlar
+                </h2>
                 <Link
-                  key={spread.id}
-                  href={`/${locale}/tarotokumasi/${spread.id}`}
-                  className='group relative overflow-hidden bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-5 sm:p-6 hover:bg-white/10 hover:border-white/20 hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl'
+                  href={`/${locale}/tarotokumasi`}
+                  className='inline-flex items-center gap-2 text-sm text-purple-400 hover:text-purple-300 transition-colors group'
                 >
-                  {/* Gradient overlay on hover */}
-                  <div className='absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300'></div>
-
-                  <div className='relative z-10'>
-                    <div className='flex items-center gap-3 mb-4'>
-                      <span className='text-3xl sm:text-4xl group-hover:scale-110 transition-transform duration-300 filter drop-shadow-lg'>
-                        {spread.icon}
-                      </span>
-                      <div className='flex-1'>
-                        <h3 className='text-base sm:text-lg font-bold text-white group-hover:text-purple-300 transition-colors leading-tight'>
-                          {t(spread.name)}
-                        </h3>
-                        <p className='text-xs sm:text-sm text-gray-400 mt-1'>
-                          {spread.cardCount} Kart
-                        </p>
-                      </div>
-                    </div>
-
-                    <p className='text-xs sm:text-sm text-gray-400 line-clamp-2 mb-4'>
-                      {t(spread.description)}
-                    </p>
-
-                    <div className='flex items-center gap-2 text-purple-400 text-xs sm:text-sm font-semibold'>
-                      Okumaya Başla
-                      <svg
-                        className='w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform'
-                        fill='none'
-                        stroke='currentColor'
-                        viewBox='0 0 24 24'
-                      >
-                        <path
-                          strokeLinecap='round'
-                          strokeLinejoin='round'
-                          strokeWidth={2}
-                          d='M9 5l7 7-7 7'
-                        />
-                      </svg>
-                    </div>
-                  </div>
+                  Tümünü Gör
+                  <svg
+                    className='w-4 h-4 group-hover:translate-x-1 transition-transform'
+                    fill='none'
+                    stroke='currentColor'
+                    viewBox='0 0 24 24'
+                  >
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth={2}
+                      d='M9 5l7 7-7 7'
+                    />
+                  </svg>
                 </Link>
-              ))}
-          </div>
-        </div>
+              </div>
 
-        {/* Back to all spreads button - Mobile friendly */}
-        <div className='max-w-6xl mx-auto mt-12'>
-          <Link
-            href={`/${locale}/tarotokumasi`}
-            className='group w-full flex items-center justify-center gap-3 px-6 py-4 bg-gradient-to-r from-purple-600/20 to-pink-600/20 hover:from-purple-600/30 hover:to-pink-600/30 backdrop-blur-xl border border-purple-500/30 rounded-2xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-2xl'
-          >
-            <svg
-              className='w-5 h-5 group-hover:-translate-x-1 transition-transform'
-              fill='none'
-              stroke='currentColor'
-              viewBox='0 0 24 24'
-            >
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth={2}
-                d='M15 19l-7-7 7-7'
-              />
-            </svg>
-            <span className='text-white font-semibold text-sm sm:text-base'>
-              Tüm Tarot Açılımları
-            </span>
-          </Link>
-        </div>
+              <div className='grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6'>
+                {tarotSpreads
+                  .filter(s => s.id !== spreadId)
+                  .slice(0, 3)
+                  .map(spread => (
+                    <Link
+                      key={spread.id}
+                      href={`/${locale}/tarotokumasi/${spread.id}`}
+                      className='group relative overflow-hidden bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-5 sm:p-6 hover:bg-white/10 hover:border-white/20 hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl'
+                    >
+                      {/* Gradient overlay on hover */}
+                      <div className='absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300'></div>
+
+                      <div className='relative z-10'>
+                        <div className='flex items-center gap-3 mb-4'>
+                          <span className='text-3xl sm:text-4xl group-hover:scale-110 transition-transform duration-300 filter drop-shadow-lg'>
+                            {spread.icon}
+                          </span>
+                          <div className='flex-1'>
+                            <h3 className='text-base sm:text-lg font-bold text-white group-hover:text-purple-300 transition-colors leading-tight'>
+                              {t(spread.name)}
+                            </h3>
+                            <p className='text-xs sm:text-sm text-gray-400 mt-1'>
+                              {spread.cardCount} Kart
+                            </p>
+                          </div>
+                        </div>
+
+                        <p className='text-xs sm:text-sm text-gray-400 line-clamp-2 mb-4'>
+                          {t(spread.description)}
+                        </p>
+
+                        <div className='flex items-center gap-2 text-purple-400 text-xs sm:text-sm font-semibold'>
+                          Okumaya Başla
+                          <svg
+                            className='w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform'
+                            fill='none'
+                            stroke='currentColor'
+                            viewBox='0 0 24 24'
+                          >
+                            <path
+                              strokeLinecap='round'
+                              strokeLinejoin='round'
+                              strokeWidth={2}
+                              d='M9 5l7 7-7 7'
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+              </div>
+            </div>
+
+            {/* Back to all spreads button - Mobile friendly */}
+            <div className='max-w-6xl mx-auto mt-12'>
+              <Link
+                href={`/${locale}/tarotokumasi`}
+                className='group w-full flex items-center justify-center gap-3 px-6 py-4 bg-gradient-to-r from-purple-600/20 to-pink-600/20 hover:from-purple-600/30 hover:to-pink-600/30 backdrop-blur-xl border border-purple-500/30 rounded-2xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-2xl'
+              >
+                <svg
+                  className='w-5 h-5 group-hover:-translate-x-1 transition-transform'
+                  fill='none'
+                  stroke='currentColor'
+                  viewBox='0 0 24 24'
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth={2}
+                    d='M15 19l-7-7 7-7'
+                  />
+                </svg>
+                <span className='text-white font-semibold text-sm sm:text-base'>
+                  Tüm Tarot Açılımları
+                </span>
+              </Link>
+            </div>
+          </>
+        )}
       </main>
 
       <BottomNavigation />
     </div>
+  );
+}
+
+// Ana component - Suspense wrapper ile useSearchParams için
+export default function SpreadPageClient({
+  locale,
+  spreadId,
+}: {
+  locale: string;
+  spreadId: string;
+}) {
+  return (
+    <Suspense
+      fallback={
+        <div className='flex flex-col min-h-screen pb-16 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900'>
+          <main className='flex-1 px-4 sm:px-6 py-6 sm:py-8 flex items-center justify-center'>
+            <div className='text-center'>
+              <div className='animate-spin rounded-full h-12 w-12 sm:h-16 sm:w-16 border-b-2 border-purple-500 mx-auto mb-4'></div>
+              <p className='text-gray-300 text-base sm:text-lg'>
+                Yükleniyor...
+              </p>
+            </div>
+          </main>
+        </div>
+      }
+    >
+      <SpreadPageContent locale={locale} spreadId={spreadId} />
+    </Suspense>
   );
 }

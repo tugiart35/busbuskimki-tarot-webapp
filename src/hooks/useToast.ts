@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
 type ToastType = 'success' | 'error' | 'warning' | 'info';
 
@@ -12,13 +12,13 @@ interface ToastState {
 export function useToast() {
   const [toast, setToast] = useState<ToastState | null>(null);
 
-  const showToast = (message: string, type: ToastType) => {
+  const showToast = useCallback((message: string, type: ToastType) => {
     setToast({ message, type });
-  };
+  }, []);
 
-  const hideToast = () => {
+  const hideToast = useCallback(() => {
     setToast(null);
-  };
+  }, []);
 
   return {
     toast,

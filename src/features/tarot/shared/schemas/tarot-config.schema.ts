@@ -266,6 +266,7 @@ export type FormI18nKeys = z.infer<typeof FormI18nKeysSchema>;
 export type CanvasI18nKeys = z.infer<typeof CanvasI18nKeysSchema>;
 export type CreditKeys = z.infer<typeof CreditKeysSchema>;
 export type PersonalInfo = z.infer<typeof PersonalInfoSchema>;
+export type PartnerInfo = z.infer<typeof PartnerInfoSchema>;
 export type Questions = z.infer<typeof QuestionsSchema>;
 export type FormErrors = z.infer<typeof FormErrorsSchema>;
 export type ModalStates = z.infer<typeof ModalStatesSchema>;

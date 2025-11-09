@@ -34,7 +34,7 @@ Kullanım durumu:
 
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { supabase } from '@/lib/supabase/client';
 import { logError, logSupabaseError } from '@/lib/logger';
 import { useToast } from '@/hooks/useToast';
@@ -46,6 +46,8 @@ import {
 import { useTarotDeck } from '@/features/tarot/lib/full-tarot-deck';
 import type { TarotCard } from '@/types/tarot';
 import type { Reading as DashboardReading } from '@/types/dashboard.types';
+import { tarotSpreads } from '@/lib/constants/tarotSpreads';
+import { useTranslations } from '@/hooks/useTranslations';
 import {
   CardSkeleton,
   TableSkeleton,
@@ -73,6 +75,8 @@ import {
   Mail,
   MessageSquare,
   Phone,
+  Plus,
+  X,
 } from 'lucide-react';
 
 interface Reading {
@@ -202,6 +206,7 @@ export default function ReadingsPage() {
   const [totalCount, setTotalCount] = useState(0);
   const [selectedReading, setSelectedReading] = useState<Reading | null>(null);
   const [showReadingModal, setShowReadingModal] = useState(false);
+  const [showCreateReadingModal, setShowCreateReadingModal] = useState(false);
   const [typeFilter, setTypeFilter] = useState<string>('all');
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [stats, setStats] = useState({
@@ -307,12 +312,7 @@ export default function ReadingsPage() {
     normalizedType
   );
 
-  useEffect(() => {
-    fetchReadings();
-    fetchStats();
-  }, [currentPage, searchTerm, typeFilter, statusFilter]);
-
-  const fetchStats = async () => {
+  const fetchStats = useCallback(async () => {
     try {
       const { data, error } = await supabase
         .from('readings')
@@ -348,9 +348,9 @@ export default function ReadingsPage() {
     } catch (error) {
       logError('Error fetching reading stats', error);
     }
-  };
+  }, []);
 
-  const fetchReadings = async () => {
+  const fetchReadings = useCallback(async () => {
     setLoading(true);
     try {
       // Toplam okuma sayısını al
@@ -463,7 +463,12 @@ export default function ReadingsPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [currentPage, searchTerm, typeFilter, statusFilter, showToast]);
+
+  useEffect(() => {
+    fetchReadings();
+    fetchStats();
+  }, [fetchReadings, fetchStats]);
 
   const getTypeIcon = (type: string) => {
     switch (type) {
@@ -687,13 +692,22 @@ export default function ReadingsPage() {
               </div>
             </div>
 
-            <button
-              onClick={() => fetchReadings()}
-              className='admin-btn-primary p-3 md:px-4 md:py-2 rounded-lg flex items-center space-x-2 touch-target flex-shrink-0 hover:bg-indigo-600 transition-colors'
-            >
-              <RefreshCw className='h-4 w-4' />
-              <span className='hidden sm:inline'>Yenile</span>
-            </button>
+            <div className='flex items-center gap-2 flex-shrink-0'>
+              <button
+                onClick={() => setShowCreateReadingModal(true)}
+                className='admin-btn-primary p-3 md:px-4 md:py-2 rounded-lg flex items-center space-x-2 touch-target hover:bg-indigo-600 transition-colors bg-gradient-to-r from-purple-600 to-pink-600'
+              >
+                <Plus className='h-4 w-4' />
+                <span className='hidden sm:inline'>Okuma Yarat</span>
+              </button>
+              <button
+                onClick={() => fetchReadings()}
+                className='admin-btn-primary p-3 md:px-4 md:py-2 rounded-lg flex items-center space-x-2 touch-target flex-shrink-0 hover:bg-indigo-600 transition-colors'
+              >
+                <RefreshCw className='h-4 w-4' />
+                <span className='hidden sm:inline'>Yenile</span>
+              </button>
+            </div>
           </div>
 
           <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3'>
@@ -2265,10 +2279,290 @@ export default function ReadingsPage() {
         </div>
       )}
 
+      {/* Create Reading Modal */}
+      {showCreateReadingModal && (
+        <CreateReadingModal
+          onClose={() => setShowCreateReadingModal(false)}
+          onSuccess={() => {
+            setShowCreateReadingModal(false);
+            showToast(
+              'Okuma başarıyla oluşturuldu ve e-posta gönderildi',
+              'success'
+            );
+            fetchReadings();
+          }}
+        />
+      )}
+
       {/* Toast Notification */}
       {toast && (
         <Toast message={toast.message} type={toast.type} onClose={hideToast} />
       )}
+    </div>
+  );
+}
+
+// Create Reading Modal Component
+function CreateReadingModal({
+  onClose,
+  onSuccess,
+}: {
+  onClose: () => void;
+  onSuccess: () => void;
+}) {
+  const { t } = useTranslations();
+  const [formData, setFormData] = useState({
+    customerEmail: '',
+    customerFirstName: '',
+    customerLastName: '',
+    spreadKey: '',
+    readingType: 'detailed' as 'detailed' | 'written',
+    expiresInDays: 7,
+  });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+
+    if (
+      !formData.customerEmail ||
+      !formData.spreadKey ||
+      !formData.readingType
+    ) {
+      setError('Lütfen e-posta, tarot açılımı ve okuma tipi seçin');
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const response = await fetch('/api/admin/reading-sessions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          customerEmail: formData.customerEmail,
+          customerFirstName: formData.customerFirstName,
+          customerLastName: formData.customerLastName,
+          spreadKey: formData.spreadKey,
+          readingType: formData.readingType,
+          expiresInDays: formData.expiresInDays,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Okuma oluşturulamadı');
+      }
+
+      // Email gönder
+      if (data.readingLink) {
+        try {
+          const emailResponse = await fetch('/api/admin/send-reading-link', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              sessionId: data.sessionId,
+              readingLink: data.readingLink,
+              customerEmail: formData.customerEmail,
+              customerName:
+                `${formData.customerFirstName} ${formData.customerLastName}`.trim() ||
+                'Müşteri',
+              spreadName:
+                tarotSpreads.find(s => s.id === formData.spreadKey)?.name ||
+                formData.spreadKey,
+            }),
+          });
+
+          const emailData = await emailResponse.json();
+
+          if (!emailResponse.ok) {
+            // eslint-disable-next-line no-console
+            console.error('Email gönderme hatası:', emailData);
+            setError(
+              `Okuma oluşturuldu ancak e-posta gönderilemedi: ${emailData.error || 'Bilinmeyen hata'}`
+            );
+            return; // Hata varsa modal'ı kapatma
+          }
+        } catch (emailErr) {
+          // eslint-disable-next-line no-console
+          console.error('Email gönderme hatası:', emailErr);
+          setError(
+            `Okuma oluşturuldu ancak e-posta gönderilemedi: ${emailErr instanceof Error ? emailErr.message : 'Bilinmeyen hata'}`
+          );
+          return; // Hata varsa modal'ı kapatma
+        }
+      }
+
+      onSuccess();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Bir hata oluştu');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className='fixed inset-0 bg-black/70 backdrop-blur-lg flex items-center justify-center z-50 p-4'>
+      <div className='admin-card rounded-2xl p-6 w-full max-w-md'>
+        <div className='flex items-center justify-between mb-6'>
+          <h3 className='text-xl font-bold text-white'>Yeni Okuma Oluştur</h3>
+          <button
+            onClick={onClose}
+            className='p-2 admin-glass rounded-lg hover:bg-slate-700/50 transition-colors'
+          >
+            <X className='h-5 w-5 text-slate-300' />
+          </button>
+        </div>
+
+        <form onSubmit={handleSubmit} className='space-y-4'>
+          {/* Spread Seçimi */}
+          <div>
+            <label className='block text-sm font-medium text-slate-300 mb-2'>
+              Tarot Açılımı <span className='text-red-400'>*</span>
+            </label>
+            <select
+              value={formData.spreadKey}
+              onChange={e =>
+                setFormData({ ...formData, spreadKey: e.target.value })
+              }
+              className='w-full p-3 admin-glass rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-indigo-500'
+              required
+            >
+              <option value=''>Açılım seçin...</option>
+              {tarotSpreads.map(spread => (
+                <option key={spread.id} value={spread.id}>
+                  {t(spread.name)} ({spread.cardCount} kart)
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Reading Type Seçimi */}
+          <div>
+            <label className='block text-sm font-medium text-slate-300 mb-2'>
+              Okuma Tipi <span className='text-red-400'>*</span>
+            </label>
+            <select
+              value={formData.readingType}
+              onChange={e =>
+                setFormData({
+                  ...formData,
+                  readingType: e.target.value as 'detailed' | 'written',
+                })
+              }
+              className='w-full p-3 admin-glass rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-indigo-500'
+              required
+            >
+              <option value='detailed'>🔮 Sesli Okuma (DETAILED)</option>
+              <option value='written'>📝 Yazılı Okuma (WRITTEN)</option>
+            </select>
+            <p className='text-xs text-slate-400 mt-1'>
+              Müşteri link&apos;e tıkladığında bu okuma tipine direkt geçecek
+            </p>
+          </div>
+
+          {/* E-posta */}
+          <div>
+            <label className='block text-sm font-medium text-slate-300 mb-2'>
+              E-posta <span className='text-red-400'>*</span>
+            </label>
+            <input
+              type='email'
+              value={formData.customerEmail}
+              onChange={e =>
+                setFormData({ ...formData, customerEmail: e.target.value })
+              }
+              className='w-full p-3 admin-glass rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500'
+              placeholder='musteri@example.com'
+              required
+            />
+          </div>
+
+          {/* Ad */}
+          <div>
+            <label className='block text-sm font-medium text-slate-300 mb-2'>
+              Ad (Opsiyonel)
+            </label>
+            <input
+              type='text'
+              value={formData.customerFirstName}
+              onChange={e =>
+                setFormData({ ...formData, customerFirstName: e.target.value })
+              }
+              className='w-full p-3 admin-glass rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500'
+              placeholder='Müşteri adı'
+            />
+          </div>
+
+          {/* Soyad */}
+          <div>
+            <label className='block text-sm font-medium text-slate-300 mb-2'>
+              Soyad (Opsiyonel)
+            </label>
+            <input
+              type='text'
+              value={formData.customerLastName}
+              onChange={e =>
+                setFormData({ ...formData, customerLastName: e.target.value })
+              }
+              className='w-full p-3 admin-glass rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500'
+              placeholder='Müşteri soyadı'
+            />
+          </div>
+
+          {/* Geçerlilik Süresi */}
+          <div>
+            <label className='block text-sm font-medium text-slate-300 mb-2'>
+              Geçerlilik Süresi (Gün)
+            </label>
+            <input
+              type='number'
+              min='1'
+              max='30'
+              value={formData.expiresInDays}
+              onChange={e =>
+                setFormData({
+                  ...formData,
+                  expiresInDays: parseInt(e.target.value) || 7,
+                })
+              }
+              className='w-full p-3 admin-glass rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500'
+            />
+          </div>
+
+          {/* Hata Mesajı */}
+          {error && (
+            <div className='p-3 bg-red-500/20 border border-red-500/50 rounded-lg text-red-400 text-sm'>
+              {error}
+            </div>
+          )}
+
+          {/* Butonlar */}
+          <div className='flex gap-3 pt-4'>
+            <button
+              type='button'
+              onClick={onClose}
+              className='flex-1 p-3 admin-glass rounded-lg text-white hover:bg-slate-700/50 transition-colors'
+              disabled={loading}
+            >
+              İptal
+            </button>
+            <button
+              type='submit'
+              className='flex-1 p-3 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg text-white font-semibold hover:from-purple-700 hover:to-pink-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
+              disabled={loading}
+            >
+              {loading ? 'Oluşturuluyor...' : 'Okuma Oluştur'}
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
