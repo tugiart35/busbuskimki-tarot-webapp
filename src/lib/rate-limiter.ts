@@ -172,8 +172,8 @@ if (typeof window !== 'undefined') {
  */
 export function withRateLimit<T extends unknown[], R>(
   action: string,
-  fn: (...args: T) => R,
-  getIdentifier?: (...args: T) => string
+  fn: (..._args: T) => R,
+  getIdentifier?: (..._args: T) => string
 ) {
   return (...args: T): R | { error: string; resetTime?: number } => {
     const identifier = getIdentifier ? getIdentifier(...args) : 'default';
@@ -203,8 +203,8 @@ export function withRateLimit<T extends unknown[], R>(
  */
 export function withAsyncRateLimit<T extends unknown[], R>(
   action: string,
-  fn: (...args: T) => Promise<R>,
-  getIdentifier?: (...args: T) => string
+  fn: (..._args: T) => Promise<R>,
+  getIdentifier?: (..._args: T) => string
 ) {
   return async (
     ...args: T

@@ -46,6 +46,7 @@ Gereklilik ve Kullanım Durumu:
 import type { TarotCard } from '@/features/tarot/lib/a-tarot-helpers';
 import { useTranslations } from '@/hooks/useTranslations';
 import { ReactElement } from 'react';
+import Image from 'next/image';
 
 interface CardRendererProps {
   mode: 'position' | 'gallery';
@@ -260,9 +261,11 @@ export default function BaseCardPosition({
           ) : (
             // Varsayılan kart görünümü
             <div className='w-full h-full flex items-center justify-center'>
-              <img
+              <Image
                 src={_card ? _card.image : '/cards/CardBack.webp'}
                 alt={_card ? _card.nameTr : 'Kart'}
+                width={200}
+                height={300}
                 className={`w-full h-full object-cover rounded-lg ${isReversed ? 'transform rotate-180' : ''}`}
               />
             </div>

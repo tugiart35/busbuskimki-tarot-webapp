@@ -161,7 +161,7 @@ export interface AdminModalProps {
 
 export interface AdminFilterProps<T> {
   filter: T;
-  setFilter: (filter: T) => void;
+  setFilter: (_filter: T) => void;
   options: Array<{ value: T; label: string }>;
 }
 
@@ -175,7 +175,7 @@ export interface AdminDataHookReturn<T> {
 
 export interface AdminFilterHookReturn<T> {
   filter: T[keyof T] | string;
-  setFilter: (filter: T[keyof T] | string) => void;
+  setFilter: (_filter: T[keyof T] | string) => void;
   filteredData: T[];
 }
 

@@ -6,7 +6,7 @@ import { Metric as WebVitalsMetric } from 'web-vitals';
 export function WebVitals({
   onPerfEntry,
 }: {
-  onPerfEntry?: (metric: WebVitalsMetric) => void;
+  onPerfEntry?: (_metric: WebVitalsMetric) => void;
 }) {
   useEffect(() => {
     // Only run in browser

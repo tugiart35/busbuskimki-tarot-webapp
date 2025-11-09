@@ -2,6 +2,7 @@
 
 import React, { Component, ReactNode } from 'react';
 import { AlertTriangle, RefreshCw } from 'lucide-react';
+import { logger } from '@/lib/logger';
 
 interface Props {
   children: ReactNode;
@@ -24,7 +25,13 @@ export class PaymentErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error('Payment Error Boundary caught an error:', error, errorInfo);
+    logger.error('Payment Error Boundary caught an error', error, {
+      action: 'error_boundary',
+      resource: 'PaymentErrorBoundary',
+      metadata: {
+        componentStack: errorInfo.componentStack,
+      },
+    });
   }
 
   handleRetry = () => {
@@ -65,7 +72,7 @@ export class PaymentErrorBoundary extends Component<Props, State> {
                   onClick={() => (window.location.href = '/dashboard')}
                   className='w-full btn btn-secondary'
                 >
-                  Dashboard'a Dön
+                  Dashboard&apos;a Dön
                 </button>
               </div>
             </div>

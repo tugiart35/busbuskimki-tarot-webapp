@@ -99,11 +99,12 @@ export function WebVitals() {
 
 // Global type declaration for gtag
 declare global {
+  // eslint-disable-next-line no-unused-vars
   interface Window {
     gtag?: (
-      command: string,
-      eventName: string,
-      eventParams: Record<string, unknown>
+      _command: string,
+      _eventName: string,
+      _eventParams: Record<string, unknown>
     ) => void;
   }
 }

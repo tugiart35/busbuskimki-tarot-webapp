@@ -31,7 +31,7 @@ export interface SaveReadingResult {
 export interface UseTarotSaveStateProps {
   config: TarotConfig;
   selectedReadingType: string | null;
-  setSelectedReadingType: (type: string | null) => void;
+  setSelectedReadingType: (_type: string | null) => void;
   formState: Pick<
     UseTarotFormStateReturn,
     | 'validateDetailedForm'
@@ -50,7 +50,7 @@ export interface UseTarotSaveStateReturn {
     success: boolean;
     reason?: 'auth' | 'credits';
   }>;
-  saveReading: (payload: SaveReadingPayload) => Promise<SaveReadingResult>;
+  saveReading: (_payload: SaveReadingPayload) => Promise<SaveReadingResult>;
   detailedCredits: ReturnType<typeof useReadingCredits>;
   writtenCredits: ReturnType<typeof useReadingCredits>;
 }

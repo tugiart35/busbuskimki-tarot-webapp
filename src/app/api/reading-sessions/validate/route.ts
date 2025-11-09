@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import crypto from 'crypto';
+import { logger } from '@/lib/logger';
 
 export async function GET(request: NextRequest) {
   try {
@@ -8,10 +9,7 @@ export async function GET(request: NextRequest) {
     const token = searchParams.get('token');
 
     if (!token) {
-      return NextResponse.json(
-        { error: 'Token gereklidir' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Token gereklidir' }, { status: 400 });
     }
 
     // Supabase admin client
@@ -77,7 +75,13 @@ export async function GET(request: NextRequest) {
     // Tamamlanmış mı kontrol et
     if (session.status === 'completed') {
       return NextResponse.json(
-        { error: 'Bu okuma zaten tamamlanmış' },
+        {
+          error: 'Bu okuma zaten tamamlanmış',
+          message: 'Okumanızı tamamladınız. Bu link artık kullanılamaz.',
+          status: 'completed',
+          completedAt: session.completed_at,
+          readingId: session.reading_id || null, // Reading ID'yi döndür
+        },
         { status: 410 }
       );
     }
@@ -101,7 +105,7 @@ export async function GET(request: NextRequest) {
 
     // Reading type'ı belirle (kolondan veya metadata'dan)
     let readingType: 'detailed' | 'written' | null = null;
-    
+
     if (session.reading_type) {
       // Kolondan al
       readingType = session.reading_type as 'detailed' | 'written';
@@ -115,7 +119,9 @@ export async function GET(request: NextRequest) {
         .single();
 
       if (event.data?.metadata?.reading_type) {
-        readingType = event.data.metadata.reading_type as 'detailed' | 'written';
+        readingType = event.data.metadata.reading_type as
+          | 'detailed'
+          | 'written';
       }
     }
 
@@ -131,14 +137,15 @@ export async function GET(request: NextRequest) {
       expiresAt: session.expires_at,
     });
   } catch (error) {
-    console.error('Token doğrulama hatası:', error);
+    logger.error('Token doğrulama hatası', error, {
+      action: 'validate_token',
+      resource: 'reading_sessions',
+    });
     return NextResponse.json(
       {
-        error:
-          error instanceof Error ? error.message : 'Token doğrulanamadı',
+        error: error instanceof Error ? error.message : 'Token doğrulanamadı',
       },
       { status: 500 }
     );
   }
 }
-

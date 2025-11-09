@@ -6,6 +6,7 @@
  */
 
 import { AdminError } from '@/types/admin.types';
+import { logger } from '@/lib/logger';
 
 export class AdminErrorService {
   /**
@@ -159,12 +160,16 @@ export class AdminErrorService {
    */
   static safeLogError(error: Error | unknown, context: string): void {
     try {
-      if (process.env.NODE_ENV === 'development') {
-        console.error(`[ADMIN] ${context}:`, error);
-      }
+      logger.error(`[ADMIN] ${context}`, error, {
+        action: 'admin_error',
+        resource: 'admin_error_service',
+      });
     } catch (logError) {
       // Logging hatası olursa sessizce geç
-      console.warn('Error logging failed:', logError);
+      logger.warn('Error logging failed', logError, {
+        action: 'log_error',
+        resource: 'admin_error_service',
+      });
     }
   }
 }

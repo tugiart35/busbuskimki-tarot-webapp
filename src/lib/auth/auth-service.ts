@@ -13,8 +13,8 @@ import type { RegisterFormData } from './auth-validation';
 export class AuthError extends Error {
   constructor(
     message: string,
-    public originalError?: any,
-    public code?: string
+    public _originalError?: any,
+    public _code?: string
   ) {
     super(message);
     this.name = 'AuthError';
@@ -248,7 +248,7 @@ export class AuthService {
    * Auth state değişikliklerini dinleme
    */
   static onAuthStateChange(
-    callback: (event: string, session: Session | null) => void
+    callback: (_event: string, _session: Session | null) => void
   ) {
     return supabase.auth.onAuthStateChange(callback);
   }

@@ -13,7 +13,7 @@ interface StatsCardsProps {
   isAdmin: boolean;
   recentReadings: any[];
   refreshCreditBalance: () => Promise<void>;
-  translate: (key: string, fallback?: string) => string;
+  translate: (_key: string, _fallback?: string) => string;
 }
 
 // İstatistik kartları bileşeni

@@ -1118,10 +1118,11 @@ export const searchposition3MeaningsByKeyword = (
 };
 
 // Varsayılan export
-export default {
+const relationshipProblemsPosition3Export = {
   position3Meanings,
   getposition3Meaning,
   getAllposition3Meanings,
   getposition3MeaningsByGroup,
   searchposition3MeaningsByKeyword,
 };
+export default relationshipProblemsPosition3Export;

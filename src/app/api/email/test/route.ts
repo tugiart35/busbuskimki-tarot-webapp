@@ -27,6 +27,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { emailService } from '@/lib/email/email-service';
 import { ErrorResponse } from '@/lib/api/error-responses';
+import { logger } from '@/lib/logger';
 import { EmailCORS } from '@/lib/api/email-cors';
 import { getClientIP } from '@/lib/utils/ip-utils';
 
@@ -144,7 +145,10 @@ export async function POST(request: NextRequest) {
       );
     }
   } catch (error) {
-    console.error('Test email API error:', error);
+    logger.error('Test email API error', error, {
+      action: 'test_email',
+      resource: 'email',
+    });
     return EmailCORS.wrapResponse(ErrorResponse.internalServerError());
   }
 }
@@ -178,7 +182,10 @@ export async function GET(request: NextRequest) {
       })
     );
   } catch (error) {
-    console.error('SMTP status API error:', error);
+    logger.error('SMTP status API error', error, {
+      action: 'check_smtp_status',
+      resource: 'email',
+    });
     return EmailCORS.wrapResponse(ErrorResponse.internalServerError());
   }
 }

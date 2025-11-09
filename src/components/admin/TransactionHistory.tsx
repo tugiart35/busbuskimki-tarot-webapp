@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase/client';
+import { logger } from '@/lib/logger';
 import {
   TrendingUp,
   TrendingDown,
@@ -55,7 +56,10 @@ export default function TransactionHistory({
         .limit(limit);
 
       if (error) {
-        console.error('Supabase error fetching transactions:', error);
+        logger.error('Supabase error fetching transactions', error, {
+          action: 'fetch_transactions',
+          resource: 'transactions',
+        });
         throw new Error(
           `İşlem verileri yüklenirken hata oluştu: ${error.message}`
         );
@@ -63,7 +67,10 @@ export default function TransactionHistory({
 
       setTransactions(data || []);
     } catch (error) {
-      console.error('Error fetching transactions:', error);
+      logger.error('Error fetching transactions', error, {
+        action: 'fetch_transactions',
+        resource: 'transactions',
+      });
       setTransactions([]);
     } finally {
       setLoading(false);

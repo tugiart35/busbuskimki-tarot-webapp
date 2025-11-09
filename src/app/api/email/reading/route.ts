@@ -21,6 +21,7 @@ import { pdfGeneratorService } from '@/lib/pdf/pdf-generator';
 import { createClient } from '@supabase/supabase-js';
 import { ErrorResponse } from '@/lib/api/error-responses';
 import { EmailCORS } from '@/lib/api/email-cors';
+import { logger } from '@/lib/logger';
 
 // POST endpoint - Send reading email
 export async function POST(request: NextRequest) {
@@ -54,28 +55,59 @@ export async function POST(request: NextRequest) {
       .single();
 
     if (readingError || !readingData) {
-      console.error('❌ Okuma verisi bulunamadı:', readingError);
+      logger.error('Okuma verisi bulunamadı', readingError, {
+        action: 'fetch_reading',
+        resource: 'readings',
+      });
       return EmailCORS.wrapResponse(
         ErrorResponse.notFoundError('Okuma verisi')
       );
     }
 
-    // Kullanıcı email adresini al (admin client ile)
-    const { data: userData, error: userError } =
-      await supabaseAdmin.auth.admin.getUserById(readingData.user_id);
-    if (userError || !userData.user?.email) {
-      console.error('❌ Kullanıcı email adresi alınamadı:', userError);
+    // Kullanıcı email adresini al
+    let userEmail: string | null = null;
+
+    // Önce user_id'den email almayı dene
+    if (readingData.user_id) {
+      const { data: userData, error: userError } =
+        await supabaseAdmin.auth.admin.getUserById(readingData.user_id);
+      if (!userError && userData.user?.email) {
+        userEmail = userData.user.email;
+      }
+    }
+
+    // Eğer user_id'den email alınamadıysa, reading_sessions'dan al (token akışı)
+    if (!userEmail) {
+      // reading_id ile reading_sessions'dan customer_email'i bul
+      const { data: sessionData, error: sessionError } = await supabaseAdmin
+        .from('reading_sessions')
+        .select('customer_email')
+        .eq('reading_id', readingId)
+        .single();
+
+      if (!sessionError && sessionData?.customer_email) {
+        userEmail = sessionData.customer_email;
+      }
+    }
+
+    if (!userEmail) {
+      logger.error('Kullanıcı email adresi alınamadı', null, {
+        action: 'fetch_user_email',
+        resource: 'readings',
+        metadata: {
+          readingId,
+          checkedUserId: !!readingData.user_id,
+        },
+      });
       return EmailCORS.wrapResponse(
         ErrorResponse.notFoundError('Kullanıcı email adresi')
       );
     }
 
-    const userEmail = userData.user.email;
-
     // PDF oluştur - Hata durumunda PDF olmadan devam et
     let pdfBuffer: Buffer | null = null;
     let fileName: string | null = null;
-    
+
     try {
       const pdfData = {
         id: readingData.id,
@@ -95,7 +127,14 @@ export async function POST(request: NextRequest) {
       fileName = `tarot-okuma-${readingId.slice(0, 8)}-${new Date().toISOString().split('T')[0]}.pdf`;
     } catch (pdfError) {
       // PDF oluşturma hatası - PDF olmadan devam et
-      console.warn('⚠️ PDF oluşturulamadı, PDF olmadan email gönderilecek:', pdfError);
+      logger.warn(
+        'PDF oluşturulamadı, PDF olmadan email gönderilecek',
+        pdfError,
+        {
+          action: 'generate_pdf',
+          resource: 'readings',
+        }
+      );
       // pdfBuffer null kalacak, email servisi PDF olmadan gönderecek
     }
 
@@ -130,13 +169,20 @@ export async function POST(request: NextRequest) {
         })
       );
     } else {
-      console.error('❌ Email gönderimi başarısız');
+      logger.error('Email gönderimi başarısız', null, {
+        action: 'send_email',
+        resource: 'readings',
+        metadata: { readingId, recipient: userEmail },
+      });
       return EmailCORS.wrapResponse(
         ErrorResponse.smtpConnectionError('Email gönderimi başarısız')
       );
     }
   } catch (error) {
-    console.error('❌ Server-side email gönderimi hatası:', error);
+    logger.error('Server-side email gönderimi hatası', error, {
+      action: 'send_email',
+      resource: 'readings',
+    });
     return EmailCORS.wrapResponse(
       ErrorResponse.internalServerError(
         error instanceof Error ? error.message : 'Bilinmeyen hata'

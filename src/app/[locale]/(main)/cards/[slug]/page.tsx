@@ -30,7 +30,7 @@ export async function generateStaticParams() {
     'the-chariot',
     'strength',
     'the-hermit',
-    'wheel-of-fortune',
+    'wheeloffortune',
     'justice',
     'the-hanged-man',
     'death',

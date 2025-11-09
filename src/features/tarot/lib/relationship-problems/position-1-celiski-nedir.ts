@@ -1049,10 +1049,11 @@ export const searchPosition1MeaningsByKeyword = (
 };
 
 // Varsayılan export
-export default {
+const relationshipProblemsPosition1Export = {
   position1Meanings,
   getPosition1Meaning,
   getAllPosition1Meanings,
   getPosition1MeaningsByGroup,
   searchPosition1MeaningsByKeyword,
 };
+export default relationshipProblemsPosition1Export;

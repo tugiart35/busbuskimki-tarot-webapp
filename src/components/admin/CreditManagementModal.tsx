@@ -1,4 +1,5 @@
 'use client';
+/* eslint-disable no-unused-vars */
 
 import { useState } from 'react';
 import { supabase } from '@/lib/supabase/client';
@@ -13,7 +14,7 @@ interface CreditManagementModalProps {
 }
 
 export default function CreditManagementModal({
-  user,
+  user, // eslint-disable-line no-unused-vars
   onClose,
   onUpdate,
 }: CreditManagementModalProps) {

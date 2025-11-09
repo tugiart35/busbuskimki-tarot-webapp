@@ -12,6 +12,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
+import { logger } from '@/lib/logger';
 
 // Ürün tipi tanımı
 interface Product {
@@ -214,7 +215,10 @@ export async function GET(request: NextRequest) {
       }
     );
   } catch (error) {
-    console.error('Products API error:', error);
+    logger.error('Products API error', error, {
+      action: 'fetch_products',
+      resource: 'products',
+    });
     return NextResponse.json(
       {
         success: false,
@@ -263,7 +267,10 @@ export async function POST(request: NextRequest) {
       { status: 200 }
     );
   } catch (error) {
-    console.error('Products POST API error:', error);
+    logger.error('Products POST API error', error, {
+      action: 'create_product',
+      resource: 'products',
+    });
     return NextResponse.json(
       {
         success: false,

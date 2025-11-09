@@ -1025,7 +1025,7 @@ export default function OrdersPage() {
         <div className='admin-card rounded-xl p-4'>
           <div className='flex items-center justify-between'>
             <div className='text-sm text-slate-400'>
-              {totalCount} transaction'dan{' '}
+              {totalCount} transaction&apos;dan{' '}
               {(currentPage - 1) * ordersPerPage + 1}-
               {Math.min(currentPage * ordersPerPage, totalCount)} arası
               gösteriliyor

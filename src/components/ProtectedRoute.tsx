@@ -21,11 +21,10 @@
 
 'use client';
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState, type ReactNode } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { useAuthCheck } from '@/hooks/useAuthCheck';
 import { AuthErrorBoundary } from './AuthErrorBoundary';
-import type { ReactNode } from 'react';
 
 interface ProtectedRouteProps {
   children: ReactNode;

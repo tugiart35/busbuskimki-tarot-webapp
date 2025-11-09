@@ -6,13 +6,18 @@
  */
 
 import { NextResponse } from 'next/server';
+import { logger } from '@/lib/logger';
 
 export class AuthErrorService {
   /**
    * Callback error'ını handle et
    */
   static handleCallbackError(error: any, locale: string): NextResponse {
-    console.error('Auth callback error:', error);
+    logger.error('Auth callback error', error, {
+      action: 'auth_callback_error',
+      resource: 'auth',
+      metadata: { locale },
+    });
 
     // Error type'a göre farklı redirect'ler
     if (error.message?.includes('expired')) {
@@ -30,7 +35,11 @@ export class AuthErrorService {
    * Email confirmation error'ını handle et
    */
   static handleConfirmationError(error: any, locale: string): NextResponse {
-    console.error('Email confirmation error:', error);
+    logger.error('Email confirmation error', error, {
+      action: 'email_confirmation_error',
+      resource: 'auth',
+      metadata: { locale },
+    });
 
     if (error.message?.includes('expired')) {
       return this.createErrorRedirect(locale, 'token_expired');

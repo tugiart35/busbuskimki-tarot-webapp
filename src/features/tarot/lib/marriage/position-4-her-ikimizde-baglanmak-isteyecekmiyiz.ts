@@ -1047,10 +1047,11 @@ export const searchposition4MeaningsByKeyword = (
 };
 
 // Varsayılan export
-export default {
+const position4MeaningsExport = {
   position4Meanings,
   getposition4Meaning,
   getAllposition4Meanings,
   getposition4MeaningsByGroup,
   searchposition4MeaningsByKeyword,
 };
+export default position4MeaningsExport;

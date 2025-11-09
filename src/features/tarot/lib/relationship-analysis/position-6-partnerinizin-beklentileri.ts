@@ -1212,10 +1212,11 @@ export const searchposition6MeaningsByKeyword = (
 };
 
 // Varsayılan export
-export default {
+const relationshipAnalysisPosition6Export = {
   position6Meanings,
   getRelationshipAnalysisPosition6Meaning,
   getRelationshipAnalysisPosition6MeaningByCardName,
   getAllposition6Meanings: getAllposition6Meanings,
   getRelationshipAnalysisposition6MeaningsByGroup: getposition6MeaningsByGroup,
 };
+export default relationshipAnalysisPosition6Export;

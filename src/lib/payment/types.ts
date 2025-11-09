@@ -185,7 +185,8 @@ export interface StripeConfig {
   publishable_key: string;
   webhook_secret: string;
   price_ids: {
-    [key in SubscriptionType]: string;
+    // eslint-disable-next-line no-unused-vars
+    [_key in SubscriptionType]: string;
   };
 }
 
@@ -195,7 +196,8 @@ export interface PayPalConfig {
   client_secret: string;
   environment: 'sandbox' | 'production';
   plan_ids: {
-    [key in SubscriptionType]: string;
+    // eslint-disable-next-line no-unused-vars
+    [_key in SubscriptionType]: string;
   };
 }
 
@@ -243,13 +245,16 @@ export interface PaymentAnalytics {
   conversion_rate: number;
   average_revenue_per_user: number;
   subscription_count: {
-    [key in SubscriptionType]: number;
+    // eslint-disable-next-line no-unused-vars
+    [_key in SubscriptionType]: number;
   };
   payment_method_distribution: {
-    [key in PaymentMethod]: number;
+    // eslint-disable-next-line no-unused-vars
+    [_key in PaymentMethod]: number;
   };
   currency_distribution: {
-    [key in Currency]: number;
+    // eslint-disable-next-line no-unused-vars
+    [_key in Currency]: number;
   };
 }
 
@@ -279,22 +284,22 @@ export interface PaymentContextType {
 
   // Payment operations
   createSubscription: (
-    tierId: string,
-    paymentData: PaymentFormData
+    _tierId: string,
+    _paymentData: PaymentFormData
   ) => Promise<boolean>;
   updateSubscription: (
-    subscriptionId: string,
-    updates: Partial<PaymentSubscription>
+    _subscriptionId: string,
+    _updates: Partial<PaymentSubscription>
   ) => Promise<boolean>;
-  cancelSubscription: (subscriptionId: string) => Promise<boolean>;
-  addPaymentMethod: (paymentData: PaymentFormData) => Promise<boolean>;
-  removePaymentMethod: (paymentMethodId: string) => Promise<boolean>;
-  setDefaultPaymentMethod: (paymentMethodId: string) => Promise<boolean>;
+  cancelSubscription: (_subscriptionId: string) => Promise<boolean>;
+  addPaymentMethod: (_paymentData: PaymentFormData) => Promise<boolean>;
+  removePaymentMethod: (_paymentMethodId: string) => Promise<boolean>;
+  setDefaultPaymentMethod: (_paymentMethodId: string) => Promise<boolean>;
 
   // Utility functions
   getPaymentPermissions: () => PaymentPermissions;
-  canAccessFeature: (feature: string) => boolean;
-  getRemainingUsage: (feature: string) => number;
+  canAccessFeature: (_feature: string) => boolean;
+  getRemainingUsage: (_feature: string) => number;
 
   // Loading states
   loading: boolean;
@@ -306,9 +311,9 @@ export interface UsePaymentReturn extends PaymentContextType {
   // Additional hook-specific methods
   refreshPaymentData: () => Promise<void>;
   validateCoupon: (
-    code: string
+    _code: string
   ) => Promise<{ valid: boolean; discount?: number }>;
-  calculatePrice: (tierId: string, couponCode?: string) => Promise<number>;
+  calculatePrice: (_tierId: string, _couponCode?: string) => Promise<number>;
 }
 
 // All types are already exported inline above

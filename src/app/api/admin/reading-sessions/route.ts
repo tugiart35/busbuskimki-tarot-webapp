@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import crypto from 'crypto';
+import { logger } from '@/lib/logger';
 
 export async function POST(request: NextRequest) {
   try {
@@ -62,8 +63,10 @@ export async function POST(request: NextRequest) {
     }
 
     // Mevcut kullanıcıyı kontrol et (cookie'den)
-    const { data: { user } } = await supabaseAdmin.auth.getUser();
-    
+    const {
+      data: { user },
+    } = await supabaseAdmin.auth.getUser();
+
     if (user) {
       // Admin kontrolü
       const { data: adminData } = await supabaseAdmin
@@ -122,23 +125,39 @@ export async function POST(request: NextRequest) {
         .insert(insertData)
         .select()
         .single();
-      
+
       session = retryResult.data;
       sessionError = retryResult.error;
     }
 
     if (sessionError || !session) {
-      console.error('Reading session oluşturma hatası:', sessionError);
+      logger.error('Reading session oluşturma hatası', sessionError, {
+        action: 'create_session',
+        resource: 'reading_sessions',
+      });
       return NextResponse.json(
-        { 
-          error: 'Okuma oturumu oluşturulamadı: ' + (sessionError?.message || 'Bilinmeyen hata'),
-          hint: sessionError?.code === 'PGRST204' 
-            ? 'spread_key kolonu migration ile eklenmeli. Migration dosyası: migrations/20250108_01_add_spread_key_to_reading_sessions.sql'
-            : undefined
+        {
+          error:
+            'Okuma oturumu oluşturulamadı: ' +
+            (sessionError?.message || 'Bilinmeyen hata'),
+          hint:
+            sessionError?.code === 'PGRST204'
+              ? 'spread_key kolonu migration ile eklenmeli. Migration dosyası: migrations/20250108_01_add_spread_key_to_reading_sessions.sql'
+              : undefined,
         },
         { status: 500 }
       );
     }
+
+    // Link oluştur - development'ta localhost:3001, production'da NEXT_PUBLIC_SITE_URL
+    // Geçici test için NEXT_PUBLIC_READING_LINK_BASE_URL environment variable'ı kullanılabilir
+    const baseUrl =
+      process.env.NEXT_PUBLIC_READING_LINK_BASE_URL ||
+      (process.env.NODE_ENV === 'development'
+        ? 'http://localhost:3001'
+        : process.env.NEXT_PUBLIC_SITE_URL || 'https://tarotnumeroloji.com');
+    const locale = 'tr'; // Varsayılan locale, ileride dinamik yapılabilir
+    const readingLink = `${baseUrl}/${locale}/tarotokumasi/${spreadKey}?token=${token}`;
 
     // Event log kaydet
     await supabaseAdmin.from('reading_events').insert({
@@ -152,18 +171,10 @@ export async function POST(request: NextRequest) {
         spread_key: spreadKey,
         reading_type: readingType,
         expires_in_days: expiresInDays,
+        token: token, // Token'ı metadata'ya ekle (link oluşturmak için)
+        reading_link: readingLink, // Link'i de metadata'ya ekle
       },
     });
-
-    // Link oluştur - development'ta localhost:3001, production'da NEXT_PUBLIC_SITE_URL
-    // Geçici test için NEXT_PUBLIC_READING_LINK_BASE_URL environment variable'ı kullanılabilir
-    const baseUrl =
-      process.env.NEXT_PUBLIC_READING_LINK_BASE_URL ||
-      (process.env.NODE_ENV === 'development'
-        ? 'http://localhost:3001'
-        : process.env.NEXT_PUBLIC_SITE_URL || 'https://tarotnumeroloji.com');
-    const locale = 'tr'; // Varsayılan locale, ileride dinamik yapılabilir
-    const readingLink = `${baseUrl}/${locale}/tarotokumasi/${spreadKey}?token=${token}`;
 
     return NextResponse.json({
       success: true,
@@ -174,7 +185,10 @@ export async function POST(request: NextRequest) {
       expiresAt: expiresAt.toISOString(),
     });
   } catch (error) {
-    console.error('Reading session oluşturma hatası:', error);
+    logger.error('Reading session oluşturma hatası', error, {
+      action: 'create_session',
+      resource: 'reading_sessions',
+    });
     return NextResponse.json(
       {
         error:
@@ -184,4 +198,3 @@ export async function POST(request: NextRequest) {
     );
   }
 }
-

@@ -237,6 +237,7 @@ export function PWAAuthProvider({ children }: PWAAuthProviderProps) {
 
         // Handle service worker messages
         navigator.serviceWorker.addEventListener('message', event => {
+          // eslint-disable-next-line no-unused-vars
           const { type, data: _data } = event.data;
 
           switch (type) {

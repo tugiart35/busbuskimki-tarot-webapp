@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
+import Link from 'next/link';
 import { supabase } from '@/lib/supabase/client';
 import { useAuth } from '@/hooks/auth/useAuth';
 import { useTranslations } from '@/hooks/useTranslations';
@@ -247,12 +248,12 @@ export default function SettingsPage() {
               {t('settings.accountSettings', 'Hesap Ayarları')}
             </span>
           </div>
-          <a
+          <Link
             href='/dashboard'
             className='text-lavender hover:text-gold transition-colors'
           >
             ← {t('settings.backToDashboard', "Dashboard'a Dön")}
-          </a>
+          </Link>
         </div>
       </header>
 
@@ -754,12 +755,12 @@ export default function SettingsPage() {
 
         {/* Navigation */}
         <div className='mt-12 text-center'>
-          <a
+          <Link
             href='/dashboard'
             className='bg-gold hover:bg-gold/80 text-night font-semibold py-3 px-6 rounded-lg transition-colors'
           >
             {t('settings.backToDashboard', "Dashboard'a Dön")}
-          </a>
+          </Link>
         </div>
       </main>
       {/* Bottom Navigation */}

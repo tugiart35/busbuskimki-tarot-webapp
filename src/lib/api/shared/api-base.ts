@@ -135,7 +135,7 @@ export class ApiBase {
    */
   static validateRequestBody<T>(
     request: NextRequest,
-    validator: (body: any) => T
+    validator: (_body: any) => T
   ): { success: true; data: T } | { success: false; error: NextResponse } {
     try {
       const body = request.json();

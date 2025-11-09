@@ -7,15 +7,15 @@ interface UseTouchScrollOptions {
   snapToGrid?: boolean;
   snapThreshold?: number;
   momentum?: boolean;
-  onScroll?: (scrollLeft: number, scrollTop: number) => void;
+  onScroll?: (_scrollLeft: number, _scrollTop: number) => void;
   onScrollEnd?: () => void;
 }
 
 interface UseTouchScrollReturn {
   scrollRef: React.RefObject<HTMLDivElement>;
   isScrolling: boolean;
-  scrollTo: (position: number, smooth?: boolean) => void;
-  scrollToElement: (element: HTMLElement, smooth?: boolean) => void;
+  scrollTo: (_position: number, _smooth?: boolean) => void;
+  scrollToElement: (_element: HTMLElement, _smooth?: boolean) => void;
 }
 
 export function useTouchScroll({

@@ -77,10 +77,16 @@ export interface UseTarotFormStateReturn {
   modalStates: ModalStates;
 
   // Actions
-  updatePersonalInfo: (field: keyof PersonalInfo, value: string | boolean) => void;
-  updatePartnerInfo: (field: keyof PartnerInfo, value: string | boolean) => void;
-  updateCommunicationMethod: (method: 'email' | 'whatsapp') => void;
-  updateQuestion: (field: keyof Questions, value: string) => void;
+  updatePersonalInfo: (
+    _field: keyof PersonalInfo,
+    _value: string | boolean
+  ) => void;
+  updatePartnerInfo: (
+    _field: keyof PartnerInfo,
+    _value: string | boolean
+  ) => void;
+  updateCommunicationMethod: (_method: 'email' | 'whatsapp') => void;
+  updateQuestion: (_field: keyof Questions, _value: string) => void;
   setPersonalInfo: React.Dispatch<React.SetStateAction<PersonalInfo>>;
   setPartnerInfo: React.Dispatch<React.SetStateAction<PartnerInfo>>;
   setQuestions: React.Dispatch<React.SetStateAction<Questions>>;
@@ -94,9 +100,9 @@ export interface UseTarotFormStateReturn {
   closeInfoModal: () => void;
   closeCreditConfirm: () => void;
   closeSuccessModal: () => void;
-  setSaving: (isSaving: boolean) => void;
-  setSavingReading: (isSavingReading: boolean) => void;
-  setDetailedFormSaved: (saved: boolean) => void;
+  setSaving: (_isSaving: boolean) => void;
+  setSavingReading: (_isSavingReading: boolean) => void;
+  setDetailedFormSaved: (_saved: boolean) => void;
 }
 
 export function useTarotFormState({
@@ -163,7 +169,7 @@ export function useTarotFormState({
     (field: keyof PersonalInfo, value: string | boolean) => {
       setPersonalInfo(prev => ({ ...prev, [field]: value }));
       setFormErrors(errors => ({ ...errors, [field]: '', general: '' }));
-      
+
       // Eğer "doğum tarihimi bilmiyorum" seçildiyse, doğum tarihini temizle
       if (field === 'birthDateUnknown' && value === true) {
         setPersonalInfo(prev => ({ ...prev, birthDate: '' }));
@@ -222,23 +228,10 @@ export function useTarotFormState({
       hasError = true;
     }
 
-    // Relationship status validation
-    if (!personalInfo.relationshipStatus.trim()) {
-      errors.relationshipStatus = t(validationKeys.relationshipStatusRequired);
-      hasError = true;
-    }
+    // Relationship status validation - Artık zorunlu değil, opsiyonel alan
 
-    if (requiresPartnerInfo) {
-      if (!partnerInfo.name.trim() || partnerInfo.name.trim().length < 3) {
-        errors.partnerName = t(validationKeys.partnerNameRequired);
-        hasError = true;
-      }
-
-      if (!partnerInfo.birthDateUnknown && !partnerInfo.birthDate.trim()) {
-        errors.partnerBirthDate = t(validationKeys.partnerBirthDateRequired);
-        hasError = true;
-      }
-    }
+    // Partner bilgileri artık zorunlu değil - opsiyonel alanlar
+    // Validasyon kaldırıldı
 
     // Email validation (Email seçilirse gerekli)
     if (communicationMethod === 'email') {
@@ -285,7 +278,15 @@ export function useTarotFormState({
 
     setFormErrors(prev => ({ ...prev, ...errors }));
     return !hasError;
-  }, [personalInfo, partnerInfo, questions, communicationMethod, validationKeys, requiresPartnerInfo, t]);
+  }, [
+    personalInfo,
+    partnerInfo,
+    questions,
+    communicationMethod,
+    validationKeys,
+    requiresPartnerInfo,
+    t,
+  ]);
 
   // Modal helper functions
   const closeInfoModal = useCallback(() => {

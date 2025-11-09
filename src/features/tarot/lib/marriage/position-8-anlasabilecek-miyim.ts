@@ -1028,10 +1028,11 @@ export const searchposition8MeaningsByKeyword = (
 };
 
 // Varsayılan export
-export default {
+const position8MeaningsExport = {
   position8Meanings,
   getposition8Meaning,
   getAllposition8Meanings,
   getposition8MeaningsByGroup,
   searchposition8MeaningsByKeyword,
 };
+export default position8MeaningsExport;

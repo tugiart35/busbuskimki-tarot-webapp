@@ -18,9 +18,9 @@ export interface BasePositionMeaning {
 
 export interface PositionMeaningGenerator {
   generatePositionMeanings(
-    spreadType: string,
-    position: number,
-    positionName: string
+    _spreadType: string,
+    _position: number,
+    _positionName: string
   ): BasePositionMeaning[];
 }
 

@@ -1153,10 +1153,11 @@ export const searchposition6MeaningsByKeyword = (
 };
 
 // Varsayılan export
-export default {
+const position6MeaningsExport = {
   position6Meanings,
   getposition6Meaning,
   getAllposition6Meanings,
   getposition6MeaningsByGroup,
   searchposition6MeaningsByKeyword,
 };
+export default position6MeaningsExport;

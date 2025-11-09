@@ -1051,10 +1051,11 @@ export const searchposition8MeaningsByKeyword = (
 };
 
 // Varsayılan export
-export default {
+const relationshipProblemsPosition8Export = {
   position8Meanings,
   getposition8Meaning,
   getAllposition8Meanings,
   getposition8MeaningsByGroup,
   searchposition8MeaningsByKeyword,
 };
+export default relationshipProblemsPosition8Export;

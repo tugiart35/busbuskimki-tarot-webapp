@@ -4,7 +4,7 @@ import { useState, useEffect, ChangeEvent, KeyboardEvent } from 'react';
 
 interface DatePickerProps {
   value: string; // YYYY-MM-DD format (ISO)
-  onChange: (value: string) => void;
+  onChange: (_value: string) => void;
   placeholder?: string;
   error?: boolean;
   minDate?: Date;

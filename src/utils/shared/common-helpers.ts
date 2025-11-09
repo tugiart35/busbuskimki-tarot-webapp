@@ -175,7 +175,7 @@ export const ArrayUtils = {
 
   groupBy: <T, K extends string | number>(
     arr: T[],
-    key: (item: T) => K
+    key: (_item: T) => K
   ): Record<K, T[]> => {
     return arr.reduce(
       (groups, item) => {
@@ -192,7 +192,7 @@ export const ArrayUtils = {
 
   sortBy: <T>(
     arr: T[],
-    key: (item: T) => any,
+    key: (_item: T) => any,
     order: 'asc' | 'desc' = 'asc'
   ): T[] => {
     return [...arr].sort((a, b) => {
@@ -280,7 +280,7 @@ export const ObjectUtils = {
   },
 
   isEmpty: (obj: any): boolean => {
-    if (obj == null) {
+    if (obj === null || obj === undefined) {
       return true;
     }
     if (Array.isArray(obj) || typeof obj === 'string') {

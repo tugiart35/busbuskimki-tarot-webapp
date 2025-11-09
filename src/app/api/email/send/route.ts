@@ -32,6 +32,7 @@ import { NextRequest } from 'next/server';
 import nodemailer from 'nodemailer';
 import { ErrorResponse } from '@/lib/api/error-responses';
 import { EmailCORS } from '@/lib/api/email-cors';
+import { logger } from '@/lib/logger';
 import { ApiBase } from '@/lib/api/shared/api-base';
 
 export async function POST(request: NextRequest) {
@@ -90,7 +91,10 @@ export async function POST(request: NextRequest) {
     try {
       await transporter.verify();
     } catch (error) {
-      console.error('SMTP connection verification failed:', error);
+      logger.error('SMTP connection verification failed', error, {
+        action: 'verify_smtp',
+        resource: 'email',
+      });
       return ErrorResponse.smtpConnectionError();
     }
 

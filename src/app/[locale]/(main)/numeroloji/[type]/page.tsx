@@ -40,6 +40,9 @@ export default function NumerologyResultPage({
     locale: string;
   } | null>(null);
   const [resolvedSearchParams, setResolvedSearchParams] = useState<any>(null);
+  const [result, setResult] = useState<NumerologyResult | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const resolveParams = async () => {
@@ -50,32 +53,6 @@ export default function NumerologyResultPage({
     };
     resolveParams();
   }, [params, searchParams]);
-
-  if (!resolvedParams || !resolvedSearchParams) {
-    return (
-      <div className='min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white flex items-center justify-center'>
-        <div className='text-center'>
-          <div className='w-16 h-16 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-4'></div>
-          <p className='text-gray-300'>{t('numerologyResult.loading')}</p>
-        </div>
-      </div>
-    );
-  }
-
-  const { type, locale } = resolvedParams;
-  const {
-    fullName,
-    birthDate,
-    date,
-    targetDate,
-    personA_fullName,
-    personA_birthDate,
-    personB_fullName,
-    personB_birthDate,
-  } = resolvedSearchParams;
-  const [result, setResult] = useState<NumerologyResult | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   const splitFullName = (value?: string) => {
     if (!value) {
@@ -95,8 +72,24 @@ export default function NumerologyResultPage({
   };
 
   useEffect(() => {
+    if (!resolvedParams || !resolvedSearchParams) {
+      return;
+    }
+
     const calculateResult = () => {
       try {
+        const { type: readingType, locale } = resolvedParams;
+        const {
+          fullName,
+          birthDate,
+          date,
+          targetDate,
+          personA_fullName,
+          personA_birthDate,
+          personB_fullName,
+          personB_birthDate,
+        } = resolvedSearchParams;
+
         // Tip validasyonu
         const validTypes: NumerologyType[] = [
           'life-path',
@@ -109,7 +102,7 @@ export default function NumerologyResultPage({
           'personal-cycles',
           'compatibility',
         ];
-        if (!validTypes.includes(type as NumerologyType)) {
+        if (!validTypes.includes(readingType as NumerologyType)) {
           setError(t('numerologyResult.invalidType'));
           setLoading(false);
           return;
@@ -133,8 +126,11 @@ export default function NumerologyResultPage({
           ],
         };
 
-        const missingParams = requiredParams[type as NumerologyType]?.filter(
-          param => !searchParams[param as keyof typeof searchParams]
+        const missingParams = requiredParams[
+          readingType as NumerologyType
+        ]?.filter(
+          param =>
+            !resolvedSearchParams[param as keyof typeof resolvedSearchParams]
         );
 
         if (missingParams && missingParams.length > 0) {
@@ -158,7 +154,7 @@ export default function NumerologyResultPage({
         }
 
         // Uyum analizi için özel parametreler
-        if (type === 'compatibility') {
+        if (readingType === 'compatibility') {
           const personANameParts = splitFullName(personA_fullName);
           const personBNameParts = splitFullName(personB_fullName);
           input.personA = {
@@ -176,7 +172,7 @@ export default function NumerologyResultPage({
         }
 
         const calculatedResult = calculateNumerology(
-          type as NumerologyType,
+          readingType as NumerologyType,
           input,
           locale
         );
@@ -191,18 +187,21 @@ export default function NumerologyResultPage({
     };
 
     calculateResult();
-  }, [
-    type,
-    fullName,
-    birthDate,
-    date,
-    targetDate,
-    personA_fullName,
-    personA_birthDate,
-    personB_fullName,
-    personB_birthDate,
-    resolvedSearchParams,
-  ]);
+  }, [resolvedParams, resolvedSearchParams, t]);
+
+  if (!resolvedParams || !resolvedSearchParams) {
+    return (
+      <div className='min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white flex items-center justify-center'>
+        <div className='text-center'>
+          <div className='w-16 h-16 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-4'></div>
+          <p className='text-gray-300'>{t('numerologyResult.loading')}</p>
+        </div>
+      </div>
+    );
+  }
+
+  // eslint-disable-next-line no-unused-vars
+  const { type: readingType, locale } = resolvedParams;
 
   if (loading) {
     return (

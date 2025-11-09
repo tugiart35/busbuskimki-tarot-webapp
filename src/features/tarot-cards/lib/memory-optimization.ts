@@ -36,7 +36,9 @@ export function useMemoryOptimization(
   options: Partial<MemoryOptimizationOptions> = {}
 ) {
   const {
+    // eslint-disable-next-line no-unused-vars
     enableCompression: _enableCompression = true,
+    // eslint-disable-next-line no-unused-vars
     enableVirtualization: _enableVirtualization = true,
     enableGarbageCollection = true,
     enableMonitoring = true,
@@ -360,7 +362,7 @@ export function useMemoryEfficientImages(
  */
 export class MemoryMonitor {
   private static instance: MemoryMonitor;
-  private observers: Set<(stats: MemoryStats) => void> = new Set();
+  private observers: Set<(_stats: MemoryStats) => void> = new Set();
   private monitoringInterval: NodeJS.Timeout | null = null;
 
   static getInstance(): MemoryMonitor {
@@ -387,7 +389,7 @@ export class MemoryMonitor {
     }
   }
 
-  subscribe(callback: (stats: MemoryStats) => void): () => void {
+  subscribe(callback: (_stats: MemoryStats) => void): () => void {
     this.observers.add(callback);
     return () => this.observers.delete(callback);
   }

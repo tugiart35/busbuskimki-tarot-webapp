@@ -2,6 +2,7 @@
 
 import React, { Component, ReactNode } from 'react';
 import { AlertTriangle, RefreshCw, Home } from 'lucide-react';
+import { logger } from '@/lib/logger';
 
 interface Props {
   children: ReactNode;
@@ -24,7 +25,13 @@ export class LayoutErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error('Layout Error Boundary caught an error:', error, errorInfo);
+    logger.error('Layout Error Boundary caught an error', error, {
+      action: 'error_boundary',
+      resource: 'LayoutErrorBoundary',
+      metadata: {
+        componentStack: errorInfo.componentStack,
+      },
+    });
   }
 
   handleRetry = () => {

@@ -574,6 +574,7 @@ export function createTarotReadingComponent({
     onPositionChange,
     onReadingTypeSelected: _onReadingTypeSelected,
     initialReadingType,
+    sessionToken,
   }: TarotReadingProps) {
     // Konfigürasyon ve tema stilleri - memo ile optimize edilmiş
     const config = useMemo(() => getConfig(), []);
@@ -600,9 +601,11 @@ export function createTarotReadingComponent({
 
     // Kredi yönetimi - detaylı ve yazılı okuma için ayrı krediler
     const detailedCredits = useReadingCredits(
-      config.creditKeys.detailed as any
+      (config.creditKeys?.detailed || 'DEFAULT_DETAILED') as any
     );
-    const writtenCredits = useReadingCredits(config.creditKeys.written as any);
+    const writtenCredits = useReadingCredits(
+      (config.creditKeys?.written || 'DEFAULT_WRITTEN') as any
+    );
 
     // Tarot okuma akışı hook'u - tüm state ve fonksiyonları yönetir
     const {
@@ -628,6 +631,7 @@ export function createTarotReadingComponent({
 
       // Form verileri
       personalInfo,
+      partnerInfo,
       communicationMethod,
       questions,
       formErrors,
@@ -638,6 +642,7 @@ export function createTarotReadingComponent({
 
       // Form güncelleme fonksiyonları
       updatePersonalInfo,
+      updatePartnerInfo,
       updateCommunicationMethod,
       updateQuestion,
       validateDetailedForm,
@@ -666,7 +671,108 @@ export function createTarotReadingComponent({
     // Başlangıç zamanı - okuma süresini hesaplamak için
     const [startTime] = useState(() => Date.now());
 
-    // initialReadingType varsa otomatik olarak okuma tipini seç ve form ekranına geç
+    // Token ile yarım bırakılan okumayı yükle
+    useEffect(() => {
+      if (sessionToken && typeof window !== 'undefined') {
+        try {
+          const savedData = localStorage.getItem(
+            `reading_session_${sessionToken}`
+          );
+          if (savedData) {
+            const parsed = JSON.parse(savedData);
+
+            // Form verilerini yükle
+            if (parsed.personalInfo) {
+              Object.keys(parsed.personalInfo).forEach(key => {
+                updatePersonalInfo(key as any, parsed.personalInfo[key]);
+              });
+            }
+            if (parsed.partnerInfo) {
+              Object.keys(parsed.partnerInfo).forEach(key => {
+                updatePartnerInfo(key as any, parsed.partnerInfo[key]);
+              });
+            }
+            if (parsed.communicationMethod) {
+              updateCommunicationMethod(parsed.communicationMethod);
+            }
+            if (parsed.questions) {
+              // Questions object olarak kaydedilmiş olabilir
+              if (
+                typeof parsed.questions === 'object' &&
+                !Array.isArray(parsed.questions)
+              ) {
+                if (parsed.questions.concern) {
+                  updateQuestion('concern', parsed.questions.concern);
+                }
+                if (parsed.questions.understanding) {
+                  updateQuestion(
+                    'understanding',
+                    parsed.questions.understanding
+                  );
+                }
+                if (parsed.questions.emotional) {
+                  updateQuestion('emotional', parsed.questions.emotional);
+                }
+              }
+            }
+            if (parsed.selectedReadingType) {
+              setSelectedReadingType(parsed.selectedReadingType);
+            }
+            if (parsed.selectedCards && Array.isArray(parsed.selectedCards)) {
+              // Kartları yükle (basit bir yaklaşım - tam implementasyon için daha fazla kod gerekir)
+              // Bu kısım için useTarotReadingFlow hook'una erişim gerekir
+            }
+            if (parsed.detailedFormSaved) {
+              setDetailedFormSaved(true);
+            }
+          }
+        } catch (error) {
+          // eslint-disable-next-line no-console
+          console.warn('Yarım bırakılan okuma yüklenirken hata:', error);
+        }
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [sessionToken]);
+
+    // Yarım bırakılan okumayı localStorage'a kaydet
+    useEffect(() => {
+      if (sessionToken && typeof window !== 'undefined') {
+        try {
+          const dataToSave = {
+            personalInfo,
+            partnerInfo,
+            communicationMethod,
+            questions,
+            selectedReadingType,
+            selectedCards: selectedCards.filter(card => card !== null),
+            isReversed,
+            detailedFormSaved,
+            timestamp: new Date().toISOString(),
+          };
+          localStorage.setItem(
+            `reading_session_${sessionToken}`,
+            JSON.stringify(dataToSave)
+          );
+        } catch (error) {
+          // eslint-disable-next-line no-console
+          console.warn('Yarım bırakılan okuma kaydedilirken hata:', error);
+        }
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [
+      sessionToken,
+      personalInfo,
+      partnerInfo,
+      communicationMethod,
+      questions,
+      selectedReadingType,
+      selectedCards,
+      isReversed,
+      detailedFormSaved,
+    ]);
+
+    // initialReadingType varsa otomatik olarak okuma tipini seç
+    // Ama normal akışa devam et: bilgilendirme modal'ı → form → kart seçimi
     useEffect(() => {
       if (initialReadingType && !selectedReadingType) {
         const readingTypeValue =
@@ -674,10 +780,9 @@ export function createTarotReadingComponent({
             ? READING_TYPES.DETAILED
             : READING_TYPES.WRITTEN;
         setSelectedReadingType(readingTypeValue);
-        // Form kaydedilmiş gibi davran (kredi kontrolü olmadan)
-        setDetailedFormSaved(true);
-        // Info modal'ı gösterme
-        setModalStates(prev => ({ ...prev, showInfoModal: false }));
+        // Normal akışa devam et: bilgilendirme modal'ını göster
+        // Form kaydedilmiş gibi davranma - kullanıcı formu doldurmalı
+        setModalStates(prev => ({ ...prev, showInfoModal: true }));
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [initialReadingType]);
@@ -808,8 +913,10 @@ export function createTarotReadingComponent({
     };
 
     // Detaylı form kaydetme - kullanıcı girişi kontrolü yapar ve formu kaydeder
+    // Özel okuma (initialReadingType) için giriş kontrolü yapılmaz
     const saveDetailedForm = async () => {
-      if (!user) {
+      // Özel okuma değilse ve kullanıcı giriş yapmamışsa hata göster
+      if (!initialReadingType && !user) {
         showToast(t(messages.loginRequired), 'error');
         setModalStates(prev => ({
           ...prev,
@@ -832,8 +939,32 @@ export function createTarotReadingComponent({
     // Supabase'e okuma kaydetme - kredi kontrolü ve veri kaydetme işlemi
     const saveReadingToSupabase = async (readingData: any) => {
       try {
-        // Misafir kullanıcı kontrolü
-        if (!user?.id) {
+        // Token akışında kullanıcı olmayabilir, bu durumda özel bir user_id oluştur
+        // veya reading_sessions'dan customer_email'i kullan
+        const userId = user?.id;
+        let isTokenFlow = false;
+
+        if (!userId && sessionToken) {
+          // Token akışı - reading_sessions'dan customer_email'i al
+          // Önce session'ı bul ve customer_email'i al
+          try {
+            const sessionResponse = await fetch(
+              `/api/reading-sessions/validate?token=${sessionToken}`
+            );
+            if (sessionResponse.ok) {
+              // Token akışı için özel bir user_id oluştur (customer_email hash'i)
+              // veya null bırak ve email API'de reading_sessions'dan alsın
+              isTokenFlow = true;
+              // user_id null olabilir, email API reading_sessions'dan alacak
+            }
+          } catch (error) {
+            // eslint-disable-next-line no-console
+            console.warn('Session validation failed:', error);
+          }
+        }
+
+        // Misafir kullanıcı kontrolü (token akışı değilse)
+        if (!userId && !isTokenFlow) {
           return {
             success: true,
             id: 'guest-session',
@@ -861,25 +992,59 @@ export function createTarotReadingComponent({
           },
         };
 
-        // Debug: RPC çağrısı öncesi parametreleri log'la
-        const rpcParams = {
-          p_user_id: user.id,
-          p_reading_type: readingData.readingType,
-          p_spread_name: t(dataKeys.spreadName),
-          p_title: readingData.title || t(dataKeys.spreadTitle),
-          p_interpretation: readingData.interpretation,
-          p_cards: readingData.cards.selectedCards,
-          p_questions: readingData.questions,
-          p_cost_credits: costCredits,
-          p_metadata: enhancedMetadata,
-          p_idempotency_key: `reading_${user.id}_${readingData.timestamp}`,
-        };
+        // Token akışında user_id null olabilir, bu durumda direkt insert yap
+        let rpcResult: any = null;
+        let rpcError: any = null;
 
-        // Supabase RPC fonksiyonu ile okuma kaydetme ve kredi düşme
-        const { data: rpcResult, error: rpcError } = await supabase.rpc(
-          'fn_create_reading_with_debit',
-          rpcParams
-        );
+        if (isTokenFlow && !userId) {
+          // Token akışı - direkt insert yap (kredi düşme olmadan)
+          const insertData = {
+            user_id: null, // Token akışında user_id null
+            reading_type: readingData.readingType,
+            spread_name: t(dataKeys.spreadName),
+            title: readingData.title || t(dataKeys.spreadTitle),
+            interpretation: readingData.interpretation,
+            cards: readingData.cards.selectedCards,
+            questions: readingData.questions,
+            cost_credits: 0, // Token akışında kredi düşülmez
+            status: 'completed',
+            metadata: enhancedMetadata,
+          };
+
+          const { data: insertDataResult, error: insertError } = await supabase
+            .from('readings')
+            .insert(insertData)
+            .select()
+            .single();
+
+          rpcResult = insertDataResult;
+          rpcError = insertError;
+        } else if (userId) {
+          // Normal akış - RPC ile kredi düşme
+          const rpcParams = {
+            p_user_id: userId,
+            p_reading_type: readingData.readingType,
+            p_spread_name: t(dataKeys.spreadName),
+            p_title: readingData.title || t(dataKeys.spreadTitle),
+            p_interpretation: readingData.interpretation,
+            p_cards: readingData.cards.selectedCards,
+            p_questions: readingData.questions,
+            p_cost_credits: costCredits,
+            p_metadata: enhancedMetadata,
+            p_idempotency_key: `reading_${userId}_${readingData.timestamp}`,
+          };
+
+          // Supabase RPC fonksiyonu ile okuma kaydetme ve kredi düşme
+          const { data: rpcData, error: rpcErr } = await supabase.rpc(
+            'fn_create_reading_with_debit',
+            rpcParams
+          );
+
+          rpcResult = rpcData;
+          rpcError = rpcErr;
+        } else {
+          throw new Error('Kullanıcı ID bulunamadı');
+        }
 
         // Okuma kaydedildikten sonra iletişim bilgilerini güncelle
         if (rpcResult?.id) {
@@ -906,7 +1071,7 @@ export function createTarotReadingComponent({
         return {
           success: true,
           id: rpcResult?.id,
-          userId: user.id,
+          userId: userId || 'token-user',
         };
       } catch (error) {
         return {
@@ -1023,6 +1188,7 @@ export function createTarotReadingComponent({
             },
             questions: {
               personalInfo,
+              ...(config.requiresPartnerInfo ? { partnerInfo } : {}),
               userQuestions: questions,
             },
             metadata: {
@@ -1049,6 +1215,59 @@ export function createTarotReadingComponent({
 
           if (saveResult.success) {
             showToast(t(messages.readingSavedSuccess), 'success');
+
+            // Token varsa session'ı complete et
+            // UUID format kontrolü (guest-session gibi string'leri filtrele)
+            if (sessionToken && saveResult.id) {
+              const isUUID =
+                /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
+                  saveResult.id
+                );
+
+              if (isUUID) {
+                // Sadece geçerli UUID ise complete endpoint'ini çağır
+                try {
+                  const completeResponse = await fetch(
+                    '/api/reading-sessions/complete',
+                    {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json',
+                      },
+                      body: JSON.stringify({
+                        token: sessionToken,
+                        readingId: saveResult.id,
+                      }),
+                    }
+                  );
+
+                  if (completeResponse.ok) {
+                    // Session tamamlandı, localStorage'dan temizle
+                    if (sessionToken) {
+                      localStorage.removeItem(
+                        `reading_session_${sessionToken}`
+                      );
+                    }
+                  } else {
+                    // eslint-disable-next-line no-console
+                    console.warn(
+                      'Session complete hatası:',
+                      await completeResponse.text()
+                    );
+                  }
+                } catch (error) {
+                  // eslint-disable-next-line no-console
+                  console.warn('Session complete işlemi başarısız:', error);
+                  // Hata olsa bile devam et
+                }
+              } else {
+                // Guest kullanıcı için session'ı complete etme (reading_id olmadan)
+                // eslint-disable-next-line no-console
+                console.log(
+                  'Guest kullanıcı için session complete atlandı (UUID değil)'
+                );
+              }
+            }
           } else {
             showToast(t(messages.readingSaveError), 'error');
           }
@@ -1056,18 +1275,16 @@ export function createTarotReadingComponent({
           // Başarı modalını göster
           setModalStates(prev => ({ ...prev, showSuccessModal: true }));
 
-          // 1.5 saniye sonra tarotokumasi sayfasına yönlendir
+          // 1.5 saniye sonra tarotokumasi sayfasına yönlendir (spread ID olmadan)
           setTimeout(() => {
             setModalStates(prev => ({ ...prev, showSuccessModal: false }));
             try {
               const currentLocale = pathname?.split('/')[1] || 'tr';
-              const actualSpreadId = getActualSpreadId(config.spreadId);
-              router.push(`/${currentLocale}/tarotokumasi/${actualSpreadId}`);
+              router.push(`/${currentLocale}/tarotokumasi`);
             } catch {
               // Fallback: window.location kullan
               const currentLocale = pathname?.split('/')[1] || 'tr';
-              const actualSpreadId = getActualSpreadId(config.spreadId);
-              window.location.href = `/${currentLocale}/tarotokumasi/${actualSpreadId}`;
+              window.location.href = `/${currentLocale}/tarotokumasi`;
             }
           }, 1500);
 
@@ -1240,11 +1457,13 @@ export function createTarotReadingComponent({
           }
           onClose={() => setSelectedReadingType(null)}
           personalInfo={personalInfo}
+          partnerInfo={partnerInfo}
           communicationMethod={communicationMethod}
           questions={questions}
           formErrors={formErrors}
           isSaving={isSaving}
           onUpdatePersonalInfo={updatePersonalInfo}
+          onUpdatePartnerInfo={updatePartnerInfo}
           onUpdateCommunicationMethod={updateCommunicationMethod}
           onUpdateQuestion={updateQuestion}
           onSaveForm={handleSaveDetailedFormClick}
@@ -1362,7 +1581,8 @@ export function createTarotReadingComponent({
           )}
 
         {/* Okuma tipi değiştir butonu - tip seçildikten sonra gösterilir */}
-        {selectedReadingType !== null && (
+        {/* initialReadingType varsa (özel okuma) gizle, normal sayfada göster */}
+        {selectedReadingType !== null && !initialReadingType && (
           <div className='flex justify-center mb-6'>
             <div className='flex flex-col items-center gap-3'>
               <div className='flex items-center gap-2 px-4 py-2 bg-white/10 rounded-lg'>
@@ -1593,23 +1813,4 @@ export function createTarotReadingComponent({
       </div>
     );
   };
-}
-
-// Yardımcı fonksiyon: Config spread ID'sini gerçek spread ID'sine çevir
-function getActualSpreadId(configSpreadId: string): string {
-  // Önce tam eşleşmeyi dene
-  const foundSpread = tarotSpreads.find(s => s.id === configSpreadId);
-  if (foundSpread) {
-    return configSpreadId;
-  }
-  
-  // Eğer bulunamazsa, -spread suffix'i ekleyerek dene
-  const spreadWithSuffix = `${configSpreadId}-spread`;
-  const foundWithSuffix = tarotSpreads.find(s => s.id === spreadWithSuffix);
-  if (foundWithSuffix) {
-    return spreadWithSuffix;
-  }
-  
-  // Hala bulunamazsa, configSpreadId'yi kullan (fallback)
-  return configSpreadId;
 }

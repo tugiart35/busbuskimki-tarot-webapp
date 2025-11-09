@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase/client';
+import { logger } from '@/lib/logger';
 import {
   CreditCard,
   Calendar,
@@ -60,7 +61,10 @@ export default function PaymentHistory({
         .limit(limit);
 
       if (error) {
-        console.error('Supabase error fetching payments:', error);
+        logger.error('Supabase error fetching payments', error, {
+          action: 'fetch_payments',
+          resource: 'payments',
+        });
         throw new Error(
           `Ödeme verileri yüklenirken hata oluştu: ${error.message}`
         );
@@ -91,7 +95,10 @@ export default function PaymentHistory({
 
       setPayments(filteredPayments);
     } catch (error) {
-      console.error('Error fetching payments:', error);
+      logger.error('Error fetching payments', error, {
+        action: 'fetch_payments',
+        resource: 'payments',
+      });
       // Mock data yerine boş liste göster
       setPayments([]);
     } finally {

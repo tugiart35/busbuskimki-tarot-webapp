@@ -2,7 +2,7 @@
 
 interface PDFGeneratorProps {
   data: any;
-  onGenerate?: (pdf: any) => void;
+  onGenerate?: (_pdf: any) => void;
 }
 
 // Simplified PDF generator component

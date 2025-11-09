@@ -1031,10 +1031,11 @@ export const searchposition3MeaningsByKeyword = (
 };
 
 // Varsayılan export
-export default {
+const position3MeaningsExport = {
   position3Meanings,
   getposition3Meaning,
   getAllposition3Meanings,
   getposition3MeaningsByGroup,
   searchposition3MeaningsByKeyword,
 };
+export default position3MeaningsExport;

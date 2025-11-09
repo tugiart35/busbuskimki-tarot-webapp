@@ -147,7 +147,6 @@ class EmailService {
     // Kullanıcı bilgilerini al
     const personalInfo = readingData.questions?.personalInfo || {};
     const userName = personalInfo.name || 'Bilinmiyor';
-    const userSurname = personalInfo.surname || 'Bilinmiyor';
     const birthDate = personalInfo.birthDate || 'Bilinmiyor';
     const phoneNumber = personalInfo.phone || 'Belirtilmemiş';
     const whatsapp = personalInfo.whatsapp || false;
@@ -164,9 +163,10 @@ class EmailService {
       }
     );
 
-    // Okuma türünü Türkçe'ye çevir
-    const getReadingTypeText = (type: string) => {
-      switch (type) {
+    // Okuma türünü Türkçe'ye çevir (gelecekte kullanılacak)
+    // eslint-disable-next-line no-unused-vars
+    const _getReadingTypeText = (_type: string) => {
+      switch (_type) {
         case 'LOVE_SPREAD_DETAILED':
           return 'Aşk Açılımı - Detaylı';
         case 'LOVE_SPREAD_WRITTEN':
@@ -190,12 +190,25 @@ class EmailService {
 
     // Okuma formatını belirle
     const getReadingFormat = () => {
+      // Önce metadata'dan readingFormat bilgisini kontrol et (en güvenilir)
+      if (readingData.metadata?.readingFormat) {
+        const format = readingData.metadata.readingFormat.toLowerCase();
+        if (format === 'detailed') {
+          return 'Sesli';
+        } else if (format === 'written') {
+          return 'Yazılı';
+        } else if (format === 'simple') {
+          return 'Basit';
+        }
+      }
+
+      // Fallback: reading_type'a göre belirle (eski format için)
       if (readingData.reading_type?.includes('DETAILED')) {
-        return '🎤 Sesli Detaylı Okuma';
+        return 'Sesli';
       } else if (readingData.reading_type?.includes('WRITTEN')) {
-        return '📝 Yazılı Okuma';
+        return 'Yazılı';
       } else {
-        return '📄 Standart Okuma';
+        return 'Standart';
       }
     };
 
@@ -211,39 +224,89 @@ class EmailService {
     };
 
     // Seçilen kartları listele - Yorumları ile birlikte
-    const selectedCards = Array.isArray(readingData.cards)
-      ? readingData.cards
-      : [];
+    // Supabase'den gelen kart verisi { selectedCards: [...], positions: [...] } formatında olabilir
+    let selectedCards: any[] = [];
+    let positions: Array<{
+      id: number;
+      title: string;
+      description?: string;
+      desc?: string;
+    }> = [];
+
+    if (Array.isArray(readingData.cards)) {
+      // Eğer direkt array ise (eski format)
+      selectedCards = readingData.cards;
+    } else if (readingData.cards && typeof readingData.cards === 'object') {
+      // Eğer object ise ve selectedCards property'si varsa (yeni format)
+      if (Array.isArray(readingData.cards.selectedCards)) {
+        selectedCards = readingData.cards.selectedCards;
+      } else if (Array.isArray(readingData.cards.cards)) {
+        // Alternatif format kontrolü
+        selectedCards = readingData.cards.cards;
+      }
+
+      // Pozisyon bilgilerini al
+      if (Array.isArray(readingData.cards.positions)) {
+        positions = readingData.cards.positions;
+      }
+    }
 
     // Kartların yorumlarını çıkar
     const getCardInterpretation = (cardIndex: number, cardName: string) => {
       const interpretation = readingData.interpretation || '';
-      const lines = interpretation.split('\n');
-      const cardSection = lines.find(
-        (line: string) =>
-          line.includes(`${cardIndex + 1}.`) && line.includes(cardName)
-      );
 
-      if (cardSection) {
-        const sectionIndex = lines.findIndex(
-          (line: string) => line === cardSection
-        );
-        const meaningLines = [];
-        for (let i = sectionIndex + 2; i < lines.length; i++) {
-          const currentLine = lines[i];
-          if (
-            !currentLine ||
-            currentLine.trim() === '' ||
-            currentLine.match(/^\*\*\d+\./) ||
-            currentLine.includes('**Aşk Hayatı Özeti**')
-          ) {
-            break;
-          }
-          meaningLines.push(currentLine.trim());
-        }
-        return meaningLines.join(' ').trim();
+      // Eğer interpretation boşsa veya geçersizse
+      if (!interpretation || typeof interpretation !== 'string') {
+        return 'Yorum bulunamadı.';
       }
-      return 'Yorum bulunamadı.';
+
+      const lines = interpretation.split('\n');
+
+      // Kart bölümünü bul - daha esnek arama
+      const cardSectionIndex = lines.findIndex((line: string) => {
+        const normalizedLine = line.toLowerCase().trim();
+        const normalizedCardName = (cardName || '').toLowerCase();
+        return (
+          (normalizedLine.includes(`${cardIndex + 1}.`) ||
+            normalizedLine.includes(`**${cardIndex + 1}.`) ||
+            normalizedLine.includes(`*${cardIndex + 1}.`)) &&
+          (normalizedLine.includes(normalizedCardName) ||
+            normalizedCardName === '')
+        );
+      });
+
+      if (cardSectionIndex === -1) {
+        return 'Yorum bulunamadı.';
+      }
+
+      const meaningLines = [];
+      // Kart açıklamasını topla - bir sonraki kart bölümüne kadar
+      for (let i = cardSectionIndex + 1; i < lines.length; i++) {
+        const currentLine = lines[i];
+
+        // [object Object] kontrolü - bu satırı atla
+        if (currentLine?.includes('[object Object]')) {
+          continue;
+        }
+
+        // Durma koşulları
+        if (
+          !currentLine ||
+          currentLine.trim() === '' ||
+          currentLine.match(/^\*\*\d+\./) ||
+          currentLine.match(/^\*\d+\./) ||
+          currentLine.includes('**Aşk Hayatı Özeti**') ||
+          currentLine.includes('💫 **tarotPage') ||
+          (i > cardSectionIndex + 1 && currentLine.match(/^\d+\./)) // Bir sonraki kart numarası
+        ) {
+          break;
+        }
+
+        meaningLines.push(currentLine.trim());
+      }
+
+      const meaning = meaningLines.join(' ').trim();
+      return meaning || 'Yorum bulunamadı.';
     };
 
     const cardsList = selectedCards
@@ -252,11 +315,27 @@ class EmailService {
           index,
           card.nameTr || card.name
         );
+
+        // Pozisyon bilgisini al
+        const positionInfo = positions[index];
+        const positionTitle = positionInfo?.title || `Pozisyon ${index + 1}`;
+        const positionDesc =
+          positionInfo?.description || positionInfo?.desc || '';
+
         return `
           <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #8b5cf6;">
-            <h4 style="margin: 0 0 8px 0; color: #1f2937; font-size: 14px;">
+            <h4 style="margin: 0 0 8px 0; color: #1f2937; font-size: 14px; font-weight: 600;">
               ${index + 1}. ${card.nameTr || card.name} ${card.isReversed ? '(Ters)' : '(Düz)'}
             </h4>
+            ${
+              positionDesc
+                ? `
+            <p style="margin: 0 0 8px 0; color: #6b7280; font-size: 12px; font-style: italic; border-bottom: 1px solid #e5e7eb; padding-bottom: 8px;">
+              <strong>${positionTitle}:</strong> ${positionDesc}
+            </p>
+            `
+                : ''
+            }
             <p style="margin: 0; color: #374151; font-size: 13px; line-height: 1.5;">
               ${interpretation}
             </p>
@@ -402,8 +481,8 @@ class EmailService {
             <div class="section user-info">
               <h3>👤 KULLANICI BİLGİLERİ</h3>
               <div class="info-row">
-                <span class="info-label">Ad Soyad:</span> 
-                <span class="info-value">${userName} ${userSurname}</span>
+                <span class="info-label">Ad:</span> 
+                <span class="info-value">${userName}</span>
               </div>
               <div class="info-row">
                 <span class="info-label">Email:</span> 
@@ -422,10 +501,6 @@ class EmailService {
             <div class="section reading-info">
               <h3>🔮 OKUMA DETAYLARI</h3>
               <div class="info-row">
-                <span class="info-label">Okuma Türü:</span> 
-                <span class="info-value">${getReadingTypeText(readingData.reading_type)}</span>
-              </div>
-              <div class="info-row">
                 <span class="info-label">Başlık:</span> 
                 <span class="info-value">${readingData.title || 'Tarot okuma'}</span>
               </div>
@@ -440,10 +515,6 @@ class EmailService {
               <div class="info-row">
                 <span class="info-label">Açılım Tarihi:</span> 
                 <span class="info-value">${readingDate}</span>
-              </div>
-              <div class="info-row">
-                <span class="info-label">Kredi Maliyeti:</span> 
-                <span class="info-value"><span class="badge info">${readingData.cost_credits || 50} kredi</span></span>
               </div>
               <div class="info-row">
                 <span class="info-label">Durum:</span> 

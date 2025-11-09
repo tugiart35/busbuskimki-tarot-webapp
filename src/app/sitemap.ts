@@ -336,7 +336,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       'the-chariot',
       'strength',
       'the-hermit',
-      'the-wheel-of-fortune',
+      'wheeloffortune',
       'justice',
       'the-hanged-man',
       'death',

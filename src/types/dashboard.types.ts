@@ -97,14 +97,14 @@ export interface DashboardState {
 // Dashboard actions interface'i
 export interface DashboardActions {
   refreshCreditBalance: () => Promise<void>;
-  downloadReading: (reading: Reading) => void;
-  handlePackagePurchase: (pkg: Package) => Promise<void>;
+  downloadReading: (_reading: Reading) => void;
+  handlePackagePurchase: (_pkg: Package) => Promise<void>;
   handleLogout: () => Promise<void>;
   openProfileModal: () => Promise<void>;
   handleSaveProfile: () => Promise<void>;
-  setSidebarOpen: (open: boolean) => void;
-  setProfileModalOpen: (open: boolean) => void;
-  setEditing: (editing: boolean) => void;
-  setEditForm: (form: Partial<UserProfile>) => void;
-  setSelectedReading: (reading: Reading | null) => void;
+  setSidebarOpen: (_open: boolean) => void;
+  setProfileModalOpen: (_open: boolean) => void;
+  setEditing: (_editing: boolean) => void;
+  setEditForm: (_form: Partial<UserProfile>) => void;
+  setSelectedReading: (_reading: Reading | null) => void;
 }

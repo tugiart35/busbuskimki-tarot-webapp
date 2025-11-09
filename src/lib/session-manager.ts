@@ -32,7 +32,7 @@ class SessionManager {
   private refreshTimer: NodeJS.Timeout | null = null;
   private readonly REFRESH_MARGIN = 5 * 60 * 1000; // 5 minutes before expiry
   private readonly MIN_REFRESH_INTERVAL = 60 * 1000; // Minimum 1 minute between refreshes
-  private listeners: Array<(state: SessionState) => void> = [];
+  private listeners: Array<(_state: SessionState) => void> = [];
 
   constructor() {
     this.initializeSession();
@@ -320,7 +320,7 @@ class SessionManager {
   /**
    * Subscribe to session state changes
    */
-  public onSessionChange(listener: (state: SessionState) => void): () => void {
+  public onSessionChange(listener: (_state: SessionState) => void): () => void {
     this.listeners.push(listener);
 
     // Return unsubscribe function

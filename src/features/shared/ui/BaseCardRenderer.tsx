@@ -48,6 +48,7 @@ Gereklilik ve Kullanım Durumu:
 'use client';
 
 import React, { memo } from 'react';
+import Image from 'next/image';
 import type { TarotCard } from '@/features/tarot/lib/a-tarot-helpers';
 import type { CardTheme, CardMode, CardSize } from '@/types/ui';
 import { validateImageSrc } from '@/utils/security';
@@ -237,17 +238,14 @@ const BaseCardRenderer = memo(function BaseCardRenderer({
 
     return (
       <div className='relative w-full h-full'>
-        <img
+        <Image
           src={imageSrc}
           alt={getAltText()}
+          width={200}
+          height={300}
           className={`w-full h-full object-cover transition-transform duration-500 ${
             isReversed ? 'rotate-180' : ''
           }`}
-          loading='lazy'
-          onError={e => {
-            // Fallback olarak arka plan rengi göster
-            e.currentTarget.style.display = 'none';
-          }}
         />
       </div>
     );

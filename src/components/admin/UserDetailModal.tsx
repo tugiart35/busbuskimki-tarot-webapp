@@ -46,7 +46,7 @@ interface UserDetailModalProps {
   user: AdminUser;
   onClose: () => void;
   onEditCredit: () => void;
-  onStatusChange: (userId: string, status: string) => void;
+  onStatusChange: (_userId: string, _status: string) => void;
 }
 
 export default function UserDetailModal({

@@ -48,17 +48,25 @@ export interface BaseTarotFormProps {
   };
   isSaving: boolean;
   onUpdatePersonalInfo: (
-    field: 'name' | 'surname' | 'birthDate' | 'birthDateUnknown' | 'relationshipStatus' | 'email' | 'phone' | 'countryCode',
-    value: string | boolean
+    _field:
+      | 'name'
+      | 'surname'
+      | 'birthDate'
+      | 'birthDateUnknown'
+      | 'relationshipStatus'
+      | 'email'
+      | 'phone'
+      | 'countryCode',
+    _value: string | boolean
   ) => void;
   onUpdatePartnerInfo?: (
-    field: 'name' | 'birthDate' | 'birthDateUnknown',
-    value: string | boolean
+    _field: 'name' | 'birthDate' | 'birthDateUnknown',
+    _value: string | boolean
   ) => void;
-  onUpdateCommunicationMethod: (method: 'email' | 'whatsapp') => void;
+  onUpdateCommunicationMethod: (_method: 'email' | 'whatsapp') => void;
   onUpdateQuestion: (
-    field: 'concern' | 'understanding' | 'emotional',
-    value: string
+    _field: 'concern' | 'understanding' | 'emotional',
+    _value: string
   ) => void;
   onSaveForm: () => void;
   className?: string;
@@ -135,7 +143,9 @@ export default function BaseTarotForm({
       personalInfo.phone ||
       (config.requiresPartnerInfo &&
         partnerInfo &&
-        (partnerInfo.name || partnerInfo.birthDate || partnerInfo.birthDateUnknown)) ||
+        (partnerInfo.name ||
+          partnerInfo.birthDate ||
+          partnerInfo.birthDateUnknown)) ||
       questions.concern ||
       questions.understanding ||
       questions.emotional;
@@ -255,7 +265,9 @@ export default function BaseTarotForm({
                     ? 'border-red-500'
                     : themeClasses.inputBorder
                 } rounded-lg text-white focus:outline-none ${themeClasses.focusRing} transition-all ${
-                  personalInfo.birthDateUnknown ? 'opacity-50 cursor-not-allowed' : ''
+                  personalInfo.birthDateUnknown
+                    ? 'opacity-50 cursor-not-allowed'
+                    : ''
                 }`}
               />
               <div className='flex items-center'>
@@ -264,7 +276,10 @@ export default function BaseTarotForm({
                   id='birthDateUnknown'
                   checked={personalInfo.birthDateUnknown}
                   onChange={event =>
-                    onUpdatePersonalInfo('birthDateUnknown', event.target.checked)
+                    onUpdatePersonalInfo(
+                      'birthDateUnknown',
+                      event.target.checked
+                    )
                   }
                   className='w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded focus:ring-blue-500 focus:ring-2'
                 />
@@ -287,7 +302,7 @@ export default function BaseTarotForm({
             <label
               className={`block text-sm font-medium ${themeClasses.labelText} mb-2`}
             >
-              {translate(formKeys.relationshipStatus)} *
+              {translate(formKeys.relationshipStatus)}
             </label>
             <select
               value={personalInfo.relationshipStatus}
@@ -300,14 +315,32 @@ export default function BaseTarotForm({
                   : themeClasses.inputBorder
               } rounded-lg text-white focus:outline-none ${themeClasses.focusRing} transition-all`}
             >
-              <option value=''>{translate(formKeys.selectRelationshipStatus)}</option>
-              <option value='single'>{translate(formKeys.relationshipStatusOptions.single)}</option>
-              <option value='in_relationship'>{translate(formKeys.relationshipStatusOptions.in_relationship)}</option>
-              <option value='married'>{translate(formKeys.relationshipStatusOptions.married)}</option>
-              <option value='separated'>{translate(formKeys.relationshipStatusOptions.separated)}</option>
-              <option value='divorced'>{translate(formKeys.relationshipStatusOptions.divorced)}</option>
-              <option value='widowed'>{translate(formKeys.relationshipStatusOptions.widowed)}</option>
-              <option value='prefer_not_to_say'>{translate(formKeys.relationshipStatusOptions.prefer_not_to_say)}</option>
+              <option value=''>
+                {translate(formKeys.selectRelationshipStatus)}
+              </option>
+              <option value='single'>
+                {translate(formKeys.relationshipStatusOptions.single)}
+              </option>
+              <option value='in_relationship'>
+                {translate(formKeys.relationshipStatusOptions.in_relationship)}
+              </option>
+              <option value='married'>
+                {translate(formKeys.relationshipStatusOptions.married)}
+              </option>
+              <option value='separated'>
+                {translate(formKeys.relationshipStatusOptions.separated)}
+              </option>
+              <option value='divorced'>
+                {translate(formKeys.relationshipStatusOptions.divorced)}
+              </option>
+              <option value='widowed'>
+                {translate(formKeys.relationshipStatusOptions.widowed)}
+              </option>
+              <option value='prefer_not_to_say'>
+                {translate(
+                  formKeys.relationshipStatusOptions.prefer_not_to_say
+                )}
+              </option>
             </select>
             {formErrors.relationshipStatus && (
               <p className='text-red-400 text-xs mt-1'>
@@ -320,7 +353,9 @@ export default function BaseTarotForm({
             <div
               className={`space-y-4 pt-4 border-t ${themeClasses.sectionBorder}`}
             >
-              <h3 className={`${themeClasses.titleText} text-base font-semibold`}>
+              <h3
+                className={`${themeClasses.titleText} text-base font-semibold`}
+              >
                 {translate(formKeys.partnerInfo)}
               </h3>
 
@@ -328,7 +363,7 @@ export default function BaseTarotForm({
                 <label
                   className={`block text-sm font-medium ${themeClasses.labelText} mb-2`}
                 >
-                  {translate(formKeys.partnerName)} *
+                  {translate(formKeys.partnerName)}
                 </label>
                 <input
                   type='text'
@@ -353,7 +388,7 @@ export default function BaseTarotForm({
                 <label
                   className={`block text-sm font-medium ${themeClasses.labelText} mb-2`}
                 >
-                  {translate(formKeys.partnerBirthDate)} *
+                  {translate(formKeys.partnerBirthDate)}
                 </label>
                 <div className='space-y-2'>
                   <input

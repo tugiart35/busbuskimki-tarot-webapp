@@ -4,13 +4,12 @@ import { useCallback } from 'react';
 import { useTarotReading } from '@/hooks/useTarotReading';
 import { useTarotFormState } from './useTarotFormState';
 import { TarotConfig } from '../types/tarot-config.types';
-import { TarotCard } from '@/types/tarot';
-import { READING_TYPES } from '@/types/tarot';
+import { TarotCard, READING_TYPES } from '@/types/tarot';
 
 export interface UseTarotReadingFlowProps {
   config: TarotConfig;
-  onComplete?: (cards: TarotCard[], interpretation: string) => void;
-  onPositionChange?: (title: string) => void;
+  onComplete?: (_cards: TarotCard[], _interpretation: string) => void;
+  onPositionChange?: (_title: string) => void;
 }
 
 export interface UseTarotReadingFlowReturn {
@@ -73,26 +72,34 @@ export interface UseTarotReadingFlowReturn {
   };
 
   // Tarot Reading Actions
-  handleCardSelect: (card: TarotCard) => void;
-  handleCardDetails: (card: TarotCard) => void;
-  setShowCardDetails: (card: TarotCard | null) => void;
-  toggleCardState: (positionId: number) => void;
+  handleCardSelect: (_card: TarotCard) => void;
+  handleCardDetails: (_card: TarotCard) => void;
+  setShowCardDetails: (_card: TarotCard | null) => void;
+  toggleCardState: (_positionId: number) => void;
   handleClearAll: () => void;
   shuffleDeck: () => void;
 
   // Form Actions
   updatePersonalInfo: (
-    field: 'name' | 'surname' | 'birthDate' | 'birthDateUnknown' | 'relationshipStatus' | 'email' | 'phone' | 'countryCode',
-    value: string | boolean
+    _field:
+      | 'name'
+      | 'surname'
+      | 'birthDate'
+      | 'birthDateUnknown'
+      | 'relationshipStatus'
+      | 'email'
+      | 'phone'
+      | 'countryCode',
+    _value: string | boolean
   ) => void;
   updatePartnerInfo: (
-    field: 'name' | 'birthDate' | 'birthDateUnknown',
-    value: string | boolean
+    _field: 'name' | 'birthDate' | 'birthDateUnknown',
+    _value: string | boolean
   ) => void;
-  updateCommunicationMethod: (method: 'email' | 'whatsapp') => void;
+  updateCommunicationMethod: (_method: 'email' | 'whatsapp') => void;
   updateQuestion: (
-    field: 'concern' | 'understanding' | 'emotional',
-    value: string
+    _field: 'concern' | 'understanding' | 'emotional',
+    _value: string
   ) => void;
   setPersonalInfo: React.Dispatch<
     React.SetStateAction<{
@@ -155,13 +162,13 @@ export interface UseTarotReadingFlowReturn {
   closeInfoModal: () => void;
   closeCreditConfirm: () => void;
   closeSuccessModal: () => void;
-  setSaving: (isSaving: boolean) => void;
-  setSavingReading: (isSavingReading: boolean) => void;
-  setDetailedFormSaved: (saved: boolean) => void;
+  setSaving: (_isSaving: boolean) => void;
+  setSavingReading: (_isSavingReading: boolean) => void;
+  setDetailedFormSaved: (_saved: boolean) => void;
 
   // Reading Type Management
-  setSelectedReadingType: (type: string | null) => void;
-  handleReadingTypeSelect: (type: string) => void;
+  setSelectedReadingType: (_type: string | null) => void;
+  handleReadingTypeSelect: (_type: string) => void;
 
   // Config
   config: TarotConfig;

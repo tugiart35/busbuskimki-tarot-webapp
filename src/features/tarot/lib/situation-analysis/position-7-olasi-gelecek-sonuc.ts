@@ -1035,10 +1035,11 @@ export const searchPosition7MeaningsByKeyword = (
 };
 
 // Varsayılan export
-export default {
+const situationAnalysisPosition7Export = {
   position7Meanings,
   getPosition7Meaning,
   getAllPosition7Meanings,
   getPosition7MeaningsByGroup,
   searchPosition7MeaningsByKeyword,
 };
+export default situationAnalysisPosition7Export;

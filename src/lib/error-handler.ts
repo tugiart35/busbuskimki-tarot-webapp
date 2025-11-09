@@ -295,7 +295,7 @@ export const handleAsyncError = async <T>(
 };
 
 export const withErrorBoundary = <T extends unknown[], R>(
-  fn: (...args: T) => R,
+  fn: (..._args: T) => R,
   context: ErrorContext
 ) => {
   return (...args: T): R | { error: unknown } => {

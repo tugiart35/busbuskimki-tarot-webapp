@@ -16,7 +16,7 @@ export interface ReadingQuestions {
 function parseQuestions(
   rawQuestions: any,
   config: TarotConfig | null,
-  translate: (key: string, fallback?: string) => string
+  translate: (_key: string, _fallback?: string) => string
 ): ReadingQuestions {
   if (!rawQuestions) {
     return { personalInfo: [], prompts: [] };

@@ -1238,10 +1238,11 @@ export const searchPosition5MeaningsByKeyword = (
 };
 
 // Varsayılan export
-export default {
+const relationshipAnalysisPosition5Export = {
   position5Meanings,
   getRelationshipAnalysisPosition5Meaning,
   getRelationshipAnalysisPosition5MeaningByCardName,
   getAllPosition5Meanings: getAllPosition5Meanings,
   getRelationshipAnalysisPosition5MeaningsByGroup: getPosition5MeaningsByGroup,
 };
+export default relationshipAnalysisPosition5Export;

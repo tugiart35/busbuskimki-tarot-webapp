@@ -63,20 +63,20 @@ function getNumberedEntry(section: unknown, number: number): unknown {
     return null;
   }
   const key = number.toString();
-  
+
   // Önce object kontrolü yap (daha yaygın)
   if (typeof section === 'object' && !Array.isArray(section)) {
     const record = section as Record<string, unknown>;
     return key in record ? record[key] : null;
   }
-  
+
   // Array kontrolü (sr.json için)
   if (Array.isArray(section)) {
     // Array'de index 0 = null, index 1 = "1", index 2 = "2", vs.
     // Sayı 1 için index 1'e bakmalıyız
     return section[number] ?? null;
   }
-  
+
   return null;
 }
 
@@ -440,8 +440,8 @@ export function getMaturityNumberMeaning(
 /**
  * Zirve sayısı anlamını getirir
  */
-const PINNACLE_ALLOWED = new Set([1,2,3,4,5,6,7,8,9,11,22,33]);
-const CHALLENGE_ALLOWED = new Set([0,1,2,3,4,5,6,7,8]);
+const PINNACLE_ALLOWED = new Set([1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 22, 33]);
+const CHALLENGE_ALLOWED = new Set([0, 1, 2, 3, 4, 5, 6, 7, 8]);
 const MASTER_ROOT: Record<number, number> = { 11: 2, 22: 4, 33: 6 };
 
 function normalizeLocale(locale?: string) {
@@ -453,10 +453,16 @@ function getMeaningWithFallback(
   n: number,
   locale: string
 ): string | null {
-  const chain = [normalizeLocale(locale), normalizeLocale(DEFAULT_LOCALE), 'en'];
+  const chain = [
+    normalizeLocale(locale),
+    normalizeLocale(DEFAULT_LOCALE),
+    'en',
+  ];
   for (const loc of chain) {
     const m = getLocalizedMeaningFromSection(n, section, loc);
-    if (m) return m;
+    if (m) {
+      return m;
+    }
   }
   return null;
 }
@@ -466,13 +472,19 @@ export function getPinnacleNumberMeaningSafe(
   number: number,
   locale: string = DEFAULT_LOCALE
 ): string | null {
-  if (!PINNACLE_ALLOWED.has(number)) return null;
+  if (!PINNACLE_ALLOWED.has(number)) {
+    return null;
+  }
   const direct = getMeaningWithFallback('pinnaclesMeanings', number, locale);
-  if (direct) return direct;
+  if (direct) {
+    return direct;
+  }
 
   // Master metni yoksa köke düş (11→2, 22→4, 33→6)
   const root = MASTER_ROOT[number];
-  return root ? getMeaningWithFallback('pinnaclesMeanings', root, locale) : null;
+  return root
+    ? getMeaningWithFallback('pinnaclesMeanings', root, locale)
+    : null;
 }
 
 // Zorluk: 0–8, master yok; 0 için metin yoksa genel bir fallback belirle
@@ -480,18 +492,30 @@ export function getChallengeNumberMeaningSafe(
   number: number,
   locale: string = DEFAULT_LOCALE
 ): string | null {
-  if (!CHALLENGE_ALLOWED.has(number)) return null;
+  if (!CHALLENGE_ALLOWED.has(number)) {
+    return null;
+  }
   const m = getMeaningWithFallback('challengesMeanings', number, locale);
-  if (m) return m;
+  if (m) {
+    return m;
+  }
 
   // Opsiyonel: 0 için veri yoksa minimal bir default döndür
   if (number === 0) {
-    const chain = [normalizeLocale(locale), normalizeLocale(DEFAULT_LOCALE), 'en'];
+    const chain = [
+      normalizeLocale(locale),
+      normalizeLocale(DEFAULT_LOCALE),
+      'en',
+    ];
     const defaults: Record<string, string> = {
       tr: '0 Zorluğu: Boşluk ve iç dengeyle yüzleşme.',
       en: 'Challenge 0: The void—balance and self-reliance.',
     };
-    for (const loc of chain) if (defaults[loc]) return defaults[loc];
+    for (const loc of chain) {
+      if (defaults[loc]) {
+        return defaults[loc];
+      }
+    }
   }
   return null;
 }

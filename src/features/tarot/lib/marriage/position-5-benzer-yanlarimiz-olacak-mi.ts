@@ -1026,10 +1026,11 @@ export const searchposition5MeaningsByKeyword = (
 };
 
 // Varsayılan export
-export default {
+const position5MeaningsExport = {
   position5Meanings,
   getposition5Meaning,
   getAllposition5Meanings,
   getposition5MeaningsByGroup,
   searchposition5MeaningsByKeyword,
 };
+export default position5MeaningsExport;

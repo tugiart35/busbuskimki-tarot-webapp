@@ -21,8 +21,8 @@ interface AdminAuthContextType {
   loading: boolean;
   isAuthenticated: boolean;
   loginAdmin: (
-    email: string,
-    password: string
+    _email: string,
+    _password: string
   ) => Promise<{ success: boolean; error: string | null }>;
   logoutAdmin: () => Promise<void>;
 }

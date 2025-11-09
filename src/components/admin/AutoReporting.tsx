@@ -33,6 +33,7 @@ Kullanım durumu:
 'use client';
 
 import { useState, useEffect } from 'react';
+import { logger } from '@/lib/logger';
 import {
   Calendar,
   Download,
@@ -95,7 +96,10 @@ export default function AutoReporting() {
         .order('created_at', { ascending: false });
 
       if (error) {
-        console.error('Error loading schedules:', error);
+        logger.error('Error loading schedules', error, {
+          action: 'load_schedules',
+          resource: 'report_schedules',
+        });
         return;
       }
 
@@ -114,7 +118,10 @@ export default function AutoReporting() {
 
       setSchedules(formattedSchedules);
     } catch (error) {
-      console.error('Error loading schedules:', error);
+      logger.error('Error loading schedules', error, {
+        action: 'load_schedules',
+        resource: 'report_schedules',
+      });
     }
   };
 
@@ -127,7 +134,10 @@ export default function AutoReporting() {
         .limit(10);
 
       if (error) {
-        console.error('Error loading recent reports:', error);
+        logger.error('Error loading recent reports', error, {
+          action: 'load_reports',
+          resource: 'generated_reports',
+        });
         return;
       }
 
@@ -145,7 +155,10 @@ export default function AutoReporting() {
 
       setRecentReports(formattedReports);
     } catch (error) {
-      console.error('Error loading recent reports:', error);
+      logger.error('Error loading recent reports', error, {
+        action: 'load_reports',
+        resource: 'generated_reports',
+      });
     }
   };
 

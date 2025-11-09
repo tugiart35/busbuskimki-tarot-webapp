@@ -132,7 +132,8 @@ export class RateLimiter {
     for (const [endpoint, store] of this.stores) {
       let activeEntries = 0;
 
-      for (const [_, entry] of store) {
+      // eslint-disable-next-line no-unused-vars
+      for (const [, entry] of store) {
         if (now <= entry.resetTime) {
           activeEntries++;
         }

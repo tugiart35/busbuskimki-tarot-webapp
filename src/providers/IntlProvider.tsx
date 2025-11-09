@@ -26,9 +26,8 @@ Kullanım durumu:
 
 'use client';
 
-import { NextIntlClientProvider } from 'next-intl';
+import { NextIntlClientProvider, useLocale } from 'next-intl';
 import { ReactNode } from 'react';
-import { useLocale } from 'next-intl';
 
 interface IntlProviderProps {
   children: ReactNode;

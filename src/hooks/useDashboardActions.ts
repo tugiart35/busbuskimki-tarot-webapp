@@ -16,7 +16,7 @@ export const useDashboardActions = (
   profile: UserProfile | null,
   user: User | null,
   currentLocale: string,
-  setProfile: (profile: UserProfile | null) => void,
+  setProfile: (_profile: UserProfile | null) => void,
   currency: 'TRY' | 'EUR' = 'TRY' // Para birimi desteği
 ) => {
   // useShopier hook'undan ödeme fonksiyonlarını al

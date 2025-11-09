@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { logger } from '@/lib/logger';
 
 /**
  * Schema Validation API
@@ -61,7 +62,10 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(response);
   } catch (error) {
-    console.error('Error in schema validation:', error);
+    logger.error('Error in schema validation', error, {
+      action: 'validate_schema',
+      resource: 'seo',
+    });
     return NextResponse.json(
       { success: false, error: 'Internal server error' },
       { status: 500 }

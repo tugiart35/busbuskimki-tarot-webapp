@@ -961,10 +961,11 @@ export const searchPosition6MeaningsByKeyword = (
 };
 
 // Varsayılan export
-export default {
+const situationAnalysisPosition6Export = {
   position6Meanings,
   getPosition6Meaning,
   getAllPosition6Meanings,
   getPosition6MeaningsByGroup,
   searchPosition6MeaningsByKeyword,
 };
+export default situationAnalysisPosition6Export;

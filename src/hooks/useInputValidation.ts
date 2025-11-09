@@ -7,7 +7,7 @@ interface ValidationRule {
   minLength?: number;
   maxLength?: number;
   pattern?: RegExp;
-  custom?: (value: string) => string | null;
+  custom?: (_value: string) => string | null;
 }
 
 interface ValidationResult {
@@ -16,11 +16,11 @@ interface ValidationResult {
 }
 
 interface UseInputValidationReturn {
-  validate: (value: string, rules: ValidationRule) => ValidationResult;
-  validateEmail: (email: string) => ValidationResult;
-  validatePassword: (password: string) => ValidationResult;
-  validateCreditAmount: (amount: number) => ValidationResult;
-  sanitizeInput: (input: string) => string;
+  validate: (_value: string, _rules: ValidationRule) => ValidationResult;
+  validateEmail: (_email: string) => ValidationResult;
+  validatePassword: (_password: string) => ValidationResult;
+  validateCreditAmount: (_amount: number) => ValidationResult;
+  sanitizeInput: (_input: string) => string;
 }
 
 /**

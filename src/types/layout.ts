@@ -70,7 +70,7 @@ export interface LayoutProps {
 export interface ErrorBoundaryProps {
   children: React.ReactNode;
   fallback?: React.ReactNode;
-  onError?: (error: Error, errorInfo: React.ErrorInfo) => void;
+  onError?: (_error: Error, _errorInfo: React.ErrorInfo) => void;
 }
 
 export interface ErrorBoundaryState {
@@ -84,20 +84,20 @@ export interface UseNavigationReturn {
   currentLocale: string;
   currentLanguage: LanguageOption;
   languages: LanguageOption[];
-  handleLanguageChange: (locale: string) => void;
-  handleNavigationClick: (item: NavigationItem) => void;
+  handleLanguageChange: (_locale: string) => void;
+  handleNavigationClick: (_item: NavigationItem) => void;
   router: any; // Next.js router type
 }
 
 // Layout Component Props
 export interface BottomNavigationProps {
   className?: string;
-  onItemClick?: (item: NavigationItem) => void;
+  onItemClick?: (_item: NavigationItem) => void;
 }
 
 export interface LanguageSelectorProps {
   currentLocale: string;
-  onLanguageChange: (locale: string) => void;
+  onLanguageChange: (_locale: string) => void;
   className?: string;
 }
 

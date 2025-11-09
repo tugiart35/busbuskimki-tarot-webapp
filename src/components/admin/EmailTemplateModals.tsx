@@ -30,6 +30,7 @@ Kullanım durumu:
 
 import { useState } from 'react';
 import { X, Save, Eye, Plus, Trash2, Edit } from 'lucide-react';
+import { logger } from '@/lib/logger';
 import {
   EmailSystemManager,
   EmailTemplate,
@@ -74,7 +75,10 @@ export function AddEmailTemplateModal({
       onSuccess();
       onClose();
     } catch (error) {
-      console.error('Error creating email template:', error);
+      logger.error('Error creating email template', error, {
+        action: 'create_email_template',
+        resource: 'email_templates',
+      });
       alert('Template oluşturulurken hata oluştu: ' + (error as Error).message);
     } finally {
       setLoading(false);
@@ -382,7 +386,10 @@ export function EditEmailTemplateModal({
       onSuccess();
       onClose();
     } catch (error) {
-      console.error('Error updating email template:', error);
+      logger.error('Error updating email template', error, {
+        action: 'update_email_template',
+        resource: 'email_templates',
+      });
       alert('Template güncellenirken hata oluştu: ' + (error as Error).message);
     } finally {
       setLoading(false);

@@ -54,7 +54,7 @@ function getCardImagePath(cardId: string): string {
     'the-chariot': 'VII-Chariot',
     strength: 'VIII-Strength',
     'the-hermit': 'IX-Hermit',
-    'wheel-of-fortune': 'X-WheelOfFortune',
+    wheeloffortune: 'X-WheelOfFortune',
     justice: 'XI-Justice',
     'the-hanged-man': 'XII-HangedMan',
     death: 'XIII-Death',

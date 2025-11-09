@@ -3,7 +3,7 @@
 interface ChartProps {
   data: any[];
   type?: 'line' | 'bar' | 'pie';
-  onRender?: (chart: any) => void;
+  onRender?: (_chart: any) => void;
 }
 
 // Simplified chart component

@@ -275,9 +275,9 @@ async function fetchAnalyticsData(supabase: any): Promise<ReportData> {
 
 // Rapor dosyası oluştur
 async function generateReportFile(
-  data: ReportData,
-  type: string,
-  format: string
+  _data: ReportData,
+  _type: string,
+  _format: string
 ): Promise<Blob> {
   // Bu fonksiyon client-side export-utils.ts'den çağrılacak
   // Edge Function'da doğrudan PDF/Excel oluşturamayız, bu yüzden
@@ -296,8 +296,9 @@ async function sendEmail(params: {
     contentType: string;
   };
 }): Promise<any> {
-  // SMTP konfigürasyonu
-  const smtpConfig = {
+  // SMTP konfigürasyonu (gelecekte kullanılacak)
+  // eslint-disable-next-line no-unused-vars
+  const _smtpConfig = {
     host: Deno.env.get('SMTP_HOST') || 'smtp.gmail.com',
     port: parseInt(Deno.env.get('SMTP_PORT') || '587'),
     secure: false,
@@ -307,8 +308,9 @@ async function sendEmail(params: {
     },
   };
 
-  // Email içeriği
-  const emailContent = {
+  // Email içeriği (gelecekte kullanılacak)
+  // eslint-disable-next-line no-unused-vars
+  const _emailContent = {
     from: Deno.env.get('SMTP_FROM') || 'noreply@busbuskimki.com',
     to: params.recipients.join(', '),
     subject: params.subject,

@@ -26,10 +26,19 @@ function SpreadPageContent({
     interpretation: string;
     spreadId: string;
   } | null>(null);
-  
-  const [initialReadingType, setInitialReadingType] = useState<'detailed' | 'written' | null>(null);
+
+  const [initialReadingType, setInitialReadingType] = useState<
+    'detailed' | 'written' | null
+  >(null);
   const [tokenValidating, setTokenValidating] = useState(!!token);
   const [tokenError, setTokenError] = useState<string | null>(null);
+  const [tokenErrorDetails, setTokenErrorDetails] = useState<{
+    message?: string;
+    status?: string;
+    readingId?: string;
+  } | null>(null);
+  const [completedReading, setCompletedReading] = useState<any>(null);
+  const [loadingReading, setLoadingReading] = useState(false);
 
   // Token doğrulama
   useEffect(() => {
@@ -40,11 +49,22 @@ function SpreadPageContent({
 
     const validateToken = async () => {
       try {
-        const response = await fetch(`/api/reading-sessions/validate?token=${token}`);
+        const response = await fetch(
+          `/api/reading-sessions/validate?token=${token}`
+        );
         const data = await response.json();
 
         if (!response.ok) {
           setTokenError(data.error || 'Token doğrulanamadı');
+          setTokenErrorDetails(
+            data.status === 'completed'
+              ? {
+                  message: data.message,
+                  status: data.status,
+                  readingId: data.readingId || null,
+                }
+              : null
+          );
           setTokenValidating(false);
           return;
         }
@@ -71,6 +91,29 @@ function SpreadPageContent({
 
     validateToken();
   }, [token, spreadId]);
+
+  // Tamamlanmış okuma için reading'i çek
+  useEffect(() => {
+    if (
+      tokenErrorDetails?.status === 'completed' &&
+      tokenErrorDetails?.readingId
+    ) {
+      setLoadingReading(true);
+      fetch(`/api/readings/${tokenErrorDetails.readingId}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.success && data.reading) {
+            setCompletedReading(data.reading);
+          }
+        })
+        .catch(err => {
+          console.error('Reading fetch error:', err);
+        })
+        .finally(() => {
+          setLoadingReading(false);
+        });
+    }
+  }, [tokenErrorDetails?.status, tokenErrorDetails?.readingId]);
 
   // Find the spread
   const currentSpread = tarotSpreads.find(s => s.id === spreadId);
@@ -109,19 +152,104 @@ function SpreadPageContent({
 
   // Token hatası
   if (tokenError) {
+    const isCompleted = tokenErrorDetails?.status === 'completed';
+
+    // Tamamlanmış okuma ve kartlar yükleniyor
+    if (isCompleted && loadingReading) {
+      return (
+        <div className='flex flex-col min-h-screen pb-16 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900'>
+          <main className='flex-1 px-4 sm:px-6 py-6 sm:py-8 flex items-center justify-center'>
+            <div className='text-center'>
+              <div className='animate-spin rounded-full h-12 w-12 sm:h-16 sm:w-16 border-b-2 border-purple-500 mx-auto mb-4'></div>
+              <p className='text-gray-300 text-base sm:text-lg'>
+                Okuma bilgileri yükleniyor...
+              </p>
+            </div>
+          </main>
+        </div>
+      );
+    }
+
+    // Tamamlanmış okuma ve kartlar varsa göster
+    if (isCompleted && completedReading) {
+      // Kartları parse et (JSONB formatından)
+      let cards: TarotCard[] = [];
+      if (completedReading.cards) {
+        if (Array.isArray(completedReading.cards)) {
+          cards = completedReading.cards;
+        } else if (completedReading.cards.selectedCards) {
+          cards = completedReading.cards.selectedCards;
+        } else if (completedReading.cards.cards) {
+          cards = completedReading.cards.cards;
+        }
+      }
+
+      return (
+        <div className='flex flex-col min-h-screen pb-16 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900'>
+          <main className='flex-1 px-4 sm:px-6 py-6 sm:py-8'>
+            <div className='max-w-4xl mx-auto'>
+              <div className='text-center mb-8'>
+                <div className='text-6xl mb-4'>✅</div>
+                <h2 className='text-2xl sm:text-3xl font-bold text-white mb-2'>
+                  Okuma Tamamlandı
+                </h2>
+                <p className='text-gray-400 text-sm sm:text-base'>
+                  Bu okuma zaten tamamlandı. Çekilen kartlarınız aşağıda.
+                </p>
+              </div>
+
+              {/* Çekilen kartları göster */}
+              {cards.length > 0 ? (
+                <LastReadingSummary
+                  cards={cards}
+                  interpretation={completedReading.interpretation || ''}
+                  spreadId={spreadId}
+                />
+              ) : (
+                <div className='admin-glass rounded-2xl p-6 border border-slate-700/50 text-center'>
+                  <p className='text-gray-400'>Kart bilgileri bulunamadı.</p>
+                </div>
+              )}
+
+              <div className='mt-6 text-center'>
+                <Link
+                  href={`/${locale}/tarotokumasi`}
+                  className='inline-flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors'
+                >
+                  Tüm Açılımları Gör
+                </Link>
+              </div>
+            </div>
+          </main>
+        </div>
+      );
+    }
+
+    // Normal hata mesajı (completed değil veya reading yüklenemedi)
     return (
       <div className='flex flex-col min-h-screen pb-16 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900'>
         <main className='flex-1 px-4 sm:px-6 py-6 sm:py-8 flex items-center justify-center'>
           <div className='text-center max-w-md'>
             <div className='text-gray-400 mb-4'>
-              <span className='text-4xl sm:text-6xl'>⚠️</span>
+              <span className='text-4xl sm:text-6xl'>
+                {isCompleted ? '✅' : '⚠️'}
+              </span>
             </div>
-            <p className='text-gray-300 text-base sm:text-lg mb-4'>
-              {tokenError}
+            <h2 className='text-xl sm:text-2xl font-bold text-white mb-4'>
+              {isCompleted ? 'Okuma Tamamlandı' : 'Hata'}
+            </h2>
+            <p className='text-gray-300 text-base sm:text-lg mb-2'>
+              {tokenErrorDetails?.message || tokenError}
             </p>
+            {isCompleted && (
+              <p className='text-gray-400 text-sm mb-6'>
+                Bu okuma linki artık kullanılamaz. Yeni bir okuma için lütfen
+                admin panelinden yeni bir link oluşturun.
+              </p>
+            )}
             <Link
               href={`/${locale}/tarotokumasi`}
-              className='inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors'
+              className='inline-flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors'
             >
               Tüm Açılımları Gör
             </Link>
@@ -267,6 +395,7 @@ function SpreadPageContent({
               <CurrentComponent
                 onComplete={handleReadingComplete}
                 initialReadingType={initialReadingType}
+                sessionToken={token}
                 // onReadingTypeSelected prop'u kaldırıldı - açıklama kapatma mantığı gereksiz
               />
             </Suspense>

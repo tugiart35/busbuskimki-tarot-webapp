@@ -144,7 +144,7 @@ export interface TarotSpreadConfig {
   positionsLayout: readonly PositionLayout[];
   positionsInfo: readonly PositionInfo[];
   interpretationConfig: SpreadInterpretationConfig;
-  interpretationSummary?: (cards: TarotCard[]) => string;
+  interpretationSummary?: (_cards: TarotCard[]) => string;
   interpretationComponent?: any; // React component for interpretation
 }
 
@@ -165,4 +165,5 @@ export interface TarotReadingProps {
   onPositionChange?: (_title: string) => void;
   onReadingTypeSelected?: () => void;
   initialReadingType?: 'detailed' | 'written' | null;
+  sessionToken?: string | null; // Token-based reading için session token
 }

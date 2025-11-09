@@ -39,8 +39,8 @@ export interface UseTarotReadingProps {
     cardCount: number;
     positionsInfo: readonly PositionInfo[];
   };
-  onComplete?: (cards: TarotCard[], interpretation: string) => void;
-  onPositionChange?: (title: string) => void;
+  onComplete?: (_cards: TarotCard[], _interpretation: string) => void;
+  onPositionChange?: (_title: string) => void;
 }
 
 /**
@@ -57,10 +57,10 @@ export interface UseTarotReadingReturn {
   userQuestion: string;
   selectedReadingType: string | null;
   interpretationRef: React.RefObject<HTMLDivElement>;
-  handleCardSelect: (card: TarotCard) => void;
-  handleCardDetails: (card: TarotCard) => void;
+  handleCardSelect: (_card: TarotCard) => void;
+  handleCardDetails: (_card: TarotCard) => void;
   setShowCardDetails: React.Dispatch<React.SetStateAction<TarotCard | null>>;
-  toggleCardState: (positionId: number) => void;
+  toggleCardState: (_positionId: number) => void;
   handleClearAll: () => void;
   shuffleDeck: () => void;
   setSelectedReadingType: React.Dispatch<React.SetStateAction<string | null>>;

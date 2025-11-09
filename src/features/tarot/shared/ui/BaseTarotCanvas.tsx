@@ -32,8 +32,8 @@ export interface BaseTarotCanvasProps {
   cardStates: boolean[];
   isReversed: boolean[];
   currentPosition: number;
-  onCardDetails: (card: TarotCard) => void;
-  onToggleCard: (positionId: number) => void;
+  onCardDetails: (_card: TarotCard) => void;
+  onToggleCard: (_positionId: number) => void;
   selectedReadingType: string | null;
   detailedFormSaved: boolean;
   className?: string;

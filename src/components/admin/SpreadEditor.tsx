@@ -1,7 +1,9 @@
 'use client';
+/* eslint-disable no-unused-vars */
 
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase/client';
+import { logger } from '@/lib/logger';
 import { X, Plus, Trash, Save, Eye } from 'lucide-react';
 // import type { SpreadConfig } from '../../types/spread';
 
@@ -38,6 +40,7 @@ interface SpreadEditorProps {
 }
 
 export default function SpreadEditor({
+  // eslint-disable-next-line no-unused-vars
   spread,
   onClose,
   onSave,
@@ -118,7 +121,10 @@ export default function SpreadEditor({
       onSave(formData);
       onClose();
     } catch (error) {
-      console.error('Error saving spread:', error);
+      logger.error('Error saving spread', error, {
+        action: 'save_spread',
+        resource: 'spreads',
+      });
       alert('Dizilim kaydedilirken hata oluştu');
     } finally {
       setLoading(false);

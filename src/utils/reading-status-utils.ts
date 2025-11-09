@@ -30,7 +30,7 @@ const STATUS_PRESENTATION: Record<string, ReadingStatusInfo> = {
  */
 export function getReadingStatusInfo(
   reading: Reading | null,
-  translate: (key: string, fallback?: string) => string
+  translate: (_key: string, _fallback?: string) => string
 ): ReadingStatusInfo {
   const statusKey = reading?.status ?? 'pending';
   const presentation =

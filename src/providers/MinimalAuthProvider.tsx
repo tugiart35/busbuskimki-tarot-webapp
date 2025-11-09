@@ -31,7 +31,7 @@ interface MinimalAuthContextType {
   loading: boolean;
   isAdmin: boolean;
   isAuthenticated: boolean;
-  checkAdminStatus: (userId: string) => Promise<boolean>;
+  checkAdminStatus: (_userId: string) => Promise<boolean>;
 }
 
 const MinimalAuthContext = createContext<MinimalAuthContextType | null>(null);

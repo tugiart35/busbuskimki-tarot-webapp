@@ -485,7 +485,7 @@ export const getI18nMeaningByCardAndPosition = (
 };
 
 // Varsayılan export
-export default {
+const lovePositionMeaningsExport = {
   allLovePositionMeanings,
   getMeaningsByPosition,
   getMeaningByCardAndPosition,
@@ -503,3 +503,4 @@ export default {
   useI18nLovePositions,
   getI18nMeaningByCardAndPosition,
 };
+export default lovePositionMeaningsExport;

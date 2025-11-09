@@ -2,17 +2,13 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { buildInviteEmailHtml } from '@/lib/email/templates';
 import { emailService } from '@/lib/email/email-service';
+import { logger } from '@/lib/logger';
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const {
-      sessionId,
-      readingLink,
-      customerEmail,
-      customerName,
-      spreadName,
-    } = body;
+    const { sessionId, readingLink, customerEmail, customerName, spreadName } =
+      body;
 
     if (!sessionId || !readingLink || !customerEmail) {
       return NextResponse.json(
@@ -59,27 +55,26 @@ export async function POST(request: NextRequest) {
     if (!emailSent) {
       // SMTP ayarlarını kontrol et
       const smtpConfigured =
-        process.env.SMTP_HOST &&
-        process.env.SMTP_USER &&
-        process.env.SMTP_PASS;
+        process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS;
 
       const errorMessage = smtpConfigured
         ? 'E-posta gönderilemedi. SMTP ayarlarını kontrol edin.'
-        : 'E-posta gönderilemedi. SMTP ayarları eksik. Lütfen SMTP_HOST, SMTP_USER ve SMTP_PASS environment variable\'larını ayarlayın.';
+        : "E-posta gönderilemedi. SMTP ayarları eksik. Lütfen SMTP_HOST, SMTP_USER ve SMTP_PASS environment variable'larını ayarlayın.";
 
-      console.error('Email gönderme hatası:', {
-        customerEmail,
-        sessionId,
-        smtpConfigured,
-        smtpHost: process.env.SMTP_HOST ? '✓' : '✗',
-        smtpUser: process.env.SMTP_USER ? '✓' : '✗',
-        smtpPass: process.env.SMTP_PASS ? '✓' : '✗',
+      logger.error('Email gönderme hatası', null, {
+        action: 'send_email',
+        resource: 'reading_sessions',
+        metadata: {
+          customerEmail,
+          sessionId,
+          smtpConfigured,
+          smtpHost: process.env.SMTP_HOST ? 'configured' : 'missing',
+          smtpUser: process.env.SMTP_USER ? 'configured' : 'missing',
+          smtpPass: process.env.SMTP_PASS ? 'configured' : 'missing',
+        },
       });
 
-      return NextResponse.json(
-        { error: errorMessage },
-        { status: 500 }
-      );
+      return NextResponse.json({ error: errorMessage }, { status: 500 });
     }
 
     // Event log kaydet
@@ -104,14 +99,15 @@ export async function POST(request: NextRequest) {
       message: 'E-posta başarıyla gönderildi',
     });
   } catch (error) {
-    console.error('E-posta gönderme hatası:', error);
+    logger.error('E-posta gönderme hatası', error, {
+      action: 'send_email',
+      resource: 'reading_sessions',
+    });
     return NextResponse.json(
       {
-        error:
-          error instanceof Error ? error.message : 'E-posta gönderilemedi',
+        error: error instanceof Error ? error.message : 'E-posta gönderilemedi',
       },
       { status: 500 }
     );
   }
 }
-

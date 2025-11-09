@@ -4343,7 +4343,8 @@
       "saving": "Snimanje ...",
       "understandingQuestion": "Šta želite da razumete ili čujete iz ove ekspanzije?",
       "whatsappCommunication": "Vhatsapp"
-    },    "validation": {
+    },
+    "validation": {
       "partnerNameRequired": "Potrebno je ime partnera",
       "partnerBirthDateRequired": "Potrebno je navesti datum rođenja partnera"
     },
@@ -6517,7 +6518,8 @@
       "understandingQuestion": "Koje biste područja braka voleli da bolje razumete?",
       "understandingRequired": "Potrebno je razumevanje",
       "whatsappCommunication": "Vhatsapp"
-    },    "validation": {
+    },
+    "validation": {
       "partnerNameRequired": "Potrebno je ime partnera",
       "partnerBirthDateRequired": "Potrebno je navesti datum rođenja partnera"
     },
@@ -11744,16 +11746,32 @@
     },
     "form": {
       "birthDate": "Datum rođenja",
+      "birthDateUnknown": "Ne znam datum rođenja",
       "clearAll": "Očistiti sve",
+      "communicationMethod": "Metoda komunikacije",
       "concernQuestion": "Koja finansijska situacija želite da analizirate?",
       "email": "E-mail",
+      "emailCommunication": "E-mail",
       "emotionalQuestion": "Kako se trenutno osećate u novcu?",
       "firstName": "Naziv",
       "lastName": "Prezime",
+      "personalInfo": "Lične informacije",
       "questions": "Pitanja",
+      "relationshipStatus": "Status veze",
+      "selectRelationshipStatus": "Izaberite status veze",
+      "relationshipStatusOptions": {
+        "single": "Slobodan",
+        "in_relationship": "U vezi",
+        "married": "Oženjen/Udata",
+        "separated": "Razdvojen",
+        "divorced": "Razveden",
+        "widowed": "Udovac/Udovica",
+        "prefer_not_to_say": "Ne želim da kažem"
+      },
       "saveAndOpen": "Spremite i otvorite",
       "saving": "Snimanje ...",
-      "understandingQuestion": "Šta želite da razumete sa ovom ekspanzijom novca?"
+      "understandingQuestion": "Šta želite da razumete sa ovom ekspanzijom novca?",
+      "whatsappCommunication": "WhatsApp"
     },
     "modals": {
       "aboutSpread": "O otvaranju",
@@ -11768,6 +11786,8 @@
       "detailedReading": "Čitanje naglas",
       "detailedReadingText": "Detaljna analiza novca sa vašim ličnim podacima i određenim pitanjima.",
       "infoTitle": "O otvaranju valuta",
+      "loveAttention": "Nakon što sačuvate čitanje, obično vam šaljem ličnu interpretaciju putem e-pošte u roku od 2-4 sata. Ovaj rad je u svrhe vodenja; konačni izbori su vaši.",
+      "loveAttentionInfo": "Nježna napomena",
       "process": "Period",
       "processing": "Obrada ...",
       "redirecting": "Usmereni ste na početnu stranicu ...",
@@ -15777,7 +15797,8 @@
       "understandingQuestion": "prazan",
       "understandingRequired": "Potrebno je razumevanje",
       "whatsappCommunication": "Vhatsapp"
-    },    "validation": {
+    },
+    "validation": {
       "partnerNameRequired": "Potrebno je ime partnera",
       "partnerBirthDateRequired": "Potrebno je navesti datum rođenja partnera"
     },
@@ -16655,6 +16676,7 @@
     },
     "form": {
       "birthDate": "Datum rođenja",
+      "birthDateUnknown": "Ne znam datum rođenja",
       "clearAll": "Očistiti sve",
       "close": "Zatvoriti",
       "closeForm": "Zatvori obrazac (ESC)",
@@ -16676,6 +16698,17 @@
         "understandingQuestion": "Šta želite da razumete sa ovim objašnjenjem rešavanja problema?"
       },
       "questions": "✨ Rešavanje problema Rešavanje pitanja objašnjenja ✨",
+      "relationshipStatus": "Status veze",
+      "selectRelationshipStatus": "Izaberite status vaše veze",
+      "relationshipStatusOptions": {
+        "single": "Slobodan/na",
+        "in_relationship": "U vezi",
+        "married": "Oženjen/Udata",
+        "separated": "Razdvojen/a",
+        "divorced": "Razveden/a",
+        "widowed": "Udovac/Udovica",
+        "prefer_not_to_say": "Ne želim da kažem"
+      },
       "saveAndOpen": "Spremite i otvorite",
       "saving": "Snimanje ...",
       "understandingQuestion": "Šta želite da razumete sa ovim objašnjenjem rešavanja problema?",
@@ -16686,6 +16719,7 @@
       "formNotSavedConfirm": "Obrazac je ispunjen, ali nije sačuvan. Jeste li sigurni da želite da prestanete?",
       "loginRequired": "Morate se prijaviti za ovaj proces.",
       "readingSaveError": "Došlo je do greške prilikom čuvanja čitanja.",
+      "readingSavedSuccess": "Vaše čitanje je uspešno sačuvano!",
       "readingSavedSuccessfully": "Vaše čitanje je uspešno sačuvano!",
       "redirectingToHome": "Usmereni ste na početnu stranicu ...",
       "savingReading": "📝 Čitanje se beleži ...",
@@ -16996,6 +17030,7 @@
     },
     "form": {
       "birthDate": "Datum rođenja",
+      "birthDateUnknown": "Ne znam datum rođenja",
       "clearAll": "🔄 Očistite sve",
       "communicationMethod": "Metoda komunikacije",
       "concernQuestion": "Koji problem želite da analizirate?",
@@ -17006,6 +17041,17 @@
       "lastName": "vaše prezime",
       "personalInfo": "Vaše lične podatke",
       "questions": "Problemi sa vezama Odnos pitanja objašnjenja 💔",
+      "relationshipStatus": "Status veze",
+      "selectRelationshipStatus": "Izaberite status veze",
+      "relationshipStatusOptions": {
+        "single": "Slobodan",
+        "in_relationship": "U vezi",
+        "married": "Oženjen/Udata",
+        "separated": "Razdvojen",
+        "divorced": "Razveden",
+        "widowed": "Udovac/Udovica",
+        "prefer_not_to_say": "Ne želim da kažem"
+      },
       "partnerInfo": "Podaci o partneru",
       "partnerName": "Ime partnera",
       "partnerBirthDate": "Datum rođenja partnera",
@@ -17014,7 +17060,8 @@
       "saving": "Snimanje ...",
       "understandingQuestion": "Šta želite da razumete sa ovim analizama problema sa vezama?",
       "whatsappCommunication": "Vhatsapp"
-    },    "validation": {
+    },
+    "validation": {
       "partnerNameRequired": "Potrebno je ime partnera",
       "partnerBirthDateRequired": "Potrebno je navesti datum rođenja partnera"
     },
@@ -17172,6 +17219,7 @@
     },
     "form": {
       "birthDate": "Datum rođenja",
+      "birthDateUnknown": "Ne znam datum rođenja",
       "clearAll": "🔄 Očistite sve",
       "concernQuestion": "Koja situacija želite da analizirate?",
       "email": "Vaša adresa e-pošte",
@@ -17185,6 +17233,17 @@
       "phonePlaceholder": "+90 5KSKS KSKSKS KSKS KSKS",
       "phoneRequired": "Telefonski broj je potreban za VhatsApp",
       "questions": "✨ SITUACIJA ANALIZA OBJAŠNAVA PITANjA ✨",
+      "relationshipStatus": "Status veze",
+      "selectRelationshipStatus": "Izaberite status veze",
+      "relationshipStatusOptions": {
+        "single": "Slobodan",
+        "in_relationship": "U vezi",
+        "married": "Oženjen/Udata",
+        "separated": "Razdvojen",
+        "divorced": "Razveden",
+        "widowed": "Udovac/Udovica",
+        "prefer_not_to_say": "Ne želim da kažem"
+      },
       "saveAndOpen": "🔍 Sačuvajte i otvorite kartice",
       "saving": "Snimanje ...",
       "understandingQuestion": "Šta želite da razumete sa ovom analizom situacije?",
@@ -19317,7 +19376,7 @@
         "related_cards": ["visoki sveštenik", "snaga", "budala"],
         "imageUrl": "/cards/rws/IX-Hermit.webp"
       },
-      "wheel-of-fortune": {
+      "wheeloffortune": {
         "name": "Točak sudbine - promena i ciklusa",
         "short_description": "Točak sudbine predstavlja cikluse života, promene i sudbine. Simbolizuje povratak sreće, nove mogućnosti i predaje se toku života.",
         "imageUrl": "/cards/rws/k-Vheeloffortune.webp",

@@ -3,7 +3,7 @@
 interface AnimationProps {
   children: React.ReactNode;
   animation?: 'fade' | 'slide' | 'bounce';
-  onAnimate?: (animation: any) => void;
+  onAnimate?: (_animation: any) => void;
 }
 
 // Simplified animation component

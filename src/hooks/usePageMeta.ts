@@ -19,18 +19,18 @@ interface PageMeta {
 }
 
 interface UsePageMetaReturn {
-  setPageMeta: (meta: PageMeta) => void;
-  updateTitle: (title: string) => void;
-  updateDescription: (description: string) => void;
-  updateKeywords: (keywords: string) => void;
-  updateCanonical: (canonical: string) => void;
+  setPageMeta: (_meta: PageMeta) => void;
+  updateTitle: (_title: string) => void;
+  updateDescription: (_description: string) => void;
+  updateKeywords: (_keywords: string) => void;
+  updateCanonical: (_canonical: string) => void;
   updateOpenGraph: (
-    og: Partial<
+    _og: Partial<
       Pick<PageMeta, 'ogTitle' | 'ogDescription' | 'ogImage' | 'ogUrl'>
     >
   ) => void;
   updateTwitter: (
-    twitter: Partial<
+    _twitter: Partial<
       Pick<
         PageMeta,
         'twitterCard' | 'twitterTitle' | 'twitterDescription' | 'twitterImage'

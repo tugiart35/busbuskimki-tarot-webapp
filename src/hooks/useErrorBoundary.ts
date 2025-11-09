@@ -13,7 +13,7 @@ interface UseErrorBoundaryReturn {
   hasError: boolean;
   errorInfo: string | null;
   resetError: () => void;
-  captureError: (error: Error, errorInfo?: string) => void;
+  captureError: (_error: Error, _errorInfo?: string) => void;
 }
 
 /**

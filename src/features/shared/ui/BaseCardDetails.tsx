@@ -45,6 +45,7 @@ import type { TarotCard } from '@/features/tarot/lib/a-tarot-helpers';
 import type { CardMeaningData } from '@/types/ui';
 import { ReactElement } from 'react';
 import { useFocusTrap } from '@/hooks/useFocusTrap';
+import Image from 'next/image';
 
 export interface BaseCardDetailsProps {
   card: TarotCard | null;
@@ -330,9 +331,11 @@ export default function BaseCardDetails({
             {renderCardImage ? (
               renderCardImage(card, isReversed)
             ) : (
-              <img
+              <Image
                 src={card.image || '/cards/CardBack (1).jpg'}
                 alt={card.nameTr}
+                width={128}
+                height={192}
                 className={`w-32 h-48 mx-auto rounded-lg border-2 border-current/30 shadow-lg object-cover ${isReversed ? 'transform rotate-180' : ''}`}
               />
             )}
@@ -373,7 +376,7 @@ export default function BaseCardDetails({
                       </span>
                     </div>
                     <div className='text-gray-300 text-sm leading-relaxed italic'>
-                      "{_positionInfo.desc}"
+                      &quot;{_positionInfo.desc}&quot;
                     </div>
                   </div>
                 )}

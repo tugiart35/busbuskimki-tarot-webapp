@@ -698,7 +698,7 @@ export default function SettingsPage() {
                       Henüz API Key Yok
                     </h3>
                     <p className='text-slate-400 mb-6'>
-                      İlk API key'inizi ekleyin
+                      İlk API key&apos;inizi ekleyin
                     </p>
                     <button
                       onClick={() => setShowAddAPIKeyModal(true)}
@@ -938,7 +938,7 @@ export default function SettingsPage() {
                     <div className='admin-gradient-accent p-2 rounded-lg mr-3'>
                       <Mail className='h-4 w-4 text-white' />
                     </div>
-                    Email Template'leri
+                    Email Template&apos;leri
                   </h4>
                   <div className='flex space-x-2'>
                     {emailTemplates.length === 0 && (
@@ -947,7 +947,7 @@ export default function SettingsPage() {
                         className='admin-glass hover:bg-slate-700/50 px-4 py-2 rounded-lg flex items-center space-x-2'
                       >
                         <Code className='h-4 w-4' />
-                        <span>Varsayılan Template'ler</span>
+                        <span>Varsayılan Template&apos;ler</span>
                       </button>
                     )}
                     <button
@@ -966,7 +966,7 @@ export default function SettingsPage() {
                       <Mail className='h-6 w-6 text-blue-500' />
                     </div>
                     <span className='ml-3 text-slate-400'>
-                      Template'ler yükleniyor...
+                      Template&apos;ler yükleniyor...
                     </span>
                   </div>
                 ) : emailTemplates.length > 0 ? (
@@ -1044,13 +1044,13 @@ export default function SettingsPage() {
                       Template Yok
                     </h4>
                     <p className='text-slate-400 mb-4'>
-                      Henüz email template'i oluşturulmamış
+                      Henüz email template&apos;i oluşturulmamış
                     </p>
                     <button
                       onClick={() => setShowAddTemplateModal(true)}
                       className='admin-btn-primary px-4 py-2 rounded-lg'
                     >
-                      İlk Template'i Oluştur
+                      İlk Template&apos;i Oluştur
                     </button>
                   </div>
                 )}
@@ -1121,7 +1121,9 @@ export default function SettingsPage() {
                         </span>
                       </div>
                       <div className='flex justify-between col-span-2'>
-                        <span className='text-slate-400'>İzinli IP'ler:</span>
+                        <span className='text-slate-400'>
+                          İzinli IP&apos;ler:
+                        </span>
                         <span className='text-white'>
                           {maintenanceStatus.allowedIPs.length > 0
                             ? maintenanceStatus.allowedIPs.join(', ')
@@ -1730,7 +1732,7 @@ export default function SettingsPage() {
                         <label className='block text-sm text-slate-400 mb-2'>
                           Webhook URL
                           <span className='ml-2 text-xs text-slate-500'>
-                            (Backend webhook endpoint - Shopier Panel'de
+                            (Backend webhook endpoint - Shopier Panel&apos;de
                             tanımlanmalı)
                           </span>
                         </label>

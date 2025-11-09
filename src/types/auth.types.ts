@@ -80,15 +80,19 @@ export interface AuthContextType {
   isPremium: boolean;
   sessionConfig: SessionConfig;
   signOut: () => Promise<void>;
-  resetPassword: (email: string) => Promise<boolean>;
+  // eslint-disable-next-line no-unused-vars
+  resetPassword: (_email: string) => Promise<boolean>;
+  // eslint-disable-next-line no-unused-vars
   updateProfile: (
-    updates: Partial<EnhancedUser['user_metadata']>
+    _updates: Partial<EnhancedUser['user_metadata']>
   ) => Promise<boolean>;
   refreshSession: () => Promise<boolean>;
-  checkPermission: (permission: string) => boolean;
+  // eslint-disable-next-line no-unused-vars
+  checkPermission: (_permission: string) => boolean;
+  // eslint-disable-next-line no-unused-vars
   auditLog: (
-    action: string,
-    details?: Record<string, unknown>
+    _action: string,
+    _details?: Record<string, unknown>
   ) => Promise<void>;
 }
 
@@ -105,7 +109,8 @@ export type Permission =
 
 // Role permissions mapping
 export type RolePermissions = {
-  [key in UserRole]: Permission[];
+  // eslint-disable-next-line no-unused-vars
+  [_key in UserRole]: Permission[];
 };
 
 // Audit log entry

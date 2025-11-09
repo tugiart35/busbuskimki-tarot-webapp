@@ -180,7 +180,9 @@ export default function AuditLogViewer({
           <div className='admin-pulse'>
             <Activity className='h-8 w-8 text-blue-500 mx-auto mb-4' />
           </div>
-          <div className='admin-text-shimmer'>Audit log'lar yükleniyor...</div>
+          <div className='admin-text-shimmer'>
+            Audit log&apos;lar yükleniyor...
+          </div>
         </div>
       </div>
     );
@@ -195,7 +197,9 @@ export default function AuditLogViewer({
             <Eye className='h-5 w-5 text-white' />
           </div>
           <div>
-            <h3 className='text-xl font-bold text-white'>Audit Log'ları</h3>
+            <h3 className='text-xl font-bold text-white'>
+              Audit Log&apos;ları
+            </h3>
             <p className='text-slate-400 text-sm'>Sistem güvenlik kayıtları</p>
           </div>
         </div>

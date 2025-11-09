@@ -84,7 +84,7 @@ export class CodeSplitter {
   ) {
     const LazyComponent = lazy(importFunc);
 
-    return (props: React.ComponentProps<T>) =>
+    const LazyComponentWrapper = (props: React.ComponentProps<T>) =>
       React.createElement(
         React.Suspense,
         {
@@ -94,6 +94,8 @@ export class CodeSplitter {
         },
         React.createElement(LazyComponent, props)
       );
+    LazyComponentWrapper.displayName = 'LazyComponentWrapper';
+    return LazyComponentWrapper;
   }
 
   /**
@@ -105,12 +107,14 @@ export class CodeSplitter {
   ) {
     const LazyComponent = lazy(() => this.retryImport(importFunc, maxRetries));
 
-    return (props: React.ComponentProps<T>) =>
+    const LazyComponentWithRetryWrapper = (props: React.ComponentProps<T>) =>
       React.createElement(
         React.Suspense,
         { fallback: React.createElement(DefaultFallback) },
         React.createElement(LazyComponent, props)
       );
+    LazyComponentWithRetryWrapper.displayName = 'LazyComponentWithRetryWrapper';
+    return LazyComponentWithRetryWrapper;
   }
 
   /**
@@ -166,12 +170,14 @@ export class RouteCodeSplitter {
   ) {
     const LazyPage = lazy(importFunc);
 
-    return (props: React.ComponentProps<T>) =>
+    const LazyPageWrapper = (props: React.ComponentProps<T>) =>
       React.createElement(
         React.Suspense,
         { fallback: React.createElement(PageFallback) },
         React.createElement(LazyPage, props)
       );
+    LazyPageWrapper.displayName = 'LazyPageWrapper';
+    return LazyPageWrapper;
   }
 
   /**
@@ -207,7 +213,7 @@ export class ComponentCodeSplitter {
   ) {
     const LazyComponent = lazy(importFunc);
 
-    return (props: React.ComponentProps<T>) =>
+    const FeatureSplitWrapper = (props: React.ComponentProps<T>) =>
       React.createElement(
         React.Suspense,
         {
@@ -217,6 +223,8 @@ export class ComponentCodeSplitter {
         },
         React.createElement(LazyComponent, props)
       );
+    FeatureSplitWrapper.displayName = `FeatureSplitWrapper_${featureName}`;
+    return FeatureSplitWrapper;
   }
 
   /**
@@ -235,12 +243,14 @@ export class ComponentCodeSplitter {
           ? React.createElement(ImportantFallback)
           : React.createElement(OptionalFallback);
 
-    return (props: React.ComponentProps<T>) =>
+    const UsageBasedSplitWrapper = (props: React.ComponentProps<T>) =>
       React.createElement(
         React.Suspense,
         { fallback: fallbackComponent },
         React.createElement(LazyComponent, props)
       );
+    UsageBasedSplitWrapper.displayName = `UsageBasedSplitWrapper_${usageLevel}`;
+    return UsageBasedSplitWrapper;
   }
 }
 
@@ -257,7 +267,7 @@ export class LibraryCodeSplitter {
   ) {
     const LazyComponent = lazy(importFunc);
 
-    return (props: React.ComponentProps<T>) =>
+    const LibrarySplitWrapper = (props: React.ComponentProps<T>) =>
       React.createElement(
         React.Suspense,
         {
@@ -267,6 +277,8 @@ export class LibraryCodeSplitter {
         },
         React.createElement(LazyComponent, props)
       );
+    LibrarySplitWrapper.displayName = `LibrarySplitWrapper_${libraryName}`;
+    return LibrarySplitWrapper;
   }
 
   /**

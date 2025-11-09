@@ -37,7 +37,7 @@ export function CardAffirmations({
                   ✨
                 </div>
                 <p className='text-lg leading-relaxed flex-1'>
-                  "{affirmation}"
+                  &quot;{affirmation}&quot;
                 </p>
               </div>
             </div>

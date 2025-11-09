@@ -35,8 +35,8 @@ let ExcelJS: any = null;
 
 async function loadJsPDF() {
   if (!jsPDF) {
-    const module = await import('jspdf');
-    jsPDF = module.default;
+    const pdfModule = await import('jspdf');
+    jsPDF = pdfModule.default;
   }
   return jsPDF;
 }

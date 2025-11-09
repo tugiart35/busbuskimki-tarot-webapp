@@ -77,6 +77,8 @@ import {
   Phone,
   Plus,
   X,
+  Copy,
+  ExternalLink,
 } from 'lucide-react';
 
 interface Reading {
@@ -95,6 +97,37 @@ interface Reading {
   updated_at: string;
   user_display_name?: string;
   user_email?: string;
+  session?: {
+    id: string;
+    status: string;
+    customer_email?: string;
+    customer_name?: string;
+    token_preview?: string;
+    created_at: string;
+    completed_at?: string;
+    expires_at?: string;
+  } | null;
+}
+
+interface TokenReading {
+  id: string;
+  session_id: string;
+  customer_email?: string;
+  customer_first_name?: string;
+  customer_last_name?: string;
+  customer_name?: string;
+  spread_key?: string;
+  spread_name?: string;
+  reading_type?: 'detailed' | 'written';
+  status: string;
+  token_preview?: string;
+  created_at: string;
+  completed_at?: string;
+  expires_at?: string;
+  reading_id?: string;
+  reading?: Reading | null;
+  formResponse?: any; // Form response verileri (reading_form_responses tablosundan)
+  reading_link?: string; // Gönderilen okuma linki
 }
 
 // Kart detayları için bileşen
@@ -198,23 +231,35 @@ function CardInsight({
 }
 
 export default function ReadingsPage() {
+  const { t } = useTranslations();
   const [readings, setReadings] = useState<Reading[]>([]);
+  const [tokenReadings, setTokenReadings] = useState<TokenReading[]>([]);
   const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState<'normal' | 'token'>('normal');
   const { toast, showToast, hideToast } = useToast();
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalCount, setTotalCount] = useState(0);
+  const [tokenTotalCount, setTokenTotalCount] = useState(0);
   const [selectedReading, setSelectedReading] = useState<Reading | null>(null);
   const [showReadingModal, setShowReadingModal] = useState(false);
   const [showCreateReadingModal, setShowCreateReadingModal] = useState(false);
   const [typeFilter, setTypeFilter] = useState<string>('all');
   const [statusFilter, setStatusFilter] = useState<string>('all');
+  const [tokenStatusFilter, setTokenStatusFilter] = useState<string>('all');
   const [stats, setStats] = useState({
     total: 0,
     completed: 0,
     pending: 0,
     failed: 0,
     totalCredits: 0,
+  });
+  const [tokenStats, setTokenStats] = useState({
+    total: 0,
+    completed: 0,
+    invited: 0,
+    expired: 0,
+    cancelled: 0,
   });
 
   const readingsPerPage = 12;
@@ -352,6 +397,11 @@ export default function ReadingsPage() {
 
   const fetchReadings = useCallback(async () => {
     setLoading(true);
+    const timeoutId = setTimeout(() => {
+      console.warn('fetchReadings timeout - forcing loading to false');
+      setLoading(false);
+    }, 30000); // 30 saniye timeout
+
     try {
       // Toplam okuma sayısını al
       let countQuery = supabase
@@ -408,8 +458,10 @@ export default function ReadingsPage() {
       const { data: readingsData, error } = await query;
 
       if (error) {
+        clearTimeout(timeoutId);
         logSupabaseError('readings fetch', error);
         setReadings([]);
+        setLoading(false);
         return;
       }
 
@@ -435,11 +487,19 @@ export default function ReadingsPage() {
       // Format readings safely with user data
       const formattedReadings = (readingsData || []).map((reading: any) => {
         const profile = profilesMap.get(reading.user_id);
+        // spread_name bir translation key olabilir, çevirmeyi dene
+        let spreadName = reading.spread_name || 'Bilinmeyen Yayılım';
+        if (reading.spread_name && reading.spread_name.includes('.')) {
+          const translated = t(reading.spread_name);
+          if (translated && translated !== reading.spread_name) {
+            spreadName = translated;
+          }
+        }
         return {
           id: reading.id || 'unknown',
           user_id: reading.user_id || 'unknown',
           reading_type: reading.reading_type || 'unknown',
-          spread_name: reading.spread_name || 'Bilinmeyen Yayılım',
+          spread_name: spreadName,
           title: reading.title || 'Okuma',
           interpretation: reading.interpretation || 'Açıklama yok',
           cards: reading.cards || null,
@@ -461,14 +521,311 @@ export default function ReadingsPage() {
       showToast('Okumalar yüklenirken hata oluştu', 'error');
       setReadings([]);
     } finally {
+      clearTimeout(timeoutId);
       setLoading(false);
     }
-  }, [currentPage, searchTerm, typeFilter, statusFilter, showToast]);
+  }, [currentPage, searchTerm, typeFilter, statusFilter, showToast, t]);
 
+  // Token okumaları için fetch fonksiyonu
+  const fetchTokenReadings = useCallback(async () => {
+    setLoading(true);
+    const timeoutId = setTimeout(() => {
+      console.warn('fetchTokenReadings timeout - forcing loading to false');
+      setLoading(false);
+    }, 30000); // 30 saniye timeout
+
+    try {
+      // Toplam token okuma sayısını al
+      let countQuery = supabase
+        .from('reading_sessions')
+        .select('*', { count: 'exact' });
+
+      // Durum filtresi
+      if (tokenStatusFilter !== 'all') {
+        countQuery = countQuery.eq('status', tokenStatusFilter);
+      }
+
+      // Arama terimi
+      if (searchTerm) {
+        countQuery = countQuery.or(
+          `customer_email.ilike.%${searchTerm}%,customer_first_name.ilike.%${searchTerm}%,customer_last_name.ilike.%${searchTerm}%,spread_key.ilike.%${searchTerm}%`
+        );
+      }
+
+      const { count } = await countQuery;
+      setTokenTotalCount(count || 0);
+
+      // Token readings query
+      let query = supabase
+        .from('reading_sessions')
+        .select('*')
+        .range(
+          (currentPage - 1) * readingsPerPage,
+          currentPage * readingsPerPage - 1
+        )
+        .order('created_at', { ascending: false });
+
+      // Durum filtresi
+      if (tokenStatusFilter !== 'all') {
+        query = query.eq('status', tokenStatusFilter);
+      }
+
+      // Arama terimi
+      if (searchTerm) {
+        query = query.or(
+          `customer_email.ilike.%${searchTerm}%,customer_first_name.ilike.%${searchTerm}%,customer_last_name.ilike.%${searchTerm}%,spread_key.ilike.%${searchTerm}%`
+        );
+      }
+
+      const { data: sessionsData, error } = await query;
+
+      if (error) {
+        clearTimeout(timeoutId);
+        logSupabaseError('token readings fetch', error);
+        setTokenReadings([]);
+        setLoading(false);
+        return;
+      }
+
+      // Reading ID'leri topla
+      const readingIds = (sessionsData || [])
+        .map((s: any) => s.reading_id)
+        .filter((id: string) => id !== null);
+
+      // İlgili reading'leri çek
+      const readingsMap = new Map();
+      if (readingIds.length > 0) {
+        const { data: readingsData } = await supabase
+          .from('readings')
+          .select('*')
+          .in('id', readingIds);
+
+        (readingsData || []).forEach((reading: any) => {
+          readingsMap.set(reading.id, reading);
+        });
+      }
+
+      // Session ID'leri topla
+      const sessionIds = (sessionsData || []).map((s: any) => s.id);
+
+      // Form response'ları çek (token okumaları için)
+      const formResponsesMap = new Map();
+      if (sessionIds.length > 0) {
+        const { data: formResponsesData } = await supabase
+          .from('reading_form_responses')
+          .select('session_id, payload')
+          .in('session_id', sessionIds);
+
+        (formResponsesData || []).forEach((formResponse: any) => {
+          formResponsesMap.set(formResponse.session_id, formResponse.payload);
+        });
+      }
+
+      // Reading events'ten link'leri çek (token okumaları için)
+      const readingLinksMap = new Map();
+      if (sessionIds.length > 0) {
+        const { data: eventsData } = await supabase
+          .from('reading_events')
+          .select('session_id, metadata')
+          .eq('event_type', 'session_created')
+          .in('session_id', sessionIds);
+
+        (eventsData || []).forEach((event: any) => {
+          if (event.metadata?.reading_link) {
+            readingLinksMap.set(event.session_id, event.metadata.reading_link);
+          }
+        });
+      }
+
+      // Spread bilgilerini al ve çevir
+      const spreadKeys = [
+        ...new Set(
+          (sessionsData || []).map((s: any) => s.spread_key).filter(Boolean)
+        ),
+      ];
+      const spreadMap = new Map();
+      spreadKeys.forEach((key: string) => {
+        const spread = tarotSpreads.find(s => s.id === key);
+        if (spread) {
+          // spread.name bir translation key olduğu için çevir
+          const translatedName = t(spread.name);
+          spreadMap.set(key, translatedName || spread.name);
+        }
+      });
+
+      // Format token readings
+      const formattedTokenReadings: TokenReading[] = (sessionsData || []).map(
+        (session: any) => {
+          const reading = readingsMap.get(session.reading_id);
+          const formResponse = formResponsesMap.get(session.id);
+          const readingLink = readingLinksMap.get(session.id);
+          const customerName =
+            session.customer_first_name || session.customer_last_name
+              ? `${session.customer_first_name || ''} ${session.customer_last_name || ''}`.trim()
+              : null;
+
+          // Eğer reading varsa ve form response varsa, form verilerini reading'e ekle
+          let readingWithFormData = reading;
+          if (reading && formResponse) {
+            // reading.questions'ı parse et (eğer string ise)
+            let parsedQuestions = reading.questions;
+            if (typeof reading.questions === 'string') {
+              try {
+                parsedQuestions = JSON.parse(reading.questions);
+              } catch {
+                parsedQuestions = reading.questions;
+              }
+            }
+
+            // Form response'u öncelikli yap (token okumalarında form verileri daha önemli)
+            // Form response ile reading.questions'ı birleştir
+            // Form response içinde personalInfo, partnerInfo, questions gibi alanlar var
+            const mergedQuestions = parsedQuestions
+              ? {
+                  ...formResponse, // Form response öncelikli (personalInfo, partnerInfo, questions)
+                  ...parsedQuestions, // Reading'deki diğer veriler
+                }
+              : formResponse;
+
+            readingWithFormData = {
+              ...reading,
+              questions: mergedQuestions,
+            };
+          } else if (reading && !reading.questions && formResponse) {
+            // Reading'de questions yoksa, form response'u ekle
+            readingWithFormData = {
+              ...reading,
+              questions: formResponse,
+            };
+          }
+
+          // Token okumalarında reading objesi eksik alanlar içerebilir, bu yüzden session bilgilerini ekle
+          if (readingWithFormData) {
+            // reading_type Supabase'den gelen reading objesinde spread adı olarak gelir (love, career, vb.)
+            // Eğer yoksa spread_key'den türet
+            const readingType =
+              readingWithFormData.reading_type ||
+              session.spread_key ||
+              'general';
+
+            readingWithFormData = {
+              ...readingWithFormData,
+              reading_type: readingType,
+              // Session bilgilerini ekle
+              session: {
+                id: session.id,
+                status: session.status,
+                customer_email: session.customer_email,
+                customer_name: customerName,
+                token_preview: session.token_preview,
+                created_at: session.created_at,
+                completed_at: session.completed_at,
+                expires_at: session.expires_at,
+              },
+              // Metadata'ya reading format bilgisini ekle (detailed/written)
+              metadata: {
+                ...readingWithFormData.metadata,
+                readingFormat:
+                  session.reading_type ||
+                  readingWithFormData.metadata?.readingFormat,
+              },
+            };
+          }
+
+          return {
+            id: session.id,
+            session_id: session.id,
+            customer_email: session.customer_email,
+            customer_first_name: session.customer_first_name,
+            customer_last_name: session.customer_last_name,
+            customer_name: customerName,
+            spread_key: session.spread_key,
+            spread_name:
+              spreadMap.get(session.spread_key) ||
+              session.spread_key ||
+              'Bilinmeyen',
+            reading_type: session.reading_type,
+            status: session.status,
+            token_preview: session.token_preview,
+            created_at: session.created_at,
+            completed_at: session.completed_at,
+            expires_at: session.expires_at,
+            reading_id: session.reading_id,
+            reading: readingWithFormData || null,
+            formResponse: formResponse || null, // Form response'u ayrıca sakla
+            reading_link: readingLink || null, // Gönderilen okuma linki
+          };
+        }
+      );
+
+      setTokenReadings(formattedTokenReadings);
+    } catch (error) {
+      logError('Error fetching token readings', error);
+      showToast('Token okumaları yüklenirken hata oluştu', 'error');
+      setTokenReadings([]);
+    } finally {
+      clearTimeout(timeoutId);
+      setLoading(false);
+    }
+  }, [currentPage, searchTerm, tokenStatusFilter, showToast, t]);
+
+  // Token stats fetch
+  const fetchTokenStats = useCallback(async () => {
+    try {
+      const { data, error } = await supabase
+        .from('reading_sessions')
+        .select('status');
+
+      if (error) {
+        logSupabaseError('token readings stats fetch', error);
+        return;
+      }
+
+      const sessionsData = data || [];
+      const completed = sessionsData.filter(
+        (s: any) => s.status === 'completed'
+      ).length;
+      const invited = sessionsData.filter(
+        (s: any) => s.status === 'invited'
+      ).length;
+      const expired = sessionsData.filter(
+        (s: any) => s.status === 'expired'
+      ).length;
+      const cancelled = sessionsData.filter(
+        (s: any) => s.status === 'cancelled'
+      ).length;
+
+      setTokenStats({
+        total: sessionsData.length,
+        completed,
+        invited,
+        expired,
+        cancelled,
+      });
+    } catch (error) {
+      logError('Error fetching token stats', error);
+    }
+  }, []);
+
+  // Veri çekme - tab ve filtre değişikliklerinde
   useEffect(() => {
-    fetchReadings();
-    fetchStats();
-  }, [fetchReadings, fetchStats]);
+    // İlk yükleme veya filtre/tab değişikliğinde veri çek
+    if (activeTab === 'normal') {
+      fetchReadings();
+      fetchStats();
+    } else {
+      fetchTokenReadings();
+      fetchTokenStats();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    activeTab,
+    currentPage,
+    searchTerm,
+    typeFilter,
+    statusFilter,
+    tokenStatusFilter,
+  ]);
 
   const getTypeIcon = (type: string) => {
     switch (type) {
@@ -652,7 +1009,107 @@ export default function ReadingsPage() {
       minute: '2-digit',
     });
   };
-  const totalPages = Math.ceil(totalCount / readingsPerPage);
+
+  // Session status helper functions
+  const getSessionStatusColor = (status: string) => {
+    switch (status) {
+      case 'completed':
+        return 'text-green-400 bg-green-500/20 border border-green-500/30';
+      case 'invited':
+        return 'text-blue-400 bg-blue-500/20 border border-blue-500/30';
+      case 'form_started':
+        return 'text-yellow-400 bg-yellow-500/20 border border-yellow-500/30';
+      case 'form_done':
+        return 'text-purple-400 bg-purple-500/20 border border-purple-500/30';
+      case 'cards_selected':
+        return 'text-indigo-400 bg-indigo-500/20 border border-indigo-500/30';
+      case 'ready_for_reader':
+        return 'text-pink-400 bg-pink-500/20 border border-pink-500/30';
+      case 'cancelled':
+        return 'text-red-400 bg-red-500/20 border border-red-500/30';
+      case 'expired':
+        return 'text-gray-400 bg-gray-500/20 border border-gray-500/30';
+      default:
+        return 'text-slate-400 bg-slate-500/20 border border-slate-500/30';
+    }
+  };
+
+  const getSessionStatusIcon = (status: string) => {
+    switch (status) {
+      case 'completed':
+        return <CheckCircle className='h-3 w-3' />;
+      case 'invited':
+        return <Mail className='h-3 w-3' />;
+      case 'form_started':
+        return <Clock className='h-3 w-3' />;
+      case 'form_done':
+        return <FileText className='h-3 w-3' />;
+      case 'cards_selected':
+        return <Sparkles className='h-3 w-3' />;
+      case 'ready_for_reader':
+        return <Star className='h-3 w-3' />;
+      case 'cancelled':
+        return <XCircle className='h-3 w-3' />;
+      case 'expired':
+        return <AlertCircle className='h-3 w-3' />;
+      default:
+        return <Clock className='h-3 w-3' />;
+    }
+  };
+
+  const getSessionStatusText = (status: string) => {
+    switch (status) {
+      case 'completed':
+        return 'Tamamlandı';
+      case 'invited':
+        return 'Davet Edildi';
+      case 'form_started':
+        return 'Form Başladı';
+      case 'form_done':
+        return 'Form Tamamlandı';
+      case 'cards_selected':
+        return 'Kartlar Seçildi';
+      case 'ready_for_reader':
+        return 'Okumaya Hazır';
+      case 'cancelled':
+        return 'İptal Edildi';
+      case 'expired':
+        return 'Süresi Doldu';
+      default:
+        return status;
+    }
+  };
+
+  // Tab değiştiğinde sayfayı sıfırla
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [activeTab]);
+
+  // Loading state debug - production'da kaldırılabilir
+  useEffect(() => {
+    if (loading) {
+      const loadingTimeout = setTimeout(() => {
+        console.error('Loading state stuck for more than 10 seconds!', {
+          activeTab,
+          currentPage,
+          searchTerm,
+          typeFilter,
+          statusFilter,
+          tokenStatusFilter,
+        });
+      }, 10000);
+      return () => clearTimeout(loadingTimeout);
+    }
+    return undefined;
+  }, [
+    loading,
+    activeTab,
+    currentPage,
+    searchTerm,
+    typeFilter,
+    statusFilter,
+    tokenStatusFilter,
+  ]);
 
   if (loading) {
     return (
@@ -710,308 +1167,709 @@ export default function ReadingsPage() {
             </div>
           </div>
 
+          {/* Tabs */}
           <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3'>
-            <div className='inline-flex rounded-xl bg-slate-900/60 p-1 border border-slate-700/60 w-full sm:w-auto'></div>
-            <div className='flex items-center gap-3'></div>
+            <div className='inline-flex rounded-xl bg-slate-900/60 p-1 border border-slate-700/60 w-full sm:w-auto'>
+              <button
+                onClick={() => setActiveTab('normal')}
+                className={`flex-1 sm:flex-none px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                  activeTab === 'normal'
+                    ? 'bg-indigo-600 text-white shadow-lg'
+                    : 'text-slate-400 hover:text-white'
+                }`}
+              >
+                <span className='flex items-center justify-center gap-2'>
+                  <BookOpen className='h-4 w-4' />
+                  Normal Okumalar
+                  {activeTab === 'normal' && (
+                    <span className='bg-white/20 px-2 py-0.5 rounded-full text-xs'>
+                      {stats.total}
+                    </span>
+                  )}
+                </span>
+              </button>
+              <button
+                onClick={() => setActiveTab('token')}
+                className={`flex-1 sm:flex-none px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                  activeTab === 'token'
+                    ? 'bg-indigo-600 text-white shadow-lg'
+                    : 'text-slate-400 hover:text-white'
+                }`}
+              >
+                <span className='flex items-center justify-center gap-2'>
+                  <Sparkles className='h-4 w-4' />
+                  Token Okumaları
+                  {activeTab === 'token' && (
+                    <span className='bg-white/20 px-2 py-0.5 rounded-full text-xs'>
+                      {tokenStats.total}
+                    </span>
+                  )}
+                </span>
+              </button>
+            </div>
+            <div className='flex items-center gap-3'>
+              <button
+                onClick={() => {
+                  if (activeTab === 'normal') {
+                    fetchReadings();
+                    fetchStats();
+                  } else {
+                    fetchTokenReadings();
+                    fetchTokenStats();
+                  }
+                }}
+                className='admin-btn-primary p-3 md:px-4 md:py-2 rounded-lg flex items-center space-x-2 touch-target flex-shrink-0 hover:bg-indigo-600 transition-colors'
+              >
+                <RefreshCw className='h-4 w-4' />
+                <span className='hidden sm:inline'>Yenile</span>
+              </button>
+            </div>
           </div>
         </div>
 
         {/* Stats Cards */}
-        <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4 mb-6'>
-          <div className='admin-glass rounded-lg p-4 text-center'>
-            <div className='flex items-center justify-center mb-2'>
-              <BookOpen className='h-5 w-5 text-indigo-400 mr-2' />
-              <span className='text-sm text-slate-400'>Toplam</span>
+        {activeTab === 'normal' ? (
+          <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4 mb-6'>
+            <div className='admin-glass rounded-lg p-4 text-center'>
+              <div className='flex items-center justify-center mb-2'>
+                <BookOpen className='h-5 w-5 text-indigo-400 mr-2' />
+                <span className='text-sm text-slate-400'>Toplam</span>
+              </div>
+              <div className='text-xl font-bold text-white'>{stats.total}</div>
             </div>
-            <div className='text-xl font-bold text-white'>{stats.total}</div>
-          </div>
 
-          <div className='admin-glass rounded-lg p-4 text-center'>
-            <div className='flex items-center justify-center mb-2'>
-              <CheckCircle className='h-5 w-5 text-green-400 mr-2' />
-              <span className='text-sm text-slate-400'>Tamamlanan</span>
+            <div className='admin-glass rounded-lg p-4 text-center'>
+              <div className='flex items-center justify-center mb-2'>
+                <CheckCircle className='h-5 w-5 text-green-400 mr-2' />
+                <span className='text-sm text-slate-400'>Tamamlanan</span>
+              </div>
+              <div className='text-xl font-bold text-green-400'>
+                {stats.completed}
+              </div>
             </div>
-            <div className='text-xl font-bold text-green-400'>
-              {stats.completed}
-            </div>
-          </div>
 
-          <div className='admin-glass rounded-lg p-4 text-center'>
-            <div className='flex items-center justify-center mb-2'>
-              <Clock className='h-5 w-5 text-yellow-400 mr-2' />
-              <span className='text-sm text-slate-400'>Beklemede</span>
+            <div className='admin-glass rounded-lg p-4 text-center'>
+              <div className='flex items-center justify-center mb-2'>
+                <Clock className='h-5 w-5 text-yellow-400 mr-2' />
+                <span className='text-sm text-slate-400'>Beklemede</span>
+              </div>
+              <div className='text-xl font-bold text-yellow-400'>
+                {stats.pending}
+              </div>
             </div>
-            <div className='text-xl font-bold text-yellow-400'>
-              {stats.pending}
-            </div>
-          </div>
 
-          <div className='admin-glass rounded-lg p-4 text-center'>
-            <div className='flex items-center justify-center mb-2'>
-              <XCircle className='h-5 w-5 text-red-400 mr-2' />
-              <span className='text-sm text-slate-400'>Başarısız</span>
+            <div className='admin-glass rounded-lg p-4 text-center'>
+              <div className='flex items-center justify-center mb-2'>
+                <XCircle className='h-5 w-5 text-red-400 mr-2' />
+                <span className='text-sm text-slate-400'>Başarısız</span>
+              </div>
+              <div className='text-xl font-bold text-red-400'>
+                {stats.failed}
+              </div>
             </div>
-            <div className='text-xl font-bold text-red-400'>{stats.failed}</div>
-          </div>
 
-          <div className='admin-glass rounded-lg p-4 text-center'>
-            <div className='flex items-center justify-center mb-2'>
-              <Star className='h-5 w-5 text-purple-400 mr-2' />
-              <span className='text-sm text-slate-400'>Toplam Kredi</span>
-            </div>
-            <div className='text-lg font-bold text-purple-400'>
-              {stats.totalCredits}
+            <div className='admin-glass rounded-lg p-4 text-center'>
+              <div className='flex items-center justify-center mb-2'>
+                <Star className='h-5 w-5 text-purple-400 mr-2' />
+                <span className='text-sm text-slate-400'>Toplam Kredi</span>
+              </div>
+              <div className='text-lg font-bold text-purple-400'>
+                {stats.totalCredits}
+              </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4 mb-6'>
+            <div className='admin-glass rounded-lg p-4 text-center'>
+              <div className='flex items-center justify-center mb-2'>
+                <Sparkles className='h-5 w-5 text-indigo-400 mr-2' />
+                <span className='text-sm text-slate-400'>Toplam</span>
+              </div>
+              <div className='text-xl font-bold text-white'>
+                {tokenStats.total}
+              </div>
+            </div>
+
+            <div className='admin-glass rounded-lg p-4 text-center'>
+              <div className='flex items-center justify-center mb-2'>
+                <CheckCircle className='h-5 w-5 text-green-400 mr-2' />
+                <span className='text-sm text-slate-400'>Tamamlanan</span>
+              </div>
+              <div className='text-xl font-bold text-green-400'>
+                {tokenStats.completed}
+              </div>
+            </div>
+
+            <div className='admin-glass rounded-lg p-4 text-center'>
+              <div className='flex items-center justify-center mb-2'>
+                <Mail className='h-5 w-5 text-blue-400 mr-2' />
+                <span className='text-sm text-slate-400'>Davet Edildi</span>
+              </div>
+              <div className='text-xl font-bold text-blue-400'>
+                {tokenStats.invited}
+              </div>
+            </div>
+
+            <div className='admin-glass rounded-lg p-4 text-center'>
+              <div className='flex items-center justify-center mb-2'>
+                <AlertCircle className='h-5 w-5 text-gray-400 mr-2' />
+                <span className='text-sm text-slate-400'>Süresi Doldu</span>
+              </div>
+              <div className='text-xl font-bold text-gray-400'>
+                {tokenStats.expired}
+              </div>
+            </div>
+
+            <div className='admin-glass rounded-lg p-4 text-center'>
+              <div className='flex items-center justify-center mb-2'>
+                <XCircle className='h-5 w-5 text-red-400 mr-2' />
+                <span className='text-sm text-slate-400'>İptal Edildi</span>
+              </div>
+              <div className='text-xl font-bold text-red-400'>
+                {tokenStats.cancelled}
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Filters */}
-        <div className='space-y-3 lg:space-y-0 lg:grid lg:grid-cols-4 lg:gap-4'>
-          {/* Search */}
-          <div className='lg:col-span-2'>
-            <div className='relative'>
-              <Search className='absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400' />
-              <input
-                type='text'
-                placeholder='Başlık, yayılım veya açıklama ile ara...'
-                value={searchTerm}
-                onChange={e => setSearchTerm(e.target.value)}
-                className='w-full pl-10 pr-4 py-3 admin-glass rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm'
-              />
+        {activeTab === 'normal' ? (
+          <div className='space-y-3 lg:space-y-0 lg:grid lg:grid-cols-4 lg:gap-4'>
+            {/* Search */}
+            <div className='lg:col-span-2'>
+              <div className='relative'>
+                <Search className='absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400' />
+                <input
+                  type='text'
+                  placeholder='Başlık, yayılım veya açıklama ile ara...'
+                  value={searchTerm}
+                  onChange={e => setSearchTerm(e.target.value)}
+                  className='w-full pl-10 pr-4 py-3 admin-glass rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm'
+                />
+              </div>
+            </div>
+
+            {/* Type Filter */}
+            <div>
+              <select
+                value={typeFilter}
+                onChange={e => setTypeFilter(e.target.value)}
+                className='w-full px-4 py-3 admin-glass rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm'
+              >
+                <option value='all'>🔮 Tüm Tipler</option>
+                <option value='love'>❤️ Aşk</option>
+                <option value='career'>💼 Kariyer</option>
+                <option value='general'>🎯 Genel</option>
+                <option value='tarot'>✨ Tarot</option>
+                <option value='numerology'>⭐ Numeroloji</option>
+                <option value='situation-analysis'>📊 Durum Analizi</option>
+                <option value='problem-solving'>🔍 Problem Çözme</option>
+              </select>
+            </div>
+
+            {/* Status Filter */}
+            <div>
+              <select
+                value={statusFilter}
+                onChange={e => setStatusFilter(e.target.value)}
+                className='w-full px-4 py-3 admin-glass rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm'
+              >
+                <option value='all'>📊 Tüm Durumlar</option>
+                <option value='completed'>✅ Tamamlanan</option>
+                <option value='pending'>⏳ Beklemede</option>
+                <option value='failed'>❌ Başarısız</option>
+                <option value='reviewed'>👀 İncelenen</option>
+              </select>
             </div>
           </div>
+        ) : (
+          <div className='space-y-3 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-4'>
+            {/* Search */}
+            <div className='lg:col-span-2'>
+              <div className='relative'>
+                <Search className='absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400' />
+                <input
+                  type='text'
+                  placeholder='Müşteri adı, e-posta veya açılım ile ara...'
+                  value={searchTerm}
+                  onChange={e => setSearchTerm(e.target.value)}
+                  className='w-full pl-10 pr-4 py-3 admin-glass rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm'
+                />
+              </div>
+            </div>
 
-          {/* Type Filter */}
-          <div>
-            <select
-              value={typeFilter}
-              onChange={e => setTypeFilter(e.target.value)}
-              className='w-full px-4 py-3 admin-glass rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm'
-            >
-              <option value='all'>🔮 Tüm Tipler</option>
-              <option value='love'>❤️ Aşk</option>
-              <option value='career'>💼 Kariyer</option>
-              <option value='general'>🎯 Genel</option>
-              <option value='tarot'>✨ Tarot</option>
-              <option value='numerology'>⭐ Numeroloji</option>
-              <option value='situation-analysis'>📊 Durum Analizi</option>
-              <option value='problem-solving'>🔍 Problem Çözme</option>
-            </select>
+            {/* Status Filter */}
+            <div>
+              <select
+                value={tokenStatusFilter}
+                onChange={e => setTokenStatusFilter(e.target.value)}
+                className='w-full px-4 py-3 admin-glass rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm'
+              >
+                <option value='all'>📊 Tüm Durumlar</option>
+                <option value='completed'>✅ Tamamlanan</option>
+                <option value='invited'>📧 Davet Edildi</option>
+                <option value='form_started'>📝 Form Başladı</option>
+                <option value='form_done'>✅ Form Tamamlandı</option>
+                <option value='cards_selected'>🃏 Kartlar Seçildi</option>
+                <option value='ready_for_reader'>👁️ Okumaya Hazır</option>
+                <option value='expired'>⏰ Süresi Doldu</option>
+                <option value='cancelled'>❌ İptal Edildi</option>
+              </select>
+            </div>
           </div>
-
-          {/* Status Filter */}
-          <div>
-            <select
-              value={statusFilter}
-              onChange={e => setStatusFilter(e.target.value)}
-              className='w-full px-4 py-3 admin-glass rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm'
-            >
-              <option value='all'>📊 Tüm Durumlar</option>
-              <option value='completed'>✅ Tamamlanan</option>
-              <option value='pending'>⏳ Beklemede</option>
-              <option value='failed'>❌ Başarısız</option>
-              <option value='reviewed'>👀 İncelenen</option>
-              <option value='situation-analysis'>📊 Durum Analizi</option>
-              <option value='problem-solving'>🔍 Problem Çözme</option>
-            </select>
-          </div>
-        </div>
+        )}
       </div>
 
       {/* Readings Grid */}
-      <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 md:gap-6'>
-        {readings.map((reading, index) => (
-          <div
-            key={reading.id}
-            className='group relative overflow-hidden admin-card rounded-2xl border border-slate-700/50 admin-hover-lift transition-all duration-300 hover:border-indigo-500/50'
-            style={{ animationDelay: `${index * 0.05}s` }}
-          >
-            {/* Header with gradient */}
-            <div className='relative p-4 md:p-6 pb-4'>
-              <div className='flex flex-col sm:flex-row sm:items-start justify-between mb-4 space-y-3 sm:space-y-0'>
-                <div className='flex items-center space-x-3 flex-1 min-w-0'>
-                  <div className='relative flex-shrink-0'>
-                    <div className='admin-gradient-primary p-3 rounded-xl'>
-                      {getTypeIcon(reading.reading_type)}
+      {activeTab === 'normal' ? (
+        <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 md:gap-6'>
+          {readings.map((reading, index) => (
+            <div
+              key={reading.id}
+              className='group relative overflow-hidden admin-card rounded-2xl border border-slate-700/50 admin-hover-lift transition-all duration-300 hover:border-indigo-500/50'
+              style={{ animationDelay: `${index * 0.05}s` }}
+            >
+              {/* Header with gradient */}
+              <div className='relative p-4 md:p-6 pb-4'>
+                <div className='flex flex-col sm:flex-row sm:items-start justify-between mb-4 space-y-3 sm:space-y-0'>
+                  <div className='flex items-center space-x-3 flex-1 min-w-0'>
+                    <div className='relative flex-shrink-0'>
+                      <div className='admin-gradient-primary p-3 rounded-xl'>
+                        {getTypeIcon(reading.reading_type)}
+                      </div>
+                      <div className='absolute -top-1 -right-1 w-4 h-4 bg-white rounded-full flex items-center justify-center'>
+                        <div className='w-2 h-2 bg-green-400 rounded-full animate-pulse'></div>
+                      </div>
                     </div>
-                    <div className='absolute -top-1 -right-1 w-4 h-4 bg-white rounded-full flex items-center justify-center'>
-                      <div className='w-2 h-2 bg-green-400 rounded-full animate-pulse'></div>
+                    <div className='flex-1 min-w-0'>
+                      <h3 className='font-bold text-white text-base md:text-lg truncate group-hover:text-indigo-300 transition-colors'>
+                        {reading.title}
+                      </h3>
+                      <p className='text-xs md:text-sm text-slate-400 mt-1'>
+                        {formatDate(reading.created_at)}
+                      </p>
                     </div>
                   </div>
+
+                  <div className='flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 sm:flex-shrink-0'>
+                    <div
+                      className={`inline-flex items-center px-2 md:px-3 py-1.5 rounded-full text-xs font-semibold ${getStatusColor(reading.status)}`}
+                    >
+                      {getStatusIcon(reading.status)}
+                      <span className='ml-1.5 hidden sm:inline'>
+                        {getStatusText(reading.status)}
+                      </span>
+                      <span className='ml-1.5 sm:hidden'>
+                        {getStatusText(reading.status).slice(0, 3)}
+                      </span>
+                    </div>
+                    <div
+                      className={`inline-flex items-center px-2 md:px-3 py-1.5 rounded-full text-xs font-semibold ${getMediaTypeColor(reading.metadata)}`}
+                    >
+                      {getMediaTypeIcon(reading.metadata)}
+                      <span className='ml-1.5 hidden sm:inline'>
+                        {getMediaTypeText(reading.metadata)}
+                      </span>
+                      <span className='ml-1.5 sm:hidden'>
+                        {getMediaTypeText(reading.metadata).slice(0, 3)}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* User Info */}
+                <div className='flex items-center space-x-3 mb-4'>
+                  <div className='w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0'>
+                    {reading.user_display_name?.charAt(0)?.toUpperCase() || 'U'}
+                  </div>
                   <div className='flex-1 min-w-0'>
-                    <h3 className='font-bold text-white text-base md:text-lg truncate group-hover:text-indigo-300 transition-colors'>
-                      {reading.title}
-                    </h3>
-                    <p className='text-xs md:text-sm text-slate-400 mt-1'>
-                      {formatDate(reading.created_at)}
+                    <p className='text-white font-medium truncate text-sm md:text-base'>
+                      {reading.user_display_name}
+                    </p>
+                    <p className='text-slate-400 text-xs truncate'>
+                      {reading.user_email}
                     </p>
                   </div>
                 </div>
 
-                <div className='flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 sm:flex-shrink-0'>
+                {/* Reading Type & Spread */}
+                <div className='flex flex-col sm:flex-row sm:items-center justify-between mb-4 space-y-2 sm:space-y-0'>
                   <div
-                    className={`inline-flex items-center px-2 md:px-3 py-1.5 rounded-full text-xs font-semibold ${getStatusColor(reading.status)}`}
+                    className={`inline-flex items-center px-3 py-2 rounded-lg text-sm font-medium ${getTypeColor(reading.reading_type)} w-fit`}
                   >
-                    {getStatusIcon(reading.status)}
-                    <span className='ml-1.5 hidden sm:inline'>
-                      {getStatusText(reading.status)}
-                    </span>
-                    <span className='ml-1.5 sm:hidden'>
-                      {getStatusText(reading.status).slice(0, 3)}
+                    {getTypeIcon(reading.reading_type)}
+                    <span className='ml-2'>
+                      {getTypeText(reading.reading_type)}
                     </span>
                   </div>
-                  <div
-                    className={`inline-flex items-center px-2 md:px-3 py-1.5 rounded-full text-xs font-semibold ${getMediaTypeColor(reading.metadata)}`}
-                  >
-                    {getMediaTypeIcon(reading.metadata)}
-                    <span className='ml-1.5 hidden sm:inline'>
-                      {getMediaTypeText(reading.metadata)}
-                    </span>
-                    <span className='ml-1.5 sm:hidden'>
-                      {getMediaTypeText(reading.metadata).slice(0, 3)}
-                    </span>
+                  <div className='text-left sm:text-right'>
+                    <p className='text-slate-400 text-xs'>Yayılım</p>
+                    <p className='text-white text-sm font-medium truncate'>
+                      {reading.spread_name}
+                    </p>
                   </div>
+                </div>
+
+                {/* Interpretation Preview */}
+                <div className='mb-4'>
+                  <p className='text-slate-300 text-sm leading-relaxed line-clamp-2 md:line-clamp-3'>
+                    {reading.interpretation}
+                  </p>
+                </div>
+
+                {/* Cost & Button */}
+                <div className='flex flex-col sm:flex-row sm:items-center justify-between mb-6 space-y-3 sm:space-y-0'>
+                  <div className='flex items-center space-x-2'>
+                    <Star className='h-4 w-4 text-yellow-400' />
+                    <span className='text-yellow-400 font-bold text-lg'>
+                      {reading.cost_credits}
+                    </span>
+                    <span className='text-slate-400 text-sm'>Kredi</span>
+                  </div>
+                  <button
+                    onClick={() => {
+                      setSelectedReading(reading);
+                      setShowReadingModal(true);
+                    }}
+                    className='group/btn relative overflow-hidden admin-gradient-primary px-4 md:px-6 py-2.5 rounded-xl text-white font-medium text-sm transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-indigo-500/25 w-full sm:w-auto'
+                  >
+                    <span className='relative z-10 flex items-center justify-center space-x-2'>
+                      <Eye className='h-4 w-4' />
+                      <span>Detayları Gör</span>
+                    </span>
+                    <div className='absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700'></div>
+                  </button>
                 </div>
               </div>
 
-              {/* User Info */}
-              <div className='flex items-center space-x-3 mb-4'>
-                <div className='w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0'>
-                  {reading.user_display_name?.charAt(0)?.toUpperCase() || 'U'}
-                </div>
-                <div className='flex-1 min-w-0'>
-                  <p className='text-white font-medium truncate text-sm md:text-base'>
-                    {reading.user_display_name}
-                  </p>
-                  <p className='text-slate-400 text-xs truncate'>
-                    {reading.user_email}
-                  </p>
-                </div>
-              </div>
+              {/* Bottom border accent */}
+              <div className='h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300'></div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 md:gap-6'>
+          {tokenReadings.map((tokenReading, index) => (
+            <div
+              key={tokenReading.id}
+              className='group relative overflow-hidden admin-card rounded-2xl border border-slate-700/50 admin-hover-lift transition-all duration-300 hover:border-indigo-500/50'
+              style={{ animationDelay: `${index * 0.05}s` }}
+            >
+              {/* Header with gradient */}
+              <div className='relative p-4 md:p-6 pb-4'>
+                <div className='flex flex-col sm:flex-row sm:items-start justify-between mb-4 space-y-3 sm:space-y-0'>
+                  <div className='flex items-center space-x-3 flex-1 min-w-0'>
+                    <div className='relative flex-shrink-0'>
+                      <div className='admin-gradient-primary p-3 rounded-xl'>
+                        <Sparkles className='h-4 w-4 text-white' />
+                      </div>
+                      <div className='absolute -top-1 -right-1 w-4 h-4 bg-white rounded-full flex items-center justify-center'>
+                        <div className='w-2 h-2 bg-purple-400 rounded-full animate-pulse'></div>
+                      </div>
+                    </div>
+                    <div className='flex-1 min-w-0'>
+                      <h3 className='font-bold text-white text-base md:text-lg truncate group-hover:text-indigo-300 transition-colors'>
+                        {tokenReading.customer_name ||
+                          tokenReading.customer_email ||
+                          'Token Okuma'}
+                      </h3>
+                      <p className='text-xs md:text-sm text-slate-400 mt-1'>
+                        {formatDate(tokenReading.created_at)}
+                      </p>
+                    </div>
+                  </div>
 
-              {/* Reading Type & Spread */}
-              <div className='flex flex-col sm:flex-row sm:items-center justify-between mb-4 space-y-2 sm:space-y-0'>
-                <div
-                  className={`inline-flex items-center px-3 py-2 rounded-lg text-sm font-medium ${getTypeColor(reading.reading_type)} w-fit`}
-                >
-                  {getTypeIcon(reading.reading_type)}
-                  <span className='ml-2'>
-                    {getTypeText(reading.reading_type)}
-                  </span>
+                  <div className='flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 sm:flex-shrink-0'>
+                    <div
+                      className={`inline-flex items-center px-2 md:px-3 py-1.5 rounded-full text-xs font-semibold ${getSessionStatusColor(tokenReading.status)}`}
+                    >
+                      {getSessionStatusIcon(tokenReading.status)}
+                      <span className='ml-1.5 hidden sm:inline'>
+                        {getSessionStatusText(tokenReading.status)}
+                      </span>
+                      <span className='ml-1.5 sm:hidden'>
+                        {getSessionStatusText(tokenReading.status).slice(0, 3)}
+                      </span>
+                    </div>
+                    {tokenReading.reading_type && (
+                      <div
+                        className={`inline-flex items-center px-2 md:px-3 py-1.5 rounded-full text-xs font-semibold ${
+                          tokenReading.reading_type === 'detailed'
+                            ? 'text-purple-400 bg-purple-500/20 border border-purple-500/30'
+                            : 'text-blue-400 bg-blue-500/20 border border-blue-500/30'
+                        }`}
+                      >
+                        {tokenReading.reading_type === 'detailed' ? (
+                          <Mic className='h-3 w-3' />
+                        ) : (
+                          <FileText className='h-3 w-3' />
+                        )}
+                        <span className='ml-1.5 hidden sm:inline'>
+                          {tokenReading.reading_type === 'detailed'
+                            ? 'Sesli'
+                            : 'Yazılı'}
+                        </span>
+                        <span className='ml-1.5 sm:hidden'>
+                          {tokenReading.reading_type === 'detailed' ? 'S' : 'Y'}
+                        </span>
+                      </div>
+                    )}
+                  </div>
                 </div>
-                <div className='text-left sm:text-right'>
-                  <p className='text-slate-400 text-xs'>Yayılım</p>
+
+                {/* Customer Info */}
+                <div className='flex items-center space-x-3 mb-4'>
+                  <div className='w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-600 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0'>
+                    {tokenReading.customer_name?.charAt(0)?.toUpperCase() ||
+                      tokenReading.customer_email?.charAt(0)?.toUpperCase() ||
+                      'T'}
+                  </div>
+                  <div className='flex-1 min-w-0'>
+                    <p className='text-white font-medium truncate text-sm md:text-base'>
+                      {tokenReading.customer_name || 'Müşteri'}
+                    </p>
+                    <p className='text-slate-400 text-xs truncate'>
+                      {tokenReading.customer_email || 'E-posta yok'}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Spread Info */}
+                <div className='mb-4'>
+                  <p className='text-slate-400 text-xs mb-1'>Açılım</p>
                   <p className='text-white text-sm font-medium truncate'>
-                    {reading.spread_name}
+                    {tokenReading.spread_name}
                   </p>
                 </div>
-              </div>
 
-              {/* Interpretation Preview */}
-              <div className='mb-4'>
-                <p className='text-slate-300 text-sm leading-relaxed line-clamp-2 md:line-clamp-3'>
-                  {reading.interpretation}
-                </p>
-              </div>
+                {/* Token Preview */}
+                {tokenReading.token_preview && (
+                  <div className='mb-4 p-2 bg-slate-800/50 rounded-lg'>
+                    <p className='text-slate-400 text-xs mb-1'>Token</p>
+                    <p className='text-white font-mono text-xs truncate'>
+                      {tokenReading.token_preview}
+                    </p>
+                  </div>
+                )}
 
-              {/* Cost & Button */}
-              <div className='flex flex-col sm:flex-row sm:items-center justify-between mb-6 space-y-3 sm:space-y-0'>
-                <div className='flex items-center space-x-2'>
-                  <Star className='h-4 w-4 text-yellow-400' />
-                  <span className='text-yellow-400 font-bold text-lg'>
-                    {reading.cost_credits}
-                  </span>
-                  <span className='text-slate-400 text-sm'>Kredi</span>
+                {/* Reading Link */}
+                {tokenReading.reading_link && (
+                  <div className='mb-4 p-2 bg-indigo-500/10 rounded-lg border border-indigo-500/20'>
+                    <div className='flex items-center justify-between mb-2'>
+                      <p className='text-indigo-400 text-xs font-medium flex items-center gap-1.5'>
+                        <ExternalLink className='h-3 w-3' />
+                        Okuma Linki
+                      </p>
+                    </div>
+                    <div className='flex items-center gap-2'>
+                      <a
+                        href={tokenReading.reading_link}
+                        target='_blank'
+                        rel='noopener noreferrer'
+                        className='text-white font-mono text-xs truncate flex-1 hover:text-indigo-400 transition-colors break-all'
+                        title={tokenReading.reading_link}
+                      >
+                        {tokenReading.reading_link}
+                      </a>
+                      <button
+                        onClick={() => {
+                          navigator.clipboard.writeText(
+                            tokenReading.reading_link || ''
+                          );
+                          showToast('Link kopyalandı', 'success');
+                        }}
+                        className='p-1.5 hover:bg-indigo-500/20 rounded transition-colors flex-shrink-0'
+                        title='Linki kopyala'
+                      >
+                        <Copy className='h-3.5 w-3.5 text-indigo-400' />
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {/* Reading Status */}
+                {tokenReading.reading && (
+                  <div className='mb-4 p-2 bg-green-500/10 rounded-lg border border-green-500/20'>
+                    <p className='text-green-400 text-xs font-medium'>
+                      ✅ Okuma tamamlandı
+                    </p>
+                  </div>
+                )}
+
+                {/* Dates */}
+                <div className='space-y-1 mb-4'>
+                  {tokenReading.completed_at && (
+                    <p className='text-slate-400 text-xs'>
+                      Tamamlandı: {formatDate(tokenReading.completed_at)}
+                    </p>
+                  )}
+                  {tokenReading.expires_at && (
+                    <p className='text-slate-400 text-xs'>
+                      Son geçerlilik: {formatDate(tokenReading.expires_at)}
+                    </p>
+                  )}
                 </div>
+
+                {/* Action Button */}
+                <div className='flex justify-center'>
+                  <button
+                    onClick={() => {
+                      if (tokenReading.reading) {
+                        // Debug: reading objesini kontrol et
+                        console.log(
+                          'Token reading objesi:',
+                          tokenReading.reading
+                        );
+                        console.log(
+                          'Reading type:',
+                          tokenReading.reading.reading_type
+                        );
+                        console.log(
+                          'Reading title:',
+                          tokenReading.reading.title
+                        );
+                        setSelectedReading(tokenReading.reading);
+                        setShowReadingModal(true);
+                      } else {
+                        showToast('Bu okuma henüz tamamlanmamış', 'info');
+                      }
+                    }}
+                    className='group/btn relative overflow-hidden admin-gradient-primary px-4 md:px-6 py-2.5 rounded-xl text-white font-medium text-sm transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-indigo-500/25 w-full sm:w-auto'
+                    disabled={!tokenReading.reading}
+                  >
+                    <span className='relative z-10 flex items-center justify-center space-x-2'>
+                      <Eye className='h-4 w-4' />
+                      <span>
+                        {tokenReading.reading
+                          ? 'Detayları Gör'
+                          : 'Henüz Tamamlanmadı'}
+                      </span>
+                    </span>
+                    <div className='absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700'></div>
+                  </button>
+                </div>
+              </div>
+
+              {/* Bottom border accent */}
+              <div className='h-1 bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300'></div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Empty State */}
+      {((activeTab === 'normal' && readings.length === 0) ||
+        (activeTab === 'token' && tokenReadings.length === 0)) &&
+        !loading && (
+          <div className='admin-card rounded-2xl p-12 text-center'>
+            {activeTab === 'normal' ? (
+              <>
+                <BookOpen className='h-20 w-20 text-slate-600 mx-auto mb-4' />
+                <h3 className='text-xl font-semibold text-white mb-2'>
+                  Okuma Bulunamadı
+                </h3>
+                <p className='text-slate-400 mb-6'>
+                  {searchTerm || typeFilter !== 'all' || statusFilter !== 'all'
+                    ? 'Arama kriterlerinize uygun okuma bulunamadı.'
+                    : 'Henüz okuma bulunmuyor.'}
+                </p>
+                {(searchTerm ||
+                  typeFilter !== 'all' ||
+                  statusFilter !== 'all') && (
+                  <button
+                    onClick={() => {
+                      setSearchTerm('');
+                      setTypeFilter('all');
+                      setStatusFilter('all');
+                      setCurrentPage(1);
+                    }}
+                    className='admin-btn-primary px-6 py-2 rounded-lg'
+                  >
+                    Filtreleri Temizle
+                  </button>
+                )}
+              </>
+            ) : (
+              <>
+                <Sparkles className='h-20 w-20 text-slate-600 mx-auto mb-4' />
+                <h3 className='text-xl font-semibold text-white mb-2'>
+                  Token Okuma Bulunamadı
+                </h3>
+                <p className='text-slate-400 mb-6'>
+                  {searchTerm || tokenStatusFilter !== 'all'
+                    ? 'Arama kriterlerinize uygun token okuma bulunamadı.'
+                    : 'Henüz token okuma bulunmuyor.'}
+                </p>
+                {(searchTerm || tokenStatusFilter !== 'all') && (
+                  <button
+                    onClick={() => {
+                      setSearchTerm('');
+                      setTokenStatusFilter('all');
+                      setCurrentPage(1);
+                    }}
+                    className='admin-btn-primary px-6 py-2 rounded-lg'
+                  >
+                    Filtreleri Temizle
+                  </button>
+                )}
+              </>
+            )}
+          </div>
+        )}
+
+      {/* Pagination */}
+      {(() => {
+        const currentTotalCount =
+          activeTab === 'normal' ? totalCount : tokenTotalCount;
+        const currentTotalPages = Math.ceil(
+          currentTotalCount / readingsPerPage
+        );
+
+        if (currentTotalPages <= 1) {
+          return null;
+        }
+
+        return (
+          <div className='admin-card rounded-xl p-4'>
+            <div className='flex flex-col sm:flex-row items-center justify-between space-y-3 sm:space-y-0'>
+              <div className='text-sm text-slate-400 text-center sm:text-left'>
+                {currentTotalCount}{' '}
+                {activeTab === 'normal' ? 'okumadan' : 'token okumadan'}{' '}
+                {(currentPage - 1) * readingsPerPage + 1}-
+                {Math.min(currentPage * readingsPerPage, currentTotalCount)}{' '}
+                arası gösteriliyor
+              </div>
+
+              <div className='flex items-center space-x-2'>
                 <button
-                  onClick={() => {
-                    setSelectedReading(reading);
-                    setShowReadingModal(true);
-                  }}
-                  className='group/btn relative overflow-hidden admin-gradient-primary px-4 md:px-6 py-2.5 rounded-xl text-white font-medium text-sm transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-indigo-500/25 w-full sm:w-auto'
+                  onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+                  disabled={currentPage === 1}
+                  className='p-2 admin-glass rounded-lg admin-hover-scale disabled:opacity-50 disabled:cursor-not-allowed'
                 >
-                  <span className='relative z-10 flex items-center justify-center space-x-2'>
-                    <Eye className='h-4 w-4' />
-                    <span>Detayları Gör</span>
-                  </span>
-                  <div className='absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700'></div>
+                  <ChevronLeft className='h-4 w-4' />
+                </button>
+
+                <span className='px-4 py-2 admin-gradient-accent rounded-lg text-white font-medium'>
+                  {currentPage} / {currentTotalPages}
+                </span>
+
+                <button
+                  onClick={() =>
+                    setCurrentPage(Math.min(currentTotalPages, currentPage + 1))
+                  }
+                  disabled={currentPage === currentTotalPages}
+                  className='p-2 admin-glass rounded-lg admin-hover-scale disabled:opacity-50 disabled:cursor-not-allowed'
+                >
+                  <ChevronRight className='h-4 w-4' />
                 </button>
               </div>
             </div>
-
-            {/* Bottom border accent */}
-            <div className='h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300'></div>
           </div>
-        ))}
-      </div>
-
-      {/* Empty State */}
-      {readings.length === 0 && !loading && (
-        <div className='admin-card rounded-2xl p-12 text-center'>
-          <BookOpen className='h-20 w-20 text-slate-600 mx-auto mb-4' />
-          <h3 className='text-xl font-semibold text-white mb-2'>
-            Okuma Bulunamadı
-          </h3>
-          <p className='text-slate-400 mb-6'>
-            {searchTerm || typeFilter !== 'all' || statusFilter !== 'all'
-              ? 'Arama kriterlerinize uygun okuma bulunamadı.'
-              : 'Henüz okuma bulunmuyor.'}
-          </p>
-          {(searchTerm || typeFilter !== 'all' || statusFilter !== 'all') && (
-            <button
-              onClick={() => {
-                setSearchTerm('');
-                setTypeFilter('all');
-                setStatusFilter('all');
-                setCurrentPage(1);
-              }}
-              className='admin-btn-primary px-6 py-2 rounded-lg'
-            >
-              Filtreleri Temizle
-            </button>
-          )}
-        </div>
-      )}
-
-      {/* Pagination */}
-      {totalPages > 1 && (
-        <div className='admin-card rounded-xl p-4'>
-          <div className='flex flex-col sm:flex-row items-center justify-between space-y-3 sm:space-y-0'>
-            <div className='text-sm text-slate-400 text-center sm:text-left'>
-              {totalCount} okumadan {(currentPage - 1) * readingsPerPage + 1}-
-              {Math.min(currentPage * readingsPerPage, totalCount)} arası
-              gösteriliyor
-            </div>
-
-            <div className='flex items-center space-x-2'>
-              <button
-                onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
-                disabled={currentPage === 1}
-                className='p-2 admin-glass rounded-lg admin-hover-scale disabled:opacity-50 disabled:cursor-not-allowed'
-              >
-                <ChevronLeft className='h-4 w-4' />
-              </button>
-
-              <span className='px-4 py-2 admin-gradient-accent rounded-lg text-white font-medium'>
-                {currentPage} / {totalPages}
-              </span>
-
-              <button
-                onClick={() =>
-                  setCurrentPage(Math.min(totalPages, currentPage + 1))
-                }
-                disabled={currentPage === totalPages}
-                className='p-2 admin-glass rounded-lg admin-hover-scale disabled:opacity-50 disabled:cursor-not-allowed'
-              >
-                <ChevronRight className='h-4 w-4' />
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+        );
+      })()}
 
       {/* Reading Detail Modal */}
-      {showReadingModal && selectedReading && (
+      {showReadingModal && selectedReading && selectedReading.reading_type && (
         <div className='fixed inset-0 bg-black/80 backdrop-blur-xl flex items-center justify-center z-50 p-2 md:p-4'>
           <div className='relative w-full max-w-4xl xl:max-w-5xl max-h-[95vh] overflow-hidden'>
             {/* Modal Container */}
@@ -2373,9 +3231,17 @@ function CreateReadingModal({
               customerName:
                 `${formData.customerFirstName} ${formData.customerLastName}`.trim() ||
                 'Müşteri',
-              spreadName:
-                tarotSpreads.find(s => s.id === formData.spreadKey)?.name ||
-                formData.spreadKey,
+              spreadName: (() => {
+                const spread = tarotSpreads.find(
+                  s => s.id === formData.spreadKey
+                );
+                if (spread?.name) {
+                  // Translation key ise çevir, değilse direkt kullan
+                  const translated = t(spread.name);
+                  return translated !== spread.name ? translated : spread.name;
+                }
+                return formData.spreadKey;
+              })(),
             }),
           });
 

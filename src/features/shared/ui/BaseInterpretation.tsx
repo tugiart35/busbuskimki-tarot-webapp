@@ -36,6 +36,7 @@ Anlam Seçimi Öncelik Sırası:
 'use client';
 
 import { forwardRef } from 'react';
+import Image from 'next/image';
 import type { TarotCard } from '@/types/tarot';
 import type { Theme, PositionInfo, CardMeaningData } from '@/types/ui';
 // useAuth kaldırıldı - login sistemi kaldırıldı
@@ -441,14 +442,15 @@ const BaseInterpretation = forwardRef<HTMLDivElement, BaseInterpretationProps>(
               >
                 {/* Kart Görseli */}
                 <div className='flex-shrink-0'>
-                  <img
+                  <Image
                     src={card.image || '/cards/CardBack.webp'}
                     alt={card.nameTr}
+                    width={88}
+                    height={160}
                     className={`
                       w-22 h-40 object-cover rounded-lg border-2 ${colors.cardBorder} shadow 
                       ${isReversed[idx] ? 'rotate-180' : ''}
                     `}
-                    loading='lazy'
                   />
                 </div>
 

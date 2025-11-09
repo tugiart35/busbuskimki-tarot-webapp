@@ -1109,10 +1109,11 @@ export const searchPosition4MeaningsByKeyword = (
 };
 
 // Varsayılan export
-export default {
+const relationshipAnalysisPosition4Export = {
   position4Meanings,
   getRelationshipAnalysisPosition4Meaning,
   getRelationshipAnalysisPosition4MeaningByCardName,
   getAllPosition4Meanings: getAllPosition4Meanings,
   getRelationshipAnalysisPosition4MeaningsByGroup: getPosition4MeaningsByGroup,
 };
+export default relationshipAnalysisPosition4Export;
