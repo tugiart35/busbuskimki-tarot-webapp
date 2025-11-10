@@ -78,3 +78,49 @@ export function buildReadyEmailHtml(
     </div>
   `;
 }
+
+export interface AklindakiKisiInviteTemplateOptions {
+  customerEmail: string;
+  inviteLink: string;
+  expiresAt?: string | null;
+}
+
+export function buildAklindakiKisiInviteHtml(
+  options: AklindakiKisiInviteTemplateOptions
+): string {
+  const { customerEmail, inviteLink, expiresAt } = options;
+  const expiryText = expiresAt
+    ? `Bu bağlantı ${new Date(expiresAt).toLocaleString('tr-TR')} tarihine kadar geçerlidir.`
+    : 'Bu bağlantı süresiz geçerlidir.';
+
+  return `
+    <div style="font-family: 'Segoe UI', Arial, sans-serif; background: #F7F6F3; color: #1F2A44; padding: 32px">
+      <div style="max-width: 520px; margin: 0 auto; background: #FDFBF8; border-radius: 16px; border: 1px solid #D9CBA1; overflow: hidden">
+        <div style="padding: 28px 28px 16px 28px; background: linear-gradient(120deg, rgba(201, 178, 109, 0.3), rgba(236, 72, 153, 0.25))">
+          <h1 style="font-size: 24px; color: #C9B26D; margin: 0">💫 Niyet Et, Bir Kart Seç</h1>
+          <p style="margin: 12px 0 0 0; font-size: 15px; line-height: 1.6; color: #1F2A44">
+            Merhaba,<br />
+            Kalbindeki kişiyle yeniden bağ kurmak için size özel bir kart çekme linki hazırladık.
+          </p>
+        </div>
+        <div style="padding: 28px;">
+          <p style="font-size: 15px; line-height: 1.6; margin-top: 0; color: #4B5563">
+            Günde 3 kart çekme hakkınız var. Her kart, sezgisel bir bağ kurar ve size özel mesajlar taşır.
+          </p>
+          <a href='${inviteLink}' style="display: block; text-align: center; margin: 24px auto; background: #C9B26D; color: #1F2A44; padding: 14px 20px; border-radius: 999px; text-decoration: none; font-weight: 600; transition: background 0.3s;">Kartları Çekmeye Başla</a>
+          <p style="font-size: 13px; line-height: 1.6; color: #6B7280;">${expiryText}</p>
+          <p style="font-size: 13px; line-height: 1.6; color: #6B7280;">
+            Bağlantı çalışmazsa, bu URL'yi tarayıcınıza yapıştırabilirsiniz: <br />
+            <span style="word-break: break-all; color: #1F2A44;">${inviteLink}</span>
+          </p>
+          <p style="font-size: 13px; line-height: 1.6; color: #6B7280; margin-top: 20px; font-style: italic;">
+            Özlem duyduğunda, bir rüya seni ona götürdüğünde veya kalbin konuşmak istediğinde... bu deste seninle. 🌙
+          </p>
+        </div>
+        <div style="padding: 20px 28px; border-top: 1px solid #D9CBA1; background: rgba(247, 246, 243, 0.7); font-size: 12px; color: #6B7280;">
+          Busbuskimki Tarot ekibi
+        </div>
+      </div>
+    </div>
+  `;
+}

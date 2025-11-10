@@ -513,6 +513,102 @@ export interface Database {
           updated_at: string;
         };
       };
+      customer_links: {
+        Row: {
+          id: string;
+          customer_email: string;
+          token: string;
+          token_hash: string;
+          generated_date: string;
+          expiry_date?: string;
+          status: 'active' | 'expired' | 'used';
+          created_by_admin_id?: string;
+          allowed_ips?: string[];
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          customer_email: string;
+          token: string;
+          token_hash: string;
+          generated_date?: string;
+          expiry_date?: string;
+          status?: 'active' | 'expired' | 'used';
+          created_by_admin_id?: string;
+          allowed_ips?: string[];
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          customer_email?: string;
+          token?: string;
+          token_hash?: string;
+          generated_date?: string;
+          expiry_date?: string;
+          status?: 'active' | 'expired' | 'used';
+          created_by_admin_id?: string;
+          allowed_ips?: string[];
+          created_at?: string;
+          updated_at?: string;
+        };
+      };
+      card_sessions: {
+        Row: {
+          id: string;
+          customer_email: string;
+          last_draw_date?: string;
+          cards_drawn_today_count: number;
+          last_24_drawn_cards: number[];
+          period_start_date?: string;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          customer_email: string;
+          last_draw_date?: string;
+          cards_drawn_today_count?: number;
+          last_24_drawn_cards?: number[];
+          period_start_date?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          customer_email?: string;
+          last_draw_date?: string;
+          cards_drawn_today_count?: number;
+          last_24_drawn_cards?: number[];
+          period_start_date?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+      };
+      all_cards: {
+        Row: {
+          id: number;
+          card_number: number;
+          card_name: string;
+          image_path: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: number;
+          card_number: number;
+          card_name: string;
+          image_path: string;
+          created_at?: string;
+        };
+        Update: {
+          id?: number;
+          card_number?: number;
+          card_name?: string;
+          image_path?: string;
+          created_at?: string;
+        };
+      };
     };
   };
 }

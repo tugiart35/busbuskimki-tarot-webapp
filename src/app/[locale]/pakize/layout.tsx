@@ -25,6 +25,7 @@ import {
   Crown,
   Sparkles,
   TrendingUp,
+  Heart,
 } from 'lucide-react';
 
 function AdminLayoutContent({ children }: { children: React.ReactNode }) {
@@ -79,6 +80,13 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
       icon: TrendingUp,
       gradient: 'from-cyan-500 to-blue-600',
       description: 'Detaylı analitik raporlar',
+    },
+    {
+      name: 'Aklındaki Kişi',
+      href: `/${locale}/pakize/aklindaki-kisi`,
+      icon: Heart,
+      gradient: 'from-pink-500 to-rose-600',
+      description: 'Müşteri link oluşturma ve yönetimi',
     },
     {
       name: 'Ayarlar',
