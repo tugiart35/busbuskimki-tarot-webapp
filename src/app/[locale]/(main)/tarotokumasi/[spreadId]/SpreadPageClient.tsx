@@ -201,9 +201,14 @@ function SpreadPageContent({
               {/* Çekilen kartları göster */}
               {cards.length > 0 ? (
                 <LastReadingSummary
-                  cards={cards}
-                  interpretation={completedReading.interpretation || ''}
-                  spreadId={spreadId}
+                  lastReading={{
+                    cards: cards,
+                    interpretation: completedReading.interpretation || '',
+                    spreadId: spreadId,
+                    reading_type: completedReading.reading_type,
+                    cost_credits: completedReading.cost_credits,
+                  }}
+                  currentSpreadId={spreadId}
                 />
               ) : (
                 <div className='admin-glass rounded-2xl p-6 border border-slate-700/50 text-center'>

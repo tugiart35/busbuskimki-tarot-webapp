@@ -7,7 +7,9 @@ export function shuffleCards<T>(cards: T[]): T[] {
   const shuffled = [...cards];
   for (let i = shuffled.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    const temp = shuffled[i]!;
+    shuffled[i] = shuffled[j]!;
+    shuffled[j] = temp;
   }
   return shuffled;
 }
@@ -52,9 +54,7 @@ export function filterDrawnCards(
   allCards: Array<{ card_number: number }>,
   last24DrawnCards: number[]
 ): Array<{ card_number: number }> {
-  return allCards.filter(
-    (card) => !last24DrawnCards.includes(card.card_number)
-  );
+  return allCards.filter(card => !last24DrawnCards.includes(card.card_number));
 }
 
 /**
@@ -81,5 +81,3 @@ export function getCardImagePath(cardNumber: number): string {
 export function getBackImagePath(): string {
   return '/cards/aklindakikisi/Back.webp';
 }
-
-

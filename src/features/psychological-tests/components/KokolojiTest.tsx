@@ -56,7 +56,7 @@ export default function KokolojiTest() {
       setCurrentQuestion(currentQuestion + 1);
     } else {
       // Test tamamlandı
-      const result = getTestResult(selectedTest!.id, newAnswers, t);
+      const result = getTestResult(selectedTest!.id, newAnswers);
       const interpretation = generateInterpretation(
         selectedTest!,
         newAnswers,
@@ -1187,7 +1187,7 @@ export default function KokolojiTest() {
           onClick={resetTest}
           className='w-full bg-white/10 text-white py-3 px-6 rounded-xl font-medium border border-white/20 transition-all hover:bg-white/20'
         >
-          {t('psychTests.ui.buttons.cancelTest')}
+          {t('psychTests.common.cancelTest')}
         </button>
       </div>
     );

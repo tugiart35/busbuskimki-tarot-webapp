@@ -11,6 +11,7 @@ export interface CustomerLink {
   customer_email: string;
   token: string;
   token_hash: string;
+  token_preview?: string; // Token'ın önizlemesi (arama için)
   generated_date: string;
   expiry_date?: string;
   status: 'active' | 'expired' | 'used';

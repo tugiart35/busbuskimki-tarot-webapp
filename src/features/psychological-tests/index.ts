@@ -21,6 +21,5 @@ export {
   getStressProfiles,
   nameTarotCards,
   calculateNameTarotResult,
-  getNameTarotCards,
 } from './lib/kokolojiData';
 export type { PsychologicalTest, TestQuestion } from './lib/kokolojiData';

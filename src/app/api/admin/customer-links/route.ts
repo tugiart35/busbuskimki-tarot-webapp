@@ -250,6 +250,7 @@ export async function POST(request: NextRequest) {
         customer_email: customerEmail,
         token,
         token_hash: tokenHash,
+        token_preview: tokenPreview,
         expiry_date: expiresAt,
         status: 'active',
         created_by_admin_id: adminUserId,
@@ -293,7 +294,7 @@ export async function POST(request: NextRequest) {
       success: true,
       token,
       link,
-      expiresAt: expiresAt || undefined,
+      ...(expiresAt && { expiresAt }),
       linkId: customerLink.id,
     });
   } catch (error) {

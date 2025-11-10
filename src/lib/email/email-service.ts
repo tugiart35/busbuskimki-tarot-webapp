@@ -90,12 +90,14 @@ class EmailService {
       this.transporter = nodemailer.createTransport(config);
       this.isInitialized = true;
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('Email transporter initialization failed:', error);
     }
   }
 
   async sendEmail(emailData: EmailData): Promise<boolean> {
     if (!this.transporter) {
+      // eslint-disable-next-line no-console
       console.error('Email transporter not initialized');
       return false;
     }
@@ -116,8 +118,10 @@ class EmailService {
     } catch (error) {
       // Always log errors (but sanitize in production)
       if (process.env.NODE_ENV === 'development') {
+        // eslint-disable-next-line no-console
         console.error('Email sending failed:', error);
       } else {
+        // eslint-disable-next-line no-console
         console.error('Email sending failed - check logs for details');
       }
       return false;
@@ -162,31 +166,6 @@ class EmailService {
         minute: '2-digit',
       }
     );
-
-    // Okuma türünü Türkçe'ye çevir (gelecekte kullanılacak)
-    // eslint-disable-next-line no-unused-vars
-    const _getReadingTypeText = (_type: string) => {
-      switch (_type) {
-        case 'LOVE_SPREAD_DETAILED':
-          return 'Aşk Açılımı - Detaylı';
-        case 'LOVE_SPREAD_WRITTEN':
-          return 'Aşk Açılımı - Yazılı';
-        case 'GENERAL_SPREAD':
-          return 'Genel Okuma';
-        case 'THREE_CARD_SPREAD':
-          return 'Üç Kart Açılımı';
-        case 'CAREER_SPREAD':
-          return 'Kariyer Okuması';
-        case 'NUMEROLOGY_READING':
-          return 'Numeroloji';
-        case 'PROBLEM_SOLVING_SPREAD':
-          return 'Problem Çözme';
-        case 'MONEY_SPREAD':
-          return 'Para ve Mali Durum';
-        default:
-          return type.replace(/_/g, ' ');
-      }
-    };
 
     // Okuma formatını belirle
     const getReadingFormat = () => {

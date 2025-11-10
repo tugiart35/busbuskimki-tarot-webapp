@@ -331,7 +331,7 @@ export async function POST(request: NextRequest) {
     }
 
     const remainingCards = isTestToken 
-      ? null // Test token için sınırsız, null döndür
+      ? undefined // Test token için sınırsız, undefined döndür
       : Math.max(0, dailyLimit - (cardSession.cards_drawn_today_count + 1));
 
     // Period start date ve reset countdown hesapla
@@ -349,7 +349,6 @@ export async function POST(request: NextRequest) {
         resetCountdown = remainingTime;
         
         // 30 günlük aktif dönem kontrolü
-        const daysSinceStart = (now.getTime() - periodStartDateObj.getTime()) / (1000 * 60 * 60 * 24);
         const periodEndDate = new Date(periodStartDateObj.getTime() + 30 * 24 * 60 * 60 * 1000); // +30 gün
         
         if (now < periodEndDate) {
@@ -375,11 +374,11 @@ export async function POST(request: NextRequest) {
         card_name: selectedCard.card_name,
         image_path: selectedCard.image_path,
       },
-      remainingCards,
-      periodStartDate: finalPeriodStartDate || undefined,
-      resetCountdown,
-      periodDaysRemaining,
-      resetDaysRemaining,
+      ...(remainingCards !== undefined && { remainingCards }),
+      ...(finalPeriodStartDate && { periodStartDate: finalPeriodStartDate }),
+      ...(resetCountdown !== undefined && { resetCountdown }),
+      ...(periodDaysRemaining !== undefined && { periodDaysRemaining }),
+      ...(resetDaysRemaining !== undefined && { resetDaysRemaining }),
     });
   } catch (error) {
     logger.error('Kart çekme hatası', error, {

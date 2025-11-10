@@ -88,7 +88,7 @@ export interface AklindakiKisiInviteTemplateOptions {
 export function buildAklindakiKisiInviteHtml(
   options: AklindakiKisiInviteTemplateOptions
 ): string {
-  const { customerEmail, inviteLink, expiresAt } = options;
+  const { inviteLink, expiresAt } = options;
   const expiryText = expiresAt
     ? `Bu bağlantı ${new Date(expiresAt).toLocaleString('tr-TR')} tarihine kadar geçerlidir.`
     : 'Bu bağlantı süresiz geçerlidir.';

@@ -89,8 +89,10 @@ export async function GET(request: NextRequest) {
 
     logger.info('Token doğrulama başladı', {
       action: 'validate_token',
-      tokenLength: token.length,
-      tokenHash: tokenHash.substring(0, 16) + '...',
+      metadata: {
+        tokenLength: token.length,
+        tokenHash: tokenHash.substring(0, 16) + '...',
+      },
     });
 
     // Customer link bul
@@ -103,8 +105,10 @@ export async function GET(request: NextRequest) {
     if (linkError || !customerLink) {
       logger.warn('Token bulunamadı', {
         action: 'validate_token',
-        error: linkError?.message,
-        tokenHash: tokenHash.substring(0, 16) + '...',
+        metadata: {
+          error: linkError?.message,
+          tokenHash: tokenHash.substring(0, 16) + '...',
+        },
       });
       return NextResponse.json<ValidateTokenResponse>(
         { valid: false, error: 'Geçersiz veya bulunamayan token' },
@@ -114,8 +118,10 @@ export async function GET(request: NextRequest) {
 
     logger.info('Token bulundu', {
       action: 'validate_token',
-      customerEmail: customerLink.customer_email,
-      status: customerLink.status,
+      metadata: {
+        customerEmail: customerLink.customer_email,
+        status: customerLink.status,
+      },
     });
 
     // Status kontrolü
@@ -162,10 +168,12 @@ export async function GET(request: NextRequest) {
 
       logger.info('E-posta doğrulama kontrolü', {
         action: 'validate_email',
-        rawEmail: email,
-        inputEmail: normalizedInputEmail,
-        linkEmail: normalizedLinkEmail,
-        match: normalizedInputEmail === normalizedLinkEmail,
+        metadata: {
+          rawEmail: email,
+          inputEmail: normalizedInputEmail,
+          linkEmail: normalizedLinkEmail,
+          match: normalizedInputEmail === normalizedLinkEmail,
+        },
       });
 
       if (normalizedInputEmail !== normalizedLinkEmail) {
@@ -185,10 +193,12 @@ export async function GET(request: NextRequest) {
 
       logger.info('IP kontrolü başladı', {
         action: 'check_ip',
-        linkId: customerLink.id,
-        clientIP,
-        currentIPs: allowedIPs,
-        ipCount: allowedIPs.length,
+        metadata: {
+          linkId: customerLink.id,
+          clientIP,
+          currentIPs: allowedIPs,
+          ipCount: allowedIPs.length,
+        },
       });
 
       // Eğer IP zaten listede değilse
@@ -197,9 +207,11 @@ export async function GET(request: NextRequest) {
         if (allowedIPs.length >= 3) {
           logger.warn('IP limiti aşıldı', {
             action: 'ip_limit_reached',
-            linkId: customerLink.id,
-            clientIP,
-            currentIPs: allowedIPs,
+            metadata: {
+              linkId: customerLink.id,
+              clientIP,
+              currentIPs: allowedIPs,
+            },
           });
 
           return NextResponse.json<ValidateTokenResponse>(
@@ -226,23 +238,29 @@ export async function GET(request: NextRequest) {
         if (updateError) {
           logger.error('IP güncelleme hatası', updateError, {
             action: 'update_allowed_ips',
-            linkId: customerLink.id,
-            clientIP,
+            metadata: {
+              linkId: customerLink.id,
+              clientIP,
+            },
           });
           // Hata olsa bile devam et (IP kaydedilemese bile erişim izni ver)
         } else {
           logger.info('Yeni IP eklendi', {
             action: 'add_ip',
-            linkId: customerLink.id,
-            newIP: clientIP,
-            totalIPs: updatedIPs.length,
+            metadata: {
+              linkId: customerLink.id,
+              newIP: clientIP,
+              totalIPs: updatedIPs.length,
+            },
           });
         }
       } else {
         logger.info('IP zaten kayıtlı', {
           action: 'ip_already_exists',
-          linkId: customerLink.id,
-          clientIP,
+          metadata: {
+            linkId: customerLink.id,
+            clientIP,
+          },
         });
       }
 
@@ -255,7 +273,7 @@ export async function GET(request: NextRequest) {
         .eq('customer_email', customerEmail)
         .single();
 
-      let remainingCards = 3; // Varsayılan değer
+      let remainingCards: number | undefined = 3; // Varsayılan değer
       let periodStartDate: string | undefined = undefined;
       let resetCountdown: number | undefined = undefined;
       let periodDaysRemaining: number | undefined = undefined;
@@ -366,7 +384,7 @@ export async function GET(request: NextRequest) {
         const dailyLimit = isTestToken ? Infinity : 3;
 
         remainingCards = isTestToken 
-          ? null // Test token için sınırsız, null döndür
+          ? undefined // Test token için sınırsız, undefined döndür
           : Math.max(0, dailyLimit - cardsDrawnTodayCount);
 
         // Açılan kartları al (24 saat içinde çekilen kartlar - unique)
@@ -378,12 +396,12 @@ export async function GET(request: NextRequest) {
       return NextResponse.json<ValidateTokenResponse>({
         valid: true,
         customerEmail: customerLink.customer_email,
-        remainingCards,
+        ...(remainingCards !== undefined && { remainingCards }),
         openedCards,
-        periodStartDate,
-        resetCountdown,
-        periodDaysRemaining,
-        resetDaysRemaining,
+        ...(periodStartDate && { periodStartDate }),
+        ...(resetCountdown !== undefined && { resetCountdown }),
+        ...(periodDaysRemaining !== undefined && { periodDaysRemaining }),
+        ...(resetDaysRemaining !== undefined && { resetDaysRemaining }),
       });
     }
 

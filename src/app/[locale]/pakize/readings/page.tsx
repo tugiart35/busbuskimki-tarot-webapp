@@ -638,11 +638,11 @@ export default function ReadingsPage() {
       }
 
       // Spread bilgilerini al ve çevir
-      const spreadKeys = [
-        ...new Set(
-          (sessionsData || []).map((s: any) => s.spread_key).filter(Boolean)
-        ),
-      ];
+      const spreadKeys: string[] = Array.from(
+        new Set(
+          (sessionsData || []).map((s: any) => s.spread_key).filter(Boolean) as string[]
+        )
+      );
       const spreadMap = new Map();
       spreadKeys.forEach((key: string) => {
         const spread = tarotSpreads.find(s => s.id === key);

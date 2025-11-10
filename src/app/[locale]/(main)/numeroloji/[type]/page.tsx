@@ -200,8 +200,7 @@ export default function NumerologyResultPage({
     );
   }
 
-  // eslint-disable-next-line no-unused-vars
-  const { type: readingType, locale } = resolvedParams;
+  const { locale } = resolvedParams;
 
   if (loading) {
     return (

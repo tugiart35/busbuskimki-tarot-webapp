@@ -4,7 +4,6 @@ import { useState, useEffect, useCallback } from 'react';
 import {
   Copy,
   Mail,
-  Send,
   Link as LinkIcon,
   Heart,
   List,
@@ -13,7 +12,6 @@ import {
   Clock,
   CheckCircle,
   XCircle,
-  AlertCircle,
   RefreshCw,
   ExternalLink,
 } from 'lucide-react';
@@ -28,7 +26,7 @@ import {
 } from '@/types/aklindaki-kisi.types';
 
 export default function AklindakiKisiAdminPage() {
-  const { toast, showToast } = useToast();
+  const { toast, showToast, hideToast } = useToast();
   const [activeTab, setActiveTab] = useState<'create' | 'list'>('create');
   
   // Link oluşturma state
@@ -630,7 +628,7 @@ export default function AklindakiKisiAdminPage() {
       </div>
 
       {/* Toast Notification */}
-      {toast && <Toast {...toast} />}
+      {toast && <Toast {...toast} onClose={hideToast} />}
     </div>
   );
 }
