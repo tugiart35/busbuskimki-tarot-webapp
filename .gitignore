@@ -137,5 +137,36 @@ messages/adsense.md
 adsensecodex.md
 deli-kart-analiz-raporu.md
 
+# Messages - Gereksiz dosyalar
+messages/*_reordered.json
+messages/*.backup*
+messages/*.txt
+messages/reorder_analysis.txt
+messages/backup/
+messages/numerology_*.json
+
+# Backup dosyaları (tüm proje genelinde)
+**/*.backup
+**/*.bak
+
+# Log dosyaları (ek)
+build-*.log
+build-*.txt
+server.log
+
+# Public - Gereksiz görseller
+public/new-lover-backup.png
+public/new-lover-original.png
+public/new-lover-optimized.png
+public/new-lover-small.png
+
+# Geliştirme dosyaları
+reorder_json.py
+Aklindakikisikartlari/
+OKUMA_URET_ANALIZ_RAPORU.md
+PERFORMANCE_OPTIMIZATION_REPORT.md
+yapayzekaseo.md
+src/AccessibilityReport.md
+
 # Development SQL migrations (Supabase'de yönetiliyor)
 migrations/
