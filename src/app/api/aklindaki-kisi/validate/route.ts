@@ -2,8 +2,62 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import crypto from 'crypto';
 import { logger } from '@/lib/logger';
-import { ValidateTokenResponse } from '@/types/aklindaki-kisi.types';
+import { ValidateTokenResponse, DrawnCard } from '@/types/aklindaki-kisi.types';
 import { getClientIP, cleanIPAddress } from '@/lib/utils/ip-utils';
+
+// 24 saat geçen kartları filtrele
+function filterValidDrawnCards(drawnCards: DrawnCard[] | null | undefined): DrawnCard[] {
+  if (!drawnCards || !Array.isArray(drawnCards)) {
+    return [];
+  }
+
+  const now = new Date();
+  const twentyFourHoursAgo = now.getTime() - 24 * 60 * 60 * 1000;
+
+  return drawnCards.filter((drawnCard) => {
+    // Eski format (number[]) desteği - migration sırasında geçiş için
+    if (typeof drawnCard === 'number') {
+      return false; // Eski formatı kabul etme
+    }
+
+    // Yeni format (DrawnCard) kontrolü
+    if (drawnCard && typeof drawnCard === 'object' && 'cardNumber' in drawnCard && 'drawnAt' in drawnCard) {
+      const drawnAt = new Date(drawnCard.drawnAt);
+      return drawnAt.getTime() > twentyFourHoursAgo;
+    }
+
+    return false;
+  });
+}
+
+// last_24_drawn_cards'ı DrawnCard[] formatına çevir (JSONB'den geliyor)
+function parseDrawnCards(data: any): DrawnCard[] {
+  if (!data) {
+    return [];
+  }
+
+  // Eğer zaten array ise
+  if (Array.isArray(data)) {
+    // Eski format (number[]) kontrolü
+    if (data.length > 0 && typeof data[0] === 'number') {
+      return []; // Eski formatı boş array'e çevir
+    }
+
+    // Yeni format kontrolü
+    return data.filter((item): item is DrawnCard => {
+      return (
+        item &&
+        typeof item === 'object' &&
+        'cardNumber' in item &&
+        'drawnAt' in item &&
+        typeof item.cardNumber === 'number' &&
+        typeof item.drawnAt === 'string'
+      );
+    });
+  }
+
+  return [];
+}
 
 export async function GET(request: NextRequest) {
   try {
@@ -210,8 +264,27 @@ export async function GET(request: NextRequest) {
       
       if (cardSession) {
         const now = new Date();
+
+        // last_24_drawn_cards'ı parse et ve 24 saat geçen kartları filtrele
+        const parsedDrawnCards = parseDrawnCards(cardSession.last_24_drawn_cards);
+        const validDrawnCards = filterValidDrawnCards(parsedDrawnCards);
+
+        // Eğer 24 saat geçen kartlar varsa, database'i güncelle
+        if (parsedDrawnCards.length !== validDrawnCards.length) {
+          await supabaseAdmin
+            .from('card_sessions')
+            .update({
+              last_24_drawn_cards: validDrawnCards,
+              updated_at: now.toISOString(),
+            })
+            .eq('id', cardSession.id);
+
+          // Session'ı güncelle
+          cardSession.last_24_drawn_cards = validDrawnCards as any;
+        }
         
-        // Period kontrolü - 31 gün geçtiyse kartları sıfırla
+        // Period kontrolü - 31 gün geçtiyse sadece period_start_date ve cards_drawn_today_count'u sıfırla
+        // Açılan kartlar 24 saat kontrolü ile yönetiliyor, period kontrolüne gerek yok
         const sessionPeriodStartDate = cardSession.period_start_date
           ? new Date(cardSession.period_start_date)
           : null;
@@ -221,11 +294,10 @@ export async function GET(request: NextRequest) {
             (now.getTime() - sessionPeriodStartDate.getTime()) / (1000 * 60 * 60 * 24);
 
           if (daysSinceStart >= 31) {
-            // 31 gün geçti, kartları sıfırla
+            // 31 gün geçti, sadece period ve günlük sayacı sıfırla (açılan kartlar 24 saat kontrolü ile yönetiliyor)
             await supabaseAdmin
               .from('card_sessions')
               .update({
-                last_24_drawn_cards: [],
                 period_start_date: null,
                 cards_drawn_today_count: 0,
                 updated_at: now.toISOString(),
@@ -233,7 +305,6 @@ export async function GET(request: NextRequest) {
               .eq('id', cardSession.id);
 
             // Session'ı güncelle
-            cardSession.last_24_drawn_cards = [];
             cardSession.period_start_date = null;
             cardSession.cards_drawn_today_count = 0;
           } else {
@@ -283,20 +354,25 @@ export async function GET(request: NextRequest) {
           }
         }
 
-        // Test token kontrolü - özel test linki için sınırsız
-        const testToken = '6cee9bde3e92dacffebceb951b63637d6a0db2d63298e6209bfef2d60deedf1d';
-        const testTokenHash = crypto.createHash('sha256').update(testToken).digest('hex');
-        const isTestToken = tokenHash === testTokenHash;
+        // Test token kontrolü - özel test linkleri için sınırsız
+        const testTokens = [
+          '6cee9bde3e92dacffebceb951b63637d6a0db2d63298e6209bfef2d60deedf1d',
+          'e6e91e66450805433f08e385b89c45ea4bd201c12ab6a4314b54cfd50c8ebca7',
+        ];
+        const isTestToken = testTokens.some((testToken) => {
+          const testTokenHash = crypto.createHash('sha256').update(testToken).digest('hex');
+          return tokenHash === testTokenHash;
+        });
         const dailyLimit = isTestToken ? Infinity : 3;
 
         remainingCards = isTestToken 
           ? null // Test token için sınırsız, null döndür
           : Math.max(0, dailyLimit - cardsDrawnTodayCount);
 
-        // Açılan kartları al (unique - last_24_drawn_cards array'inden)
-        openedCards = cardSession.last_24_drawn_cards 
-          ? [...new Set(cardSession.last_24_drawn_cards)] // Unique kartlar
-          : [];
+        // Açılan kartları al (24 saat içinde çekilen kartlar - unique)
+        openedCards = validDrawnCards
+          .map((drawnCard) => drawnCard.cardNumber)
+          .filter((cardNumber, index, self) => self.indexOf(cardNumber) === index); // Unique
       }
 
       return NextResponse.json<ValidateTokenResponse>({

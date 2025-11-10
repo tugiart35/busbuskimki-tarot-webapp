@@ -1,5 +1,11 @@
 // Aklındaki Kişi Kart Çekme Sistemi - Type Definitions
 
+// Çekilen kart bilgisi - kart numarası ve çekilme zamanı
+export interface DrawnCard {
+  cardNumber: number;
+  drawnAt: string; // ISO timestamp
+}
+
 export interface CustomerLink {
   id: string;
   customer_email: string;
@@ -19,7 +25,7 @@ export interface CardSession {
   customer_email: string;
   last_draw_date?: string;
   cards_drawn_today_count: number;
-  last_24_drawn_cards: number[];
+  last_24_drawn_cards: DrawnCard[]; // Kart numarası ve çekilme zamanı - 24 saat geçen kartlar otomatik kapanır
   period_start_date?: string; // İlk kart çekildiğinde kaydedilen tarih - 30 gün sonra 1 günlük geri sayım başlar
   created_at: string;
   updated_at: string;

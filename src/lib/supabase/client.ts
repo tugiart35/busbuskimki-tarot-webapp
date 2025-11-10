@@ -560,7 +560,7 @@ export interface Database {
           customer_email: string;
           last_draw_date?: string;
           cards_drawn_today_count: number;
-          last_24_drawn_cards: number[];
+          last_24_drawn_cards: any; // JSONB - DrawnCard[] formatında
           period_start_date?: string;
           created_at: string;
           updated_at: string;
@@ -570,7 +570,7 @@ export interface Database {
           customer_email: string;
           last_draw_date?: string;
           cards_drawn_today_count?: number;
-          last_24_drawn_cards?: number[];
+          last_24_drawn_cards?: any; // JSONB - DrawnCard[] formatında
           period_start_date?: string;
           created_at?: string;
           updated_at?: string;
@@ -580,7 +580,7 @@ export interface Database {
           customer_email?: string;
           last_draw_date?: string;
           cards_drawn_today_count?: number;
-          last_24_drawn_cards?: number[];
+          last_24_drawn_cards?: any; // JSONB - DrawnCard[] formatında
           period_start_date?: string;
           created_at?: string;
           updated_at?: string;
