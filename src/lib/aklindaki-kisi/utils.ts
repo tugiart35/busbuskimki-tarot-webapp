@@ -82,3 +82,4 @@ export function getBackImagePath(): string {
   return '/cards/aklindakikisi/Back.webp';
 }
 
+

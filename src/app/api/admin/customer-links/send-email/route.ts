@@ -101,9 +101,8 @@ export async function POST(request: NextRequest) {
     // Link oluştur
     const baseUrl =
       process.env.NEXT_PUBLIC_READING_LINK_BASE_URL ||
-      (process.env.NODE_ENV === 'development'
-        ? 'http://localhost:3001'
-        : process.env.NEXT_PUBLIC_SITE_URL || 'https://tarotnumeroloji.com');
+      process.env.NEXT_PUBLIC_SITE_URL ||
+      'https://www.busbuskimki.com';
     const locale = 'tr';
     const link = `${baseUrl}/${locale}/aklindaki-kisi?token=${customerLink.token}`;
 

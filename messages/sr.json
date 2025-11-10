@@ -46458,7 +46458,12 @@
       "yourResult": "Vaš Rezultat",
       "detailedAnalysis": "Detaljna analiza vašeg testa",
       "questions": "pitanja",
-      "question": "Pitanje"
+      "question": "Pitanje",
+      "questionProgress": "Pitanje",
+      "copySuccess": "Rezultat kopiran! Možete ga podeliti sa prijateljima 🎉",
+      "shareFriendEnergy": "Otkrijte i vi svoju energiju u grupi prijatelja! ",
+      "shareGeneric": "Dobio sam svoj rezultat! Probaj i ti: ",
+      "unknown": "Nepoznato"
     },
     "tests": {
       "stress": {
@@ -47174,6 +47179,915 @@
             "element": "Zemlja",
             "astrology": "Saturn"
           }
+        }
+      },
+      "results": {
+        "mbti": {
+          "types": {
+            "INTJ": {
+              "title": "Arhitekta",
+              "description": "Strateški mislilac, planer i nezavisan",
+              "traits": "Analitičan, kreativan, odlučan, nezavisan",
+              "career": "Naučnik, inženjer, strateg, pisac"
+            },
+            "INTP": {
+              "title": "Logičar",
+              "description": "Kreativni inovator, teorijski mislilac",
+              "traits": "Logičan, kreativan, radoznao, objektivan",
+              "career": "Naučnik, matematičar, filozof, programer"
+            },
+            "ENTJ": {
+              "title": "Komandant",
+              "description": "Hrabar, odlučan, prirodni vođa",
+              "traits": "Odlučan, vođa, strateški, direktan",
+              "career": "CEO, advokat, menadžer, preduzetnik"
+            },
+            "ENTP": {
+              "title": "Debatant",
+              "description": "Pametan i radoznao mislilac",
+              "traits": "Kreativan, fleksibilan, inteligentan, hrabar",
+              "career": "Preduzetnik, advokat, prodaja, konsultant"
+            },
+            "INFJ": {
+              "title": "Advokat",
+              "description": "Tih i misteriozan idealista",
+              "traits": "Idealističan, odlučan, kreativan, empatičan",
+              "career": "Pisac, psiholog, nastavnik, savetnik"
+            },
+            "INFP": {
+              "title": "Posrednik",
+              "description": "Pesnička duša, pomoćni idealista",
+              "traits": "Idealističan, kreativan, empatičan, fleksibilan",
+              "career": "Pisac, umetnik, psiholog, nastavnik"
+            },
+            "ENFJ": {
+              "title": "Protagonist",
+              "description": "Harizmatičan i inspirativan vođa",
+              "traits": "Vođa, harizmatičan, empatičan, odlučan",
+              "career": "Nastavnik, savetnik, menadžer, trener"
+            },
+            "ENFP": {
+              "title": "Kampanjer",
+              "description": "Slobodna duša, kreativan društveni",
+              "traits": "Kreativan, energičan, društven, fleksibilan",
+              "career": "Novinar, umetnik, trener, prodaja"
+            },
+            "ISTJ": {
+              "title": "Logističar",
+              "description": "Praktičan i realističan organizovan",
+              "traits": "Praktičan, pouzdan, organizovan, odlučan",
+              "career": "Računovođa, menadžer, policajac, vojnik"
+            },
+            "ISFJ": {
+              "title": "Branilac",
+              "description": "Veoma predan i zaštitnički",
+              "traits": "Pouzdan, predan, praktičan, topao",
+              "career": "Medicinska sestra, nastavnik, socijalni rad, sekretar"
+            },
+            "ESTJ": {
+              "title": "Izvršni direktor",
+              "description": "Izvrsan menadžer, praktičan",
+              "traits": "Vođa, praktičan, odlučan, organizovan",
+              "career": "Menadžer, vojnik, policajac, advokat"
+            },
+            "ESFJ": {
+              "title": "Konzul",
+              "description": "Veoma društven i popularan",
+              "traits": "Društven, pouzdan, predan, praktičan",
+              "career": "Nastavnik, medicinska sestra, prodaja, menadžer"
+            },
+            "ISTP": {
+              "title": "Virtuoz",
+              "description": "Hrabar i praktičan eksperimentator",
+              "traits": "Praktičan, fleksibilan, hrabar, analitičan",
+              "career": "Tehničar, pilot, sportista, policajac"
+            },
+            "ISFP": {
+              "title": "Avanturista",
+              "description": "Fleksibilan i šarmantan umetnik",
+              "traits": "Kreativan, fleksibilan, topao, praktičan",
+              "career": "Umetnik, dizajner, medicinska sestra, nastavnik"
+            },
+            "ESTP": {
+              "title": "Preduzetnik",
+              "description": "Pametan, energičan i veoma perceptivan",
+              "traits": "Energetičan, praktičan, hrabar, fleksibilan",
+              "career": "Preduzetnik, prodaja, sportista, pilot"
+            },
+            "ESFP": {
+              "title": "Zabavljač",
+              "description": "Spontan, energičan i zabavan",
+              "traits": "Energetičan, društven, fleksibilan, praktičan",
+              "career": "Umetnik, zabavljač, prodaja, nastavnik"
+            }
+          }
+        },
+        "loveLanguages": {
+          "words": {
+            "title": "Reči Potvrde",
+            "description": "Ceni izražavanje ljubavi rečima",
+            "traits": "Zahvalnost, pohvala, reči ljubavi su važne",
+            "tips": "Često kažite \"volim te\", dajte pohvalu"
+          },
+          "acts": {
+            "title": "Činovi Usluge",
+            "description": "Pokazuje ljubav kroz pomoć i uslugu",
+            "traits": "Pomoć, podrška je važna",
+            "tips": "Pomozite u svakodnevnim poslovima, preuzmite odgovornost"
+          },
+          "gifts": {
+            "title": "Primanje Poklona",
+            "description": "Izražava ljubav kroz poklone",
+            "traits": "Simbolički pokloni, iznenađenja su važna",
+            "tips": "Dajte male poklone, napravite iznenađenja"
+          },
+          "time": {
+            "title": "Kvalitetno Vreme",
+            "description": "Ceni vreme provedeno zajedno",
+            "traits": "Aktivnosti zajedno, razgovor su važni",
+            "tips": "Isključite telefon, dajte punu pažnju"
+          },
+          "touch": {
+            "title": "Fizički Dodir",
+            "description": "Oseća ljubav kroz fizički kontakt",
+            "traits": "Grljenje, držanje za ruke, ljubljenje je važno",
+            "tips": "Često dodirujte, uspostavite fizički kontakt"
+          }
+        },
+        "stress": {
+          "profiles": {
+            "low": {
+              "level": "Nizak Stres",
+              "emoji": "😌",
+              "scoreRange": "0-15",
+              "description": "Vaš nivo stresa izgleda prilično nizak! Imate uravnoteženu situaciju u životu i dobro upravljate svakodnevnim faktorima stresa.",
+              "message": "Odlično! Vaše upravljanje stresom je snažno. Nastavite da održavate svoju trenutnu ravnotežu.",
+              "meditationTips": [
+                "🧘‍♀️ Preventivna meditacija: Održavajte ravnotežu radeći 10-15 minuta meditacije disanja dnevno",
+                "🌿 Provedite vreme u prirodi: 2-3 šetnje u prirodi nedeljno povećavaju vašu otpornost na stres",
+                "📖 Praksa svesnosti: Ojačajte svoj unutrašnji mir sa 5 minuta dnevne svesnosti",
+                "💤 Higijena sna: Redovni sati spavanja su osnova vaše otpornosti na stres"
+              ],
+              "wellnessAdvice": "Nastavite redovno vežbanje, zdravo ishranu i održavanje društvenih veza da održite svoju trenutnu ravnotežu."
+            },
+            "moderate": {
+              "level": "Umeren Stres",
+              "emoji": "😐",
+              "scoreRange": "16-30",
+              "description": "Doživljavate umeren stres. Ovo je normalno stanje, ali možete postići bolju ravnotežu sa tehnikama upravljanja stresom.",
+              "message": "Vaš nivo stresa je upravljiv. Možete postići bolju ravnotežu sa meditacijom i tehnikama opuštanja.",
+              "meditationTips": [
+                "🧘‍♂️ Dnevna meditacija: Radite 15-20 minuta meditacije fokusirane na disanje svakog dana",
+                "🎵 Muzika za opuštanje: Slušajte muziku za opuštanje 10 minuta tokom dana",
+                "💆‍♀️ Skeniranje tela: Probajte 10 minuta meditacije skeniranja tela uveče",
+                "🌊 4-7-8 Tehnika Disanja: U trenucima stresa, udahnite 4 sekunde, zadržite 7 sekundi, izdahnite 8 sekundi",
+                "🧘‍♀️ Šetnja meditacija: Vežbajte svesnost tokom 20-minutnih šetnji 2-3 puta nedeljno"
+              ],
+              "wellnessAdvice": "Ojačajte redovno vežbanje, režim ishrane i vaš sistem društvene podrške. Radite aktivnosti opuštanja najmanje 2 puta nedeljno."
+            },
+            "high": {
+              "level": "Visok Stres",
+              "emoji": "😰",
+              "scoreRange": "31-45",
+              "description": "Doživljavate visoke nivoe stresa. Ovo može uticati na vaše fizičko i emocionalno zdravlje. Važno je primeniti tehnike upravljanja stresom.",
+              "message": "Vaš nivo stresa je visok. Preporučuje se redovna meditacija i profesionalna podrška.",
+              "meditationTips": [
+                "🧘‍♀️ Duboka meditacija: Radite 20-30 minuta duboke meditacije disanja dva puta dnevno",
+                "🌙 Noćna meditacija: 15 minuta meditacije opuštanja pre spavanja",
+                "💆‍♂️ Progresivno opuštanje mišića: 20 minuta tehnika opuštanja mišića dnevno",
+                "🍃 Prirodna meditacija: 30 minuta svesnosti u prirodi 3 puta nedeljno",
+                "🎭 Meditacija svesnosti: 5-10 minuta trenutne svesnosti u stresnim trenucima",
+                "🧘‍♀️ Vođena meditacija: Slušajte vođenu meditaciju iz aplikacija",
+                "💧 Meditacija tople kupke: Vežba disanja tokom toplih kupki 2-3 puta nedeljno"
+              ],
+              "wellnessAdvice": "Hitna prioritet: Redovan san (7-9 sati), uravnotežena ishrana, 30 minuta dnevnog vežbanja. Razmislite o profesionalnoj podršci."
+            },
+            "veryHigh": {
+              "level": "Veoma Visok Stres",
+              "emoji": "😱",
+              "scoreRange": "46-60",
+              "description": "Doživljavate veoma visoke nivoe stresa. Ovo može ozbiljno uticati na vaš svakodnevni život. Snažno se preporučuje da potražite profesionalnu podršku.",
+              "message": "Vaš nivo stresa je veoma visok. Molimo konsultujte zdravstvenog stručnjaka i započnite redovnu praksu meditacije.",
+              "meditationTips": [
+                "🚨 Hitna meditacija: 10 minuta meditacije disanja svakih 2-3 sata tokom dana",
+                "🧘‍♀️ Duboka meditacija 3 puta dnevno: 30 minuta vođene meditacije jutro, podne, veče",
+                "💆‍♀️ 24/7 Svesnost: Pretvorite svaki stresni trenutak u priliku za meditaciju",
+                "🌊 4-7-8 Tehnika: Primenite odmah u svakom trenutku napada stresa (10+ puta dnevno)",
+                "🧘‍♂️ Joga meditacija: 45 minuta joge + meditacije 4-5 puta nedeljno",
+                "🎵 Kontinuirano opuštanje: Muzika za meditaciju u pozadini dok radite ili se opuštate",
+                "💤 Meditacija sna: 20 minuta meditacije opuštanja pre spavanja svake večeri",
+                "🏥 Profesionalna podrška: Radite sa psihologom ili terapeutom"
+              ],
+              "wellnessAdvice": "Hitna situacija: Molimo konsultujte zdravstvenog stručnjaka. Redovno vežbanje, higijena sna i zdrava ishrana su kritični. Ojačajte vaš sistem društvene podrške.",
+              "urgentNote": "⚠️ Ovi rezultati testa su samo u informativne svrhe. Ako vaši simptomi stresa ozbiljno utiču na vaš svakodnevni život, molimo konsultujte psihologa, psihijatra ili vašeg porodičnog lekara."
+            }
+          }
+        },
+        "loveVibration": {
+          "profiles": {
+            "venusHarmony": {
+              "name": "Venerina Harmonija - Romantična Duša 💕",
+              "title": "Venerina Energija",
+              "emoji": "💕",
+              "planet": "Venera",
+              "element": "Vazduh/Voda",
+              "tarotCard": "Ljubavnici",
+              "tagline": "Ljubav je tvoj prirodni jezik",
+              "description": "Vibriraš sa Venerinom energijom! Imaš romantičnu, harmoničnu i punu ljubavi energiju ljubavi. Tražiš ravnotežu, lepotu i harmoniju u vezama. Prirodni si romantik.",
+              "loveStyle": "Romantičan, harmoničan, ceni estetske vrednosti",
+              "strengths": [
+                "💝 Romantika i nežnost",
+                "🌹 Estetska i osetljivost za lepotu",
+                "🤝 Traženje harmonije i ravnoteže",
+                "💞 Sposobnost izražavanja ljubavi"
+              ],
+              "compatibility": "Kompatibilan sa Venerinom i Merkurovom energijom",
+              "astrologicalInsight": "Venera je planeta ljubavi, lepote i harmonije u klasičnoj astrologiji. Ova energija predstavlja traženje romantike, estetike i emocionalne veze u vezama."
+            },
+            "marsPassion": {
+              "name": "Marsova Strast - Vatreno Srce 🔥",
+              "title": "Marsova Energija",
+              "emoji": "🔥",
+              "planet": "Mars",
+              "element": "Vatra",
+              "tarotCard": "Snaga",
+              "tagline": "Tvoja strast vredi zvezde",
+              "description": "Goriš sa Marsovom energijom! Imaš strastvenu, hrabru i odlučnu energiju ljubavi. Tražiš uzbuđenje, strast i jake veze u vezama. Intenzivno živiš svoju ljubav.",
+              "loveStyle": "Strastven, hrabar, odlučan, traži uzbuđenje",
+              "strengths": [
+                "🔥 Intenzivna strast i žudnja",
+                "💪 Hrabrost i odlučnost",
+                "⚡ Energija i uzbuđenje",
+                "🎯 Ciljno orijentisana ljubav"
+              ],
+              "compatibility": "Uravnotežen sa Marsovom i Venerinom energijom",
+              "astrologicalInsight": "Mars je planeta žudnje, akcije i strasti u klasičnoj astrologiji. Ova energija predstavlja traženje jakih veza, uzbuđenja i odlučnosti u vezama."
+            },
+            "mercuryCommunication": {
+              "name": "Merkurova Komunikacija - Mentalna Veza 💬",
+              "title": "Merkurova Energija",
+              "emoji": "💬",
+              "planet": "Merkur",
+              "element": "Vazduh",
+              "tarotCard": "Mađioničar",
+              "tagline": "Reči su tvoj jezik ljubavi",
+              "description": "Komuniciraš sa Merkurovom energijom! Imaš pametnu, pričljivu i mentalno povezanu energiju ljubavi. Duboki razgovori, razumevanje i intelektualna veza su važni u vezama.",
+              "loveStyle": "Fokusiran na komunikaciju, mentalan, pričljiv, razumevan",
+              "strengths": [
+                "💬 Jaka komunikacija",
+                "🧠 Traženje mentalne harmonije",
+                "📚 Intelektualna veza",
+                "🗣️ Iskren i otvoren"
+              ],
+              "compatibility": "Kompatibilan sa Merkurovom i Venerinom energijom",
+              "astrologicalInsight": "Merkur je planeta komunikacije, uma i veze u klasičnoj astrologiji. Ova energija predstavlja traženje dubokih razgovora, razumevanja i mentalne harmonije u vezama."
+            },
+            "venusMarsMix": {
+              "name": "Venera-Mars Ravnoteža - Savršena Harmonija ⚖️",
+              "title": "Venera-Mars Ravnoteža",
+              "emoji": "⚖️",
+              "planet": "Venera & Mars",
+              "element": "Vatra & Vazduh",
+              "tarotCard": "Umerenost",
+              "tagline": "Ravnoteža romantike i strasti",
+              "description": "Doživljavaš i Venerinu i Marsovu energiju u ravnoteži! Imaš energiju ljubavi koja je i romantična i strastvena, i meka i jaka. Gradiš idealne uravnotežene veze.",
+              "loveStyle": "Uravnotežen, i romantičan i strastven, zreo",
+              "strengths": [
+                "⚖️ Ravnoteža romantike i strasti",
+                "💕 I meka i jaka",
+                "🎭 Emocionalna inteligencija",
+                "✨ Zreo pristup ljubavi"
+              ],
+              "compatibility": "Kompatibilan sa svim tipovima energije",
+              "astrologicalInsight": "Ravnoteža Venerine i Marsove energije predstavlja traženje i romantike i strasti u vezama. Ova ravnoteža je osnova zrelih i zdravih veza."
+            },
+            "mercuryVenusMix": {
+              "name": "Merkur-Venera Mešavina - Romantični Dijalog 💝",
+              "title": "Merkur-Venera Mešavina",
+              "emoji": "💝",
+              "planet": "Merkur & Venera",
+              "element": "Vazduh",
+              "tarotCard": "Carica",
+              "tagline": "Gradiš ljubav rečima",
+              "description": "Kombinuješ Merkurovu i Venerinu energiju! Imaš romantičnu ali fokusiranu na komunikaciju energiju ljubavi. Ljubavne reči, duboki razgovori i emocionalno razumevanje su tvoj stil.",
+              "loveStyle": "Romantičan i fokusiran na komunikaciju, pesnički, razumevan",
+              "strengths": [
+                "💌 Romantična komunikacija",
+                "📖 Reči ljubavi",
+                "🌸 Estetska senzibilnost",
+                "💭 Empatija i razumevanje"
+              ],
+              "compatibility": "Kompatibilan sa Venerinim i Merkurovim dominantnim profilima",
+              "astrologicalInsight": "Merkur-Venera kombinacija predstavlja traženje i romantike i jake komunikacije u vezama. Sposobnost izražavanja ljubavi rečima je jaka."
+            },
+            "marsMercuryMix": {
+              "name": "Mars-Merkur Mešavina - Pametna Strast 🧠",
+              "title": "Mars-Merkur Mešavina",
+              "emoji": "🧠",
+              "planet": "Mars & Merkur",
+              "element": "Vatra & Vazduh",
+              "tarotCard": "Kočija",
+              "tagline": "Strastven ali strateški",
+              "description": "Kombinuješ Marsovu i Merkurovu energiju! Imaš strastvenu ali pametnu energiju ljubavi. Tražiš i uzbuđenje i logiku u vezama. Strateški si romantik.",
+              "loveStyle": "Strastven ali promišljen, hrabar, strateški",
+              "strengths": [
+                "🎯 Strateški pristup",
+                "🔥 Pametna strast",
+                "⚡ Brzo donošenje odluka",
+                "🗣️ Iskrenost"
+              ],
+              "compatibility": "Kompatibilan sa Marsovom i Merkurovom energijom",
+              "astrologicalInsight": "Mars-Merkur kombinacija predstavlja traženje i strasti i mentalne kompatibilnosti u vezama. Pametan i odlučan pristup ljubavi se pokazuje."
+            },
+            "tripleHarmony": {
+              "name": "Trostruka Harmonija - Kozmička Ravnoteža 🌟",
+              "title": "Venera-Mars-Merkur Harmonija",
+              "emoji": "🌟",
+              "planet": "Venera & Mars & Merkur",
+              "element": "Svi Elementi",
+              "tarotCard": "Zvezda",
+              "tagline": "Kozmička energija ljubavi",
+              "description": "Nosiš sve tri planetarne energije u ravnoteži! I romantičan si, i strastven, i otvoren za komunikaciju. Imaš retku kozmičku energiju ljubavi.",
+              "loveStyle": "Uravnotežen, zreo, svestran, kozmički",
+              "strengths": [
+                "🌟 Ravnoteža svih energija",
+                "💫 Zreo pristup ljubavi",
+                "✨ Svestran jezik ljubavi",
+                "🎭 Sposobnost čitanja situacije"
+              ],
+              "compatibility": "Kompatibilan sa svim energetskim profilima",
+              "astrologicalInsight": "Ravnoteža Venerine, Marsove i Merkurove energije predstavlja traženje celovitosti i kozmičke harmonije u vezama. Ova retka ravnoteža je pokazatelj zrelih i zdravih veza."
+            },
+            "moonIntuition": {
+              "name": "Mesečeva Intuicija - Emocionalni Okean 🌙",
+              "title": "Mesečeva Energija (Bonus)",
+              "emoji": "🌙",
+              "planet": "Mesec",
+              "element": "Voda",
+              "tarotCard": "Mesec",
+              "tagline": "Voliš svojom intuicijom",
+              "description": "Ideš duboko sa Mesečevom energijom! Imaš intuitivnu, emocionalnu i misterioznu energiju ljubavi. Tražiš duboke emocionalne veze i duhovnu harmoniju u vezama.",
+              "loveStyle": "Intuitivan, emocionalan, misteriozan, duhovan",
+              "strengths": [
+                "🌊 Duboka emocionalnost",
+                "🔮 Jaka intuicija",
+                "💫 Duhovna veza",
+                "🌙 Misteriozna privlačnost"
+              ],
+              "compatibility": "Kompatibilan sa Venerinom i Vodenim elementom energijama",
+              "astrologicalInsight": "Mesec je simbol emocija, intuicije i unutrašnjeg sveta u klasičnoj astrologiji. Ova energija predstavlja traženje dubokih emocionalnih veza i duhovne harmonije u vezama."
+            }
+          }
+        },
+        "friendEnergy": {
+          "roles": {
+            "wiseMentor": {
+              "name": "Mudri Mentor Grupe 🧙‍♂️",
+              "title": "Mudri Mentor",
+              "emoji": "🧙‍♂️",
+              "tagline": "Ti si onaj koga svi u grupi pitaju za savet",
+              "description": "Slušaš probleme svojih prijatelja, nudiš logična rešenja i uvek daješ najbolji savet. Uravnotežavaš grupu sa mirnom, mudrom i pouzdanom energijom.",
+              "socialRole": "Konsultant i Mentor",
+              "strengths": [
+                "Zreo i promišljen",
+                "Dobar slušalac",
+                "Rešava probleme",
+                "Ima pouzdane savete"
+              ],
+              "funFacts": [
+                "📱 Ti si WhatsApp konsultaciona linija grupe",
+                "🎯 Ti si adresa za \"Šta da radim?\" pitanja",
+                "🧠 Najviše čuješ \"Bio si u pravu\""
+              ],
+              "shareText": "Ja sam mudri mentor svoje grupe prijatelja! 🧙‍♂️"
+            },
+            "dramaQueen": {
+              "name": "Drama Kraljica/Kralj 👑",
+              "title": "Drama Kraljica",
+              "emoji": "👑",
+              "tagline": "Život je sapunica i ti si glavna uloga",
+              "description": "Ti si najšareniji karakter grupe! Svaka priča ima uzbuđenje, svaki trenutak ima dramu. Čak i dosadne trenutke života pričaš kao film.",
+              "socialRole": "Izvor Zabave i Uzbuđenja",
+              "strengths": [
+                "Visoka sposobnost pripovedanja",
+                "Dodaje energiju i uzbuđenje grupi",
+                "Nikad dosadan",
+                "Emocionalan i otvoren"
+              ],
+              "funFacts": [
+                "🎬 Svaka priča ima zaplet",
+                "😱 \"Nećeš verovati ali...\" je tvoja poznata rečenica",
+                "💅 Ti si glavni lik grupnih razgovora"
+              ],
+              "shareText": "Ja sam drama kraljica svoje grupe prijatelja! 👑"
+            },
+            "spontaneousExplorer": {
+              "name": "Spontani Istraživač 🌍",
+              "title": "Spontani Istraživač",
+              "emoji": "🌍",
+              "tagline": "Planovi ne menjaju tebe, ti menjaš planove",
+              "description": "Spontan si, avanturističan i slobodne duše. Kada kažeš \"Hajde da idemo!\" svi se spremaju. Ti si kralj planova u poslednjem trenutku.",
+              "socialRole": "Organizator Avantura",
+              "strengths": [
+                "Spontan i fleksibilan",
+                "Avanturistički duh",
+                "Rizikuje",
+                "Otvoren za nova iskustva"
+              ],
+              "funFacts": [
+                "🎒 \"Spreman za 5 minuta\" je tvoj moto",
+                "✈️ Misliš da najbolji planovi dolaze iz spontanosti",
+                "🗺️ Google Maps pokazuje gde si sada, ko zna"
+              ],
+              "shareText": "Ja sam spontani istraživač svoje grupe prijatelja! 🌍"
+            },
+            "momFriend": {
+              "name": "Mama Grupe 🤱",
+              "title": "Mama Grupe",
+              "emoji": "🤱",
+              "tagline": "Tvoja torba je apoteka, tvoje srce je od anđela",
+              "description": "Ti si zaštitnik i negovatelj grupe. Tvoja torba ima sve: vlažne maramice, punjač, hitan aspirin... Svi se osećaju bezbedno sa tobom.",
+              "socialRole": "Zaštitnik i Podrška",
+              "strengths": [
+                "Promišljen i brižan",
+                "Zaštitnički",
+                "Organizovan",
+                "Saosećajan"
+              ],
+              "funFacts": [
+                "🎒 Tvoja torba ima nešto za svaku hitnu situaciju",
+                "⏰ \"Ne kasnite\" poruke dolaze od tebe",
+                "🌡️ Ti si vlasnik pitanja \"Zar ti nije hladno?\""
+              ],
+              "shareText": "Ja sam mama svoje grupe prijatelja! 🤱"
+            },
+            "partyStarter": {
+              "name": "Pokretač Žurke 🎉",
+              "title": "Pokretač Žurke",
+              "emoji": "🎉",
+              "tagline": "Zabava počinje kada ti dođeš",
+              "description": "Ti si društveni organizator grupe i bomba energije! Pre tebe je sastanak, posle tebe je žurka. Radost i entuzijazam su tvoj posao.",
+              "socialRole": "Društveni Organizator",
+              "strengths": [
+                "Energetičan i entuzijastičan",
+                "Organizator",
+                "Društven",
+                "Ispušta pozitivnu energiju"
+              ],
+              "funFacts": [
+                "📅 Ti praviš sve planove",
+                "🎵 Ti si ekspert za plejliste",
+                "📸 Ti si najfotografisanija osoba"
+              ],
+              "shareText": "Ja sam pokretač žurke svoje grupe prijatelja! 🎉"
+            },
+            "quietPower": {
+              "name": "Tiha Snaga 🦉",
+              "title": "Tiha Snaga",
+              "emoji": "🦉",
+              "tagline": "Malo govori, mnogo razume",
+              "description": "Ti si tihi ali moćan član grupe. Svaka tvoja reč je vredna. Malo govoriš ali kada govoriš, svi slušaju. Dubok si posmatrač.",
+              "socialRole": "Posmatrač i Strateg",
+              "strengths": [
+                "Posmatrač",
+                "Promišljen",
+                "Miran",
+                "Duboko razumevanje"
+              ],
+              "funFacts": [
+                "👀 Primećuješ sve ali ne kažeš",
+                "🤐 \"Šta misliš?\" pitanje uvek dolazi tebi",
+                "💭 Tvoje reči su malo ali efikasne"
+              ],
+              "shareText": "Ja sam tiha snaga svoje grupe prijatelja! 🦉"
+            },
+            "comedian": {
+              "name": "Stand-Up Komičar 😂",
+              "title": "Komičar",
+              "emoji": "😂",
+              "tagline": "Život je težak, ti si smešan",
+              "description": "Ti si mašina za smeh grupe! Možeš napraviti šalu u bilo kojoj situaciji, učiniti da se čak i najnapetiji trenuci smeju. Humor je tvoja super moć.",
+              "socialRole": "Ekspert za Humor i Zabavu",
+              "strengths": [
+                "Visok smisao za humor",
+                "Pozitivan",
+                "Ublažava stres",
+                "Zabavan"
+              ],
+              "funFacts": [
+                "🎭 Život je pozornica, ti si komičar",
+                "😆 \"Umro sam od smeha\" je rečenica koju najviše čuješ",
+                "🤡 Čak i ozbiljne trenutke činiš smešnim"
+              ],
+              "shareText": "Ja sam komičar svoje grupe prijatelja! 😂"
+            },
+            "therapist": {
+              "name": "Terapijski Prijatelj 💭",
+              "title": "Terapijski Prijatelj",
+              "emoji": "💭",
+              "tagline": "Besplatna terapija, neograničena empatija",
+              "description": "Ti si psiholog grupe. Svi ti pričaju svoje probleme, ti slušaš i razumeš. Empatičan si, razumevan i zver emocionalne inteligencije.",
+              "socialRole": "Pružalac Emocionalne Podrške",
+              "strengths": [
+                "Empatičan",
+                "Dobar slušalac",
+                "Razumevan",
+                "Emocionalno inteligentan"
+              ],
+              "funFacts": [
+                "🛋️ Tvoji prijatelji se osećaju bolje nakon razgovora sa tobom",
+                "💚 \"Slušanje tebe je pomoglo\" je ono što najviše čuješ",
+                "🎧 3-satni telefonski pozivi su rutina za tebe"
+              ],
+              "shareText": "Ja sam terapijski prijatelj svoje grupe prijatelja! 💭"
+            },
+            "adventurer": {
+              "name": "Lovac na Adrenalin 🚀",
+              "title": "Lovac na Adrenalin",
+              "emoji": "🚀",
+              "tagline": "Opasnost? Hajde da idemo!",
+              "description": "Ti si hrabri avanturista grupe! Spreman si za bilo koju aktivnost. Bungee jumping, parasailing, šta god... Kažeš \"Ja sam tu!\"",
+              "socialRole": "Rizikuje i Izvor Hrabrosti",
+              "strengths": [
+                "Hrabar",
+                "Avanturističan",
+                "Rizikuje",
+                "Inspirativan"
+              ],
+              "funFacts": [
+                "⛷️ Tvoja lista želja je beskrajna",
+                "🎢 \"Nisam se uplašio\" je tvoja omiljena rečenica",
+                "📸 Imaš najluđe fotografije"
+              ],
+              "shareText": "Ja sam lovac na adrenalin svoje grupe prijatelja! 🚀"
+            },
+            "peacekeeper": {
+              "name": "Ambasador Mira ☮️",
+              "title": "Ambasador Mira",
+              "emoji": "☮️",
+              "tagline": "Majstor u pomirenju svađajućih prijatelja",
+              "description": "Ti si diplomat grupe. Kada se dva prijatelja svađaju, ti se umesaš, razumeš sve i održavaš ravnotežu. Ti si maestro rešavanja konflikata.",
+              "socialRole": "Posrednik i Moderator",
+              "strengths": [
+                "Posrednik",
+                "Nepristrasan",
+                "Uravnotežen",
+                "Kompromisan"
+              ],
+              "funFacts": [
+                "🕊️ \"Hajde da se pomirimo\" je tvoja replika",
+                "⚖️ Razumeš obe strane",
+                "🤝 Ti si onaj koji drži grupu zajedno"
+              ],
+              "shareText": "Ja sam ambasador mira svoje grupe prijatelja! ☮️"
+            }
+          }
+        },
+        "enneagram": {
+          "types": {
+            "type1": {
+              "name": "Tip 1 - Reformator (Perfekcionista)",
+              "title": "Reformator",
+              "subtitle": "Idealan i Principijelan",
+              "description": "Oni su principijelni, organizovani ljudi koji tragaju za ispravnošću, pravdom i savršenstvom. Veruju da sve mora biti urađeno ispravno.",
+              "coreMotivation": "Biti u pravu, poboljšati sve, izbeći greške",
+              "coreFear": "Biti u krivu, biti pokvaren, biti loš",
+              "lightSide": {
+                "title": "Svetle Strane",
+                "traits": "Principijelan, pravedan, odgovoran, disciplinovan, posvećen etičkim vrednostima, poboljšavajući, samokontrolisan, idealističan",
+                "description": "Oni su principijelni, organizovani i pouzdani. Imaju visoke standarde i rade svoj posao savršeno. Žele biti korisni društvu."
+              },
+              "shadowSide": {
+                "title": "Tamne Strane",
+                "traits": "Kritičan, rigidan, perfekcionista, ljut (potisnut), oštar prema sebi/drugima, nefleksibilan",
+                "description": "Mogu biti previše kritični, veoma oštri prema i sebi i drugima. Ekstremno se plaše grešaka."
+              }
+            },
+            "type2": {
+              "name": "Tip 2 - Pomoćnik",
+              "title": "Pomoćnik",
+              "subtitle": "Brižan i Velikodušan",
+              "description": "Oni su brižni, pomoćni i saosećajni ljudi koji vode računa o tuđim potrebama. Treba im ljubav i priznanje.",
+              "coreMotivation": "Biti voljen, biti cenjen, pomoći drugima",
+              "coreFear": "Biti nevoljen, biti nepotreban, biti bezvredan",
+              "lightSide": {
+                "title": "Svetle Strane",
+                "traits": "Empatičan, velikodušan, brižan, pomoćan, topao, podržavajući, nesebičan, pun ljubavi",
+                "description": "Oni su iskreni i velikodušni ljudi. Osetljivi su na tuđe emocije i zaista uživaju u pomaganju."
+              },
+              "shadowSide": {
+                "title": "Tamne Strane",
+                "traits": "Manipulativan, posesivan, zanemaruje sopstvene potrebe, zavisan od odobrenja, ne može postaviti granice",
+                "description": "Mogu zanemariti sopstvene potrebe, uložiti prekomerni napor za odobrenje. Mogu postojati skrivena očekivanja kada pomažu."
+              }
+            },
+            "type3": {
+              "name": "Tip 3 - Uspešan",
+              "title": "Uspešan",
+              "subtitle": "Ambiciozan i Prilagodljiv",
+              "description": "Oni su usmereni na uspeh, postavljaju ciljeve i svesni su svog imidža. Žele biti prepoznati po svojim dostignućima.",
+              "coreMotivation": "Biti uspešan, osećati se vrednim, biti cenjen",
+              "coreFear": "Biti bezvredan, neuspešan, neprimetan",
+              "lightSide": {
+                "title": "Svetle Strane",
+                "traits": "Uspešan, motivišući, produktivan, prilagodljiv, harizmatičan, usmeren na cilj, energičan, inspirativan",
+                "description": "Oni su veoma vredni i uspešni. Inspirišu druge i ulažu veliki napor da postignu svoje ciljeve."
+              },
+              "shadowSide": {
+                "title": "Tamne Strane",
+                "traits": "Usmeren na imidž, takmičarski, radoholičar, lažan, skriva emocije, ljubomora",
+                "description": "Mogu previše ceniti svoj imidž, izgubiti ravnotežu između posla i života. Mogu se fokusirati samo na to da izgledaju uspešno potiskujući svoje prave emocije."
+              }
+            },
+            "type4": {
+              "name": "Tip 4 - Individualista (Romantičar)",
+              "title": "Individualista",
+              "subtitle": "Kreativan i Osetljiv",
+              "description": "Oni su originalni, kreativni i emocionalno duboki ljudi. Treba im izražavanje i razumevanje.",
+              "coreMotivation": "Biti originalan, izraziti sebe, biti razumevan",
+              "coreFear": "Biti bez identiteta, biti besmislen, izgubiti svoju originalnost",
+              "lightSide": {
+                "title": "Svetle Strane",
+                "traits": "Kreativan, originalan, dubok, empatičan, estetski osetljiv, emocionalno iskren, umetnički",
+                "description": "Oni su izuzetno kreativni i originalni. Doživljavaju duboke emocionalne iskustva i izražavaju se kroz umetnost."
+              },
+              "shadowSide": {
+                "title": "Tamne Strane",
+                "traits": "Melanholičan, dramatičan, ljubomora, osećanje žrtve, previše emocionalan, povlačenje",
+                "description": "Mogu skrenuti u melanholiju, osećati se pogrešno razumevanim. Mogu idealizovati tuđe živote i biti nezadovoljni svojim."
+              }
+            },
+            "type5": {
+              "name": "Tip 5 - Istraživač (Posmatrač)",
+              "title": "Istraživač",
+              "subtitle": "Radoznao i Analitičan",
+              "description": "Oni su ljudi koji prikupljaju informacije, analitički razmišljaju i posmatraju. Traže znanje i kompetentnost.",
+              "coreMotivation": "Biti upućen, biti kompetentan, razumeti sve",
+              "coreFear": "Biti nekompetentan, biti beskoristan, biti prazan",
+              "lightSide": {
+                "title": "Svetle Strane",
+                "traits": "Analitičan, upućen, nezavisan, objektivan, inovativan, radoznao, fokusiran, ekspert",
+                "description": "Oni su duboki mislioci i postaju eksperti. Imaju sposobnost razumevanja složenih tema i sistematskog razmišljanja."
+              },
+              "shadowSide": {
+                "title": "Tamne Strane",
+                "traits": "Izolovan, emocionalno distanciran, škrt (informacije/vreme/energija), nedostatak društvenih veština, previše mentalan",
+                "description": "Mogu izbegavati društvenu interakciju, imati poteškoće sa deljenjem emocija. Mogu odložiti život zarad akumulacije znanja."
+              }
+            },
+            "type6": {
+              "name": "Tip 6 - Vernik (Pitanje)",
+              "title": "Vernik",
+              "subtitle": "Pouzdan i Odgovoran",
+              "description": "Oni su ljudi usmereni na bezbednost, verni i odgovorni. Izbegavaju neizvesnost i trebaju im pouzdani sistemi.",
+              "coreMotivation": "Biti bezbedan, biti podržan, izvesnost",
+              "coreFear": "Gubitak podrške, biti sam, pretnja",
+              "lightSide": {
+                "title": "Svetle Strane",
+                "traits": "Veran, pouzdan, odgovoran, hrabar (fobičan-kontrafobičan), timski igrač, rešava probleme",
+                "description": "Oni su izuzetno verni i pouzdani. Dobro su pripremljeni i planiraju za rizike. Posvećeni su timu."
+              },
+              "shadowSide": {
+                "title": "Tamne Strane",
+                "traits": "Anksiozan, sumnjičav, neodlučan, defanzivan, problemi sa poverenjem, previše razmišljanja",
+                "description": "Mogu biti previše anksiozni, razmišljati o najgorim scenarijima. Mogu imati probleme sa poverenjem i konstantno tražiti odobrenje."
+              }
+            },
+            "type7": {
+              "name": "Tip 7 - Entuzijasta (Avanturista)",
+              "title": "Entuzijasta",
+              "subtitle": "Spontan i Uzbuđen",
+              "description": "Oni su ljudi slobodne duše, koji traže uzbuđenje i pozitivni. Žele uživati u životu i doživeti nove stvari.",
+              "coreMotivation": "Biti srećan, biti zadovoljan, biti slobodan",
+              "coreFear": "Patiti, biti lišen, biti dosadan",
+              "lightSide": {
+                "title": "Svetle Strane",
+                "traits": "Vesel, energičan, kreativan, spontan, svestran, optimističan, fleksibilan, avanturističan",
+                "description": "Oni su puni života i pozitivni. Uzbuduju se zbog novih ideja i mogućnosti. Daju energiju drugima."
+              },
+              "shadowSide": {
+                "title": "Tamne Strane",
+                "traits": "Tendencija bekstva, površan, nedisciplinovan, problemi sa vezivanjem, izbegavanje bola, prekomerna potrošnja",
+                "description": "Mogu izbegavati negativne emocije, držati se podalje od odgovornosti. Konstantna potraga za novim uzbuđenjem može sprečiti produbljivanje."
+              }
+            },
+            "type8": {
+              "name": "Tip 8 - Izzivač (Vođa)",
+              "title": "Izzivač",
+              "subtitle": "Jak i Zaštitnički",
+              "description": "Oni su jaki, odlučni i kontrolišući ljudi. Brani pravdu i žele zaštititi slabe.",
+              "coreMotivation": "Biti jak, zaštititi sebe, zadržati kontrolu",
+              "coreFear": "Biti slab, biti kontrolisan, biti povređen",
+              "lightSide": {
+                "title": "Svetle Strane",
+                "traits": "Jak, zaštitnički, pravedan, vođa, odlučan, hrabar, samopouzdan, direktan",
+                "description": "Oni su prirodni vođe. Brani pravdu i štite slabe. Odlučni su i hrabri."
+              },
+              "shadowSide": {
+                "title": "Tamne Strane",
+                "traits": "Agresivan, kontrolišući, dominantan, ne može pokazati slabost, bes, nepoverenje, povređujući",
+                "description": "Mogu biti previše kontrolišući i dominantni. Plaše se pokazivanja slabosti i mogu imati probleme sa besom."
+              }
+            },
+            "type9": {
+              "name": "Tip 9 - Mirotvorac (Posrednik)",
+              "title": "Mirotvorac",
+              "subtitle": "Harmoničan i Podržavajući",
+              "description": "Oni su mirni, prihvatljivi ljudi koji traže mir i harmoniju. Izbegavaju konflikt i vrednuju ravnotežu.",
+              "coreMotivation": "Unutrašnji mir, harmonija, izbegavanje konflikta",
+              "coreFear": "Gubitak, razdvojenost, konflikt, prekid veze",
+              "lightSide": {
+                "title": "Svetle Strane",
+                "traits": "Miran, prihvatljiv, strpljiv, podržavajući, posrednik, udoban, empatičan, kompromisan",
+                "description": "Oni su mirni i miroljubivi. Dobri su slušaoci i posrednici. Mogu razumeti tuđe perspektive."
+              },
+              "shadowSide": {
+                "title": "Tamne Strane",
+                "traits": "Pasivan, neodlučan, odlaže, ignorira sopstvene potrebe, izbegava konflikt, tvrdoglav",
+                "description": "Mogu zanemariti sopstvene potrebe da bi izbegli konflikt. Imaju poteškoće sa donošenjem odluka i mogu odložiti važne stvari."
+              }
+            }
+          }
+        },
+        "bigFive": {
+          "dimensions": {
+            "openness": {
+              "high": {
+                "title": "Visoka Otvorenost",
+                "description": "Kreativni ste, radoznali i otvoreni za nova iskustva. Umetnost, kultura i filozofija vas zanimaju.",
+                "traits": "Jaka mašta, inovativan, visoka estetska senzibilnost"
+              },
+              "medium": {
+                "title": "Srednja Otvorenost",
+                "description": "Imate uravnotežen pristup. Možete balansirati inovacije sa tradicionalnim vrednostima.",
+                "traits": "Fleksibilan, praktičan, harmoničan"
+              },
+              "low": {
+                "title": "Niska Otvorenost",
+                "description": "Tradicionalni ste, praktični i konkretno razmišljate. Preferirate poznate i testirane metode.",
+                "traits": "Tradicionalan, realan, praktičan"
+              }
+            },
+            "conscientiousness": {
+              "high": {
+                "title": "Visoka Savest",
+                "description": "Organizovani ste, disciplinovani i usmereni na cilj. Savršeno završavate svoje zadatke.",
+                "traits": "Organizovan, pouzdan, planiran, uporan"
+              },
+              "medium": {
+                "title": "Srednja Savest",
+                "description": "Možete biti fleksibilni prema situaciji. Možete biti organizovani kada je potrebno, spontani kada je potrebno.",
+                "traits": "Uravnotežen, harmoničan, razuman"
+              },
+              "low": {
+                "title": "Niska Savest",
+                "description": "Imate spontanu, fleksibilnu i udobnu prirodu. Možete imati poteškoće sa praćenjem strogih pravila.",
+                "traits": "Fleksibilan, udoban, spontan"
+              }
+            },
+            "extraversion": {
+              "high": {
+                "title": "Visoka Ekstraverzija",
+                "description": "Društveni ste, energični i pričljivi. Uživate u provođenju vremena sa ljudima.",
+                "traits": "Društven, živahan, uzbuđen, prijateljski"
+              },
+              "medium": {
+                "title": "Srednja Ekstraverzija (Ambivert)",
+                "description": "Imate i introvertne i ekstravertne karakteristike. Možete se prilagoditi prema situaciji.",
+                "traits": "Uravnotežen, harmoničan, fleksibilan"
+              },
+              "low": {
+                "title": "Niska Ekstraverzija (Introvert)",
+                "description": "Mirni ste, promišljeni i uživate u provođenju vremena sami. Gradite duboke veze.",
+                "traits": "Tih, promišljen, nezavisan, pažljiv"
+              }
+            },
+            "agreeableness": {
+              "high": {
+                "title": "Visoka Ugodnost",
+                "description": "Empatični ste, pomoćni i kooperativni. Verujete u ljudsku dobrotu.",
+                "traits": "Empatičan, pouzdan, ljubazan, nesebičan"
+              },
+              "medium": {
+                "title": "Srednja Ugodnost",
+                "description": "Možete zaštititi svoje interese dok razmišljate o drugima.",
+                "traits": "Uravnotežen, pravedan, praktičan"
+              },
+              "low": {
+                "title": "Niska Ugodnost",
+                "description": "Takmičarski ste, nezavisni i kritički razmišljate. Branite svoje stavove.",
+                "traits": "Nezavisan, analitičan, takmičarski"
+              }
+            },
+            "neuroticism": {
+              "high": {
+                "title": "Visoka Neurotičnost",
+                "description": "Emocionalni ste, osetljivi i reaktivni. Možete intenzivno doživeti stres.",
+                "traits": "Osetljiv, emocionalan, anksiozan, reaktivan",
+                "tips": "Tehnike upravljanja stresom, meditacija i redovno vežbanje mogu biti korisne."
+              },
+              "medium": {
+                "title": "Srednja Emocionalna Ravnoteža",
+                "description": "Uglavnom možete ostati mirni ali ponekad možete biti zahvaćeni stresom.",
+                "traits": "Uravnotežen, normalne reakcije, harmoničan"
+              },
+              "low": {
+                "title": "Niska Neurotičnost (Visoka Emocionalna Ravnoteža)",
+                "description": "Mirni ste, uravnoteženi i otporni na stres. Emocionalno ste stabilni.",
+                "traits": "Miran, uravnotežen, otporan, udoban"
+              }
+            }
+          },
+          "dimensionNames": {
+            "openness": "Otvorenost",
+            "conscientiousness": "Savest",
+            "extraversion": "Ekstraverzija",
+            "agreeableness": "Ugodnost",
+            "neuroticism": "Emocionalna Ravnoteža"
+          }
+        }
+      },
+      "ui": {
+        "results": {
+          "title": "Rezultat",
+          "detailedAnalysis": "Detaljna analiza vašeg testa",
+          "mbti": {
+            "traits": "Osobine",
+            "careers": "Pogodne Karijere"
+          },
+          "bigFive": {
+            "title": "Big Five Profil Ličnosti",
+            "subtitle": "Analiza vaših 5 osnovnih dimenzija ličnosti",
+            "score": "poena",
+            "traits": "Osobine",
+            "tips": "Savet",
+            "personalizedTips": "Personalizovani Saveti",
+            "tipTexts": {
+              "opennessHigh": "Vaša otvorenost je visoka: uključite se više u kreativne projekte, postavite ciljeve učenja.",
+              "conscientiousnessLow": "Vaša savest je niska: planirajte male zadatke sa vremenskim blokovima, smanjite odlaganje.",
+              "extraversionLow": "Vaša ekstraverzija je niska: planirajte mala i značajna okupljanja dok čuvate svoju društvenu energiju.",
+              "agreeablenessLow": "Vaša ugodnost je niska: vežbajte slušanje povratnih informacija bez osuđivanja.",
+              "neuroticismHigh": "Vaša neurotičnost je visoka: kreirajte rutine disanja/meditacije, obratite pažnju na higijenu spavanja.",
+              "balancedProfile": "Uravnotežen profil: ojačajte svoje snage, negujte oblasti razvoja sa mikro ciljevima."
+            }
+          },
+          "enneagram": {
+            "coreMotivation": "Osnovna Motivacija",
+            "coreFear": "Osnovni Strah",
+            "lightSide": "Svetle Strane",
+            "shadowSide": "Tamne Strane",
+            "wing": "Sekundarna Tendenca (Krilo)",
+            "scientificSource": "Naučni Izvor",
+            "scientificNote": "Ovaj test se zasniva na istraživanjima Enneagram Instituta i literaturi psihologije ličnosti. Enneagram sistem je naučno validan alat korišćen za ličnu svest i razvoj."
+          },
+          "friendEnergy": {
+            "superPowers": "Vaše Super Moći",
+            "funFacts": "Zabavne Činjenice",
+            "secondaryEnergy": "Vaša Sekundarna Energija",
+            "shareTitle": "Podelite sa Prijateljima!",
+            "shareHint": "Neka i vaši prijatelji otkriju! 🎊"
+          },
+          "loveVibration": {
+            "loveStyle": "Vaš Stil Ljubavi",
+            "superPowers": "Vaše Super Moći Ljubavi",
+            "planetEnergies": "Vaše Planetarne Energije",
+            "compatibility": "Kompatibilnost",
+            "astrologicalInsight": "Astrološki Uvid",
+            "source": "Izvor"
+          },
+          "stress": {
+            "score": "Poen",
+            "scoreRange": "Opseg Poena",
+            "visualization": "Vizuelizacija Nivoa Stresa",
+            "meditationTips": "Personalizovane Preporuke za Meditaciju",
+            "wellnessAdvice": "Opšte Preporuke za Zdravlje",
+            "scientificInfo": "Naučne Informacije o Testu",
+            "scientificNote": "Ovaj test se zasniva na DASS21 (Depression Anxiety Stress Scales) skali stresa. To je naučni alat za procenu razvijen od strane Lovibond & Lovibond (1995) i široko korišćen.",
+            "source": "Izvor: Lovibond, S. H., & Lovibond, P. F. (1995). Manual for the Depression Anxiety Stress Scales (2nd ed.). Sydney: Psychology Foundation.",
+            "disclaimer": "⚠️ Ovaj test je samo u informativne svrhe i ne zamenjuje profesionalnu psihološku procenu. Ako vaši simptomi stresa ozbiljno utiču na vaš svakodnevni život, molimo konsultujte zdravstvenog stručnjaka.",
+            "levels": {
+              "low": "Nizak (0-15)",
+              "moderate": "Umeren (16-30)",
+              "high": "Visok (31-45)",
+              "veryHigh": "Veoma Visok (46-60)"
+            }
+          },
+          "nameTarot": {
+            "nameValue": "Vrednost Imena",
+            "finalNumber": "Konačni Broj",
+            "theme": "Tema Karte",
+            "keywords": "Ključne Reči",
+            "advice": "Savet",
+            "astrology": "Astrologija",
+            "element": "Element",
+            "numerology": "Numerološki Kalkulacija",
+            "calculation": "Kalkulacija",
+            "pythagorasNote": "Pitagorina Numerologija: Svako slovo nosi specifičnu numeričku vibraciju. Zbir slova vašeg imena formira vašu numerološku energiju."
+          }
+        },
+        "buttons": {
+          "cancelTest": "Otkaži Test",
+          "backToTests": "← Nazad na Testove"
         }
       }
     }

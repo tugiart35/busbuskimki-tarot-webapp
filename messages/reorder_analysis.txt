@@ -1,0 +1,1953 @@
+====================================================================================================
+                              JSON DÜZENLEME DETAYLI ANALİZ RAPORU
+====================================================================================================
+
+Referans dosya: tr.json
+Analiz tarihi: 2025-11-10 10:58:23
+
+====================================================================================================
+
+📈 GENEL İSTATİSTİKLER
+----------------------------------------------------------------------------------------------------
+
+📊 Anahtar Sayıları:
+  TR.json toplam anahtar sayısı: 41,849
+  EN.json toplam anahtar sayısı: 41,167 (Fark: -682)
+  SR.json toplam anahtar sayısı: 38,414 (Fark: -3,435)
+
+📄 Satır Sayıları:
+  TR.json toplam satır sayısı: 56,264
+  EN.json toplam satır sayısı: 54,474 (Fark: -1,790)
+  SR.json toplam satır sayısı: 48,104 (Fark: -8,160)
+
+📈 Ortalama Satır/Anahtar Oranı:
+  TR.json: 1.34 satır/anahtar
+  EN.json: 1.32 satır/anahtar
+  SR.json: 1.25 satır/anahtar
+
+====================================================================================================
+📊 EN.json DETAYLI ANALİZ
+====================================================================================================
+
+❌ EKSİK ANAHTARLAR: 350 adet
+----------------------------------------------------------------------------------------------------
+
+📁 Kategori: blog (324 adet)
+    - blog.cards.Judgement.affirmations.affirmation_list (length mismatch)
+    - blog.cards.Judgement.combinations (length mismatch)
+    - blog.cards.Judgement.daily_practices (length mismatch)
+    - blog.cards.Judgement.numerological_perspective.insights (length mismatch)
+    - blog.cards.Judgement.symbolism (length mismatch)
+    - blog.cards.ace-of-cups.affirmations.affirmation_list (length mismatch)
+    - blog.cards.ace-of-cups.combinations (length mismatch)
+    - blog.cards.ace-of-cups.daily_practices (length mismatch)
+    - blog.cards.ace-of-pentacles.affirmations.affirmation_list (length mismatch)
+    - blog.cards.ace-of-pentacles.combinations (length mismatch)
+    - blog.cards.ace-of-pentacles.daily_practices (length mismatch)
+    - blog.cards.ace-of-pentacles.symbolism (length mismatch)
+    - blog.cards.ace-of-swords.affirmations.affirmation_list (length mismatch)
+    - blog.cards.ace-of-swords.combinations (length mismatch)
+    - blog.cards.ace-of-swords.daily_practices (length mismatch)
+    - blog.cards.ace-of-wands.affirmations.affirmation_list (length mismatch)
+    - blog.cards.ace-of-wands.combinations (length mismatch)
+    - blog.cards.ace-of-wands.daily_practices (length mismatch)
+    - blog.cards.ace-of-wands.symbolism (length mismatch)
+    - blog.cards.death.affirmations.affirmation_list (length mismatch)
+    - blog.cards.death.combinations (length mismatch)
+    - blog.cards.death.daily_practices (length mismatch)
+    - blog.cards.death.numerological_perspective.insights (length mismatch)
+    - blog.cards.eight-of-cups.affirmations.affirmation_list (length mismatch)
+    - blog.cards.eight-of-cups.combinations (length mismatch)
+    - blog.cards.eight-of-cups.daily_practices (length mismatch)
+    - blog.cards.eight-of-cups.symbolism (length mismatch)
+    - blog.cards.eight-of-pentacles.affirmations.affirmation_list (length mismatch)
+    - blog.cards.eight-of-pentacles.combinations (length mismatch)
+    - blog.cards.eight-of-pentacles.daily_practices (length mismatch)
+    - blog.cards.eight-of-pentacles.symbolism (length mismatch)
+    - blog.cards.eight-of-swords.affirmations.affirmation_list (length mismatch)
+    - blog.cards.eight-of-swords.combinations (length mismatch)
+    - blog.cards.eight-of-swords.daily_practices (length mismatch)
+    - blog.cards.eight-of-wands.affirmations.affirmation_list (length mismatch)
+    - blog.cards.eight-of-wands.combinations (length mismatch)
+    - blog.cards.eight-of-wands.daily_practices (length mismatch)
+    - blog.cards.eight-of-wands.seo.focusKeywords (length mismatch)
+    - blog.cards.five-of-cups.affirmations.affirmation_list (length mismatch)
+    - blog.cards.five-of-cups.combinations (length mismatch)
+    - blog.cards.five-of-cups.daily_practices (length mismatch)
+    - blog.cards.five-of-cups.seo.focusKeywords (length mismatch)
+    - blog.cards.five-of-pentacles.affirmations.affirmation_list (length mismatch)
+    - blog.cards.five-of-pentacles.combinations (length mismatch)
+    - blog.cards.five-of-pentacles.daily_practices (length mismatch)
+    - blog.cards.five-of-pentacles.symbolism (length mismatch)
+    - blog.cards.five-of-swords.affirmations.affirmation_list (length mismatch)
+    - blog.cards.five-of-swords.combinations (length mismatch)
+    - blog.cards.five-of-swords.daily_practices (length mismatch)
+    - blog.cards.five-of-swords.symbolism (length mismatch)
+    - blog.cards.five-of-wands.affirmations.affirmation_list (length mismatch)
+    - blog.cards.five-of-wands.combinations (length mismatch)
+    - blog.cards.five-of-wands.daily_practices (length mismatch)
+    - blog.cards.five-of-wands.seo.focusKeywords (length mismatch)
+    - blog.cards.five-of-wands.symbolism (length mismatch)
+    - blog.cards.four-of-cups.affirmations.affirmation_list (length mismatch)
+    - blog.cards.four-of-cups.combinations (length mismatch)
+    - blog.cards.four-of-cups.daily_practices (length mismatch)
+    - blog.cards.four-of-cups.symbolism (length mismatch)
+    - blog.cards.four-of-pentacles.affirmations.affirmation_list (length mismatch)
+    - blog.cards.four-of-pentacles.combinations (length mismatch)
+    - blog.cards.four-of-pentacles.daily_practices (length mismatch)
+    - blog.cards.four-of-pentacles.symbolism (length mismatch)
+    - blog.cards.four-of-swords.affirmations.affirmation_list (length mismatch)
+    - blog.cards.four-of-swords.combinations (length mismatch)
+    - blog.cards.four-of-swords.daily_practices (length mismatch)
+    - blog.cards.four-of-wands.affirmations.affirmation_list (length mismatch)
+    - blog.cards.four-of-wands.combinations (length mismatch)
+    - blog.cards.four-of-wands.daily_practices (length mismatch)
+    - blog.cards.justice.affirmations.affirmation_list (length mismatch)
+    - blog.cards.justice.combinations (length mismatch)
+    - blog.cards.justice.daily_practices (length mismatch)
+    - blog.cards.justice.numerological_perspective.insights (length mismatch)
+    - blog.cards.justice.symbolism (length mismatch)
+    - blog.cards.king-of-cups.affirmations.affirmation_list (length mismatch)
+    - blog.cards.king-of-cups.combinations (length mismatch)
+    - blog.cards.king-of-cups.daily_practices (length mismatch)
+    - blog.cards.king-of-cups.symbolism (length mismatch)
+    - blog.cards.king-of-pentacles.combinations (length mismatch)
+    - blog.cards.king-of-pentacles.daily_practices (length mismatch)
+    - blog.cards.king-of-pentacles.seo.focusKeywords (length mismatch)
+    - blog.cards.king-of-pentacles.symbolism (length mismatch)
+    - blog.cards.king-of-swords.affirmations.affirmation_list (length mismatch)
+    - blog.cards.king-of-swords.combinations (length mismatch)
+    - blog.cards.king-of-swords.daily_practices (length mismatch)
+    - blog.cards.king-of-swords.symbolism (length mismatch)
+    - blog.cards.king-of-wands.affirmations.affirmation_list (length mismatch)
+    - blog.cards.king-of-wands.combinations (length mismatch)
+    - blog.cards.king-of-wands.daily_practices (length mismatch)
+    - blog.cards.king-of-wands.symbolism (length mismatch)
+    - blog.cards.knight-of-cups.affirmations.affirmation_list (length mismatch)
+    - blog.cards.knight-of-cups.combinations (length mismatch)
+    - blog.cards.knight-of-cups.daily_practices (length mismatch)
+    - blog.cards.knight-of-cups.symbolism (length mismatch)
+    - blog.cards.knight-of-pentacles.affirmations.affirmation_list (length mismatch)
+    - blog.cards.knight-of-pentacles.combinations (length mismatch)
+    - blog.cards.knight-of-pentacles.daily_practices (length mismatch)
+    - blog.cards.knight-of-pentacles.symbolism (length mismatch)
+    - blog.cards.knight-of-swords.affirmations.affirmation_list (length mismatch)
+    - blog.cards.knight-of-swords.combinations (length mismatch)
+    - blog.cards.knight-of-swords.daily_practices (length mismatch)
+    - blog.cards.knight-of-swords.symbolism (length mismatch)
+    - blog.cards.knight-of-wands.affirmations.affirmation_list (length mismatch)
+    - blog.cards.knight-of-wands.combinations (length mismatch)
+    - blog.cards.knight-of-wands.daily_practices (length mismatch)
+    - blog.cards.knight-of-wands.symbolism (length mismatch)
+    - blog.cards.nine-of-cups.affirmations.affirmation_list (length mismatch)
+    - blog.cards.nine-of-cups.combinations (length mismatch)
+    - blog.cards.nine-of-cups.daily_practices (length mismatch)
+    - blog.cards.nine-of-cups.symbolism (length mismatch)
+    - blog.cards.nine-of-pentacles.affirmations.affirmation_list (length mismatch)
+    - blog.cards.nine-of-pentacles.combinations (length mismatch)
+    - blog.cards.nine-of-pentacles.daily_practices (length mismatch)
+    - blog.cards.nine-of-pentacles.symbolism (length mismatch)
+    - blog.cards.nine-of-swords.affirmations.affirmation_list (length mismatch)
+    - blog.cards.nine-of-swords.combinations (length mismatch)
+    - blog.cards.nine-of-swords.daily_practices (length mismatch)
+    - blog.cards.nine-of-swords.symbolism (length mismatch)
+    - blog.cards.nine-of-wands.affirmations.affirmation_list (length mismatch)
+    - blog.cards.nine-of-wands.combinations (length mismatch)
+    - blog.cards.nine-of-wands.daily_practices (length mismatch)
+    - blog.cards.nine-of-wands.seo.focusKeywords (length mismatch)
+    - blog.cards.page-of-cups.affirmations.affirmation_list (length mismatch)
+    - blog.cards.page-of-cups.combinations (length mismatch)
+    - blog.cards.page-of-cups.daily_practices (length mismatch)
+    - blog.cards.page-of-cups.symbolism (length mismatch)
+    - blog.cards.page-of-pentacles.affirmations.affirmation_list (length mismatch)
+    - blog.cards.page-of-pentacles.combinations (length mismatch)
+    - blog.cards.page-of-pentacles.daily_practices (length mismatch)
+    - blog.cards.page-of-swords.affirmations.affirmation_list (length mismatch)
+    - blog.cards.page-of-swords.combinations (length mismatch)
+    - blog.cards.page-of-swords.daily_practices (length mismatch)
+    - blog.cards.page-of-swords.symbolism (length mismatch)
+    - blog.cards.page-of-wands.affirmations.affirmation_list (length mismatch)
+    - blog.cards.page-of-wands.combinations (length mismatch)
+    - blog.cards.page-of-wands.daily_practices (length mismatch)
+    - blog.cards.page-of-wands.symbolism (length mismatch)
+    - blog.cards.queen-of-cups.affirmations.affirmation_list (length mismatch)
+    - blog.cards.queen-of-cups.combinations (length mismatch)
+    - blog.cards.queen-of-cups.daily_practices (length mismatch)
+    - blog.cards.queen-of-cups.symbolism (length mismatch)
+    - blog.cards.queen-of-pentacles.affirmations.affirmation_list (length mismatch)
+    - blog.cards.queen-of-pentacles.combinations (length mismatch)
+    - blog.cards.queen-of-pentacles.daily_practices (length mismatch)
+    - blog.cards.queen-of-pentacles.symbolism (length mismatch)
+    - blog.cards.queen-of-swords.affirmations.affirmation_list (length mismatch)
+    - blog.cards.queen-of-swords.combinations (length mismatch)
+    - blog.cards.queen-of-swords.daily_practices (length mismatch)
+    - blog.cards.queen-of-swords.symbolism (length mismatch)
+    - blog.cards.queen-of-wands.affirmations.affirmation_list (length mismatch)
+    - blog.cards.queen-of-wands.combinations (length mismatch)
+    - blog.cards.queen-of-wands.daily_practices (length mismatch)
+    - blog.cards.queen-of-wands.seo.focusKeywords (length mismatch)
+    - blog.cards.queen-of-wands.symbolism (length mismatch)
+    - blog.cards.seven-of-cups.affirmations.affirmation_list (length mismatch)
+    - blog.cards.seven-of-cups.combinations (length mismatch)
+    - blog.cards.seven-of-cups.daily_practices (length mismatch)
+    - blog.cards.seven-of-cups.symbolism (length mismatch)
+    - blog.cards.seven-of-pentacles.affirmations.affirmation_list (length mismatch)
+    - blog.cards.seven-of-pentacles.combinations (length mismatch)
+    - blog.cards.seven-of-pentacles.daily_practices (length mismatch)
+    - blog.cards.seven-of-pentacles.symbolism (length mismatch)
+    - blog.cards.seven-of-swords.affirmations.affirmation_list (length mismatch)
+    - blog.cards.seven-of-swords.combinations (length mismatch)
+    - blog.cards.seven-of-swords.daily_practices (length mismatch)
+    - blog.cards.seven-of-swords.symbolism (length mismatch)
+    - blog.cards.seven-of-wands.affirmations.affirmation_list (length mismatch)
+    - blog.cards.seven-of-wands.combinations (length mismatch)
+    - blog.cards.seven-of-wands.daily_practices (length mismatch)
+    - blog.cards.seven-of-wands.seo.focusKeywords (length mismatch)
+    - blog.cards.seven-of-wands.symbolism (length mismatch)
+    - blog.cards.six-of-cups.affirmations.affirmation_list (length mismatch)
+    - blog.cards.six-of-cups.combinations (length mismatch)
+    - blog.cards.six-of-cups.daily_practices (length mismatch)
+    - blog.cards.six-of-cups.symbolism (length mismatch)
+    - blog.cards.six-of-pentacles.affirmations.affirmation_list (length mismatch)
+    - blog.cards.six-of-pentacles.combinations (length mismatch)
+    - blog.cards.six-of-pentacles.daily_practices (length mismatch)
+    - blog.cards.six-of-pentacles.symbolism (length mismatch)
+    - blog.cards.six-of-swords.affirmations.affirmation_list (length mismatch)
+    - blog.cards.six-of-swords.combinations (length mismatch)
+    - blog.cards.six-of-swords.daily_practices (length mismatch)
+    - blog.cards.six-of-swords.symbolism (length mismatch)
+    - blog.cards.six-of-wands.affirmations.affirmation_list (length mismatch)
+    - blog.cards.six-of-wands.combinations (length mismatch)
+    - blog.cards.six-of-wands.daily_practices (length mismatch)
+    - blog.cards.six-of-wands.seo.focusKeywords (length mismatch)
+    - blog.cards.six-of-wands.symbolism (length mismatch)
+    - blog.cards.strength.affirmations.affirmation_list (length mismatch)
+    - blog.cards.strength.combinations (length mismatch)
+    - blog.cards.strength.daily_practices (length mismatch)
+    - blog.cards.strength.faq (length mismatch)
+    - blog.cards.strength.numerological_perspective.insights (length mismatch)
+    - blog.cards.temperance.affirmations.affirmation_list (length mismatch)
+    - blog.cards.temperance.combinations (length mismatch)
+    - blog.cards.temperance.daily_practices (length mismatch)
+    - blog.cards.temperance.numerological_perspective.insights (length mismatch)
+    - blog.cards.ten-of-cups.affirmations.affirmation_list (length mismatch)
+    - blog.cards.ten-of-cups.combinations (length mismatch)
+    - blog.cards.ten-of-cups.daily_practices (length mismatch)
+    - blog.cards.ten-of-cups.seo.focusKeywords (length mismatch)
+    - blog.cards.ten-of-cups.symbolism (length mismatch)
+    - blog.cards.ten-of-pentacles.affirmations.affirmation_list (length mismatch)
+    - blog.cards.ten-of-pentacles.combinations (length mismatch)
+    - blog.cards.ten-of-pentacles.daily_practices (length mismatch)
+    - blog.cards.ten-of-pentacles.symbolism (length mismatch)
+    - blog.cards.ten-of-swords.affirmations.affirmation_list (length mismatch)
+    - blog.cards.ten-of-swords.combinations (length mismatch)
+    - blog.cards.ten-of-swords.daily_practices (length mismatch)
+    - blog.cards.ten-of-swords.symbolism (length mismatch)
+    - blog.cards.ten-of-wands.affirmations.affirmation_list (length mismatch)
+    - blog.cards.ten-of-wands.combinations (length mismatch)
+    - blog.cards.ten-of-wands.daily_practices (length mismatch)
+    - blog.cards.ten-of-wands.symbolism (length mismatch)
+    - blog.cards.the-chariot.affirmations.affirmation_list (length mismatch)
+    - blog.cards.the-chariot.combinations (length mismatch)
+    - blog.cards.the-chariot.daily_practices (length mismatch)
+    - blog.cards.the-chariot.numerological_perspective.insights (length mismatch)
+    - blog.cards.the-chariot.symbolism (length mismatch)
+    - blog.cards.the-devil.affirmations.affirmation_list (length mismatch)
+    - blog.cards.the-devil.combinations (length mismatch)
+    - blog.cards.the-devil.daily_practices (length mismatch)
+    - blog.cards.the-emperor.affirmations.affirmation_list (length mismatch)
+    - blog.cards.the-emperor.combinations (length mismatch)
+    - blog.cards.the-emperor.daily_practices (length mismatch)
+    - blog.cards.the-emperor.numerological_perspective.insights (length mismatch)
+    - blog.cards.the-empress.affirmations.affirmation_list (length mismatch)
+    - blog.cards.the-empress.combinations (length mismatch)
+    - blog.cards.the-empress.daily_practices (length mismatch)
+    - blog.cards.the-empress.numerological_perspective.insights (length mismatch)
+    - blog.cards.the-fool.affirmations.affirmation_list (length mismatch)
+    - blog.cards.the-fool.combinations (length mismatch)
+    - blog.cards.the-fool.daily_practices (length mismatch)
+    - blog.cards.the-fool.numerological_perspective.insights (length mismatch)
+    - blog.cards.the-hanged-man.affirmations.affirmation_list (length mismatch)
+    - blog.cards.the-hanged-man.combinations (length mismatch)
+    - blog.cards.the-hanged-man.daily_practices (length mismatch)
+    - blog.cards.the-hanged-man.numerological_perspective.insights (length mismatch)
+    - blog.cards.the-hanged-man.symbolism (length mismatch)
+    - blog.cards.the-hermit.affirmations.affirmation_list (length mismatch)
+    - blog.cards.the-hermit.combinations (length mismatch)
+    - blog.cards.the-hermit.daily_practices (length mismatch)
+    - blog.cards.the-hermit.numerological_perspective.insights (length mismatch)
+    - blog.cards.the-hermit.seo.focusKeywords (length mismatch)
+    - blog.cards.the-hermit.symbolism (length mismatch)
+    - blog.cards.the-hierophant.affirmations.affirmation_list (length mismatch)
+    - blog.cards.the-hierophant.combinations (length mismatch)
+    - blog.cards.the-hierophant.daily_practices (length mismatch)
+    - blog.cards.the-hierophant.numerological_perspective.insights (length mismatch)
+    - blog.cards.the-hierophant.symbolism (length mismatch)
+    - blog.cards.the-high-priestess.affirmations.affirmation_list (length mismatch)
+    - blog.cards.the-high-priestess.combinations (length mismatch)
+    - blog.cards.the-high-priestess.daily_practices (length mismatch)
+    - blog.cards.the-high-priestess.numerological_perspective.insights (length mismatch)
+    - blog.cards.the-lovers.affirmations.affirmation_list (length mismatch)
+    - blog.cards.the-lovers.combinations (length mismatch)
+    - blog.cards.the-lovers.daily_practices (length mismatch)
+    - blog.cards.the-lovers.numerological_perspective.insights (length mismatch)
+    - blog.cards.the-lovers.symbolism (length mismatch)
+    - blog.cards.the-magician.affirmations.affirmation_list (length mismatch)
+    - blog.cards.the-magician.combinations (length mismatch)
+    - blog.cards.the-magician.daily_practices (length mismatch)
+    - blog.cards.the-magician.numerological_perspective.insights (length mismatch)
+    - blog.cards.the-moon.affirmations.affirmation_list (length mismatch)
+    - blog.cards.the-moon.combinations (length mismatch)
+    - blog.cards.the-moon.daily_practices (length mismatch)
+    - blog.cards.the-moon.numerological_perspective.insights (length mismatch)
+    - blog.cards.the-moon.symbolism (length mismatch)
+    - blog.cards.the-star.affirmations.affirmation_list (length mismatch)
+    - blog.cards.the-star.combinations (length mismatch)
+    - blog.cards.the-star.daily_practices (length mismatch)
+    - blog.cards.the-star.symbolism (length mismatch)
+    - blog.cards.the-sun.affirmations.affirmation_list (length mismatch)
+    - blog.cards.the-sun.combinations (length mismatch)
+    - blog.cards.the-sun.daily_practices (length mismatch)
+    - blog.cards.the-sun.numerological_perspective.insights (length mismatch)
+    - blog.cards.the-sun.seo.focusKeywords (length mismatch)
+    - blog.cards.the-sun.symbolism (length mismatch)
+    - blog.cards.the-tower.affirmations.affirmation_list (length mismatch)
+    - blog.cards.the-tower.combinations (length mismatch)
+    - blog.cards.the-tower.daily_practices (length mismatch)
+    - blog.cards.the-tower.numerological_perspective.insights (length mismatch)
+    - blog.cards.the-tower.symbolism (length mismatch)
+    - blog.cards.the-world.affirmations.affirmation_list (length mismatch)
+    - blog.cards.the-world.combinations (length mismatch)
+    - blog.cards.the-world.daily_practices (length mismatch)
+    - blog.cards.the-world.numerological_perspective.insights (length mismatch)
+    - blog.cards.the-world.symbolism (length mismatch)
+    - blog.cards.three-of-cups.affirmations.affirmation_list (length mismatch)
+    - blog.cards.three-of-cups.combinations (length mismatch)
+    - blog.cards.three-of-cups.daily_practices (length mismatch)
+    - blog.cards.three-of-cups.seo.focusKeywords (length mismatch)
+    - blog.cards.three-of-cups.symbolism (length mismatch)
+    - blog.cards.three-of-pentacles.affirmations.affirmation_list (length mismatch)
+    - blog.cards.three-of-pentacles.combinations (length mismatch)
+    - blog.cards.three-of-pentacles.daily_practices (length mismatch)
+    - blog.cards.three-of-pentacles.symbolism (length mismatch)
+    - blog.cards.three-of-swords.affirmations.affirmation_list (length mismatch)
+    - blog.cards.three-of-swords.combinations (length mismatch)
+    - blog.cards.three-of-swords.daily_practices (length mismatch)
+    - blog.cards.three-of-wands.affirmations.affirmation_list (length mismatch)
+    - blog.cards.three-of-wands.combinations (length mismatch)
+    - blog.cards.three-of-wands.daily_practices (length mismatch)
+    - blog.cards.two-of-cups.affirmations.affirmation_list (length mismatch)
+    - blog.cards.two-of-cups.combinations (length mismatch)
+    - blog.cards.two-of-cups.daily_practices (length mismatch)
+    - blog.cards.two-of-cups.seo.focusKeywords (length mismatch)
+    - blog.cards.two-of-cups.symbolism (length mismatch)
+    - blog.cards.two-of-pentacles.affirmations.affirmation_list (length mismatch)
+    - blog.cards.two-of-pentacles.combinations (length mismatch)
+    - blog.cards.two-of-pentacles.daily_practices (length mismatch)
+    - blog.cards.two-of-pentacles.symbolism (length mismatch)
+    - blog.cards.two-of-swords.affirmations.affirmation_list (length mismatch)
+    - blog.cards.two-of-swords.combinations (length mismatch)
+    - blog.cards.two-of-swords.daily_practices (length mismatch)
+    - blog.cards.two-of-wands.affirmations.affirmation_list (length mismatch)
+    - blog.cards.two-of-wands.combinations (length mismatch)
+    - blog.cards.two-of-wands.daily_practices (length mismatch)
+    - blog.cards.two-of-wands.symbolism (length mismatch)
+    - blog.cards.wheeloffortune.affirmations.affirmation_list (length mismatch)
+    - blog.cards.wheeloffortune.combinations (length mismatch)
+    - blog.cards.wheeloffortune.daily_practices (length mismatch)
+    - blog.cards.wheeloffortune.numerological_perspective.insights (length mismatch)
+    - blog.common.iliskinin-uzun-vaJoker
+
+📁 Kategori: career (5 adet)
+    - career.form.birthDateUnknown
+    - career.form.relationshipStatus
+    - career.form.relationshipStatusOptions
+    - career.form.selectRelationshipStatus
+    - career.validation.relationshipStatusRequired
+
+📁 Kategori: common (1 adet)
+    - common.iliskinin-uzun-vaJoker
+
+📁 Kategori: love (4 adet)
+    - love.form.birthDateUnknown
+    - love.form.relationshipStatus
+    - love.form.relationshipStatusOptions
+    - love.form.selectRelationshipStatus
+
+📁 Kategori: marriage (4 adet)
+    - marriage.form.birthDateUnknown
+    - marriage.form.relationshipStatus
+    - marriage.form.relationshipStatusOptions
+    - marriage.form.selectRelationshipStatus
+
+📁 Kategori: messages (3 adet)
+    - messages.tarot.page.allSpreads
+    - messages.tarot.page.startReading
+    - messages.tarot.spread
+
+📁 Kategori: newLover (4 adet)
+    - newLover.form.birthDateUnknown
+    - newLover.form.relationshipStatus
+    - newLover.form.relationshipStatusOptions
+    - newLover.form.selectRelationshipStatus
+
+📁 Kategori: relationshipAnalysis (5 adet)
+    - relationshipAnalysis.form.birthDateUnknown
+    - relationshipAnalysis.form.relationshipStatus
+    - relationshipAnalysis.form.relationshipStatusOptions
+    - relationshipAnalysis.form.selectRelationshipStatus
+    - relationshipAnalysis.messages
+
+➕ FAZLA ANAHTARLAR: 6 adet
+----------------------------------------------------------------------------------------------------
+
+📁 Kategori: blog (3 adet)
+    - blog.cards.king-of-pentacles.affirmations.description
+    - blog.cards.the-empress.context.celtic_cross
+    - blog.common.iliskinin-uzun-vadeli
+
+📁 Kategori: common (1 adet)
+    - common.iliskinin-uzun-vadeli
+
+📁 Kategori: problemSolving (1 adet)
+    - problemSolving.form.placeholders.lastName
+
+📁 Kategori: root (1 adet)
+    - aboutPage
+
+📋 EN.json KATEGORİ ÖZETİ
+----------------------------------------------------------------------------------------------------
+Kategori                       Eksik           Fazla          
+----------------------------------------------------------------------------------------------------
+blog                           324             3              
+career                         5               0              
+common                         1               1              
+love                           4               0              
+marriage                       4               0              
+messages                       3               0              
+newLover                       4               0              
+problemSolving                 0               1              
+relationshipAnalysis           5               0              
+root                           0               1              
+
+====================================================================================================
+📊 SR.json DETAYLI ANALİZ
+====================================================================================================
+
+❌ EKSİK ANAHTARLAR: 1056 adet
+----------------------------------------------------------------------------------------------------
+
+📁 Kategori: blog (1015 adet)
+    - blog.cards.Judgement.affirmations.affirmation_list (length mismatch)
+    - blog.cards.Judgement.affirmations.description
+    - blog.cards.Judgement.closing_paragraph
+    - blog.cards.Judgement.combinations
+    - blog.cards.Judgement.context.history
+    - blog.cards.Judgement.daily_practices
+    - blog.cards.Judgement.faq (length mismatch)
+    - blog.cards.Judgement.image_gallery
+    - blog.cards.Judgement.numerological_perspective
+    - blog.cards.Judgement.numerology
+    - blog.cards.Judgement.related_cards (length mismatch)
+    - blog.cards.Judgement.seo
+    - blog.cards.Judgement.symbolism
+    - blog.cards.ace-of-cups.affirmations.affirmation_list (length mismatch)
+    - blog.cards.ace-of-cups.affirmations.description
+    - blog.cards.ace-of-cups.closing_paragraph
+    - blog.cards.ace-of-cups.combinations
+    - blog.cards.ace-of-cups.context.history
+    - blog.cards.ace-of-cups.daily_practices
+    - blog.cards.ace-of-cups.faq (length mismatch)
+    - blog.cards.ace-of-cups.image_gallery
+    - blog.cards.ace-of-cups.numerological_perspective
+    - blog.cards.ace-of-cups.numerology
+    - blog.cards.ace-of-cups.related_cards (length mismatch)
+    - blog.cards.ace-of-cups.seo
+    - blog.cards.ace-of-cups.symbolism
+    - blog.cards.ace-of-pentacles.affirmations.affirmation_list (length mismatch)
+    - blog.cards.ace-of-pentacles.affirmations.description
+    - blog.cards.ace-of-pentacles.closing_paragraph
+    - blog.cards.ace-of-pentacles.combinations
+    - blog.cards.ace-of-pentacles.context.history
+    - blog.cards.ace-of-pentacles.daily_practices
+    - blog.cards.ace-of-pentacles.faq (length mismatch)
+    - blog.cards.ace-of-pentacles.image_gallery
+    - blog.cards.ace-of-pentacles.numerological_perspective
+    - blog.cards.ace-of-pentacles.numerology
+    - blog.cards.ace-of-pentacles.related_cards (length mismatch)
+    - blog.cards.ace-of-pentacles.seo
+    - blog.cards.ace-of-pentacles.symbolism
+    - blog.cards.ace-of-swords.affirmations.affirmation_list (length mismatch)
+    - blog.cards.ace-of-swords.affirmations.description
+    - blog.cards.ace-of-swords.closing_paragraph
+    - blog.cards.ace-of-swords.combinations
+    - blog.cards.ace-of-swords.context.history
+    - blog.cards.ace-of-swords.daily_practices
+    - blog.cards.ace-of-swords.faq (length mismatch)
+    - blog.cards.ace-of-swords.image_gallery
+    - blog.cards.ace-of-swords.numerological_perspective
+    - blog.cards.ace-of-swords.numerology
+    - blog.cards.ace-of-swords.related_cards (length mismatch)
+    - blog.cards.ace-of-swords.seo
+    - blog.cards.ace-of-swords.symbolism
+    - blog.cards.ace-of-wands.affirmations.affirmation_list (length mismatch)
+    - blog.cards.ace-of-wands.affirmations.description
+    - blog.cards.ace-of-wands.closing_paragraph
+    - blog.cards.ace-of-wands.combinations
+    - blog.cards.ace-of-wands.context.history
+    - blog.cards.ace-of-wands.daily_practices
+    - blog.cards.ace-of-wands.faq (length mismatch)
+    - blog.cards.ace-of-wands.image_gallery
+    - blog.cards.ace-of-wands.numerological_perspective
+    - blog.cards.ace-of-wands.numerology
+    - blog.cards.ace-of-wands.related_cards (length mismatch)
+    - blog.cards.ace-of-wands.seo
+    - blog.cards.ace-of-wands.symbolism
+    - blog.cards.death.affirmations.affirmation_list (length mismatch)
+    - blog.cards.death.affirmations.description
+    - blog.cards.death.closing_paragraph
+    - blog.cards.death.combinations
+    - blog.cards.death.context.history
+    - blog.cards.death.daily_practices
+    - blog.cards.death.faq (length mismatch)
+    - blog.cards.death.image_gallery
+    - blog.cards.death.numerological_perspective
+    - blog.cards.death.numerology
+    - blog.cards.death.related_cards (length mismatch)
+    - blog.cards.death.seo
+    - blog.cards.death.symbolism
+    - blog.cards.eight-of-cups.affirmations.affirmation_list (length mismatch)
+    - blog.cards.eight-of-cups.affirmations.description
+    - blog.cards.eight-of-cups.closing_paragraph
+    - blog.cards.eight-of-cups.combinations
+    - blog.cards.eight-of-cups.context.history
+    - blog.cards.eight-of-cups.daily_practices
+    - blog.cards.eight-of-cups.faq (length mismatch)
+    - blog.cards.eight-of-cups.image_gallery
+    - blog.cards.eight-of-cups.numerological_perspective
+    - blog.cards.eight-of-cups.numerology
+    - blog.cards.eight-of-cups.related_cards (length mismatch)
+    - blog.cards.eight-of-cups.seo
+    - blog.cards.eight-of-cups.symbolism
+    - blog.cards.eight-of-pentacles.affirmations.affirmation_list (length mismatch)
+    - blog.cards.eight-of-pentacles.affirmations.description
+    - blog.cards.eight-of-pentacles.closing_paragraph
+    - blog.cards.eight-of-pentacles.combinations
+    - blog.cards.eight-of-pentacles.context.history
+    - blog.cards.eight-of-pentacles.daily_practices
+    - blog.cards.eight-of-pentacles.faq (length mismatch)
+    - blog.cards.eight-of-pentacles.image_gallery
+    - blog.cards.eight-of-pentacles.numerological_perspective
+    - blog.cards.eight-of-pentacles.numerology
+    - blog.cards.eight-of-pentacles.related_cards (length mismatch)
+    - blog.cards.eight-of-pentacles.seo
+    - blog.cards.eight-of-pentacles.symbolism
+    - blog.cards.eight-of-swords.affirmations.affirmation_list (length mismatch)
+    - blog.cards.eight-of-swords.affirmations.description
+    - blog.cards.eight-of-swords.closing_paragraph
+    - blog.cards.eight-of-swords.combinations
+    - blog.cards.eight-of-swords.context.history
+    - blog.cards.eight-of-swords.daily_practices
+    - blog.cards.eight-of-swords.faq (length mismatch)
+    - blog.cards.eight-of-swords.image_gallery
+    - blog.cards.eight-of-swords.numerological_perspective
+    - blog.cards.eight-of-swords.numerology
+    - blog.cards.eight-of-swords.related_cards (length mismatch)
+    - blog.cards.eight-of-swords.seo
+    - blog.cards.eight-of-swords.symbolism
+    - blog.cards.eight-of-wands.affirmations.affirmation_list (length mismatch)
+    - blog.cards.eight-of-wands.affirmations.description
+    - blog.cards.eight-of-wands.closing_paragraph
+    - blog.cards.eight-of-wands.combinations
+    - blog.cards.eight-of-wands.context.history
+    - blog.cards.eight-of-wands.daily_practices
+    - blog.cards.eight-of-wands.faq (length mismatch)
+    - blog.cards.eight-of-wands.image_gallery
+    - blog.cards.eight-of-wands.numerological_perspective
+    - blog.cards.eight-of-wands.numerology
+    - blog.cards.eight-of-wands.related_cards (length mismatch)
+    - blog.cards.eight-of-wands.seo
+    - blog.cards.eight-of-wands.symbolism
+    - blog.cards.five-of-cups.affirmations.affirmation_list (length mismatch)
+    - blog.cards.five-of-cups.affirmations.description
+    - blog.cards.five-of-cups.closing_paragraph
+    - blog.cards.five-of-cups.combinations
+    - blog.cards.five-of-cups.context.history
+    - blog.cards.five-of-cups.daily_practices
+    - blog.cards.five-of-cups.faq (length mismatch)
+    - blog.cards.five-of-cups.image_gallery
+    - blog.cards.five-of-cups.numerological_perspective
+    - blog.cards.five-of-cups.numerology
+    - blog.cards.five-of-cups.related_cards (length mismatch)
+    - blog.cards.five-of-cups.seo
+    - blog.cards.five-of-cups.symbolism
+    - blog.cards.five-of-pentacles.affirmations.affirmation_list (length mismatch)
+    - blog.cards.five-of-pentacles.affirmations.description
+    - blog.cards.five-of-pentacles.closing_paragraph
+    - blog.cards.five-of-pentacles.combinations
+    - blog.cards.five-of-pentacles.context.history
+    - blog.cards.five-of-pentacles.daily_practices
+    - blog.cards.five-of-pentacles.faq (length mismatch)
+    - blog.cards.five-of-pentacles.image_gallery
+    - blog.cards.five-of-pentacles.numerological_perspective
+    - blog.cards.five-of-pentacles.numerology
+    - blog.cards.five-of-pentacles.related_cards (length mismatch)
+    - blog.cards.five-of-pentacles.seo
+    - blog.cards.five-of-pentacles.symbolism
+    - blog.cards.five-of-swords.affirmations.affirmation_list (length mismatch)
+    - blog.cards.five-of-swords.affirmations.description
+    - blog.cards.five-of-swords.closing_paragraph
+    - blog.cards.five-of-swords.combinations
+    - blog.cards.five-of-swords.context.history
+    - blog.cards.five-of-swords.daily_practices
+    - blog.cards.five-of-swords.faq (length mismatch)
+    - blog.cards.five-of-swords.image_gallery
+    - blog.cards.five-of-swords.numerological_perspective
+    - blog.cards.five-of-swords.numerology
+    - blog.cards.five-of-swords.related_cards (length mismatch)
+    - blog.cards.five-of-swords.seo
+    - blog.cards.five-of-swords.symbolism
+    - blog.cards.five-of-wands.affirmations.affirmation_list (length mismatch)
+    - blog.cards.five-of-wands.affirmations.description
+    - blog.cards.five-of-wands.closing_paragraph
+    - blog.cards.five-of-wands.combinations
+    - blog.cards.five-of-wands.context.history
+    - blog.cards.five-of-wands.daily_practices
+    - blog.cards.five-of-wands.faq (length mismatch)
+    - blog.cards.five-of-wands.image_gallery
+    - blog.cards.five-of-wands.numerological_perspective
+    - blog.cards.five-of-wands.numerology
+    - blog.cards.five-of-wands.related_cards (length mismatch)
+    - blog.cards.five-of-wands.seo
+    - blog.cards.five-of-wands.symbolism
+    - blog.cards.four-of-cups.affirmations.affirmation_list (length mismatch)
+    - blog.cards.four-of-cups.affirmations.description
+    - blog.cards.four-of-cups.closing_paragraph
+    - blog.cards.four-of-cups.combinations
+    - blog.cards.four-of-cups.context.history
+    - blog.cards.four-of-cups.daily_practices
+    - blog.cards.four-of-cups.faq (length mismatch)
+    - blog.cards.four-of-cups.image_gallery
+    - blog.cards.four-of-cups.numerological_perspective
+    - blog.cards.four-of-cups.numerology
+    - blog.cards.four-of-cups.related_cards (length mismatch)
+    - blog.cards.four-of-cups.seo
+    - blog.cards.four-of-cups.symbolism
+    - blog.cards.four-of-pentacles.affirmations.affirmation_list (length mismatch)
+    - blog.cards.four-of-pentacles.affirmations.description
+    - blog.cards.four-of-pentacles.closing_paragraph
+    - blog.cards.four-of-pentacles.combinations
+    - blog.cards.four-of-pentacles.context.history
+    - blog.cards.four-of-pentacles.daily_practices
+    - blog.cards.four-of-pentacles.faq (length mismatch)
+    - blog.cards.four-of-pentacles.image_gallery
+    - blog.cards.four-of-pentacles.numerological_perspective
+    - blog.cards.four-of-pentacles.numerology
+    - blog.cards.four-of-pentacles.related_cards (length mismatch)
+    - blog.cards.four-of-pentacles.seo
+    - blog.cards.four-of-pentacles.symbolism
+    - blog.cards.four-of-swords.affirmations.affirmation_list (length mismatch)
+    - blog.cards.four-of-swords.affirmations.description
+    - blog.cards.four-of-swords.closing_paragraph
+    - blog.cards.four-of-swords.combinations
+    - blog.cards.four-of-swords.context.history
+    - blog.cards.four-of-swords.daily_practices
+    - blog.cards.four-of-swords.faq (length mismatch)
+    - blog.cards.four-of-swords.image_gallery
+    - blog.cards.four-of-swords.numerological_perspective
+    - blog.cards.four-of-swords.numerology
+    - blog.cards.four-of-swords.related_cards (length mismatch)
+    - blog.cards.four-of-swords.seo
+    - blog.cards.four-of-swords.symbolism
+    - blog.cards.four-of-wands.affirmations.affirmation_list (length mismatch)
+    - blog.cards.four-of-wands.affirmations.description
+    - blog.cards.four-of-wands.closing_paragraph
+    - blog.cards.four-of-wands.combinations
+    - blog.cards.four-of-wands.context.history
+    - blog.cards.four-of-wands.daily_practices
+    - blog.cards.four-of-wands.faq (length mismatch)
+    - blog.cards.four-of-wands.image_gallery
+    - blog.cards.four-of-wands.numerological_perspective
+    - blog.cards.four-of-wands.numerology
+    - blog.cards.four-of-wands.related_cards (length mismatch)
+    - blog.cards.four-of-wands.seo
+    - blog.cards.four-of-wands.symbolism
+    - blog.cards.justice.affirmations.affirmation_list (length mismatch)
+    - blog.cards.justice.affirmations.description
+    - blog.cards.justice.closing_paragraph
+    - blog.cards.justice.combinations
+    - blog.cards.justice.context.history
+    - blog.cards.justice.daily_practices
+    - blog.cards.justice.faq (length mismatch)
+    - blog.cards.justice.image_gallery
+    - blog.cards.justice.numerological_perspective
+    - blog.cards.justice.numerology
+    - blog.cards.justice.related_cards (length mismatch)
+    - blog.cards.justice.seo
+    - blog.cards.justice.symbolism
+    - blog.cards.king-of-cups.affirmations.affirmation_list (length mismatch)
+    - blog.cards.king-of-cups.affirmations.description
+    - blog.cards.king-of-cups.closing_paragraph
+    - blog.cards.king-of-cups.combinations
+    - blog.cards.king-of-cups.context.history
+    - blog.cards.king-of-cups.daily_practices
+    - blog.cards.king-of-cups.faq (length mismatch)
+    - blog.cards.king-of-cups.image_gallery
+    - blog.cards.king-of-cups.numerological_perspective
+    - blog.cards.king-of-cups.numerology
+    - blog.cards.king-of-cups.related_cards (length mismatch)
+    - blog.cards.king-of-cups.seo
+    - blog.cards.king-of-cups.symbolism
+    - blog.cards.king-of-pentacles.affirmations.affirmation_list (length mismatch)
+    - blog.cards.king-of-pentacles.closing_paragraph
+    - blog.cards.king-of-pentacles.combinations
+    - blog.cards.king-of-pentacles.context.history
+    - blog.cards.king-of-pentacles.daily_practices
+    - blog.cards.king-of-pentacles.faq (length mismatch)
+    - blog.cards.king-of-pentacles.image_gallery
+    - blog.cards.king-of-pentacles.numerological_perspective
+    - blog.cards.king-of-pentacles.numerology
+    - blog.cards.king-of-pentacles.related_cards (length mismatch)
+    - blog.cards.king-of-pentacles.seo
+    - blog.cards.king-of-pentacles.symbolism
+    - blog.cards.king-of-swords.affirmations.affirmation_list (length mismatch)
+    - blog.cards.king-of-swords.affirmations.description
+    - blog.cards.king-of-swords.closing_paragraph
+    - blog.cards.king-of-swords.combinations
+    - blog.cards.king-of-swords.context.history
+    - blog.cards.king-of-swords.daily_practices
+    - blog.cards.king-of-swords.faq (length mismatch)
+    - blog.cards.king-of-swords.image_gallery
+    - blog.cards.king-of-swords.numerological_perspective
+    - blog.cards.king-of-swords.numerology
+    - blog.cards.king-of-swords.related_cards (length mismatch)
+    - blog.cards.king-of-swords.seo
+    - blog.cards.king-of-swords.symbolism
+    - blog.cards.king-of-wands.affirmations.affirmation_list (length mismatch)
+    - blog.cards.king-of-wands.affirmations.description
+    - blog.cards.king-of-wands.closing_paragraph
+    - blog.cards.king-of-wands.combinations
+    - blog.cards.king-of-wands.context.history
+    - blog.cards.king-of-wands.daily_practices
+    - blog.cards.king-of-wands.faq (length mismatch)
+    - blog.cards.king-of-wands.image_gallery
+    - blog.cards.king-of-wands.numerological_perspective
+    - blog.cards.king-of-wands.numerology
+    - blog.cards.king-of-wands.related_cards (length mismatch)
+    - blog.cards.king-of-wands.seo
+    - blog.cards.king-of-wands.symbolism
+    - blog.cards.knight-of-cups.affirmations.affirmation_list (length mismatch)
+    - blog.cards.knight-of-cups.affirmations.description
+    - blog.cards.knight-of-cups.closing_paragraph
+    - blog.cards.knight-of-cups.combinations
+    - blog.cards.knight-of-cups.context.history
+    - blog.cards.knight-of-cups.daily_practices
+    - blog.cards.knight-of-cups.faq (length mismatch)
+    - blog.cards.knight-of-cups.image_gallery
+    - blog.cards.knight-of-cups.numerological_perspective
+    - blog.cards.knight-of-cups.numerology
+    - blog.cards.knight-of-cups.related_cards (length mismatch)
+    - blog.cards.knight-of-cups.seo
+    - blog.cards.knight-of-cups.symbolism
+    - blog.cards.knight-of-pentacles.affirmations.affirmation_list (length mismatch)
+    - blog.cards.knight-of-pentacles.affirmations.description
+    - blog.cards.knight-of-pentacles.closing_paragraph
+    - blog.cards.knight-of-pentacles.combinations
+    - blog.cards.knight-of-pentacles.context.history
+    - blog.cards.knight-of-pentacles.daily_practices
+    - blog.cards.knight-of-pentacles.faq (length mismatch)
+    - blog.cards.knight-of-pentacles.image_gallery
+    - blog.cards.knight-of-pentacles.numerological_perspective
+    - blog.cards.knight-of-pentacles.numerology
+    - blog.cards.knight-of-pentacles.related_cards (length mismatch)
+    - blog.cards.knight-of-pentacles.seo
+    - blog.cards.knight-of-pentacles.symbolism
+    - blog.cards.knight-of-swords.affirmations.affirmation_list (length mismatch)
+    - blog.cards.knight-of-swords.affirmations.description
+    - blog.cards.knight-of-swords.closing_paragraph
+    - blog.cards.knight-of-swords.combinations
+    - blog.cards.knight-of-swords.context.history
+    - blog.cards.knight-of-swords.daily_practices
+    - blog.cards.knight-of-swords.faq (length mismatch)
+    - blog.cards.knight-of-swords.image_gallery
+    - blog.cards.knight-of-swords.numerological_perspective
+    - blog.cards.knight-of-swords.numerology
+    - blog.cards.knight-of-swords.related_cards (length mismatch)
+    - blog.cards.knight-of-swords.seo
+    - blog.cards.knight-of-swords.symbolism
+    - blog.cards.knight-of-wands.affirmations.affirmation_list (length mismatch)
+    - blog.cards.knight-of-wands.affirmations.description
+    - blog.cards.knight-of-wands.closing_paragraph
+    - blog.cards.knight-of-wands.combinations
+    - blog.cards.knight-of-wands.context.history
+    - blog.cards.knight-of-wands.daily_practices
+    - blog.cards.knight-of-wands.faq (length mismatch)
+    - blog.cards.knight-of-wands.image_gallery
+    - blog.cards.knight-of-wands.numerological_perspective
+    - blog.cards.knight-of-wands.numerology
+    - blog.cards.knight-of-wands.related_cards (length mismatch)
+    - blog.cards.knight-of-wands.seo
+    - blog.cards.knight-of-wands.symbolism
+    - blog.cards.nine-of-cups.affirmations.affirmation_list (length mismatch)
+    - blog.cards.nine-of-cups.affirmations.description
+    - blog.cards.nine-of-cups.closing_paragraph
+    - blog.cards.nine-of-cups.combinations
+    - blog.cards.nine-of-cups.context.history
+    - blog.cards.nine-of-cups.daily_practices
+    - blog.cards.nine-of-cups.faq (length mismatch)
+    - blog.cards.nine-of-cups.image_gallery
+    - blog.cards.nine-of-cups.numerological_perspective
+    - blog.cards.nine-of-cups.numerology
+    - blog.cards.nine-of-cups.related_cards (length mismatch)
+    - blog.cards.nine-of-cups.seo
+    - blog.cards.nine-of-cups.symbolism
+    - blog.cards.nine-of-pentacles.affirmations.affirmation_list (length mismatch)
+    - blog.cards.nine-of-pentacles.affirmations.description
+    - blog.cards.nine-of-pentacles.closing_paragraph
+    - blog.cards.nine-of-pentacles.combinations
+    - blog.cards.nine-of-pentacles.context.history
+    - blog.cards.nine-of-pentacles.daily_practices
+    - blog.cards.nine-of-pentacles.faq (length mismatch)
+    - blog.cards.nine-of-pentacles.image_gallery
+    - blog.cards.nine-of-pentacles.numerological_perspective
+    - blog.cards.nine-of-pentacles.numerology
+    - blog.cards.nine-of-pentacles.related_cards (length mismatch)
+    - blog.cards.nine-of-pentacles.seo
+    - blog.cards.nine-of-pentacles.symbolism
+    - blog.cards.nine-of-swords.affirmations.affirmation_list (length mismatch)
+    - blog.cards.nine-of-swords.affirmations.description
+    - blog.cards.nine-of-swords.closing_paragraph
+    - blog.cards.nine-of-swords.combinations
+    - blog.cards.nine-of-swords.context.history
+    - blog.cards.nine-of-swords.daily_practices
+    - blog.cards.nine-of-swords.faq (length mismatch)
+    - blog.cards.nine-of-swords.image_gallery
+    - blog.cards.nine-of-swords.numerological_perspective
+    - blog.cards.nine-of-swords.numerology
+    - blog.cards.nine-of-swords.related_cards (length mismatch)
+    - blog.cards.nine-of-swords.seo
+    - blog.cards.nine-of-swords.symbolism
+    - blog.cards.nine-of-wands.affirmations.affirmation_list (length mismatch)
+    - blog.cards.nine-of-wands.affirmations.description
+    - blog.cards.nine-of-wands.closing_paragraph
+    - blog.cards.nine-of-wands.combinations
+    - blog.cards.nine-of-wands.context.history
+    - blog.cards.nine-of-wands.daily_practices
+    - blog.cards.nine-of-wands.faq (length mismatch)
+    - blog.cards.nine-of-wands.image_gallery
+    - blog.cards.nine-of-wands.numerological_perspective
+    - blog.cards.nine-of-wands.numerology
+    - blog.cards.nine-of-wands.related_cards (length mismatch)
+    - blog.cards.nine-of-wands.seo
+    - blog.cards.nine-of-wands.symbolism
+    - blog.cards.page-of-cups.affirmations.affirmation_list (length mismatch)
+    - blog.cards.page-of-cups.affirmations.description
+    - blog.cards.page-of-cups.closing_paragraph
+    - blog.cards.page-of-cups.combinations
+    - blog.cards.page-of-cups.context.history
+    - blog.cards.page-of-cups.daily_practices
+    - blog.cards.page-of-cups.faq (length mismatch)
+    - blog.cards.page-of-cups.image_gallery
+    - blog.cards.page-of-cups.numerological_perspective
+    - blog.cards.page-of-cups.numerology
+    - blog.cards.page-of-cups.related_cards (length mismatch)
+    - blog.cards.page-of-cups.seo
+    - blog.cards.page-of-cups.symbolism
+    - blog.cards.page-of-pentacles.affirmations.affirmation_list (length mismatch)
+    - blog.cards.page-of-pentacles.affirmations.description
+    - blog.cards.page-of-pentacles.closing_paragraph
+    - blog.cards.page-of-pentacles.combinations
+    - blog.cards.page-of-pentacles.context.history
+    - blog.cards.page-of-pentacles.daily_practices
+    - blog.cards.page-of-pentacles.faq (length mismatch)
+    - blog.cards.page-of-pentacles.image_gallery
+    - blog.cards.page-of-pentacles.numerological_perspective
+    - blog.cards.page-of-pentacles.numerology
+    - blog.cards.page-of-pentacles.related_cards (length mismatch)
+    - blog.cards.page-of-pentacles.seo
+    - blog.cards.page-of-pentacles.symbolism
+    - blog.cards.page-of-swords.affirmations.affirmation_list (length mismatch)
+    - blog.cards.page-of-swords.affirmations.description
+    - blog.cards.page-of-swords.closing_paragraph
+    - blog.cards.page-of-swords.combinations
+    - blog.cards.page-of-swords.context.history
+    - blog.cards.page-of-swords.daily_practices
+    - blog.cards.page-of-swords.faq (length mismatch)
+    - blog.cards.page-of-swords.image_gallery
+    - blog.cards.page-of-swords.numerological_perspective
+    - blog.cards.page-of-swords.numerology
+    - blog.cards.page-of-swords.related_cards (length mismatch)
+    - blog.cards.page-of-swords.seo
+    - blog.cards.page-of-swords.symbolism
+    - blog.cards.page-of-wands.affirmations.affirmation_list (length mismatch)
+    - blog.cards.page-of-wands.affirmations.description
+    - blog.cards.page-of-wands.closing_paragraph
+    - blog.cards.page-of-wands.combinations
+    - blog.cards.page-of-wands.context.history
+    - blog.cards.page-of-wands.daily_practices
+    - blog.cards.page-of-wands.faq (length mismatch)
+    - blog.cards.page-of-wands.image_gallery
+    - blog.cards.page-of-wands.numerological_perspective
+    - blog.cards.page-of-wands.numerology
+    - blog.cards.page-of-wands.related_cards (length mismatch)
+    - blog.cards.page-of-wands.seo
+    - blog.cards.page-of-wands.symbolism
+    - blog.cards.queen-of-cups.affirmations.affirmation_list (length mismatch)
+    - blog.cards.queen-of-cups.affirmations.description
+    - blog.cards.queen-of-cups.closing_paragraph
+    - blog.cards.queen-of-cups.combinations
+    - blog.cards.queen-of-cups.context.history
+    - blog.cards.queen-of-cups.daily_practices
+    - blog.cards.queen-of-cups.faq (length mismatch)
+    - blog.cards.queen-of-cups.image_gallery
+    - blog.cards.queen-of-cups.numerological_perspective
+    - blog.cards.queen-of-cups.numerology
+    - blog.cards.queen-of-cups.related_cards (length mismatch)
+    - blog.cards.queen-of-cups.seo
+    - blog.cards.queen-of-cups.symbolism
+    - blog.cards.queen-of-pentacles.affirmations.affirmation_list (length mismatch)
+    - blog.cards.queen-of-pentacles.affirmations.description
+    - blog.cards.queen-of-pentacles.closing_paragraph
+    - blog.cards.queen-of-pentacles.combinations
+    - blog.cards.queen-of-pentacles.context.history
+    - blog.cards.queen-of-pentacles.daily_practices
+    - blog.cards.queen-of-pentacles.faq (length mismatch)
+    - blog.cards.queen-of-pentacles.image_gallery
+    - blog.cards.queen-of-pentacles.numerological_perspective
+    - blog.cards.queen-of-pentacles.numerology
+    - blog.cards.queen-of-pentacles.related_cards (length mismatch)
+    - blog.cards.queen-of-pentacles.seo
+    - blog.cards.queen-of-pentacles.symbolism
+    - blog.cards.queen-of-swords.affirmations.affirmation_list (length mismatch)
+    - blog.cards.queen-of-swords.affirmations.description
+    - blog.cards.queen-of-swords.closing_paragraph
+    - blog.cards.queen-of-swords.combinations
+    - blog.cards.queen-of-swords.context.history
+    - blog.cards.queen-of-swords.daily_practices
+    - blog.cards.queen-of-swords.faq (length mismatch)
+    - blog.cards.queen-of-swords.image_gallery
+    - blog.cards.queen-of-swords.numerological_perspective
+    - blog.cards.queen-of-swords.numerology
+    - blog.cards.queen-of-swords.related_cards (length mismatch)
+    - blog.cards.queen-of-swords.seo
+    - blog.cards.queen-of-swords.symbolism
+    - blog.cards.queen-of-wands.affirmations.affirmation_list (length mismatch)
+    - blog.cards.queen-of-wands.affirmations.description
+    - blog.cards.queen-of-wands.closing_paragraph
+    - blog.cards.queen-of-wands.combinations
+    - blog.cards.queen-of-wands.context.history
+    - blog.cards.queen-of-wands.daily_practices
+    - blog.cards.queen-of-wands.faq (length mismatch)
+    - blog.cards.queen-of-wands.image_gallery
+    - blog.cards.queen-of-wands.numerological_perspective
+    - blog.cards.queen-of-wands.numerology
+    - blog.cards.queen-of-wands.related_cards (length mismatch)
+    - blog.cards.queen-of-wands.seo
+    - blog.cards.queen-of-wands.symbolism
+    - blog.cards.seven-of-cups.affirmations.affirmation_list (length mismatch)
+    - blog.cards.seven-of-cups.affirmations.description
+    - blog.cards.seven-of-cups.closing_paragraph
+    - blog.cards.seven-of-cups.combinations
+    - blog.cards.seven-of-cups.context.history
+    - blog.cards.seven-of-cups.daily_practices
+    - blog.cards.seven-of-cups.faq (length mismatch)
+    - blog.cards.seven-of-cups.image_gallery
+    - blog.cards.seven-of-cups.numerological_perspective
+    - blog.cards.seven-of-cups.numerology
+    - blog.cards.seven-of-cups.related_cards (length mismatch)
+    - blog.cards.seven-of-cups.seo
+    - blog.cards.seven-of-cups.symbolism
+    - blog.cards.seven-of-pentacles.affirmations.affirmation_list (length mismatch)
+    - blog.cards.seven-of-pentacles.affirmations.description
+    - blog.cards.seven-of-pentacles.closing_paragraph
+    - blog.cards.seven-of-pentacles.combinations
+    - blog.cards.seven-of-pentacles.context.history
+    - blog.cards.seven-of-pentacles.daily_practices
+    - blog.cards.seven-of-pentacles.faq (length mismatch)
+    - blog.cards.seven-of-pentacles.image_gallery
+    - blog.cards.seven-of-pentacles.numerological_perspective
+    - blog.cards.seven-of-pentacles.numerology
+    - blog.cards.seven-of-pentacles.related_cards (length mismatch)
+    - blog.cards.seven-of-pentacles.seo
+    - blog.cards.seven-of-pentacles.symbolism
+    - blog.cards.seven-of-swords.affirmations.affirmation_list (length mismatch)
+    - blog.cards.seven-of-swords.affirmations.description
+    - blog.cards.seven-of-swords.closing_paragraph
+    - blog.cards.seven-of-swords.combinations
+    - blog.cards.seven-of-swords.context.history
+    - blog.cards.seven-of-swords.daily_practices
+    - blog.cards.seven-of-swords.faq (length mismatch)
+    - blog.cards.seven-of-swords.image_gallery
+    - blog.cards.seven-of-swords.numerological_perspective
+    - blog.cards.seven-of-swords.numerology
+    - blog.cards.seven-of-swords.related_cards (length mismatch)
+    - blog.cards.seven-of-swords.seo
+    - blog.cards.seven-of-swords.symbolism
+    - blog.cards.seven-of-wands.affirmations.affirmation_list (length mismatch)
+    - blog.cards.seven-of-wands.affirmations.description
+    - blog.cards.seven-of-wands.closing_paragraph
+    - blog.cards.seven-of-wands.combinations
+    - blog.cards.seven-of-wands.context.history
+    - blog.cards.seven-of-wands.daily_practices
+    - blog.cards.seven-of-wands.faq (length mismatch)
+    - blog.cards.seven-of-wands.image_gallery
+    - blog.cards.seven-of-wands.numerological_perspective
+    - blog.cards.seven-of-wands.numerology
+    - blog.cards.seven-of-wands.related_cards (length mismatch)
+    - blog.cards.seven-of-wands.seo
+    - blog.cards.seven-of-wands.symbolism
+    - blog.cards.six-of-cups.affirmations.affirmation_list (length mismatch)
+    - blog.cards.six-of-cups.affirmations.description
+    - blog.cards.six-of-cups.closing_paragraph
+    - blog.cards.six-of-cups.combinations
+    - blog.cards.six-of-cups.context.history
+    - blog.cards.six-of-cups.daily_practices
+    - blog.cards.six-of-cups.faq (length mismatch)
+    - blog.cards.six-of-cups.image_gallery
+    - blog.cards.six-of-cups.numerological_perspective
+    - blog.cards.six-of-cups.numerology
+    - blog.cards.six-of-cups.related_cards (length mismatch)
+    - blog.cards.six-of-cups.seo
+    - blog.cards.six-of-cups.symbolism
+    - blog.cards.six-of-pentacles.affirmations.affirmation_list (length mismatch)
+    - blog.cards.six-of-pentacles.affirmations.description
+    - blog.cards.six-of-pentacles.closing_paragraph
+    - blog.cards.six-of-pentacles.combinations
+    - blog.cards.six-of-pentacles.context.history
+    - blog.cards.six-of-pentacles.daily_practices
+    - blog.cards.six-of-pentacles.faq (length mismatch)
+    - blog.cards.six-of-pentacles.image_gallery
+    - blog.cards.six-of-pentacles.numerological_perspective
+    - blog.cards.six-of-pentacles.numerology
+    - blog.cards.six-of-pentacles.related_cards (length mismatch)
+    - blog.cards.six-of-pentacles.seo
+    - blog.cards.six-of-pentacles.symbolism
+    - blog.cards.six-of-swords.affirmations.affirmation_list (length mismatch)
+    - blog.cards.six-of-swords.affirmations.description
+    - blog.cards.six-of-swords.closing_paragraph
+    - blog.cards.six-of-swords.combinations
+    - blog.cards.six-of-swords.context.history
+    - blog.cards.six-of-swords.daily_practices
+    - blog.cards.six-of-swords.faq (length mismatch)
+    - blog.cards.six-of-swords.image_gallery
+    - blog.cards.six-of-swords.numerological_perspective
+    - blog.cards.six-of-swords.numerology
+    - blog.cards.six-of-swords.related_cards (length mismatch)
+    - blog.cards.six-of-swords.seo
+    - blog.cards.six-of-swords.symbolism
+    - blog.cards.six-of-wands.affirmations.affirmation_list (length mismatch)
+    - blog.cards.six-of-wands.affirmations.description
+    - blog.cards.six-of-wands.closing_paragraph
+    - blog.cards.six-of-wands.combinations
+    - blog.cards.six-of-wands.context.history
+    - blog.cards.six-of-wands.daily_practices
+    - blog.cards.six-of-wands.faq (length mismatch)
+    - blog.cards.six-of-wands.image_gallery
+    - blog.cards.six-of-wands.numerological_perspective
+    - blog.cards.six-of-wands.numerology
+    - blog.cards.six-of-wands.related_cards (length mismatch)
+    - blog.cards.six-of-wands.seo
+    - blog.cards.six-of-wands.symbolism
+    - blog.cards.strength.affirmations.affirmation_list (length mismatch)
+    - blog.cards.strength.affirmations.description
+    - blog.cards.strength.closing_paragraph
+    - blog.cards.strength.combinations
+    - blog.cards.strength.context.history
+    - blog.cards.strength.daily_practices
+    - blog.cards.strength.faq (length mismatch)
+    - blog.cards.strength.image_gallery
+    - blog.cards.strength.numerological_perspective
+    - blog.cards.strength.numerology
+    - blog.cards.strength.related_cards (length mismatch)
+    - blog.cards.strength.seo
+    - blog.cards.strength.symbolism
+    - blog.cards.temperance.affirmations.affirmation_list (length mismatch)
+    - blog.cards.temperance.affirmations.description
+    - blog.cards.temperance.closing_paragraph
+    - blog.cards.temperance.combinations
+    - blog.cards.temperance.context.history
+    - blog.cards.temperance.daily_practices
+    - blog.cards.temperance.faq (length mismatch)
+    - blog.cards.temperance.image_gallery
+    - blog.cards.temperance.numerological_perspective
+    - blog.cards.temperance.numerology
+    - blog.cards.temperance.related_cards (length mismatch)
+    - blog.cards.temperance.seo
+    - blog.cards.temperance.symbolism
+    - blog.cards.ten-of-cups.affirmations.affirmation_list (length mismatch)
+    - blog.cards.ten-of-cups.affirmations.description
+    - blog.cards.ten-of-cups.closing_paragraph
+    - blog.cards.ten-of-cups.combinations
+    - blog.cards.ten-of-cups.context.history
+    - blog.cards.ten-of-cups.daily_practices
+    - blog.cards.ten-of-cups.faq (length mismatch)
+    - blog.cards.ten-of-cups.image_gallery
+    - blog.cards.ten-of-cups.numerological_perspective
+    - blog.cards.ten-of-cups.numerology
+    - blog.cards.ten-of-cups.related_cards (length mismatch)
+    - blog.cards.ten-of-cups.seo
+    - blog.cards.ten-of-cups.symbolism
+    - blog.cards.ten-of-pentacles.affirmations.affirmation_list (length mismatch)
+    - blog.cards.ten-of-pentacles.affirmations.description
+    - blog.cards.ten-of-pentacles.closing_paragraph
+    - blog.cards.ten-of-pentacles.combinations
+    - blog.cards.ten-of-pentacles.context.history
+    - blog.cards.ten-of-pentacles.daily_practices
+    - blog.cards.ten-of-pentacles.faq (length mismatch)
+    - blog.cards.ten-of-pentacles.image_gallery
+    - blog.cards.ten-of-pentacles.numerological_perspective
+    - blog.cards.ten-of-pentacles.numerology
+    - blog.cards.ten-of-pentacles.related_cards (length mismatch)
+    - blog.cards.ten-of-pentacles.seo
+    - blog.cards.ten-of-pentacles.symbolism
+    - blog.cards.ten-of-swords.affirmations.affirmation_list (length mismatch)
+    - blog.cards.ten-of-swords.affirmations.description
+    - blog.cards.ten-of-swords.closing_paragraph
+    - blog.cards.ten-of-swords.combinations
+    - blog.cards.ten-of-swords.context.history
+    - blog.cards.ten-of-swords.daily_practices
+    - blog.cards.ten-of-swords.faq (length mismatch)
+    - blog.cards.ten-of-swords.image_gallery
+    - blog.cards.ten-of-swords.numerological_perspective
+    - blog.cards.ten-of-swords.numerology
+    - blog.cards.ten-of-swords.related_cards (length mismatch)
+    - blog.cards.ten-of-swords.seo
+    - blog.cards.ten-of-swords.symbolism
+    - blog.cards.ten-of-wands.affirmations.affirmation_list (length mismatch)
+    - blog.cards.ten-of-wands.affirmations.description
+    - blog.cards.ten-of-wands.closing_paragraph
+    - blog.cards.ten-of-wands.combinations
+    - blog.cards.ten-of-wands.context.history
+    - blog.cards.ten-of-wands.daily_practices
+    - blog.cards.ten-of-wands.faq (length mismatch)
+    - blog.cards.ten-of-wands.image_gallery
+    - blog.cards.ten-of-wands.numerological_perspective
+    - blog.cards.ten-of-wands.numerology
+    - blog.cards.ten-of-wands.related_cards (length mismatch)
+    - blog.cards.ten-of-wands.seo
+    - blog.cards.ten-of-wands.symbolism
+    - blog.cards.the-chariot.affirmations.affirmation_list (length mismatch)
+    - blog.cards.the-chariot.affirmations.description
+    - blog.cards.the-chariot.closing_paragraph
+    - blog.cards.the-chariot.combinations
+    - blog.cards.the-chariot.context.history
+    - blog.cards.the-chariot.daily_practices
+    - blog.cards.the-chariot.faq (length mismatch)
+    - blog.cards.the-chariot.image_gallery
+    - blog.cards.the-chariot.numerological_perspective
+    - blog.cards.the-chariot.numerology
+    - blog.cards.the-chariot.related_cards (length mismatch)
+    - blog.cards.the-chariot.seo
+    - blog.cards.the-chariot.symbolism
+    - blog.cards.the-devil.affirmations.affirmation_list (length mismatch)
+    - blog.cards.the-devil.affirmations.description
+    - blog.cards.the-devil.closing_paragraph
+    - blog.cards.the-devil.combinations
+    - blog.cards.the-devil.context.history
+    - blog.cards.the-devil.daily_practices
+    - blog.cards.the-devil.faq (length mismatch)
+    - blog.cards.the-devil.image_gallery
+    - blog.cards.the-devil.numerological_perspective
+    - blog.cards.the-devil.numerology
+    - blog.cards.the-devil.related_cards (length mismatch)
+    - blog.cards.the-devil.seo
+    - blog.cards.the-devil.symbolism
+    - blog.cards.the-emperor.affirmations.affirmation_list (length mismatch)
+    - blog.cards.the-emperor.affirmations.description
+    - blog.cards.the-emperor.closing_paragraph
+    - blog.cards.the-emperor.combinations
+    - blog.cards.the-emperor.context.history
+    - blog.cards.the-emperor.daily_practices
+    - blog.cards.the-emperor.faq (length mismatch)
+    - blog.cards.the-emperor.image_gallery
+    - blog.cards.the-emperor.numerological_perspective
+    - blog.cards.the-emperor.numerology
+    - blog.cards.the-emperor.related_cards (length mismatch)
+    - blog.cards.the-emperor.seo
+    - blog.cards.the-emperor.symbolism
+    - blog.cards.the-empress.affirmations.affirmation_list (length mismatch)
+    - blog.cards.the-empress.affirmations.description
+    - blog.cards.the-empress.closing_paragraph
+    - blog.cards.the-empress.combinations
+    - blog.cards.the-empress.context.history
+    - blog.cards.the-empress.daily_practices
+    - blog.cards.the-empress.faq (length mismatch)
+    - blog.cards.the-empress.image_gallery
+    - blog.cards.the-empress.numerological_perspective
+    - blog.cards.the-empress.numerology
+    - blog.cards.the-empress.related_cards (length mismatch)
+    - blog.cards.the-empress.seo
+    - blog.cards.the-empress.symbolism
+    - blog.cards.the-fool.affirmations.affirmation_list (length mismatch)
+    - blog.cards.the-fool.affirmations.description
+    - blog.cards.the-fool.closing_paragraph
+    - blog.cards.the-fool.combinations
+    - blog.cards.the-fool.context.history
+    - blog.cards.the-fool.daily_practices
+    - blog.cards.the-fool.faq (length mismatch)
+    - blog.cards.the-fool.image_gallery
+    - blog.cards.the-fool.numerological_perspective
+    - blog.cards.the-fool.numerology
+    - blog.cards.the-fool.related_cards
+    - blog.cards.the-fool.seo
+    - blog.cards.the-fool.symbolism
+    - blog.cards.the-hanged-man.affirmations.affirmation_list (length mismatch)
+    - blog.cards.the-hanged-man.affirmations.description
+    - blog.cards.the-hanged-man.closing_paragraph
+    - blog.cards.the-hanged-man.combinations
+    - blog.cards.the-hanged-man.context.history
+    - blog.cards.the-hanged-man.daily_practices
+    - blog.cards.the-hanged-man.faq (length mismatch)
+    - blog.cards.the-hanged-man.image_gallery
+    - blog.cards.the-hanged-man.numerological_perspective
+    - blog.cards.the-hanged-man.numerology
+    - blog.cards.the-hanged-man.related_cards (length mismatch)
+    - blog.cards.the-hanged-man.seo
+    - blog.cards.the-hanged-man.symbolism
+    - blog.cards.the-hermit.affirmations.affirmation_list (length mismatch)
+    - blog.cards.the-hermit.affirmations.description
+    - blog.cards.the-hermit.closing_paragraph
+    - blog.cards.the-hermit.combinations
+    - blog.cards.the-hermit.context.history
+    - blog.cards.the-hermit.daily_practices
+    - blog.cards.the-hermit.faq (length mismatch)
+    - blog.cards.the-hermit.image_gallery
+    - blog.cards.the-hermit.numerological_perspective
+    - blog.cards.the-hermit.numerology
+    - blog.cards.the-hermit.related_cards (length mismatch)
+    - blog.cards.the-hermit.seo
+    - blog.cards.the-hermit.symbolism
+    - blog.cards.the-hierophant.affirmations.affirmation_list (length mismatch)
+    - blog.cards.the-hierophant.affirmations.description
+    - blog.cards.the-hierophant.closing_paragraph
+    - blog.cards.the-hierophant.combinations
+    - blog.cards.the-hierophant.context.history
+    - blog.cards.the-hierophant.daily_practices
+    - blog.cards.the-hierophant.faq (length mismatch)
+    - blog.cards.the-hierophant.image_gallery
+    - blog.cards.the-hierophant.numerological_perspective
+    - blog.cards.the-hierophant.numerology
+    - blog.cards.the-hierophant.related_cards (length mismatch)
+    - blog.cards.the-hierophant.seo
+    - blog.cards.the-hierophant.symbolism
+    - blog.cards.the-high-priestess.affirmations.affirmation_list (length mismatch)
+    - blog.cards.the-high-priestess.affirmations.description
+    - blog.cards.the-high-priestess.closing_paragraph
+    - blog.cards.the-high-priestess.combinations
+    - blog.cards.the-high-priestess.context.history
+    - blog.cards.the-high-priestess.daily_practices
+    - blog.cards.the-high-priestess.faq (length mismatch)
+    - blog.cards.the-high-priestess.image_gallery
+    - blog.cards.the-high-priestess.numerological_perspective
+    - blog.cards.the-high-priestess.numerology
+    - blog.cards.the-high-priestess.related_cards (length mismatch)
+    - blog.cards.the-high-priestess.seo
+    - blog.cards.the-high-priestess.symbolism
+    - blog.cards.the-lovers.affirmations.affirmation_list (length mismatch)
+    - blog.cards.the-lovers.affirmations.description
+    - blog.cards.the-lovers.closing_paragraph
+    - blog.cards.the-lovers.combinations
+    - blog.cards.the-lovers.context.history
+    - blog.cards.the-lovers.daily_practices
+    - blog.cards.the-lovers.faq (length mismatch)
+    - blog.cards.the-lovers.image_gallery
+    - blog.cards.the-lovers.numerological_perspective
+    - blog.cards.the-lovers.numerology
+    - blog.cards.the-lovers.related_cards (length mismatch)
+    - blog.cards.the-lovers.seo
+    - blog.cards.the-lovers.symbolism
+    - blog.cards.the-magician.affirmations.affirmation_list (length mismatch)
+    - blog.cards.the-magician.affirmations.description
+    - blog.cards.the-magician.closing_paragraph
+    - blog.cards.the-magician.combinations
+    - blog.cards.the-magician.context.history
+    - blog.cards.the-magician.daily_practices
+    - blog.cards.the-magician.faq (length mismatch)
+    - blog.cards.the-magician.image_gallery
+    - blog.cards.the-magician.numerological_perspective
+    - blog.cards.the-magician.numerology
+    - blog.cards.the-magician.related_cards
+    - blog.cards.the-magician.seo
+    - blog.cards.the-magician.symbolism
+    - blog.cards.the-moon.affirmations.affirmation_list (length mismatch)
+    - blog.cards.the-moon.affirmations.description
+    - blog.cards.the-moon.closing_paragraph
+    - blog.cards.the-moon.combinations
+    - blog.cards.the-moon.context.history
+    - blog.cards.the-moon.daily_practices
+    - blog.cards.the-moon.faq (length mismatch)
+    - blog.cards.the-moon.image_gallery
+    - blog.cards.the-moon.numerological_perspective
+    - blog.cards.the-moon.numerology
+    - blog.cards.the-moon.related_cards (length mismatch)
+    - blog.cards.the-moon.seo
+    - blog.cards.the-moon.symbolism
+    - blog.cards.the-star.affirmations.affirmation_list (length mismatch)
+    - blog.cards.the-star.affirmations.description
+    - blog.cards.the-star.closing_paragraph
+    - blog.cards.the-star.combinations
+    - blog.cards.the-star.context.history
+    - blog.cards.the-star.daily_practices
+    - blog.cards.the-star.faq (length mismatch)
+    - blog.cards.the-star.image_gallery
+    - blog.cards.the-star.numerological_perspective
+    - blog.cards.the-star.numerology
+    - blog.cards.the-star.related_cards (length mismatch)
+    - blog.cards.the-star.seo
+    - blog.cards.the-star.symbolism
+    - blog.cards.the-sun.affirmations.affirmation_list (length mismatch)
+    - blog.cards.the-sun.affirmations.description
+    - blog.cards.the-sun.closing_paragraph
+    - blog.cards.the-sun.combinations
+    - blog.cards.the-sun.context.history
+    - blog.cards.the-sun.daily_practices
+    - blog.cards.the-sun.faq (length mismatch)
+    - blog.cards.the-sun.image_gallery
+    - blog.cards.the-sun.numerological_perspective
+    - blog.cards.the-sun.numerology
+    - blog.cards.the-sun.related_cards (length mismatch)
+    - blog.cards.the-sun.seo
+    - blog.cards.the-sun.symbolism
+    - blog.cards.the-tower.affirmations.affirmation_list (length mismatch)
+    - blog.cards.the-tower.affirmations.description
+    - blog.cards.the-tower.closing_paragraph
+    - blog.cards.the-tower.combinations
+    - blog.cards.the-tower.context.history
+    - blog.cards.the-tower.daily_practices
+    - blog.cards.the-tower.faq (length mismatch)
+    - blog.cards.the-tower.image_gallery
+    - blog.cards.the-tower.numerological_perspective
+    - blog.cards.the-tower.numerology
+    - blog.cards.the-tower.related_cards (length mismatch)
+    - blog.cards.the-tower.seo
+    - blog.cards.the-tower.symbolism
+    - blog.cards.the-world.affirmations.affirmation_list (length mismatch)
+    - blog.cards.the-world.affirmations.description
+    - blog.cards.the-world.closing_paragraph
+    - blog.cards.the-world.combinations
+    - blog.cards.the-world.context.history
+    - blog.cards.the-world.daily_practices
+    - blog.cards.the-world.faq (length mismatch)
+    - blog.cards.the-world.image_gallery
+    - blog.cards.the-world.numerological_perspective
+    - blog.cards.the-world.numerology
+    - blog.cards.the-world.related_cards (length mismatch)
+    - blog.cards.the-world.seo
+    - blog.cards.the-world.symbolism
+    - blog.cards.three-of-cups.affirmations.affirmation_list (length mismatch)
+    - blog.cards.three-of-cups.affirmations.description
+    - blog.cards.three-of-cups.closing_paragraph
+    - blog.cards.three-of-cups.combinations
+    - blog.cards.three-of-cups.context.history
+    - blog.cards.three-of-cups.daily_practices
+    - blog.cards.three-of-cups.faq (length mismatch)
+    - blog.cards.three-of-cups.image_gallery
+    - blog.cards.three-of-cups.numerological_perspective
+    - blog.cards.three-of-cups.numerology
+    - blog.cards.three-of-cups.related_cards (length mismatch)
+    - blog.cards.three-of-cups.seo
+    - blog.cards.three-of-cups.symbolism
+    - blog.cards.three-of-pentacles.affirmations.affirmation_list (length mismatch)
+    - blog.cards.three-of-pentacles.affirmations.description
+    - blog.cards.three-of-pentacles.closing_paragraph
+    - blog.cards.three-of-pentacles.combinations
+    - blog.cards.three-of-pentacles.context.history
+    - blog.cards.three-of-pentacles.daily_practices
+    - blog.cards.three-of-pentacles.faq (length mismatch)
+    - blog.cards.three-of-pentacles.image_gallery
+    - blog.cards.three-of-pentacles.numerological_perspective
+    - blog.cards.three-of-pentacles.numerology
+    - blog.cards.three-of-pentacles.related_cards (length mismatch)
+    - blog.cards.three-of-pentacles.seo
+    - blog.cards.three-of-pentacles.symbolism
+    - blog.cards.three-of-swords.affirmations.affirmation_list (length mismatch)
+    - blog.cards.three-of-swords.affirmations.description
+    - blog.cards.three-of-swords.closing_paragraph
+    - blog.cards.three-of-swords.combinations
+    - blog.cards.three-of-swords.context.history
+    - blog.cards.three-of-swords.daily_practices
+    - blog.cards.three-of-swords.faq (length mismatch)
+    - blog.cards.three-of-swords.image_gallery
+    - blog.cards.three-of-swords.numerological_perspective
+    - blog.cards.three-of-swords.numerology
+    - blog.cards.three-of-swords.related_cards (length mismatch)
+    - blog.cards.three-of-swords.seo
+    - blog.cards.three-of-swords.symbolism
+    - blog.cards.three-of-wands.affirmations.affirmation_list (length mismatch)
+    - blog.cards.three-of-wands.affirmations.description
+    - blog.cards.three-of-wands.closing_paragraph
+    - blog.cards.three-of-wands.combinations
+    - blog.cards.three-of-wands.context.history
+    - blog.cards.three-of-wands.daily_practices
+    - blog.cards.three-of-wands.faq (length mismatch)
+    - blog.cards.three-of-wands.image_gallery
+    - blog.cards.three-of-wands.numerological_perspective
+    - blog.cards.three-of-wands.numerology
+    - blog.cards.three-of-wands.related_cards (length mismatch)
+    - blog.cards.three-of-wands.seo
+    - blog.cards.three-of-wands.symbolism
+    - blog.cards.two-of-cups.affirmations.affirmation_list (length mismatch)
+    - blog.cards.two-of-cups.affirmations.description
+    - blog.cards.two-of-cups.closing_paragraph
+    - blog.cards.two-of-cups.combinations
+    - blog.cards.two-of-cups.context.history
+    - blog.cards.two-of-cups.daily_practices
+    - blog.cards.two-of-cups.faq (length mismatch)
+    - blog.cards.two-of-cups.image_gallery
+    - blog.cards.two-of-cups.numerological_perspective
+    - blog.cards.two-of-cups.numerology
+    - blog.cards.two-of-cups.related_cards (length mismatch)
+    - blog.cards.two-of-cups.seo
+    - blog.cards.two-of-cups.symbolism
+    - blog.cards.two-of-pentacles.affirmations.affirmation_list (length mismatch)
+    - blog.cards.two-of-pentacles.affirmations.description
+    - blog.cards.two-of-pentacles.closing_paragraph
+    - blog.cards.two-of-pentacles.combinations
+    - blog.cards.two-of-pentacles.context.history
+    - blog.cards.two-of-pentacles.daily_practices
+    - blog.cards.two-of-pentacles.faq (length mismatch)
+    - blog.cards.two-of-pentacles.image_gallery
+    - blog.cards.two-of-pentacles.numerological_perspective
+    - blog.cards.two-of-pentacles.numerology
+    - blog.cards.two-of-pentacles.related_cards (length mismatch)
+    - blog.cards.two-of-pentacles.seo
+    - blog.cards.two-of-pentacles.symbolism
+    - blog.cards.two-of-swords.affirmations.affirmation_list (length mismatch)
+    - blog.cards.two-of-swords.affirmations.description
+    - blog.cards.two-of-swords.closing_paragraph
+    - blog.cards.two-of-swords.combinations
+    - blog.cards.two-of-swords.context.history
+    - blog.cards.two-of-swords.daily_practices
+    - blog.cards.two-of-swords.faq (length mismatch)
+    - blog.cards.two-of-swords.image_gallery
+    - blog.cards.two-of-swords.numerological_perspective
+    - blog.cards.two-of-swords.numerology
+    - blog.cards.two-of-swords.related_cards (length mismatch)
+    - blog.cards.two-of-swords.seo
+    - blog.cards.two-of-swords.symbolism
+    - blog.cards.two-of-wands.affirmations.affirmation_list (length mismatch)
+    - blog.cards.two-of-wands.affirmations.description
+    - blog.cards.two-of-wands.closing_paragraph
+    - blog.cards.two-of-wands.combinations
+    - blog.cards.two-of-wands.context.history
+    - blog.cards.two-of-wands.daily_practices
+    - blog.cards.two-of-wands.faq (length mismatch)
+    - blog.cards.two-of-wands.image_gallery
+    - blog.cards.two-of-wands.numerological_perspective
+    - blog.cards.two-of-wands.numerology
+    - blog.cards.two-of-wands.related_cards (length mismatch)
+    - blog.cards.two-of-wands.seo
+    - blog.cards.two-of-wands.symbolism
+    - blog.cards.wheeloffortune.affirmations.affirmation_list (length mismatch)
+    - blog.cards.wheeloffortune.affirmations.description
+    - blog.cards.wheeloffortune.closing_paragraph
+    - blog.cards.wheeloffortune.combinations
+    - blog.cards.wheeloffortune.context.history
+    - blog.cards.wheeloffortune.daily_practices
+    - blog.cards.wheeloffortune.faq (length mismatch)
+    - blog.cards.wheeloffortune.image_gallery
+    - blog.cards.wheeloffortune.numerological_perspective
+    - blog.cards.wheeloffortune.numerology
+    - blog.cards.wheeloffortune.related_cards (length mismatch)
+    - blog.cards.wheeloffortune.seo
+    - blog.cards.wheeloffortune.symbolism
+    - blog.common.iliskinin-uzun-vaJoker
+    - blog.shared.reversed
+
+📁 Kategori: career (5 adet)
+    - career.form.birthDateUnknown
+    - career.form.relationshipStatus
+    - career.form.relationshipStatusOptions
+    - career.form.selectRelationshipStatus
+    - career.validation.relationshipStatusRequired
+
+📁 Kategori: common (1 adet)
+    - common.iliskinin-uzun-vaJoker
+
+📁 Kategori: home (1 adet)
+    - home.services.tests
+
+📁 Kategori: homepage (1 adet)
+    - homepage.services.tests
+
+📁 Kategori: love (4 adet)
+    - love.form.birthDateUnknown
+    - love.form.relationshipStatus
+    - love.form.relationshipStatusOptions
+    - love.form.selectRelationshipStatus
+
+📁 Kategori: marriage (4 adet)
+    - marriage.form.birthDateUnknown
+    - marriage.form.relationshipStatus
+    - marriage.form.relationshipStatusOptions
+    - marriage.form.selectRelationshipStatus
+
+📁 Kategori: messages (3 adet)
+    - messages.tarot.page.allSpreads
+    - messages.tarot.page.startReading
+    - messages.tarot.spread
+
+📁 Kategori: newLover (4 adet)
+    - newLover.form.birthDateUnknown
+    - newLover.form.relationshipStatus
+    - newLover.form.relationshipStatusOptions
+    - newLover.form.selectRelationshipStatus
+
+📁 Kategori: relationshipAnalysis (5 adet)
+    - relationshipAnalysis.form.birthDateUnknown
+    - relationshipAnalysis.form.relationshipStatus
+    - relationshipAnalysis.form.relationshipStatusOptions
+    - relationshipAnalysis.form.selectRelationshipStatus
+    - relationshipAnalysis.messages
+
+📁 Kategori: tarotCards (13 adet)
+    - tarotCards.pentacles.1
+    - tarotCards.pentacles.10
+    - tarotCards.pentacles.2
+    - tarotCards.pentacles.3
+    - tarotCards.pentacles.4
+    - tarotCards.pentacles.5
+    - tarotCards.pentacles.6
+    - tarotCards.pentacles.7
+    - tarotCards.pentacles.8
+    - tarotCards.pentacles.9
+    - tarotCards.pentacles.king
+    - tarotCards.pentacles.knight.keywords
+    - tarotCards.pentacles.knight.meaning.reversed
+
+➕ FAZLA ANAHTARLAR: 395 adet
+----------------------------------------------------------------------------------------------------
+
+📁 Kategori: blog (393 adet)
+    - blog.cards.Judgement.associations
+    - blog.cards.Judgement.card_combinations
+    - blog.cards.Judgement.cta
+    - blog.cards.Judgement.keywords
+    - blog.cards.Judgement.story
+    - blog.cards.ace-of-cups.associations
+    - blog.cards.ace-of-cups.card_combinations
+    - blog.cards.ace-of-cups.cta
+    - blog.cards.ace-of-cups.keywords
+    - blog.cards.ace-of-cups.story
+    - blog.cards.ace-of-pentacles.associations
+    - blog.cards.ace-of-pentacles.card_combinations
+    - blog.cards.ace-of-pentacles.cta
+    - blog.cards.ace-of-pentacles.keywords
+    - blog.cards.ace-of-pentacles.story
+    - blog.cards.ace-of-swords.associations
+    - blog.cards.ace-of-swords.card_combinations
+    - blog.cards.ace-of-swords.cta
+    - blog.cards.ace-of-swords.keywords
+    - blog.cards.ace-of-swords.story
+    - blog.cards.ace-of-wands.associations
+    - blog.cards.ace-of-wands.card_combinations
+    - blog.cards.ace-of-wands.cta
+    - blog.cards.ace-of-wands.keywords
+    - blog.cards.ace-of-wands.story
+    - blog.cards.death.associations
+    - blog.cards.death.card_combinations
+    - blog.cards.death.cta
+    - blog.cards.death.keywords
+    - blog.cards.death.story
+    - blog.cards.eight-of-cups.associations
+    - blog.cards.eight-of-cups.card_combinations
+    - blog.cards.eight-of-cups.cta
+    - blog.cards.eight-of-cups.keywords
+    - blog.cards.eight-of-cups.story
+    - blog.cards.eight-of-pentacles.associations
+    - blog.cards.eight-of-pentacles.card_combinations
+    - blog.cards.eight-of-pentacles.cta
+    - blog.cards.eight-of-pentacles.keywords
+    - blog.cards.eight-of-pentacles.story
+    - blog.cards.eight-of-swords.associations
+    - blog.cards.eight-of-swords.card_combinations
+    - blog.cards.eight-of-swords.cta
+    - blog.cards.eight-of-swords.keywords
+    - blog.cards.eight-of-swords.story
+    - blog.cards.eight-of-wands.associations
+    - blog.cards.eight-of-wands.card_combinations
+    - blog.cards.eight-of-wands.cta
+    - blog.cards.eight-of-wands.keywords
+    - blog.cards.eight-of-wands.story
+    - blog.cards.five-of-cups.associations
+    - blog.cards.five-of-cups.card_combinations
+    - blog.cards.five-of-cups.cta
+    - blog.cards.five-of-cups.keywords
+    - blog.cards.five-of-cups.story
+    - blog.cards.five-of-pentacles.associations
+    - blog.cards.five-of-pentacles.card_combinations
+    - blog.cards.five-of-pentacles.cta
+    - blog.cards.five-of-pentacles.keywords
+    - blog.cards.five-of-pentacles.story
+    - blog.cards.five-of-swords.associations
+    - blog.cards.five-of-swords.card_combinations
+    - blog.cards.five-of-swords.cta
+    - blog.cards.five-of-swords.keywords
+    - blog.cards.five-of-swords.story
+    - blog.cards.five-of-wands.associations
+    - blog.cards.five-of-wands.card_combinations
+    - blog.cards.five-of-wands.cta
+    - blog.cards.five-of-wands.keywords
+    - blog.cards.five-of-wands.story
+    - blog.cards.four-of-cups.associations
+    - blog.cards.four-of-cups.card_combinations
+    - blog.cards.four-of-cups.cta
+    - blog.cards.four-of-cups.keywords
+    - blog.cards.four-of-cups.story
+    - blog.cards.four-of-pentacles.associations
+    - blog.cards.four-of-pentacles.card_combinations
+    - blog.cards.four-of-pentacles.cta
+    - blog.cards.four-of-pentacles.keywords
+    - blog.cards.four-of-pentacles.story
+    - blog.cards.four-of-swords.associations
+    - blog.cards.four-of-swords.card_combinations
+    - blog.cards.four-of-swords.cta
+    - blog.cards.four-of-swords.keywords
+    - blog.cards.four-of-swords.story
+    - blog.cards.four-of-wands.associations
+    - blog.cards.four-of-wands.card_combinations
+    - blog.cards.four-of-wands.cta
+    - blog.cards.four-of-wands.keywords
+    - blog.cards.four-of-wands.story
+    - blog.cards.justice.associations
+    - blog.cards.justice.card_combinations
+    - blog.cards.justice.cta
+    - blog.cards.justice.keywords
+    - blog.cards.justice.story
+    - blog.cards.king-of-cups.associations
+    - blog.cards.king-of-cups.card_combinations
+    - blog.cards.king-of-cups.cta
+    - blog.cards.king-of-cups.keywords
+    - blog.cards.king-of-cups.story
+    - blog.cards.king-of-pentacles.associations
+    - blog.cards.king-of-pentacles.card_combinations
+    - blog.cards.king-of-pentacles.cta
+    - blog.cards.king-of-pentacles.keywords
+    - blog.cards.king-of-pentacles.story
+    - blog.cards.king-of-swords.associations
+    - blog.cards.king-of-swords.card_combinations
+    - blog.cards.king-of-swords.cta
+    - blog.cards.king-of-swords.keywords
+    - blog.cards.king-of-swords.story
+    - blog.cards.king-of-wands.associations
+    - blog.cards.king-of-wands.card_combinations
+    - blog.cards.king-of-wands.cta
+    - blog.cards.king-of-wands.keywords
+    - blog.cards.king-of-wands.story
+    - blog.cards.knight-of-cups.associations
+    - blog.cards.knight-of-cups.card_combinations
+    - blog.cards.knight-of-cups.cta
+    - blog.cards.knight-of-cups.keywords
+    - blog.cards.knight-of-cups.story
+    - blog.cards.knight-of-pentacles.associations
+    - blog.cards.knight-of-pentacles.card_combinations
+    - blog.cards.knight-of-pentacles.cta
+    - blog.cards.knight-of-pentacles.keywords
+    - blog.cards.knight-of-pentacles.story
+    - blog.cards.knight-of-swords.associations
+    - blog.cards.knight-of-swords.card_combinations
+    - blog.cards.knight-of-swords.cta
+    - blog.cards.knight-of-swords.keywords
+    - blog.cards.knight-of-swords.story
+    - blog.cards.knight-of-wands.associations
+    - blog.cards.knight-of-wands.card_combinations
+    - blog.cards.knight-of-wands.cta
+    - blog.cards.knight-of-wands.keywords
+    - blog.cards.knight-of-wands.story
+    - blog.cards.nine-of-cups.associations
+    - blog.cards.nine-of-cups.card_combinations
+    - blog.cards.nine-of-cups.cta
+    - blog.cards.nine-of-cups.keywords
+    - blog.cards.nine-of-cups.story
+    - blog.cards.nine-of-pentacles.associations
+    - blog.cards.nine-of-pentacles.card_combinations
+    - blog.cards.nine-of-pentacles.cta
+    - blog.cards.nine-of-pentacles.keywords
+    - blog.cards.nine-of-pentacles.story
+    - blog.cards.nine-of-swords.associations
+    - blog.cards.nine-of-swords.card_combinations
+    - blog.cards.nine-of-swords.cta
+    - blog.cards.nine-of-swords.keywords
+    - blog.cards.nine-of-swords.story
+    - blog.cards.nine-of-wands.associations
+    - blog.cards.nine-of-wands.card_combinations
+    - blog.cards.nine-of-wands.cta
+    - blog.cards.nine-of-wands.keywords
+    - blog.cards.nine-of-wands.story
+    - blog.cards.page-of-cups.associations
+    - blog.cards.page-of-cups.card_combinations
+    - blog.cards.page-of-cups.cta
+    - blog.cards.page-of-cups.keywords
+    - blog.cards.page-of-cups.story
+    - blog.cards.page-of-pentacles.associations
+    - blog.cards.page-of-pentacles.card_combinations
+    - blog.cards.page-of-pentacles.cta
+    - blog.cards.page-of-pentacles.keywords
+    - blog.cards.page-of-pentacles.story
+    - blog.cards.page-of-swords.associations
+    - blog.cards.page-of-swords.card_combinations
+    - blog.cards.page-of-swords.cta
+    - blog.cards.page-of-swords.keywords
+    - blog.cards.page-of-swords.story
+    - blog.cards.page-of-wands.associations
+    - blog.cards.page-of-wands.card_combinations
+    - blog.cards.page-of-wands.cta
+    - blog.cards.page-of-wands.keywords
+    - blog.cards.page-of-wands.story
+    - blog.cards.queen-of-cups.associations
+    - blog.cards.queen-of-cups.card_combinations
+    - blog.cards.queen-of-cups.cta
+    - blog.cards.queen-of-cups.keywords
+    - blog.cards.queen-of-cups.story
+    - blog.cards.queen-of-pentacles.associations
+    - blog.cards.queen-of-pentacles.card_combinations
+    - blog.cards.queen-of-pentacles.cta
+    - blog.cards.queen-of-pentacles.keywords
+    - blog.cards.queen-of-pentacles.story
+    - blog.cards.queen-of-swords.associations
+    - blog.cards.queen-of-swords.card_combinations
+    - blog.cards.queen-of-swords.cta
+    - blog.cards.queen-of-swords.keywords
+    - blog.cards.queen-of-swords.story
+    - blog.cards.queen-of-wands.associations
+    - blog.cards.queen-of-wands.card_combinations
+    - blog.cards.queen-of-wands.cta
+    - blog.cards.queen-of-wands.keywords
+    - blog.cards.queen-of-wands.story
+    - blog.cards.seven-of-cups.associations
+    - blog.cards.seven-of-cups.card_combinations
+    - blog.cards.seven-of-cups.cta
+    - blog.cards.seven-of-cups.keywords
+    - blog.cards.seven-of-cups.story
+    - blog.cards.seven-of-pentacles.associations
+    - blog.cards.seven-of-pentacles.card_combinations
+    - blog.cards.seven-of-pentacles.cta
+    - blog.cards.seven-of-pentacles.keywords
+    - blog.cards.seven-of-pentacles.story
+    - blog.cards.seven-of-swords.associations
+    - blog.cards.seven-of-swords.card_combinations
+    - blog.cards.seven-of-swords.cta
+    - blog.cards.seven-of-swords.keywords
+    - blog.cards.seven-of-swords.story
+    - blog.cards.seven-of-wands.associations
+    - blog.cards.seven-of-wands.card_combinations
+    - blog.cards.seven-of-wands.cta
+    - blog.cards.seven-of-wands.keywords
+    - blog.cards.seven-of-wands.story
+    - blog.cards.six-of-cups.associations
+    - blog.cards.six-of-cups.card_combinations
+    - blog.cards.six-of-cups.cta
+    - blog.cards.six-of-cups.keywords
+    - blog.cards.six-of-cups.story
+    - blog.cards.six-of-pentacles.associations
+    - blog.cards.six-of-pentacles.card_combinations
+    - blog.cards.six-of-pentacles.cta
+    - blog.cards.six-of-pentacles.keywords
+    - blog.cards.six-of-pentacles.story
+    - blog.cards.six-of-swords.associations
+    - blog.cards.six-of-swords.card_combinations
+    - blog.cards.six-of-swords.cta
+    - blog.cards.six-of-swords.keywords
+    - blog.cards.six-of-swords.story
+    - blog.cards.six-of-wands.associations
+    - blog.cards.six-of-wands.card_combinations
+    - blog.cards.six-of-wands.cta
+    - blog.cards.six-of-wands.keywords
+    - blog.cards.six-of-wands.story
+    - blog.cards.strength.associations
+    - blog.cards.strength.card_combinations
+    - blog.cards.strength.cta
+    - blog.cards.strength.keywords
+    - blog.cards.strength.story
+    - blog.cards.temperance.associations
+    - blog.cards.temperance.card_combinations
+    - blog.cards.temperance.cta
+    - blog.cards.temperance.keywords
+    - blog.cards.temperance.story
+    - blog.cards.ten-of-cups.associations
+    - blog.cards.ten-of-cups.card_combinations
+    - blog.cards.ten-of-cups.cta
+    - blog.cards.ten-of-cups.keywords
+    - blog.cards.ten-of-cups.story
+    - blog.cards.ten-of-pentacles.associations
+    - blog.cards.ten-of-pentacles.card_combinations
+    - blog.cards.ten-of-pentacles.cta
+    - blog.cards.ten-of-pentacles.keywords
+    - blog.cards.ten-of-pentacles.story
+    - blog.cards.ten-of-swords.associations
+    - blog.cards.ten-of-swords.card_combinations
+    - blog.cards.ten-of-swords.cta
+    - blog.cards.ten-of-swords.keywords
+    - blog.cards.ten-of-swords.story
+    - blog.cards.ten-of-wands.associations
+    - blog.cards.ten-of-wands.card_combinations
+    - blog.cards.ten-of-wands.cta
+    - blog.cards.ten-of-wands.keywords
+    - blog.cards.ten-of-wands.story
+    - blog.cards.the-chariot.associations
+    - blog.cards.the-chariot.card_combinations
+    - blog.cards.the-chariot.cta
+    - blog.cards.the-chariot.keywords
+    - blog.cards.the-chariot.story
+    - blog.cards.the-devil.associations
+    - blog.cards.the-devil.card_combinations
+    - blog.cards.the-devil.cta
+    - blog.cards.the-devil.keywords
+    - blog.cards.the-devil.story
+    - blog.cards.the-emperor.associations
+    - blog.cards.the-emperor.card_combinations
+    - blog.cards.the-emperor.cta
+    - blog.cards.the-emperor.keywords
+    - blog.cards.the-emperor.story
+    - blog.cards.the-empress.associations
+    - blog.cards.the-empress.card_combinations
+    - blog.cards.the-empress.context.celtic_cross
+    - blog.cards.the-empress.cta
+    - blog.cards.the-empress.keywords
+    - blog.cards.the-empress.story
+    - blog.cards.the-fool.associations
+    - blog.cards.the-fool.card_combinations
+    - blog.cards.the-fool.cta
+    - blog.cards.the-fool.keywords
+    - blog.cards.the-fool.story
+    - blog.cards.the-hanged-man.associations
+    - blog.cards.the-hanged-man.card_combinations
+    - blog.cards.the-hanged-man.cta
+    - blog.cards.the-hanged-man.keywords
+    - blog.cards.the-hanged-man.story
+    - blog.cards.the-hermit.associations
+    - blog.cards.the-hermit.card_combinations
+    - blog.cards.the-hermit.cta
+    - blog.cards.the-hermit.keywords
+    - blog.cards.the-hermit.story
+    - blog.cards.the-hierophant.associations
+    - blog.cards.the-hierophant.card_combinations
+    - blog.cards.the-hierophant.cta
+    - blog.cards.the-hierophant.keywords
+    - blog.cards.the-hierophant.story
+    - blog.cards.the-high-priestess.associations
+    - blog.cards.the-high-priestess.card_combinations
+    - blog.cards.the-high-priestess.cta
+    - blog.cards.the-high-priestess.keywords
+    - blog.cards.the-high-priestess.story
+    - blog.cards.the-lovers.associations
+    - blog.cards.the-lovers.card_combinations
+    - blog.cards.the-lovers.cta
+    - blog.cards.the-lovers.keywords
+    - blog.cards.the-lovers.story
+    - blog.cards.the-magician.associations
+    - blog.cards.the-magician.card_combinations
+    - blog.cards.the-magician.cta
+    - blog.cards.the-magician.keywords
+    - blog.cards.the-magician.story
+    - blog.cards.the-moon.associations
+    - blog.cards.the-moon.card_combinations
+    - blog.cards.the-moon.cta
+    - blog.cards.the-moon.keywords
+    - blog.cards.the-moon.story
+    - blog.cards.the-star.associations
+    - blog.cards.the-star.card_combinations
+    - blog.cards.the-star.cta
+    - blog.cards.the-star.keywords
+    - blog.cards.the-star.story
+    - blog.cards.the-sun.associations
+    - blog.cards.the-sun.card_combinations
+    - blog.cards.the-sun.cta
+    - blog.cards.the-sun.keywords
+    - blog.cards.the-sun.story
+    - blog.cards.the-tower.associations
+    - blog.cards.the-tower.card_combinations
+    - blog.cards.the-tower.cta
+    - blog.cards.the-tower.keywords
+    - blog.cards.the-tower.story
+    - blog.cards.the-world.associations
+    - blog.cards.the-world.card_combinations
+    - blog.cards.the-world.cta
+    - blog.cards.the-world.keywords
+    - blog.cards.the-world.story
+    - blog.cards.three-of-cups.associations
+    - blog.cards.three-of-cups.card_combinations
+    - blog.cards.three-of-cups.cta
+    - blog.cards.three-of-cups.keywords
+    - blog.cards.three-of-cups.story
+    - blog.cards.three-of-pentacles.associations
+    - blog.cards.three-of-pentacles.card_combinations
+    - blog.cards.three-of-pentacles.cta
+    - blog.cards.three-of-pentacles.keywords
+    - blog.cards.three-of-pentacles.story
+    - blog.cards.three-of-swords.associations
+    - blog.cards.three-of-swords.card_combinations
+    - blog.cards.three-of-swords.cta
+    - blog.cards.three-of-swords.keywords
+    - blog.cards.three-of-swords.story
+    - blog.cards.three-of-wands.associations
+    - blog.cards.three-of-wands.card_combinations
+    - blog.cards.three-of-wands.cta
+    - blog.cards.three-of-wands.keywords
+    - blog.cards.three-of-wands.story
+    - blog.cards.two-of-cups.associations
+    - blog.cards.two-of-cups.card_combinations
+    - blog.cards.two-of-cups.cta
+    - blog.cards.two-of-cups.keywords
+    - blog.cards.two-of-cups.story
+    - blog.cards.two-of-pentacles.associations
+    - blog.cards.two-of-pentacles.card_combinations
+    - blog.cards.two-of-pentacles.cta
+    - blog.cards.two-of-pentacles.keywords
+    - blog.cards.two-of-pentacles.story
+    - blog.cards.two-of-swords.associations
+    - blog.cards.two-of-swords.card_combinations
+    - blog.cards.two-of-swords.cta
+    - blog.cards.two-of-swords.keywords
+    - blog.cards.two-of-swords.story
+    - blog.cards.two-of-wands.associations
+    - blog.cards.two-of-wands.card_combinations
+    - blog.cards.two-of-wands.cta
+    - blog.cards.two-of-wands.keywords
+    - blog.cards.two-of-wands.story
+    - blog.cards.wheeloffortune.associations
+    - blog.cards.wheeloffortune.card_combinations
+    - blog.cards.wheeloffortune.cta
+    - blog.cards.wheeloffortune.keywords
+    - blog.cards.wheeloffortune.story
+    - blog.common.iliskinin-uzun-vadeli
+    - blog.shared.ters
+
+📁 Kategori: common (1 adet)
+    - common.iliskinin-uzun-vadeli
+
+📁 Kategori: problemSolving (1 adet)
+    - problemSolving.form.placeholders.lastName
+
+📋 SR.json KATEGORİ ÖZETİ
+----------------------------------------------------------------------------------------------------
+Kategori                       Eksik           Fazla          
+----------------------------------------------------------------------------------------------------
+blog                           1015            393            
+career                         5               0              
+common                         1               1              
+home                           1               0              
+homepage                       1               0              
+love                           4               0              
+marriage                       4               0              
+messages                       3               0              
+newLover                       4               0              
+problemSolving                 0               1              
+relationshipAnalysis           5               0              
+tarotCards                     13              0              
+
+====================================================================================================
+📝 ÖZET
+====================================================================================================
+
+EN.json:
+  - Eksik anahtarlar: 350
+  - Fazla anahtarlar: 6
+  - Toplam fark: 344
+
+SR.json:
+  - Eksik anahtarlar: 1056
+  - Fazla anahtarlar: 395
+  - Toplam fark: 661
+
+====================================================================================================

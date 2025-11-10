@@ -39,139 +39,139 @@ export interface PsychologicalTest {
   totalQuestions: number;
 }
 
-// MBTI Kişilik Tipleri ve Açıklamaları
-const mbtiTypes = {
+// MBTI Kişilik Tipleri ve Açıklamaları - Helper Fonksiyon
+export const getMBTITypes = (t: (key: string) => string) => ({
   INTJ: {
-    title: 'Mimar',
-    description: 'Stratejik düşünür, planlayıcı ve bağımsız',
-    traits: 'Analitik, yaratıcı, kararlı, bağımsız',
-    career: 'Bilim insanı, mühendis, stratejist, yazar',
+    title: t('psychTests.results.mbti.types.INTJ.title'),
+    description: t('psychTests.results.mbti.types.INTJ.description'),
+    traits: t('psychTests.results.mbti.types.INTJ.traits'),
+    career: t('psychTests.results.mbti.types.INTJ.career'),
   },
   INTP: {
-    title: 'Mantıkçı',
-    description: 'Yaratıcı yenilikçi, teorik düşünür',
-    traits: 'Mantıklı, yaratıcı, meraklı, objektif',
-    career: 'Bilim insanı, matematikçi, filozof, programcı',
+    title: t('psychTests.results.mbti.types.INTP.title'),
+    description: t('psychTests.results.mbti.types.INTP.description'),
+    traits: t('psychTests.results.mbti.types.INTP.traits'),
+    career: t('psychTests.results.mbti.types.INTP.career'),
   },
   ENTJ: {
-    title: 'Komutan',
-    description: 'Cesur, kararlı, doğal lider',
-    traits: 'Kararlı, lider, stratejik, direkt',
-    career: 'CEO, avukat, yönetici, girişimci',
+    title: t('psychTests.results.mbti.types.ENTJ.title'),
+    description: t('psychTests.results.mbti.types.ENTJ.description'),
+    traits: t('psychTests.results.mbti.types.ENTJ.traits'),
+    career: t('psychTests.results.mbti.types.ENTJ.career'),
   },
   ENTP: {
-    title: 'Münazır',
-    description: 'Akıllı ve meraklı düşünür',
-    traits: 'Yaratıcı, esnek, zeki, cesur',
-    career: 'Girişimci, avukat, satış, danışman',
+    title: t('psychTests.results.mbti.types.ENTP.title'),
+    description: t('psychTests.results.mbti.types.ENTP.description'),
+    traits: t('psychTests.results.mbti.types.ENTP.traits'),
+    career: t('psychTests.results.mbti.types.ENTP.career'),
   },
   INFJ: {
-    title: 'Avukat',
-    description: 'Sessiz ve gizemli idealist',
-    traits: 'İdealist, kararlı, yaratıcı, empatik',
-    career: 'Yazar, psikolog, öğretmen, danışman',
+    title: t('psychTests.results.mbti.types.INFJ.title'),
+    description: t('psychTests.results.mbti.types.INFJ.description'),
+    traits: t('psychTests.results.mbti.types.INFJ.traits'),
+    career: t('psychTests.results.mbti.types.INFJ.career'),
   },
   INFP: {
-    title: 'Arabulucu',
-    description: 'Şair ruhlu, yardımsever idealist',
-    traits: 'İdealist, yaratıcı, empatik, esnek',
-    career: 'Yazar, sanatçı, psikolog, öğretmen',
+    title: t('psychTests.results.mbti.types.INFP.title'),
+    description: t('psychTests.results.mbti.types.INFP.description'),
+    traits: t('psychTests.results.mbti.types.INFP.traits'),
+    career: t('psychTests.results.mbti.types.INFP.career'),
   },
   ENFJ: {
-    title: 'Protagonist',
-    description: 'Karizmatik ve ilham verici lider',
-    traits: 'Lider, karizmatik, empatik, kararlı',
-    career: 'Öğretmen, danışman, yönetici, eğitmen',
+    title: t('psychTests.results.mbti.types.ENFJ.title'),
+    description: t('psychTests.results.mbti.types.ENFJ.description'),
+    traits: t('psychTests.results.mbti.types.ENFJ.traits'),
+    career: t('psychTests.results.mbti.types.ENFJ.career'),
   },
   ENFP: {
-    title: 'Kampanyacı',
-    description: 'Özgür ruhlu, yaratıcı sosyal',
-    traits: 'Yaratıcı, enerjik, sosyal, esnek',
-    career: 'Gazeteci, sanatçı, eğitmen, satış',
+    title: t('psychTests.results.mbti.types.ENFP.title'),
+    description: t('psychTests.results.mbti.types.ENFP.description'),
+    traits: t('psychTests.results.mbti.types.ENFP.traits'),
+    career: t('psychTests.results.mbti.types.ENFP.career'),
   },
   ISTJ: {
-    title: 'Mantıkçı',
-    description: 'Pratik ve gerçekçi düzenli',
-    traits: 'Pratik, güvenilir, düzenli, kararlı',
-    career: 'Muhasebeci, yönetici, polis, asker',
+    title: t('psychTests.results.mbti.types.ISTJ.title'),
+    description: t('psychTests.results.mbti.types.ISTJ.description'),
+    traits: t('psychTests.results.mbti.types.ISTJ.traits'),
+    career: t('psychTests.results.mbti.types.ISTJ.career'),
   },
   ISFJ: {
-    title: 'Savunucu',
-    description: 'Çok özverili ve koruyucu',
-    traits: 'Güvenilir, özverili, pratik, sıcak',
-    career: 'Hemşire, öğretmen, sosyal hizmet, sekreter',
+    title: t('psychTests.results.mbti.types.ISFJ.title'),
+    description: t('psychTests.results.mbti.types.ISFJ.description'),
+    traits: t('psychTests.results.mbti.types.ISFJ.traits'),
+    career: t('psychTests.results.mbti.types.ISFJ.career'),
   },
   ESTJ: {
-    title: 'Yönetici',
-    description: 'Mükemmel yönetici, pratik',
-    traits: 'Lider, pratik, kararlı, organize',
-    career: 'Yönetici, asker, polis, avukat',
+    title: t('psychTests.results.mbti.types.ESTJ.title'),
+    description: t('psychTests.results.mbti.types.ESTJ.description'),
+    traits: t('psychTests.results.mbti.types.ESTJ.traits'),
+    career: t('psychTests.results.mbti.types.ESTJ.career'),
   },
   ESFJ: {
-    title: 'Konsül',
-    description: 'Çok sosyal ve popüler',
-    traits: 'Sosyal, güvenilir, özverili, pratik',
-    career: 'Öğretmen, hemşire, satış, yönetici',
+    title: t('psychTests.results.mbti.types.ESFJ.title'),
+    description: t('psychTests.results.mbti.types.ESFJ.description'),
+    traits: t('psychTests.results.mbti.types.ESFJ.traits'),
+    career: t('psychTests.results.mbti.types.ESFJ.career'),
   },
   ISTP: {
-    title: 'Virtüöz',
-    description: 'Cesur ve pratik deneyselci',
-    traits: 'Pratik, esnek, cesur, analitik',
-    career: 'Teknisyen, pilot, atlet, polis',
+    title: t('psychTests.results.mbti.types.ISTP.title'),
+    description: t('psychTests.results.mbti.types.ISTP.description'),
+    traits: t('psychTests.results.mbti.types.ISTP.traits'),
+    career: t('psychTests.results.mbti.types.ISTP.career'),
   },
   ISFP: {
-    title: 'Maceraperest',
-    description: 'Esnek ve çekici sanatçı',
-    traits: 'Yaratıcı, esnek, sıcak, pratik',
-    career: 'Sanatçı, tasarımcı, hemşire, öğretmen',
+    title: t('psychTests.results.mbti.types.ISFP.title'),
+    description: t('psychTests.results.mbti.types.ISFP.description'),
+    traits: t('psychTests.results.mbti.types.ISFP.traits'),
+    career: t('psychTests.results.mbti.types.ISFP.career'),
   },
   ESTP: {
-    title: 'Girişimci',
-    description: 'Akıllı, enerjik ve çok algılı',
-    traits: 'Enerjik, pratik, cesur, esnek',
-    career: 'Girişimci, satış, atlet, pilot',
+    title: t('psychTests.results.mbti.types.ESTP.title'),
+    description: t('psychTests.results.mbti.types.ESTP.description'),
+    traits: t('psychTests.results.mbti.types.ESTP.traits'),
+    career: t('psychTests.results.mbti.types.ESTP.career'),
   },
   ESFP: {
-    title: 'Eğlendirici',
-    description: 'Spontane, enerjik ve eğlenceli',
-    traits: 'Enerjik, sosyal, esnek, pratik',
-    career: 'Sanatçı, eğlendirici, satış, öğretmen',
+    title: t('psychTests.results.mbti.types.ESFP.title'),
+    description: t('psychTests.results.mbti.types.ESFP.description'),
+    traits: t('psychTests.results.mbti.types.ESFP.traits'),
+    career: t('psychTests.results.mbti.types.ESFP.career'),
   },
-};
+});
 
-// Aşk Dili Tipleri
-const loveLanguages = {
+// Aşk Dili Tipleri - Helper Fonksiyon
+export const getLoveLanguages = (t: (key: string) => string) => ({
   words: {
-    title: 'Onaylayıcı Sözler',
-    description: 'Sözlerle sevgi ifade etmeyi önemser',
-    traits: 'Teşekkür, övgü, sevgi sözleri önemli',
-    tips: 'Sık sık "seni seviyorum" deyin, övgüde bulunun',
+    title: t('psychTests.results.loveLanguages.words.title'),
+    description: t('psychTests.results.loveLanguages.words.description'),
+    traits: t('psychTests.results.loveLanguages.words.traits'),
+    tips: t('psychTests.results.loveLanguages.words.tips'),
   },
   acts: {
-    title: 'Hizmet Davranışları',
-    description: 'Yardım ve hizmetle sevgi gösterir',
-    traits: 'Yardım etmek, destek olmak önemli',
-    tips: 'Günlük işlerde yardım edin, sorumluluk alın',
+    title: t('psychTests.results.loveLanguages.acts.title'),
+    description: t('psychTests.results.loveLanguages.acts.description'),
+    traits: t('psychTests.results.loveLanguages.acts.traits'),
+    tips: t('psychTests.results.loveLanguages.acts.tips'),
   },
   gifts: {
-    title: 'Hediye Alma',
-    description: 'Hediyelerle sevgi ifade eder',
-    traits: 'Sembolik hediyeler, sürprizler önemli',
-    tips: 'Küçük hediyeler, sürprizler yapın',
+    title: t('psychTests.results.loveLanguages.gifts.title'),
+    description: t('psychTests.results.loveLanguages.gifts.description'),
+    traits: t('psychTests.results.loveLanguages.gifts.traits'),
+    tips: t('psychTests.results.loveLanguages.gifts.tips'),
   },
   time: {
-    title: 'Kaliteli Zaman',
-    description: 'Birlikte geçirilen zamanı önemser',
-    traits: 'Birlikte aktiviteler, sohbet önemli',
-    tips: 'Telefonu kapatın, tam dikkat verin',
+    title: t('psychTests.results.loveLanguages.time.title'),
+    description: t('psychTests.results.loveLanguages.time.description'),
+    traits: t('psychTests.results.loveLanguages.time.traits'),
+    tips: t('psychTests.results.loveLanguages.time.tips'),
   },
   touch: {
-    title: 'Fiziksel Dokunma',
-    description: 'Fiziksel temasla sevgi hisseder',
-    traits: 'Sarılmak, el tutmak, öpücük önemli',
-    tips: 'Sık sık dokunun, fiziksel temas kurun',
+    title: t('psychTests.results.loveLanguages.touch.title'),
+    description: t('psychTests.results.loveLanguages.touch.description'),
+    traits: t('psychTests.results.loveLanguages.touch.traits'),
+    tips: t('psychTests.results.loveLanguages.touch.tips'),
   },
-};
+});
 
 // İsim Enerjisi - Numeroloji ve Tarot Eşleştirmeleri
 // Pythagoras numerolojisi + Rider-Waite tarot sembolizmi
@@ -392,768 +392,542 @@ const getNameTarotCards = (t: (_key: string) => string) => ({
 // Stres Düzeyi Profilleri ve Meditasyon Önerileri
 // DASS21 ve psikolojik stres değerlendirme ölçeklerine dayalı
 // Kaynak: Lovibond & Lovibond (1995) DASS21, Harvard Medical School stres yönetimi araştırmaları
-const stressProfiles = {
+export const getStressProfiles = (t: (key: string) => string) => ({
   low: {
-    level: 'Düşük Stres',
-    emoji: '😌',
-    scoreRange: '0-15',
-    description:
-      'Stres seviyeniz oldukça düşük görünüyor! Hayatınızda dengeli bir durum var ve günlük stres faktörlerini iyi yönetiyorsunuz.',
-    message:
-      'Harika! Stres yönetiminiz güçlü. Mevcut dengenizi korumaya devam edin.',
-    meditationTips: [
-      '🧘‍♀️ Önleyici meditasyon: Günde 10-15 dakika nefes meditasyonu yaparak dengeyi koruyun',
-      '🌿 Doğada zaman geçirin: Haftada 2-3 kez doğa yürüyüşleri stres direncinizi artırır',
-      '📖 Farkındalık pratiği: Günlük 5 dakika mindfulness ile iç huzurunuzu pekiştirin',
-      '💤 Uyku hijyeni: Düzenli uyku saatleri stres direncinizin temelidir',
-    ],
-    wellnessAdvice:
-      'Mevcut dengenizi korumak için düzenli egzersiz, sağlıklı beslenme ve sosyal bağlantıları sürdürmeye devam edin.',
+    level: t('psychTests.results.stress.profiles.low.level'),
+    emoji: t('psychTests.results.stress.profiles.low.emoji'),
+    scoreRange: t('psychTests.results.stress.profiles.low.scoreRange'),
+    description: t('psychTests.results.stress.profiles.low.description'),
+    message: t('psychTests.results.stress.profiles.low.message'),
+    meditationTips: JSON.parse(t('psychTests.results.stress.profiles.low.meditationTips') || '[]') as string[],
+    wellnessAdvice: t('psychTests.results.stress.profiles.low.wellnessAdvice'),
   },
   moderate: {
-    level: 'Orta Düzey Stres',
-    emoji: '😐',
-    scoreRange: '16-30',
-    description:
-      'Orta düzeyde stres yaşıyorsunuz. Bu normal bir durum, ancak stres yönetimi teknikleri ile daha iyi bir denge kurabilirsiniz.',
-    message:
-      'Stres seviyeniz yönetilebilir. Meditasyon ve rahatlama teknikleri ile daha iyi bir denge kurabilirsiniz.',
-    meditationTips: [
-      '🧘‍♂️ Günlük meditasyon: Her gün 15-20 dakika nefes odaklı meditasyon yapın',
-      '🎵 Rahatlama müziği: Gün içinde 10 dakika rahatlama müziği dinleyin',
-      '💆‍♀️ Vücut tarama: Akşamları 10 dakika vücut tarama meditasyonu deneyin',
-      '🌊 4-7-8 Nefes Tekniği: Stres anında 4 saniye nefes al, 7 saniye tut, 8 saniye ver',
-      '🧘‍♀️ Yürüyüş meditasyonu: Haftada 2-3 kez 20 dakika yürüyüş sırasında farkındalık pratiği',
-    ],
-    wellnessAdvice:
-      'Düzenli egzersiz, beslenme düzeni ve sosyal destek sisteminizi güçlendirin. Haftada en az 2 kez rahatlama aktiviteleri yapın.',
+    level: t('psychTests.results.stress.profiles.moderate.level'),
+    emoji: t('psychTests.results.stress.profiles.moderate.emoji'),
+    scoreRange: t('psychTests.results.stress.profiles.moderate.scoreRange'),
+    description: t('psychTests.results.stress.profiles.moderate.description'),
+    message: t('psychTests.results.stress.profiles.moderate.message'),
+    meditationTips: JSON.parse(t('psychTests.results.stress.profiles.moderate.meditationTips') || '[]') as string[],
+    wellnessAdvice: t('psychTests.results.stress.profiles.moderate.wellnessAdvice'),
   },
   high: {
-    level: 'Yüksek Stres',
-    emoji: '😰',
-    scoreRange: '31-45',
-    description:
-      'Yüksek düzeyde stres yaşıyorsunuz. Bu durum fiziksel ve duygusal sağlığınızı etkileyebilir. Stres yönetimi tekniklerini uygulamanız önemli.',
-    message:
-      'Stres seviyeniz yüksek. Düzenli meditasyon ve profesyonel destek almanız önerilir.',
-    meditationTips: [
-      '🧘‍♀️ Derin meditasyon: Günde 2 kez 20-30 dakika derin nefes meditasyonu',
-      '🌙 Gece meditasyonu: Uyku öncesi 15 dakika rahatlama meditasyonu',
-      '💆‍♂️ Aşamalı kas gevşetme: Günlük 20 dakika kas gevşetme teknikleri',
-      '🍃 Doğa meditasyonu: Haftada 3 kez doğada 30 dakika mindfulness',
-      '🎭 Farkındalık meditasyonu: Stres anlarında 5-10 dakika anlık farkındalık',
-      '🧘‍♀️ Rehberli meditasyon: Uygulamalardan rehberli meditasyon dinleyin',
-      '💧 Sıcak banyo meditasyonu: Haftada 2-3 kez sıcak banyo sırasında nefes pratiği',
-    ],
-    wellnessAdvice:
-      'Acil öncelik: Düzenli uyku (7-9 saat), dengeli beslenme, günlük 30 dakika egzersiz. Profesyonel destek almayı düşünün.',
+    level: t('psychTests.results.stress.profiles.high.level'),
+    emoji: t('psychTests.results.stress.profiles.high.emoji'),
+    scoreRange: t('psychTests.results.stress.profiles.high.scoreRange'),
+    description: t('psychTests.results.stress.profiles.high.description'),
+    message: t('psychTests.results.stress.profiles.high.message'),
+    meditationTips: JSON.parse(t('psychTests.results.stress.profiles.high.meditationTips') || '[]') as string[],
+    wellnessAdvice: t('psychTests.results.stress.profiles.high.wellnessAdvice'),
   },
   veryHigh: {
-    level: 'Çok Yüksek Stres',
-    emoji: '😱',
-    scoreRange: '46-60',
-    description:
-      'Çok yüksek düzeyde stres yaşıyorsunuz. Bu durum günlük yaşamınızı ciddi şekilde etkileyebilir. Profesyonel destek almanız önemle tavsiye edilir.',
-    message:
-      'Stres seviyeniz çok yüksek. Lütfen profesyonel bir sağlık uzmanına danışın ve düzenli meditasyon pratiği başlatın.',
-    meditationTips: [
-      '🚨 Acil meditasyon: Gün içinde her 2-3 saatte bir 10 dakika nefes meditasyonu',
-      '🧘‍♀️ Günde 3 kez derin meditasyon: Sabah, öğlen, akşam 30 dakika rehberli meditasyon',
-      '💆‍♀️ 24/7 Farkındalık: Her stresli anı meditasyon fırsatına çevirin',
-      '🌊 4-7-8 Tekniği: Her stres atak anında derhal uygulayın (günde 10+ kez)',
-      '🧘‍♂️ Yoga meditasyonu: Haftada 4-5 kez 45 dakika yoga + meditasyon',
-      '🎵 Sürekli rahatlama: Çalışırken veya dinlenirken arka planda meditasyon müziği',
-      '💤 Uyku meditasyonu: Her gece uyku öncesi 20 dakika rahatlama meditasyonu',
-      '🏥 Profesyonel destek: Bir psikolog veya terapist ile çalışın',
-    ],
-    wellnessAdvice:
-      'Acil durum: Lütfen bir sağlık uzmanına danışın. Düzenli egzersiz, uyku hijyeni ve sağlıklı beslenme kritik. Sosyal destek sisteminizi güçlendirin.',
-    urgentNote:
-      '⚠️ Bu test sonuçları yalnızca bilgilendirme amaçlıdır. Stres belirtileriniz günlük yaşamınızı ciddi şekilde etkiliyorsa, lütfen bir psikolog, psikiyatrist veya aile hekiminize başvurun.',
+    level: t('psychTests.results.stress.profiles.veryHigh.level'),
+    emoji: t('psychTests.results.stress.profiles.veryHigh.emoji'),
+    scoreRange: t('psychTests.results.stress.profiles.veryHigh.scoreRange'),
+    description: t('psychTests.results.stress.profiles.veryHigh.description'),
+    message: t('psychTests.results.stress.profiles.veryHigh.message'),
+    meditationTips: JSON.parse(t('psychTests.results.stress.profiles.veryHigh.meditationTips') || '[]') as string[],
+    wellnessAdvice: t('psychTests.results.stress.profiles.veryHigh.wellnessAdvice'),
+    urgentNote: t('psychTests.results.stress.profiles.veryHigh.urgentNote'),
   },
-};
+});
 
 // Aşk Enerjisi (Love Vibration) Profilleri
 // Astroloji ve Tarot temelli - Venüs, Mars, Merkür gezegen enerjileri
 // Kaynak: Klasik astroloji ve modern kişilik psikolojisi sentezi
-const loveVibrationProfiles = {
+export const getLoveVibrationProfiles = (t: (key: string) => string) => ({
   venusHarmony: {
-    name: 'Venüs Uyumu - Romantik Ruh 💕',
-    title: 'Venüs Enerjisi',
-    emoji: '💕',
-    planet: 'Venüs',
-    element: 'Hava/Su',
-    tarotCard: 'The Lovers (Aşıklar)',
-    tagline: 'Aşk senin doğal dilin',
-    description:
-      'Venüs enerjisi ile titreşiyorsun! Romantik, uyumlu ve sevgi dolu bir aşk enerjine sahipsin. İlişkilerde denge, güzellik ve uyum ararsın. Doğal bir romantiksin.',
-    loveStyle: 'Romantik, uyumlu, estetik değerlere önem veren',
-    strengths: [
-      '💝 Romantizm ve şefkat',
-      '🌹 Estetik ve güzellik duyarlılığı',
-      '🤝 Uyum ve denge arayışı',
-      '💞 Sevgi ifade etme yeteneği',
-    ],
-    compatibility: 'Venüs ve Merkür enerjileri ile uyumlu',
-    astrologicalInsight:
-      'Venüs, klasik astrolojide aşk, güzellik ve uyumun gezegenidir. Bu enerji, ilişkilerde romantizm, estetik ve duygusal bağ arayışını temsil eder.',
+    name: t('psychTests.results.loveVibration.profiles.venusHarmony.name'),
+    title: t('psychTests.results.loveVibration.profiles.venusHarmony.title'),
+    emoji: t('psychTests.results.loveVibration.profiles.venusHarmony.emoji'),
+    planet: t('psychTests.results.loveVibration.profiles.venusHarmony.planet'),
+    element: t('psychTests.results.loveVibration.profiles.venusHarmony.element'),
+    tarotCard: t('psychTests.results.loveVibration.profiles.venusHarmony.tarotCard'),
+    tagline: t('psychTests.results.loveVibration.profiles.venusHarmony.tagline'),
+    description: t('psychTests.results.loveVibration.profiles.venusHarmony.description'),
+    loveStyle: t('psychTests.results.loveVibration.profiles.venusHarmony.loveStyle'),
+    strengths: JSON.parse(t('psychTests.results.loveVibration.profiles.venusHarmony.strengths') || '[]') as string[],
+    compatibility: t('psychTests.results.loveVibration.profiles.venusHarmony.compatibility'),
+    astrologicalInsight: t('psychTests.results.loveVibration.profiles.venusHarmony.astrologicalInsight'),
   },
   marsPassion: {
-    name: 'Mars Tutkusu - Ateşli Kalp 🔥',
-    title: 'Mars Enerjisi',
-    emoji: '🔥',
-    planet: 'Mars',
-    element: 'Ateş',
-    tarotCard: 'Strength (Güç)',
-    tagline: 'Tutkun yıldızlara değer',
-    description:
-      'Mars enerjisi ile yanıp tutuşuyorsun! Tutkulu, cesur ve kararlı bir aşk enerjine sahipsin. İlişkilerde heyecan, tutku ve güçlü bağlar ararsın. Aşkını yoğun yaşarsın.',
-    loveStyle: 'Tutkulu, cesur, kararlı, heyecan arayan',
-    strengths: [
-      '🔥 Yoğun tutku ve arzu',
-      '💪 Cesaret ve kararlılık',
-      '⚡ Enerji ve heyecan',
-      '🎯 Amaç odaklı sevgi',
-    ],
-    compatibility: 'Mars ve Venüs enerjileri ile dengeli',
-    astrologicalInsight:
-      'Mars, klasik astrolojide arzu, eylem ve tutkunun gezegenidir. Bu enerji, ilişkilerde güçlü bağlar, heyecan ve kararlılık arayışını temsil eder.',
+    name: t('psychTests.results.loveVibration.profiles.marsPassion.name'),
+    title: t('psychTests.results.loveVibration.profiles.marsPassion.title'),
+    emoji: t('psychTests.results.loveVibration.profiles.marsPassion.emoji'),
+    planet: t('psychTests.results.loveVibration.profiles.marsPassion.planet'),
+    element: t('psychTests.results.loveVibration.profiles.marsPassion.element'),
+    tarotCard: t('psychTests.results.loveVibration.profiles.marsPassion.tarotCard'),
+    tagline: t('psychTests.results.loveVibration.profiles.marsPassion.tagline'),
+    description: t('psychTests.results.loveVibration.profiles.marsPassion.description'),
+    loveStyle: t('psychTests.results.loveVibration.profiles.marsPassion.loveStyle'),
+    strengths: JSON.parse(t('psychTests.results.loveVibration.profiles.marsPassion.strengths') || '[]') as string[],
+    compatibility: t('psychTests.results.loveVibration.profiles.marsPassion.compatibility'),
+    astrologicalInsight: t('psychTests.results.loveVibration.profiles.marsPassion.astrologicalInsight'),
   },
   mercuryCommunication: {
-    name: 'Merkür İletişimi - Zihinsel Bağ 💬',
-    title: 'Merkür Enerjisi',
-    emoji: '💬',
-    planet: 'Merkür',
-    element: 'Hava',
-    tarotCard: 'The Magician (Büyücü)',
-    tagline: 'Sözler senin aşk dilin',
-    description:
-      'Merkür enerjisi ile iletişim kuruyorsun! Akıllı, konuşkan ve zihinsel bağ arayan bir aşk enerjine sahipsin. İlişkilerde derin sohbetler, anlayış ve entelektüel bağ önemli.',
-    loveStyle: 'İletişim odaklı, zihinsel, konuşkan, anlayışlı',
-    strengths: [
-      '💬 Güçlü iletişim',
-      '🧠 Zihinsel uyum arayışı',
-      '📚 Entelektüel bağ',
-      '🗣️ Dürüst ve açık',
-    ],
-    compatibility: 'Merkür ve Venüs enerjileri ile uyumlu',
-    astrologicalInsight:
-      'Merkür, klasik astrolojide iletişim, akıl ve bağlantının gezegenidir. Bu enerji, ilişkilerde derin sohbetler, anlayış ve zihinsel uyum arayışını temsil eder.',
+    name: t('psychTests.results.loveVibration.profiles.mercuryCommunication.name'),
+    title: t('psychTests.results.loveVibration.profiles.mercuryCommunication.title'),
+    emoji: t('psychTests.results.loveVibration.profiles.mercuryCommunication.emoji'),
+    planet: t('psychTests.results.loveVibration.profiles.mercuryCommunication.planet'),
+    element: t('psychTests.results.loveVibration.profiles.mercuryCommunication.element'),
+    tarotCard: t('psychTests.results.loveVibration.profiles.mercuryCommunication.tarotCard'),
+    tagline: t('psychTests.results.loveVibration.profiles.mercuryCommunication.tagline'),
+    description: t('psychTests.results.loveVibration.profiles.mercuryCommunication.description'),
+    loveStyle: t('psychTests.results.loveVibration.profiles.mercuryCommunication.loveStyle'),
+    strengths: JSON.parse(t('psychTests.results.loveVibration.profiles.mercuryCommunication.strengths') || '[]') as string[],
+    compatibility: t('psychTests.results.loveVibration.profiles.mercuryCommunication.compatibility'),
+    astrologicalInsight: t('psychTests.results.loveVibration.profiles.mercuryCommunication.astrologicalInsight'),
   },
   venusMarsMix: {
-    name: 'Venüs-Mars Dengesi - Mükemmel Armoni ⚖️',
-    title: 'Venüs-Mars Dengesi',
-    emoji: '⚖️',
-    planet: 'Venüs & Mars',
-    element: 'Ateş & Hava',
-    tarotCard: 'Temperance (Denge)',
-    tagline: 'Romantizm ve tutkunun dengesi',
-    description:
-      'Hem Venüs hem Mars enerjisini dengeli yaşıyorsun! Hem romantik hem tutkulu, hem yumuşak hem güçlü bir aşk enerjine sahipsin. İdeal dengeli ilişkiler kurarsın.',
-    loveStyle: 'Dengeli, hem romantik hem tutkulu, olgun',
-    strengths: [
-      '⚖️ Romantizm ve tutku dengesi',
-      '💕 Hem yumuşak hem güçlü',
-      '🎭 Duygusal zeka',
-      '✨ Olgun sevgi yaklaşımı',
-    ],
-    compatibility: 'Tüm enerji tipleri ile uyumlu',
-    astrologicalInsight:
-      'Venüs ve Mars enerjilerinin dengesi, ilişkilerde hem romantizm hem tutku arayışını temsil eder. Bu denge, olgun ve sağlıklı ilişkilerin temelidir.',
+    name: t('psychTests.results.loveVibration.profiles.venusMarsMix.name'),
+    title: t('psychTests.results.loveVibration.profiles.venusMarsMix.title'),
+    emoji: t('psychTests.results.loveVibration.profiles.venusMarsMix.emoji'),
+    planet: t('psychTests.results.loveVibration.profiles.venusMarsMix.planet'),
+    element: t('psychTests.results.loveVibration.profiles.venusMarsMix.element'),
+    tarotCard: t('psychTests.results.loveVibration.profiles.venusMarsMix.tarotCard'),
+    tagline: t('psychTests.results.loveVibration.profiles.venusMarsMix.tagline'),
+    description: t('psychTests.results.loveVibration.profiles.venusMarsMix.description'),
+    loveStyle: t('psychTests.results.loveVibration.profiles.venusMarsMix.loveStyle'),
+    strengths: JSON.parse(t('psychTests.results.loveVibration.profiles.venusMarsMix.strengths') || '[]') as string[],
+    compatibility: t('psychTests.results.loveVibration.profiles.venusMarsMix.compatibility'),
+    astrologicalInsight: t('psychTests.results.loveVibration.profiles.venusMarsMix.astrologicalInsight'),
   },
   mercuryVenusMix: {
-    name: 'Merkür-Venüs Karışımı - Romantik Diyalog 💝',
-    title: 'Merkür-Venüs Karışımı',
-    emoji: '💝',
-    planet: 'Merkür & Venüs',
-    element: 'Hava',
-    tarotCard: 'The Empress (İmparatoriçe)',
-    tagline: 'Aşkı kelimelerle inşa edersin',
-    description:
-      'Merkür ve Venüs enerjilerini birleştiriyorsun! Romantik ama iletişim odaklı bir aşk enerjine sahipsin. Sevgi dolu sözler, derin sohbetler ve duygusal anlayış senin tarzın.',
-    loveStyle: 'Romantik ve iletişim odaklı, şiirsel, anlayışlı',
-    strengths: [
-      '💌 Romantik iletişim',
-      '📖 Sevgi sözleri',
-      '🌸 Estetik duygusallık',
-      '💭 Empati ve anlayış',
-    ],
-    compatibility: 'Venüs ve Merkür dominant profiller ile uyumlu',
-    astrologicalInsight:
-      'Merkür ve Venüs kombinasyonu, ilişkilerde hem romantizm hem güçlü iletişim arayışını temsil eder. Aşkı kelimelerle ifade etme yeteneği güçlüdür.',
+    name: t('psychTests.results.loveVibration.profiles.mercuryVenusMix.name'),
+    title: t('psychTests.results.loveVibration.profiles.mercuryVenusMix.title'),
+    emoji: t('psychTests.results.loveVibration.profiles.mercuryVenusMix.emoji'),
+    planet: t('psychTests.results.loveVibration.profiles.mercuryVenusMix.planet'),
+    element: t('psychTests.results.loveVibration.profiles.mercuryVenusMix.element'),
+    tarotCard: t('psychTests.results.loveVibration.profiles.mercuryVenusMix.tarotCard'),
+    tagline: t('psychTests.results.loveVibration.profiles.mercuryVenusMix.tagline'),
+    description: t('psychTests.results.loveVibration.profiles.mercuryVenusMix.description'),
+    loveStyle: t('psychTests.results.loveVibration.profiles.mercuryVenusMix.loveStyle'),
+    strengths: JSON.parse(t('psychTests.results.loveVibration.profiles.mercuryVenusMix.strengths') || '[]') as string[],
+    compatibility: t('psychTests.results.loveVibration.profiles.mercuryVenusMix.compatibility'),
+    astrologicalInsight: t('psychTests.results.loveVibration.profiles.mercuryVenusMix.astrologicalInsight'),
   },
   marsMercuryMix: {
-    name: 'Mars-Merkür Karışımı - Akıllı Tutku 🧠',
-    title: 'Mars-Merkür Karışımı',
-    emoji: '🧠',
-    planet: 'Mars & Merkür',
-    element: 'Ateş & Hava',
-    tarotCard: 'The Chariot (Savaş Arabası)',
-    tagline: 'Tutkulu ama stratejik',
-    description:
-      'Mars ve Merkür enerjilerini birleştiriyorsun! Tutkulu ama akıllı bir aşk enerjine sahipsin. İlişkilerde hem heyecan hem mantık ararsın. Stratejik romantiksin.',
-    loveStyle: 'Tutkulu ama düşünceli, cesur, stratejik',
-    strengths: [
-      '🎯 Stratejik yaklaşım',
-      '🔥 Akıllı tutku',
-      '⚡ Hızlı karar verme',
-      '🗣️ Açık sözlülük',
-    ],
-    compatibility: 'Mars ve Merkür enerjileri ile uyumlu',
-    astrologicalInsight:
-      'Mars ve Merkür kombinasyonu, ilişkilerde hem tutku hem zihinsel uyumluluk arayışını temsil eder. Akıllı ve kararlı sevgi yaklaşımı sergilenir.',
+    name: t('psychTests.results.loveVibration.profiles.marsMercuryMix.name'),
+    title: t('psychTests.results.loveVibration.profiles.marsMercuryMix.title'),
+    emoji: t('psychTests.results.loveVibration.profiles.marsMercuryMix.emoji'),
+    planet: t('psychTests.results.loveVibration.profiles.marsMercuryMix.planet'),
+    element: t('psychTests.results.loveVibration.profiles.marsMercuryMix.element'),
+    tarotCard: t('psychTests.results.loveVibration.profiles.marsMercuryMix.tarotCard'),
+    tagline: t('psychTests.results.loveVibration.profiles.marsMercuryMix.tagline'),
+    description: t('psychTests.results.loveVibration.profiles.marsMercuryMix.description'),
+    loveStyle: t('psychTests.results.loveVibration.profiles.marsMercuryMix.loveStyle'),
+    strengths: JSON.parse(t('psychTests.results.loveVibration.profiles.marsMercuryMix.strengths') || '[]') as string[],
+    compatibility: t('psychTests.results.loveVibration.profiles.marsMercuryMix.compatibility'),
+    astrologicalInsight: t('psychTests.results.loveVibration.profiles.marsMercuryMix.astrologicalInsight'),
   },
   tripleHarmony: {
-    name: 'Üçlü Armoni - Kozmik Denge 🌟',
-    title: 'Venüs-Mars-Merkür Uyumu',
-    emoji: '🌟',
-    planet: 'Venüs & Mars & Merkür',
-    element: 'Tüm Elementler',
-    tarotCard: 'The Star (Yıldız)',
-    tagline: 'Kozmik aşk enerjisi',
-    description:
-      'Üç gezegen enerjisini de dengeli taşıyorsun! Hem romantik, hem tutkulu, hem de iletişime açıksın. Nadir bulunan kozmik bir aşk enerjine sahipsin.',
-    loveStyle: 'Dengeli, olgun, çok yönlü, kozmik',
-    strengths: [
-      '🌟 Tüm enerjilerin dengesi',
-      '💫 Olgun aşk yaklaşımı',
-      '✨ Çok yönlü sevgi dili',
-      '🎭 Durum okuma yeteneği',
-    ],
-    compatibility: 'Tüm enerji profilleri ile uyumlu',
-    astrologicalInsight:
-      'Venüs, Mars ve Merkür enerjilerinin dengesi, ilişkilerde bütünlük ve kozmik uyum arayışını temsil eder. Bu nadir denge, olgun ve sağlıklı ilişkilerin göstergesidir.',
+    name: t('psychTests.results.loveVibration.profiles.tripleHarmony.name'),
+    title: t('psychTests.results.loveVibration.profiles.tripleHarmony.title'),
+    emoji: t('psychTests.results.loveVibration.profiles.tripleHarmony.emoji'),
+    planet: t('psychTests.results.loveVibration.profiles.tripleHarmony.planet'),
+    element: t('psychTests.results.loveVibration.profiles.tripleHarmony.element'),
+    tarotCard: t('psychTests.results.loveVibration.profiles.tripleHarmony.tarotCard'),
+    tagline: t('psychTests.results.loveVibration.profiles.tripleHarmony.tagline'),
+    description: t('psychTests.results.loveVibration.profiles.tripleHarmony.description'),
+    loveStyle: t('psychTests.results.loveVibration.profiles.tripleHarmony.loveStyle'),
+    strengths: JSON.parse(t('psychTests.results.loveVibration.profiles.tripleHarmony.strengths') || '[]') as string[],
+    compatibility: t('psychTests.results.loveVibration.profiles.tripleHarmony.compatibility'),
+    astrologicalInsight: t('psychTests.results.loveVibration.profiles.tripleHarmony.astrologicalInsight'),
   },
   moonIntuition: {
-    name: 'Ay Sezgisi - Duygusal Okyanus 🌙',
-    title: 'Ay Enerjisi (Bonus)',
-    emoji: '🌙',
-    planet: 'Ay',
-    element: 'Su',
-    tarotCard: 'The Moon (Ay)',
-    tagline: 'Sezginle seviyorsun',
-    description:
-      'Ay enerjisi ile derinlere iniyorsun! Sezgisel, duygusal ve gizemli bir aşk enerjine sahipsin. İlişkilerde derin duygusal bağlar ve ruhani uyum ararsın.',
-    loveStyle: 'Sezgisel, duygusal, gizemli, ruhani',
-    strengths: [
-      '🌊 Derin duygusallık',
-      '🔮 Güçlü sezgi',
-      '💫 Ruhani bağ',
-      '🌙 Gizemli çekicilik',
-    ],
-    compatibility: 'Venüs ve Su elementi enerjileri ile uyumlu',
-    astrologicalInsight:
-      'Ay, klasik astrolojide duyguların, sezginin ve iç dünyanın simgesidir. Bu enerji, ilişkilerde derin duygusal bağlar ve ruhani uyum arayışını temsil eder.',
+    name: t('psychTests.results.loveVibration.profiles.moonIntuition.name'),
+    title: t('psychTests.results.loveVibration.profiles.moonIntuition.title'),
+    emoji: t('psychTests.results.loveVibration.profiles.moonIntuition.emoji'),
+    planet: t('psychTests.results.loveVibration.profiles.moonIntuition.planet'),
+    element: t('psychTests.results.loveVibration.profiles.moonIntuition.element'),
+    tarotCard: t('psychTests.results.loveVibration.profiles.moonIntuition.tarotCard'),
+    tagline: t('psychTests.results.loveVibration.profiles.moonIntuition.tagline'),
+    description: t('psychTests.results.loveVibration.profiles.moonIntuition.description'),
+    loveStyle: t('psychTests.results.loveVibration.profiles.moonIntuition.loveStyle'),
+    strengths: JSON.parse(t('psychTests.results.loveVibration.profiles.moonIntuition.strengths') || '[]') as string[],
+    compatibility: t('psychTests.results.loveVibration.profiles.moonIntuition.compatibility'),
+    astrologicalInsight: t('psychTests.results.loveVibration.profiles.moonIntuition.astrologicalInsight'),
   },
-};
+});
 
 // Arkadaş Grubu Enerjisi Rolleri
 // Sosyal psikoloji ve grup dinamikleri araştırmalarına dayalı, eğlenceli kişilik rolleri
-const friendEnergyRoles = {
+export const getFriendEnergyRoles = (t: (key: string) => string) => ({
   wiseMentor: {
-    name: 'Grubun Akıl Hocası 🧙‍♂️',
-    title: 'Akıl Hocası',
-    emoji: '🧙‍♂️',
-    tagline: 'Sen grupta herkesin tavsiye aldığı kişisin',
-    description:
-      'Arkadaşların sorunlarını dinler, mantıklı çözümler sunar ve her zaman en iyi tavsiyeyi verirsin. Sakin, bilge ve güvenilir enerjiyle grubu dengeleyensin.',
-    socialRole: 'Danışman ve Mentor',
-    strengths: [
-      'Olgun ve akıllı düşünür',
-      'İyi dinleyici',
-      'Sorun çözücü',
-      'Güvenilir tavsiyeleri var',
-    ],
-    funFacts: [
-      '📱 Grubun WhatsApp danışma hattısın',
-      '🎯 "Ne yapmalıyım?" sorusunun adresisin',
-      '🧠 En çok "Haklıymışsın" kelimesini duyarsın',
-    ],
-    shareText: 'Ben arkadaş grubumun Akıl Hocasıyım! 🧙‍♂️',
+    name: t('psychTests.results.friendEnergy.roles.wiseMentor.name'),
+    title: t('psychTests.results.friendEnergy.roles.wiseMentor.title'),
+    emoji: t('psychTests.results.friendEnergy.roles.wiseMentor.emoji'),
+    tagline: t('psychTests.results.friendEnergy.roles.wiseMentor.tagline'),
+    description: t('psychTests.results.friendEnergy.roles.wiseMentor.description'),
+    socialRole: t('psychTests.results.friendEnergy.roles.wiseMentor.socialRole'),
+    strengths: JSON.parse(t('psychTests.results.friendEnergy.roles.wiseMentor.strengths') || '[]') as string[],
+    funFacts: JSON.parse(t('psychTests.results.friendEnergy.roles.wiseMentor.funFacts') || '[]') as string[],
+    shareText: t('psychTests.results.friendEnergy.roles.wiseMentor.shareText'),
   },
   dramaQueen: {
-    name: 'Drama Kraliçesi/Kralı 👑',
-    title: 'Drama Kraliçesi',
-    emoji: '👑',
-    tagline: 'Hayatın bir pembe dizi ve sen başroldesin',
-    description:
-      'Grubun en renkli karakterisin! Her hikayende heyecan, her anında drama var. Hayatın sıkıcı anlarını bile sinema filmi gibi anlatırsın.',
-    socialRole: 'Eğlence ve Heyecan Kaynağı',
-    strengths: [
-      'Hikaye anlatma yeteneği yüksek',
-      'Gruba enerji ve heyecan katar',
-      'Asla sıkıcı değil',
-      'Duygusal ve açık',
-    ],
-    funFacts: [
-      '🎬 Her hikayende plot twist var',
-      '😱 "İnanamayacaksın ama..." cümlen meşhur',
-      '💅 Grup sohbetlerinin ana karakterisin',
-    ],
-    shareText: 'Ben arkadaş grubumun Drama Kraliçesiyim! 👑',
+    name: t('psychTests.results.friendEnergy.roles.dramaQueen.name'),
+    title: t('psychTests.results.friendEnergy.roles.dramaQueen.title'),
+    emoji: t('psychTests.results.friendEnergy.roles.dramaQueen.emoji'),
+    tagline: t('psychTests.results.friendEnergy.roles.dramaQueen.tagline'),
+    description: t('psychTests.results.friendEnergy.roles.dramaQueen.description'),
+    socialRole: t('psychTests.results.friendEnergy.roles.dramaQueen.socialRole'),
+    strengths: JSON.parse(t('psychTests.results.friendEnergy.roles.dramaQueen.strengths') || '[]') as string[],
+    funFacts: JSON.parse(t('psychTests.results.friendEnergy.roles.dramaQueen.funFacts') || '[]') as string[],
+    shareText: t('psychTests.results.friendEnergy.roles.dramaQueen.shareText'),
   },
   spontaneousExplorer: {
-    name: 'Plansız Gezgin 🌍',
-    title: 'Plansız Gezgin',
-    emoji: '🌍',
-    tagline: 'Planlar seni değil, sen planları değiştirirsin',
-    description:
-      'Spontane, maceracı ve özgür ruhlusun. "Hadi gidelim!" dediğinde herkes hazırlanır. Son dakika planlarının kralısın.',
-    socialRole: 'Macera Organizatörü',
-    strengths: [
-      'Spontane ve esnek',
-      'Macera ruhlu',
-      'Risk alıcı',
-      'Yeni deneyimlere açık',
-    ],
-    funFacts: [
-      '🎒 "5 dakikada hazırım" senin motton',
-      '✈️ En iyi planlar plansızlıklardan çıkar diye düşünürsün',
-      '🗺️ Google Maps şu an nerede gösterir bilinmez',
-    ],
-    shareText: 'Ben arkadaş grubumun Plansız Gezginiyim! 🌍',
+    name: t('psychTests.results.friendEnergy.roles.spontaneousExplorer.name'),
+    title: t('psychTests.results.friendEnergy.roles.spontaneousExplorer.title'),
+    emoji: t('psychTests.results.friendEnergy.roles.spontaneousExplorer.emoji'),
+    tagline: t('psychTests.results.friendEnergy.roles.spontaneousExplorer.tagline'),
+    description: t('psychTests.results.friendEnergy.roles.spontaneousExplorer.description'),
+    socialRole: t('psychTests.results.friendEnergy.roles.spontaneousExplorer.socialRole'),
+    strengths: JSON.parse(t('psychTests.results.friendEnergy.roles.spontaneousExplorer.strengths') || '[]') as string[],
+    funFacts: JSON.parse(t('psychTests.results.friendEnergy.roles.spontaneousExplorer.funFacts') || '[]') as string[],
+    shareText: t('psychTests.results.friendEnergy.roles.spontaneousExplorer.shareText'),
   },
   momFriend: {
-    name: 'Grup Annesi 🤱',
-    title: 'Grup Annesi',
-    emoji: '🤱',
-    tagline: 'Çantan eczane, kalbin melekten',
-    description:
-      'Grubun koruyucusu ve bakıcısısın. Çantanda her şey var: ıslak mendil, şarj aleti, acil aspirin... Herkes senin yanında güvende hisseder.',
-    socialRole: 'Koruyucu ve Destekleyici',
-    strengths: ['Düşünceli ve özenli', 'Koruyucu', 'Organize', 'Şefkatli'],
-    funFacts: [
-      '🎒 Çantanda her acil durum için bir şey var',
-      '⏰ "Geç kalmayın" mesajları senden gelir',
-      '🌡️ "Üşümez misin?" sorusunun sahibisin',
-    ],
-    shareText: 'Ben arkadaş grubumun Annesiyim! 🤱',
+    name: t('psychTests.results.friendEnergy.roles.momFriend.name'),
+    title: t('psychTests.results.friendEnergy.roles.momFriend.title'),
+    emoji: t('psychTests.results.friendEnergy.roles.momFriend.emoji'),
+    tagline: t('psychTests.results.friendEnergy.roles.momFriend.tagline'),
+    description: t('psychTests.results.friendEnergy.roles.momFriend.description'),
+    socialRole: t('psychTests.results.friendEnergy.roles.momFriend.socialRole'),
+    strengths: JSON.parse(t('psychTests.results.friendEnergy.roles.momFriend.strengths') || '[]') as string[],
+    funFacts: JSON.parse(t('psychTests.results.friendEnergy.roles.momFriend.funFacts') || '[]') as string[],
+    shareText: t('psychTests.results.friendEnergy.roles.momFriend.shareText'),
   },
   partyStarter: {
-    name: 'Parti Başlatıcı 🎉',
-    title: 'Parti Başlatıcı',
-    emoji: '🎉',
-    tagline: 'Eğlence başlar, sen gelirsin',
-    description:
-      'Grubun sosyal organizatörü ve enerji bombasısın! Senden önce toplantı, senden sonra parti. Neşe ve coşku senin işin.',
-    socialRole: 'Sosyal Organizatör',
-    strengths: [
-      'Enerjik ve coşkulu',
-      'Organizatör',
-      'Sosyal',
-      'Pozitif enerji yayar',
-    ],
-    funFacts: [
-      '📅 Tüm planları sen yaparsın',
-      '🎵 Playlist uzmanısın',
-      '📸 En çok fotoğraf çekilen kişisin',
-    ],
-    shareText: 'Ben arkadaş grubumun Parti Başlatıcısıyım! 🎉',
+    name: t('psychTests.results.friendEnergy.roles.partyStarter.name'),
+    title: t('psychTests.results.friendEnergy.roles.partyStarter.title'),
+    emoji: t('psychTests.results.friendEnergy.roles.partyStarter.emoji'),
+    tagline: t('psychTests.results.friendEnergy.roles.partyStarter.tagline'),
+    description: t('psychTests.results.friendEnergy.roles.partyStarter.description'),
+    socialRole: t('psychTests.results.friendEnergy.roles.partyStarter.socialRole'),
+    strengths: JSON.parse(t('psychTests.results.friendEnergy.roles.partyStarter.strengths') || '[]') as string[],
+    funFacts: JSON.parse(t('psychTests.results.friendEnergy.roles.partyStarter.funFacts') || '[]') as string[],
+    shareText: t('psychTests.results.friendEnergy.roles.partyStarter.shareText'),
   },
   quietPower: {
-    name: 'Sessiz Güç 🦉',
-    title: 'Sessiz Güç',
-    emoji: '🦉',
-    tagline: 'Az konuşur, çok anlar',
-    description:
-      'Grubun sessiz ama güçlü üyesisin. Her sözün değerlidir. Az konuşursun ama konuştuğunda herkes dinler. Derin gözlemcisin.',
-    socialRole: 'Gözlemci ve Stratejist',
-    strengths: ['Gözlemci', 'Düşünceli', 'Sakin', 'Derin anlayış'],
-    funFacts: [
-      '👀 Her şeyi fark edersin ama söylemezsin',
-      '🤐 "Sen ne düşünüyorsun?" sorusu hep sana gelir',
-      '💭 Sözlerin az ama etkili',
-    ],
-    shareText: 'Ben arkadaş grubumun Sessiz Gücüyüm! 🦉',
+    name: t('psychTests.results.friendEnergy.roles.quietPower.name'),
+    title: t('psychTests.results.friendEnergy.roles.quietPower.title'),
+    emoji: t('psychTests.results.friendEnergy.roles.quietPower.emoji'),
+    tagline: t('psychTests.results.friendEnergy.roles.quietPower.tagline'),
+    description: t('psychTests.results.friendEnergy.roles.quietPower.description'),
+    socialRole: t('psychTests.results.friendEnergy.roles.quietPower.socialRole'),
+    strengths: JSON.parse(t('psychTests.results.friendEnergy.roles.quietPower.strengths') || '[]') as string[],
+    funFacts: JSON.parse(t('psychTests.results.friendEnergy.roles.quietPower.funFacts') || '[]') as string[],
+    shareText: t('psychTests.results.friendEnergy.roles.quietPower.shareText'),
   },
   comedian: {
-    name: 'Stand-Up Komedyeni 😂',
-    title: 'Komedyen',
-    emoji: '😂',
-    tagline: 'Hayat zor, sen komiksin',
-    description:
-      'Grubun kahkaha makinesisin! Her durumda espri yapabilir, en gergin anları bile güldürürsün. Mizah senin süper gücün.',
-    socialRole: 'Mizah ve Eğlence Uzmanı',
-    strengths: [
-      'Mizah anlayışı yüksek',
-      'Pozitif',
-      'Stresi hafifletir',
-      'Eğlenceli',
-    ],
-    funFacts: [
-      '🎭 Hayat bir sahne, sen komedyensin',
-      '😆 "Gülmekten öldüm" en çok duyduğun cümle',
-      '🤡 Ciddi anları bile komik hale getirirsin',
-    ],
-    shareText: 'Ben arkadaş grubumun Komedyeniyim! 😂',
+    name: t('psychTests.results.friendEnergy.roles.comedian.name'),
+    title: t('psychTests.results.friendEnergy.roles.comedian.title'),
+    emoji: t('psychTests.results.friendEnergy.roles.comedian.emoji'),
+    tagline: t('psychTests.results.friendEnergy.roles.comedian.tagline'),
+    description: t('psychTests.results.friendEnergy.roles.comedian.description'),
+    socialRole: t('psychTests.results.friendEnergy.roles.comedian.socialRole'),
+    strengths: JSON.parse(t('psychTests.results.friendEnergy.roles.comedian.strengths') || '[]') as string[],
+    funFacts: JSON.parse(t('psychTests.results.friendEnergy.roles.comedian.funFacts') || '[]') as string[],
+    shareText: t('psychTests.results.friendEnergy.roles.comedian.shareText'),
   },
   therapist: {
-    name: 'Terapi Arkadaşı 💭',
-    title: 'Terapi Arkadaşı',
-    emoji: '💭',
-    tagline: 'Bedava terapi, sınırsız empati',
-    description:
-      'Grubun psikoloğusun. Herkes sana dert anlatır, sen dinler ve anlar. Empatik, anlayışlı ve duygusal zeka canavarısın.',
-    socialRole: 'Duygusal Destek Sağlayıcı',
-    strengths: ['Empatik', 'İyi dinleyici', 'Anlayışlı', 'Duygusal zekalı'],
-    funFacts: [
-      '🛋️ Arkadaşların seninle konuşunca rahatlıyor',
-      '💚 "Seni dinlemek iyi geldi" en çok duydukların',
-      '🎧 3 saatlik telefon görüşmelerin rutin',
-    ],
-    shareText: 'Ben arkadaş grubumun Terapi Arkadaşıyım! 💭',
+    name: t('psychTests.results.friendEnergy.roles.therapist.name'),
+    title: t('psychTests.results.friendEnergy.roles.therapist.title'),
+    emoji: t('psychTests.results.friendEnergy.roles.therapist.emoji'),
+    tagline: t('psychTests.results.friendEnergy.roles.therapist.tagline'),
+    description: t('psychTests.results.friendEnergy.roles.therapist.description'),
+    socialRole: t('psychTests.results.friendEnergy.roles.therapist.socialRole'),
+    strengths: JSON.parse(t('psychTests.results.friendEnergy.roles.therapist.strengths') || '[]') as string[],
+    funFacts: JSON.parse(t('psychTests.results.friendEnergy.roles.therapist.funFacts') || '[]') as string[],
+    shareText: t('psychTests.results.friendEnergy.roles.therapist.shareText'),
   },
   adventurer: {
-    name: 'Adrenalin Avcısı 🚀',
-    title: 'Adrenalin Avcısı',
-    emoji: '🚀',
-    tagline: 'Tehlike mi? Hadi gidelim!',
-    description:
-      'Grubun cesur maceracısısın! Her türlü aktiviteye hazırsın. Bungee jumping, parasailing ne olursa... "Ben varım!" dersin.',
-    socialRole: 'Risk Alıcı ve Cesaret Kaynağı',
-    strengths: ['Cesur', 'Maceracı', 'Risk alır', 'İlham verici'],
-    funFacts: [
-      "⛷️ Bucket list'in sonsuz",
-      '🎢 "Korkmadım ki" en sevdiğin cümle',
-      '📸 En çılgın fotoğraflar sende',
-    ],
-    shareText: 'Ben arkadaş grubumun Adrenalin Avcısıyım! 🚀',
+    name: t('psychTests.results.friendEnergy.roles.adventurer.name'),
+    title: t('psychTests.results.friendEnergy.roles.adventurer.title'),
+    emoji: t('psychTests.results.friendEnergy.roles.adventurer.emoji'),
+    tagline: t('psychTests.results.friendEnergy.roles.adventurer.tagline'),
+    description: t('psychTests.results.friendEnergy.roles.adventurer.description'),
+    socialRole: t('psychTests.results.friendEnergy.roles.adventurer.socialRole'),
+    strengths: JSON.parse(t('psychTests.results.friendEnergy.roles.adventurer.strengths') || '[]') as string[],
+    funFacts: JSON.parse(t('psychTests.results.friendEnergy.roles.adventurer.funFacts') || '[]') as string[],
+    shareText: t('psychTests.results.friendEnergy.roles.adventurer.shareText'),
   },
   peacekeeper: {
-    name: 'Barış Elçisi ☮️',
-    title: 'Barış Elçisi',
-    emoji: '☮️',
-    tagline: 'Kavga eden arkadaşları barıştırma ustası',
-    description:
-      'Grubun diplomatısın. İki arkadaş tartışınca araya giren, herkesi anla yan, dengeyi sağlayan sensin. Çatışma çözücü maestro.',
-    socialRole: 'Arabulucu ve Moderatör',
-    strengths: ['Arabulucu', 'Tarafsız', 'Dengeli', 'Uzlaşmacı'],
-    funFacts: [
-      '🕊️ "Hadi barışın" senin repliğin',
-      '⚖️ Her iki tarafı da anlarsın',
-      '🤝 Grubu bir arada tutan sensin',
-    ],
-    shareText: 'Ben arkadaş grubumun Barış Elçisiyim! ☮️',
+    name: t('psychTests.results.friendEnergy.roles.peacekeeper.name'),
+    title: t('psychTests.results.friendEnergy.roles.peacekeeper.title'),
+    emoji: t('psychTests.results.friendEnergy.roles.peacekeeper.emoji'),
+    tagline: t('psychTests.results.friendEnergy.roles.peacekeeper.tagline'),
+    description: t('psychTests.results.friendEnergy.roles.peacekeeper.description'),
+    socialRole: t('psychTests.results.friendEnergy.roles.peacekeeper.socialRole'),
+    strengths: JSON.parse(t('psychTests.results.friendEnergy.roles.peacekeeper.strengths') || '[]') as string[],
+    funFacts: JSON.parse(t('psychTests.results.friendEnergy.roles.peacekeeper.funFacts') || '[]') as string[],
+    shareText: t('psychTests.results.friendEnergy.roles.peacekeeper.shareText'),
   },
-};
+});
 
 // Enneagram 9 Kişilik Tipi Açıklamaları
 // Kaynak: Enneagram Institute ve bilimsel kişilik psikolojisi literatürü
-const enneagramTypes = {
+export const getEnneagramTypes = (t: (key: string) => string) => ({
   type1: {
-    name: 'Tip 1 - Reformcu (Mükemmeliyetçi)',
-    title: 'Reformcu',
-    subtitle: 'İdeal ve Prensipli',
-    description:
-      'Doğruluk, adalet ve mükemmellik peşinde koşan, ilkeli ve organize kişilerdir. Her şeyin doğru yapılması gerektiğine inanırlar.',
-    coreMotivation:
-      'Doğru olmak, her şeyi iyileştirmek, hata yapmaktan kaçınmak',
-    coreFear: 'Yanlış olmak, bozuk olmak, kötü olmak',
+    name: t('psychTests.results.enneagram.types.type1.name'),
+    title: t('psychTests.results.enneagram.types.type1.title'),
+    subtitle: t('psychTests.results.enneagram.types.type1.subtitle'),
+    description: t('psychTests.results.enneagram.types.type1.description'),
+    coreMotivation: t('psychTests.results.enneagram.types.type1.coreMotivation'),
+    coreFear: t('psychTests.results.enneagram.types.type1.coreFear'),
     lightSide: {
-      title: 'Işık Yönleri',
-      traits:
-        'Prensipli, adil, sorumlu, disiplinli, etik değerlere bağlı, iyileştirici, öz-kontrollü, idealist',
-      description:
-        'İlkeli, organize ve güvenilirdirler. Yüksek standartlara sahip olup işlerini mükemmel yaparlar. Topluma faydalı olmak isterler.',
+      title: t('psychTests.results.enneagram.types.type1.lightSide.title'),
+      traits: t('psychTests.results.enneagram.types.type1.lightSide.traits'),
+      description: t('psychTests.results.enneagram.types.type1.lightSide.description'),
     },
     shadowSide: {
-      title: 'Gölge Yönleri',
-      traits:
-        'Eleştirel, katı, mükemmeliyetçi, öfkeli (bastırılmış), kendine/başkalarına sert, esnek olmayan',
-      description:
-        'Aşırı eleştirel olabilir, hem kendilerine hem başkalarına karşı çok sert olabilirler. Hata yapmaktan aşırı korkarlar.',
+      title: t('psychTests.results.enneagram.types.type1.shadowSide.title'),
+      traits: t('psychTests.results.enneagram.types.type1.shadowSide.traits'),
+      description: t('psychTests.results.enneagram.types.type1.shadowSide.description'),
     },
   },
   type2: {
-    name: 'Tip 2 - Yardımsever',
-    title: 'Yardımsever',
-    subtitle: 'Şefkatli ve Cömert',
-    description:
-      'Başkalarının ihtiyaçlarını önemseyen, yardımsever ve şefkatli kişilerdir. Sevgi ve takdir görme ihtiyacı duyarlar.',
-    coreMotivation: 'Sevilmek, takdir edilmek, başkalarına yardım etmek',
-    coreFear: 'Sevilmemek, ihtiyaç duyulmamak, değersiz olmak',
+    name: t('psychTests.results.enneagram.types.type2.name'),
+    title: t('psychTests.results.enneagram.types.type2.title'),
+    subtitle: t('psychTests.results.enneagram.types.type2.subtitle'),
+    description: t('psychTests.results.enneagram.types.type2.description'),
+    coreMotivation: t('psychTests.results.enneagram.types.type2.coreMotivation'),
+    coreFear: t('psychTests.results.enneagram.types.type2.coreFear'),
     lightSide: {
-      title: 'Işık Yönleri',
-      traits:
-        'Empatik, cömert, şefkatli, yardımsever, sıcak, destekleyici, fedakar, sevgi dolu',
-      description:
-        'İçten ve cömert kişilerdir. Başkalarının duygularına duyarlıdırlar ve gerçekten yardım etmekten mutluluk duyarlar.',
+      title: t('psychTests.results.enneagram.types.type2.lightSide.title'),
+      traits: t('psychTests.results.enneagram.types.type2.lightSide.traits'),
+      description: t('psychTests.results.enneagram.types.type2.lightSide.description'),
     },
     shadowSide: {
-      title: 'Gölge Yönleri',
-      traits:
-        'Manipülatif, sahiplenici, kendi ihtiyaçlarını ihmal eden, onay bağımlısı, sınır koyamayan',
-      description:
-        'Kendi ihtiyaçlarını görmezden gelebilir, onay için aşırı çaba gösterebilir. Yardım ederken gizli beklentiler olabilir.',
+      title: t('psychTests.results.enneagram.types.type2.shadowSide.title'),
+      traits: t('psychTests.results.enneagram.types.type2.shadowSide.traits'),
+      description: t('psychTests.results.enneagram.types.type2.shadowSide.description'),
     },
   },
   type3: {
-    name: 'Tip 3 - Başarılı (Başaran)',
-    title: 'Başarılı',
-    subtitle: 'Hırslı ve Uyumlu',
-    description:
-      'Başarı odaklı, hedef belirleyen ve imaj bilinçli kişilerdir. Başarılarıyla tanınmak isterler.',
-    coreMotivation: 'Başarılı olmak, değerli hissetmek, takdir görmek',
-    coreFear: 'Değersiz olmak, başarısız olmak, göze çarpmamak',
+    name: t('psychTests.results.enneagram.types.type3.name'),
+    title: t('psychTests.results.enneagram.types.type3.title'),
+    subtitle: t('psychTests.results.enneagram.types.type3.subtitle'),
+    description: t('psychTests.results.enneagram.types.type3.description'),
+    coreMotivation: t('psychTests.results.enneagram.types.type3.coreMotivation'),
+    coreFear: t('psychTests.results.enneagram.types.type3.coreFear'),
     lightSide: {
-      title: 'Işık Yönleri',
-      traits:
-        'Başarılı, motive edici, verimli, uyumlu, karizmatik, hedef odaklı, enerjik, ilham verici',
-      description:
-        'Çok çalışkan ve başarılıdırlar. Başkalarına ilham verirler ve hedeflerine ulaşmak için büyük çaba gösterirler.',
+      title: t('psychTests.results.enneagram.types.type3.lightSide.title'),
+      traits: t('psychTests.results.enneagram.types.type3.lightSide.traits'),
+      description: t('psychTests.results.enneagram.types.type3.lightSide.description'),
     },
     shadowSide: {
-      title: 'Gölge Yönleri',
-      traits:
-        'İmaj odaklı, rekabetçi, işkolik, sahtelik, duygularını gizleyen, kıskançlık',
-      description:
-        'İmajlarına aşırı önem verebilir, iş-yaşam dengesini kaybedebilir. Gerçek duygularını bastırarak sadece başarılı görünmeye odaklanabilirler.',
+      title: t('psychTests.results.enneagram.types.type3.shadowSide.title'),
+      traits: t('psychTests.results.enneagram.types.type3.shadowSide.traits'),
+      description: t('psychTests.results.enneagram.types.type3.shadowSide.description'),
     },
   },
   type4: {
-    name: 'Tip 4 - Bireyci (Romantik)',
-    title: 'Bireyci',
-    subtitle: 'Yaratıcı ve Hassas',
-    description:
-      'Özgün, yaratıcı ve duygusal olarak derin kişilerdir. Kendilerini ifade etme ve anlaşılma ihtiyacı duyarlar.',
-    coreMotivation: 'Özgün olmak, kendini ifade etmek, anlaşılmak',
-    coreFear: 'Kimliksiz olmak, anlamsız olmak, özgünlüğünü kaybetmek',
+    name: t('psychTests.results.enneagram.types.type4.name'),
+    title: t('psychTests.results.enneagram.types.type4.title'),
+    subtitle: t('psychTests.results.enneagram.types.type4.subtitle'),
+    description: t('psychTests.results.enneagram.types.type4.description'),
+    coreMotivation: t('psychTests.results.enneagram.types.type4.coreMotivation'),
+    coreFear: t('psychTests.results.enneagram.types.type4.coreFear'),
     lightSide: {
-      title: 'Işık Yönleri',
-      traits:
-        'Yaratıcı, özgün, derin, empatik, estetik duyarlı, duygusal olarak dürüst, sanatsal',
-      description:
-        'Son derece yaratıcı ve özgündürler. Derin duygusal deneyimler yaşar ve sanat yoluyla kendilerini ifade ederler.',
+      title: t('psychTests.results.enneagram.types.type4.lightSide.title'),
+      traits: t('psychTests.results.enneagram.types.type4.lightSide.traits'),
+      description: t('psychTests.results.enneagram.types.type4.lightSide.description'),
     },
     shadowSide: {
-      title: 'Gölge Yönleri',
-      traits:
-        'Melankolik, dramatik, kıskançlık, kendini kurban hissetme, aşırı duygusal, çekilme',
-      description:
-        'Melankoliye kayabilir, kendilerini yanlış anlaşılmış hissedebilir. Başkalarının hayatlarını idealleştirip kendi hayatlarından memnuniyetsiz olabilirler.',
+      title: t('psychTests.results.enneagram.types.type4.shadowSide.title'),
+      traits: t('psychTests.results.enneagram.types.type4.shadowSide.traits'),
+      description: t('psychTests.results.enneagram.types.type4.shadowSide.description'),
     },
   },
   type5: {
-    name: 'Tip 5 - Araştırmacı (Gözlemci)',
-    title: 'Araştırmacı',
-    subtitle: 'Meraklı ve Analitik',
-    description:
-      'Bilgi toplayan, analitik düşünen ve gözlemci kişilerdir. Bilgi ve yeterlilik arayışındadırlar.',
-    coreMotivation: 'Bilgili olmak, yeterli olmak, her şeyi anlamak',
-    coreFear: 'Yetersiz olmak, işe yaramaz olmak, boş olmak',
+    name: t('psychTests.results.enneagram.types.type5.name'),
+    title: t('psychTests.results.enneagram.types.type5.title'),
+    subtitle: t('psychTests.results.enneagram.types.type5.subtitle'),
+    description: t('psychTests.results.enneagram.types.type5.description'),
+    coreMotivation: t('psychTests.results.enneagram.types.type5.coreMotivation'),
+    coreFear: t('psychTests.results.enneagram.types.type5.coreFear'),
     lightSide: {
-      title: 'Işık Yönleri',
-      traits:
-        'Analitik, bilgili, bağımsız, objektif, inovatif, meraklı, odaklanmış, uzman',
-      description:
-        'Derin düşünürler ve uzman olurlar. Karmaşık konuları anlama ve sistematik düşünme yeteneğine sahiptirler.',
+      title: t('psychTests.results.enneagram.types.type5.lightSide.title'),
+      traits: t('psychTests.results.enneagram.types.type5.lightSide.traits'),
+      description: t('psychTests.results.enneagram.types.type5.lightSide.description'),
     },
     shadowSide: {
-      title: 'Gölge Yönleri',
-      traits:
-        'İzole, duygusal mesafeli, cimri (bilgi/zaman/enerji), sosyal beceri eksikliği, aşırı zihinsel',
-      description:
-        'Sosyal etkileşimden kaçınabilir, duygularını paylaşmakta zorlanabilir. Bilgi biriktirme uğruna yaşamı erteleyebilirler.',
+      title: t('psychTests.results.enneagram.types.type5.shadowSide.title'),
+      traits: t('psychTests.results.enneagram.types.type5.shadowSide.traits'),
+      description: t('psychTests.results.enneagram.types.type5.shadowSide.description'),
     },
   },
   type6: {
-    name: 'Tip 6 - Sadık (Sorgulayıcı)',
-    title: 'Sadık',
-    subtitle: 'Güvenilir ve Sorumlu',
-    description:
-      'Güvenlik odaklı, sadık ve sorumlu kişilerdir. Belirsizlikten kaçınır ve güvenilir sistemlere ihtiyaç duyarlar.',
-    coreMotivation: 'Güvende olmak, desteklenmek, kesinlik',
-    coreFear: 'Destek kaybı, yalnız kalmak, tehdit',
+    name: t('psychTests.results.enneagram.types.type6.name'),
+    title: t('psychTests.results.enneagram.types.type6.title'),
+    subtitle: t('psychTests.results.enneagram.types.type6.subtitle'),
+    description: t('psychTests.results.enneagram.types.type6.description'),
+    coreMotivation: t('psychTests.results.enneagram.types.type6.coreMotivation'),
+    coreFear: t('psychTests.results.enneagram.types.type6.coreFear'),
     lightSide: {
-      title: 'Işık Yönleri',
-      traits:
-        'Sadık, güvenilir, sorumlu, cesaretli (fobik-karşıfobik), takım oyuncusu, problem çözücü',
-      description:
-        'Son derece sadık ve güvenilirdirler. İyi hazırlıklı olur ve riskler için plan yaparlar. Takıma bağlıdırlar.',
+      title: t('psychTests.results.enneagram.types.type6.lightSide.title'),
+      traits: t('psychTests.results.enneagram.types.type6.lightSide.traits'),
+      description: t('psychTests.results.enneagram.types.type6.lightSide.description'),
     },
     shadowSide: {
-      title: 'Gölge Yönleri',
-      traits:
-        'Endişeli, şüpheci, kararsız, savunmacı, güven sorunları, aşırı düşünme',
-      description:
-        'Aşırı endişeli olabilir, en kötü senaryoları düşünebilir. Güven sorunları yaşayabilir ve sürekli onay arayabilirler.',
+      title: t('psychTests.results.enneagram.types.type6.shadowSide.title'),
+      traits: t('psychTests.results.enneagram.types.type6.shadowSide.traits'),
+      description: t('psychTests.results.enneagram.types.type6.shadowSide.description'),
     },
   },
   type7: {
-    name: 'Tip 7 - Coşkulu (Maceracı)',
-    title: 'Coşkulu',
-    subtitle: 'Spontane ve Heyecanlı',
-    description:
-      'Özgür ruhlu, heyecan arayan ve pozitif kişilerdir. Hayatın tadını çıkarmak ve yeni deneyimler yaşamak isterler.',
-    coreMotivation: 'Mutlu olmak, tatmin olmak, özgür olmak',
-    coreFear: 'Acı çekmek, mahrum kalmak, sıkılmak',
+    name: t('psychTests.results.enneagram.types.type7.name'),
+    title: t('psychTests.results.enneagram.types.type7.title'),
+    subtitle: t('psychTests.results.enneagram.types.type7.subtitle'),
+    description: t('psychTests.results.enneagram.types.type7.description'),
+    coreMotivation: t('psychTests.results.enneagram.types.type7.coreMotivation'),
+    coreFear: t('psychTests.results.enneagram.types.type7.coreFear'),
     lightSide: {
-      title: 'Işık Yönleri',
-      traits:
-        'Neşeli, enerjik, yaratıcı, spontane, çok yönlü, iyimser, esnek, maceracı',
-      description:
-        'Hayat dolu ve pozitiftirler. Yeni fikirler ve olasılıklarla heyecanlanırlar. Başkalarına enerji verirler.',
+      title: t('psychTests.results.enneagram.types.type7.lightSide.title'),
+      traits: t('psychTests.results.enneagram.types.type7.lightSide.traits'),
+      description: t('psychTests.results.enneagram.types.type7.lightSide.description'),
     },
     shadowSide: {
-      title: 'Gölge Yönleri',
-      traits:
-        'Kaçış eğilimi, yüzeysel, disiplinsiz, bağlanma sorunu, acıdan kaçma, aşırı tüketim',
-      description:
-        'Olumsuz duygulardan kaçabilir, sorumluluktan uzak durabilir. Sürekli yeni heyecan arayışı derinleşmeyi engelleyebilir.',
+      title: t('psychTests.results.enneagram.types.type7.shadowSide.title'),
+      traits: t('psychTests.results.enneagram.types.type7.shadowSide.traits'),
+      description: t('psychTests.results.enneagram.types.type7.shadowSide.description'),
     },
   },
   type8: {
-    name: 'Tip 8 - Meydan Okuyan (Lider)',
-    title: 'Meydan Okuyan',
-    subtitle: 'Güçlü ve Koruyucu',
-    description:
-      'Güçlü, kararlı ve kontrolcü kişilerdir. Adaleti savunur ve zayıfları korumak isterler.',
-    coreMotivation: 'Güçlü olmak, kendini korumak, kontrolü elinde tutmak',
-    coreFear: 'Zayıf olmak, kontrol edilmek, zarar görmek',
+    name: t('psychTests.results.enneagram.types.type8.name'),
+    title: t('psychTests.results.enneagram.types.type8.title'),
+    subtitle: t('psychTests.results.enneagram.types.type8.subtitle'),
+    description: t('psychTests.results.enneagram.types.type8.description'),
+    coreMotivation: t('psychTests.results.enneagram.types.type8.coreMotivation'),
+    coreFear: t('psychTests.results.enneagram.types.type8.coreFear'),
     lightSide: {
-      title: 'Işık Yönleri',
-      traits:
-        'Güçlü, koruyucu, adil, lider, kararlı, cesaretli, kendine güvenen, doğrudan',
-      description:
-        'Doğal liderlerdir. Adaleti savunur ve zayıfları korurlar. Kararlı ve cesurdurlar.',
+      title: t('psychTests.results.enneagram.types.type8.lightSide.title'),
+      traits: t('psychTests.results.enneagram.types.type8.lightSide.traits'),
+      description: t('psychTests.results.enneagram.types.type8.lightSide.description'),
     },
     shadowSide: {
-      title: 'Gölge Yönleri',
-      traits:
-        'Agresif, kontrolcü, baskın, zaaf gösterememe, öfke, güvensizlik, kırıcı',
-      description:
-        'Aşırı kontrolcü ve dominant olabilir. Zayıflık göstermekten korkar ve öfke sorunları yaşayabilir.',
+      title: t('psychTests.results.enneagram.types.type8.shadowSide.title'),
+      traits: t('psychTests.results.enneagram.types.type8.shadowSide.traits'),
+      description: t('psychTests.results.enneagram.types.type8.shadowSide.description'),
     },
   },
   type9: {
-    name: 'Tip 9 - Barışçı (Arabulucu)',
-    title: 'Barışçı',
-    subtitle: 'Uyumlu ve Destekleyici',
-    description:
-      'Huzur ve uyum arayan, rahat ve kabul edici kişilerdir. Çatışmadan kaçınır ve dengeyi önemserler.',
-    coreMotivation: 'İç huzur, uyum, çatışmadan kaçınma',
-    coreFear: 'Kayıp, ayrılık, çatışma, bağlantının kopması',
+    name: t('psychTests.results.enneagram.types.type9.name'),
+    title: t('psychTests.results.enneagram.types.type9.title'),
+    subtitle: t('psychTests.results.enneagram.types.type9.subtitle'),
+    description: t('psychTests.results.enneagram.types.type9.description'),
+    coreMotivation: t('psychTests.results.enneagram.types.type9.coreMotivation'),
+    coreFear: t('psychTests.results.enneagram.types.type9.coreFear'),
     lightSide: {
-      title: 'Işık Yönleri',
-      traits:
-        'Barışçıl, kabul edici, sabırlı, destekleyici, arabulucu, rahat, empatik, uzlaşmacı',
-      description:
-        'Sakin ve barışçıldırlar. İyi dinleyici ve arabulucudurlar. Başkalarının bakış açılarını anlayabilirler.',
+      title: t('psychTests.results.enneagram.types.type9.lightSide.title'),
+      traits: t('psychTests.results.enneagram.types.type9.lightSide.traits'),
+      description: t('psychTests.results.enneagram.types.type9.lightSide.description'),
     },
     shadowSide: {
-      title: 'Gölge Yönleri',
-      traits:
-        'Pasif, kararsız, erteleyici, kendi ihtiyaçlarını görmezden gelen, çatışmadan kaçan, inatçı',
-      description:
-        'Çatışmadan kaçmak için kendi ihtiyaçlarını ihmal edebilir. Karar vermekte zorlanır ve önemli konuları erteleyebilir.',
+      title: t('psychTests.results.enneagram.types.type9.shadowSide.title'),
+      traits: t('psychTests.results.enneagram.types.type9.shadowSide.traits'),
+      description: t('psychTests.results.enneagram.types.type9.shadowSide.description'),
     },
   },
-};
+});
 
 // Big Five Kişilik Boyutları Açıklamaları
-const bigFiveTraits = {
+export const getBigFiveTraits = (t: (key: string) => string) => ({
   openness: {
     high: {
-      title: 'Yüksek Açıklık',
-      description:
-        'Yaratıcı, meraklı ve yeni deneyimlere açıksınız. Sanat, kültür ve felsefe ilginizi çeker.',
-      traits: 'Hayal gücü kuvvetli, yenilikçi, estetik duyarlılık yüksek',
+      title: t('psychTests.results.bigFive.dimensions.openness.high.title'),
+      description: t('psychTests.results.bigFive.dimensions.openness.high.description'),
+      traits: t('psychTests.results.bigFive.dimensions.openness.high.traits'),
     },
     medium: {
-      title: 'Orta Açıklık',
-      description:
-        'Dengeli bir yaklaşıma sahipsiniz. Yeniliklerle geleneksel değerleri dengeleyebilirsiniz.',
-      traits: 'Esnek, pratik, uyumlu',
+      title: t('psychTests.results.bigFive.dimensions.openness.medium.title'),
+      description: t('psychTests.results.bigFive.dimensions.openness.medium.description'),
+      traits: t('psychTests.results.bigFive.dimensions.openness.medium.traits'),
     },
     low: {
-      title: 'Düşük Açıklık',
-      description:
-        'Geleneksel, pratik ve somut düşünen birisiniz. Bilinen ve test edilmiş yöntemleri tercih edersiniz.',
-      traits: 'Gelenekçi, gerçekçi, pratik',
+      title: t('psychTests.results.bigFive.dimensions.openness.low.title'),
+      description: t('psychTests.results.bigFive.dimensions.openness.low.description'),
+      traits: t('psychTests.results.bigFive.dimensions.openness.low.traits'),
     },
   },
   conscientiousness: {
     high: {
-      title: 'Yüksek Sorumluluk',
-      description:
-        'Düzenli, disiplinli ve hedef odaklısınız. Görevlerinizi eksiksiz tamamlarsınız.',
-      traits: 'Organize, güvenilir, planlı, azimli',
+      title: t('psychTests.results.bigFive.dimensions.conscientiousness.high.title'),
+      description: t('psychTests.results.bigFive.dimensions.conscientiousness.high.description'),
+      traits: t('psychTests.results.bigFive.dimensions.conscientiousness.high.traits'),
     },
     medium: {
-      title: 'Orta Sorumluluk',
-      description:
-        'Duruma göre esnek davranabilirsiniz. Gerektiğinde organize, gerektiğinde spontane olabilirsiniz.',
-      traits: 'Dengeli, uyumlu, makul',
+      title: t('psychTests.results.bigFive.dimensions.conscientiousness.medium.title'),
+      description: t('psychTests.results.bigFive.dimensions.conscientiousness.medium.description'),
+      traits: t('psychTests.results.bigFive.dimensions.conscientiousness.medium.traits'),
     },
     low: {
-      title: 'Düşük Sorumluluk',
-      description:
-        'Spontane, esnek ve rahat bir yapınız var. Katı kurallara uymakta zorlanabilirsiniz.',
-      traits: 'Esnek, rahat, spontane',
+      title: t('psychTests.results.bigFive.dimensions.conscientiousness.low.title'),
+      description: t('psychTests.results.bigFive.dimensions.conscientiousness.low.description'),
+      traits: t('psychTests.results.bigFive.dimensions.conscientiousness.low.traits'),
     },
   },
   extraversion: {
     high: {
-      title: 'Yüksek Dışa Dönüklük',
-      description:
-        'Sosyal, enerjik ve konuşkan birisiniz. İnsanlarla vakit geçirmekten keyif alırsınız.',
-      traits: 'Sosyal, canlı, heyecanlı, arkadaş canlısı',
+      title: t('psychTests.results.bigFive.dimensions.extraversion.high.title'),
+      description: t('psychTests.results.bigFive.dimensions.extraversion.high.description'),
+      traits: t('psychTests.results.bigFive.dimensions.extraversion.high.traits'),
     },
     medium: {
-      title: 'Orta Dışa Dönüklük (Ambivert)',
-      description:
-        'Hem içe hem dışa dönük özelliklere sahipsiniz. Duruma göre uyum sağlayabilirsiniz.',
-      traits: 'Dengeli, uyumlu, esnek',
+      title: t('psychTests.results.bigFive.dimensions.extraversion.medium.title'),
+      description: t('psychTests.results.bigFive.dimensions.extraversion.medium.description'),
+      traits: t('psychTests.results.bigFive.dimensions.extraversion.medium.traits'),
     },
     low: {
-      title: 'Düşük Dışa Dönüklük (İçe Dönük)',
-      description:
-        'Sakin, düşünceli ve yalnız vakit geçirmekten hoşlanırsınız. Derin ilişkiler kurarsınız.',
-      traits: 'Sessiz, düşünceli, bağımsız, dikkatli',
+      title: t('psychTests.results.bigFive.dimensions.extraversion.low.title'),
+      description: t('psychTests.results.bigFive.dimensions.extraversion.low.description'),
+      traits: t('psychTests.results.bigFive.dimensions.extraversion.low.traits'),
     },
   },
   agreeableness: {
     high: {
-      title: 'Yüksek Uyumluluk',
-      description:
-        'Empatik, yardımsever ve işbirlikçisiniz. İnsanların iyiliğine inanırsınız.',
-      traits: 'Empatik, güvenilir, nazik, fedakar',
+      title: t('psychTests.results.bigFive.dimensions.agreeableness.high.title'),
+      description: t('psychTests.results.bigFive.dimensions.agreeableness.high.description'),
+      traits: t('psychTests.results.bigFive.dimensions.agreeableness.high.traits'),
     },
     medium: {
-      title: 'Orta Uyumluluk',
-      description:
-        'Başkalarını düşünürken kendi çıkarlarınızı da koruyabilirsiniz.',
-      traits: 'Dengeli, adil, pratik',
+      title: t('psychTests.results.bigFive.dimensions.agreeableness.medium.title'),
+      description: t('psychTests.results.bigFive.dimensions.agreeableness.medium.description'),
+      traits: t('psychTests.results.bigFive.dimensions.agreeableness.medium.traits'),
     },
     low: {
-      title: 'Düşük Uyumluluk',
-      description:
-        'Rekabetçi, bağımsız ve eleştirel düşünürüsünüz. Kendi görüşlerinizi savunursunuz.',
-      traits: 'Bağımsız, analitik, rekabetçi',
+      title: t('psychTests.results.bigFive.dimensions.agreeableness.low.title'),
+      description: t('psychTests.results.bigFive.dimensions.agreeableness.low.description'),
+      traits: t('psychTests.results.bigFive.dimensions.agreeableness.low.traits'),
     },
   },
   neuroticism: {
     high: {
-      title: 'Yüksek Nevrotiklik',
-      description:
-        'Duygusal, hassas ve tepkiselsiniz. Stresi yoğun yaşayabilirsiniz.',
-      traits: 'Hassas, duygusal, endişeli, tepkisel',
-      tips: 'Stres yönetimi teknikleri, meditasyon ve düzenli egzersiz faydalı olabilir.',
+      title: t('psychTests.results.bigFive.dimensions.neuroticism.high.title'),
+      description: t('psychTests.results.bigFive.dimensions.neuroticism.high.description'),
+      traits: t('psychTests.results.bigFive.dimensions.neuroticism.high.traits'),
+      tips: t('psychTests.results.bigFive.dimensions.neuroticism.high.tips'),
     },
     medium: {
-      title: 'Orta Duygusal Denge',
-      description:
-        'Genellikle sakin kalabilirsiniz ama bazen strese kapılabilirsiniz.',
-      traits: 'Dengeli, normal tepkiler, uyumlu',
+      title: t('psychTests.results.bigFive.dimensions.neuroticism.medium.title'),
+      description: t('psychTests.results.bigFive.dimensions.neuroticism.medium.description'),
+      traits: t('psychTests.results.bigFive.dimensions.neuroticism.medium.traits'),
     },
     low: {
-      title: 'Düşük Nevrotiklik (Yüksek Duygusal Denge)',
-      description:
-        'Sakin, dengeli ve strese karşı dayanıklısınız. Duygusal olarak istikrarlısınız.',
-      traits: 'Sakin, dengeli, dayanıklı, rahat',
+      title: t('psychTests.results.bigFive.dimensions.neuroticism.low.title'),
+      description: t('psychTests.results.bigFive.dimensions.neuroticism.low.description'),
+      traits: t('psychTests.results.bigFive.dimensions.neuroticism.low.traits'),
     },
   },
-};
+  dimensionNames: {
+    openness: t('psychTests.results.bigFive.dimensionNames.openness'),
+    conscientiousness: t('psychTests.results.bigFive.dimensionNames.conscientiousness'),
+    extraversion: t('psychTests.results.bigFive.dimensionNames.extraversion'),
+    agreeableness: t('psychTests.results.bigFive.dimensionNames.agreeableness'),
+    neuroticism: t('psychTests.results.bigFive.dimensionNames.neuroticism'),
+  },
+});
 
 // Helper fonksiyon: i18n destekli storm personality testi oluştur
 const getStormPersonalityTest = (
@@ -2224,13 +1998,3 @@ export const psychologicalTests = getPsychologicalTests((_key: string) => _key);
 // Backward compatibility için nameTarotCards - varsayılan key'leri döndürür
 export const nameTarotCards = getNameTarotCards((_key: string) => _key);
 
-export {
-  mbtiTypes,
-  loveLanguages,
-  bigFiveTraits,
-  enneagramTypes,
-  friendEnergyRoles,
-  loveVibrationProfiles,
-  stressProfiles,
-  getNameTarotCards,
-};

@@ -511,10 +511,8 @@ export default function AklindakiKisiAdminPage() {
                     {filteredLinks.map((link) => {
                       const baseUrl =
                         process.env.NEXT_PUBLIC_READING_LINK_BASE_URL ||
-                        (process.env.NODE_ENV === 'development'
-                          ? 'http://localhost:3001'
-                          : process.env.NEXT_PUBLIC_SITE_URL ||
-                            'https://tarotnumeroloji.com');
+                        process.env.NEXT_PUBLIC_SITE_URL ||
+                        'https://www.busbuskimki.com';
                       const locale = 'tr';
                       const fullLink = `${baseUrl}/${locale}/aklindaki-kisi?token=${link.token}`;
 
