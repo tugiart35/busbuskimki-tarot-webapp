@@ -81,6 +81,10 @@ const MoneyReading = dynamic(
   () => import('@/features/tarot/components/Money-Spread/MoneyTarot')
 );
 
+const SingleCardReading = dynamic(
+  () => import('@/features/tarot/components/Single-Card/SingleCardTarot')
+);
+
 // Tarot kart pozisyonu interface'i
 export interface TarotCardPosition {
   id: number;
@@ -110,6 +114,7 @@ export interface TarotSpread {
     systemPrompt?: string;
     interpretationTemplate?: string;
   };
+  hidden?: boolean; // Admin-only spreads (sadece link üzerinden erişilebilir)
 }
 
 // Love spread pozisyonları
@@ -909,6 +914,36 @@ export const tarotSpreads: TarotSpread[] = [
       systemPrompt: 'Sen deneyimli bir tarot okuyucusu ve finans uzmanısın...',
     },
   },
+  {
+    id: 'single-card-spread',
+    name: 'spreads.singleCard.name',
+    description: 'spreads.singleCard.description',
+    cardCount: 1,
+    component: SingleCardReading,
+    icon: '🎴',
+    color: 'purple',
+    positions: [
+      {
+        id: 1,
+        title: 'spreads.singleCard.positions.1.title',
+        description: 'spreads.singleCard.positions.1.description',
+        className:
+          'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30',
+        x: 50,
+        y: 50,
+      },
+    ],
+    layout: {
+      type: 'custom',
+      containerClass:
+        'relative w-full h-[500px] md:h-[600px] bg-gradient-to-br from-purple-800/50 to-indigo-800/50 rounded-xl border border-purple-700',
+      cardSize: 'large',
+    },
+    prompts: {
+      systemPrompt: 'Sen deneyimli bir tarot okuyucusu ve tek kart okuma uzmanısın...',
+    },
+    hidden: true, // Admin-only: Sadece link üzerinden erişilebilir, tarotokumasi sayfasında gözükmez
+  },
 ];
 
 // Spread bulmak için yardımcı fonksiyon
@@ -934,4 +969,5 @@ export type SpreadId =
   | 'relationship-problems-spread'
   | 'marriage-spread'
   | 'new-lover-spread'
-  | 'money-spread';
+  | 'money-spread'
+  | 'single-card-spread';

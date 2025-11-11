@@ -44,6 +44,7 @@ export const FormPlaceholdersSchema = z.object({
   concernQuestion: z.string().min(1).optional(),
   understandingQuestion: z.string().min(1).optional(),
   emotionalQuestion: z.string().min(1).optional(),
+  mainQuestion: z.string().min(1).optional(),
 });
 
 /**
@@ -75,6 +76,9 @@ export const FormI18nKeysSchema = z.object({
   concernQuestion: z.string().min(1),
   understandingQuestion: z.string().min(1),
   emotionalQuestion: z.string().min(1),
+  mainQuestion: z.string().min(1).optional(),
+  mainQuestionPlaceholder: z.string().min(1).optional(),
+  hasPartner: z.string().min(1).optional(),
   saving: z.string().min(1),
   saveAndOpen: z.string().min(1),
   clearAll: z.string().min(1).optional(),
@@ -175,6 +179,7 @@ export const TarotConfigSchema = z.object({
   backgroundImage: z.string().min(1),
   backgroundAlt: z.string().min(1),
   requiresPartnerInfo: z.boolean().optional(),
+  isSingleCard: z.boolean().optional(), // Single card spread flag
   readingType: z.string().min(1),
   supabaseReadingType: z.string().min(1).optional(),
   creditKeyPrefix: z.string().min(1).optional(),
@@ -207,6 +212,7 @@ export const QuestionsSchema = z.object({
   concern: z.string().min(1),
   understanding: z.string().min(1),
   emotional: z.string().min(1),
+  mainQuestion: z.string().optional(), // Single card için tek soru
 });
 
 /**

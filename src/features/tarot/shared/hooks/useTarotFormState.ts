@@ -24,6 +24,7 @@ export interface Questions {
   concern: string;
   understanding: string;
   emotional: string;
+  mainQuestion?: string; // Single card için tek soru
 }
 
 export interface FormErrors {
@@ -65,6 +66,7 @@ export interface ValidationKeys {
 export interface UseTarotFormStateProps {
   validationKeys: ValidationKeys;
   requiresPartnerInfo?: boolean;
+  isSingleCard?: boolean; // Single card spread flag
 }
 
 export interface UseTarotFormStateReturn {
@@ -75,6 +77,7 @@ export interface UseTarotFormStateReturn {
   questions: Questions;
   formErrors: FormErrors;
   modalStates: ModalStates;
+  hasPartner: boolean; // Single card için partner bilgisi toggle
 
   // Actions
   updatePersonalInfo: (
@@ -87,6 +90,7 @@ export interface UseTarotFormStateReturn {
   ) => void;
   updateCommunicationMethod: (_method: 'email' | 'whatsapp') => void;
   updateQuestion: (_field: keyof Questions, _value: string) => void;
+  toggleHasPartner: (_value: boolean) => void; // Single card için partner toggle
   setPersonalInfo: React.Dispatch<React.SetStateAction<PersonalInfo>>;
   setPartnerInfo: React.Dispatch<React.SetStateAction<PartnerInfo>>;
   setQuestions: React.Dispatch<React.SetStateAction<Questions>>;
@@ -108,7 +112,9 @@ export interface UseTarotFormStateReturn {
 export function useTarotFormState({
   validationKeys,
   requiresPartnerInfo = false,
+  isSingleCard = false,
 }: UseTarotFormStateProps): UseTarotFormStateReturn {
+  const [hasPartner, setHasPartner] = useState<boolean>(false);
   const { t } = useTranslations();
 
   // Form state
@@ -137,6 +143,7 @@ export function useTarotFormState({
     concern: '',
     understanding: '',
     emotional: '',
+    mainQuestion: '',
   });
 
   const [formErrors, setFormErrors] = useState<FormErrors>({
@@ -230,8 +237,17 @@ export function useTarotFormState({
 
     // Relationship status validation - Artık zorunlu değil, opsiyonel alan
 
-    // Partner bilgileri artık zorunlu değil - opsiyonel alanlar
-    // Validasyon kaldırıldı
+    // Partner bilgileri validasyonu - requiresPartnerInfo true ise zorunlu, değilse hasPartner true ise zorunlu
+    if (requiresPartnerInfo || hasPartner) {
+      if (!partnerInfo.name.trim()) {
+        errors.partnerName = t(validationKeys.partnerNameRequired);
+        hasError = true;
+      }
+      if (!partnerInfo.birthDateUnknown && !partnerInfo.birthDate) {
+        errors.partnerBirthDate = t(validationKeys.partnerBirthDateRequired);
+        hasError = true;
+      }
+    }
 
     // Email validation (Email seçilirse gerekli)
     if (communicationMethod === 'email') {
@@ -258,22 +274,31 @@ export function useTarotFormState({
     }
 
     // Questions validation
-    if (!questions.concern.trim() || questions.concern.trim().length < 10) {
-      errors.concern = t(validationKeys.questionMinLength);
-      hasError = true;
-    }
+    if (isSingleCard) {
+      // Single card için sadece concern (mainQuestion) kontrolü
+      if (!questions.concern.trim() || questions.concern.trim().length < 10) {
+        errors.concern = t(validationKeys.questionMinLength);
+        hasError = true;
+      }
+    } else {
+      // Normal spread için 3 soru kontrolü
+      if (!questions.concern.trim() || questions.concern.trim().length < 10) {
+        errors.concern = t(validationKeys.questionMinLength);
+        hasError = true;
+      }
 
-    if (
-      !questions.understanding.trim() ||
-      questions.understanding.trim().length < 10
-    ) {
-      errors.understanding = t(validationKeys.questionMinLength);
-      hasError = true;
-    }
+      if (
+        !questions.understanding.trim() ||
+        questions.understanding.trim().length < 10
+      ) {
+        errors.understanding = t(validationKeys.questionMinLength);
+        hasError = true;
+      }
 
-    if (!questions.emotional.trim() || questions.emotional.trim().length < 10) {
-      errors.emotional = t(validationKeys.questionMinLength);
-      hasError = true;
+      if (!questions.emotional.trim() || questions.emotional.trim().length < 10) {
+        errors.emotional = t(validationKeys.questionMinLength);
+        hasError = true;
+      }
     }
 
     setFormErrors(prev => ({ ...prev, ...errors }));
@@ -281,12 +306,35 @@ export function useTarotFormState({
   }, [
     personalInfo,
     partnerInfo,
+    hasPartner,
     questions,
     communicationMethod,
     validationKeys,
     requiresPartnerInfo,
+    isSingleCard,
     t,
   ]);
+
+  // Partner bilgisi toggle fonksiyonu
+  const toggleHasPartner = useCallback(
+    (value: boolean) => {
+      setHasPartner(value);
+      if (!value) {
+        // Partner bilgisi kapatıldığında temizle
+        setPartnerInfo({
+          name: '',
+          birthDate: '',
+          birthDateUnknown: false,
+        });
+        setFormErrors(prev => ({
+          ...prev,
+          partnerName: '',
+          partnerBirthDate: '',
+        }));
+      }
+    },
+    []
+  );
 
   // Modal helper functions
   const closeInfoModal = useCallback(() => {
@@ -336,12 +384,14 @@ export function useTarotFormState({
     questions,
     formErrors,
     modalStates,
+    hasPartner,
 
     // Actions
     updatePersonalInfo,
     updatePartnerInfo,
     updateCommunicationMethod,
     updateQuestion,
+    toggleHasPartner,
     setPersonalInfo,
     setPartnerInfo,
     setQuestions,

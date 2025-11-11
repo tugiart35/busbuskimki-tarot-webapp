@@ -29,28 +29,34 @@ export default async function SpreadLayout({
   return (
     <>
       {/* Breadcrumb Schema */}
-      <script
-        type='application/ld+json'
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(structuredData.breadcrumb),
-        }}
-      />
+      {structuredData.breadcrumb && (
+        <script
+          type='application/ld+json'
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData.breadcrumb),
+          }}
+        />
+      )}
 
       {/* WebPage Schema */}
-      <script
-        type='application/ld+json'
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(structuredData.webpage),
-        }}
-      />
+      {structuredData.webpage && (
+        <script
+          type='application/ld+json'
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData.webpage),
+          }}
+        />
+      )}
 
       {/* Service/Product Schema */}
-      <script
-        type='application/ld+json'
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(structuredData.service),
-        }}
-      />
+      {structuredData.service && (
+        <script
+          type='application/ld+json'
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData.service),
+          }}
+        />
+      )}
 
       {children}
     </>

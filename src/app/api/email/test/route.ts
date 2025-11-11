@@ -117,7 +117,7 @@ export async function POST(request: NextRequest) {
           </div>
           
           <div class="footer">
-            <p>Busbuskimki Tarot - Mistik Rehberlik Sistemi</p>
+            <p>Busbuskimki - Tarot Rehberlik Sistemi</p>
             <p>Bu email otomatik test sistemi tarafından gönderilmiştir.</p>
           </div>
         </body>

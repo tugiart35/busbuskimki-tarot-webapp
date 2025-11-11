@@ -20,6 +20,10 @@
  */
 
 import nodemailer from 'nodemailer';
+import fs from 'fs';
+import path from 'path';
+import TranslationCache from './translation-cache';
+import { logger } from '@/lib/logger';
 
 interface EmailConfig {
   host: string;
@@ -91,14 +95,20 @@ class EmailService {
       this.isInitialized = true;
     } catch (error) {
       // eslint-disable-next-line no-console
-      console.error('Email transporter initialization failed:', error);
+      logger.error('Email transporter initialization failed', error, {
+        action: 'init_transporter',
+        resource: 'email_service',
+      });
     }
   }
 
   async sendEmail(emailData: EmailData): Promise<boolean> {
     if (!this.transporter) {
       // eslint-disable-next-line no-console
-      console.error('Email transporter not initialized');
+      logger.error('Email transporter not initialized', null, {
+        action: 'send_email',
+        resource: 'email_service',
+      });
       return false;
     }
 
@@ -119,10 +129,15 @@ class EmailService {
       // Always log errors (but sanitize in production)
       if (process.env.NODE_ENV === 'development') {
         // eslint-disable-next-line no-console
-        console.error('Email sending failed:', error);
+        logger.error('Email sending failed', error, {
+          action: 'send_email',
+          resource: 'email_service',
+        });
       } else {
-        // eslint-disable-next-line no-console
-        console.error('Email sending failed - check logs for details');
+        logger.error('Email sending failed - check logs for details', null, {
+          action: 'send_email',
+          resource: 'email_service',
+        });
       }
       return false;
     }
@@ -230,8 +245,131 @@ class EmailService {
       }
     }
 
+    // Single card okuması kontrolü
+    const isSingleCardReading =
+      readingData.metadata?.isSingleCardReading === true ||
+      readingData.metadata?.isSingleCardReading === 'true';
+
+    // Kart ismini JSON key'ine dönüştür (örn: "The Fool" -> "the-fool")
+    const getCardKeyFromName = (cardName: string): string => {
+      return cardName
+        .toLowerCase()
+        .replace(/\s+/g, '-')
+        .replace(/[^a-z0-9-]/g, '');
+    };
+
+    // Translation dosyasından kart anlamını al (single card için)
+    const getCardMeaningFromTranslations = (
+      cardName: string,
+      isReversed: boolean,
+      locale: string = 'tr'
+    ): string | null => {
+      try {
+        // Cache'den kontrol et
+        let messages = TranslationCache.get(locale);
+
+        if (!messages) {
+          // Cache'de yok, dosyadan oku
+          const messagesPath = path.join(
+            process.cwd(),
+            'messages',
+            `${locale}.json`
+          );
+          const messagesContent = fs.readFileSync(messagesPath, 'utf-8');
+          messages = JSON.parse(messagesContent);
+
+          // Cache'e kaydet
+          TranslationCache.set(locale, messages);
+        }
+
+        const cardKey = getCardKeyFromName(cardName);
+        const meaningKey = isReversed
+          ? `blog.cards.${cardKey}.meanings.reversed.general`
+          : `blog.cards.${cardKey}.meanings.upright.general`;
+
+        // Development modunda debug log
+        if (process.env.NODE_ENV === 'development') {
+          logger.debug('Single card translation lookup', {
+            cardName,
+            cardKey,
+            meaningKey,
+            isReversed,
+            locale,
+          });
+        }
+
+        // Nested key'i çöz (örn: "blog.cards.the-fool.meanings.upright.general")
+        const keys = meaningKey.split('.');
+        let value: any = messages;
+        for (const key of keys) {
+          if (value && typeof value === 'object' && key in value) {
+            value = value[key];
+          } else {
+            // Development modunda detaylı log
+            if (process.env.NODE_ENV === 'development') {
+              logger.debug('Translation key not found', {
+                meaningKey,
+                currentKey: key,
+                availableKeys:
+                  value && typeof value === 'object'
+                    ? Object.keys(value).slice(0, 10)
+                    : null,
+              });
+            }
+            return null;
+          }
+        }
+
+        return typeof value === 'string' ? value : null;
+      } catch (error) {
+        logger.error('Translation dosyası okuma hatası', error, {
+          action: 'read_translation',
+          locale,
+          cardName,
+        });
+        return null;
+      }
+    };
+
     // Kartların yorumlarını çıkar
-    const getCardInterpretation = (cardIndex: number, cardName: string) => {
+    const getCardInterpretation = (
+      cardIndex: number,
+      cardName: string,
+      isReversed: boolean = false,
+      card?: any // Kart objesi (fallback için)
+    ) => {
+      // Single card okuması için translation dosyasından al
+      if (isSingleCardReading) {
+        // Locale'i metadata'dan veya varsayılan olarak 'tr' kullan
+        const locale =
+          readingData.metadata?.locale || 'tr';
+        const meaning = getCardMeaningFromTranslations(
+          cardName,
+          isReversed,
+          locale
+        );
+        if (meaning) {
+          return meaning;
+        }
+        // Fallback: Kartın kendi anlamını kullan (eğer varsa)
+        if (card) {
+          if (isReversed && card.meaningTr?.reversed) {
+            return card.meaningTr.reversed;
+          }
+          if (isReversed && card.meaning?.reversed) {
+            return card.meaning.reversed;
+          }
+          if (!isReversed && card.meaningTr?.upright) {
+            return card.meaningTr.upright;
+          }
+          if (!isReversed && card.meaning?.upright) {
+            return card.meaning.upright;
+          }
+        }
+        return 'Yorum bulunamadı.';
+      }
+
+      // Normal okuma için interpretation'dan çıkar
       const interpretation = readingData.interpretation || '';
 
       // Eğer interpretation boşsa veya geçersizse
@@ -290,9 +428,16 @@ class EmailService {
 
     const cardsList = selectedCards
       .map((card: any, index: number) => {
+        // Single card için kart ismini translation key'ine çevirirken İngilizce ismi kullan
+        // Öncelik: card.name (İngilizce) -> card.nameTr (Türkçe)
+        const cardNameForTranslation = isSingleCardReading
+          ? card.name || card.nameTr
+          : card.nameTr || card.name;
         const interpretation = getCardInterpretation(
           index,
-          card.nameTr || card.name
+          cardNameForTranslation,
+          card.isReversed || false,
+          card // Kart objesini geç (fallback için)
         );
 
         // Pozisyon bilgisini al
@@ -449,7 +594,7 @@ class EmailService {
         <div class="container">
           <div class="header">
             <h1>🔮 Yeni Tarot Okuma Bildirimi</h1>
-            <p>Busbuskimki Tarot - Mistik Rehberlik Sistemi</p>
+            <p>Busbuskimki - Tarot Rehberlik Sistemi</p>
           </div>
           
           <div class="content">

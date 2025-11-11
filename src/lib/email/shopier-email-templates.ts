@@ -74,7 +74,7 @@ const translations: Record<string, EmailTranslations> = {
     userCanNowRead:
       '🎯 Kullanıcı artık {credits} kredi ile tarot okumaları yapabilir.',
     automaticallySaved: '📊 Bu ödeme otomatik olarak sisteme kaydedilmiştir.',
-    footerText: 'Busbuskimki Tarot - Mistik Rehberlik Sistemi',
+    footerText: 'Busbuskimki - Tarot Rehberlik Sistemi',
     automaticEmail: 'Bu email otomatik olarak gönderilmiştir.',
     paymentStatus: '📋 Ödeme Durumu',
     warning: '⚠️ Ödeme Bildirimi',

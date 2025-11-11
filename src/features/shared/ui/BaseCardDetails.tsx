@@ -68,7 +68,8 @@ export interface BaseCardDetailsProps {
     | 'relationship-analysis'
     | 'relationship-problems'
     | 'marriage'
-    | 'new-lover';
+    | 'new-lover'
+    | 'single-card';
   theme?: 'default' | 'amber' | 'pink' | 'purple' | 'blue';
   maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | '2xl';
   positionInfo?:

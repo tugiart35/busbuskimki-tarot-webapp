@@ -413,6 +413,16 @@ const NEW_LOVER_POSITIONS_LAYOUT: PositionLayout[] = [
   }, // en sağ (hafif yana kayık)
 ];
 
+// Single Card Spread Layout Data (CSS positions only)
+// Tek kart merkezi konumda gösterilir
+const SINGLE_CARD_POSITIONS_LAYOUT: PositionLayout[] = [
+  {
+    id: 1,
+    className:
+      'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30',
+  },
+];
+
 // Situation Analysis Spread Layout Data (CSS positions only)
 
 const SITUATION_ANALYSIS_POSITIONS_LAYOUT: PositionLayout[] = [
@@ -490,6 +500,9 @@ const createFormI18nKeys = (spreadId: string): FormI18nKeys => ({
   concernQuestion: `${spreadId}.form.concernQuestion`,
   understandingQuestion: `${spreadId}.form.understandingQuestion`,
   emotionalQuestion: `${spreadId}.form.emotionalQuestion`,
+  mainQuestion: `${spreadId}.form.mainQuestion`,
+  mainQuestionPlaceholder: `${spreadId}.form.mainQuestionPlaceholder`,
+  hasPartner: `${spreadId}.form.hasPartner`,
   saving: `${spreadId}.form.saving`,
   saveAndOpen: `${spreadId}.form.saveAndOpen`,
   clearAll: `${spreadId}.form.clearAll`,
@@ -501,6 +514,7 @@ const createFormI18nKeys = (spreadId: string): FormI18nKeys => ({
     concernQuestion: `${spreadId}.form.placeholders.concernQuestion`,
     understandingQuestion: `${spreadId}.form.placeholders.understandingQuestion`,
     emotionalQuestion: `${spreadId}.form.placeholders.emotionalQuestion`,
+    mainQuestion: `${spreadId}.form.placeholders.mainQuestion`,
   },
 });
 
@@ -555,6 +569,7 @@ export interface CreateTarotConfigParams {
   backgroundImage?: string;
   backgroundAlt?: string;
   requiresPartnerInfo?: boolean;
+  isSingleCard?: boolean; // Single card spread flag
   t?: (_key: string) => string; // i18n fonksiyonu (optional, fallback varsa)
 }
 
@@ -585,6 +600,7 @@ export function createTarotConfig(
     backgroundImage,
     backgroundAlt,
     requiresPartnerInfo = false,
+    isSingleCard = false,
     t,
   } = params;
 
@@ -705,6 +721,7 @@ export function createTarotConfig(
     supabaseReadingType: supabaseReadingTypeValue,
     creditKeyPrefix: creditPrefix,
     requiresPartnerInfo,
+    isSingleCard: isSingleCard ?? false,
     creditKeys: defaultCreditKeys,
     validationKeys: defaultValidationKeys,
     i18nKeys: mergeI18nKeys(defaultI18nKeys, customI18nKeys),
@@ -755,7 +772,7 @@ export function createLoveConfig(t?: (_key: string) => string): TarotConfig {
     creditKeyPrefix: 'LOVE_SPREAD',
     backgroundImage: '/new-lover.png',
     backgroundAlt: 'Love Tarot Reading background',
-    requiresPartnerInfo: true,
+    requiresPartnerInfo: false, // Partner bilgisi opsiyonel - hasPartner toggle ile kontrol edilir
     ...(t && { t }),
   });
 }
@@ -934,6 +951,33 @@ export function createSituationAnalysisConfig(
     creditKeyPrefix: 'SITUATION_ANALYSIS',
     backgroundImage: '/new-lover.png',
     backgroundAlt: 'Situation Analysis Tarot Reading background',
+    ...(t && { t }),
+  });
+}
+
+/**
+ * Single Card spread için özel konfigürasyon
+ * @param t - i18n translation function (optional)
+ */
+export function createSingleCardConfig(
+  t?: (_key: string) => string
+): TarotConfig {
+  return createTarotConfig({
+    spreadId: 'single-card',
+    spreadKey: 'singleCard',
+    cardCount: 1,
+    translationNamespace: 'spreads.singleCard', // Çeviri dosyasında spreads.singleCard altında
+    summaryKey: 'singleCardSpread',
+    positionsLayout: SINGLE_CARD_POSITIONS_LAYOUT,
+    theme: 'purple',
+    icon: '🎴',
+    readingType: 'SINGLE_CARD_SPREAD',
+    supabaseReadingType: 'general', // Veritabanında mevcut enum değeri (single-card enum'da yok, general kullanıyoruz)
+    creditKeyPrefix: 'SINGLE_CARD',
+    backgroundImage: '/new-lover.png',
+    backgroundAlt: 'Single Card Tarot Reading background',
+    requiresPartnerInfo: false, // Partner bilgisi opsiyonel
+    isSingleCard: true, // Single card spread flag
     ...(t && { t }),
   });
 }

@@ -193,6 +193,7 @@ export function useTarotReadingFlow({
   const formState = useTarotFormState({
     validationKeys: config.validationKeys,
     requiresPartnerInfo: Boolean(config.requiresPartnerInfo),
+    isSingleCard: Boolean(config.isSingleCard),
   });
 
   // Reading Type Selection Handler
@@ -229,6 +230,7 @@ export function useTarotReadingFlow({
     questions: formState.questions,
     formErrors: formState.formErrors,
     modalStates: formState.modalStates,
+    hasPartner: formState.hasPartner,
 
     // Tarot Reading Actions
     handleCardSelect: tarotReading.handleCardSelect,
@@ -243,6 +245,7 @@ export function useTarotReadingFlow({
     updatePartnerInfo: formState.updatePartnerInfo,
     updateCommunicationMethod: formState.updateCommunicationMethod,
     updateQuestion: formState.updateQuestion,
+    toggleHasPartner: formState.toggleHasPartner,
     setPersonalInfo: formState.setPersonalInfo,
     setPartnerInfo: formState.setPartnerInfo,
     setQuestions: formState.setQuestions,

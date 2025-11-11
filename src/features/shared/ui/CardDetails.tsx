@@ -45,6 +45,7 @@ import Image from 'next/image';
 import type { TarotCard } from '@/features/tarot/lib/a-tarot-helpers';
 import type { CardMeaningData } from '@/types/ui';
 import BaseCardDetails from './BaseCardDetails';
+import { useTranslations } from '@/hooks/useTranslations';
 // Eski import'lar kaldırıldı - yeni yapıda kullanılmıyor
 
 // CardMeaningData artık @/types/ui'dan import ediliyor
@@ -63,7 +64,8 @@ interface CardDetailsProps {
     | 'relationship-problems'
     | 'marriage'
     | 'new-lover'
-    | 'money';
+    | 'money'
+    | 'single-card';
   positionInfo?: {
     title: string;
     desc: string;
@@ -112,9 +114,19 @@ const CardDetails: React.FC<CardDetailsProps> = ({
   showContext = false,
   getPositionContext,
 }) => {
+  const { t } = useTranslations();
+
   if (!card) {
     return null;
   }
+
+  // Kart ismini JSON key'ine dönüştür (örn: "The Fool" -> "the-fool")
+  const getCardKeyFromName = (cardName: string): string => {
+    return cardName
+      .toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/[^a-z0-9-]/g, '');
+  };
 
   // Bu fonksiyonlar artık renderContent içinde kullanılıyor, burada sadece debug için bırakıyoruz
   // const getMeaningByType = () => { ... }; // Kullanılmıyor, renderContent içinde tanımlandı
@@ -130,6 +142,7 @@ const CardDetails: React.FC<CardDetailsProps> = ({
     marriage: { theme: 'pink', maxWidth: 'lg' },
     'new-lover': { theme: 'pink', maxWidth: 'lg' },
     money: { theme: 'amber', maxWidth: 'lg' },
+    'single-card': { theme: 'purple', maxWidth: 'lg' },
   } as const;
 
   const renderCardImage = (card: TarotCard, isReversed: boolean) => (
@@ -183,6 +196,72 @@ const CardDetails: React.FC<CardDetailsProps> = ({
     isReversedParam: boolean,
     positionParam: number | null
   ) => {
+    // Single card için özel render - blog.cards'dan veri çek
+    if (spreadType === 'single-card') {
+      const cardKey = getCardKeyFromName(cardParam.name);
+      const cardName = cardParam.nameTr || cardParam.name;
+
+      // Kartın pozisyonuna göre sadece ilgili anlamı göster
+      const meaningKey = isReversedParam
+        ? `blog.cards.${cardKey}.meanings.reversed.general`
+        : `blog.cards.${cardKey}.meanings.upright.general`;
+      const meaning = t(meaningKey);
+
+      // Eğer çeviri bulunamazsa (key dönerse), boş string kullan
+      const meaningText = meaning === meaningKey ? '' : meaning;
+      const isReversed = isReversedParam;
+
+      return (
+        <div className='w-full space-y-6'>
+          {/* Kart İsmi */}
+          <div className='relative group'>
+            <div className='absolute inset-0 bg-gradient-to-br from-purple-500/10 to-indigo-500/10 rounded-2xl blur-sm group-hover:blur-none transition-all duration-500'></div>
+            <div className='relative bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/20 shadow-2xl'>
+              <h2 className='text-2xl font-bold text-white text-center'>
+                {cardName}
+              </h2>
+            </div>
+          </div>
+
+          {/* Anlam - Düz veya Ters */}
+          {meaningText && (
+            <div className='relative group'>
+              <div
+                className={`absolute inset-0 rounded-2xl blur-sm group-hover:blur-none transition-all duration-500 ${
+                  isReversed
+                    ? 'bg-gradient-to-br from-red-500/10 to-orange-500/10'
+                    : 'bg-gradient-to-br from-green-500/10 to-emerald-500/10'
+                }`}
+              ></div>
+              <div className='relative bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/20 shadow-2xl'>
+                <div className='space-y-4'>
+                  <div className='flex items-center gap-4'>
+                    <div
+                      className={`w-4 h-4 rounded-full shadow-lg ${
+                        isReversed
+                          ? 'bg-gradient-to-r from-red-400 to-orange-400'
+                          : 'bg-gradient-to-r from-green-400 to-emerald-400'
+                      }`}
+                    ></div>
+                    <span
+                      className={`font-light text-lg tracking-wide ${
+                        isReversed ? 'text-red-200' : 'text-green-200'
+                      }`}
+                    >
+                      {isReversed ? 'Ters Anlam' : 'Düz Anlam'}
+                    </span>
+                  </div>
+                  <div className='text-white text-base leading-relaxed font-light pl-8'>
+                    {meaningText}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      );
+    }
+
     // BaseInterpretation.tsx'teki mantığı kullan - pozisyon özel yorum fonksiyonu öncelikli
     const getCardInterpretation = (): string => {
       const cardMeaning: CardMeaningData | null = getCardMeaning

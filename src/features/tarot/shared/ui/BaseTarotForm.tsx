@@ -69,6 +69,8 @@ export interface BaseTarotFormProps {
     _value: string
   ) => void;
   onSaveForm: () => void;
+  hasPartner?: boolean; // Single card için partner bilgisi toggle
+  onToggleHasPartner?: (_value: boolean) => void; // Single card için partner toggle
   className?: string;
   variant?: 'modal' | 'inline';
   questionLabels?: {
@@ -96,11 +98,14 @@ export default function BaseTarotForm({
   className = '',
   variant = 'modal',
   questionLabels,
+  hasPartner = false,
+  onToggleHasPartner,
 }: BaseTarotFormProps) {
   const { t } = useTranslations();
   const themeClasses = getThemeClasses(config.theme);
   const formKeys = config.i18nKeys.form;
   const { countryInfo, isLoading: countryLoading } = useCountryDetection();
+  const isSingleCard = config.isSingleCard || config.cardCount === 1 || config.spreadId === 'single-card';
 
   // Otomatik ülke kodu ayarla
   useEffect(() => {
@@ -349,10 +354,32 @@ export default function BaseTarotForm({
             )}
           </div>
 
-          {config.requiresPartnerInfo && partnerInfo && onUpdatePartnerInfo && (
+          {/* Partner bilgisi - Single card ve love spread için opsiyonel checkbox ile, diğerleri için requiresPartnerInfo kontrolü */}
+          {((config.requiresPartnerInfo || isSingleCard || config.spreadId === 'love') && partnerInfo && onUpdatePartnerInfo) && (
             <div
               className={`space-y-4 pt-4 border-t ${themeClasses.sectionBorder}`}
             >
+              {(isSingleCard || config.spreadId === 'love') && onToggleHasPartner && (
+                <div className='flex items-center mb-4'>
+                  <input
+                    type='checkbox'
+                    id='hasPartner'
+                    checked={hasPartner}
+                    onChange={event => onToggleHasPartner(event.target.checked)}
+                    className='w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded focus:ring-blue-500 focus:ring-2'
+                  />
+                  <label
+                    htmlFor='hasPartner'
+                    className={`ml-2 text-sm ${themeClasses.labelText} cursor-pointer`}
+                  >
+                    {translate(
+                      config.spreadId === 'love'
+                        ? `${config.translationNamespace}.form.hasPartner`
+                        : formKeys.hasPartner || 'spreads.singleCard.form.hasPartner'
+                    )}
+                  </label>
+                </div>
+              )}
               <h3
                 className={`${themeClasses.titleText} text-base font-semibold`}
               >
@@ -371,11 +398,16 @@ export default function BaseTarotForm({
                   onChange={event =>
                     onUpdatePartnerInfo('name', event.target.value)
                   }
+                  disabled={(isSingleCard || config.spreadId === 'love') && !hasPartner}
                   className={`w-full px-4 py-3 bg-slate-800/80 border ${
                     formErrors.partnerName
                       ? 'border-red-500'
                       : themeClasses.inputBorder
-                  } rounded-lg text-white placeholder-gray-400 focus:outline-none ${themeClasses.focusRing} transition-all`}
+                  } rounded-lg text-white placeholder-gray-400 focus:outline-none ${themeClasses.focusRing} transition-all ${
+                    (isSingleCard || config.spreadId === 'love') && !hasPartner
+                      ? 'opacity-50 cursor-not-allowed'
+                      : ''
+                  }`}
                 />
                 {formErrors.partnerName && (
                   <p className='text-red-400 text-xs mt-1'>
@@ -397,13 +429,13 @@ export default function BaseTarotForm({
                     onChange={event =>
                       onUpdatePartnerInfo('birthDate', event.target.value)
                     }
-                    disabled={partnerInfo.birthDateUnknown}
+                    disabled={partnerInfo.birthDateUnknown || ((isSingleCard || config.spreadId === 'love') && !hasPartner)}
                     className={`w-full px-4 py-3 bg-slate-800/80 border ${
                       formErrors.partnerBirthDate
                         ? 'border-red-500'
                         : themeClasses.inputBorder
                     } rounded-lg text-white focus:outline-none ${themeClasses.focusRing} transition-all ${
-                      partnerInfo.birthDateUnknown
+                      partnerInfo.birthDateUnknown || ((isSingleCard || config.spreadId === 'love') && !hasPartner)
                         ? 'opacity-50 cursor-not-allowed'
                         : ''
                     }`}
@@ -419,11 +451,20 @@ export default function BaseTarotForm({
                           event.target.checked
                         )
                       }
-                      className='w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded focus:ring-blue-500 focus:ring-2'
+                      disabled={(isSingleCard || config.spreadId === 'love') && !hasPartner}
+                      className={`w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded focus:ring-blue-500 focus:ring-2 ${
+                        (isSingleCard || config.spreadId === 'love') && !hasPartner
+                          ? 'opacity-50 cursor-not-allowed'
+                          : ''
+                      }`}
                     />
                     <label
                       htmlFor='partnerBirthDateUnknown'
-                      className={`ml-2 text-sm ${themeClasses.labelText} cursor-pointer`}
+                      className={`ml-2 text-sm ${themeClasses.labelText} ${
+                        (isSingleCard || config.spreadId === 'love') && !hasPartner
+                          ? 'opacity-50 cursor-not-allowed'
+                          : 'cursor-pointer'
+                      }`}
                     >
                       {translate(formKeys.partnerBirthDateUnknown)}
                     </label>
@@ -766,86 +807,121 @@ export default function BaseTarotForm({
               {translate(formKeys.questions)}
             </h3>
 
-            <div>
-              <label
-                className={`block text-sm font-medium ${themeClasses.labelText} mb-2`}
-              >
-                {questionLabels?.concern || translate(formKeys.concernQuestion)}
-                <span className='text-red-400'> *</span>
-              </label>
-              <textarea
-                value={questions.concern}
-                onChange={event =>
-                  onUpdateQuestion('concern', event.target.value)
-                }
-                placeholder={getPlaceholder(placeholders.concernQuestion)}
-                rows={3}
-                className={`w-full px-4 py-3 bg-slate-800/80 border ${
-                  formErrors.concern
-                    ? 'border-red-500'
-                    : themeClasses.inputBorder
-                } rounded-lg text-white placeholder-gray-400 focus:outline-none ${themeClasses.focusRing} transition-all resize-none`}
-              />
-              {formErrors.concern && (
-                <p className='text-red-400 text-xs mt-1'>
-                  {formErrors.concern}
-                </p>
-              )}
-            </div>
+            {isSingleCard ? (
+              // Single card için tek soru
+              <div>
+                <label
+                  className={`block text-sm font-medium ${themeClasses.labelText} mb-2`}
+                >
+                  {translate(formKeys.mainQuestion || 'spreads.singleCard.form.mainQuestion')}
+                  <span className='text-red-400'> *</span>
+                </label>
+                <textarea
+                  value={questions.concern}
+                  onChange={event =>
+                    onUpdateQuestion('concern', event.target.value)
+                  }
+                  placeholder={getPlaceholder(
+                    placeholders.mainQuestion || formKeys.mainQuestionPlaceholder || 'spreads.singleCard.form.mainQuestionPlaceholder'
+                  )}
+                  rows={4}
+                  className={`w-full px-4 py-3 bg-slate-800/80 border ${
+                    formErrors.concern
+                      ? 'border-red-500'
+                      : themeClasses.inputBorder
+                  } rounded-lg text-white placeholder-gray-400 focus:outline-none ${themeClasses.focusRing} transition-all resize-none`}
+                />
+                {formErrors.concern && (
+                  <p className='text-red-400 text-xs mt-1'>
+                    {formErrors.concern}
+                  </p>
+                )}
+              </div>
+            ) : (
+              // Normal spread için 3 soru
+              <>
+                <div>
+                  <label
+                    className={`block text-sm font-medium ${themeClasses.labelText} mb-2`}
+                  >
+                    {questionLabels?.concern || translate(formKeys.concernQuestion)}
+                    <span className='text-red-400'> *</span>
+                  </label>
+                  <textarea
+                    value={questions.concern}
+                    onChange={event =>
+                      onUpdateQuestion('concern', event.target.value)
+                    }
+                    placeholder={getPlaceholder(placeholders.concernQuestion)}
+                    rows={3}
+                    className={`w-full px-4 py-3 bg-slate-800/80 border ${
+                      formErrors.concern
+                        ? 'border-red-500'
+                        : themeClasses.inputBorder
+                    } rounded-lg text-white placeholder-gray-400 focus:outline-none ${themeClasses.focusRing} transition-all resize-none`}
+                  />
+                  {formErrors.concern && (
+                    <p className='text-red-400 text-xs mt-1'>
+                      {formErrors.concern}
+                    </p>
+                  )}
+                </div>
 
-            <div>
-              <label
-                className={`block text-sm font-medium ${themeClasses.labelText} mb-2`}
-              >
-                {questionLabels?.understanding ||
-                  translate(formKeys.understandingQuestion)}
-              </label>
-              <textarea
-                value={questions.understanding}
-                onChange={event =>
-                  onUpdateQuestion('understanding', event.target.value)
-                }
-                placeholder={getPlaceholder(placeholders.understandingQuestion)}
-                rows={3}
-                className={`w-full px-4 py-3 bg-slate-800/80 border ${
-                  formErrors.understanding
-                    ? 'border-red-500'
-                    : themeClasses.inputBorder
-                } rounded-lg text-white placeholder-gray-400 focus:outline-none ${themeClasses.focusRing} transition-all resize-none`}
-              />
-              {formErrors.understanding && (
-                <p className='text-red-400 text-xs mt-1'>
-                  {formErrors.understanding}
-                </p>
-              )}
-            </div>
+                <div>
+                  <label
+                    className={`block text-sm font-medium ${themeClasses.labelText} mb-2`}
+                  >
+                    {questionLabels?.understanding ||
+                      translate(formKeys.understandingQuestion)}
+                  </label>
+                  <textarea
+                    value={questions.understanding}
+                    onChange={event =>
+                      onUpdateQuestion('understanding', event.target.value)
+                    }
+                    placeholder={getPlaceholder(placeholders.understandingQuestion)}
+                    rows={3}
+                    className={`w-full px-4 py-3 bg-slate-800/80 border ${
+                      formErrors.understanding
+                        ? 'border-red-500'
+                        : themeClasses.inputBorder
+                    } rounded-lg text-white placeholder-gray-400 focus:outline-none ${themeClasses.focusRing} transition-all resize-none`}
+                  />
+                  {formErrors.understanding && (
+                    <p className='text-red-400 text-xs mt-1'>
+                      {formErrors.understanding}
+                    </p>
+                  )}
+                </div>
 
-            <div>
-              <label
-                className={`block text-sm font-medium ${themeClasses.labelText} mb-2`}
-              >
-                {questionLabels?.emotional ||
-                  translate(formKeys.emotionalQuestion)}
-              </label>
-              <textarea
-                value={questions.emotional}
-                onChange={event =>
-                  onUpdateQuestion('emotional', event.target.value)
-                }
-                placeholder={getPlaceholder(placeholders.emotionalQuestion)}
-                rows={3}
-                className={`w-full px-4 py-3 bg-slate-800/80 border ${
-                  formErrors.emotional
-                    ? 'border-red-500'
-                    : themeClasses.inputBorder
-                } rounded-lg text-white placeholder-gray-400 focus:outline-none ${themeClasses.focusRing} transition-all resize-none`}
-              />
-              {formErrors.emotional && (
-                <p className='text-red-400 text-xs mt-1'>
-                  {formErrors.emotional}
-                </p>
-              )}
-            </div>
+                <div>
+                  <label
+                    className={`block text-sm font-medium ${themeClasses.labelText} mb-2`}
+                  >
+                    {questionLabels?.emotional ||
+                      translate(formKeys.emotionalQuestion)}
+                  </label>
+                  <textarea
+                    value={questions.emotional}
+                    onChange={event =>
+                      onUpdateQuestion('emotional', event.target.value)
+                    }
+                    placeholder={getPlaceholder(placeholders.emotionalQuestion)}
+                    rows={3}
+                    className={`w-full px-4 py-3 bg-slate-800/80 border ${
+                      formErrors.emotional
+                        ? 'border-red-500'
+                        : themeClasses.inputBorder
+                    } rounded-lg text-white placeholder-gray-400 focus:outline-none ${themeClasses.focusRing} transition-all resize-none`}
+                  />
+                  {formErrors.emotional && (
+                    <p className='text-red-400 text-xs mt-1'>
+                      {formErrors.emotional}
+                    </p>
+                  )}
+                </div>
+              </>
+            )}
           </div>
 
           {formErrors.general && (
@@ -870,7 +946,7 @@ export default function BaseTarotForm({
               {translate(formKeys.saving, 'Kaydediliyor...')}
             </div>
           ) : (
-            translate(formKeys.saveAndOpen)
+            translate(formKeys.saveAndOpen || formKeys.saveAndContinue || 'spreads.singleCard.form.saveAndOpen', 'Formu Kaydet ve Kartları Aç 🎴')
           )}
         </button>
       </div>

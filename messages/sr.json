@@ -4329,6 +4329,7 @@
       "emailCommunication": "E-mail",
       "emotionalQuestion": "Kako ste trenutno emocionalno? (npr. Nadam se, nesigurno, umorno ...)",
       "firstName": "Vaše ime",
+      "hasPartner": "Imate li informacije o partneru? (Opciono)",
       "lastName": "vaše prezime",
       "personalInfo": "Lične informacije",
       "phone": "Telefonski broj",
@@ -17433,6 +17434,124 @@
           "description": "Koje posebne veštine moram da zaradim novac?",
           "title": "Novčane sposobnosti"
         }
+      }
+    },
+    "singleCard": {
+      "name": "Čitanje Jedne Karte",
+      "description": "Duboko vođstvo sa jednom kartom",
+      "positions": {
+        "1": {
+          "title": "Jedna Karta",
+          "description": "Vaša izabrana karta nosi vašu ličnu poruku"
+        }
+      },
+      "form": {
+        "personalInfo": "Lične Informacije",
+        "firstName": "Vaše Ime",
+        "lastName": "Vaše Prezime",
+        "birthDate": "Datum Rođenja",
+        "birthDateUnknown": "Ne znam datum rođenja",
+        "communicationMethod": "Preferencija Komunikacije",
+        "emailCommunication": "Email",
+        "whatsappCommunication": "WhatsApp",
+        "email": "Vaša Email Adresa",
+        "phone": "Broj Telefona",
+        "phonePlaceholder": "+381 XX XXX XXXX",
+        "partnerInfo": "Informacije o Partneru (Opciono)",
+        "partnerName": "Ime Partnera",
+        "partnerBirthDate": "Datum Rođenja Partnera",
+        "partnerBirthDateUnknown": "Ne znam datum rođenja partnera",
+        "hasPartner": "Imate li informacije o partneru?",
+        "questions": "Pitanja",
+        "mainQuestion": "Šta želite da naučite iz ove karte?",
+        "mainQuestionPlaceholder": "Npr., Želim vođstvo o budućnosti moje veze...",
+        "saveAndContinue": "Sačuvaj Formu i Otvori Karte 🎴",
+        "saveAndOpen": "Sačuvaj Formu i Otvori Karte 🎴",
+        "saving": "Čuvanje…",
+        "clearAll": "Očistiti Sve",
+        "relationshipStatus": "Status Veze",
+        "selectRelationshipStatus": "Izaberite status veze",
+        "relationshipStatusOptions": {
+          "single": "Slobodan",
+          "in_relationship": "U vezi",
+          "married": "Oženjen/Udata",
+          "separated": "Razdvojen",
+          "divorced": "Razveden",
+          "widowed": "Udovac/Udovica",
+          "prefer_not_to_say": "Ne želim da kažem"
+        },
+        "placeholders": {
+          "firstName": "Unesite vaše ime",
+          "lastName": "Unesite vaše prezime"
+        }
+      },
+      "data": {
+        "spreadName": "Čitanje Jedne Karte",
+        "spreadTitle": "Čitanje Jedne Karte",
+        "detailedTitle": "Čitanje Jedne Karte - Detaljno Lično Čitanje",
+        "simpleTitle": "Čitanje Jedne Karte",
+        "simpleInterpretation": "Dobijte personalizovano vođstvo sa čitanjem jedne karte.",
+        "badgeText": "JEDNA KARTA",
+        "interpretationTitle": "Tumačenje Karte",
+        "readingFormats": {
+          "detailed": "Audio Čitanje",
+          "written": "Pisano Čitanje",
+          "simple": "Jednostavno Čitanje"
+        },
+        "cardDirections": {
+          "upright": "Uspravno",
+          "reversed": "Obrnuto"
+        }
+      },
+      "messages": {
+        "formUnsavedWarning": "Forma je popunjena ali nije sačuvana. Da li ste sigurni da želite da izađete? Vaši nesačuvani podaci će biti izgubljeni.",
+        "loginRequired": "Morate se prijaviti za ovu operaciju.",
+        "readingSaveError": "Došlo je do greške prilikom čuvanja čitanja.",
+        "readingSavedSuccess": "Vaše čitanje jedne karte je uspešno sačuvano!",
+        "simpleReadingCompleted": "Jednostavno čitanje završeno.",
+        "allCardsRequired": "Morate izabrati sve karte.",
+        "interpretationGreeting": "Vaše karte su spremne!",
+        "selectReadingTypeFirst": "Morate prvo izabrati tip čitanja."
+      },
+      "modals": {
+        "aboutSpread": "O Otvaranju",
+        "aboutSpreadText": "Čitanje jedne karte pruža duboko vođstvo za vaše specifično pitanje. Karta koju izaberete nosi odgovor na vaše pitanje i tumači se posebno za vas.",
+        "cancel": "Otkaži",
+        "cardCount": "Broj Karata",
+        "cardCountText": "Ovo otvaranje koristi 1 kartu i fokusira se na vaše specifično pitanje.",
+        "confirm": "Da, Potvrđujem",
+        "continue": "Nastavi",
+        "creditConfirm": "Potvrda Kredita",
+        "creditConfirmMessage": "Krediti će biti korišćeni za ovo čitanje jedne karte. Da li ste sigurni da želite da nastavite?",
+        "detailedReading": "Audio Čitanje",
+        "detailedReadingText": "Primite vaše tumačenje kao toplu audio snimku. Pripremljeno je posebno za vas; možete preuzeti i slušati kad god želite.",
+        "infoTitle": "O Čitanju Jedne Karte",
+        "loveAttention": "Nakon čuvanja čitanja, obično vam šaljem lično tumačenje putem emaila u roku od 2-4 sata. Ovaj rad je u svrhe vođstva; konačni izbori su vaši.",
+        "loveAttentionInfo": "Nježna Napomena",
+        "process": "Proces",
+        "processing": "Obrađuje se…",
+        "redirecting": "🎴 Preusmeravanje na početnu stranicu…",
+        "saveReading": "Sačuvaj Čitanje 🎴",
+        "savingReading": "Čuva se…",
+        "step1": "Unesite vaše lične informacije i pitanje",
+        "step2": "Izaberite vašu preferenciju komunikacije",
+        "step3": "Izaberite vašu jednu kartu",
+        "step4": "Sačuvajte čitanje; rezultati će doći na vaš izabrani komunikacioni kanal",
+        "successTitle": "Vaša Karta Je Izabrana! 🎴",
+        "successMessage": "Vaše čitanje će biti dostavljeno u roku od 2-4 sata prema vašoj izabranoj preferenciji komunikacije.",
+        "emailMessage": "Vaše čitanje će biti poslato na vašu email adresu.",
+        "whatsappMessage": "Vaše čitanje će biti poslato na vaš WhatsApp broj.",
+        "close": "Zatvori",
+        "writtenReading": "Pisano Čitanje",
+        "writtenReadingText": "Ako preferirate, biće dostavljeno kao detaljan pisani izveštaj; možete ga sačuvati i ponovo pročitati."
+      },
+      "validation": {
+        "nameMinLength": "Ime mora imati najmanje 3 karaktera",
+        "birthDateRequired": "Datum rođenja je obavezan",
+        "emailRequired": "Email adresa je obavezna",
+        "emailInvalid": "Molimo unesite važeću email adresu",
+        "phoneRequired": "Broj telefona je obavezan za WhatsApp",
+        "questionMinLength": "Pitanje mora imati najmanje 10 karaktera"
       }
     },
     "newLover": {
@@ -45705,6 +45824,11 @@
     "viewAll": "Pogledajte sve",
     "warning": "Upozorenje",
     "yes": "Da",
+    "tarot": {
+      "spread": {
+        "componentNotAvailable": "Komponenta nije dostupna"
+      }
+    },
     "cups": "Šolje",
     "pentacles": "pentaklovi",
     "swords": "Mačevi",

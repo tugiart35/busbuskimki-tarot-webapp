@@ -73,14 +73,20 @@ import { useTranslations } from '@/hooks/useTranslations';
 
 export default function TarotPage() {
   const { t } = useTranslations();
-  const [selectedSpread, setSelectedSpread] = useState('love-spread');
+  
+  // Hidden spread'leri filtrele (admin-only spreads)
+  const visibleSpreads = tarotSpreads.filter(spread => !spread.hidden);
+  
+  // İlk visible spread'i varsayılan olarak seç
+  const defaultSpread = visibleSpreads[0]?.id || 'love-spread';
+  const [selectedSpread, setSelectedSpread] = useState(defaultSpread);
   const [showDescription, setShowDescription] = useState(true); // Açıklama gösterilsin mi?
   const [lastReading, setLastReading] = useState<{
     cards: TarotCard[];
     interpretation: string;
     spreadId: string;
   } | null>(null);
-
+  
   const currentSpread = tarotSpreads.find(s => s.id === selectedSpread);
   const CurrentComponent = currentSpread?.component;
 
@@ -96,6 +102,11 @@ export default function TarotPage() {
   };
 
   const handleSpreadSelect = (spreadId: string) => {
+    // Hidden spread seçilmesini engelle
+    const spread = tarotSpreads.find(s => s.id === spreadId);
+    if (spread?.hidden) {
+      return;
+    }
     setSelectedSpread(spreadId);
     setLastReading(null);
     setShowDescription(true); // Yeni açılım seçildiğinde açıklamayı göster
@@ -108,7 +119,7 @@ export default function TarotPage() {
     <div className='flex flex-col min-h-screen pb-16 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900'>
       <main className='flex-1 px-6 py-8'>
         <TarotSpreadSelector
-          spreads={tarotSpreads}
+          spreads={visibleSpreads}
           selectedSpread={selectedSpread}
           onSpreadSelect={handleSpreadSelect}
           showDescription={showDescription}

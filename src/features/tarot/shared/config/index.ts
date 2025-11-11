@@ -9,5 +9,6 @@ export {
   createRelationshipAnalysisConfig,
   createRelationshipProblemsConfig,
   createSituationAnalysisConfig,
+  createSingleCardConfig,
   type CreateTarotConfigParams,
 } from './tarot-config-factory';

@@ -711,6 +711,16 @@ export default function ReadingsPage() {
             readingWithFormData = {
               ...readingWithFormData,
               reading_type: readingType,
+              // Token reading'lerde user bilgilerini personalInfo'dan veya customer_email'den al
+              user_display_name:
+                readingWithFormData.questions?.personalInfo?.name ||
+                customerName ||
+                session.customer_email ||
+                'Bilinmeyen Kullanıcı',
+              user_email:
+                readingWithFormData.questions?.personalInfo?.email ||
+                session.customer_email ||
+                'Bilinmeyen',
               // Session bilgilerini ekle
               session: {
                 id: session.id,
@@ -2165,6 +2175,32 @@ export default function ReadingsPage() {
                                 </p>
                               </div>
                             )}
+                            {selectedReading.questions.personalInfo
+                              .relationshipStatus && (
+                              <div className='admin-glass rounded-xl p-4 border border-slate-700/30'>
+                                <div className='flex items-center space-x-2 mb-2'>
+                                  <Heart className='h-4 w-4 text-blue-400' />
+                                  <p className='text-slate-400 text-sm font-medium'>
+                                    İlişki Durumu
+                                  </p>
+                                </div>
+                                <p className='text-white font-medium'>
+                                  {(() => {
+                                    const relationshipStatus =
+                                      selectedReading.questions.personalInfo
+                                        .relationshipStatus;
+                                    // İngilizce değeri Türkçe'ye çevir
+                                    // Herhangi bir spread'in relationshipStatusOptions'unu kullanabiliriz (hepsi aynı)
+                                    const translationKey = `spreads.love.form.relationshipStatusOptions.${relationshipStatus}`;
+                                    const translated = t(translationKey);
+                                    // Eğer translation bulunamazsa (key dönerse), orijinal değeri göster
+                                    return translated !== translationKey
+                                      ? translated
+                                      : relationshipStatus;
+                                  })()}
+                                </p>
+                              </div>
+                            )}
                           </div>
                         </div>
                       )}
@@ -2238,12 +2274,37 @@ export default function ReadingsPage() {
                                   </h6>
                                   {Object.entries(
                                     selectedReading.questions.userQuestions
-                                  ).map(
-                                    ([key, value]: [string, any], index) => {
-                                      // Açılım türüne göre soru metinleri
-                                      const getSpreadQuestionMap = (
-                                        readingType: string
-                                      ): Record<string, string> => {
+                                  )
+                                    .filter(([key]) => {
+                                      // Single card okuması kontrolü
+                                      const isSingleCardReading =
+                                        selectedReading.metadata
+                                          ?.isSingleCardReading === true ||
+                                        selectedReading.metadata
+                                          ?.isSingleCardReading === 'true' ||
+                                        selectedReading.reading_type
+                                          ?.toLowerCase()
+                                          .includes('single-card') ||
+                                        selectedReading.spread_name
+                                          ?.toLowerCase()
+                                          .includes('tek kart');
+
+                                      // Single card okumasında sadece concern göster
+                                      if (
+                                        isSingleCardReading &&
+                                        key !== 'concern'
+                                      ) {
+                                        return false; // understanding, emotional, mainQuestion'ı filtrele
+                                      }
+
+                                      return true;
+                                    })
+                                    .map(
+                                      ([key, value]: [string, any], index) => {
+                                        // Açılım türüne göre soru metinleri
+                                        const getSpreadQuestionMap = (
+                                          readingType: string
+                                        ): Record<string, string> => {
                                         const type = readingType.toLowerCase();
 
                                         if (
@@ -2744,12 +2805,34 @@ export default function ReadingsPage() {
                                   </h6>
                                   {Object.entries(selectedReading.questions)
                                     .filter(
-                                      ([key]) =>
-                                        ![
+                                      ([key]) => {
+                                        // Single card okuması kontrolü
+                                        const isSingleCardReading =
+                                          selectedReading.metadata
+                                            ?.isSingleCardReading === true ||
+                                          selectedReading.metadata
+                                            ?.isSingleCardReading === 'true' ||
+                                          selectedReading.reading_type
+                                            ?.toLowerCase()
+                                            .includes('single-card') ||
+                                          selectedReading.spread_name
+                                            ?.toLowerCase()
+                                            .includes('tek kart');
+
+                                        // Single card okumasında sadece concern göster
+                                        if (
+                                          isSingleCardReading &&
+                                          key !== 'concern'
+                                        ) {
+                                          return false; // understanding, emotional, mainQuestion'ı filtrele
+                                        }
+
+                                        return ![
                                           'personalInfo',
                                           'userQuestions',
                                           'prompts',
-                                        ].includes(key)
+                                        ].includes(key);
+                                      }
                                     )
                                     .map(([key, value]: [string, any]) => {
                                       // Açılım türüne göre soru metinleri (yukarıdaki fonksiyonla aynı)

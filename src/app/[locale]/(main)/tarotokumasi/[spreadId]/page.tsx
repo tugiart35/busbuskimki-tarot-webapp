@@ -5,16 +5,22 @@ import SpreadPageClient from './SpreadPageClient';
 // ISR Configuration for optimal performance
 export const revalidate = 3600; // 1 hour cache
 export const dynamic = 'force-static'; // Full static generation
-export const dynamicParams = false; // Only generate defined spreads
+export const dynamicParams = true; // Allow dynamic params for hidden spreads (admin-only links)
 
 /**
  * Generate static params for all tarot spreads
- * This ensures all spread pages are pre-rendered at build time
+ * Hidden spreads are included for admin-only link access
  */
 export async function generateStaticParams() {
-  const spreadIds = getAllSpreadIds();
-
-  return spreadIds.map(spreadId => ({
+  // getAllSpreadIds() hidden spread'leri filtreler, ama biz hidden spread'leri de dahil etmeliyiz
+  // çünkü admin link üzerinden erişilebilir olmalılar
+  const visibleSpreadIds = getAllSpreadIds();
+  const allSpreadIds = tarotSpreads.map(spread => spread.id);
+  
+  // Hem visible hem hidden spread'leri dahil et
+  const allIds = [...new Set([...visibleSpreadIds, ...allSpreadIds])];
+  
+  return allIds.map(spreadId => ({
     spreadId,
   }));
 }

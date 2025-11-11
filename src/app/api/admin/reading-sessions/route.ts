@@ -149,12 +149,12 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Link oluştur - development'ta localhost:3001, production'da NEXT_PUBLIC_SITE_URL
+    // Link oluştur - development'ta localhost:3003, production'da NEXT_PUBLIC_SITE_URL
     // Geçici test için NEXT_PUBLIC_READING_LINK_BASE_URL environment variable'ı kullanılabilir
     const baseUrl =
       process.env.NEXT_PUBLIC_READING_LINK_BASE_URL ||
       (process.env.NODE_ENV === 'development'
-        ? 'http://localhost:3001'
+        ? 'http://localhost:3003'
         : process.env.NEXT_PUBLIC_SITE_URL || 'https://tarotnumeroloji.com');
     const locale = 'tr'; // Varsayılan locale, ileride dinamik yapılabilir
     const readingLink = `${baseUrl}/${locale}/tarotokumasi/${spreadKey}?token=${token}`;

@@ -54,6 +54,7 @@ export default function BaseTarotCanvas({
   const themeClasses = getThemeClasses(config.theme);
   const { t } = useTranslations();
   const canvasKeys = config.i18nKeys.canvas;
+  const isSingleCard = config.isSingleCard || config.cardCount === 1 || config.spreadId === 'single-card';
 
   // Tema bazlı gradient sınıfları
   const getCanvasTheme = (theme: TarotTheme): string => {
@@ -215,6 +216,7 @@ export default function BaseTarotCanvas({
                   card={card}
                   theme={mapTarotThemeToCardTheme(config.theme)}
                   {...props}
+                  showName={isSingleCard ? true : props.showName} // Single card için kart ismini göster
                 />
               )}
               colorScheme={mapTarotThemeToCardTheme(config.theme)}

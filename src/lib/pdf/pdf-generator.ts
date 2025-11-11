@@ -402,7 +402,7 @@ class PDFGeneratorService {
         </div>
         
         <div class="footer">
-          <p>Busbuskimki Tarot - Mistik Rehberlik Sistemi</p>
+          <p>Busbuskimki - Tarot Rehberlik Sistemi</p>
           <p>Bu PDF otomatik olarak oluşturulmuştur. - ${new Date().toLocaleString('tr-TR')}</p>
         </div>
       </body>
@@ -977,7 +977,7 @@ class PDFGeneratorService {
         }
         
         <div class="footer">
-          <p>Busbuskimki Tarot - Mistik Rehberlik Sistemi</p>
+          <p>Busbuskimki - Tarot Rehberlik Sistemi</p>
           <p>Bu numeroloji analizi otomatik olarak oluşturulmuştur. - ${new Date().toLocaleString('tr-TR')}</p>
         </div>
       </body>

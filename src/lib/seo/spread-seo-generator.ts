@@ -164,6 +164,22 @@ const spreadSeoData: Record<
       description: 'Finansijsko čitanje sa 8 karata.',
     },
   },
+  'single-card-spread': {
+    tr: {
+      title: 'Tek Kart Tarot Okuması',
+      description:
+        'Tek bir kartla derinlemesine rehberlik. Kişisel sorularınız için özel tarot okuması.',
+    },
+    en: {
+      title: 'Single Card Tarot Reading',
+      description:
+        'In-depth guidance with a single card. Personal tarot reading for your specific questions.',
+    },
+    sr: {
+      title: 'Tarot Čitanje Jedne Karte',
+      description: 'Dubinsko čitanje sa jednom kartom za vaša pitanja.',
+    },
+  },
 };
 
 /**
@@ -396,9 +412,12 @@ export function generateSpreadStructuredData(spreadId: string, locale: string) {
 
 /**
  * Get all spread IDs for static generation
+ * Hidden spreads (admin-only) are excluded from static generation
  */
 export function getAllSpreadIds(): string[] {
-  return tarotSpreads.map(spread => spread.id);
+  return tarotSpreads
+    .filter(spread => !spread.hidden)
+    .map(spread => spread.id);
 }
 
 /**

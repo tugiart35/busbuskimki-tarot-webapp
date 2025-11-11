@@ -4,10 +4,12 @@ import { useState, Suspense, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { BottomNavigation } from '@/features/shared/layout';
-import { TarotCard } from '@/features/tarot/lib/full-tarot-deck';
+import type { TarotCard } from '@/features/tarot/lib/full-tarot-deck';
+import { useTarotDeck } from '@/features/tarot/lib/full-tarot-deck';
 import { tarotSpreads } from '@/lib/constants/tarotSpreads';
 import { LastReadingSummary } from '@/features/tarot/components';
 import { useTranslations } from '@/hooks/useTranslations';
+import Image from 'next/image';
 
 // Token'i almak için wrapper component
 function SpreadPageContent({
@@ -20,6 +22,7 @@ function SpreadPageContent({
   const { t } = useTranslations();
   const searchParams = useSearchParams();
   const token = searchParams.get('token');
+  const fullTarotDeck = useTarotDeck();
 
   const [lastReading, setLastReading] = useState<{
     cards: TarotCard[];
@@ -76,14 +79,12 @@ function SpreadPageContent({
 
         // Spread ID kontrolü (eğer token'daki spreadKey farklıysa uyar)
         if (data.spreadKey && data.spreadKey !== spreadId) {
-          console.warn(
-            `Token'daki spread key (${data.spreadKey}) mevcut spread ID (${spreadId}) ile eşleşmiyor`
-          );
+          // Token'daki spread key mevcut spread ID ile eşleşmiyor
         }
 
         setTokenValidating(false);
       } catch (error) {
-        console.error('Token doğrulama hatası:', error);
+        // Token doğrulama hatası
         setTokenError('Token doğrulanırken bir hata oluştu');
         setTokenValidating(false);
       }
@@ -106,8 +107,8 @@ function SpreadPageContent({
             setCompletedReading(data.reading);
           }
         })
-        .catch(err => {
-          console.error('Reading fetch error:', err);
+        .catch(() => {
+          // Reading fetch error
         })
         .finally(() => {
           setLoadingReading(false);
@@ -173,16 +174,70 @@ function SpreadPageContent({
     // Tamamlanmış okuma ve kartlar varsa göster
     if (isCompleted && completedReading) {
       // Kartları parse et (JSONB formatından)
-      let cards: TarotCard[] = [];
+      let rawCards: any[] = [];
+      
       if (completedReading.cards) {
         if (Array.isArray(completedReading.cards)) {
-          cards = completedReading.cards;
+          rawCards = completedReading.cards;
         } else if (completedReading.cards.selectedCards) {
-          cards = completedReading.cards.selectedCards;
+          rawCards = completedReading.cards.selectedCards;
         } else if (completedReading.cards.cards) {
-          cards = completedReading.cards.cards;
+          rawCards = completedReading.cards.cards;
         }
       }
+
+      // Full tarot deck'ten kart bilgilerini al
+      const deckById = new Map<number, TarotCard>();
+      fullTarotDeck.forEach(card => {
+        deckById.set(card.id, card);
+      });
+
+      const deckByName = new Map<string, TarotCard>();
+      fullTarotDeck.forEach(card => {
+        deckByName.set(card.name.toLowerCase(), card);
+        deckByName.set(card.nameTr.toLowerCase(), card);
+      });
+
+      // Raw kartları full kart bilgileriyle eşleştir
+      const cards: (TarotCard & { isReversed: boolean })[] = rawCards
+        .map((rawCard: any) => {
+          // ID ile bul
+          if (rawCard.id !== undefined && deckById.has(rawCard.id)) {
+            return {
+              ...deckById.get(rawCard.id)!,
+              isReversed: rawCard.isReversed || false,
+            };
+          }
+          // İsim ile bul
+          if (rawCard.name) {
+            const byName = deckByName.get(rawCard.name.toLowerCase());
+            if (byName) {
+              return { ...byName, isReversed: rawCard.isReversed || false };
+            }
+          }
+          if (rawCard.nameTr) {
+            const byNameTr = deckByName.get(rawCard.nameTr.toLowerCase());
+            if (byNameTr) {
+              return { ...byNameTr, isReversed: rawCard.isReversed || false };
+            }
+          }
+          return null;
+        })
+        .filter(
+          (card): card is TarotCard & { isReversed: boolean } => card !== null
+        );
+
+      // Single card okuması için özel gösterim
+      const isSingleCard =
+        spreadId === 'single-card-spread' && cards.length === 1;
+
+      // Kart ismini JSON key'ine dönüştür (single card için anlam almak için)
+      const getCardKeyFromName = (cardName: string): string => {
+        return cardName
+          .toLowerCase()
+          .replace(/\s+/g, '-')
+          .replace(/[^a-z0-9-]/g, '');
+      };
 
       return (
         <div className='flex flex-col min-h-screen pb-16 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900'>
@@ -194,12 +249,111 @@ function SpreadPageContent({
                   Okuma Tamamlandı
                 </h2>
                 <p className='text-gray-400 text-sm sm:text-base'>
-                  Bu okuma zaten tamamlandı. Çekilen kartlarınız aşağıda.
+                  {isSingleCard
+                    ? 'Okumayı tamamladınız. 2-4 saat içinde okumanız size iletilecektir.'
+                    : 'Bu okuma zaten tamamlandı. Çekilen kartlarınız aşağıda.'}
                 </p>
               </div>
 
-              {/* Çekilen kartları göster */}
-              {cards.length > 0 ? (
+              {/* Single card okuması için özel gösterim */}
+              {isSingleCard && cards.length > 0 && cards[0] ? (
+                <div className='bg-gradient-to-br from-purple-900/50 to-indigo-900/50 rounded-2xl p-6 sm:p-8 border border-purple-700/50 mb-6'>
+                  <div className='flex flex-col items-center space-y-6'>
+                    {/* Kart Görseli */}
+                    <div className='relative'>
+                      <Image
+                        src={cards[0].image || '/cards/CardBack.webp'}
+                        alt={cards[0].nameTr || cards[0].name}
+                        width={200}
+                        height={350}
+                        className={`w-48 sm:w-56 md:w-64 h-auto object-cover rounded-xl border-4 border-purple-500/50 shadow-2xl ${
+                          cards[0].isReversed ? 'rotate-180' : ''
+                        }`}
+                      />
+                      {cards[0].isReversed && (
+                        <div className='absolute top-2 right-2 bg-red-500/80 text-white px-3 py-1 rounded-full text-xs font-bold'>
+                          Ters
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Kart İsmi */}
+                    <div className='text-center'>
+                      <h3 className='text-2xl sm:text-3xl font-bold text-white mb-2'>
+                        {cards[0].nameTr || cards[0].name}
+                      </h3>
+                      <div className='flex items-center justify-center gap-2'>
+                        <span
+                          className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium ${
+                            completedReading.metadata?.readingFormat ===
+                            'written'
+                              ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
+                              : 'bg-purple-500/20 text-purple-400 border border-purple-500/30'
+                          }`}
+                        >
+                          {completedReading.metadata?.readingFormat ===
+                          'written' ? (
+                            <>
+                              <span>📝</span>
+                              <span>Yazılı</span>
+                            </>
+                          ) : (
+                            <>
+                              <span>🎵</span>
+                              <span>Sesli</span>
+                            </>
+                          )}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Kart Anlamı */}
+                    <div className='w-full bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/20'>
+                      <div className='space-y-4'>
+                        <div className='flex items-center gap-2 mb-4'>
+                          <div
+                            className={`w-4 h-4 rounded-full shadow-lg ${
+                              cards[0].isReversed
+                                ? 'bg-gradient-to-r from-red-400 to-orange-400'
+                                : 'bg-gradient-to-r from-green-400 to-emerald-400'
+                            }`}
+                          ></div>
+                          <span
+                            className={`font-light text-lg tracking-wide ${
+                              cards[0].isReversed
+                                ? 'text-red-200'
+                                : 'text-green-200'
+                            }`}
+                          >
+                            {cards[0].isReversed ? 'Ters Anlam' : 'Düz Anlam'}
+                          </span>
+                        </div>
+                        <div className='text-white text-base leading-relaxed font-light'>
+                          {(() => {
+                            const cardKey = getCardKeyFromName(cards[0].name);
+                            const meaningKey = cards[0].isReversed
+                              ? `blog.cards.${cardKey}.meanings.reversed.general`
+                              : `blog.cards.${cardKey}.meanings.upright.general`;
+                            const meaning = t(meaningKey);
+
+                            // Eğer çeviri bulunamazsa (key dönerse), fallback olarak kartın kendi anlamını kullan
+                            if (meaning === meaningKey) {
+                              return cards[0].isReversed
+                                ? cards[0].meaningTr?.reversed ||
+                                    cards[0].meaning?.reversed ||
+                                    'Anlam bulunamadı'
+                                : cards[0].meaningTr?.upright ||
+                                    cards[0].meaning?.upright ||
+                                    'Anlam bulunamadı';
+                            }
+                            return meaning;
+                          })()}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ) : cards.length > 0 ? (
                 <LastReadingSummary
                   lastReading={{
                     cards: cards,
@@ -247,10 +401,17 @@ function SpreadPageContent({
               {tokenErrorDetails?.message || tokenError}
             </p>
             {isCompleted && (
-              <p className='text-gray-400 text-sm mb-6'>
-                Bu okuma linki artık kullanılamaz. Yeni bir okuma için lütfen
-                admin panelinden yeni bir link oluşturun.
+              <div className='space-y-2'>
+                <p className='text-gray-400 text-sm'>
+                  Okumayı tamamladınız. 2-4 saat içinde okumanız size
+                  iletilecektir.
+                </p>
+                {spreadId === 'single-card-spread' && (
+                  <p className='text-gray-500 text-xs'>
+                    Bu okuma linki artık kullanılamaz.
               </p>
+                )}
+              </div>
             )}
             <Link
               href={`/${locale}/tarotokumasi`}
@@ -318,6 +479,8 @@ function SpreadPageContent({
         </nav>
 
         {/* Modern Hero Section - Ana sayfa tarzı gradient */}
+        {/* Single card için bu bölüm gösterilmez */}
+        {spreadId !== 'single-card-spread' && (
         <div className='max-w-6xl mx-auto mb-8'>
           <div className='relative overflow-hidden rounded-2xl sm:rounded-3xl'>
             {/* Animated gradient background */}
@@ -381,6 +544,7 @@ function SpreadPageContent({
             </div>
           </div>
         </div>
+        )}
 
         {/* Spread component */}
         <div className='max-w-6xl mx-auto mb-8'>
