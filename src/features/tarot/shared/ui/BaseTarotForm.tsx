@@ -105,7 +105,10 @@ export default function BaseTarotForm({
   const themeClasses = getThemeClasses(config.theme);
   const formKeys = config.i18nKeys.form;
   const { countryInfo, isLoading: countryLoading } = useCountryDetection();
-  const isSingleCard = config.isSingleCard || config.cardCount === 1 || config.spreadId === 'single-card';
+  const isSingleCard =
+    config.isSingleCard ||
+    config.cardCount === 1 ||
+    config.spreadId === 'single-card';
 
   // Otomatik ülke kodu ayarla
   useEffect(() => {
@@ -355,129 +358,152 @@ export default function BaseTarotForm({
           </div>
 
           {/* Partner bilgisi - Single card ve love spread için opsiyonel checkbox ile, diğerleri için requiresPartnerInfo kontrolü */}
-          {((config.requiresPartnerInfo || isSingleCard || config.spreadId === 'love') && partnerInfo && onUpdatePartnerInfo) && (
-            <div
-              className={`space-y-4 pt-4 border-t ${themeClasses.sectionBorder}`}
-            >
-              {(isSingleCard || config.spreadId === 'love') && onToggleHasPartner && (
-                <div className='flex items-center mb-4'>
-                  <input
-                    type='checkbox'
-                    id='hasPartner'
-                    checked={hasPartner}
-                    onChange={event => onToggleHasPartner(event.target.checked)}
-                    className='w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded focus:ring-blue-500 focus:ring-2'
-                  />
-                  <label
-                    htmlFor='hasPartner'
-                    className={`ml-2 text-sm ${themeClasses.labelText} cursor-pointer`}
-                  >
-                    {translate(
-                      config.spreadId === 'love'
-                        ? `${config.translationNamespace}.form.hasPartner`
-                        : formKeys.hasPartner || 'spreads.singleCard.form.hasPartner'
-                    )}
-                  </label>
-                </div>
-              )}
-              <h3
-                className={`${themeClasses.titleText} text-base font-semibold`}
+          {(config.requiresPartnerInfo ||
+            isSingleCard ||
+            config.spreadId === 'love') &&
+            partnerInfo &&
+            onUpdatePartnerInfo && (
+              <div
+                className={`space-y-4 pt-4 border-t ${themeClasses.sectionBorder}`}
               >
-                {translate(formKeys.partnerInfo)}
-              </h3>
-
-              <div>
-                <label
-                  className={`block text-sm font-medium ${themeClasses.labelText} mb-2`}
+                {(isSingleCard || config.spreadId === 'love') &&
+                  onToggleHasPartner && (
+                    <div className='flex items-center mb-4'>
+                      <input
+                        type='checkbox'
+                        id='hasPartner'
+                        checked={hasPartner}
+                        onChange={event =>
+                          onToggleHasPartner(event.target.checked)
+                        }
+                        className='w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded focus:ring-blue-500 focus:ring-2'
+                      />
+                      <label
+                        htmlFor='hasPartner'
+                        className={`ml-2 text-sm ${themeClasses.labelText} cursor-pointer`}
+                      >
+                        {translate(
+                          config.spreadId === 'love'
+                            ? `${config.translationNamespace}.form.hasPartner`
+                            : formKeys.hasPartner ||
+                                'spreads.singleCard.form.hasPartner'
+                        )}
+                      </label>
+                    </div>
+                  )}
+                <h3
+                  className={`${themeClasses.titleText} text-base font-semibold`}
                 >
-                  {translate(formKeys.partnerName)}
-                </label>
-                <input
-                  type='text'
-                  value={partnerInfo.name}
-                  onChange={event =>
-                    onUpdatePartnerInfo('name', event.target.value)
-                  }
-                  disabled={(isSingleCard || config.spreadId === 'love') && !hasPartner}
-                  className={`w-full px-4 py-3 bg-slate-800/80 border ${
-                    formErrors.partnerName
-                      ? 'border-red-500'
-                      : themeClasses.inputBorder
-                  } rounded-lg text-white placeholder-gray-400 focus:outline-none ${themeClasses.focusRing} transition-all ${
-                    (isSingleCard || config.spreadId === 'love') && !hasPartner
-                      ? 'opacity-50 cursor-not-allowed'
-                      : ''
-                  }`}
-                />
-                {formErrors.partnerName && (
-                  <p className='text-red-400 text-xs mt-1'>
-                    {formErrors.partnerName}
-                  </p>
-                )}
-              </div>
+                  {translate(formKeys.partnerInfo)}
+                </h3>
 
-              <div>
-                <label
-                  className={`block text-sm font-medium ${themeClasses.labelText} mb-2`}
-                >
-                  {translate(formKeys.partnerBirthDate)}
-                </label>
-                <div className='space-y-2'>
+                <div>
+                  <label
+                    className={`block text-sm font-medium ${themeClasses.labelText} mb-2`}
+                  >
+                    {translate(formKeys.partnerName)}
+                  </label>
                   <input
-                    type='date'
-                    value={partnerInfo.birthDate}
+                    type='text'
+                    value={partnerInfo.name}
                     onChange={event =>
-                      onUpdatePartnerInfo('birthDate', event.target.value)
+                      onUpdatePartnerInfo('name', event.target.value)
                     }
-                    disabled={partnerInfo.birthDateUnknown || ((isSingleCard || config.spreadId === 'love') && !hasPartner)}
+                    disabled={
+                      (isSingleCard || config.spreadId === 'love') &&
+                      !hasPartner
+                    }
                     className={`w-full px-4 py-3 bg-slate-800/80 border ${
-                      formErrors.partnerBirthDate
+                      formErrors.partnerName
                         ? 'border-red-500'
                         : themeClasses.inputBorder
-                    } rounded-lg text-white focus:outline-none ${themeClasses.focusRing} transition-all ${
-                      partnerInfo.birthDateUnknown || ((isSingleCard || config.spreadId === 'love') && !hasPartner)
+                    } rounded-lg text-white placeholder-gray-400 focus:outline-none ${themeClasses.focusRing} transition-all ${
+                      (isSingleCard || config.spreadId === 'love') &&
+                      !hasPartner
                         ? 'opacity-50 cursor-not-allowed'
                         : ''
                     }`}
                   />
-                  <div className='flex items-center'>
+                  {formErrors.partnerName && (
+                    <p className='text-red-400 text-xs mt-1'>
+                      {formErrors.partnerName}
+                    </p>
+                  )}
+                </div>
+
+                <div>
+                  <label
+                    className={`block text-sm font-medium ${themeClasses.labelText} mb-2`}
+                  >
+                    {translate(formKeys.partnerBirthDate)}
+                  </label>
+                  <div className='space-y-2'>
                     <input
-                      type='checkbox'
-                      id='partnerBirthDateUnknown'
-                      checked={partnerInfo.birthDateUnknown}
+                      type='date'
+                      value={partnerInfo.birthDate}
                       onChange={event =>
-                        onUpdatePartnerInfo(
-                          'birthDateUnknown',
-                          event.target.checked
-                        )
+                        onUpdatePartnerInfo('birthDate', event.target.value)
                       }
-                      disabled={(isSingleCard || config.spreadId === 'love') && !hasPartner}
-                      className={`w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded focus:ring-blue-500 focus:ring-2 ${
-                        (isSingleCard || config.spreadId === 'love') && !hasPartner
+                      disabled={
+                        partnerInfo.birthDateUnknown ||
+                        ((isSingleCard || config.spreadId === 'love') &&
+                          !hasPartner)
+                      }
+                      className={`w-full px-4 py-3 bg-slate-800/80 border ${
+                        formErrors.partnerBirthDate
+                          ? 'border-red-500'
+                          : themeClasses.inputBorder
+                      } rounded-lg text-white focus:outline-none ${themeClasses.focusRing} transition-all ${
+                        partnerInfo.birthDateUnknown ||
+                        ((isSingleCard || config.spreadId === 'love') &&
+                          !hasPartner)
                           ? 'opacity-50 cursor-not-allowed'
                           : ''
                       }`}
                     />
-                    <label
-                      htmlFor='partnerBirthDateUnknown'
-                      className={`ml-2 text-sm ${themeClasses.labelText} ${
-                        (isSingleCard || config.spreadId === 'love') && !hasPartner
-                          ? 'opacity-50 cursor-not-allowed'
-                          : 'cursor-pointer'
-                      }`}
-                    >
-                      {translate(formKeys.partnerBirthDateUnknown)}
-                    </label>
+                    <div className='flex items-center'>
+                      <input
+                        type='checkbox'
+                        id='partnerBirthDateUnknown'
+                        checked={partnerInfo.birthDateUnknown}
+                        onChange={event =>
+                          onUpdatePartnerInfo(
+                            'birthDateUnknown',
+                            event.target.checked
+                          )
+                        }
+                        disabled={
+                          (isSingleCard || config.spreadId === 'love') &&
+                          !hasPartner
+                        }
+                        className={`w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded focus:ring-blue-500 focus:ring-2 ${
+                          (isSingleCard || config.spreadId === 'love') &&
+                          !hasPartner
+                            ? 'opacity-50 cursor-not-allowed'
+                            : ''
+                        }`}
+                      />
+                      <label
+                        htmlFor='partnerBirthDateUnknown'
+                        className={`ml-2 text-sm ${themeClasses.labelText} ${
+                          (isSingleCard || config.spreadId === 'love') &&
+                          !hasPartner
+                            ? 'opacity-50 cursor-not-allowed'
+                            : 'cursor-pointer'
+                        }`}
+                      >
+                        {translate(formKeys.partnerBirthDateUnknown)}
+                      </label>
+                    </div>
                   </div>
+                  {formErrors.partnerBirthDate && (
+                    <p className='text-red-400 text-xs mt-1'>
+                      {formErrors.partnerBirthDate}
+                    </p>
+                  )}
                 </div>
-                {formErrors.partnerBirthDate && (
-                  <p className='text-red-400 text-xs mt-1'>
-                    {formErrors.partnerBirthDate}
-                  </p>
-                )}
               </div>
-            </div>
-          )}
+            )}
 
           {/* İletişim Tercihi - Minimal Tasarım */}
           <div className='space-y-4'>
@@ -813,7 +839,10 @@ export default function BaseTarotForm({
                 <label
                   className={`block text-sm font-medium ${themeClasses.labelText} mb-2`}
                 >
-                  {translate(formKeys.mainQuestion || 'spreads.singleCard.form.mainQuestion')}
+                  {translate(
+                    formKeys.mainQuestion ||
+                      'spreads.singleCard.form.mainQuestion'
+                  )}
                   <span className='text-red-400'> *</span>
                 </label>
                 <textarea
@@ -822,7 +851,9 @@ export default function BaseTarotForm({
                     onUpdateQuestion('concern', event.target.value)
                   }
                   placeholder={getPlaceholder(
-                    placeholders.mainQuestion || formKeys.mainQuestionPlaceholder || 'spreads.singleCard.form.mainQuestionPlaceholder'
+                    placeholders.mainQuestion ||
+                      formKeys.mainQuestionPlaceholder ||
+                      'spreads.singleCard.form.mainQuestionPlaceholder'
                   )}
                   rows={4}
                   className={`w-full px-4 py-3 bg-slate-800/80 border ${
@@ -844,7 +875,8 @@ export default function BaseTarotForm({
                   <label
                     className={`block text-sm font-medium ${themeClasses.labelText} mb-2`}
                   >
-                    {questionLabels?.concern || translate(formKeys.concernQuestion)}
+                    {questionLabels?.concern ||
+                      translate(formKeys.concernQuestion)}
                     <span className='text-red-400'> *</span>
                   </label>
                   <textarea
@@ -879,7 +911,9 @@ export default function BaseTarotForm({
                     onChange={event =>
                       onUpdateQuestion('understanding', event.target.value)
                     }
-                    placeholder={getPlaceholder(placeholders.understandingQuestion)}
+                    placeholder={getPlaceholder(
+                      placeholders.understandingQuestion
+                    )}
                     rows={3}
                     className={`w-full px-4 py-3 bg-slate-800/80 border ${
                       formErrors.understanding
@@ -946,7 +980,10 @@ export default function BaseTarotForm({
               {translate(formKeys.saving, 'Kaydediliyor...')}
             </div>
           ) : (
-            translate(formKeys.saveAndOpen || formKeys.saveAndContinue || 'spreads.singleCard.form.saveAndOpen', 'Formu Kaydet ve Kartları Aç 🎴')
+            translate(
+              formKeys.saveAndOpen || 'spreads.singleCard.form.saveAndOpen',
+              'Formu Kaydet ve Kartları Aç 🎴'
+            )
           )}
         </button>
       </div>

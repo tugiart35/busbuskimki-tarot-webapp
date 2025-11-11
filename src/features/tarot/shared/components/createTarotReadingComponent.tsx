@@ -603,9 +603,9 @@ export function createTarotReadingComponent({
 
     // Kredi yönetimi - detaylı ve yazılı okuma için ayrı krediler
     const detailedCredits = useReadingCredits(
-      config.creditKeys.detailed as any
+      config.creditKeys?.detailed as any
     );
-    const writtenCredits = useReadingCredits(config.creditKeys.written as any);
+    const writtenCredits = useReadingCredits(config.creditKeys?.written as any);
 
     // Tarot okuma akışı hook'u - tüm state ve fonksiyonları yönetir
     const {
@@ -848,8 +848,8 @@ export function createTarotReadingComponent({
             const formPayload = {
               personalInfo,
               ...(config.requiresPartnerInfo ||
-                (config.isSingleCard && hasPartner) ||
-                (config.spreadId === 'love' && hasPartner)
+              (config.isSingleCard && hasPartner) ||
+              (config.spreadId === 'love' && hasPartner)
                 ? { partnerInfo }
                 : {}),
               communicationMethod,
@@ -857,23 +857,26 @@ export function createTarotReadingComponent({
             };
 
             // API route üzerinden kaydet (server-side authenticated)
-            const saveResponse = await fetch('/api/reading-sessions/save-reading', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                token: sessionToken,
-                readingData: {
-                  ...readingData,
-                  spread_name: t(dataKeys.spreadName),
-                  spreadName: t(dataKeys.spreadName),
+            const saveResponse = await fetch(
+              '/api/reading-sessions/save-reading',
+              {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
                 },
-                formPayload,
-                communicationMethod,
-                personalInfo,
-              }),
-            });
+                body: JSON.stringify({
+                  token: sessionToken,
+                  readingData: {
+                    ...readingData,
+                    spread_name: t(dataKeys.spreadName),
+                    spreadName: t(dataKeys.spreadName),
+                  },
+                  formPayload,
+                  communicationMethod,
+                  personalInfo,
+                }),
+              }
+            );
 
             const saveResult = await saveResponse.json();
 
@@ -975,24 +978,29 @@ export function createTarotReadingComponent({
                 // Form verilerini reading_form_responses tablosuna kaydet
                 const formPayload = {
                   personalInfo,
-                  ...(config.requiresPartnerInfo || (config.isSingleCard && hasPartner) || (config.spreadId === 'love' && hasPartner)
+                  ...(config.requiresPartnerInfo ||
+                  (config.isSingleCard && hasPartner) ||
+                  (config.spreadId === 'love' && hasPartner)
                     ? { partnerInfo }
                     : {}),
                   communicationMethod,
                   userQuestions: questions,
                 };
 
-                await supabase.from('reading_form_responses').upsert({
-                  session_id: validateData.sessionId,
-                  payload: formPayload,
-                  completed_at: new Date().toISOString(),
-                }, {
-                  onConflict: 'session_id',
-                });
+                await supabase.from('reading_form_responses').upsert(
+                  {
+                    session_id: validateData.sessionId,
+                    payload: formPayload,
+                    completed_at: new Date().toISOString(),
+                  },
+                  {
+                    onConflict: 'session_id',
+                  }
+                );
               }
             } catch (error) {
               // Form response kaydetme hatası sessizce devam et
-              console.error('Form response kaydetme hatası:', error);
+              // Hata loglanmaz - sessizce devam edilir
             }
           }
         }
@@ -1136,7 +1144,9 @@ export function createTarotReadingComponent({
             status: 'completed',
             title: t(dataKeys.detailedTitle),
             // Single card okumasında interpretation boş (müşteriye gösterilmez)
-            interpretation: isSingleCardReading ? '' : generateBasicInterpretation(),
+            interpretation: isSingleCardReading
+              ? ''
+              : generateBasicInterpretation(),
             cards: {
               selectedCards: serializedCards,
               positions: config.positionsInfo.map(position => ({
@@ -1147,7 +1157,9 @@ export function createTarotReadingComponent({
             },
             questions: {
               personalInfo,
-              ...(config.requiresPartnerInfo || (config.isSingleCard && hasPartner) || (config.spreadId === 'love' && hasPartner)
+              ...(config.requiresPartnerInfo ||
+              (config.isSingleCard && hasPartner) ||
+              (config.spreadId === 'love' && hasPartner)
                 ? { partnerInfo }
                 : {}),
               userQuestions: questions,
@@ -1163,21 +1175,20 @@ export function createTarotReadingComponent({
               // initialReadingType 'detailed' veya 'written' string olarak gelir
               readingFormat: isSingleCardReading
                 ? selectedReadingType === READING_TYPES.WRITTEN ||
-                    initialReadingType === 'written'
+                  initialReadingType === 'written'
                   ? 'written'
                   : 'detailed'
                 : selectedReadingType,
-              readingFormatTr:
-                isSingleCardReading
-                  ? selectedReadingType === READING_TYPES.WRITTEN ||
-                      initialReadingType === 'written'
+              readingFormatTr: isSingleCardReading
+                ? selectedReadingType === READING_TYPES.WRITTEN ||
+                  initialReadingType === 'written'
+                  ? t(dataKeys.readingFormats.written)
+                  : t(dataKeys.readingFormats.detailed)
+                : selectedReadingType === READING_TYPES.DETAILED
+                  ? t(dataKeys.readingFormats.detailed)
+                  : selectedReadingType === READING_TYPES.WRITTEN
                     ? t(dataKeys.readingFormats.written)
-                    : t(dataKeys.readingFormats.detailed)
-                  : selectedReadingType === READING_TYPES.DETAILED
-                    ? t(dataKeys.readingFormats.detailed)
-                    : selectedReadingType === READING_TYPES.WRITTEN
-                      ? t(dataKeys.readingFormats.written)
-                      : t(dataKeys.readingFormats.simple),
+                    : t(dataKeys.readingFormats.simple),
             },
             timestamp: new Date().toISOString(),
             createdAt: new Date(),

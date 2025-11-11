@@ -324,8 +324,7 @@ class EmailService {
       } catch (error) {
         logger.error('Translation dosyası okuma hatası', error, {
           action: 'read_translation',
-          locale,
-          cardName,
+          metadata: { locale, cardName },
         });
         return null;
       }
@@ -341,8 +340,7 @@ class EmailService {
       // Single card okuması için translation dosyasından al
       if (isSingleCardReading) {
         // Locale'i metadata'dan veya varsayılan olarak 'tr' kullan
-        const locale =
-          readingData.metadata?.locale || 'tr';
+        const locale = readingData.metadata?.locale || 'tr';
         const meaning = getCardMeaningFromTranslations(
           cardName,
           isReversed,

@@ -47,6 +47,7 @@ export interface UseTarotReadingFlowReturn {
     understanding: string;
     emotional: string;
   };
+  hasPartner: boolean;
   formErrors: {
     name: string;
     surname: string;
@@ -101,6 +102,7 @@ export interface UseTarotReadingFlowReturn {
     _field: 'concern' | 'understanding' | 'emotional',
     _value: string
   ) => void;
+  toggleHasPartner: (_value: boolean) => void;
   setPersonalInfo: React.Dispatch<
     React.SetStateAction<{
       name: string;

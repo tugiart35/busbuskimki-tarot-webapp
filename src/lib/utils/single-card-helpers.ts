@@ -1,19 +1,21 @@
 /**
  * Single Card Reading Helper Functions
- * 
+ *
  * Centralized utilities for single card reading detection and operations
  */
 
-import type { TarotConfig } from '@/features/tarot/shared/config';
+import type { TarotConfig } from '@/features/tarot/shared/types/tarot-config.types';
 
 /**
  * Check if a reading is a single card reading
- * 
+ *
  * @param config - Tarot configuration object
  * @returns true if this is a single card reading
  */
 export function isSingleCardReading(config: TarotConfig | null): boolean {
-  if (!config) return false;
+  if (!config) {
+    return false;
+  }
   return (
     config.isSingleCard === true ||
     config.cardCount === 1 ||
@@ -24,7 +26,7 @@ export function isSingleCardReading(config: TarotConfig | null): boolean {
 
 /**
  * Get single card reading metadata
- * 
+ *
  * @param config - Tarot configuration object
  * @returns metadata object for single card reading
  */
@@ -39,4 +41,3 @@ export function getSingleCardMetadata(config: TarotConfig | null): {
     spreadId: config?.spreadId || null,
   };
 }
-
