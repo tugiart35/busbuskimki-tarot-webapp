@@ -8,7 +8,6 @@ const SEO_CONFIG = {
     instagram: 'https://instagram.com/busbuskimki',
     facebook: 'https://facebook.com/busbuskimki',
     twitter: 'https://twitter.com/busbuskimki',
-    youtube: 'https://youtube.com/@busbuskimki',
   },
   contact: {
     email: 'iletisim@busbuskimki.com',

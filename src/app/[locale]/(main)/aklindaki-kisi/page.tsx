@@ -13,29 +13,12 @@ import {
 } from '@/types/aklindaki-kisi.types';
 import { Mail, ArrowRight, Clock, X } from 'lucide-react';
 import Image from 'next/image';
-
-// Countdown formatı: "X gün Y saat Z dakika" veya "Y saat Z dakika" veya "Z dakika W saniye"
-function formatCountdown(milliseconds: number): string {
-  const totalSeconds = Math.floor(milliseconds / 1000);
-  const days = Math.floor(totalSeconds / (24 * 60 * 60));
-  const hours = Math.floor((totalSeconds % (24 * 60 * 60)) / (60 * 60));
-  const minutes = Math.floor((totalSeconds % (60 * 60)) / 60);
-  const seconds = totalSeconds % 60;
-
-  if (days > 0) {
-    return `${days} gün ${hours} saat ${minutes} dakika`;
-  } else if (hours > 0) {
-    return `${hours} saat ${minutes} dakika ${seconds} saniye`;
-  } else if (minutes > 0) {
-    return `${minutes} dakika ${seconds} saniye`;
-  } else {
-    return `${seconds} saniye`;
-  }
-}
+import { useTranslations } from '@/hooks/useTranslations';
 
 export default function AklindakiKisiPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const { t } = useTranslations();
   const token = searchParams.get('token');
   const emailParam = searchParams.get('email');
 
@@ -56,6 +39,45 @@ export default function AklindakiKisiPage() {
   const [email, setEmail] = useState(emailParam || '');
   const [emailError, setEmailError] = useState<string | null>(null);
   const [validatingEmail, setValidatingEmail] = useState(false);
+
+  const formatCountdown = useCallback(
+    (milliseconds: number): string => {
+      const totalSeconds = Math.floor(milliseconds / 1000);
+      const days = Math.floor(totalSeconds / (24 * 60 * 60));
+      const hours = Math.floor((totalSeconds % (24 * 60 * 60)) / (60 * 60));
+      const minutes = Math.floor((totalSeconds % (60 * 60)) / 60);
+      const seconds = totalSeconds % 60;
+
+      if (days > 0) {
+        return t(
+          'aklindakiKisi.page.countdown.daysHoursMinutes',
+          {
+            days,
+            hours,
+            minutes,
+          }
+        );
+      }
+      if (hours > 0) {
+        return t(
+          'aklindakiKisi.page.countdown.hoursMinutesSeconds',
+          {
+            hours,
+            minutes,
+            seconds,
+          }
+        );
+      }
+      if (minutes > 0) {
+        return t('aklindakiKisi.page.countdown.minutesSeconds', {
+          minutes,
+          seconds,
+        });
+      }
+      return t('aklindakiKisi.page.countdown.secondsOnly', { seconds });
+    },
+    [t]
+  );
 
   // Initialize cards (2-45, toplam 44 kart) - Token validation'dan sonra yapılacak
 
@@ -86,7 +108,7 @@ export default function AklindakiKisiPage() {
   // Token validation
   useEffect(() => {
     if (!token) {
-      setError('Token bulunamadı. Lütfen geçerli bir link kullanın.');
+      setError(t('aklindakiKisi.page.errors.tokenMissing'));
       setTokenValid(false);
       setLoading(false);
       return;
@@ -114,7 +136,7 @@ export default function AklindakiKisiPage() {
         // IP limiti kontrolü
         if (data.ipLimitReached) {
           setError(
-            'Bu link maksimum 3 farklı cihazdan açılabilir. Lütfen daha önce kullandığınız bir cihazdan giriş yapın.'
+            t('aklindakiKisi.page.errors.deviceLimit')
           );
           setTokenValid(false);
           setLoading(false);
@@ -122,7 +144,7 @@ export default function AklindakiKisiPage() {
         }
 
         if (!response.ok || !data.valid) {
-          setError(data.error || 'Token doğrulanamadı');
+          setError(data.error || t('aklindakiKisi.page.errors.tokenInvalid'));
           setTokenValid(false);
           setLoading(false);
           return;
@@ -168,14 +190,14 @@ export default function AklindakiKisiPage() {
         setLoading(false);
       } catch (err) {
         console.error('Token validation error:', err);
-        setError('Token doğrulanırken bir hata oluştu');
+        setError(t('aklindakiKisi.page.errors.tokenValidation'));
         setTokenValid(false);
         setLoading(false);
       }
     };
 
     validateToken();
-  }, [token, emailParam]);
+  }, [emailParam, t, token]);
 
   // E-posta doğrulama
   const handleEmailSubmit = async (e: React.FormEvent) => {
@@ -184,7 +206,7 @@ export default function AklindakiKisiPage() {
     setValidatingEmail(true);
 
     if (!email.trim()) {
-      setEmailError('Lütfen e-posta adresinizi girin');
+      setEmailError(t('aklindakiKisi.page.email.errors.required'));
       setValidatingEmail(false);
       return;
     }
@@ -192,7 +214,7 @@ export default function AklindakiKisiPage() {
     // E-posta format kontrolü
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      setEmailError('Geçerli bir e-posta adresi giriniz');
+      setEmailError(t('aklindakiKisi.page.email.errors.invalidFormat'));
       setValidatingEmail(false);
       return;
     }
@@ -206,14 +228,16 @@ export default function AklindakiKisiPage() {
       // IP limiti kontrolü
       if (data.ipLimitReached) {
         setEmailError(
-          'Bu link maksimum 3 farklı cihazdan açılabilir. Lütfen daha önce kullandığınız bir cihazdan giriş yapın.'
+          t('aklindakiKisi.page.errors.deviceLimit')
         );
         setValidatingEmail(false);
         return;
       }
 
       if (!response.ok || !data.valid) {
-        setEmailError(data.error || 'E-posta adresi doğrulanamadı');
+        setEmailError(
+          data.error || t('aklindakiKisi.page.email.errors.validationFailed')
+        );
         setValidatingEmail(false);
         return;
       }
@@ -223,7 +247,7 @@ export default function AklindakiKisiPage() {
       newUrl.searchParams.set('email', email.trim());
       router.push(newUrl.pathname + newUrl.search);
     } catch (err) {
-      setEmailError('E-posta doğrulanırken bir hata oluştu');
+      setEmailError(t('aklindakiKisi.page.email.errors.network'));
       setValidatingEmail(false);
     }
   };
@@ -272,10 +296,12 @@ export default function AklindakiKisiPage() {
           if (data.dailyLimitReached) {
             setDailyLimitReached(true);
             setError(
-              'Günlük 3 kart çekme hakkınızı doldurdunuz. Yeni hakkınız için bekleyiniz.'
+              t('aklindakiKisi.page.errors.dailyLimit')
             );
           } else {
-            setError(data.error || 'Kart çekilirken bir hata oluştu');
+            setError(
+              data.error || t('aklindakiKisi.page.errors.cardDraw')
+            );
           }
           setDrawingCard(false);
           return;
@@ -333,12 +359,12 @@ export default function AklindakiKisiPage() {
           }
         }
       } catch (err) {
-        setError('Kart çekilirken bir hata oluştu');
+        setError(t('aklindakiKisi.page.errors.cardDrawNetwork'));
       } finally {
         setDrawingCard(false);
       }
     },
-    [token, cards, drawingCard, dailyLimitReached, flippedCards]
+    [token, cards, dailyLimitReached, drawingCard, flippedCards, t]
   );
 
   if (loading) {
@@ -346,7 +372,9 @@ export default function AklindakiKisiPage() {
       <div className='min-h-screen bg-[#F7F6F3] text-[#1F2A44] flex flex-col items-center justify-center font-serif'>
         <div className='text-center'>
           <div className='animate-spin rounded-full h-12 w-12 border-b-2 border-[#C9B26D] mx-auto mb-4'></div>
-          <p className='text-lg text-[#4B5563]'>Yükleniyor...</p>
+          <p className='text-lg text-[#4B5563]'>
+            {t('aklindakiKisi.page.loading.message')}
+          </p>
         </div>
       </div>
     );
@@ -362,10 +390,10 @@ export default function AklindakiKisiPage() {
               <Mail className='h-8 w-8 text-pink-500' />
             </div>
             <h1 className='text-3xl font-bold mb-2 tracking-wide text-[#1F2A44]'>
-              E-posta Doğrulama
+              {t('aklindakiKisi.page.email.title')}
             </h1>
             <p className='text-[#4B5563] leading-relaxed'>
-              Kart çekme sayfasına erişmek için e-posta adresinizi girin
+              {t('aklindakiKisi.page.email.description')}
             </p>
           </div>
 
@@ -375,7 +403,7 @@ export default function AklindakiKisiPage() {
                 htmlFor='email'
                 className='block text-sm font-medium text-[#1F2A44] mb-2'
               >
-                E-posta Adresiniz
+                {t('aklindakiKisi.page.email.label')}
               </label>
               <div className='relative'>
                 <Mail className='absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-[#6B7280]' />
@@ -387,7 +415,7 @@ export default function AklindakiKisiPage() {
                     setEmail(e.target.value);
                     setEmailError(null);
                   }}
-                  placeholder='ornek@email.com'
+                  placeholder={t('aklindakiKisi.page.email.placeholder')}
                   className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all ${
                     emailError
                       ? 'border-red-300 bg-red-50'
@@ -410,11 +438,11 @@ export default function AklindakiKisiPage() {
               {validatingEmail ? (
                 <>
                   <div className='animate-spin rounded-full h-5 w-5 border-b-2 border-white'></div>
-                  Doğrulanıyor...
+                  {t('aklindakiKisi.page.email.actions.validating')}
                 </>
               ) : (
                 <>
-                  Devam Et
+                  {t('aklindakiKisi.page.email.actions.continue')}
                   <ArrowRight className='h-5 w-5' />
                 </>
               )}
@@ -422,8 +450,7 @@ export default function AklindakiKisiPage() {
           </form>
 
           <p className='mt-6 text-xs text-center text-[#6B7280]'>
-            Bu link size özel olarak gönderilmiştir. Lütfen link ile birlikte
-            gönderilen e-posta adresini kullanın.
+            {t('aklindakiKisi.page.email.footer')}
           </p>
         </div>
       </div>
@@ -435,7 +462,7 @@ export default function AklindakiKisiPage() {
       <div className='min-h-screen bg-[#F7F6F3] text-[#1F2A44] flex flex-col items-center justify-center font-serif px-6'>
         <div className='text-center max-w-2xl'>
           <h1 className='text-4xl font-bold mb-4 tracking-wide text-[#C9B26D]'>
-            Geçersiz Link
+            {t('aklindakiKisi.page.invalid.title')}
           </h1>
           <p className='text-lg text-[#4B5563] leading-relaxed'>{error}</p>
         </div>
@@ -448,13 +475,13 @@ export default function AklindakiKisiPage() {
       {/* Hero Section */}
       <section className='text-center mt-16 mb-12 px-6'>
         <h1 className='text-4xl font-bold mb-4 tracking-wide'>
-          Niyet Et, Bir Kart Seç
+          {t('aklindakiKisi.page.hero.title')}
         </h1>
         <p className='text-lg text-[#4B5563] max-w-2xl mx-auto leading-relaxed'>
-          Kalbindeki kişiyle yeniden bağ kur. 💫
+          {t('aklindakiKisi.page.hero.subtitle')}
         </p>
         <p className='mt-4 text-sm italic text-[#6B7280]'>
-          Her kart bir mesaj, her seçim bir tesadüf değil. 🌙
+          {t('aklindakiKisi.page.hero.caption')}
         </p>
         <div className='mt-6'>
           <button
@@ -462,7 +489,9 @@ export default function AklindakiKisiPage() {
             disabled={isShuffling || drawingCard}
             className='bg-[#C9B26D] hover:bg-[#B8A056] disabled:bg-[#D9CBA1] disabled:cursor-not-allowed text-white px-8 py-3 rounded-full font-medium transition-all'
           >
-            {isShuffling ? 'Karıştırılıyor...' : 'Kartları Karıştır'}
+            {isShuffling
+              ? t('aklindakiKisi.page.hero.shuffleLoading')
+              : t('aklindakiKisi.page.hero.shuffle')}
           </button>
         </div>
       </section>
@@ -471,7 +500,7 @@ export default function AklindakiKisiPage() {
       <div className='w-full max-w-7xl px-6 mb-6 flex flex-col sm:flex-row justify-between items-center gap-4'>
         {/* Sol: Açılan kartlar */}
         <div className='text-sm text-[#6B7280]'>
-          Açılan kartlar:{' '}
+          {t('aklindakiKisi.page.stats.openedCards')}:{' '}
           <span className='font-semibold text-[#1F2A44]'>
             {flippedCards.size}
           </span>{' '}
@@ -480,9 +509,11 @@ export default function AklindakiKisiPage() {
 
         {/* Sağ: Kalan kart hakkı */}
         <div className='text-sm text-[#6B7280]'>
-          Kalan kart hakkınız:{' '}
+          {t('aklindakiKisi.page.stats.remainingCards')}:{' '}
           <span className='font-semibold text-[#1F2A44]'>
-            {remainingCards === null ? 'Sınırsız' : (remainingCards ?? 3)}
+            {remainingCards === null
+              ? t('aklindakiKisi.page.stats.unlimited')
+              : (remainingCards ?? 3)}
           </span>
         </div>
       </div>
@@ -493,7 +524,7 @@ export default function AklindakiKisiPage() {
           <div className='flex items-center justify-center gap-1 text-xs text-[#6B7280]'>
             <Clock className='h-3 w-3 text-[#9CA3AF]' />
             <span>
-              Sıfırlanmaya:{' '}
+              {t('aklindakiKisi.page.countdown.label')}{' '}
               <span className='font-medium text-[#4B5563]'>
                 {formatCountdown(resetCountdown)}
               </span>
@@ -515,7 +546,7 @@ export default function AklindakiKisiPage() {
       <section className='grid grid-cols-5 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-7 xl:grid-cols-8 gap-2 sm:gap-3 md:gap-4 px-3 sm:px-4 md:px-6 mb-16 w-full'>
         {cards.length === 0 && (
           <div className='col-span-full text-center text-[#6B7280] py-8'>
-            Kartlar yükleniyor...
+            {t('aklindakiKisi.page.cardGrid.loading')}
           </div>
         )}
         {cards.map((cardNumber, index) => {
@@ -560,7 +591,7 @@ export default function AklindakiKisiPage() {
                 {isFlipped ? (
                   <Image
                     src={getCardImagePath(cardNumber)}
-                    alt={`Kart ${cardNumber}`}
+                    alt={t('aklindakiKisi.page.card.alt', { number: cardNumber })}
                     fill
                     className='object-cover'
                     priority={false}
@@ -569,7 +600,7 @@ export default function AklindakiKisiPage() {
                 ) : (
                   <Image
                     src={getBackImagePath()}
-                    alt='Card Back'
+                    alt={t('aklindakiKisi.page.card.backAlt')}
                     fill
                     className='object-cover'
                     priority={false}
@@ -596,7 +627,7 @@ export default function AklindakiKisiPage() {
             <button
               onClick={() => setFullscreenCard(null)}
               className='absolute top-4 right-4 z-10 bg-white/20 hover:bg-white/30 rounded-full p-2 transition-colors'
-              aria-label='Kapat'
+              aria-label={t('aklindakiKisi.page.fullscreen.closeAria')}
             >
               <X className='h-6 w-6 text-white' />
             </button>
@@ -605,7 +636,7 @@ export default function AklindakiKisiPage() {
             <div className='relative w-full aspect-[9/16] max-h-[85vh]'>
               <Image
                 src={getCardImagePath(fullscreenCard)}
-                alt={`Kart ${fullscreenCard}`}
+                alt={t('aklindakiKisi.page.card.alt', { number: fullscreenCard })}
                 fill
                 className='object-contain'
                 priority={true}
@@ -619,8 +650,7 @@ export default function AklindakiKisiPage() {
       {/* Footer / Ritual Text */}
       <footer className='text-center text-[#4B5563] mb-12 max-w-2xl px-6 leading-relaxed'>
         <p>
-          Özlem duyduğunda, bir rüya seni ona götürdüğünde veya kalbin konuşmak
-          istediğinde... bu deste seninle.
+          {t('aklindakiKisi.page.footer.note')}
         </p>
       </footer>
     </div>

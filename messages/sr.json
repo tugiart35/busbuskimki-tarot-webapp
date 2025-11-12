@@ -48269,5 +48269,73 @@
       "imageAlt": "popularna tarot karta",
       "sortInfo": "Sortirano po angažovanju zajednice u poslednjih 7 dana"
     }
+  },
+  "aklindakiKisi": {
+    "page": {
+      "loading": {
+        "message": "Učitavanje..."
+      },
+      "email": {
+        "title": "Verifikacija e-pošte",
+        "description": "Unesite svoju e-adresu da pristupite stranici za izvlačenje karata.",
+        "label": "Vaša e-adresa",
+        "placeholder": "primer@email.com",
+        "actions": {
+          "validating": "Verifikujem...",
+          "continue": "Nastavi"
+        },
+        "footer": "Ovaj link je poslat samo vama. Molimo koristite e-adresu koja je stigla zajedno sa linkom.",
+        "errors": {
+          "required": "Molimo unesite svoju e-adresu.",
+          "invalidFormat": "Molimo unesite važeću e-adresu.",
+          "validationFailed": "E-adresa nije mogla biti verifikovana.",
+          "network": "Došlo je do greške prilikom verifikacije e-adrese."
+        }
+      },
+      "errors": {
+        "tokenMissing": "Token nije pronađen. Molimo koristite važeći link.",
+        "deviceLimit": "Ovaj link se može otvoriti na najviše 3 različita uređaja. Molimo koristite uređaj koji ste ranije koristili.",
+        "tokenInvalid": "Token nije verifikovan.",
+        "tokenValidation": "Došlo je do greške prilikom verifikacije tokena.",
+        "dailyLimit": "Dostigli ste dnevni limit od 3 izvlačenja karata. Pokušajte ponovo kasnije.",
+        "cardDraw": "Došlo je do greške prilikom izvlačenja karte.",
+        "cardDrawNetwork": "Došlo je do greške prilikom izvlačenja karte."
+      },
+      "hero": {
+        "title": "Postavi nameru, izaberi kartu",
+        "subtitle": "Ponovo se poveži sa osobom u svom srcu. 💫",
+        "caption": "Svaka karta je poruka, nijedan izbor nije slučajan. 🌙",
+        "shuffle": "Promešaj karte",
+        "shuffleLoading": "Mešam..."
+      },
+      "stats": {
+        "openedCards": "Otvorene karte",
+        "remainingCards": "Preostala izvlačenja",
+        "unlimited": "Neograničeno"
+      },
+      "countdown": {
+        "label": "Reset za:",
+        "daysHoursMinutes": "{days} dana {hours} sati {minutes} minuta",
+        "hoursMinutesSeconds": "{hours} sati {minutes} minuta {seconds} sekundi",
+        "minutesSeconds": "{minutes} minuta {seconds} sekundi",
+        "secondsOnly": "{seconds} sekundi"
+      },
+      "cardGrid": {
+        "loading": "Karte se učitavaju..."
+      },
+      "card": {
+        "alt": "Karta {number}",
+        "backAlt": "Poleđina karte"
+      },
+      "fullscreen": {
+        "closeAria": "Zatvori prikaz karte preko celog ekrana"
+      },
+      "invalid": {
+        "title": "Nevažeći link"
+      },
+      "footer": {
+        "note": "Kad osetiš čežnju, kad te san odvede do njega ili kad tvoje srce želi da govori... ovaj špil je uz tebe."
+      }
+    }
   }
 }

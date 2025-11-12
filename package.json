@@ -69,7 +69,12 @@
     "lighthouse:mobile": "node scripts/lighthouse-audit.js --index 0 --mobile",
     "lighthouse:desktop": "node scripts/lighthouse-audit.js --index 0 --desktop",
     "lighthouse:list": "node scripts/lighthouse-audit.js --list",
-    "convert:thoth": "node scripts/convert-thoth-to-webp.js"
+    "convert:thoth": "node scripts/convert-thoth-to-webp.js",
+    "convert:arcana": "node scripts/convert-arcana-to-webp.js",
+    "convert:cups": "node scripts/convert-cups-to-webp.js",
+    "convert:pentacles": "node scripts/convert-pentacles-to-webp.js",
+    "convert:swords": "node scripts/convert-swords-to-webp.js",
+    "convert:wands": "node scripts/convert-wands-to-webp.js"
   },
   "dependencies": {
     "@fingerprintjs/fingerprintjs": "^5.0.1",

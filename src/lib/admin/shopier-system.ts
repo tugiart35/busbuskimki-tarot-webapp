@@ -81,12 +81,12 @@ export class ShopierSystemManager {
         testMode:
           shopierData.test_mode === true || shopierData.test_mode === 'true',
         successUrl:
-          shopierData.success_url || 'http://localhost:3111/payment/success',
+          shopierData.success_url || 'http://busbuskimki.com/payment/success',
         cancelUrl:
-          shopierData.cancel_url || 'http://localhost:3111/payment/cancel',
+          shopierData.cancel_url || 'http://busbuskimki.com/payment/cancel',
         webhookUrl:
           shopierData.webhook_url ||
-          'http://localhost:3111/api/webhook/shopier',
+          'http://busbuskimki.com/api/webhook/shopier',
       };
     } catch (error) {
       return null;
@@ -323,9 +323,9 @@ export class ShopierSystemManager {
       apiKey: '',
       apiSecret: '',
       testMode: true,
-      successUrl: 'http://localhost:3111/payment/success',
-      cancelUrl: 'http://localhost:3111/payment/cancel',
-      webhookUrl: 'http://localhost:3111/api/webhook/shopier',
+      successUrl: 'http://busbuskimki.com/payment/success',
+      cancelUrl: 'http://busbuskimki.com/payment/cancel',
+      webhookUrl: 'http://busbuskimki.com/api/webhook/shopier',
     };
   }
 
