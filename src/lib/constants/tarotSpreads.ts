@@ -940,7 +940,8 @@ export const tarotSpreads: TarotSpread[] = [
       cardSize: 'large',
     },
     prompts: {
-      systemPrompt: 'Sen deneyimli bir tarot okuyucusu ve tek kart okuma uzmanısın...',
+      systemPrompt:
+        'Sen deneyimli bir tarot okuyucusu ve tek kart okuma uzmanısın...',
     },
     hidden: true, // Admin-only: Sadece link üzerinden erişilebilir, tarotokumasi sayfasında gözükmez
   },

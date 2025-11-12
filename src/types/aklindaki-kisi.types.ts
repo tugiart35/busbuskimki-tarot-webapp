@@ -113,4 +113,3 @@ export interface GetLinksResponse {
   links?: LinkWithActivity[];
   error?: string;
 }
-

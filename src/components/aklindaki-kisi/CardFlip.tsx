@@ -21,18 +21,18 @@ export default function CardFlip({
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.stopPropagation();
-    
+
     // Açık kartlara tıklama (mobilde tam ekran için)
     if (isFlipped && onFlippedCardClick) {
       onFlippedCardClick();
       return;
     }
-    
+
     // Kapalı kartlar veya disabled kartlar
     if (disabled) {
       return;
     }
-    
+
     onClick();
   };
 
@@ -42,36 +42,35 @@ export default function CardFlip({
         disabled && !isFlipped
           ? 'opacity-50 cursor-not-allowed'
           : isFlipped
-          ? 'cursor-pointer'
-          : 'cursor-pointer hover:scale-105'
+            ? 'cursor-pointer'
+            : 'cursor-pointer hover:scale-105'
       }`}
       onClick={handleClick}
-      style={{ 
+      style={{
         pointerEvents: disabled && !isFlipped ? 'none' : 'auto',
       }}
     >
-      <div className="w-full h-full bg-[#FDFBF8] border border-[#D9CBA1] rounded-xl shadow-sm relative overflow-hidden">
+      <div className='w-full h-full bg-[#FDFBF8] border border-[#D9CBA1] rounded-xl shadow-sm relative overflow-hidden'>
         {isFlipped ? (
           <Image
             src={getCardImagePath(cardNumber)}
             alt={`Kart ${cardNumber}`}
             fill
-            className="object-cover"
+            className='object-cover'
             priority={false}
-            sizes="(max-width: 640px) 128px, (max-width: 768px) 160px, 192px"
+            sizes='(max-width: 640px) 128px, (max-width: 768px) 160px, 192px'
           />
         ) : (
           <Image
             src={getBackImagePath()}
-            alt="Card Back"
+            alt='Card Back'
             fill
-            className="object-cover"
+            className='object-cover'
             priority={false}
-            sizes="(max-width: 640px) 128px, (max-width: 768px) 160px, 192px"
+            sizes='(max-width: 640px) 128px, (max-width: 768px) 160px, 192px'
           />
         )}
       </div>
     </div>
   );
 }
-

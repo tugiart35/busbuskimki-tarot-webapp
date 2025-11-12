@@ -16,10 +16,10 @@ export async function generateStaticParams() {
   // çünkü admin link üzerinden erişilebilir olmalılar
   const visibleSpreadIds = getAllSpreadIds();
   const allSpreadIds = tarotSpreads.map(spread => spread.id);
-  
+
   // Hem visible hem hidden spread'leri dahil et
   const allIds = [...new Set([...visibleSpreadIds, ...allSpreadIds])];
-  
+
   return allIds.map(spreadId => ({
     spreadId,
   }));
@@ -36,8 +36,16 @@ export default async function SpreadPage({
 }) {
   const { locale, spreadId } = await params;
 
-  // Verify spread exists
-  const spread = tarotSpreads.find(s => s.id === spreadId);
+  // Normalize spreadId: eğer -spread suffix'i yoksa ekle
+  // URL'de relationship-problems olabilir ama tarotSpreads'te relationship-problems-spread olarak kayıtlı
+  const normalizedSpreadId = spreadId.endsWith('-spread')
+    ? spreadId
+    : `${spreadId}-spread`;
+
+  // Verify spread exists - önce orijinal spreadId ile, sonra normalized ile dene
+  const spread =
+    tarotSpreads.find(s => s.id === spreadId) ||
+    tarotSpreads.find(s => s.id === normalizedSpreadId);
 
   if (!spread) {
     return (
@@ -57,5 +65,8 @@ export default async function SpreadPage({
     );
   }
 
-  return <SpreadPageClient locale={locale} spreadId={spreadId} />;
+  // Normalize edilmiş spreadId'yi kullan (spread.id ile eşleşen)
+  const finalSpreadId = spread.id;
+
+  return <SpreadPageClient locale={locale} spreadId={finalSpreadId} />;
 }

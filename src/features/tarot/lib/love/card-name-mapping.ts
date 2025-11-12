@@ -65,7 +65,7 @@ export const cardNameMapping: { [key: string]: string } = {
   Kola: 'The Chariot',
   Snaga: 'Strength',
   Pustinjak: 'The Hermit',
-  'Točak Sreće': 'The The Wheel of Fortune',
+  'Točak Sreće': 'The Wheel of Fortune',
   'Točak Sreće (Wheel)': 'The Wheel of Fortune',
   Pravda: 'Justice',
   'Obeseni Čovek': 'The Hanged Man',

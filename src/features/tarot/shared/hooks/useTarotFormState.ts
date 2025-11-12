@@ -114,7 +114,8 @@ export function useTarotFormState({
   requiresPartnerInfo = false,
   isSingleCard = false,
 }: UseTarotFormStateProps): UseTarotFormStateReturn {
-  const [hasPartner, setHasPartner] = useState<boolean>(false);
+  // requiresPartnerInfo true ise varsayılan olarak hasPartner true
+  const [hasPartner, setHasPartner] = useState<boolean>(requiresPartnerInfo);
   const { t } = useTranslations();
 
   // Form state
@@ -295,7 +296,10 @@ export function useTarotFormState({
         hasError = true;
       }
 
-      if (!questions.emotional.trim() || questions.emotional.trim().length < 10) {
+      if (
+        !questions.emotional.trim() ||
+        questions.emotional.trim().length < 10
+      ) {
         errors.emotional = t(validationKeys.questionMinLength);
         hasError = true;
       }
@@ -316,25 +320,22 @@ export function useTarotFormState({
   ]);
 
   // Partner bilgisi toggle fonksiyonu
-  const toggleHasPartner = useCallback(
-    (value: boolean) => {
-      setHasPartner(value);
-      if (!value) {
-        // Partner bilgisi kapatıldığında temizle
-        setPartnerInfo({
-          name: '',
-          birthDate: '',
-          birthDateUnknown: false,
-        });
-        setFormErrors(prev => ({
-          ...prev,
-          partnerName: '',
-          partnerBirthDate: '',
-        }));
-      }
-    },
-    []
-  );
+  const toggleHasPartner = useCallback((value: boolean) => {
+    setHasPartner(value);
+    if (!value) {
+      // Partner bilgisi kapatıldığında temizle
+      setPartnerInfo({
+        name: '',
+        birthDate: '',
+        birthDateUnknown: false,
+      });
+      setFormErrors(prev => ({
+        ...prev,
+        partnerName: '',
+        partnerBirthDate: '',
+      }));
+    }
+  }, []);
 
   // Modal helper functions
   const closeInfoModal = useCallback(() => {

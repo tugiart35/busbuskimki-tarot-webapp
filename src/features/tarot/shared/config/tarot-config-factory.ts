@@ -847,7 +847,7 @@ export function createMarriageConfig(
     creditKeyPrefix: 'MARRIAGE',
     backgroundImage: '/new-lover.png',
     backgroundAlt: 'Marriage Tarot Reading background',
-    requiresPartnerInfo: true,
+    requiresPartnerInfo: false,
     ...(t && { t }),
   });
 }
@@ -898,7 +898,7 @@ export function createRelationshipProblemsConfig(
     creditKeyPrefix: 'RELATIONSHIP_PROBLEMS',
     backgroundImage: '/new-lover.png',
     backgroundAlt: 'Relationship Problems Tarot Reading background',
-    requiresPartnerInfo: true,
+    requiresPartnerInfo: false,
     ...(t && { t }),
   });
 }
@@ -920,11 +920,11 @@ export function createNewLoverConfig(
     theme: 'pink',
     icon: '💕',
     readingType: 'NEW_LOVER_SPREAD',
-    supabaseReadingType: 'new-lover', // Veritabanında mevcut enum değeri
+    supabaseReadingType: 'new-lover',
     creditKeyPrefix: 'NEW_LOVER',
     backgroundImage: '/new-lover.png',
     backgroundAlt: 'New Lover Tarot Reading background',
-    requiresPartnerInfo: true,
+    requiresPartnerInfo: false,
     ...(t && { t }),
   });
 }

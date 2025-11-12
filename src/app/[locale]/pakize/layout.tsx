@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { logAdminAction } from '@/lib/logger';
@@ -28,11 +28,87 @@ import {
   Heart,
 } from 'lucide-react';
 
+interface AdminNotification {
+  id: string;
+  type: string;
+  title: string;
+  message: string;
+  metadata?: any;
+  read: boolean;
+  read_at?: string;
+  created_at: string;
+}
+
 function AdminLayoutContent({ children }: { children: React.ReactNode }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [notifications] = useState(3);
+  const [notifications, setNotifications] = useState(0);
+  const [notificationsList, setNotificationsList] = useState<
+    AdminNotification[]
+  >([]);
+  const [showNotificationsDropdown, setShowNotificationsDropdown] =
+    useState(false);
   const pathname = usePathname();
   const { t } = useTranslations();
+
+  // Bildirimleri çek
+  const fetchNotifications = useCallback(async () => {
+    try {
+      const response = await fetch('/api/admin/notifications');
+      if (response.ok) {
+        const data = await response.json();
+        setNotifications(data.count || 0);
+        setNotificationsList(data.notifications || []);
+      }
+    } catch (error) {
+      console.error('Bildirimler yüklenemedi:', error);
+    }
+  }, []);
+
+  useEffect(() => {
+    // İlk yükleme
+    fetchNotifications();
+
+    // Her 30 saniyede bir güncelle
+    const interval = setInterval(fetchNotifications, 30000);
+
+    return () => clearInterval(interval);
+  }, [fetchNotifications]);
+
+  // Dropdown dışına tıklandığında kapat
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest('.notifications-dropdown')) {
+        setShowNotificationsDropdown(false);
+      }
+    };
+
+    if (showNotificationsDropdown) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showNotificationsDropdown]);
+
+  // Bildirimi okundu olarak işaretle
+  const markAsRead = async (notificationId: string) => {
+    try {
+      const response = await fetch('/api/admin/notifications', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ notificationId }),
+      });
+
+      if (response.ok) {
+        // Bildirimleri yeniden çek
+        await fetchNotifications();
+      }
+    } catch (error) {
+      console.error('Bildirim güncellenemedi:', error);
+    }
+  };
 
   // Pathname'den locale'i çıkar
   const locale = pathname.split('/')[1] || 'tr';
@@ -185,14 +261,68 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
               </div>
 
               <div className='flex items-center space-x-1'>
-                <button className='relative p-2 rounded-lg bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 transition-transform duration-200 hover:scale-105 touch-target'>
-                  <Bell className='h-4 w-4' />
-                  {notifications > 0 && (
-                    <span className='absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center animate-pulse'>
-                      {notifications}
-                    </span>
+                <div className='relative notifications-dropdown z-[100]'>
+                  <button
+                    onClick={() =>
+                      setShowNotificationsDropdown(!showNotificationsDropdown)
+                    }
+                    className='relative p-2 rounded-lg bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 transition-transform duration-200 hover:scale-105 touch-target'
+                  >
+                    <Bell className='h-4 w-4' />
+                    {notifications > 0 && (
+                      <span className='absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center animate-pulse'>
+                        {notifications}
+                      </span>
+                    )}
+                  </button>
+                  {showNotificationsDropdown && (
+                    <div className='fixed right-4 top-16 w-80 bg-mystical-900/95 backdrop-blur-md border border-slate-700/50 rounded-xl shadow-xl z-[9999] max-h-96 overflow-y-auto notifications-dropdown'>
+                      <div className='p-4 border-b border-slate-700/50'>
+                        <h3 className='font-bold text-white'>Bildirimler</h3>
+                      </div>
+                      <div className='max-h-80 overflow-y-auto'>
+                        {notificationsList.length === 0 ? (
+                          <div className='p-4 text-center text-slate-400 text-sm'>
+                            Bildirim yok
+                          </div>
+                        ) : (
+                          notificationsList.map(notification => (
+                            <div
+                              key={notification.id}
+                              onClick={() => {
+                                if (!notification.read) {
+                                  markAsRead(notification.id);
+                                }
+                              }}
+                              className={`p-4 border-b border-slate-700/30 cursor-pointer hover:bg-slate-800/50 transition-colors ${
+                                !notification.read ? 'bg-slate-800/30' : ''
+                              }`}
+                            >
+                              <div className='flex items-start justify-between'>
+                                <div className='flex-1'>
+                                  <div className='font-semibold text-white text-sm mb-1'>
+                                    {notification.title}
+                                  </div>
+                                  <div className='text-slate-300 text-xs'>
+                                    {notification.message}
+                                  </div>
+                                  <div className='text-slate-500 text-xs mt-1'>
+                                    {new Date(
+                                      notification.created_at
+                                    ).toLocaleString('tr-TR')}
+                                  </div>
+                                </div>
+                                {!notification.read && (
+                                  <div className='w-2 h-2 bg-blue-500 rounded-full ml-2 flex-shrink-0 mt-1' />
+                                )}
+                              </div>
+                            </div>
+                          ))
+                        )}
+                      </div>
+                    </div>
                   )}
-                </button>
+                </div>
                 <button
                   onClick={handleSignOut}
                   className='p-2 rounded-lg bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 transition-transform duration-200 hover:scale-105 text-red-400 touch-target'
@@ -435,14 +565,68 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
                 </div>
 
                 <div className='flex items-center space-x-4'>
-                  <button className='relative p-3 bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl transition-transform duration-200 hover:scale-105'>
-                    <Bell className='h-5 w-5' />
-                    {notifications > 0 && (
-                      <span className='absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center animate-pulse'>
-                        {notifications}
-                      </span>
+                  <div className='relative notifications-dropdown z-[100]'>
+                    <button
+                      onClick={() =>
+                        setShowNotificationsDropdown(!showNotificationsDropdown)
+                      }
+                      className='relative p-3 bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl transition-transform duration-200 hover:scale-105'
+                    >
+                      <Bell className='h-5 w-5' />
+                      {notifications > 0 && (
+                        <span className='absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center animate-pulse'>
+                          {notifications}
+                        </span>
+                      )}
+                    </button>
+                    {showNotificationsDropdown && (
+                      <div className='fixed right-6 top-20 w-96 bg-mystical-900/95 backdrop-blur-md border border-slate-700/50 rounded-xl shadow-xl z-[9999] max-h-96 overflow-y-auto notifications-dropdown'>
+                        <div className='p-4 border-b border-slate-700/50'>
+                          <h3 className='font-bold text-white'>Bildirimler</h3>
+                        </div>
+                        <div className='max-h-80 overflow-y-auto'>
+                          {notificationsList.length === 0 ? (
+                            <div className='p-4 text-center text-slate-400 text-sm'>
+                              Bildirim yok
+                            </div>
+                          ) : (
+                            notificationsList.map(notification => (
+                              <div
+                                key={notification.id}
+                                onClick={() => {
+                                  if (!notification.read) {
+                                    markAsRead(notification.id);
+                                  }
+                                }}
+                                className={`p-4 border-b border-slate-700/30 cursor-pointer hover:bg-slate-800/50 transition-colors ${
+                                  !notification.read ? 'bg-slate-800/30' : ''
+                                }`}
+                              >
+                                <div className='flex items-start justify-between'>
+                                  <div className='flex-1'>
+                                    <div className='font-semibold text-white text-sm mb-1'>
+                                      {notification.title}
+                                    </div>
+                                    <div className='text-slate-300 text-xs'>
+                                      {notification.message}
+                                    </div>
+                                    <div className='text-slate-500 text-xs mt-1'>
+                                      {new Date(
+                                        notification.created_at
+                                      ).toLocaleString('tr-TR')}
+                                    </div>
+                                  </div>
+                                  {!notification.read && (
+                                    <div className='w-2 h-2 bg-blue-500 rounded-full ml-2 flex-shrink-0 mt-1' />
+                                  )}
+                                </div>
+                              </div>
+                            ))
+                          )}
+                        </div>
+                      </div>
                     )}
-                  </button>
+                  </div>
 
                   <div className='bg-mystical-900/50 backdrop-blur-sm border border-mystical-700/50 rounded-xl p-3'>
                     <div className='text-sm text-slate-400'>

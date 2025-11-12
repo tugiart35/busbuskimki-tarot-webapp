@@ -1085,7 +1085,7 @@ export function getMoneyPosition5Meaning(
     Güç: 'Strength',
     Ermiş: 'The Hermit',
     Münzevi: 'The Hermit',
-    'Kader Çarkı': 'The The Wheel of Fortune',
+    'Kader Çarkı': 'The Wheel of Fortune',
     Adalet: 'Justice',
     'Asılı Adam': 'The Hanged Man',
     Ölüm: 'Death',

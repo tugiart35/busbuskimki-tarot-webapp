@@ -597,6 +597,17 @@ export function createTarotReadingComponent({
       ) as 'tr' | 'en' | 'sr';
     }, [pathname]);
 
+    const partnerInfoSpreads = useMemo(
+      () => [
+        'love',
+        'new-lover',
+        'relationship-analysis',
+        'relationship-problems',
+        'marriage',
+      ],
+      []
+    );
+
     // Kullanıcı auth ve toast bildirimleri
     const { user } = useAuth();
     const { toast, showToast, hideToast } = useToast();
@@ -841,15 +852,15 @@ export function createTarotReadingComponent({
     // Supabase'e okuma kaydetme - kredi kontrolü ve veri kaydetme işlemi
     const saveReadingToSupabase = async (readingData: any) => {
       try {
-        // Token akışında user null olabilir - API route üzerinden kaydet
-        if (!user?.id && sessionToken) {
+        // Token akışı: kullanıcı login olsa bile API route üzerinden kaydet
+        if (sessionToken) {
           try {
             // Form verilerini hazırla
             const formPayload = {
               personalInfo,
               ...(config.requiresPartnerInfo ||
               (config.isSingleCard && hasPartner) ||
-              (config.spreadId === 'love' && hasPartner)
+              (partnerInfoSpreads.includes(config.spreadId) && hasPartner)
                 ? { partnerInfo }
                 : {}),
               communicationMethod,
@@ -980,7 +991,7 @@ export function createTarotReadingComponent({
                   personalInfo,
                   ...(config.requiresPartnerInfo ||
                   (config.isSingleCard && hasPartner) ||
-                  (config.spreadId === 'love' && hasPartner)
+                  (partnerInfoSpreads.includes(config.spreadId) && hasPartner)
                     ? { partnerInfo }
                     : {}),
                   communicationMethod,
@@ -1159,7 +1170,7 @@ export function createTarotReadingComponent({
               personalInfo,
               ...(config.requiresPartnerInfo ||
               (config.isSingleCard && hasPartner) ||
-              (config.spreadId === 'love' && hasPartner)
+              (partnerInfoSpreads.includes(config.spreadId) && hasPartner)
                 ? { partnerInfo }
                 : {}),
               userQuestions: questions,
@@ -1209,29 +1220,26 @@ export function createTarotReadingComponent({
           // Başarı modalını göster
           setModalStates(prev => ({ ...prev, showSuccessModal: true }));
 
-          // 1.5 saniye sonra yönlendir
-          // Token akışında tarotokumasi sayfasına, normal akışta dashboard'a
+          // Token akışında sayfayı yenile/yönlendir (daha güvenilir)
+          // Normal akışta dashboard'a yönlendir
           setTimeout(() => {
             setModalStates(prev => ({ ...prev, showSuccessModal: false }));
-            try {
-              const currentLocale = pathname?.split('/')[1] || 'tr';
-              // Token akışında tarotokumasi sayfasına yönlendir
-              if (sessionToken) {
-                router.push(`/${currentLocale}/tarotokumasi`);
-              } else {
-                // Normal akışta dashboard'a yönlendir
+            const currentLocale = pathname?.split('/')[1] || 'tr';
+
+            if (sessionToken) {
+              // Token akışında: sayfayı yenile ve token ile tekrar yükle
+              // Bu sayede validate endpoint'i session'ın completed olduğunu görecek
+              // ve "zaten tamamlanmış" mesajı gösterecek
+              window.location.href = `/${currentLocale}/tarotokumasi/${config.spreadId}?token=${sessionToken}`;
+            } else {
+              // Normal akışta dashboard'a yönlendir
+              try {
                 router.push(`/${currentLocale}/dashboard`);
-              }
-            } catch {
-              // Fallback: window.location kullan
-              const currentLocale = pathname?.split('/')[1] || 'tr';
-              if (sessionToken) {
-                window.location.href = `/${currentLocale}/tarotokumasi`;
-              } else {
+              } catch {
                 window.location.href = `/${currentLocale}/dashboard`;
               }
             }
-          }, 1500);
+          }, 2000); // 2 saniye bekle - kullanıcı başarı mesajını görebilsin
 
           return;
         }

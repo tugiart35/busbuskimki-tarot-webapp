@@ -39,11 +39,11 @@ export async function POST(request: NextRequest) {
       .single();
 
     if (readingError || !readingData) {
-        logger.error('Okuma verisi bulunamadı', readingError, {
-            action: 'fetch_reading',
-            resource: 'readings',
-            metadata: { readingId }, // readingId'yi metadata içine taşı
-          });
+      logger.error('Okuma verisi bulunamadı', readingError, {
+        action: 'fetch_reading',
+        resource: 'readings',
+        metadata: { readingId }, // readingId'yi metadata içine taşı
+      });
       return NextResponse.json(
         { error: 'Okuma verisi bulunamadı' },
         { status: 404 }
@@ -103,11 +103,11 @@ export async function POST(request: NextRequest) {
         message: 'Admin bildirimi gönderildi',
       });
     } else {
-        logger.error('Admin bildirimi gönderilemedi', null, {
-            action: 'notify_admin',
-            resource: 'readings',
-            metadata: { readingId }, // readingId'yi metadata içine taşı
-          });
+      logger.error('Admin bildirimi gönderilemedi', null, {
+        action: 'notify_admin',
+        resource: 'readings',
+        metadata: { readingId }, // readingId'yi metadata içine taşı
+      });
       return NextResponse.json(
         { error: 'Admin bildirimi gönderilemedi' },
         { status: 500 }

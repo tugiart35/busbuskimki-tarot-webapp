@@ -34,9 +34,9 @@ Kullanım durumu:
 
 'use client';
 
-import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { supabase } from '@/lib/supabase/client';
-import { logError, logSupabaseError } from '@/lib/logger';
+import { logError, logSupabaseError, logDebug } from '@/lib/logger';
 import { useToast } from '@/hooks/useToast';
 import Toast from '@/features/shared/ui/Toast';
 import {
@@ -262,6 +262,9 @@ export default function ReadingsPage() {
     cancelled: 0,
   });
 
+  // Ref to track active fetch ID to prevent race conditions
+  const activeFetchIdRef = useRef<number>(0);
+
   const readingsPerPage = 12;
 
   // Tarot destesi - şimdilik kullanılmıyor ama gelecekte kullanılabilir
@@ -396,10 +399,23 @@ export default function ReadingsPage() {
   }, []);
 
   const fetchReadings = useCallback(async () => {
+    // Generate unique fetch ID to prevent race conditions
+    const fetchId = ++activeFetchIdRef.current;
     setLoading(true);
+
     const timeoutId = setTimeout(() => {
-      console.warn('fetchReadings timeout - forcing loading to false');
-      setLoading(false);
+      // Only clear loading if this is still the active fetch
+      if (fetchId === activeFetchIdRef.current) {
+        logError(
+          'fetchReadings timeout - forcing loading to false',
+          undefined,
+          {
+            action: 'fetchReadingsTimeout',
+            metadata: { fetchId },
+          }
+        );
+        setLoading(false);
+      }
     }, 30000); // 30 saniye timeout
 
     try {
@@ -461,28 +477,44 @@ export default function ReadingsPage() {
         clearTimeout(timeoutId);
         logSupabaseError('readings fetch', error);
         setReadings([]);
-        setLoading(false);
+        // Only clear loading if this is still the active fetch
+        if (fetchId === activeFetchIdRef.current) {
+          setLoading(false);
+        }
         return;
       }
 
       // Kullanıcı bilgilerini ayrı ayrı çek
       const userIds = [
-        ...new Set((readingsData || []).map((r: any) => r.user_id)),
+        ...new Set(
+          (readingsData || []).map((r: any) => r.user_id).filter(Boolean)
+        ),
       ];
-      const { data: profilesData, error: profilesError } = await supabase
-        .from('profiles')
-        .select('id, email, display_name')
-        .in('id', userIds);
 
-      if (profilesError) {
-        logSupabaseError('profiles fetch', profilesError);
-      }
-
-      // Profiles'ı user_id'ye göre map'le
       const profilesMap = new Map();
-      (profilesData || []).forEach((profile: any) => {
-        profilesMap.set(profile.id, profile);
-      });
+
+      // Only fetch profiles if there are user IDs
+      if (userIds.length > 0) {
+        const { data: profilesData, error: profilesError } = await supabase
+          .from('profiles')
+          .select('id, email, display_name')
+          .in('id', userIds);
+
+        if (profilesError) {
+          logSupabaseError('profiles fetch', profilesError, {
+            resource: 'profiles',
+            metadata: {
+              userIdsCount: userIds.length,
+              sampleUserIds: userIds.slice(0, 5), // Log first 5 IDs for debugging
+            },
+          });
+        }
+
+        // Profiles'ı user_id'ye göre map'le
+        (profilesData || []).forEach((profile: any) => {
+          profilesMap.set(profile.id, profile);
+        });
+      }
 
       // Format readings safely with user data
       const formattedReadings = (readingsData || []).map((reading: any) => {
@@ -522,16 +554,32 @@ export default function ReadingsPage() {
       setReadings([]);
     } finally {
       clearTimeout(timeoutId);
-      setLoading(false);
+      // Only clear loading if this is still the active fetch
+      if (fetchId === activeFetchIdRef.current) {
+        setLoading(false);
+      }
     }
   }, [currentPage, searchTerm, typeFilter, statusFilter, showToast, t]);
 
   // Token okumaları için fetch fonksiyonu
   const fetchTokenReadings = useCallback(async () => {
+    // Generate unique fetch ID to prevent race conditions
+    const fetchId = ++activeFetchIdRef.current;
     setLoading(true);
+
     const timeoutId = setTimeout(() => {
-      console.warn('fetchTokenReadings timeout - forcing loading to false');
-      setLoading(false);
+      // Only clear loading if this is still the active fetch
+      if (fetchId === activeFetchIdRef.current) {
+        logError(
+          'fetchTokenReadings timeout - forcing loading to false',
+          undefined,
+          {
+            action: 'fetchTokenReadingsTimeout',
+            metadata: { fetchId },
+          }
+        );
+        setLoading(false);
+      }
     }, 30000); // 30 saniye timeout
 
     try {
@@ -583,7 +631,10 @@ export default function ReadingsPage() {
         clearTimeout(timeoutId);
         logSupabaseError('token readings fetch', error);
         setTokenReadings([]);
-        setLoading(false);
+        // Only clear loading if this is still the active fetch
+        if (fetchId === activeFetchIdRef.current) {
+          setLoading(false);
+        }
         return;
       }
 
@@ -640,7 +691,9 @@ export default function ReadingsPage() {
       // Spread bilgilerini al ve çevir
       const spreadKeys: string[] = Array.from(
         new Set(
-          (sessionsData || []).map((s: any) => s.spread_key).filter(Boolean) as string[]
+          (sessionsData || [])
+            .map((s: any) => s.spread_key)
+            .filter(Boolean) as string[]
         )
       );
       const spreadMap = new Map();
@@ -775,7 +828,10 @@ export default function ReadingsPage() {
       setTokenReadings([]);
     } finally {
       clearTimeout(timeoutId);
-      setLoading(false);
+      // Only clear loading if this is still the active fetch
+      if (fetchId === activeFetchIdRef.current) {
+        setLoading(false);
+      }
     }
   }, [currentPage, searchTerm, tokenStatusFilter, showToast, t]);
 
@@ -920,10 +976,6 @@ export default function ReadingsPage() {
         return 'text-red-400 bg-red-500/20 border-red-500/30';
       case 'reviewed':
         return 'text-blue-400 bg-blue-500/20 border-blue-500/30';
-      case 'situation-analysis':
-        return 'text-blue-400 bg-blue-500/20 border-blue-500/30';
-      case 'problem-solving':
-        return 'text-green-400 bg-green-500/20 border-green-500/30';
       default:
         return 'text-slate-400 bg-slate-500/20 border-slate-500/30';
     }
@@ -953,10 +1005,6 @@ export default function ReadingsPage() {
       case 'failed':
         return 'Başarısız';
       case 'reviewed':
-        return 'İncelendi';
-      case 'situation-analysis':
-        return 'İncelendi';
-      case 'problem-solving':
         return 'İncelendi';
       default:
         return status;
@@ -1099,13 +1147,16 @@ export default function ReadingsPage() {
   useEffect(() => {
     if (loading) {
       const loadingTimeout = setTimeout(() => {
-        console.error('Loading state stuck for more than 10 seconds!', {
-          activeTab,
-          currentPage,
-          searchTerm,
-          typeFilter,
-          statusFilter,
-          tokenStatusFilter,
+        logError('Loading state stuck for more than 10 seconds!', undefined, {
+          action: 'readingsLoadingWatchdog',
+          metadata: {
+            activeTab,
+            currentPage,
+            searchTerm,
+            typeFilter,
+            statusFilter,
+            tokenStatusFilter,
+          },
         });
       }, 10000);
       return () => clearTimeout(loadingTimeout);
@@ -1726,18 +1777,11 @@ export default function ReadingsPage() {
                     onClick={() => {
                       if (tokenReading.reading) {
                         // Debug: reading objesini kontrol et
-                        console.log(
-                          'Token reading objesi:',
-                          tokenReading.reading
-                        );
-                        console.log(
-                          'Reading type:',
-                          tokenReading.reading.reading_type
-                        );
-                        console.log(
-                          'Reading title:',
-                          tokenReading.reading.title
-                        );
+                        logDebug('Token reading selected for modal', {
+                          readingId: tokenReading.reading.id,
+                          readingType: tokenReading.reading.reading_type,
+                          readingTitle: tokenReading.reading.title,
+                        });
                         setSelectedReading(tokenReading.reading);
                         setShowReadingModal(true);
                       } else {
@@ -2305,252 +2349,255 @@ export default function ReadingsPage() {
                                         const getSpreadQuestionMap = (
                                           readingType: string
                                         ): Record<string, string> => {
-                                        const type = readingType.toLowerCase();
+                                          const type =
+                                            readingType.toLowerCase();
 
+                                          if (
+                                            type.includes('love') ||
+                                            type.includes('aşk')
+                                          ) {
+                                            return {
+                                              concern:
+                                                'Aşk hayatınızda sizi en çok endişelendiren konu nedir?',
+                                              emotional:
+                                                'Şu anda duygusal olarak nasıl hissediyorsunuz?',
+                                              understanding:
+                                                'Bu aşk açılımı ile neyi anlamak istiyorsunuz?',
+                                              question1:
+                                                'Aşk hayatınızda sizi en çok endişelendiren konu nedir?',
+                                              question2:
+                                                'Bu aşk açılımı ile neyi anlamak istiyorsunuz?',
+                                              question3:
+                                                'Şu anda duygusal olarak nasıl hissediyorsunuz?',
+                                            };
+                                          } else if (
+                                            type.includes('money') ||
+                                            type.includes('para')
+                                          ) {
+                                            return {
+                                              concern:
+                                                'Para konusunda sizi en çok endişelendiren durum nedir?',
+                                              emotional:
+                                                'Mali durumunuz hakkında nasıl hissediyorsunuz?',
+                                              understanding:
+                                                'Bu para açılımı ile neyi anlamak istiyorsunuz?',
+                                              question1:
+                                                'Para konusunda sizi en çok endişelendiren durum nedir?',
+                                              question2:
+                                                'Bu para açılımı ile neyi anlamak istiyorsunuz?',
+                                              question3:
+                                                'Mali durumunuz hakkında nasıl hissediyorsunuz?',
+                                            };
+                                          } else if (
+                                            type.includes('career') ||
+                                            type.includes('kariyer')
+                                          ) {
+                                            return {
+                                              concern:
+                                                'Kariyerinizde sizi en çok endişelendiren konu nedir?',
+                                              emotional:
+                                                'İş hayatınız hakkında nasıl hissediyorsunuz?',
+                                              understanding:
+                                                'Bu kariyer açılımı ile neyi anlamak istiyorsunuz?',
+                                              question1:
+                                                'Kariyerinizde sizi en çok endişelendiren konu nedir?',
+                                              question2:
+                                                'Bu kariyer açılımı ile neyi anlamak istiyorsunuz?',
+                                              question3:
+                                                'İş hayatınız hakkında nasıl hissediyorsunuz?',
+                                            };
+                                          } else if (
+                                            type.includes('problem-solving') ||
+                                            type.includes('problem')
+                                          ) {
+                                            return {
+                                              concern:
+                                                'Hangi problemi çözmek istiyorsunuz?',
+                                              emotional:
+                                                'Bu problem hakkında nasıl hissediyorsunuz?',
+                                              understanding:
+                                                'Bu problem çözme açılımı ile neyi anlamak istiyorsunuz?',
+                                              question1:
+                                                'Hangi problemi çözmek istiyorsunuz?',
+                                              question2:
+                                                'Bu problem çözme açılımı ile neyi anlamak istiyorsunuz?',
+                                              question3:
+                                                'Bu problem hakkında nasıl hissediyorsunuz?',
+                                            };
+                                          } else if (
+                                            type.includes(
+                                              'situation-analysis'
+                                            ) ||
+                                            type.includes('durum')
+                                          ) {
+                                            return {
+                                              concern:
+                                                'Mevcut durumunuzda sizi en çok endişelendiren konu nedir?',
+                                              emotional:
+                                                'Şu anki durumunuz hakkında nasıl hissediyorsunuz?',
+                                              understanding:
+                                                'Bu durum analizi açılımı ile neyi anlamak istiyorsunuz?',
+                                              question1:
+                                                'Mevcut durumunuzda sizi en çok endişelendiren konu nedir?',
+                                              question2:
+                                                'Bu durum analizi açılımı ile neyi anlamak istiyorsunuz?',
+                                              question3:
+                                                'Şu anki durumunuz hakkında nasıl hissediyorsunuz?',
+                                            };
+                                          } else if (
+                                            type.includes('marriage') ||
+                                            type.includes('evlilik')
+                                          ) {
+                                            return {
+                                              concern:
+                                                'Evlilik konusunda sizi en çok endişelendiren konu nedir?',
+                                              emotional:
+                                                'Evlilik hakkında nasıl hissediyorsunuz?',
+                                              understanding:
+                                                'Bu evlilik açılımı ile neyi anlamak istiyorsunuz?',
+                                              question1:
+                                                'Evlilik konusunda sizi en çok endişelendiren konu nedir?',
+                                              question2:
+                                                'Bu evlilik açılımı ile neyi anlamak istiyorsunuz?',
+                                              question3:
+                                                'Evlilik hakkında nasıl hissediyorsunuz?',
+                                            };
+                                          } else if (
+                                            type.includes(
+                                              'relationship-analysis'
+                                            ) ||
+                                            type.includes('ilişki analizi')
+                                          ) {
+                                            return {
+                                              concern:
+                                                'İlişkinizde sizi en çok endişelendiren konu nedir?',
+                                              emotional:
+                                                'İlişkiniz hakkında nasıl hissediyorsunuz?',
+                                              understanding:
+                                                'Bu ilişki analizi açılımı ile neyi anlamak istiyorsunuz?',
+                                              question1:
+                                                'İlişkinizde sizi en çok endişelendiren konu nedir?',
+                                              question2:
+                                                'Bu ilişki analizi açılımı ile neyi anlamak istiyorsunuz?',
+                                              question3:
+                                                'İlişkiniz hakkında nasıl hissediyorsunuz?',
+                                            };
+                                          } else if (
+                                            type.includes(
+                                              'relationship-problems'
+                                            ) ||
+                                            type.includes('ilişki problemleri')
+                                          ) {
+                                            return {
+                                              concern:
+                                                'İlişkinizdeki problemler nelerdir?',
+                                              emotional:
+                                                'Bu problemler hakkında nasıl hissediyorsunuz?',
+                                              understanding:
+                                                'Bu ilişki problemleri açılımı ile neyi anlamak istiyorsunuz?',
+                                              question1:
+                                                'İlişkinizdeki problemler nelerdir?',
+                                              question2:
+                                                'Bu ilişki problemleri açılımı ile neyi anlamak istiyorsunuz?',
+                                              question3:
+                                                'Bu problemler hakkında nasıl hissediyorsunuz?',
+                                            };
+                                          } else if (
+                                            type.includes('new-lover') ||
+                                            type.includes('yeni aşk')
+                                          ) {
+                                            return {
+                                              concern:
+                                                'Yeni aşk konusunda sizi en çok endişelendiren konu nedir?',
+                                              emotional:
+                                                'Yeni aşk hakkında nasıl hissediyorsunuz?',
+                                              understanding:
+                                                'Bu yeni aşk açılımı ile neyi anlamak istiyorsunuz?',
+                                              question1:
+                                                'Yeni aşk konusunda sizi en çok endişelendiren konu nedir?',
+                                              question2:
+                                                'Bu yeni aşk açılımı ile neyi anlamak istiyorsunuz?',
+                                              question3:
+                                                'Yeni aşk hakkında nasıl hissediyorsunuz?',
+                                            };
+                                          }
+
+                                          // Varsayılan sorular
+                                          return {
+                                            concern:
+                                              'Sizi en çok endişelendiren konu nedir?',
+                                            emotional: 'Nasıl hissediyorsunuz?',
+                                            understanding:
+                                              'Bu açılım ile neyi anlamak istiyorsunuz?',
+                                            question1:
+                                              'Sizi en çok endişelendiren konu nedir?',
+                                            question2:
+                                              'Bu açılım ile neyi anlamak istiyorsunuz?',
+                                            question3: 'Nasıl hissediyorsunuz?',
+                                          };
+                                        };
+
+                                        const spreadQuestionMap =
+                                          getSpreadQuestionMap(
+                                            selectedReading.reading_type
+                                          );
+
+                                        // Soru metnini belirle
+                                        let questionText = '';
                                         if (
-                                          type.includes('love') ||
-                                          type.includes('aşk')
+                                          typeof value === 'object' &&
+                                          value.question
                                         ) {
-                                          return {
-                                            concern:
-                                              'Aşk hayatınızda sizi en çok endişelendiren konu nedir?',
-                                            emotional:
-                                              'Şu anda duygusal olarak nasıl hissediyorsunuz?',
-                                            understanding:
-                                              'Bu aşk açılımı ile neyi anlamak istiyorsunuz?',
-                                            question1:
-                                              'Aşk hayatınızda sizi en çok endişelendiren konu nedir?',
-                                            question2:
-                                              'Bu aşk açılımı ile neyi anlamak istiyorsunuz?',
-                                            question3:
-                                              'Şu anda duygusal olarak nasıl hissediyorsunuz?',
-                                          };
-                                        } else if (
-                                          type.includes('money') ||
-                                          type.includes('para')
-                                        ) {
-                                          return {
-                                            concern:
-                                              'Para konusunda sizi en çok endişelendiren durum nedir?',
-                                            emotional:
-                                              'Mali durumunuz hakkında nasıl hissediyorsunuz?',
-                                            understanding:
-                                              'Bu para açılımı ile neyi anlamak istiyorsunuz?',
-                                            question1:
-                                              'Para konusunda sizi en çok endişelendiren durum nedir?',
-                                            question2:
-                                              'Bu para açılımı ile neyi anlamak istiyorsunuz?',
-                                            question3:
-                                              'Mali durumunuz hakkında nasıl hissediyorsunuz?',
-                                          };
-                                        } else if (
-                                          type.includes('career') ||
-                                          type.includes('kariyer')
-                                        ) {
-                                          return {
-                                            concern:
-                                              'Kariyerinizde sizi en çok endişelendiren konu nedir?',
-                                            emotional:
-                                              'İş hayatınız hakkında nasıl hissediyorsunuz?',
-                                            understanding:
-                                              'Bu kariyer açılımı ile neyi anlamak istiyorsunuz?',
-                                            question1:
-                                              'Kariyerinizde sizi en çok endişelendiren konu nedir?',
-                                            question2:
-                                              'Bu kariyer açılımı ile neyi anlamak istiyorsunuz?',
-                                            question3:
-                                              'İş hayatınız hakkında nasıl hissediyorsunuz?',
-                                          };
-                                        } else if (
-                                          type.includes('problem-solving') ||
-                                          type.includes('problem')
-                                        ) {
-                                          return {
-                                            concern:
-                                              'Hangi problemi çözmek istiyorsunuz?',
-                                            emotional:
-                                              'Bu problem hakkında nasıl hissediyorsunuz?',
-                                            understanding:
-                                              'Bu problem çözme açılımı ile neyi anlamak istiyorsunuz?',
-                                            question1:
-                                              'Hangi problemi çözmek istiyorsunuz?',
-                                            question2:
-                                              'Bu problem çözme açılımı ile neyi anlamak istiyorsunuz?',
-                                            question3:
-                                              'Bu problem hakkında nasıl hissediyorsunuz?',
-                                          };
-                                        } else if (
-                                          type.includes('situation-analysis') ||
-                                          type.includes('durum')
-                                        ) {
-                                          return {
-                                            concern:
-                                              'Mevcut durumunuzda sizi en çok endişelendiren konu nedir?',
-                                            emotional:
-                                              'Şu anki durumunuz hakkında nasıl hissediyorsunuz?',
-                                            understanding:
-                                              'Bu durum analizi açılımı ile neyi anlamak istiyorsunuz?',
-                                            question1:
-                                              'Mevcut durumunuzda sizi en çok endişelendiren konu nedir?',
-                                            question2:
-                                              'Bu durum analizi açılımı ile neyi anlamak istiyorsunuz?',
-                                            question3:
-                                              'Şu anki durumunuz hakkında nasıl hissediyorsunuz?',
-                                          };
-                                        } else if (
-                                          type.includes('marriage') ||
-                                          type.includes('evlilik')
-                                        ) {
-                                          return {
-                                            concern:
-                                              'Evlilik konusunda sizi en çok endişelendiren konu nedir?',
-                                            emotional:
-                                              'Evlilik hakkında nasıl hissediyorsunuz?',
-                                            understanding:
-                                              'Bu evlilik açılımı ile neyi anlamak istiyorsunuz?',
-                                            question1:
-                                              'Evlilik konusunda sizi en çok endişelendiren konu nedir?',
-                                            question2:
-                                              'Bu evlilik açılımı ile neyi anlamak istiyorsunuz?',
-                                            question3:
-                                              'Evlilik hakkında nasıl hissediyorsunuz?',
-                                          };
-                                        } else if (
-                                          type.includes(
-                                            'relationship-analysis'
-                                          ) ||
-                                          type.includes('ilişki analizi')
-                                        ) {
-                                          return {
-                                            concern:
-                                              'İlişkinizde sizi en çok endişelendiren konu nedir?',
-                                            emotional:
-                                              'İlişkiniz hakkında nasıl hissediyorsunuz?',
-                                            understanding:
-                                              'Bu ilişki analizi açılımı ile neyi anlamak istiyorsunuz?',
-                                            question1:
-                                              'İlişkinizde sizi en çok endişelendiren konu nedir?',
-                                            question2:
-                                              'Bu ilişki analizi açılımı ile neyi anlamak istiyorsunuz?',
-                                            question3:
-                                              'İlişkiniz hakkında nasıl hissediyorsunuz?',
-                                          };
-                                        } else if (
-                                          type.includes(
-                                            'relationship-problems'
-                                          ) ||
-                                          type.includes('ilişki problemleri')
-                                        ) {
-                                          return {
-                                            concern:
-                                              'İlişkinizdeki problemler nelerdir?',
-                                            emotional:
-                                              'Bu problemler hakkında nasıl hissediyorsunuz?',
-                                            understanding:
-                                              'Bu ilişki problemleri açılımı ile neyi anlamak istiyorsunuz?',
-                                            question1:
-                                              'İlişkinizdeki problemler nelerdir?',
-                                            question2:
-                                              'Bu ilişki problemleri açılımı ile neyi anlamak istiyorsunuz?',
-                                            question3:
-                                              'Bu problemler hakkında nasıl hissediyorsunuz?',
-                                          };
-                                        } else if (
-                                          type.includes('new-lover') ||
-                                          type.includes('yeni aşk')
-                                        ) {
-                                          return {
-                                            concern:
-                                              'Yeni aşk konusunda sizi en çok endişelendiren konu nedir?',
-                                            emotional:
-                                              'Yeni aşk hakkında nasıl hissediyorsunuz?',
-                                            understanding:
-                                              'Bu yeni aşk açılımı ile neyi anlamak istiyorsunuz?',
-                                            question1:
-                                              'Yeni aşk konusunda sizi en çok endişelendiren konu nedir?',
-                                            question2:
-                                              'Bu yeni aşk açılımı ile neyi anlamak istiyorsunuz?',
-                                            question3:
-                                              'Yeni aşk hakkında nasıl hissediyorsunuz?',
-                                          };
+                                          questionText = value.question;
+                                        } else if (spreadQuestionMap[key]) {
+                                          questionText = spreadQuestionMap[key];
+                                        } else {
+                                          questionText = key;
                                         }
 
-                                        // Varsayılan sorular
-                                        return {
-                                          concern:
-                                            'Sizi en çok endişelendiren konu nedir?',
-                                          emotional: 'Nasıl hissediyorsunuz?',
-                                          understanding:
-                                            'Bu açılım ile neyi anlamak istiyorsunuz?',
-                                          question1:
-                                            'Sizi en çok endişelendiren konu nedir?',
-                                          question2:
-                                            'Bu açılım ile neyi anlamak istiyorsunuz?',
-                                          question3: 'Nasıl hissediyorsunuz?',
-                                        };
-                                      };
-
-                                      const spreadQuestionMap =
-                                        getSpreadQuestionMap(
-                                          selectedReading.reading_type
-                                        );
-
-                                      // Soru metnini belirle
-                                      let questionText = '';
-                                      if (
-                                        typeof value === 'object' &&
-                                        value.question
-                                      ) {
-                                        questionText = value.question;
-                                      } else if (spreadQuestionMap[key]) {
-                                        questionText = spreadQuestionMap[key];
-                                      } else {
-                                        questionText = key;
-                                      }
-
-                                      return (
-                                        <div
-                                          key={key}
-                                          className='admin-glass rounded-2xl p-6 border border-slate-700/30 hover:border-green-500/30 transition-all duration-300'
-                                        >
-                                          <div className='flex items-start space-x-4'>
-                                            <div className='flex-shrink-0 w-8 h-8 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center text-white text-sm font-bold'>
-                                              {index + 1}
-                                            </div>
-                                            <div className='flex-1 space-y-4'>
-                                              <div>
-                                                <div className='flex items-center space-x-2 mb-2'>
-                                                  <MessageSquare className='h-4 w-4 text-green-400' />
-                                                  <p className='text-slate-400 text-sm font-medium'>
-                                                    SORU
-                                                  </p>
-                                                </div>
-                                                <p className='text-white font-semibold text-lg leading-relaxed'>
-                                                  {questionText}
-                                                </p>
+                                        return (
+                                          <div
+                                            key={key}
+                                            className='admin-glass rounded-2xl p-6 border border-slate-700/30 hover:border-green-500/30 transition-all duration-300'
+                                          >
+                                            <div className='flex items-start space-x-4'>
+                                              <div className='flex-shrink-0 w-8 h-8 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center text-white text-sm font-bold'>
+                                                {index + 1}
                                               </div>
-                                              <div className='border-t border-slate-700/50 pt-4'>
-                                                <div className='flex items-center space-x-2 mb-2'>
-                                                  <div className='w-2 h-2 bg-green-400 rounded-full'></div>
-                                                  <p className='text-slate-400 text-sm font-medium'>
-                                                    CEVAP
+                                              <div className='flex-1 space-y-4'>
+                                                <div>
+                                                  <div className='flex items-center space-x-2 mb-2'>
+                                                    <MessageSquare className='h-4 w-4 text-green-400' />
+                                                    <p className='text-slate-400 text-sm font-medium'>
+                                                      SORU
+                                                    </p>
+                                                  </div>
+                                                  <p className='text-white font-semibold text-lg leading-relaxed'>
+                                                    {questionText}
                                                   </p>
                                                 </div>
-                                                <div className='bg-slate-800/50 rounded-xl p-4 border border-slate-700/30'>
-                                                  <p className='text-white text-base leading-relaxed'>
-                                                    {typeof value === 'object'
-                                                      ? value.answer ||
-                                                        'Cevap verilmemiş'
-                                                      : String(value)}
-                                                  </p>
+                                                <div className='border-t border-slate-700/50 pt-4'>
+                                                  <div className='flex items-center space-x-2 mb-2'>
+                                                    <div className='w-2 h-2 bg-green-400 rounded-full'></div>
+                                                    <p className='text-slate-400 text-sm font-medium'>
+                                                      CEVAP
+                                                    </p>
+                                                  </div>
+                                                  <div className='bg-slate-800/50 rounded-xl p-4 border border-slate-700/30'>
+                                                    <p className='text-white text-base leading-relaxed'>
+                                                      {typeof value === 'object'
+                                                        ? value.answer ||
+                                                          'Cevap verilmemiş'
+                                                        : String(value)}
+                                                    </p>
+                                                  </div>
                                                 </div>
                                               </div>
                                             </div>
                                           </div>
-                                        </div>
-                                      );
-                                    }
-                                  )}
+                                        );
+                                      }
+                                    )}
                                 </div>
                               )}
 
@@ -2804,36 +2851,34 @@ export default function ReadingsPage() {
                                     Diğer Sorular
                                   </h6>
                                   {Object.entries(selectedReading.questions)
-                                    .filter(
-                                      ([key]) => {
-                                        // Single card okuması kontrolü
-                                        const isSingleCardReading =
-                                          selectedReading.metadata
-                                            ?.isSingleCardReading === true ||
-                                          selectedReading.metadata
-                                            ?.isSingleCardReading === 'true' ||
-                                          selectedReading.reading_type
-                                            ?.toLowerCase()
-                                            .includes('single-card') ||
-                                          selectedReading.spread_name
-                                            ?.toLowerCase()
-                                            .includes('tek kart');
+                                    .filter(([key]) => {
+                                      // Single card okuması kontrolü
+                                      const isSingleCardReading =
+                                        selectedReading.metadata
+                                          ?.isSingleCardReading === true ||
+                                        selectedReading.metadata
+                                          ?.isSingleCardReading === 'true' ||
+                                        selectedReading.reading_type
+                                          ?.toLowerCase()
+                                          .includes('single-card') ||
+                                        selectedReading.spread_name
+                                          ?.toLowerCase()
+                                          .includes('tek kart');
 
-                                        // Single card okumasında sadece concern göster
-                                        if (
-                                          isSingleCardReading &&
-                                          key !== 'concern'
-                                        ) {
-                                          return false; // understanding, emotional, mainQuestion'ı filtrele
-                                        }
-
-                                        return ![
-                                          'personalInfo',
-                                          'userQuestions',
-                                          'prompts',
-                                        ].includes(key);
+                                      // Single card okumasında sadece concern göster
+                                      if (
+                                        isSingleCardReading &&
+                                        key !== 'concern'
+                                      ) {
+                                        return false; // understanding, emotional, mainQuestion'ı filtrele
                                       }
-                                    )
+
+                                      return ![
+                                        'personalInfo',
+                                        'userQuestions',
+                                        'prompts',
+                                      ].includes(key);
+                                    })
                                     .map(([key, value]: [string, any]) => {
                                       // Açılım türüne göre soru metinleri (yukarıdaki fonksiyonla aynı)
                                       const getSpreadQuestionMap = (

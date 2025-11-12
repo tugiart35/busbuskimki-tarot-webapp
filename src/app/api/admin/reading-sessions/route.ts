@@ -155,7 +155,7 @@ export async function POST(request: NextRequest) {
       process.env.NEXT_PUBLIC_READING_LINK_BASE_URL ||
       (process.env.NODE_ENV === 'development'
         ? 'http://localhost:3003'
-        : process.env.NEXT_PUBLIC_SITE_URL || 'https://tarotnumeroloji.com');
+        : process.env.NEXT_PUBLIC_SITE_URL || 'https://busbuskimki.com');
     const locale = 'tr'; // Varsayılan locale, ileride dinamik yapılabilir
     const readingLink = `${baseUrl}/${locale}/tarotokumasi/${spreadKey}?token=${token}`;
 

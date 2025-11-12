@@ -46,7 +46,32 @@ export async function POST(request: NextRequest) {
     }
 
     // Session zaten tamamlanmış mı kontrol et
+    // Eğer completed ise ama reading_id yoksa, reading_id'yi güncelle
+    const isValidUUID =
+      readingId &&
+      /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
+        readingId
+      );
+
     if (session.status === 'completed') {
+      // Session zaten completed ise, reading_id'yi kontrol et
+      // Eğer reading_id null ise ve geçerli bir readingId varsa, güncelle
+      if (!session.reading_id && isValidUUID && readingId) {
+        const { error: updateError } = await supabaseAdmin
+          .from('reading_sessions')
+          .update({
+            reading_id: readingId,
+          })
+          .eq('id', session.id);
+
+        if (updateError) {
+          logger.error('Session reading_id güncelleme hatası', updateError, {
+            action: 'update_session_reading_id',
+            resource: 'reading_sessions',
+          });
+        }
+      }
+
       return NextResponse.json({
         success: true,
         message: 'Session zaten tamamlanmış',
@@ -56,11 +81,6 @@ export async function POST(request: NextRequest) {
 
     // Status'u completed olarak güncelle ve reading_id'yi kaydet
     // UUID format kontrolü (guest-session gibi string'leri filtrele)
-    const isValidUUID =
-      readingId &&
-      /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
-        readingId
-      );
 
     const { error: updateError } = await supabaseAdmin
       .from('reading_sessions')
@@ -93,6 +113,69 @@ export async function POST(request: NextRequest) {
         reading_id: readingId || null,
       },
     });
+
+    // Admin bildirimi oluştur (eğer reading_id varsa)
+    if (isValidUUID && readingId) {
+      try {
+        // Reading bilgilerini çek
+        const { data: reading } = await supabaseAdmin
+          .from('readings')
+          .select('title, reading_type, user_id')
+          .eq('id', readingId)
+          .single();
+
+        if (reading) {
+          // Kullanıcı bilgilerini çek
+          let userName = 'Bilinmeyen Kullanıcı';
+          let userEmail = null;
+
+          // Önce user_id'den profil bilgilerini al
+          if (reading.user_id) {
+            const { data: profile } = await supabaseAdmin
+              .from('profiles')
+              .select('display_name, email')
+              .eq('id', reading.user_id)
+              .single();
+
+            if (profile) {
+              userName = profile.display_name || userName;
+              userEmail = profile.email || null;
+            }
+          }
+
+          // Eğer user_id yoksa, session'dan müşteri bilgilerini al
+          if (!reading.user_id && session.customer_email) {
+            userName = session.customer_first_name
+              ? `${session.customer_first_name} ${session.customer_last_name || ''}`.trim()
+              : session.customer_email;
+            userEmail = session.customer_email;
+          }
+
+          // Admin bildirimi oluştur
+          await supabaseAdmin.from('admin_notifications').insert({
+            type: 'reading_completed',
+            title: 'Yeni Okuma Tamamlandı',
+            message: `${userName} tarafından "${reading.title || 'Okuma'}" tamamlandı`,
+            metadata: {
+              reading_id: readingId,
+              reading_type: reading.reading_type,
+              user_id: reading.user_id || null,
+              user_name: userName,
+              user_email: userEmail,
+              session_id: session.id,
+            },
+            read: false,
+          });
+        }
+      } catch (notificationError) {
+        // Bildirim oluşturma hatası kritik değil, logla ama işlemi durdurma
+        logger.error('Admin bildirimi oluşturma hatası', notificationError, {
+          action: 'create_admin_notification',
+          resource: 'admin_notifications',
+          metadata: { readingId, sessionId: session.id },
+        });
+      }
+    }
 
     return NextResponse.json({
       success: true,

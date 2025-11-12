@@ -2,10 +2,16 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import crypto from 'crypto';
 import { logger } from '@/lib/logger';
-import { DrawCardRequest, DrawCardResponse, DrawnCard } from '@/types/aklindaki-kisi.types';
+import {
+  DrawCardRequest,
+  DrawCardResponse,
+  DrawnCard,
+} from '@/types/aklindaki-kisi.types';
 
 // 24 saat geçen kartları filtrele
-function filterValidDrawnCards(drawnCards: DrawnCard[] | null | undefined): DrawnCard[] {
+function filterValidDrawnCards(
+  drawnCards: DrawnCard[] | null | undefined
+): DrawnCard[] {
   if (!drawnCards || !Array.isArray(drawnCards)) {
     return [];
   }
@@ -13,14 +19,19 @@ function filterValidDrawnCards(drawnCards: DrawnCard[] | null | undefined): Draw
   const now = new Date();
   const twentyFourHoursAgo = now.getTime() - 24 * 60 * 60 * 1000;
 
-  return drawnCards.filter((drawnCard) => {
+  return drawnCards.filter(drawnCard => {
     // Eski format (number[]) desteği - migration sırasında geçiş için
     if (typeof drawnCard === 'number') {
       return false; // Eski formatı kabul etme
     }
 
     // Yeni format (DrawnCard) kontrolü
-    if (drawnCard && typeof drawnCard === 'object' && 'cardNumber' in drawnCard && 'drawnAt' in drawnCard) {
+    if (
+      drawnCard &&
+      typeof drawnCard === 'object' &&
+      'cardNumber' in drawnCard &&
+      'drawnAt' in drawnCard
+    ) {
       const drawnAt = new Date(drawnCard.drawnAt);
       return drawnAt.getTime() > twentyFourHoursAgo;
     }
@@ -241,8 +252,11 @@ export async function POST(request: NextRequest) {
       '6cee9bde3e92dacffebceb951b63637d6a0db2d63298e6209bfef2d60deedf1d',
       'e6e91e66450805433f08e385b89c45ea4bd201c12ab6a4314b54cfd50c8ebca7',
     ];
-    const isTestToken = testTokens.some((testToken) => {
-      const testTokenHash = crypto.createHash('sha256').update(testToken).digest('hex');
+    const isTestToken = testTokens.some(testToken => {
+      const testTokenHash = crypto
+        .createHash('sha256')
+        .update(testToken)
+        .digest('hex');
       return tokenHash === testTokenHash;
     });
     const dailyLimit = isTestToken ? Infinity : 3;
@@ -279,10 +293,10 @@ export async function POST(request: NextRequest) {
 
     // Son 24 saat içinde çekilen kartları filtrele (tekrar çekilemez)
     const recentlyDrawnCardNumbers = new Set(
-      validDrawnCards.map((drawnCard) => drawnCard.cardNumber)
+      validDrawnCards.map(drawnCard => drawnCard.cardNumber)
     );
     const availableCards = allCards.filter(
-      (card) => !recentlyDrawnCardNumbers.has(card.card_number)
+      card => !recentlyDrawnCardNumbers.has(card.card_number)
     );
 
     // Eğer tüm kartlar çekildiyse, listeyi sıfırla
@@ -330,35 +344,44 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const remainingCards = isTestToken 
+    const remainingCards = isTestToken
       ? undefined // Test token için sınırsız, undefined döndür
       : Math.max(0, dailyLimit - (cardSession.cards_drawn_today_count + 1));
 
     // Period start date ve reset countdown hesapla
-    const finalPeriodStartDate = updateData.period_start_date || cardSession.period_start_date;
+    const finalPeriodStartDate =
+      updateData.period_start_date || cardSession.period_start_date;
     let resetCountdown: number | undefined = undefined;
     let periodDaysRemaining: number | undefined = undefined;
     let resetDaysRemaining: number | undefined = undefined;
 
     if (finalPeriodStartDate) {
       const periodStartDateObj = new Date(finalPeriodStartDate);
-      const resetDate = new Date(periodStartDateObj.getTime() + 31 * 24 * 60 * 60 * 1000); // +31 gün
+      const resetDate = new Date(
+        periodStartDateObj.getTime() + 31 * 24 * 60 * 60 * 1000
+      ); // +31 gün
       const remainingTime = resetDate.getTime() - now.getTime();
 
       if (remainingTime > 0) {
         resetCountdown = remainingTime;
-        
+
         // 30 günlük aktif dönem kontrolü
-        const periodEndDate = new Date(periodStartDateObj.getTime() + 30 * 24 * 60 * 60 * 1000); // +30 gün
-        
+        const periodEndDate = new Date(
+          periodStartDateObj.getTime() + 30 * 24 * 60 * 60 * 1000
+        ); // +30 gün
+
         if (now < periodEndDate) {
           // Hala 30 günlük aktif dönemde
           const periodRemainingTime = periodEndDate.getTime() - now.getTime();
-          periodDaysRemaining = Math.ceil(periodRemainingTime / (1000 * 60 * 60 * 24));
+          periodDaysRemaining = Math.ceil(
+            periodRemainingTime / (1000 * 60 * 60 * 24)
+          );
         } else {
           // 30 gün geçti, 1 günlük geri sayım başladı
           const resetRemainingTime = resetDate.getTime() - now.getTime();
-          resetDaysRemaining = Math.ceil(resetRemainingTime / (1000 * 60 * 60 * 24));
+          resetDaysRemaining = Math.ceil(
+            resetRemainingTime / (1000 * 60 * 60 * 24)
+          );
         }
       } else {
         // Süre dolmuş, sıfırlanmış olmalı
@@ -395,4 +418,3 @@ export async function POST(request: NextRequest) {
     );
   }
 }
-

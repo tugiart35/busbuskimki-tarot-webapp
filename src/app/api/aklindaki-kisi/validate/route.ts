@@ -6,7 +6,9 @@ import { ValidateTokenResponse, DrawnCard } from '@/types/aklindaki-kisi.types';
 import { getClientIP, cleanIPAddress } from '@/lib/utils/ip-utils';
 
 // 24 saat geçen kartları filtrele
-function filterValidDrawnCards(drawnCards: DrawnCard[] | null | undefined): DrawnCard[] {
+function filterValidDrawnCards(
+  drawnCards: DrawnCard[] | null | undefined
+): DrawnCard[] {
   if (!drawnCards || !Array.isArray(drawnCards)) {
     return [];
   }
@@ -14,14 +16,19 @@ function filterValidDrawnCards(drawnCards: DrawnCard[] | null | undefined): Draw
   const now = new Date();
   const twentyFourHoursAgo = now.getTime() - 24 * 60 * 60 * 1000;
 
-  return drawnCards.filter((drawnCard) => {
+  return drawnCards.filter(drawnCard => {
     // Eski format (number[]) desteği - migration sırasında geçiş için
     if (typeof drawnCard === 'number') {
       return false; // Eski formatı kabul etme
     }
 
     // Yeni format (DrawnCard) kontrolü
-    if (drawnCard && typeof drawnCard === 'object' && 'cardNumber' in drawnCard && 'drawnAt' in drawnCard) {
+    if (
+      drawnCard &&
+      typeof drawnCard === 'object' &&
+      'cardNumber' in drawnCard &&
+      'drawnAt' in drawnCard
+    ) {
       const drawnAt = new Date(drawnCard.drawnAt);
       return drawnAt.getTime() > twentyFourHoursAgo;
     }
@@ -164,7 +171,9 @@ export async function GET(request: NextRequest) {
     if (email) {
       // E-posta adreslerini küçük harfe çevirip karşılaştır
       const normalizedInputEmail = email.toLowerCase().trim();
-      const normalizedLinkEmail = customerLink.customer_email.toLowerCase().trim();
+      const normalizedLinkEmail = customerLink.customer_email
+        .toLowerCase()
+        .trim();
 
       logger.info('E-posta doğrulama kontrolü', {
         action: 'validate_email',
@@ -279,12 +288,14 @@ export async function GET(request: NextRequest) {
       let periodDaysRemaining: number | undefined = undefined;
       let resetDaysRemaining: number | undefined = undefined;
       let openedCards: number[] = [];
-      
+
       if (cardSession) {
         const now = new Date();
 
         // last_24_drawn_cards'ı parse et ve 24 saat geçen kartları filtrele
-        const parsedDrawnCards = parseDrawnCards(cardSession.last_24_drawn_cards);
+        const parsedDrawnCards = parseDrawnCards(
+          cardSession.last_24_drawn_cards
+        );
         const validDrawnCards = filterValidDrawnCards(parsedDrawnCards);
 
         // Eğer 24 saat geçen kartlar varsa, database'i güncelle
@@ -300,7 +311,7 @@ export async function GET(request: NextRequest) {
           // Session'ı güncelle
           cardSession.last_24_drawn_cards = validDrawnCards as any;
         }
-        
+
         // Period kontrolü - 31 gün geçtiyse sadece period_start_date ve cards_drawn_today_count'u sıfırla
         // Açılan kartlar 24 saat kontrolü ile yönetiliyor, period kontrolüne gerek yok
         const sessionPeriodStartDate = cardSession.period_start_date
@@ -309,7 +320,8 @@ export async function GET(request: NextRequest) {
 
         if (sessionPeriodStartDate) {
           const daysSinceStart =
-            (now.getTime() - sessionPeriodStartDate.getTime()) / (1000 * 60 * 60 * 24);
+            (now.getTime() - sessionPeriodStartDate.getTime()) /
+            (1000 * 60 * 60 * 24);
 
           if (daysSinceStart >= 31) {
             // 31 gün geçti, sadece period ve günlük sayacı sıfırla (açılan kartlar 24 saat kontrolü ile yönetiliyor)
@@ -328,21 +340,30 @@ export async function GET(request: NextRequest) {
           } else {
             // Sayaç devam ediyor, reset countdown hesapla
             periodStartDate = cardSession.period_start_date;
-            const resetDate = new Date(sessionPeriodStartDate.getTime() + 31 * 24 * 60 * 60 * 1000); // +31 gün
+            const resetDate = new Date(
+              sessionPeriodStartDate.getTime() + 31 * 24 * 60 * 60 * 1000
+            ); // +31 gün
             const remainingTime = resetDate.getTime() - now.getTime();
             resetCountdown = remainingTime > 0 ? remainingTime : 0;
-            
+
             // 30 günlük aktif dönem kontrolü
-            const periodEndDate = new Date(sessionPeriodStartDate.getTime() + 30 * 24 * 60 * 60 * 1000); // +30 gün
-            
+            const periodEndDate = new Date(
+              sessionPeriodStartDate.getTime() + 30 * 24 * 60 * 60 * 1000
+            ); // +30 gün
+
             if (now < periodEndDate) {
               // Hala 30 günlük aktif dönemde
-              const periodRemainingTime = periodEndDate.getTime() - now.getTime();
-              periodDaysRemaining = Math.ceil(periodRemainingTime / (1000 * 60 * 60 * 24));
+              const periodRemainingTime =
+                periodEndDate.getTime() - now.getTime();
+              periodDaysRemaining = Math.ceil(
+                periodRemainingTime / (1000 * 60 * 60 * 24)
+              );
             } else {
               // 30 gün geçti, 1 günlük geri sayım başladı
               const resetRemainingTime = resetDate.getTime() - now.getTime();
-              resetDaysRemaining = Math.ceil(resetRemainingTime / (1000 * 60 * 60 * 24));
+              resetDaysRemaining = Math.ceil(
+                resetRemainingTime / (1000 * 60 * 60 * 24)
+              );
             }
           }
         }
@@ -353,7 +374,7 @@ export async function GET(request: NextRequest) {
           : null;
 
         let cardsDrawnTodayCount = cardSession.cards_drawn_today_count;
-        
+
         // 24 saat geçtiyse sayacı sıfırla ve database'e kaydet
         if (lastDrawDate) {
           const hoursSinceLastDraw =
@@ -377,20 +398,25 @@ export async function GET(request: NextRequest) {
           '6cee9bde3e92dacffebceb951b63637d6a0db2d63298e6209bfef2d60deedf1d',
           'e6e91e66450805433f08e385b89c45ea4bd201c12ab6a4314b54cfd50c8ebca7',
         ];
-        const isTestToken = testTokens.some((testToken) => {
-          const testTokenHash = crypto.createHash('sha256').update(testToken).digest('hex');
+        const isTestToken = testTokens.some(testToken => {
+          const testTokenHash = crypto
+            .createHash('sha256')
+            .update(testToken)
+            .digest('hex');
           return tokenHash === testTokenHash;
         });
         const dailyLimit = isTestToken ? Infinity : 3;
 
-        remainingCards = isTestToken 
+        remainingCards = isTestToken
           ? undefined // Test token için sınırsız, undefined döndür
           : Math.max(0, dailyLimit - cardsDrawnTodayCount);
 
         // Açılan kartları al (24 saat içinde çekilen kartlar - unique)
         openedCards = validDrawnCards
-          .map((drawnCard) => drawnCard.cardNumber)
-          .filter((cardNumber, index, self) => self.indexOf(cardNumber) === index); // Unique
+          .map(drawnCard => drawnCard.cardNumber)
+          .filter(
+            (cardNumber, index, self) => self.indexOf(cardNumber) === index
+          ); // Unique
       }
 
       return NextResponse.json<ValidateTokenResponse>({
@@ -426,4 +452,3 @@ export async function GET(request: NextRequest) {
     );
   }
 }
-

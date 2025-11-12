@@ -79,7 +79,10 @@ export async function POST(request: NextRequest) {
 
     if (!isAdmin) {
       return NextResponse.json<SendEmailResponse>(
-        { success: false, error: 'Admin yetkisi gereklidir. Lütfen admin olarak giriş yapın.' },
+        {
+          success: false,
+          error: 'Admin yetkisi gereklidir. Lütfen admin olarak giriş yapın.',
+        },
         { status: 403 }
       );
     }
@@ -171,11 +174,9 @@ export async function POST(request: NextRequest) {
     return NextResponse.json<SendEmailResponse>(
       {
         success: false,
-        error:
-          error instanceof Error ? error.message : 'E-posta gönderilemedi',
+        error: error instanceof Error ? error.message : 'E-posta gönderilemedi',
       },
       { status: 500 }
     );
   }
 }
-

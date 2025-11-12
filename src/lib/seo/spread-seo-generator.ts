@@ -189,8 +189,18 @@ export function generateSpreadMetadata(
   spreadId: string,
   locale: string
 ): Metadata {
-  const spread = tarotSpreads.find(s => s.id === spreadId);
-  const seoData = spreadSeoData[spreadId];
+  // Normalize spreadId: eğer -spread suffix'i yoksa ekle
+  // URL'de relationship-problems olabilir ama tarotSpreads'te relationship-problems-spread olarak kayıtlı
+  const normalizedSpreadId = spreadId.endsWith('-spread')
+    ? spreadId
+    : `${spreadId}-spread`;
+
+  // Önce normalized ile dene, sonra orijinal ile
+  const spread =
+    tarotSpreads.find(s => s.id === normalizedSpreadId) ||
+    tarotSpreads.find(s => s.id === spreadId);
+
+  const seoData = spreadSeoData[normalizedSpreadId] || spreadSeoData[spreadId];
 
   if (!spread || !seoData) {
     return {
@@ -198,6 +208,9 @@ export function generateSpreadMetadata(
       description: 'Aradığınız tarot açılımı bulunamadı.',
     };
   }
+
+  // Normalize edilmiş spreadId'yi kullan (spread.id ile eşleşen)
+  const finalSpreadId = spread.id;
 
   const currentLocale = seoData[locale as keyof typeof seoData] || seoData.tr;
 
@@ -248,12 +261,12 @@ export function generateSpreadMetadata(
 
     // Canonical and alternate URLs
     alternates: {
-      canonical: `${baseUrl}/${locale}/tarotokumasi/${spreadId}`,
+      canonical: `${baseUrl}/${locale}/tarotokumasi/${finalSpreadId}`,
       languages: {
-        'x-default': `${baseUrl}/tr/tarotokumasi/${spreadId}`,
-        tr: `${baseUrl}/tr/tarotokumasi/${spreadId}`,
-        en: `${baseUrl}/en/tarotokumasi/${spreadId}`,
-        sr: `${baseUrl}/sr/tarotokumasi/${spreadId}`,
+        'x-default': `${baseUrl}/tr/tarotokumasi/${finalSpreadId}`,
+        tr: `${baseUrl}/tr/tarotokumasi/${finalSpreadId}`,
+        en: `${baseUrl}/en/tarotokumasi/${finalSpreadId}`,
+        sr: `${baseUrl}/sr/tarotokumasi/${finalSpreadId}`,
       },
     },
 
@@ -261,11 +274,11 @@ export function generateSpreadMetadata(
     openGraph: {
       title,
       description,
-      url: `${baseUrl}/${locale}/tarotokumasi/${spreadId}`,
+      url: `${baseUrl}/${locale}/tarotokumasi/${finalSpreadId}`,
       siteName: 'BüşBüşKimKi',
       images: [
         {
-          url: `${baseUrl}/assets/spreads/${spreadId}-og.jpg`,
+          url: `${baseUrl}/assets/spreads/${finalSpreadId}-og.jpg`,
           width: 1200,
           height: 630,
           alt: currentLocale.title,
@@ -280,7 +293,7 @@ export function generateSpreadMetadata(
       card: 'summary_large_image',
       title,
       description,
-      images: [`${baseUrl}/assets/spreads/${spreadId}-twitter.jpg`],
+      images: [`${baseUrl}/assets/spreads/${finalSpreadId}-twitter.jpg`],
     },
 
     // Robots
@@ -308,12 +321,24 @@ export function generateSpreadMetadata(
  * Generate Schema.org structured data for a specific tarot spread
  */
 export function generateSpreadStructuredData(spreadId: string, locale: string) {
-  const spread = tarotSpreads.find(s => s.id === spreadId);
-  const seoData = spreadSeoData[spreadId];
+  // Normalize spreadId: eğer -spread suffix'i yoksa ekle
+  const normalizedSpreadId = spreadId.endsWith('-spread')
+    ? spreadId
+    : `${spreadId}-spread`;
+
+  // Önce normalized ile dene, sonra orijinal ile
+  const spread =
+    tarotSpreads.find(s => s.id === normalizedSpreadId) ||
+    tarotSpreads.find(s => s.id === spreadId);
+
+  const seoData = spreadSeoData[normalizedSpreadId] || spreadSeoData[spreadId];
 
   if (!spread || !seoData) {
     return {};
   }
+
+  // Normalize edilmiş spreadId'yi kullan (spread.id ile eşleşen)
+  const finalSpreadId = spread.id;
 
   const currentLocale = seoData[locale as keyof typeof seoData] || seoData.tr;
 
@@ -357,7 +382,7 @@ export function generateSpreadStructuredData(spreadId: string, locale: string) {
           '@type': 'ListItem',
           position: 3,
           name: currentLocale.title,
-          item: `${baseUrl}/${locale}/tarotokumasi/${spreadId}`,
+          item: `${baseUrl}/${locale}/tarotokumasi/${finalSpreadId}`,
         },
       ],
     },
@@ -368,7 +393,7 @@ export function generateSpreadStructuredData(spreadId: string, locale: string) {
       '@type': 'WebPage',
       name: currentLocale.title,
       description: currentLocale.description,
-      url: `${baseUrl}/${locale}/tarotokumasi/${spreadId}`,
+      url: `${baseUrl}/${locale}/tarotokumasi/${finalSpreadId}`,
       inLanguage:
         locale === 'tr' ? 'tr-TR' : locale === 'en' ? 'en-US' : 'sr-RS',
       mainEntity: {
@@ -383,7 +408,7 @@ export function generateSpreadStructuredData(spreadId: string, locale: string) {
         serviceType: 'Tarot Reading',
         availableChannel: {
           '@type': 'ServiceChannel',
-          serviceUrl: `${baseUrl}/${locale}/tarotokumasi/${spreadId}`,
+          serviceUrl: `${baseUrl}/${locale}/tarotokumasi/${finalSpreadId}`,
         },
       },
     },
@@ -415,9 +440,7 @@ export function generateSpreadStructuredData(spreadId: string, locale: string) {
  * Hidden spreads (admin-only) are excluded from static generation
  */
 export function getAllSpreadIds(): string[] {
-  return tarotSpreads
-    .filter(spread => !spread.hidden)
-    .map(spread => spread.id);
+  return tarotSpreads.filter(spread => !spread.hidden).map(spread => spread.id);
 }
 
 /**

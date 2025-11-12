@@ -92,7 +92,7 @@ export async function GET(request: NextRequest) {
 
     // Her link için card_session bilgilerini al
     const linksWithActivity = await Promise.all(
-      (links || []).map(async (link) => {
+      (links || []).map(async link => {
         const { data: cardSession } = await supabaseAdmin
           .from('card_sessions')
           .select('*')
@@ -223,7 +223,10 @@ export async function POST(request: NextRequest) {
         resource: 'customer_links',
       });
       return NextResponse.json<CreateCustomerLinkResponse>(
-        { success: false, error: 'Admin yetkisi gereklidir. Lütfen admin olarak giriş yapın.' },
+        {
+          success: false,
+          error: 'Admin yetkisi gereklidir. Lütfen admin olarak giriş yapın.',
+        },
         { status: 403 }
       );
     }
@@ -266,7 +269,8 @@ export async function POST(request: NextRequest) {
       return NextResponse.json<CreateCustomerLinkResponse>(
         {
           success: false,
-          error: 'Link oluşturulamadı: ' + (linkError?.message || 'Bilinmeyen hata'),
+          error:
+            'Link oluşturulamadı: ' + (linkError?.message || 'Bilinmeyen hata'),
         },
         { status: 500 }
       );
@@ -306,8 +310,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json<CreateCustomerLinkResponse>(
       {
         success: false,
-        error:
-          error instanceof Error ? error.message : 'Link oluşturulamadı',
+        error: error instanceof Error ? error.message : 'Link oluşturulamadı',
       },
       { status: 500 }
     );

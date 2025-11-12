@@ -73,10 +73,10 @@ import { useTranslations } from '@/hooks/useTranslations';
 
 export default function TarotPage() {
   const { t } = useTranslations();
-  
+
   // Hidden spread'leri filtrele (admin-only spreads)
   const visibleSpreads = tarotSpreads.filter(spread => !spread.hidden);
-  
+
   // İlk visible spread'i varsayılan olarak seç
   const defaultSpread = visibleSpreads[0]?.id || 'love-spread';
   const [selectedSpread, setSelectedSpread] = useState(defaultSpread);
@@ -86,7 +86,7 @@ export default function TarotPage() {
     interpretation: string;
     spreadId: string;
   } | null>(null);
-  
+
   const currentSpread = tarotSpreads.find(s => s.id === selectedSpread);
   const CurrentComponent = currentSpread?.component;
 

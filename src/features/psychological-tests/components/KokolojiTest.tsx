@@ -224,7 +224,9 @@ export default function KokolojiTest() {
           <h3 className='text-xl font-bold text-white mb-2'>
             {selectedTest.title} {t('psychTests.ui.results.title')}
           </h3>
-          <p className='text-gray-300'>{t('psychTests.ui.results.detailedAnalysis')}</p>
+          <p className='text-gray-300'>
+            {t('psychTests.ui.results.detailedAnalysis')}
+          </p>
         </div>
 
         <div className='backdrop-blur-xl bg-white/10 border border-white/20 rounded-xl p-6'>
@@ -524,24 +526,31 @@ export default function KokolojiTest() {
               </div>
 
               {/* Wing bilgisi varsa göster */}
-              {lastResult.result.wingType && (() => {
-                const enneagramTypes = getEnneagramTypes(t);
-                return (
-                  <div className='bg-white/5 rounded-lg p-4 border border-white/10'>
-                    <p className='text-sm text-purple-300'>
-                      <strong>💫 {t('psychTests.results.enneagram.wing')}:</strong>{' '}
-                      {enneagramTypes[
-                        lastResult.result.wingType as keyof typeof enneagramTypes
-                      ]?.title || t('psychTests.common.unknown')}
-                    </p>
-                  </div>
-                );
-              })()}
+              {lastResult.result.wingType &&
+                (() => {
+                  const enneagramTypes = getEnneagramTypes(t);
+                  return (
+                    <div className='bg-white/5 rounded-lg p-4 border border-white/10'>
+                      <p className='text-sm text-purple-300'>
+                        <strong>
+                          💫 {t('psychTests.results.enneagram.wing')}:
+                        </strong>{' '}
+                        {enneagramTypes[
+                          lastResult.result
+                            .wingType as keyof typeof enneagramTypes
+                        ]?.title || t('psychTests.common.unknown')}
+                      </p>
+                    </div>
+                  );
+                })()}
 
               {/* E-E-A-T: Kaynak ve Güvenilirlik */}
               <div className='bg-blue-500/10 rounded-lg p-4 border border-blue-500/30'>
                 <p className='text-xs text-blue-200'>
-                  <strong>📚 {t('psychTests.results.enneagram.scientificSource')}:</strong> {t('psychTests.results.enneagram.scientificNote')}
+                  <strong>
+                    📚 {t('psychTests.results.enneagram.scientificSource')}:
+                  </strong>{' '}
+                  {t('psychTests.results.enneagram.scientificNote')}
                 </p>
               </div>
             </div>
@@ -609,20 +618,29 @@ export default function KokolojiTest() {
               </div>
 
               {/* İkincil Enerji */}
-              {lastResult.result.secondaryRole && (() => {
-                const friendEnergyRoles = getFriendEnergyRoles(t);
-                const secondaryRole = friendEnergyRoles[
-                  lastResult.result.secondaryRole as keyof typeof friendEnergyRoles
-                ];
-                return secondaryRole ? (
-                  <div className='bg-white/5 rounded-lg p-4 border border-white/10'>
-                    <p className='text-sm text-purple-300'>
-                      <strong>💫 {t('psychTests.ui.results.friendEnergy.secondaryEnergy')}:</strong>{' '}
-                      {secondaryRole.title} {secondaryRole.emoji}
-                    </p>
-                  </div>
-                ) : null;
-              })()}
+              {lastResult.result.secondaryRole &&
+                (() => {
+                  const friendEnergyRoles = getFriendEnergyRoles(t);
+                  const secondaryRole =
+                    friendEnergyRoles[
+                      lastResult.result
+                        .secondaryRole as keyof typeof friendEnergyRoles
+                    ];
+                  return secondaryRole ? (
+                    <div className='bg-white/5 rounded-lg p-4 border border-white/10'>
+                      <p className='text-sm text-purple-300'>
+                        <strong>
+                          💫{' '}
+                          {t(
+                            'psychTests.ui.results.friendEnergy.secondaryEnergy'
+                          )}
+                          :
+                        </strong>{' '}
+                        {secondaryRole.title} {secondaryRole.emoji}
+                      </p>
+                    </div>
+                  ) : null;
+                })()}
 
               {/* Sosyal Paylaşım Butonları - Viral Element */}
               <div className='bg-gradient-to-r from-pink-500/20 to-purple-500/20 rounded-xl p-6 border border-pink-500/30'>
@@ -1154,7 +1172,8 @@ export default function KokolojiTest() {
             />
           </div>
           <p className='text-gray-300 text-sm mt-2'>
-            {t('psychTests.common.questionProgress')} {currentQuestion + 1} / {selectedTest.questions.length}
+            {t('psychTests.common.questionProgress')} {currentQuestion + 1} /{' '}
+            {selectedTest.questions.length}
           </p>
         </div>
 

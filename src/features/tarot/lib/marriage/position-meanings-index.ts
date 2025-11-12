@@ -4,7 +4,6 @@ info:
 Dosya Amacı:
 - Evlilik açılımı pozisyon anlamları
 - 10 pozisyon için özel evlilik odaklı yorumlar
-- Sylvia Abraha kitabından uyarlanmış
 - i18n desteği ile 3 dilde (TR/EN/SR)
 
 Bağlı Dosyalar:

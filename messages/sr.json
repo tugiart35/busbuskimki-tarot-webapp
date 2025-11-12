@@ -6507,6 +6507,7 @@
       "partnerName": "Ime partnera",
       "partnerBirthDate": "Datum rođenja partnera",
       "partnerBirthDateUnknown": "Ne znam datum rođenja partnera",
+      "hasPartner": "Imate li informacije o partneru?",
       "saveAndOpen": "Spremite i otvorite",
       "saveError": "Došlo je do greške prilikom čuvanja čitanja",
       "saveReading": "Sačuvati čitanje",
@@ -11743,6 +11744,7 @@
     "data": {
       "badgeText": "Novac",
       "detailedTitle": "Objašnjenje novca - Detaljno lično čitanje",
+      "interpretationTitle": "Tumačenje objašnjenja novca",
       "spreadName": "Proširenje valute"
     },
     "form": {
@@ -11802,6 +11804,10 @@
       "successTitle": "Otvaranje valuta je završeno!",
       "writtenReading": "Pismeno čitanje",
       "writtenReadingText": "Pisana analiza novca sa vašim ličnim podacima i određenim pitanjima."
+    },
+    "messages": {
+      "readingSaveError": "Došlo je do greške prilikom čuvanja otvaranja novca.",
+      "readingSavedSuccess": "Otvaranje novca je uspešno sačuvano!"
     },
     "meanings": {
       "thefool": {
@@ -15756,6 +15762,7 @@
     "data": {
       "badgeText": "Nova ljubav",
       "detailedTitle": "Nova ljubavna ekspanzija - Detaljno lično čitanje",
+      "interpretationTitle": "Tumačenje nove ljubavne ekspanzije",
       "spreadName": "Nova ljubavna ekspanzija"
     },
     "description": "Specijalna 6-kartica širi se za novi ljubavni odnos",
@@ -15766,14 +15773,14 @@
       "clearAll": "Očistiti sve",
       "communicationMethod": "Preferencija komunikacije",
       "concern": "Tvoja ljubavna briga",
-      "concernQuestion": "prazan",
+      "concernQuestion": "Šta vas najviše brine u vezi sa novom ljubavnom vezom?",
       "concernRequired": "neophodan",
       "continue": "Nastavljati",
       "email": "Vaša adresa e-pošte",
       "emailCommunication": "E-mail",
       "emailRequired": "Potrebna adresa e-pošte",
       "emotional": "Vaše trenutno emocionalno stanje",
-      "emotionalQuestion": "prazan",
+      "emotionalQuestion": "Kako se trenutno osećate emocionalno u vezi sa novom vezom? (npr. puni nade, uzbuđeni, anksiozni…)",
       "emotionalRequired": "Potrebno je emocionalno stanje",
       "firstName": "Naziv",
       "lastName": "Prezime",
@@ -15786,6 +15793,7 @@
       "partnerName": "Ime partnera",
       "partnerBirthDate": "Datum rođenja partnera",
       "partnerBirthDateUnknown": "Ne znam datum rođenja partnera",
+      "hasPartner": "Imate li informacije o partneru?",
       "saveAndOpen": "Spremite i otvorite",
       "saveError": "Došlo je do greške prilikom čuvanja čitanja",
       "saveReading": "Sačuvati čitanje",
@@ -15795,7 +15803,7 @@
       "surnameRequired": "Potrebno je prezime",
       "title": "Informacije o otvaranju novog ljubavnika",
       "understanding": "Šta želite da razumete",
-      "understandingQuestion": "prazan",
+      "understandingQuestion": "Šta želite da razumete ili čujete o novoj ljubavnoj vezi iz ovog čitanja?",
       "understandingRequired": "Potrebno je razumevanje",
       "whatsappCommunication": "Vhatsapp"
     },
@@ -15810,6 +15818,7 @@
       "title": "Nova interpretacija za proširenje ljubavnika"
     },
     "messages": {
+      "readingSaveError": "Došlo je do greške prilikom čuvanja vaše nove ekspanzije ljubavnika.",
       "readingSavedSuccess": "Vaša nova proširenje ljubavnika uspešno je sačuvana!"
     },
     "modals": {
@@ -16960,6 +16969,7 @@
     },
     "form": {
       "birthDate": "Datum rođenja",
+      "birthDateUnknown": "Ne znam datum rođenja",
       "clearAll": "🔄 Očistite sve",
       "communicationMethod": "Metoda komunikacije",
       "concernQuestion": "Koju situaciju u vezi želite da analizirate?",
@@ -16968,8 +16978,24 @@
       "emotionalQuestion": "Kako se trenutno osećate zbog ove veze?",
       "firstName": "Vaše ime",
       "lastName": "vaše prezime",
+      "partnerInfo": "Podaci o partneru",
+      "partnerName": "Ime partnera",
+      "partnerBirthDate": "Datum rođenja partnera",
+      "partnerBirthDateUnknown": "Ne znam datum rođenja partnera",
+      "hasPartner": "Imate li informacije o partneru?",
       "personalInfo": "Vaše lične podatke",
       "questions": "💕 Analiza u vezi sa objašnjenjem pitanja 💕",
+      "relationshipStatus": "Status veze",
+      "relationshipStatusOptions": {
+        "single": "Singl",
+        "in_relationship": "U vezi",
+        "married": "Oženjen",
+        "separated": "Razdvojen",
+        "divorced": "Razveden",
+        "widowed": "Udovac",
+        "prefer_not_to_say": "Radije ne reći"
+      },
+      "selectRelationshipStatus": "Izaberite status veze",
       "saveAndOpen": "💕 Sačuvajte i otvorite kartice",
       "saving": "Snimanje ...",
       "understandingQuestion": "Šta želite da razumete sa ovom analizom odnosa?",
@@ -17057,6 +17083,7 @@
       "partnerName": "Ime partnera",
       "partnerBirthDate": "Datum rođenja partnera",
       "partnerBirthDateUnknown": "Ne znam datum rođenja partnera",
+      "hasPartner": "Imate li informacije o partneru?",
       "saveAndOpen": "💔 Sačuvajte i otvorite kartice",
       "saving": "Snimanje ...",
       "understandingQuestion": "Šta želite da razumete sa ovim analizama problema sa vezama?",
@@ -17264,6 +17291,21 @@
       "savingReading": "📝 Čitanje se beleži ...",
       "selectReadingTypeFirst": "Prvo odaberite vrstu čitanja.",
       "simpleReadingCompleted": "Jednostavno čitanje završeno!"
+    },
+    "common": {
+      "tarot": {
+        "spread": {
+          "componentNotAvailable": "Komponenta nije dostupna"
+        }
+      }
+    },
+    "tarot": {
+      "common": {
+        "meaningNotFound": "Značenje nije pronađeno"
+      },
+      "page": {
+        "loadingSpread": "Otvaranje se učitava ..."
+      }
     },
     "modals": {
       "aboutSpread": "O otvaranju",
@@ -17848,6 +17890,9 @@
     "obstacle": "Prepreka",
     "opportunity": "Prilika",
     "outcome": "Zaključak",
+    "common": {
+      "meaningNotFound": "Značenje nije pronađeno"
+    },
     "page": {
       "loadingSpread": "Otvaranje se učitava ...",
       "selectSpread": "Izaberite tarot širenje",

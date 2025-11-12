@@ -1,6 +1,6 @@
 /**
  * Translation Cache for Email Service
- * 
+ *
  * In-memory cache for translation files to avoid reading from disk
  * on every email generation. Reduces I/O operations significantly.
  */
@@ -70,4 +70,3 @@ class TranslationCache {
 }
 
 export default TranslationCache;
-

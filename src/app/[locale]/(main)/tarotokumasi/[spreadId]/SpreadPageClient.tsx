@@ -4,12 +4,36 @@ import { useState, Suspense, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { BottomNavigation } from '@/features/shared/layout';
-import type { TarotCard } from '@/features/tarot/lib/full-tarot-deck';
-import { useTarotDeck } from '@/features/tarot/lib/full-tarot-deck';
+import {
+  useTarotDeck,
+  type TarotCard,
+} from '@/features/tarot/lib/full-tarot-deck';
 import { tarotSpreads } from '@/lib/constants/tarotSpreads';
 import { LastReadingSummary } from '@/features/tarot/components';
 import { useTranslations } from '@/hooks/useTranslations';
 import Image from 'next/image';
+import BaseInterpretation from '@/features/shared/ui/BaseInterpretation';
+import {
+  createLoveConfig,
+  createCareerConfig,
+  createMoneyConfig,
+  createProblemSolvingConfig,
+  createMarriageConfig,
+  createNewLoverConfig,
+  createRelationshipAnalysisConfig,
+  createRelationshipProblemsConfig,
+  createSituationAnalysisConfig,
+} from '@/features/tarot/shared/config';
+import { getI18nMeaningByCardAndPosition } from '@/features/tarot/lib/love/position-meanings-index';
+import { getI18nCareerMeaningByCardAndPosition } from '@/features/tarot/lib/career/position-meanings-index';
+import { getI18nMoneyMeaningByCardAndPosition } from '@/features/tarot/lib/money/position-meanings-index';
+import { getI18nProblemSolvingMeaningByCardAndPosition } from '@/features/tarot/lib/problem-solving/position-meanings-index';
+import { getI18nMarriageMeaningByCardAndPosition } from '@/features/tarot/lib/marriage/position-meanings-index';
+import { getI18nNewLoverMeaningByCardAndPosition } from '@/features/tarot/lib/new-lover/position-meanings-index';
+import { getI18nRelationshipAnalysisMeaningByCardAndPosition } from '@/features/tarot/lib/relationship-analysis/position-meanings-index';
+import { getI18nRelationshipProblemsMeaningByCardAndPosition } from '@/features/tarot/lib/relationship-problems/position-meanings-index';
+import { getI18nSituationAnalysisMeaningByCardAndPosition } from '@/features/tarot/lib/situation-analysis/position-meanings-index';
+import type { CardMeaningData } from '@/types/ui';
 
 // Token'i almak için wrapper component
 function SpreadPageContent({
@@ -72,7 +96,7 @@ function SpreadPageContent({
           return;
         }
 
-        // Token geçerli, reading type'ı ayarla
+        // Token geçerli ve henüz tamamlanmamış, reading type'ı ayarla
         if (data.readingType === 'detailed' || data.readingType === 'written') {
           setInitialReadingType(data.readingType);
         }
@@ -91,7 +115,42 @@ function SpreadPageContent({
     };
 
     validateToken();
-  }, [token, spreadId]);
+
+    // Polling: Sadece token geçerli ve henüz tamamlanmamışsa çalış
+    // Eğer completed ise polling'e gerek yok
+    const pollInterval = setInterval(async () => {
+      if (!token) {
+        clearInterval(pollInterval);
+        return;
+      }
+
+      // Eğer zaten completed reading gösteriliyorsa polling'i durdur
+      if (tokenErrorDetails?.status === 'completed') {
+        clearInterval(pollInterval);
+        return;
+      }
+
+      try {
+        const response = await fetch(
+          `/api/reading-sessions/validate?token=${token}`
+        );
+        const data = await response.json();
+
+        // Eğer session completed olduysa sayfayı yenile
+        if (!response.ok && data.status === 'completed') {
+          clearInterval(pollInterval);
+          // Sayfayı yenile - completed reading gösterilecek
+          window.location.reload();
+        }
+      } catch {
+        // Polling hatası - sessizce devam et
+      }
+    }, 2000);
+
+    return () => {
+      clearInterval(pollInterval);
+    };
+  }, [token, spreadId, tokenErrorDetails?.status]);
 
   // Tamamlanmış okuma için reading'i çek
   useEffect(() => {
@@ -175,7 +234,7 @@ function SpreadPageContent({
     if (isCompleted && completedReading) {
       // Kartları parse et (JSONB formatından)
       let rawCards: any[] = [];
-      
+
       if (completedReading.cards) {
         if (Array.isArray(completedReading.cards)) {
           rawCards = completedReading.cards;
@@ -354,16 +413,255 @@ function SpreadPageContent({
                   </div>
                 </div>
               ) : cards.length > 0 ? (
-                <LastReadingSummary
-                  lastReading={{
-                    cards: cards,
-                    interpretation: completedReading.interpretation || '',
-                    spreadId: spreadId,
-                    reading_type: completedReading.reading_type,
-                    cost_credits: completedReading.cost_credits,
-                  }}
-                  currentSpreadId={spreadId}
-                />
+                (() => {
+                  // Spread config ve meaning fonksiyonları mapping
+                  const spreadConfigs: Record<
+                    string,
+                    {
+                      createConfig: (_t?: (_key: string) => string) => any;
+                      getMeaning: (
+                        _cardName: string,
+                        _position: number,
+                        _t: (_key: string) => string
+                      ) => any;
+                      theme: string;
+                      icon: string;
+                      namespace: string;
+                      badgeColor: string;
+                    }
+                  > = {
+                    'love-spread': {
+                      createConfig: createLoveConfig,
+                      getMeaning: getI18nMeaningByCardAndPosition,
+                      theme: 'pink',
+                      icon: '💕',
+                      namespace: 'love',
+                      badgeColor: 'bg-pink-500/20 text-pink-400',
+                    },
+                    'career-spread': {
+                      createConfig: createCareerConfig,
+                      getMeaning: getI18nCareerMeaningByCardAndPosition,
+                      theme: 'blue',
+                      icon: '💼',
+                      namespace: 'career',
+                      badgeColor: 'bg-blue-500/20 text-blue-400',
+                    },
+                    'money-spread': {
+                      createConfig: createMoneyConfig,
+                      getMeaning: getI18nMoneyMeaningByCardAndPosition,
+                      theme: 'green',
+                      icon: '💰',
+                      namespace: 'money',
+                      badgeColor: 'bg-green-500/20 text-green-400',
+                    },
+                    'problem-solving-spread': {
+                      createConfig: createProblemSolvingConfig,
+                      getMeaning: getI18nProblemSolvingMeaningByCardAndPosition,
+                      theme: 'amber',
+                      icon: '🧩',
+                      namespace: 'problemSolving',
+                      badgeColor: 'bg-amber-500/20 text-amber-400',
+                    },
+                    'marriage-spread': {
+                      createConfig: createMarriageConfig,
+                      getMeaning: getI18nMarriageMeaningByCardAndPosition,
+                      theme: 'purple',
+                      icon: '💍',
+                      namespace: 'marriage',
+                      badgeColor: 'bg-purple-500/20 text-purple-400',
+                    },
+                    'new-lover-spread': {
+                      createConfig: createNewLoverConfig,
+                      getMeaning: getI18nNewLoverMeaningByCardAndPosition,
+                      theme: 'pink',
+                      icon: '💖',
+                      namespace: 'newLover',
+                      badgeColor: 'bg-pink-500/20 text-pink-400',
+                    },
+                    'relationship-analysis-spread': {
+                      createConfig: createRelationshipAnalysisConfig,
+                      getMeaning:
+                        getI18nRelationshipAnalysisMeaningByCardAndPosition,
+                      theme: 'blue',
+                      icon: '💙',
+                      namespace: 'relationshipAnalysis',
+                      badgeColor: 'bg-blue-500/20 text-blue-400',
+                    },
+                    'relationship-problems-spread': {
+                      createConfig: createRelationshipProblemsConfig,
+                      getMeaning:
+                        getI18nRelationshipProblemsMeaningByCardAndPosition,
+                      theme: 'pink',
+                      icon: '💔',
+                      namespace: 'relationshipProblems',
+                      badgeColor: 'bg-pink-500/20 text-pink-400',
+                    },
+                    'relationship-problems': {
+                      createConfig: createRelationshipProblemsConfig,
+                      getMeaning:
+                        getI18nRelationshipProblemsMeaningByCardAndPosition,
+                      theme: 'pink',
+                      icon: '💔',
+                      namespace: 'relationshipProblems',
+                      badgeColor: 'bg-pink-500/20 text-pink-400',
+                    },
+                    'situation-analysis-spread': {
+                      createConfig: createSituationAnalysisConfig,
+                      getMeaning:
+                        getI18nSituationAnalysisMeaningByCardAndPosition,
+                      theme: 'purple',
+                      icon: '🔮',
+                      namespace: 'situationAnalysis',
+                      badgeColor: 'bg-purple-500/20 text-purple-400',
+                    },
+                  };
+
+                  // spreadId'yi normalize et: eğer -spread suffix'i yoksa ekle
+                  const normalizedSpreadId = spreadId.endsWith('-spread')
+                    ? spreadId
+                    : `${spreadId}-spread`;
+
+                  const spreadConfig =
+                    spreadConfigs[spreadId] ||
+                    spreadConfigs[normalizedSpreadId];
+
+                  // Eğer spread için config varsa BaseInterpretation kullan
+                  if (spreadConfig) {
+                    const config = spreadConfig.createConfig(t);
+                    const isReversedArray = cards.map(
+                      card => card.isReversed || false
+                    );
+                    const cardsArray = cards.map(card => {
+                      const {
+                        isReversed: _isReversed,
+                        ...cardWithoutReversed
+                      } = card;
+                      void _isReversed;
+                      return cardWithoutReversed;
+                    });
+
+                    // getCardMeaning fonksiyonu
+                    const getCardMeaning = (
+                      card: TarotCard
+                    ): CardMeaningData | null => {
+                      const position =
+                        cardsArray.findIndex(c => c.id === card.id) + 1;
+                      const meaning = spreadConfig.getMeaning(
+                        card.name,
+                        position,
+                        t
+                      );
+
+                      if (!meaning) {
+                        return null;
+                      }
+
+                      return {
+                        upright: meaning.upright,
+                        reversed: meaning.reversed,
+                        context: meaning.context,
+                        keywords: meaning.keywords,
+                      };
+                    };
+
+                    // getPositionSpecificInterpretation fonksiyonu
+                    const getPositionSpecificInterpretation = (
+                      card: TarotCard,
+                      position: number,
+                      isReversed: boolean
+                    ) => {
+                      const meaning = spreadConfig.getMeaning(
+                        card.name,
+                        position,
+                        t
+                      );
+
+                      if (!meaning) {
+                        const fallback =
+                          t('tarot.common.meaningNotFound') ||
+                          'Anlam bulunamadı';
+                        return {
+                          interpretation: fallback,
+                          context: '',
+                          keywords: [],
+                        };
+                      }
+
+                      return {
+                        interpretation: isReversed
+                          ? meaning.reversed
+                          : meaning.upright,
+                        context: meaning.context || '',
+                        keywords: meaning.keywords || [],
+                      };
+                    };
+
+                    // getKeywords fonksiyonu
+                    const getKeywords = (
+                      _meaning: CardMeaningData | null,
+                      card: TarotCard
+                    ): string[] => {
+                      const position =
+                        cardsArray.findIndex(c => c.id === card.id) + 1;
+                      const meaning = spreadConfig.getMeaning(
+                        card.name,
+                        position,
+                        t
+                      );
+                      return meaning?.keywords || [];
+                    };
+
+                    return (
+                      <BaseInterpretation
+                        cards={cardsArray}
+                        isReversed={isReversedArray}
+                        theme={spreadConfig.theme as any}
+                        title={
+                          t(
+                            `${spreadConfig.namespace}.data.interpretationTitle`
+                          ) ||
+                          t(`${spreadConfig.namespace}.data.spreadName`) ||
+                          t(`spreads.${spreadConfig.namespace}.name`) ||
+                          'Tarot Yorumu'
+                        }
+                        icon={spreadConfig.icon}
+                        badgeText={
+                          t(`${spreadConfig.namespace}.data.badgeText`) ||
+                          spreadConfig.namespace.toUpperCase()
+                        }
+                        badgeColor={spreadConfig.badgeColor}
+                        positionsInfo={config.positionsInfo}
+                        getCardMeaning={getCardMeaning}
+                        getPositionSpecificInterpretation={
+                          getPositionSpecificInterpretation
+                        }
+                        getKeywords={getKeywords}
+                        showContext={true}
+                      />
+                    );
+                  }
+
+                  // Diğer spread'ler için LastReadingSummary kullan
+                  return (
+                    <LastReadingSummary
+                      lastReading={{
+                        cards: cards.map(card => {
+                          const {
+                            isReversed: _isReversed,
+                            ...cardWithoutReversed
+                          } = card;
+                          void _isReversed;
+                          return cardWithoutReversed;
+                        }),
+                        interpretation: completedReading.interpretation || '',
+                        spreadId: spreadId,
+                        reading_type: completedReading.reading_type,
+                        cost_credits: completedReading.cost_credits,
+                      }}
+                      currentSpreadId={spreadId}
+                    />
+                  );
+                })()
               ) : (
                 <div className='admin-glass rounded-2xl p-6 border border-slate-700/50 text-center'>
                   <p className='text-gray-400'>Kart bilgileri bulunamadı.</p>
@@ -409,7 +707,7 @@ function SpreadPageContent({
                 {spreadId === 'single-card-spread' && (
                   <p className='text-gray-500 text-xs'>
                     Bu okuma linki artık kullanılamaz.
-              </p>
+                  </p>
                 )}
               </div>
             )}
@@ -481,69 +779,69 @@ function SpreadPageContent({
         {/* Modern Hero Section - Ana sayfa tarzı gradient */}
         {/* Single card için bu bölüm gösterilmez */}
         {spreadId !== 'single-card-spread' && (
-        <div className='max-w-6xl mx-auto mb-8'>
-          <div className='relative overflow-hidden rounded-2xl sm:rounded-3xl'>
-            {/* Animated gradient background */}
-            <div className='absolute inset-0 bg-gradient-to-br from-pink-600/20 via-purple-600/20 to-slate-900/50'></div>
-            <div className='absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(236,72,153,0.3),transparent_50%)]'></div>
-            <div className='absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(168,85,247,0.2),transparent_50%)]'></div>
+          <div className='max-w-6xl mx-auto mb-8'>
+            <div className='relative overflow-hidden rounded-2xl sm:rounded-3xl'>
+              {/* Animated gradient background */}
+              <div className='absolute inset-0 bg-gradient-to-br from-pink-600/20 via-purple-600/20 to-slate-900/50'></div>
+              <div className='absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(236,72,153,0.3),transparent_50%)]'></div>
+              <div className='absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(168,85,247,0.2),transparent_50%)]'></div>
 
-            {/* Content */}
-            <div className='relative z-10 p-6 sm:p-8 md:p-12'>
-              <div className='flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6'>
-                <div className='text-5xl sm:text-6xl md:text-8xl animate-float filter drop-shadow-lg'>
-                  {currentSpread.icon}
-                </div>
-                <div className='text-center sm:text-left flex-1'>
-                  <h1 className='text-2xl sm:text-3xl md:text-5xl font-bold text-white mb-2 sm:mb-3'>
-                    {t(currentSpread.name)}
-                  </h1>
-                  <p className='text-gray-300 text-sm sm:text-base md:text-xl max-w-2xl'>
-                    {t(currentSpread.description)}
-                  </p>
-                </div>
-              </div>
-
-              {/* What You'll Discover - Positions Preview */}
-              <div className='mt-6 sm:mt-8 p-5 sm:p-6 bg-gradient-to-r from-purple-900/30 to-pink-900/30 backdrop-blur-sm border border-purple-500/30 rounded-2xl'>
-                <h3 className='text-sm sm:text-lg font-bold text-white mb-4 sm:mb-5 flex items-center gap-2'>
-                  <span className='text-xl sm:text-2xl'>🔮</span>
-                  Bu Açılımda Keşfedecekleriniz
-                </h3>
-
-                <div className='grid sm:grid-cols-2 gap-3 sm:gap-4'>
-                  {currentSpread.positions.slice(0, 4).map((pos, idx) => (
-                    <div
-                      key={pos.id}
-                      className='flex items-start gap-3 p-3 sm:p-4 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 hover:border-purple-500/30 transition-all group'
-                    >
-                      <div className='flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center bg-gradient-to-br from-purple-500/30 to-pink-500/30 rounded-full text-white font-bold text-xs sm:text-sm border border-purple-500/50 group-hover:scale-110 transition-transform'>
-                        {idx + 1}
-                      </div>
-                      <div className='flex-1 min-w-0'>
-                        <h4 className='text-xs sm:text-sm font-semibold text-white mb-1 leading-tight group-hover:text-purple-300 transition-colors'>
-                          {t(pos.title)}
-                        </h4>
-                        <p className='text-xs text-gray-400 leading-relaxed line-clamp-2'>
-                          {t(pos.description)}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {currentSpread.positions.length > 4 && (
-                  <div className='mt-4 text-center'>
-                    <p className='text-xs text-purple-300 font-medium'>
-                      + {currentSpread.positions.length - 4} pozisyon daha
-                      keşfedilecek...
+              {/* Content */}
+              <div className='relative z-10 p-6 sm:p-8 md:p-12'>
+                <div className='flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6'>
+                  <div className='text-5xl sm:text-6xl md:text-8xl animate-float filter drop-shadow-lg'>
+                    {currentSpread.icon}
+                  </div>
+                  <div className='text-center sm:text-left flex-1'>
+                    <h1 className='text-2xl sm:text-3xl md:text-5xl font-bold text-white mb-2 sm:mb-3'>
+                      {t(currentSpread.name)}
+                    </h1>
+                    <p className='text-gray-300 text-sm sm:text-base md:text-xl max-w-2xl'>
+                      {t(currentSpread.description)}
                     </p>
                   </div>
-                )}
+                </div>
+
+                {/* What You'll Discover - Positions Preview */}
+                <div className='mt-6 sm:mt-8 p-5 sm:p-6 bg-gradient-to-r from-purple-900/30 to-pink-900/30 backdrop-blur-sm border border-purple-500/30 rounded-2xl'>
+                  <h3 className='text-sm sm:text-lg font-bold text-white mb-4 sm:mb-5 flex items-center gap-2'>
+                    <span className='text-xl sm:text-2xl'>🔮</span>
+                    Bu Açılımda Keşfedecekleriniz
+                  </h3>
+
+                  <div className='grid sm:grid-cols-2 gap-3 sm:gap-4'>
+                    {currentSpread.positions.slice(0, 4).map((pos, idx) => (
+                      <div
+                        key={pos.id}
+                        className='flex items-start gap-3 p-3 sm:p-4 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 hover:border-purple-500/30 transition-all group'
+                      >
+                        <div className='flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center bg-gradient-to-br from-purple-500/30 to-pink-500/30 rounded-full text-white font-bold text-xs sm:text-sm border border-purple-500/50 group-hover:scale-110 transition-transform'>
+                          {idx + 1}
+                        </div>
+                        <div className='flex-1 min-w-0'>
+                          <h4 className='text-xs sm:text-sm font-semibold text-white mb-1 leading-tight group-hover:text-purple-300 transition-colors'>
+                            {t(pos.title)}
+                          </h4>
+                          <p className='text-xs text-gray-400 leading-relaxed line-clamp-2'>
+                            {t(pos.description)}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {currentSpread.positions.length > 4 && (
+                    <div className='mt-4 text-center'>
+                      <p className='text-xs text-purple-300 font-medium'>
+                        + {currentSpread.positions.length - 4} pozisyon daha
+                        keşfedilecek...
+                      </p>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
-        </div>
         )}
 
         {/* Spread component */}

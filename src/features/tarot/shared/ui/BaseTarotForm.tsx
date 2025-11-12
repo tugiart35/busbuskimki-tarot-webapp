@@ -110,6 +110,35 @@ export default function BaseTarotForm({
     config.cardCount === 1 ||
     config.spreadId === 'single-card';
 
+  const partnerInfoSpreads = useMemo(
+    () => [
+      'love',
+      'new-lover',
+      'relationship-analysis',
+      'relationship-problems',
+      'marriage',
+    ],
+    []
+  );
+
+  const shouldShowPartnerSection =
+    (config.requiresPartnerInfo ||
+      isSingleCard ||
+      partnerInfoSpreads.includes(config.spreadId)) &&
+    partnerInfo &&
+    onUpdatePartnerInfo;
+
+  const shouldShowPartnerToggle =
+    (isSingleCard ||
+      config.requiresPartnerInfo ||
+      partnerInfoSpreads.includes(config.spreadId)) &&
+    onToggleHasPartner;
+
+  const partnerToggleLabelKey =
+    partnerInfoSpreads.includes(config.spreadId) && config.translationNamespace
+      ? `${config.translationNamespace}.form.hasPartner`
+      : formKeys.hasPartner || 'spreads.singleCard.form.hasPartner';
+
   // Otomatik ülke kodu ayarla
   useEffect(() => {
     if (countryInfo && !personalInfo.countryCode) {
@@ -357,153 +386,119 @@ export default function BaseTarotForm({
             )}
           </div>
 
-          {/* Partner bilgisi - Single card ve love spread için opsiyonel checkbox ile, diğerleri için requiresPartnerInfo kontrolü */}
-          {(config.requiresPartnerInfo ||
-            isSingleCard ||
-            config.spreadId === 'love') &&
-            partnerInfo &&
-            onUpdatePartnerInfo && (
-              <div
-                className={`space-y-4 pt-4 border-t ${themeClasses.sectionBorder}`}
-              >
-                {(isSingleCard || config.spreadId === 'love') &&
-                  onToggleHasPartner && (
-                    <div className='flex items-center mb-4'>
-                      <input
-                        type='checkbox'
-                        id='hasPartner'
-                        checked={hasPartner}
-                        onChange={event =>
-                          onToggleHasPartner(event.target.checked)
-                        }
-                        className='w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded focus:ring-blue-500 focus:ring-2'
-                      />
-                      <label
-                        htmlFor='hasPartner'
-                        className={`ml-2 text-sm ${themeClasses.labelText} cursor-pointer`}
-                      >
-                        {translate(
-                          config.spreadId === 'love'
-                            ? `${config.translationNamespace}.form.hasPartner`
-                            : formKeys.hasPartner ||
-                                'spreads.singleCard.form.hasPartner'
-                        )}
-                      </label>
-                    </div>
-                  )}
-                <h3
-                  className={`${themeClasses.titleText} text-base font-semibold`}
-                >
-                  {translate(formKeys.partnerInfo)}
-                </h3>
-
-                <div>
-                  <label
-                    className={`block text-sm font-medium ${themeClasses.labelText} mb-2`}
-                  >
-                    {translate(formKeys.partnerName)}
-                  </label>
+          {/* Partner bilgisi - Checkbox işaretliyse göster */}
+          {shouldShowPartnerSection && (
+            <div
+              className={`space-y-4 pt-4 border-t ${themeClasses.sectionBorder}`}
+            >
+              {/* Checkbox göster */}
+              {shouldShowPartnerToggle && (
+                <div className='flex items-center mb-4'>
                   <input
-                    type='text'
-                    value={partnerInfo.name}
-                    onChange={event =>
-                      onUpdatePartnerInfo('name', event.target.value)
-                    }
-                    disabled={
-                      (isSingleCard || config.spreadId === 'love') &&
-                      !hasPartner
-                    }
-                    className={`w-full px-4 py-3 bg-slate-800/80 border ${
-                      formErrors.partnerName
-                        ? 'border-red-500'
-                        : themeClasses.inputBorder
-                    } rounded-lg text-white placeholder-gray-400 focus:outline-none ${themeClasses.focusRing} transition-all ${
-                      (isSingleCard || config.spreadId === 'love') &&
-                      !hasPartner
-                        ? 'opacity-50 cursor-not-allowed'
-                        : ''
-                    }`}
+                    type='checkbox'
+                    id='hasPartner'
+                    checked={hasPartner}
+                    onChange={event => onToggleHasPartner(event.target.checked)}
+                    className='w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded focus:ring-blue-500 focus:ring-2'
                   />
-                  {formErrors.partnerName && (
-                    <p className='text-red-400 text-xs mt-1'>
-                      {formErrors.partnerName}
-                    </p>
-                  )}
-                </div>
-
-                <div>
                   <label
-                    className={`block text-sm font-medium ${themeClasses.labelText} mb-2`}
+                    htmlFor='hasPartner'
+                    className={`ml-2 text-sm ${themeClasses.labelText} cursor-pointer`}
                   >
-                    {translate(formKeys.partnerBirthDate)}
+                    {translate(partnerToggleLabelKey)}
                   </label>
-                  <div className='space-y-2'>
+                </div>
+              )}
+
+              {/* Partner bilgisi alanları - sadece checkbox işaretliyse göster */}
+              {hasPartner && (
+                <>
+                  <h3
+                    className={`${themeClasses.titleText} text-base font-semibold`}
+                  >
+                    {translate(formKeys.partnerInfo)}
+                  </h3>
+
+                  <div>
+                    <label
+                      className={`block text-sm font-medium ${themeClasses.labelText} mb-2`}
+                    >
+                      {translate(formKeys.partnerName)}
+                    </label>
                     <input
-                      type='date'
-                      value={partnerInfo.birthDate}
+                      type='text'
+                      value={partnerInfo.name}
                       onChange={event =>
-                        onUpdatePartnerInfo('birthDate', event.target.value)
-                      }
-                      disabled={
-                        partnerInfo.birthDateUnknown ||
-                        ((isSingleCard || config.spreadId === 'love') &&
-                          !hasPartner)
+                        onUpdatePartnerInfo('name', event.target.value)
                       }
                       className={`w-full px-4 py-3 bg-slate-800/80 border ${
-                        formErrors.partnerBirthDate
+                        formErrors.partnerName
                           ? 'border-red-500'
                           : themeClasses.inputBorder
-                      } rounded-lg text-white focus:outline-none ${themeClasses.focusRing} transition-all ${
-                        partnerInfo.birthDateUnknown ||
-                        ((isSingleCard || config.spreadId === 'love') &&
-                          !hasPartner)
-                          ? 'opacity-50 cursor-not-allowed'
-                          : ''
-                      }`}
+                      } rounded-lg text-white placeholder-gray-400 focus:outline-none ${themeClasses.focusRing} transition-all`}
                     />
-                    <div className='flex items-center'>
+                    {formErrors.partnerName && (
+                      <p className='text-red-400 text-xs mt-1'>
+                        {formErrors.partnerName}
+                      </p>
+                    )}
+                  </div>
+
+                  <div>
+                    <label
+                      className={`block text-sm font-medium ${themeClasses.labelText} mb-2`}
+                    >
+                      {translate(formKeys.partnerBirthDate)}
+                    </label>
+                    <div className='space-y-2'>
                       <input
-                        type='checkbox'
-                        id='partnerBirthDateUnknown'
-                        checked={partnerInfo.birthDateUnknown}
+                        type='date'
+                        value={partnerInfo.birthDate}
                         onChange={event =>
-                          onUpdatePartnerInfo(
-                            'birthDateUnknown',
-                            event.target.checked
-                          )
+                          onUpdatePartnerInfo('birthDate', event.target.value)
                         }
-                        disabled={
-                          (isSingleCard || config.spreadId === 'love') &&
-                          !hasPartner
-                        }
-                        className={`w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded focus:ring-blue-500 focus:ring-2 ${
-                          (isSingleCard || config.spreadId === 'love') &&
-                          !hasPartner
+                        disabled={partnerInfo.birthDateUnknown}
+                        className={`w-full px-4 py-3 bg-slate-800/80 border ${
+                          formErrors.partnerBirthDate
+                            ? 'border-red-500'
+                            : themeClasses.inputBorder
+                        } rounded-lg text-white focus:outline-none ${themeClasses.focusRing} transition-all ${
+                          partnerInfo.birthDateUnknown
                             ? 'opacity-50 cursor-not-allowed'
                             : ''
                         }`}
                       />
-                      <label
-                        htmlFor='partnerBirthDateUnknown'
-                        className={`ml-2 text-sm ${themeClasses.labelText} ${
-                          (isSingleCard || config.spreadId === 'love') &&
-                          !hasPartner
-                            ? 'opacity-50 cursor-not-allowed'
-                            : 'cursor-pointer'
-                        }`}
-                      >
-                        {translate(formKeys.partnerBirthDateUnknown)}
-                      </label>
+                      <div className='flex items-center'>
+                        <input
+                          type='checkbox'
+                          id='partnerBirthDateUnknown'
+                          checked={partnerInfo.birthDateUnknown}
+                          onChange={event =>
+                            onUpdatePartnerInfo(
+                              'birthDateUnknown',
+                              event.target.checked
+                            )
+                          }
+                          className='w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded focus:ring-blue-500 focus:ring-2'
+                        />
+                        <label
+                          htmlFor='partnerBirthDateUnknown'
+                          className={`ml-2 text-sm ${themeClasses.labelText} cursor-pointer`}
+                        >
+                          {translate(formKeys.partnerBirthDateUnknown)}
+                        </label>
+                      </div>
                     </div>
+                    {formErrors.partnerBirthDate && (
+                      <p className='text-red-400 text-xs mt-1'>
+                        {formErrors.partnerBirthDate}
+                      </p>
+                    )}
                   </div>
-                  {formErrors.partnerBirthDate && (
-                    <p className='text-red-400 text-xs mt-1'>
-                      {formErrors.partnerBirthDate}
-                    </p>
-                  )}
-                </div>
-              </div>
-            )}
+                </>
+              )}
+            </div>
+          )}
 
           {/* İletişim Tercihi - Minimal Tasarım */}
           <div className='space-y-4'>

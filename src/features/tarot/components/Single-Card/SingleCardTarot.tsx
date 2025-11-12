@@ -35,9 +35,9 @@ export default function SingleCardReading(props: any) {
       const meaningKey = isReversed
         ? `blog.cards.${cardKey}.meanings.reversed.general`
         : `blog.cards.${cardKey}.meanings.upright.general`;
-      
+
       const meaning = t(meaningKey);
-      
+
       // Eğer çeviri bulunamazsa (key dönerse), fallback olarak kartın kendi anlamını kullan
       if (meaning === meaningKey) {
         return isReversed ? card.meaningTr.reversed : card.meaningTr.upright;
@@ -49,4 +49,3 @@ export default function SingleCardReading(props: any) {
 
   return <TarotComponent {...props} />;
 }
-

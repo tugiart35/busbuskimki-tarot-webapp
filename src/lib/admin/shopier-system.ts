@@ -63,7 +63,6 @@ export class ShopierSystemManager {
         .eq('category', 'shopier');
 
       if (error) {
-        console.error('Error fetching shopier settings:', error);
         return null;
       }
 
@@ -90,7 +89,6 @@ export class ShopierSystemManager {
           'http://localhost:3111/api/webhook/shopier',
       };
     } catch (error) {
-      console.error('ShopierSystemManager.getShopierSettings error:', error);
       return null;
     }
   }
@@ -126,7 +124,6 @@ export class ShopierSystemManager {
         });
 
         if (error) {
-          console.error('Error saving shopier setting:', error);
           throw error;
         }
       }
@@ -151,7 +148,6 @@ export class ShopierSystemManager {
 
       return true;
     } catch (error) {
-      console.error('ShopierSystemManager.saveShopierSettings error:', error);
       throw error;
     }
   }
@@ -202,7 +198,6 @@ export class ShopierSystemManager {
         };
       }
     } catch (error) {
-      console.error('ShopierSystemManager.testShopierConnection error:', error);
       return {
         success: false,
         message: `Test hatası: ${(error as Error).message}`,
@@ -260,7 +255,6 @@ export class ShopierSystemManager {
         };
       }
     } catch (error) {
-      console.error('ShopierSystemManager.testWebhookEndpoint error:', error);
       return {
         success: false,
         message: `Webhook test hatası: ${(error as Error).message}`,
@@ -347,13 +341,11 @@ export class ShopierSystemManager {
         .limit(limit);
 
       if (error) {
-        console.error('Error fetching shopier history:', error);
         return [];
       }
 
       return data || [];
     } catch (error) {
-      console.error('ShopierSystemManager.getShopierHistory error:', error);
       return [];
     }
   }

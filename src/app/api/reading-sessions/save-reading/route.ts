@@ -68,11 +68,24 @@ export async function POST(request: NextRequest) {
     }
 
     // Reading'i kaydet (user_id null, cost_credits 0)
+    const readingTypeToInsert = readingData.readingType;
+
+    // Debug: reading_type değerini logla
+    logger.info('Reading kaydediliyor', {
+      action: 'save_reading',
+      resource: 'readings',
+      metadata: {
+        readingType: readingTypeToInsert,
+        spreadName: readingData.spread_name || readingData.spreadName,
+        sessionId: session.id,
+      },
+    });
+
     const { data: insertResult, error: insertError } = await supabaseAdmin
       .from('readings')
       .insert({
         user_id: null,
-        reading_type: readingData.readingType,
+        reading_type: readingTypeToInsert,
         spread_name: readingData.spread_name || readingData.spreadName,
         title: readingData.title,
         interpretation: readingData.interpretation || '',
@@ -98,7 +111,13 @@ export async function POST(request: NextRequest) {
       logger.error('Reading insert hatası', insertError, {
         action: 'save_reading',
         resource: 'readings',
-        metadata: { token: tokenHash.slice(0, 8) + '...' },
+        metadata: {
+          token: tokenHash.slice(0, 8) + '...',
+          readingType: readingTypeToInsert,
+          errorMessage: insertError.message,
+          errorCode: insertError.code,
+          errorDetails: insertError.details,
+        },
       });
       return NextResponse.json(
         {
@@ -131,15 +150,34 @@ export async function POST(request: NextRequest) {
         insertResult.id
       );
 
+    // Session zaten completed ise sadece reading_id'yi güncelle
+    // Değilse status'u completed yap ve reading_id'yi kaydet
+    const updateData: any = {
+      reading_id: isValidUUID ? insertResult.id : null,
+    };
+
+    // Eğer session henüz completed değilse, status ve completed_at'i de güncelle
+    if (session.status !== 'completed') {
+      updateData.status = 'completed';
+      updateData.completed_at = new Date().toISOString();
+    }
+
+    // Debug: session update öncesi log
+    logger.info('Session güncelleniyor', {
+      action: 'update_session',
+      resource: 'reading_sessions',
+      metadata: {
+        sessionId: session.id,
+        readingId: insertResult?.id,
+        updateData,
+        currentStatus: session.status,
+      },
+    });
+
     const { error: sessionUpdateError } = await supabaseAdmin
       .from('reading_sessions')
-      .update({
-        status: 'completed',
-        completed_at: new Date().toISOString(),
-        reading_id: isValidUUID ? insertResult.id : null,
-      })
-      .eq('token_hash', tokenHash)
-      .eq('status', session.status); // Optimistic locking: sadece status değişmemişse güncelle
+      .update(updateData)
+      .eq('token_hash', tokenHash);
 
     if (sessionUpdateError) {
       // Session güncelleme başarısız oldu - reading'i sil (rollback)
@@ -149,7 +187,14 @@ export async function POST(request: NextRequest) {
         {
           action: 'update_session',
           resource: 'reading_sessions',
-          metadata: { readingId: insertResult?.id },
+          metadata: {
+            readingId: insertResult?.id,
+            sessionId: session.id,
+            errorMessage: sessionUpdateError.message,
+            errorCode: sessionUpdateError.code,
+            errorDetails: sessionUpdateError.details,
+            updateData,
+          },
         }
       );
 
@@ -164,6 +209,17 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       );
     }
+
+    // Debug: session update başarılı
+    logger.info('Session başarıyla güncellendi', {
+      action: 'update_session',
+      resource: 'reading_sessions',
+      metadata: {
+        sessionId: session.id,
+        readingId: insertResult?.id,
+        newStatus: 'completed',
+      },
+    });
 
     // Event log kaydet
     await supabaseAdmin.from('reading_events').insert({
