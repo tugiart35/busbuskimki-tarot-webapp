@@ -12,6 +12,7 @@
  * - INP (Interaction to Next Paint) - Responsiveness
  */
 
+import { logger } from '@/lib/logger';
 import { useReportWebVitals } from 'next/web-vitals';
 import { useEffect } from 'react';
 
@@ -20,13 +21,15 @@ export function WebVitals() {
     // Production'da Vercel Analytics otomatik olarak topluyor
     // Ayrıca kendi analytics sistemimize de gönderebiliriz
 
-    // Development'da console'a yazdır
     if (process.env.NODE_ENV === 'development') {
-      console.log(`[Web Vitals] ${metric.name}:`, {
-        value: metric.value,
-        rating: metric.rating,
-        delta: metric.delta,
-        id: metric.id,
+      logger.info('Web Vitals metric', {
+        action: metric.name,
+        metadata: {
+          id: metric.id,
+          value: metric.value,
+          rating: metric.rating,
+          delta: metric.delta,
+        },
       });
     }
 
@@ -58,9 +61,16 @@ export function WebVitals() {
       metric.value > threshold.poor &&
       process.env.NODE_ENV === 'development'
     ) {
-      console.warn(
-        `⚠️ Poor ${metric.name}: ${metric.value} (threshold: ${threshold.good})`
-      );
+      const context = {
+        action: 'web_vitals_threshold',
+        metadata: {
+          value: metric.value,
+          threshold: threshold.good,
+          rating: metric.rating,
+        },
+      } as const;
+
+      logger.warn(`Poor ${metric.name}`, undefined, context);
     }
   });
 
@@ -75,10 +85,16 @@ export function WebVitals() {
         const observer = new PerformanceObserver(list => {
           for (const entry of list.getEntries()) {
             if (entry.duration > 50) {
-              console.warn(
-                `⚠️ Long task detected: ${entry.duration.toFixed(2)}ms`,
-                entry
-              );
+              const context = {
+                action: 'web_vitals_longtask',
+                metadata: {
+                  duration: entry.duration,
+                  name: entry.name,
+                  startTime: entry.startTime,
+                },
+              } as const;
+
+              logger.warn(`Long task detected`, entry, context);
             }
           }
         });
@@ -97,14 +113,12 @@ export function WebVitals() {
   return null;
 }
 
+type GtagFunction = (..._args: unknown[]) => void;
+
 // Global type declaration for gtag
 declare global {
   // eslint-disable-next-line no-unused-vars
   interface Window {
-    gtag?: (
-      _command: string,
-      _eventName: string,
-      _eventParams: Record<string, unknown>
-    ) => void;
+    gtag?: GtagFunction;
   }
 }

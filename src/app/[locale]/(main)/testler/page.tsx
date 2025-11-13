@@ -16,8 +16,96 @@
 
 import { KokolojiTest } from '@/features/psychological-tests';
 import { DynamicBottomNavigation as BottomNavigation } from './DynamicTestComponents';
-import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
+
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://busbuskimki.com';
+
+const localePaths = {
+  tr: '/tr/testler',
+  en: '/en/tests',
+  sr: '/sr/testovi',
+} as const;
+
+type TestsLocale = keyof typeof localePaths;
+
+const structuredContent = {
+  tr: {
+    pageName: 'Psikolojik Testler',
+    pageDescription:
+      'Bilimsel ve eğlenceli testlerle kişiliğinizi, kriz anındaki tavrınızı ve enerji dengenizi keşfedin.',
+    breadcrumbHome: 'Ana Sayfa',
+    breadcrumbCurrent: 'Psikolojik Testler',
+    tests: [
+      {
+        name: 'Deniz Fırtınası Kokoloji Testi',
+        description:
+          'Kriz anında hangi arketiple hareket ettiğinizi keşfetmek için kokoloji (projektif psikoloji) metodu.',
+      },
+      {
+        name: 'İsim Enerjisi Analizi',
+        description:
+          'Pythagoras numerolojisi ile isminizdeki titreşimleri hesaplayın ve tarot kartınızla eşleştirin.',
+      },
+      {
+        name: 'Stres Düzeyi Testi',
+        description:
+          'DASS21 temelli değerlendirme ile stres seviyenizi ölçün ve meditasyon önerileri alın.',
+      },
+    ],
+  },
+  en: {
+    pageName: 'Psychological Tests',
+    pageDescription:
+      'Discover your personality, crisis archetype and energy balance with scientific and entertaining quizzes.',
+    breadcrumbHome: 'Home',
+    breadcrumbCurrent: 'Psychological Tests',
+    tests: [
+      {
+        name: 'Sea Storm Kokology Test',
+        description:
+          'Explore your crisis archetype using the kokology (projective psychology) method.',
+      },
+      {
+        name: 'Name Energy Analysis',
+        description:
+          'Calculate the numerical vibration of your name with Pythagorean numerology and match it with a tarot archetype.',
+      },
+      {
+        name: 'Stress Level Quiz',
+        description:
+          'Assess your stress level with the DASS21-based scale and receive meditation suggestions.',
+      },
+    ],
+  },
+  sr: {
+    pageName: 'Psihološki Testovi',
+    pageDescription:
+      'Otkrijte svoju ličnost, krizni arhetip i energetsku ravnotežu kroz naučne i zabavne testove.',
+    breadcrumbHome: 'Početna',
+    breadcrumbCurrent: 'Psihološki Testovi',
+    tests: [
+      {
+        name: 'Test Olujne Oluje (Kokologija)',
+        description:
+          'Kokologija – projektivna psihologija – pomaže da otkrijete kako reagujete u kriznim situacijama.',
+      },
+      {
+        name: 'Analiza Energije Imena',
+        description:
+          'Izračunajte vibracije svog imena pomoću Pitagorine numerologije i povežite ih sa tarot simbolikom.',
+      },
+      {
+        name: 'Test Nivoa Stresa',
+        description:
+          'Procijenite nivo stresa uz skalu zasnovanu na DASS21 i dobijte predloge za meditaciju.',
+      },
+    ],
+  },
+} as const;
+
+function resolveLocale(locale: string): TestsLocale {
+  return (['tr', 'en', 'sr'].includes(locale) ? locale : 'tr') as TestsLocale;
+}
 
 interface PageProps {
   params: Promise<{
@@ -25,84 +113,10 @@ interface PageProps {
   }>;
 }
 
-// SEO Metadata - E-E-A-T Uyumlu
-export const metadata: Metadata = {
-  title: 'Deniz Fırtınası Testi, İsim Enerjisi, MBTI | busbuskimki',
-  description:
-    'Krizde kim oluyorsun? Deniz Fırtınası kokoloji testi, İsim Enerjisi numerolojisi, MBTI, Enneagram, Stres Testi, Aşk Enerjisi. Hızlı, eğlenceli ve viral testler!',
-  keywords: [
-    'psikolojik test',
-    'kişilik testi',
-    'isim enerjisi',
-    'numeroloji testi',
-    'isim numerolojisi',
-    'tarot kartı testi',
-    'pythagoras numerolojisi',
-    'deniz fırtınası testi',
-    'kokoloji testi',
-    'bilinçaltı analizi',
-    'psikolojik dayanıklılık',
-    'fırtına kişilik testi',
-    'kriz yönetimi testi',
-    'MBTI testi',
-    'enneagram testi',
-    'big five testi',
-    'OCEAN testi',
-    'aşk enerjisi testi',
-    'love vibration test',
-    'venüs mars merkür',
-    'astroloji testi',
-    'tarot ve astroloji',
-    'aşk astrolojisi',
-    'gezegen enerjileri',
-    'stres testi',
-    'stres düzeyi testi',
-    'dass21 testi',
-    'stres ölçeği',
-    'meditasyon önerileri',
-    'stres yönetimi',
-    'psikolojik stres testi',
-    'arkadaş grubu testi',
-    'arkadaş grubundaki enerjin',
-    'eğlenceli kişilik testi',
-    'viral kişilik testi',
-    'ücretsiz kişilik testi',
-    'online psikoloji testi',
-    'kişilik analizi',
-    'kendini tanıma',
-    'psikolojik analiz',
-    'drama kraliçesi testi',
-    'sosyal enerji testi',
-  ],
-  authors: [{ name: 'busbuskimki Psikoloji Ekibi' }],
-  openGraph: {
-    title:
-      'Psikolojik Testler: MBTI, Enneagram, Aşk Enerjisi (Astroloji) | busbuskimki',
-    description:
-      'Bilimsel psikolojik ve astrolojik testlerle kendinizi keşfedin! MBTI, Enneagram, Aşk Enerjin (Venüs-Mars-Merkür), Arkadaş Grubu testleri. Tarot ve astroloji ile!',
-    type: 'website',
-    siteName: 'Büşbüşkimki',
-    locale: 'tr_TR',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Aşk Enerjin Nedir? Venüs, Mars, Merkür Testi 💕',
-    description:
-      'Astroloji ve tarot ile aşk enerjini keşfet! MBTI, Enneagram, Big Five testleri de var. Ücretsiz!',
-  },
-  alternates: {
-    canonical: '/testler',
-    languages: {
-      tr: '/tr/testler',
-      en: '/en/tests',
-      sr: '/sr/testovi',
-    },
-  },
-};
-
 export default async function TestlerPage({ params }: PageProps) {
   // Locale'i params'tan al
   const { locale } = await params;
+  const resolvedLocale = resolveLocale(locale);
 
   // Çevirileri al
   const t = await getTranslations({
@@ -111,199 +125,63 @@ export default async function TestlerPage({ params }: PageProps) {
   });
 
   // Structured Data (Schema.org) - E-E-A-T için
+  const pageContent = structuredContent[resolvedLocale];
   const structuredData = {
     '@context': 'https://schema.org',
-    '@type': 'WebPage',
-    name: 'Psikolojik Testler - MBTI, Enneagram, Big Five',
-    description:
-      'Bilimsel psikolojik testler ile kendinizi keşfedin. MBTI kişilik testi, Enneagram analizi, Big Five (OCEAN) testi ve kokoloji testleri.',
-    url: 'https://busbuskimki.com/testler',
-    mainEntity: {
-      '@type': 'Quiz',
-      name: 'Psikolojik Kişilik Testleri',
-      description:
-        'MBTI, Enneagram ve Big Five testleri ile kişiliğinizi, motivasyonlarınızı ve davranış kalıplarınızı keşfedin.',
-      educationalLevel: 'Beginner',
-      typicalAgeRange: '18-65',
-      teaches: 'Kişilik analizi, öz farkındalık, psikolojik gelişim',
-      about: {
-        '@type': 'Thing',
-        name: 'Psikoloji ve Kişilik Analizi',
-        description:
-          'Bilimsel kişilik testleri, psikolojik değerlendirmeler ve kişisel gelişim araçları',
-      },
-      provider: {
-        '@type': 'Organization',
-        name: 'busbuskimki',
-        description:
-          'Profesyonel tarot, numeroloji ve psikolojik test platformu',
-      },
-      assesses: [
-        'MBTI Kişilik Tipi',
-        'Enneagram Tipi',
-        'Big Five Kişilik Boyutları',
-        'Kişilik Özellikleri',
-      ],
-      isAccessibleForFree: true,
-      inLanguage: ['tr', 'en', 'sr'],
+    '@type': 'CollectionPage',
+    name: pageContent.pageName,
+    description: pageContent.pageDescription,
+    url: `${baseUrl}${localePaths[resolvedLocale]}`,
+    inLanguage:
+      resolvedLocale === 'tr'
+        ? 'tr'
+        : resolvedLocale === 'en'
+          ? 'en'
+          : 'sr',
+    isPartOf: {
+      '@type': 'WebSite',
+      name: 'BüşBüşKimKi',
+      url: baseUrl,
     },
+    publisher: {
+      '@type': 'Organization',
+      name: 'BüşBüşKimKi',
+      url: baseUrl,
+    },
+    author: {
+      '@type': 'Person',
+      name: 'Dr. Selin Yüzbaşıoğlu',
+      jobTitle: 'Psikolojik Danışman',
+    },
+    hasPart: pageContent.tests.map(test => ({
+      '@type': 'Quiz',
+      name: test.name,
+      description: test.description,
+      isAccessibleForFree: true,
+      inLanguage:
+        resolvedLocale === 'tr'
+          ? 'tr'
+          : resolvedLocale === 'en'
+            ? 'en'
+            : 'sr',
+    })),
     breadcrumb: {
       '@type': 'BreadcrumbList',
       itemListElement: [
         {
           '@type': 'ListItem',
           position: 1,
-          name: 'Ana Sayfa',
-          item: 'https://busbuskimki.com',
+          name: pageContent.breadcrumbHome,
+          item: baseUrl,
         },
         {
           '@type': 'ListItem',
           position: 2,
-          name: 'Psikolojik Testler',
-          item: 'https://busbuskimki.com/testler',
+          name: pageContent.breadcrumbCurrent,
+          item: `${baseUrl}${localePaths[resolvedLocale]}`,
         },
       ],
     },
-    hasPart: [
-      {
-        '@type': 'Quiz',
-        name: 'Deniz Fırtınası Testi: Zor Zamanlarda Kim Oluyorsun?',
-        description:
-          'Bir fırtınanın ortasında nasıl davranırsın? Bilinçaltında krizle nasıl baş ettiğini keşfet. Kokoloji ile psikolojik dayanıklılığını öğren.',
-        numberOfQuestions: 4,
-        educationalUse: 'Kriz yönetimi ve psikolojik dayanıklılık analizi',
-        isAccessibleForFree: true,
-        about: [
-          {
-            '@type': 'Thing',
-            name: 'Kokoloji',
-            description:
-              'Projektif psikoloji testleri - bilinçaltı analizi yöntemi',
-          },
-          {
-            '@type': 'Thing',
-            name: 'Psikolojik Dayanıklılık',
-            description: 'Stres ve kriz anlarında baş etme stratejileri',
-          },
-        ],
-      },
-      {
-        '@type': 'Quiz',
-        name: 'İsim Enerjine Göre Tarot Kartın',
-        description:
-          'Adının numerolojik enerjisini hesapla, kaderini simgeleyen tarot kartını öğren. Pythagoras numerolojisi ve Rider-Waite tarot.',
-        numberOfQuestions: 1,
-        educationalUse: 'Numeroloji ve Tarot analizi',
-        isAccessibleForFree: true,
-        about: [
-          {
-            '@type': 'Thing',
-            name: 'Pythagoras Numerolojisi',
-            description:
-              'Her harfin sayısal titreşimi ile kişisel enerji analizi',
-          },
-          {
-            '@type': 'Thing',
-            name: 'Rider-Waite Tarot',
-            description: 'Klasik tarot sembolizmi ve kart yorumları',
-          },
-        ],
-      },
-      {
-        '@type': 'Quiz',
-        name: 'MBTI Kişilik Testi',
-        description: '16 kişilik tipinden hangisi olduğunuzu keşfedin',
-        numberOfQuestions: 20,
-        educationalUse: 'Kişilik analizi',
-      },
-      {
-        '@type': 'Quiz',
-        name: 'Enneagram Kişilik Testi',
-        description:
-          'Dokuz farklı kişilik tipinden hangisi olduğunuzu keşfedin',
-        numberOfQuestions: 27,
-        educationalUse: 'Motivasyon ve korku analizi',
-      },
-      {
-        '@type': 'Quiz',
-        name: 'Big Five (OCEAN) Kişilik Testi',
-        description:
-          '5 temel kişilik boyutunuzu keşfedin: Açıklık, Sorumluluk, Dışa Dönüklük, Uyumluluk, Duygusal Denge',
-        numberOfQuestions: 25,
-        educationalUse: 'Kişilik boyutları analizi',
-      },
-      {
-        '@type': 'Quiz',
-        name: 'Arkadaş Grubundaki Enerjin',
-        description:
-          'Sen arkadaş grubunda nasıl bir roldesin? Drama Kraliçesi, Akıl Hocası, Plansız Gezgin mi?',
-        numberOfQuestions: 10,
-        educationalUse: 'Sosyal dinamikler ve grup rolleri analizi',
-        isAccessibleForFree: true,
-        interactionStatistic: {
-          '@type': 'InteractionCounter',
-          interactionType: 'https://schema.org/ShareAction',
-          userInteractionCount: 0,
-        },
-      },
-      {
-        '@type': 'Quiz',
-        name: 'Aşk Enerjin (Love Vibration Test)',
-        description:
-          'Astrolojik gezegenler ve tarot kartları ile aşk enerjinizi keşfedin. Venüs, Mars, Merkür enerjileri ile titreşiminizi öğrenin.',
-        numberOfQuestions: 7,
-        educationalUse: 'Astroloji ve aşk enerjisi analizi',
-        isAccessibleForFree: true,
-        about: [
-          {
-            '@type': 'Thing',
-            name: 'Venüs Astrolojisi',
-            description: 'Aşk, romantizm ve uyum gezegeni',
-          },
-          {
-            '@type': 'Thing',
-            name: 'Mars Astrolojisi',
-            description: 'Tutku, arzu ve eylem gezegeni',
-          },
-          {
-            '@type': 'Thing',
-            name: 'Merkür Astrolojisi',
-            description: 'İletişim, akıl ve bağlantı gezegeni',
-          },
-        ],
-      },
-      {
-        '@type': 'Quiz',
-        name: 'Stres Düzeyi Testi',
-        description:
-          'DASS21 temelli bilimsel stres değerlendirme testi. Stres seviyenizi ölçün ve kişiselleştirilmiş meditasyon önerileri alın.',
-        numberOfQuestions: 15,
-        educationalUse: 'Stres değerlendirme ve yönetimi',
-        isAccessibleForFree: true,
-        about: [
-          {
-            '@type': 'Thing',
-            name: 'DASS21',
-            description:
-              'Depression Anxiety Stress Scales - Lovibond & Lovibond (1995)',
-          },
-          {
-            '@type': 'Thing',
-            name: 'Stres Yönetimi',
-            description: 'Meditasyon ve rahatlama teknikleri',
-          },
-        ],
-        citation: {
-          '@type': 'ScholarlyArticle',
-          name: 'Manual for the Depression Anxiety Stress Scales',
-          author: {
-            '@type': 'Person',
-            name: 'S. H. Lovibond & P. F. Lovibond',
-          },
-          datePublished: '1995',
-        },
-      },
-    ],
   };
 
   return (

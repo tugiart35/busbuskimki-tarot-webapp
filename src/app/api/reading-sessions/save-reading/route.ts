@@ -1,8 +1,35 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
+import type { SupabaseClient } from '@supabase/supabase-js';
 import crypto from 'crypto';
 import { logger } from '@/lib/logger';
 import { emailService } from '@/lib/email/email-service';
+import {
+  sendMetaLeadEvent,
+  type MetaPixelPayload,
+} from '@/lib/analytics/metaCapi';
+import type { ConsentPreferences } from '@/lib/consent/types';
+
+const TOKEN_HASH_PREVIEW_LENGTH = 8;
+
+function extractClientIp(request: NextRequest): string | null {
+  const forwardedFor = request.headers.get('x-forwarded-for');
+  if (forwardedFor) {
+    const [firstIp] = forwardedFor.split(',');
+    if (firstIp && firstIp.trim()) {
+      return firstIp.trim();
+    }
+  }
+
+  const realIp = request.headers.get('x-real-ip');
+  if (realIp && realIp.trim()) {
+    return realIp.trim();
+  }
+
+  // Next.js may expose request.ip depending on runtime
+  // @ts-expect-error - not yet typed on NextRequest
+  return typeof request.ip === 'string' ? request.ip : null;
+}
 
 /**
  * Token ile reading kaydetme
@@ -17,7 +44,11 @@ export async function POST(request: NextRequest) {
       formPayload,
       communicationMethod,
       personalInfo,
+      consent,
+      metaPixel: metaPixelPayload,
     } = body;
+
+    const metaPixel = metaPixelPayload as MetaPixelPayload | undefined;
 
     if (!token) {
       return NextResponse.json({ error: 'Token gereklidir' }, { status: 400 });
@@ -112,7 +143,7 @@ export async function POST(request: NextRequest) {
         action: 'save_reading',
         resource: 'readings',
         metadata: {
-          token: tokenHash.slice(0, 8) + '...',
+          token: tokenHash.slice(0, TOKEN_HASH_PREVIEW_LENGTH) + '...',
           readingType: readingTypeToInsert,
           errorMessage: insertError.message,
           errorCode: insertError.code,
@@ -270,6 +301,45 @@ export async function POST(request: NextRequest) {
         });
     }
 
+    let consentAllowsMeta = false;
+    if (metaPixel?.eventId) {
+      consentAllowsMeta = await determineMetaConsent(
+        supabaseAdmin,
+        consent as ConsentSnapshot | undefined
+      );
+    }
+
+    if (metaPixel?.eventId && consentAllowsMeta) {
+      const clientIp = extractClientIp(request);
+      const userAgent = request.headers.get('user-agent') || null;
+
+      sendMetaLeadEvent({
+        pixel: metaPixel,
+        personalInfo,
+        communicationMethod,
+        clientIp,
+        userAgent,
+      }).catch(error => {
+        logger.warn('Meta CAPI lead event gönderilemedi', error, {
+          action: 'meta_capi_lead_event',
+          resource: 'readings',
+          metadata: {
+            readingId: insertResult?.id ?? null,
+            sessionId: session.id,
+            token: `${tokenHash.slice(0, TOKEN_HASH_PREVIEW_LENGTH)}...`,
+          },
+        });
+      });
+    } else if (metaPixel?.eventId && !consentAllowsMeta) {
+      logger.info('Meta CAPI skipped due to missing consent', {
+        action: 'meta_capi_lead_event_skipped',
+        resource: 'readings',
+        metadata: {
+          sessionId: session.id,
+        },
+      });
+    }
+
     return NextResponse.json({
       success: true,
       id: insertResult?.id,
@@ -289,4 +359,59 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     );
   }
+}
+
+interface ConsentSnapshot {
+  consentId: string;
+  version?: number;
+  preferences?: ConsentPreferences;
+}
+
+async function determineMetaConsent(
+  supabaseAdmin: SupabaseClient,
+  snapshot?: ConsentSnapshot
+): Promise<boolean> {
+  try {
+    const preferences = await resolveConsentPreferences(supabaseAdmin, snapshot);
+    if (!preferences) {
+      return false;
+    }
+    return Boolean(preferences.marketing || preferences.advertising);
+  } catch (error) {
+    logger.warn('Meta consent resolution failed', error, {
+      action: 'resolve_meta_consent',
+    });
+    return false;
+  }
+}
+
+async function resolveConsentPreferences(
+  supabaseAdmin: SupabaseClient,
+  snapshot?: ConsentSnapshot
+): Promise<ConsentPreferences | undefined> {
+  if (!snapshot?.consentId) {
+    return snapshot?.preferences;
+  }
+
+  const { data, error } = await supabaseAdmin
+    .from('consent_logs')
+    .select('preferences')
+    .eq('consent_id', snapshot.consentId)
+    .order('recorded_at', { ascending: false })
+    .limit(1)
+    .maybeSingle();
+
+  if (error) {
+    logger.warn('Consent log lookup failed', error, {
+      action: 'fetch_latest_consent',
+      metadata: { consentId: snapshot.consentId },
+    });
+    return snapshot.preferences;
+  }
+
+  const preferences =
+    (data?.preferences as ConsentPreferences | undefined) ??
+    snapshot.preferences;
+
+  return preferences;
 }

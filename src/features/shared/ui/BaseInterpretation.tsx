@@ -39,6 +39,7 @@ import { forwardRef } from 'react';
 import Image from 'next/image';
 import type { TarotCard } from '@/types/tarot';
 import type { Theme, PositionInfo, CardMeaningData } from '@/types/ui';
+import { useTranslations } from '@/hooks/useTranslations';
 // useAuth kaldırıldı - login sistemi kaldırıldı
 // import { saveTarotReading } from '@/lib/services/reading-service'; // Service kaldırıldı
 
@@ -297,12 +298,13 @@ const BaseInterpretation = forwardRef<HTMLDivElement, BaseInterpretationProps>(
     },
     ref
   ) => {
+    const { t } = useTranslations();
     const colors = getThemeColors(theme);
     // useAuth kaldırıldı - login sistemi kaldırıldı
 
     // Varsayılan değerleri i18n'den al
-    const defaultTitle = title || 'Tarot Yorumu';
-    const defaultBadgeText = badgeText || 'TAROT';
+    const defaultTitle = title || t('interpretation.title');
+    const defaultBadgeText = badgeText || t('interpretation.badge');
 
     // Varsayılan fonksiyonlar kaldırıldı - kullanılmıyor
 
@@ -434,6 +436,14 @@ const BaseInterpretation = forwardRef<HTMLDivElement, BaseInterpretationProps>(
               cardMeaning?.context ||
               '';
 
+            const orientationText = isReversed[idx]
+              ? t('cards.reversed')
+              : t('cards.upright');
+
+            const orientationMeaningLabel = isReversed[idx]
+              ? t('cards.reversedMeaning')
+              : t('cards.uprightMeaning');
+
             return (
               <div
                 key={idx}
@@ -464,7 +474,7 @@ const BaseInterpretation = forwardRef<HTMLDivElement, BaseInterpretationProps>(
                       {positionInfo?.title || `position ${idx + 1}`}
                     </span>
                     <span className='text-xs text-gray-400'>
-                      ({isReversed[idx] ? 'Ters' : 'Düz'})
+                      ({orientationText})
                     </span>
                   </div>
 
@@ -479,7 +489,7 @@ const BaseInterpretation = forwardRef<HTMLDivElement, BaseInterpretationProps>(
                   <div
                     className={`text-sm ${isReversed[idx] ? 'text-red-400' : 'text-green-400'} font-medium mb-1`}
                   >
-                    {isReversed[idx] ? 'Ters Anlam:' : 'Düz Anlam:'}
+                    {orientationMeaningLabel}
                   </div>
 
                   {/* Kart Anlamı */}
@@ -495,7 +505,7 @@ const BaseInterpretation = forwardRef<HTMLDivElement, BaseInterpretationProps>(
                         <span
                           className={`text-xs ${colors.contextText} font-medium`}
                         >
-                          Bağlam:
+                          {t('interpretation.context')}
                         </span>
                       </div>
                       <div className='text-gray-300 text-xs leading-relaxed pl-4'>

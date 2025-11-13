@@ -27,6 +27,7 @@ import './globals.css';
 import { defaultMetadata, viewport } from '@/lib/config/metadata';
 import { APP_CONFIG } from '@/lib/config/app-config';
 import { HeadTags, Footer } from '@/features/shared/layout';
+import { CMPProvider } from '@/components/consent/CMPProvider';
 import { defaultLocale } from '@/lib/i18n/config';
 import { Inter } from 'next/font/google';
 import { SpeedInsights } from '@vercel/speed-insights/next';
@@ -41,6 +42,12 @@ const WebVitals = dynamic(() =>
 const GoogleAnalytics = dynamic(() =>
   import('@/components/analytics/GoogleAnalytics').then(
     mod => mod.GoogleAnalytics
+  )
+);
+
+const FacebookPixel = dynamic(() =>
+  import('@/components/analytics/FacebookPixel').then(
+    mod => mod.FacebookPixel
   )
 );
 
@@ -123,12 +130,15 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         className='h-full overflow-x-hidden antialiased'
         style={{ backgroundColor: APP_CONFIG.theme.backgroundColor }}
       >
-        <GoogleAnalytics />
-        <WebVitals />
-        {children}
-        <Footer />
-        <Analytics />
-        <SpeedInsights />
+        <CMPProvider initialLocale='en'>
+          <GoogleAnalytics />
+          <FacebookPixel />
+          <WebVitals />
+          {children}
+          <Footer />
+          <Analytics />
+          <SpeedInsights />
+        </CMPProvider>
       </body>
     </html>
   );

@@ -28,6 +28,7 @@ Kullanım durumu:
 
 'use client';
 
+import { useEffect } from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/hooks/auth/useAuth';
 import { LanguageSelector } from '@/features/shared/layout/LanguageSelector';
@@ -39,10 +40,10 @@ import {
 } from '@/components/performance/WebVitals';
 // Dynamic imports for non-critical layout widgets (performance optimization)
 import {
-  DynamicCookieConsent as CookieConsent,
   DynamicDisclaimerBanner as DisclaimerBanner,
   DynamicAgeVerificationModal as AgeVerificationModal,
 } from '@/components/shared/DynamicLayoutWidgets';
+import { useConsentLocaleSetter } from '@/hooks/useConsent';
 
 interface LocaleLayoutClientProps {
   children: React.ReactNode;
@@ -56,6 +57,7 @@ export function LocaleLayoutClient({
   const { user } = useAuth();
   const { t } = useTranslations();
   const isAuthenticated = !!user;
+  const setConsentLocale = useConsentLocaleSetter();
 
   // Performance monitoring
   useWebVitals();
@@ -69,6 +71,10 @@ export function LocaleLayoutClient({
       return fallback;
     }
   };
+
+  useEffect(() => {
+    setConsentLocale(locale as 'tr' | 'en' | 'sr');
+  }, [locale, setConsentLocale]);
 
   return (
     <div className='min-h-screen bg-gradient-to-br from-slate-950 via-black to-slate-900 text-white'>
@@ -133,9 +139,6 @@ export function LocaleLayoutClient({
 
       {/* Age Verification Modal */}
       <AgeVerificationModal locale={locale as 'tr' | 'en' | 'sr'} />
-
-      {/* Cookie Consent Banner */}
-      <CookieConsent />
 
       {/* Performance Monitoring */}
       <WebVitals />

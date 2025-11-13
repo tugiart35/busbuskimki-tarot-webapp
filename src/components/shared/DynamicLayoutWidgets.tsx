@@ -23,18 +23,6 @@ import dynamic from 'next/dynamic';
 const EmptyFallback = () => null;
 
 /**
- * Cookie Consent Component
- * Kullanıcı çerez tercihlerini yönetir
- *
- * SSR: false - localStorage kullanıyor
- * Loading: null - Görünmeden yüklenir, UX etkilenmez
- */
-export const DynamicCookieConsent = dynamic(() => import('./CookieConsent'), {
-  loading: () => <EmptyFallback />,
-  ssr: false, // localStorage requires client-side
-});
-
-/**
  * Disclaimer Banner Component
  * Yasal uyarı banner'ı
  *

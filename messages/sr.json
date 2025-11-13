@@ -558,6 +558,27 @@
       "notFoundDescription": "Tarot kartica koju ste tražili nije pronađena."
     }
   },
+  "tarotReadingComponent": {
+    "messages": {
+      "readingTypeSelectError": "Došlo je do greške pri izboru tipa čitanja. Molimo pokušajte ponovo.",
+      "cardSelectError": "Došlo je do greške pri izboru karte. Molimo pokušajte ponovo.",
+      "readingTypeChanged": "Tip čitanja je promenjen. Možete izabrati novi.",
+      "readingTypeChangeError": "Došlo je do greške pri promeni tipa čitanja.",
+      "tokenFlowSaveError": "Greška pri čuvanju u tokenu."
+    },
+    "labels": {
+      "change": "Promeni",
+      "tagSimple": "✨ Jednostavno čitanje",
+      "tagDetailed": "👑 Audio čitanje",
+      "tagWritten": "📝 Pisano čitanje"
+    },
+    "fallback": {
+      "guestDataNotStored": "Podaci za gostujućeg korisnika nisu sačuvani",
+      "simpleReadingCounter": "Brojač jednostavnih čitanja",
+      "positionDescription": "Pozicija karte",
+      "positionTitle": "Pozicija {position}"
+    }
+  },
   "career": {
     "data": {
       "badgeText": "Karijera",
@@ -26340,6 +26361,10 @@
               "sensitiveData": {
                 "title": "Osetljivi podaci",
                 "content": "Posebne kategorije kao što su datum rođenja, zdravstveno stanje. Obrada ovih kategorija moguća je samo sa eksplicitnim saglasnošću ili pravnim izuzecima."
+              },
+              "metaPixel": {
+                "title": "Upotreba Meta Pixel-a i Conversions API-ja",
+                "content": "Koristimo Meta Pixel i Meta Conversions API kako bismo merili konverzije, sprečili zloupotrebe i unapredili efikasnost kampanja. Meta prima samo SHA-256 heširane identifikatore (npr. e-pošta, telefon) i vrednosti `_fbp` / `_fbc` kolačića iz pregledača, što omogućava uparivanje događaja sa pregledača i servera bez otkrivanja sirovih podataka. Preferencije praćenja možete promeniti u bilo kom trenutku, a svoja prava iz oblasti privatnosti ostvarujete kontaktiranjem nas kroz kanale opisane u ovoj politici."
               }
             },
             "processingConditions": {
@@ -26390,7 +26415,7 @@
                 "title": "Napredna prava",
                 "rights": "Zahtev za ograničavanje obrade, prigovor na automatizovane procese odluka, prenosivost podataka"
               },
-              "application": "Primena: vaše aplikacije možete poslati na info@tarotnumeroloji.com sa dokumentima za verifikaciju identiteta."
+              "application": "Primena: vaše aplikacije možete poslati na info@Büşbüşkimki.com sa dokumentima za verifikaciju identiteta."
             },
             "internationalTransfers": {
               "title": "9. Međunarodni transferi podataka",
@@ -26420,7 +26445,7 @@
             },
             "changes": {
               "title": "12. Promene",
-              "content": "Ova politika se periodično ažurira u skladu sa regulatornim ili operativnim zahtevima. Najistaknutija verzija će uvek biti objavljena na vvv.tarotnumeroloji.com."
+              "content": "Ova politika se periodično ažurira u skladu sa regulatornim ili operativnim zahtevima. Najistaknutija verzija će uvek biti objavljena na vvv.Büşbüşkimki.com."
             },
             "contact": {
               "title": "13. Kontakt informacije",
@@ -26766,6 +26791,53 @@
     }
   },
   "new-lover": {
+    "form": {
+      "personalInfo": "Vaše lične informacije",
+      "firstName": "Ime",
+      "lastName": "Prezime",
+      "birthDate": "Datum rođenja",
+      "birthDateUnknown": "Ne znam datum rođenja",
+      "relationshipStatus": "Status veze",
+      "selectRelationshipStatus": "Izaberite status veze",
+      "relationshipStatusOptions": {
+        "single": "Slobodan/na",
+        "in_relationship": "U vezi",
+        "married": "U braku",
+        "separated": "Razdvojen/a",
+        "divorced": "Razveden/a",
+        "widowed": "Udovac/udovica",
+        "prefer_not_to_say": "Ne želim da navedem"
+      },
+      "partnerInfo": "Podaci o partneru",
+      "partnerName": "Ime partnera",
+      "partnerBirthDate": "Datum rođenja partnera",
+      "partnerBirthDateUnknown": "Ne znam datum rođenja partnera",
+      "hasPartner": "Da li imate informacije o partneru? (Opciono)",
+      "communicationMethod": "Metod komunikacije",
+      "emailCommunication": "E-mail",
+      "whatsappCommunication": "WhatsApp",
+      "email": "E-mail adresa",
+      "phone": "Broj telefona",
+      "questions": "Pitanja",
+      "concernQuestion": "Koja situacija vam sada pravi najveću brigu?",
+      "understandingQuestion": "Šta želite da razumete ili razjasnite kroz ovo čitanje?",
+      "emotionalQuestion": "Kako se osećate u ovoj situaciji?",
+      "mainQuestion": "Vaše pitanje",
+      "mainQuestionPlaceholder": "Napišite svoje pitanje...",
+      "saving": "Čuvam...",
+      "saveAndOpen": "Sačuvaj obrazac i otvori karte 🎴",
+      "clearAll": "Obriši sve",
+      "placeholders": {
+        "firstName": "Ime",
+        "lastName": "Prezime",
+        "email": "primer@mail.com",
+        "phone": "+381 60 123 45 67",
+        "concernQuestion": "Opišite situaciju za koju tražite smernice...",
+        "understandingQuestion": "Šta želite da shvatite?",
+        "emotionalQuestion": "Kako se osećate upravo sada?",
+        "mainQuestion": "Upišite pitanje..."
+      }
+    },
     "meanings": {
       "thefool": {
         "position1": {
@@ -34574,6 +34646,53 @@
     }
   },
   "relationship-analysis": {
+    "form": {
+      "personalInfo": "Vaše lične informacije",
+      "firstName": "Ime",
+      "lastName": "Prezime",
+      "birthDate": "Datum rođenja",
+      "birthDateUnknown": "Ne znam datum rođenja",
+      "relationshipStatus": "Status veze",
+      "selectRelationshipStatus": "Izaberite status veze",
+      "relationshipStatusOptions": {
+        "single": "Slobodan/na",
+        "in_relationship": "U vezi",
+        "married": "U braku",
+        "separated": "Razdvojen/a",
+        "divorced": "Razveden/a",
+        "widowed": "Udovac/udovica",
+        "prefer_not_to_say": "Ne želim da navedem"
+      },
+      "partnerInfo": "Podaci o partneru",
+      "partnerName": "Ime partnera",
+      "partnerBirthDate": "Datum rođenja partnera",
+      "partnerBirthDateUnknown": "Ne znam datum rođenja partnera",
+      "hasPartner": "Da li imate informacije o partneru? (Opciono)",
+      "communicationMethod": "Metod komunikacije",
+      "emailCommunication": "E-mail",
+      "whatsappCommunication": "WhatsApp",
+      "email": "E-mail adresa",
+      "phone": "Broj telefona",
+      "questions": "Pitanja",
+      "concernQuestion": "Koja situacija vam sada pravi najveću brigu?",
+      "understandingQuestion": "Šta želite da razumete ili razjasnite kroz ovo čitanje?",
+      "emotionalQuestion": "Kako se osećate u ovoj situaciji?",
+      "mainQuestion": "Vaše pitanje",
+      "mainQuestionPlaceholder": "Napišite svoje pitanje...",
+      "saving": "Čuvam...",
+      "saveAndOpen": "Sačuvaj obrazac i otvori karte 🎴",
+      "clearAll": "Obriši sve",
+      "placeholders": {
+        "firstName": "Ime",
+        "lastName": "Prezime",
+        "email": "primer@mail.com",
+        "phone": "+381 60 123 45 67",
+        "concernQuestion": "Opišite situaciju za koju tražite smernice...",
+        "understandingQuestion": "Šta želite da shvatite?",
+        "emotionalQuestion": "Kako se osećate upravo sada?",
+        "mainQuestion": "Upišite pitanje..."
+      }
+    },
     "meanings": {
       "thefool": {
         "position1": {
@@ -38010,6 +38129,53 @@
     }
   },
   "relationship-problems": {
+    "form": {
+      "personalInfo": "Vaše lične informacije",
+      "firstName": "Ime",
+      "lastName": "Prezime",
+      "birthDate": "Datum rođenja",
+      "birthDateUnknown": "Ne znam datum rođenja",
+      "relationshipStatus": "Status veze",
+      "selectRelationshipStatus": "Izaberite status veze",
+      "relationshipStatusOptions": {
+        "single": "Slobodan/na",
+        "in_relationship": "U vezi",
+        "married": "U braku",
+        "separated": "Razdvojen/a",
+        "divorced": "Razveden/a",
+        "widowed": "Udovac/udovica",
+        "prefer_not_to_say": "Ne želim da navedem"
+      },
+      "partnerInfo": "Podaci o partneru",
+      "partnerName": "Ime partnera",
+      "partnerBirthDate": "Datum rođenja partnera",
+      "partnerBirthDateUnknown": "Ne znam datum rođenja partnera",
+      "hasPartner": "Da li imate informacije o partneru? (Opciono)",
+      "communicationMethod": "Metod komunikacije",
+      "emailCommunication": "E-mail",
+      "whatsappCommunication": "WhatsApp",
+      "email": "E-mail adresa",
+      "phone": "Broj telefona",
+      "questions": "Pitanja",
+      "concernQuestion": "Koja situacija vam sada pravi najveću brigu?",
+      "understandingQuestion": "Šta želite da razumete ili razjasnite kroz ovo čitanje?",
+      "emotionalQuestion": "Kako se osećate u ovoj situaciji?",
+      "mainQuestion": "Vaše pitanje",
+      "mainQuestionPlaceholder": "Napišite svoje pitanje...",
+      "saving": "Čuvam...",
+      "saveAndOpen": "Sačuvaj obrazac i otvori karte 🎴",
+      "clearAll": "Obriši sve",
+      "placeholders": {
+        "firstName": "Ime",
+        "lastName": "Prezime",
+        "email": "primer@mail.com",
+        "phone": "+381 60 123 45 67",
+        "concernQuestion": "Opišite situaciju za koju tražite smernice...",
+        "understandingQuestion": "Šta želite da shvatite?",
+        "emotionalQuestion": "Kako se osećate upravo sada?",
+        "mainQuestion": "Upišite pitanje..."
+      }
+    },
     "meanings": {
       "thefool": {
         "position1": {
@@ -46134,6 +46300,10 @@
             "sensitiveData": {
               "title": "Osetljivi podaci",
               "content": "Posebne kategorije kao što su datum rođenja, zdravstveno stanje. Obrada ovih kategorija moguća je samo sa eksplicitnim saglasnošću ili pravnim izuzecima."
+            },
+            "metaPixel": {
+              "title": "Upotreba Meta Pixel-a i Conversions API-ja",
+              "content": "Koristimo Meta Pixel i Meta Conversions API kako bismo merili konverzije, sprečili zloupotrebe i unapredili efikasnost kampanja. Meta prima samo SHA-256 heširane identifikatore (npr. e-pošta, telefon) i vrednosti `_fbp` / `_fbc` kolačića iz pregledača, što omogućava uparivanje događaja sa pregledača i servera bez otkrivanja sirovih podataka. Preferencije praćenja možete promeniti u bilo kom trenutku, a svoja prava iz oblasti privatnosti ostvarujete kontaktiranjem nas kroz kanale opisane u ovoj politici."
             }
           },
           "processingConditions": {
@@ -46184,7 +46354,7 @@
               "title": "Napredna prava",
               "rights": "Zahtev za ograničavanje obrade, prigovor na automatizovane procese odluka, prenosivost podataka"
             },
-            "application": "Primena: vaše aplikacije možete poslati na info@tarotnumeroloji.com sa dokumentima za verifikaciju identiteta."
+            "application": "Primena: vaše aplikacije možete poslati na info@Büşbüşkimki.com sa dokumentima za verifikaciju identiteta."
           },
           "internationalTransfers": {
             "title": "9. Međunarodni transferi podataka",
@@ -46214,7 +46384,7 @@
           },
           "changes": {
             "title": "12. Promene",
-            "content": "Ova politika se periodično ažurira u skladu sa regulatornim ili operativnim zahtevima. Najistaknutija verzija će uvek biti objavljena na vvv.tarotnumeroloji.com."
+            "content": "Ova politika se periodično ažurira u skladu sa regulatornim ili operativnim zahtevima. Najistaknutija verzija će uvek biti objavljena na vvv.Büşbüşkimki.com."
           },
           "contact": {
             "title": "13. Kontakt informacije",
@@ -46428,6 +46598,10 @@
           "sensitiveData": {
             "title": "Osetljivi podaci",
             "content": "Posebne kategorije kao što su datum rođenja, zdravstveno stanje. Obrada ovih kategorija moguća je samo sa eksplicitnim saglasnošću ili pravnim izuzecima."
+          },
+          "metaPixel": {
+            "title": "Upotreba Meta Pixel-a i Conversions API-ja",
+            "content": "Koristimo Meta Pixel i Meta Conversions API kako bismo merili konverzije, sprečili zloupotrebe i unapredili efikasnost kampanja. Meta prima samo SHA-256 heširane identifikatore (npr. e-pošta, telefon) i vrednosti `_fbp` / `_fbc` kolačića iz pregledača, što omogućava uparivanje događaja sa pregledača i servera bez otkrivanja sirovih podataka. Preferencije praćenja možete promeniti u bilo kom trenutku, a svoja prava iz oblasti privatnosti ostvarujete kontaktiranjem nas kroz kanale opisane u ovoj politici."
           }
         },
         "processingConditions": {
@@ -46478,7 +46652,7 @@
             "title": "Napredna prava",
             "rights": "Zahtev za ograničavanje obrade, prigovor na automatizovane procese odluka, prenosivost podataka"
           },
-          "application": "Primena: vaše aplikacije možete poslati na info@tarotnumeroloji.com sa dokumentima za verifikaciju identiteta."
+          "application": "Primena: vaše aplikacije možete poslati na info@Büşbüşkimki.com sa dokumentima za verifikaciju identiteta."
         },
         "internationalTransfers": {
           "title": "9. Međunarodni transferi podataka",
@@ -46508,7 +46682,7 @@
         },
         "changes": {
           "title": "12. Promene",
-          "content": "Ova politika se periodično ažurira u skladu sa regulatornim ili operativnim zahtevima. Najistaknutija verzija će uvek biti objavljena na vvv.tarotnumeroloji.com."
+          "content": "Ova politika se periodično ažurira u skladu sa regulatornim ili operativnim zahtevima. Najistaknutija verzija će uvek biti objavljena na vvv.Büşbüşkimki.com."
         },
         "contact": {
           "title": "13. Kontakt informacije",

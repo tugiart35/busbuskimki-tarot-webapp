@@ -127,6 +127,19 @@ export default function PrivacyPolicy() {
                   )}
                 </p>
               </div>
+              <div className='bg-gradient-to-r from-indigo-500/10 to-purple-500/10 p-4 rounded-lg border border-indigo-500/20'>
+                <h3 className='text-lg font-semibold text-indigo-300 mb-2 flex items-center'>
+                  <FaShieldAlt className='w-4 h-4 mr-2' />
+                  {t(
+                    'blog.footer.legalPages.privacyPolicy.sections.dataCollection.metaPixel.title'
+                  )}
+                </h3>
+                <p className='text-cosmic-200'>
+                  {t(
+                    'blog.footer.legalPages.privacyPolicy.sections.dataCollection.metaPixel.content'
+                  )}
+                </p>
+              </div>
             </div>
           </section>
 
@@ -508,7 +521,7 @@ export default function PrivacyPolicy() {
                     )}
                   </h3>
                   <a
-                    href='mailto:info@tarotnumeroloji.com'
+                    href='mailto:info@busbuskinki.com'
                     className='text-golden-400 hover:text-golden-300 underline transition-colors'
                   >
                     {t(

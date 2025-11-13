@@ -2,15 +2,16 @@ import { Metadata } from 'next';
 import {
   generateOrganizationSchema,
   generateWebSiteSchema,
-  generateServiceSchema,
   generateBreadcrumbSchema,
   generateFAQSchema,
+  type FAQSchema,
+  type ServiceSchema,
 } from './schema-markup';
 
 interface TarotPageStructuredData {
   organization: ReturnType<typeof generateOrganizationSchema>;
   website: ReturnType<typeof generateWebSiteSchema>;
-  service: ReturnType<typeof generateServiceSchema>;
+  service: ServiceSchema;
   breadcrumb: ReturnType<typeof generateBreadcrumbSchema>;
   faq: ReturnType<typeof generateFAQSchema>;
 }
@@ -154,7 +155,7 @@ export function generateTarotPageMetadata(locale: string): Metadata {
     alternates: {
       canonical: `${baseUrl}${data.canonicalPath}`,
       languages: {
-        'x-default': `${baseUrl}/tr/tarotokumasi`,
+        'x-default': `${baseUrl}/en/tarotokumasi`,
         tr: `${baseUrl}/tr/tarotokumasi`,
         en: `${baseUrl}/en/tarotokumasi`,
         sr: `${baseUrl}/sr/tarotokumasi`,
@@ -206,8 +207,93 @@ export function generateTarotPageStructuredData(
   return {
     organization: generateOrganizationSchema(),
     website: generateWebSiteSchema(),
-    service: generateServiceSchema(),
+    service: buildTarotServiceSchema(locale),
     breadcrumb: generateBreadcrumbSchema(data.breadcrumbs),
-    faq: generateFAQSchema(locale),
+    faq: buildTarotFaqSchema(locale, data.faq),
+  };
+}
+
+function buildTarotFaqSchema(
+  locale: string,
+  faqItems: Array<{ question: string; answer: string }>
+): FAQSchema {
+  if (!faqItems || faqItems.length === 0) {
+    return generateFAQSchema(locale);
+  }
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map(item => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  };
+}
+
+function buildTarotServiceSchema(locale: string): ServiceSchema {
+  const base = process.env.NEXT_PUBLIC_SITE_URL || 'https://busbuskimki.com';
+
+  const serviceNames = {
+    tr: 'Çevrimiçi Tarot Açılımları',
+    en: 'Online Tarot Readings',
+    sr: 'Onlajn Tarot Čitanja',
+  } as const;
+
+  const serviceDescriptions = {
+    tr: 'Aşk, kariyer, para ve ilişki temalı tarot açılımlarını seçerek kişisel rehberlik alın.',
+    en: 'Select love, career, money and relationship-focused tarot spreads for personalised guidance.',
+    sr: 'Odaberite tarot rasporede za ljubav, karijeru, novac i odnose i dobijte lično vođstvo.',
+  } as const;
+
+  const offerCatalog: Array<{ name: string; description: string }> =
+    locale === 'tr'
+      ? [
+          { name: 'Aşk Tarot Açılımı', description: 'İlişkiler ve duygusal bağlantılar için tarot rehberliği.' },
+          { name: 'Kariyer Tarot Açılımı', description: 'İş ve kariyer kararlarını destekleyen kart yorumları.' },
+          { name: 'Genel Tarot Açılımı', description: 'Günlük yaşam ve kişisel gelişim için genel tarot rehberliği.' },
+        ]
+      : locale === 'sr'
+        ? [
+            { name: 'Ljubavni Tarot Raspored', description: 'Vođstvo kartama za ljubavne veze i emocije.' },
+            { name: 'Karijerni Tarot Raspored', description: 'Podrška za poslovne odluke kroz tarot simbole.' },
+            { name: 'Opšti Tarot Raspored', description: 'Sveobuhvatno vođstvo za svakodnevni život i lični rast.' },
+          ]
+        : [
+            { name: 'Love Tarot Spread', description: 'Guidance for relationships and emotional dynamics.' },
+            { name: 'Career Tarot Spread', description: 'Support for professional decisions through tarot insights.' },
+            { name: 'General Tarot Spread', description: 'Holistic tarot reading for daily life and personal growth.' },
+          ];
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: serviceNames[locale as keyof typeof serviceNames] || serviceNames.en,
+    description:
+      serviceDescriptions[locale as keyof typeof serviceDescriptions] ||
+      serviceDescriptions.en,
+    provider: {
+      '@type': 'Organization',
+      name: 'BüşBüşKimKi Tarot Okuyucusu',
+      url: base,
+    },
+    serviceType: 'Personal Services',
+    areaServed: 'Worldwide',
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: serviceNames[locale as keyof typeof serviceNames] || serviceNames.en,
+      itemListElement: offerCatalog.map(offer => ({
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: offer.name,
+          description: offer.description,
+        },
+      })),
+    },
   };
 }

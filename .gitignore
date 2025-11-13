@@ -124,6 +124,7 @@ seo-*.json
 seo-*.txt
 card-quality-report.json
 unused-translation-keys.json
+lighthouse-reports/
 
 # Development scripts
 scripts/
@@ -159,6 +160,7 @@ public/new-lover-backup.png
 public/new-lover-original.png
 public/new-lover-optimized.png
 public/new-lover-small.png
+public/Tarot_otantik/
 
 # Geliştirme dosyaları
 reorder_json.py

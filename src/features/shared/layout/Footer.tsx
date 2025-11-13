@@ -25,12 +25,14 @@ import {
   SiGooglepay,
 } from 'react-icons/si';
 import { useTranslations } from '@/hooks/useTranslations';
+import { useConsentManager } from '@/hooks/useConsent';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const { t } = useTranslations();
   const pathname = usePathname();
   const locale = pathname?.split('/')[1] || 'tr';
+  const { open: openConsentManager } = useConsentManager();
 
   return (
     <footer className='relative overflow-hidden bg-gradient-to-br from-purple-900 via-indigo-900 to-purple-800'>
@@ -147,6 +149,19 @@ const Footer = () => {
                     {t('footer.legal.cookiePolicy', 'Çerez Politikası')}
                   </span>
                 </Link>
+                <button
+                  type='button'
+                  onClick={() => openConsentManager?.()}
+                  className='text-left text-sm text-gray-300 hover:text-white transition-all duration-300 hover:translate-x-1 group disabled:cursor-not-allowed disabled:opacity-60'
+                  disabled={!openConsentManager}
+                >
+                  <span className='group-hover:text-purple-300'>
+                    {t(
+                      'footer.legal.manageCookies',
+                      'Çerez tercihlerini yönet'
+                    )}
+                  </span>
+                </button>
                 <Link
                   href={`/${locale}/legal/disclaimer`}
                   className='text-sm text-gray-300 hover:text-white transition-all duration-300 hover:translate-x-1 group'

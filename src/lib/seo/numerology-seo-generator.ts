@@ -2,15 +2,16 @@ import { Metadata } from 'next';
 import {
   generateOrganizationSchema,
   generateWebSiteSchema,
-  generateServiceSchema,
   generateBreadcrumbSchema,
   generateFAQSchema,
+  type FAQSchema,
+  type ServiceSchema,
 } from './schema-markup';
 
 interface NumerologyPageStructuredData {
   organization: ReturnType<typeof generateOrganizationSchema>;
   website: ReturnType<typeof generateWebSiteSchema>;
-  service: ReturnType<typeof generateServiceSchema>;
+  service: ServiceSchema;
   breadcrumb: ReturnType<typeof generateBreadcrumbSchema>;
   faq: ReturnType<typeof generateFAQSchema>;
 }
@@ -184,6 +185,14 @@ const numerologyPageSeoData: Record<
   },
 };
 
+type NumerologyLocale = 'tr' | 'en' | 'sr';
+
+function resolveLocale(locale: string): NumerologyLocale {
+  return (
+    ['tr', 'en', 'sr'].includes(locale) ? locale : 'tr'
+  ) as NumerologyLocale;
+}
+
 export function generateNumerologyPageMetadata(locale: string): Metadata {
   // Ensure we always have valid data with explicit type assertion
   const data =
@@ -198,7 +207,7 @@ export function generateNumerologyPageMetadata(locale: string): Metadata {
     alternates: {
       canonical: `${baseUrl}${data!.canonicalPath}`,
       languages: {
-        'x-default': `${baseUrl}/tr/numeroloji`,
+        'x-default': `${baseUrl}/en/numeroloji`,
         tr: `${baseUrl}/tr/numeroloji`,
         en: `${baseUrl}/en/numeroloji`, // SEO Fix: gerçek route kullan
         sr: `${baseUrl}/sr/numeroloji`, // SEO Fix: gerçek route kullan
@@ -252,9 +261,125 @@ export function generateNumerologyPageStructuredData(
   return {
     organization: generateOrganizationSchema(),
     website: generateWebSiteSchema(),
-    service: generateServiceSchema(),
+    service: buildNumerologyServiceSchema(locale),
     breadcrumb: generateBreadcrumbSchema(data!.breadcrumbs),
-    faq: generateFAQSchema(locale),
+    faq: buildFaqSchemaFromData(locale, data!.faq),
+  };
+}
+
+function buildFaqSchemaFromData(
+  locale: string,
+  faqItems: Array<{ question: string; answer: string }>
+): FAQSchema {
+  if (!faqItems || faqItems.length === 0) {
+    return generateFAQSchema(locale);
+  }
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map(item => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  };
+}
+
+function buildNumerologyServiceSchema(locale: string): ServiceSchema {
+  const base = process.env.NEXT_PUBLIC_SITE_URL || 'https://busbuskimki.com';
+
+  const serviceNames = {
+    tr: 'Çevrimiçi Numeroloji Analizi',
+    en: 'Online Numerology Analysis',
+    sr: 'Onlajn Numerološka Analiza',
+  } as const;
+
+  const serviceDescriptions = {
+    tr: 'Yaşam yolu, kader sayısı, ruh arzusu ve uyumluluk gibi numeroloji hesaplamalarını ücretsiz deneyin.',
+    en: 'Explore life path, destiny number, soul urge and compatibility calculations with our free numerology tools.',
+    sr: 'Istražite broj životnog puta, broj sudbine, dušinu želju i kompatibilnost uz naše besplatne numerološke alate.',
+  } as const;
+
+  const localeOffers: Record<
+    NumerologyLocale,
+    Array<{ name: string; description: string }>
+  > = {
+    tr: [
+      {
+        name: 'Yaşam Yolu Hesaplama',
+        description: 'Doğum tarihinize göre yaşam yolu numaranızı öğrenin.',
+      },
+      {
+        name: 'Kader Sayısı Analizi',
+        description: 'İsminizden kader ve ifade numaranızı hesaplayın.',
+      },
+      {
+        name: 'Uyumluluk Analizi',
+        description: 'İsim ve doğum tarihi ile ilişki uyumluluğunu hesaplayın.',
+      },
+    ],
+    en: [
+      {
+        name: 'Life Path Calculation',
+        description: 'Discover your life path number using your birth date.',
+      },
+      {
+        name: 'Destiny Number Analysis',
+        description:
+          'Calculate destiny and expression numbers from your full name.',
+      },
+      {
+        name: 'Compatibility Analysis',
+        description: 'Evaluate compatibility using name and birth date.',
+      },
+    ],
+    sr: [
+      {
+        name: 'Izračun Životnog Puta',
+        description: 'Saznajte broj životnog puta na osnovu datuma rođenja.',
+      },
+      {
+        name: 'Analiza Broja Sudbine',
+        description: 'Izračunajte broj sudbine i izražavanja iz imena.',
+      },
+      {
+        name: 'Analiza Kompatibilnosti',
+        description: 'Procijenite kompatibilnost uz ime i datum rođenja.',
+      },
+    ],
+  };
+
+  const localeKey = resolveLocale(locale);
+  const offers = localeOffers[localeKey];
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: serviceNames[localeKey] || serviceNames.en,
+    description: serviceDescriptions[localeKey] || serviceDescriptions.en,
+    provider: {
+      '@type': 'Organization',
+      name: 'BüşBüşKimKi Tarot Okuyucusu',
+      url: base,
+    },
+    serviceType: 'Personal Services',
+    areaServed: 'Worldwide',
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: serviceNames[localeKey] || serviceNames.en,
+      itemListElement: offers.map(offer => ({
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: offer.name,
+          description: offer.description,
+        },
+      })),
+    },
   };
 }
 

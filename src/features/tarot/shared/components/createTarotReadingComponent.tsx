@@ -1,5 +1,5 @@
 // React hooks ve Next.js navigation için gerekli importlar
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 
 // Proje içi custom hook'lar - çeviri, toast bildirimleri, kredi yönetimi ve auth için
@@ -9,7 +9,6 @@ import { useReadingCredits } from '@/hooks/useReadingCredits';
 import { useAuth } from '@/hooks/auth/useAuth';
 
 // Supabase client ve tema konfigürasyonu
-import { supabase } from '@/lib/supabase/client';
 import type { Theme } from '@/lib/theme/theme-config';
 
 // Paylaşılan UI bileşenleri - toast, kart galerisi, okuma tipi seçici, kart detayları ve renderer
@@ -34,6 +33,12 @@ import {
 
 // Tarot okuma akışı hook'u
 import { useTarotReadingFlow } from '../hooks';
+
+// Detaylı form akışı yardımcıları
+import {
+  createDetailedFormSubmission,
+  type MetaLeadContext,
+} from '../flows/detailedFormSubmission';
 
 // Tarot tipleri ve konfigürasyon tipleri
 import {
@@ -584,8 +589,15 @@ export function createTarotReadingComponent({
     const searchParams = useSearchParams();
     const { t } = useTranslations();
 
-    // Token'ı URL'den al (single card okuması için session complete için gerekli)
-    const sessionToken = searchParams?.get('token') || null;
+    // Token'ı URL'den al ve geçersiz değerleri filtrele
+    const rawToken = searchParams?.get('token');
+    const sessionToken =
+      rawToken &&
+      rawToken !== 'null' &&
+      rawToken !== 'undefined' &&
+      rawToken.trim() !== ''
+        ? rawToken
+        : null;
 
     // Locale bilgisini pathname'den al
     const locale = useMemo(() => {
@@ -611,6 +623,8 @@ export function createTarotReadingComponent({
     // Kullanıcı auth ve toast bildirimleri
     const { user } = useAuth();
     const { toast, showToast, hideToast } = useToast();
+
+    const metaLeadRef = useRef<MetaLeadContext | null>(null);
 
     // Kredi yönetimi - detaylı ve yazılı okuma için ayrı krediler
     const detailedCredits = useReadingCredits(
@@ -722,6 +736,31 @@ export function createTarotReadingComponent({
         interpretationGreeting: `${namespace}.messages.interpretationGreeting`,
         // Önce okuma tipi seç mesajı
         selectReadingTypeFirst: `${namespace}.messages.selectReadingTypeFirst`,
+        // Genel bileşen mesajları
+
+        readingTypeSelectError:
+          'tarotReadingComponent.messages.readingTypeSelectError',
+        cardSelectError: 'tarotReadingComponent.messages.cardSelectError',
+        readingTypeChanged: 'tarotReadingComponent.messages.readingTypeChanged',
+
+        readingTypeChangeError:
+          'tarotReadingComponent.messages.readingTypeChangeError',
+        tokenFlowSaveError: 'tarotReadingComponent.messages.tokenFlowSaveError',
+
+        changeButton: 'tarotReadingComponent.labels.change',
+        tags: {
+          simple: 'tarotReadingComponent.labels.tagSimple',
+          detailed: 'tarotReadingComponent.labels.tagDetailed',
+          written: 'tarotReadingComponent.labels.tagWritten',
+        },
+
+        guestDataNotStored: 'tarotReadingComponent.fallback.guestDataNotStored',
+        simpleReadingCounter:
+          'tarotReadingComponent.fallback.simpleReadingCounter',
+
+        positionDescription:
+          'tarotReadingComponent.fallback.positionDescription',
+        positionTitle: 'tarotReadingComponent.fallback.positionTitle',
       }),
       [namespace]
     );
@@ -806,249 +845,43 @@ export function createTarotReadingComponent({
       t,
     ]);
 
-    // Detaylı form kaydetme butonu - form doğrulaması yapar ve kredi onayı gösterir
-    const handleSaveDetailedFormClick = () => {
-      if (!validateDetailedForm()) {
-        return;
-      }
-      setModalStates(prev => ({ ...prev, showCreditConfirm: true }));
-    };
-
-    // Bilgi modalını kapatma
-    const closeInfoModal = () => {
-      setModalStates(prev => ({ ...prev, showInfoModal: false }));
-    };
-
-    // Bilgi modalını iptal etme - okuma tipini de sıfırlar
-    const cancelInfoModal = () => {
-      setModalStates(prev => ({ ...prev, showInfoModal: false }));
-      setSelectedReadingType(null);
-    };
-
-    // Detaylı form kaydetme - kullanıcı girişi kontrolü yapar ve formu kaydeder
-    // Token ile geldiğinde (sessionToken varsa) authentication kontrolü yapma
-    const saveDetailedForm = async () => {
-      // Token ile gelinmediyse ve kullanıcı giriş yapmamışsa hata göster
-      if (!sessionToken && !user) {
-        showToast(t(messages.loginRequired), 'error');
-        setModalStates(prev => ({
-          ...prev,
-          showCreditConfirm: false,
-          isSaving: false,
-        }));
-        return;
-      }
-
-      setSaving(true);
-      try {
-        // Form kaydedildi olarak işaretle
-        setDetailedFormSaved(true);
-        setModalStates(prev => ({ ...prev, showCreditConfirm: false }));
-      } finally {
-        setSaving(false);
-      }
-    };
-
-    // Supabase'e okuma kaydetme - kredi kontrolü ve veri kaydetme işlemi
-    const saveReadingToSupabase = async (readingData: any) => {
-      try {
-        // Token akışı: kullanıcı login olsa bile API route üzerinden kaydet
-        if (sessionToken) {
-          try {
-            // Form verilerini hazırla
-            const formPayload = {
-              personalInfo,
-              ...(config.requiresPartnerInfo ||
-              (config.isSingleCard && hasPartner) ||
-              (partnerInfoSpreads.includes(config.spreadId) && hasPartner)
-                ? { partnerInfo }
-                : {}),
-              communicationMethod,
-              userQuestions: questions,
-            };
-
-            // API route üzerinden kaydet (server-side authenticated)
-            const saveResponse = await fetch(
-              '/api/reading-sessions/save-reading',
-              {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                  token: sessionToken,
-                  readingData: {
-                    ...readingData,
-                    spread_name: t(dataKeys.spreadName),
-                    spreadName: t(dataKeys.spreadName),
-                  },
-                  formPayload,
-                  communicationMethod,
-                  personalInfo,
-                }),
-              }
-            );
-
-            const saveResult = await saveResponse.json();
-
-            if (!saveResponse.ok || !saveResult.success) {
-              throw new Error(
-                saveResult.error || 'Token akışında kaydetme hatası'
-              );
-            }
-
-            // Email gönderimi kaldırıldı - kullanıcıya okuma özeti gönderilmez
-            // Token linki zaten admin tarafından gönderiliyor (/api/admin/send-reading-link)
-
-            return {
-              success: true,
-              id: saveResult.id,
-              userId: null,
-            };
-          } catch (error) {
-            return {
-              success: false,
-              error:
-                error instanceof Error
-                  ? error.message
-                  : 'Token akışında kaydetme hatası',
-            };
-          }
-        }
-
-        // Normal kullanıcı kontrolü (user null ve token yok ise)
-        if (!user?.id) {
-          return {
-            success: true,
-            id: 'guest-session',
-            userId: 'guest',
-            message: 'Guest kullanıcı için veri saklanmadı',
-          };
-        }
-
-        // Okuma tipine göre kredi maliyeti hesaplama
-        const costCredits =
-          selectedReadingType === READING_TYPES.DETAILED
-            ? detailedCredits.creditStatus.requiredCredits
-            : selectedReadingType === READING_TYPES.WRITTEN
-              ? writtenCredits.creditStatus.requiredCredits
-              : 0;
-
-        // İletişim bilgilerini metadata'ya ekleme - güvenlik için telefon hash'lenir
-        const enhancedMetadata = {
-          ...readingData.metadata,
-          communicationMethod,
-          personalInfo: {
-            ...personalInfo,
-            // Güvenlik için telefon numarasını metadata'da hash'le
-            phoneProvided: !!personalInfo.phone,
-          },
-        };
-
-        // Debug: RPC çağrısı öncesi parametreleri log'la
-        const rpcParams = {
-          p_user_id: user.id,
-          p_reading_type: readingData.readingType,
-          p_spread_name: t(dataKeys.spreadName),
-          p_title: readingData.title || t(dataKeys.spreadTitle),
-          p_interpretation: readingData.interpretation,
-          p_cards: readingData.cards.selectedCards,
-          p_questions: readingData.questions,
-          p_cost_credits: costCredits,
-          p_metadata: enhancedMetadata,
-          p_idempotency_key: `reading_${user.id}_${readingData.timestamp}`,
-        };
-
-        // Supabase RPC fonksiyonu ile okuma kaydetme ve kredi düşme
-        const { data: rpcResult, error: rpcError } = await supabase.rpc(
-          'fn_create_reading_with_debit',
-          rpcParams
-        );
-
-        // Okuma kaydedildikten sonra iletişim bilgilerini güncelle
-        if (rpcResult?.id) {
-          await supabase
-            .from('readings')
-            .update({
-              contact_method: communicationMethod,
-              phone:
-                communicationMethod === 'whatsapp' ? personalInfo.phone : null,
-            })
-            .eq('id', rpcResult.id);
-
-          // Token akışında form verilerini reading_form_responses tablosuna kaydet
-          if (sessionToken) {
-            try {
-              // Token'dan session_id'yi al
-              const validateResponse = await fetch(
-                `/api/reading-sessions/validate?token=${sessionToken}`
-              );
-              const validateData = await validateResponse.json();
-
-              if (validateData.sessionId) {
-                // Form verilerini reading_form_responses tablosuna kaydet
-                const formPayload = {
-                  personalInfo,
-                  ...(config.requiresPartnerInfo ||
-                  (config.isSingleCard && hasPartner) ||
-                  (partnerInfoSpreads.includes(config.spreadId) && hasPartner)
-                    ? { partnerInfo }
-                    : {}),
-                  communicationMethod,
-                  userQuestions: questions,
-                };
-
-                await supabase.from('reading_form_responses').upsert(
-                  {
-                    session_id: validateData.sessionId,
-                    payload: formPayload,
-                    completed_at: new Date().toISOString(),
-                  },
-                  {
-                    onConflict: 'session_id',
-                  }
-                );
-              }
-            } catch (error) {
-              // Form response kaydetme hatası sessizce devam et
-              // Hata loglanmaz - sessizce devam edilir
-            }
-          }
-        }
-
-        // RPC hatası kontrolü
-        if (rpcError) {
-          throw rpcError;
-        }
-
-        // Admin'e bildirim gönder (arka planda, hata olsa bile devam et)
-        // Kullanıcıya okuma özeti gönderilmez, sadece admin'e bildirim gider
-        if (rpcResult?.id) {
-          fetch('/api/admin/notify-reading-completed', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              readingId: rpcResult.id,
-            }),
-          }).catch(() => {
-            // Admin bildirimi başarısız olsa bile okuma kaydedildi, sessizce devam et
-          });
-        }
-
-        return {
-          success: true,
-          id: rpcResult?.id,
-          userId: user.id,
-        };
-      } catch (error) {
-        return {
-          success: false,
-          error: error instanceof Error ? error.message : 'Bilinmeyen hata',
-        };
-      }
-    };
+    const {
+      handleSaveDetailedFormClick,
+      closeInfoModal,
+      cancelInfoModal,
+      saveDetailedForm,
+      saveReadingToSupabase,
+    } = createDetailedFormSubmission({
+      sessionToken,
+      userId: user?.id ?? null,
+      showToast,
+      translate: t,
+      messages: {
+        loginRequired: messages.loginRequired,
+        tokenFlowSaveError: messages.tokenFlowSaveError,
+        guestDataNotStored: messages.guestDataNotStored,
+      },
+      dataKeys: {
+        spreadName: dataKeys.spreadName,
+        spreadTitle: dataKeys.spreadTitle,
+      },
+      validateDetailedForm,
+      setModalStates,
+      setSelectedReadingType,
+      setSaving,
+      setDetailedFormSaved,
+      personalInfo,
+      partnerInfo,
+      communicationMethod,
+      questions,
+      config,
+      hasPartner,
+      partnerInfoSpreads,
+      detailedCredits,
+      writtenCredits,
+      selectedReadingType,
+      metaLeadRef,
+    });
 
     // Basit yorumlama oluşturma - seçilen kartlar ve pozisyonlara göre metin üretir
     const generateBasicInterpretation = (): string => {
@@ -1111,7 +944,7 @@ export function createTarotReadingComponent({
             status: 'completed',
             title: t(dataKeys.simpleTitle),
             cost_credits: 0,
-            admin_notes: 'Simple reading counter',
+            admin_notes: t(messages.simpleReadingCounter),
             metadata: { platform: 'web' },
             timestamp: new Date().toISOString(),
           };
@@ -1259,10 +1092,7 @@ export function createTarotReadingComponent({
         // onReadingTypeSelected callback'i kaldırıldı - açıklama kapatma mantığı gereksiz
         // Açıklama kullanıcı kart seçmeye başladığında veya başka bir mantıkla kapatılabilir
       } catch {
-        showToast(
-          'Okuma tipi seçiminde bir hata oluştu. Lütfen tekrar deneyin.',
-          'error'
-        );
+        showToast(t(messages.readingTypeSelectError), 'error');
       }
     };
 
@@ -1276,10 +1106,7 @@ export function createTarotReadingComponent({
         }
         handleCardSelect(card);
       } catch {
-        showToast(
-          'Kart seçiminde bir hata oluştu. Lütfen tekrar deneyin.',
-          'error'
-        );
+        showToast(t(messages.cardSelectError), 'error');
       }
     };
 
@@ -1530,31 +1357,25 @@ export function createTarotReadingComponent({
               <div className='flex items-center gap-2 px-4 py-2 bg-white/10 rounded-lg'>
                 <span className='text-sm text-gray-300'>
                   {selectedReadingType === READING_TYPES.SIMPLE &&
-                    '✨ Basit Okuma'}
+                    t(messages.tags.simple)}
                   {selectedReadingType === READING_TYPES.DETAILED &&
-                    '👑 Sesli Okuma'}
+                    t(messages.tags.detailed)}
                   {selectedReadingType === READING_TYPES.WRITTEN &&
-                    '📝 Yazılı Okuma'}
+                    t(messages.tags.written)}
                 </span>
                 <button
                   onClick={() => {
                     try {
                       setSelectedReadingType(null);
-                      showToast(
-                        'Okuma tipi değiştirildi. Yeni tip seçebilirsiniz.',
-                        'info'
-                      );
+                      showToast(t(messages.readingTypeChanged), 'info');
                     } catch {
-                      showToast(
-                        'Okuma tipi değiştirirken bir hata oluştu.',
-                        'error'
-                      );
+                      showToast(t(messages.readingTypeChangeError), 'error');
                     }
                   }}
                   className='px-3 py-1 text-xs bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 rounded-md transition-colors'
                   disabled={isSaving}
                 >
-                  Değiştir
+                  {t(messages.changeButton)}
                 </button>
               </div>
             </div>
@@ -1628,7 +1449,12 @@ export function createTarotReadingComponent({
               const position = config.positionsInfo[index];
               return position
                 ? { title: position.title, desc: position.desc }
-                : { title: `position ${index + 1}`, desc: 'Kart pozisyonu' };
+                : {
+                    title: t(messages.positionTitle, {
+                      position: index + 1,
+                    }),
+                    desc: t(messages.positionDescription),
+                  };
             })()}
             getPositionSpecificInterpretation={(card, position, reversed) => {
               const meaning = getCardMeaning(card, position, reversed);

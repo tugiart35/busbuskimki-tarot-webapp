@@ -1,30 +1,48 @@
 /**
  * Google Analytics Component
  *
- * Bu component Google Analytics (gtag.js) entegrasyonunu sağlar.
- * Next.js Script bileşeni ile optimize edilmiş yükleme stratejisi kullanır.
+ * Loads gtag.js only after analytics or advertising consent is granted.
  */
+'use client';
 
+import { useEffect, useMemo, useState } from 'react';
 import Script from 'next/script';
+import { useConsent } from '@/hooks/useConsent';
 
 const GA_MEASUREMENT_ID =
   process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-HYE4L3NKCL';
 
 export function GoogleAnalytics() {
-  // Production ortamında değilse GA'yi yükleme
-  if (process.env.NODE_ENV !== 'production') {
+  const { ready, preferences } = useConsent();
+  const [shouldRender, setShouldRender] = useState(false);
+
+  const consentAllowsAnalytics = useMemo(() => {
+    return preferences.analytics || preferences.advertising;
+  }, [preferences.analytics, preferences.advertising]);
+
+  useEffect(() => {
+    if (process.env.NODE_ENV !== 'production') {
+      return;
+    }
+
+    if (ready && consentAllowsAnalytics) {
+      setShouldRender(true);
+    }
+  }, [ready, consentAllowsAnalytics]);
+
+  if (!shouldRender || process.env.NODE_ENV !== 'production') {
     return null;
   }
 
   return (
     <>
-      {/* Google Analytics Script */}
       <Script
+        id='ga-script'
         strategy='afterInteractive'
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
       />
       <Script
-        id='google-analytics'
+        id='ga-init'
         strategy='afterInteractive'
         dangerouslySetInnerHTML={{
           __html: `

@@ -9,34 +9,14 @@
  * - Consent management entegrasyonu
  */
 
-const COOKIE_PREFERENCES_KEY = 'busbuskimki_cookie_preferences';
-
-interface CookiePreferences {
-  necessary: boolean;
-  analytics: boolean;
-  marketing: boolean;
-  advertising: boolean;
-}
+import { getConsentState } from '@/lib/consent/store';
 
 /**
  * Kullanıcının AdSense için onay verip vermediğini kontrol eder
  */
 export function hasAdSenseConsent(): boolean {
-  if (typeof window === 'undefined') {
-    return false;
-  }
-
-  try {
-    const preferences = localStorage.getItem(COOKIE_PREFERENCES_KEY);
-    if (!preferences) {
-      return false;
-    }
-
-    const parsed: CookiePreferences = JSON.parse(preferences);
-    return parsed.advertising === true;
-  } catch {
-    return false;
-  }
+  const state = getConsentState();
+  return state.preferences.advertising;
 }
 
 /**

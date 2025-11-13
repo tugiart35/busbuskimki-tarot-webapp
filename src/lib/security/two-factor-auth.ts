@@ -52,7 +52,7 @@ export interface TwoFactorVerificationResult {
 
 // TOTP implementation
 export class TOTPManager {
-  private static readonly ISSUER = 'TarotNumeroloji';
+  private static readonly ISSUER = 'Büşbüşkimki';
   private static readonly ALGORITHM = 'SHA1';
   private static readonly DIGITS = 6;
   private static readonly PERIOD = 30;
