@@ -130,7 +130,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         className='h-full overflow-x-hidden antialiased'
         style={{ backgroundColor: APP_CONFIG.theme.backgroundColor }}
       >
-        <CMPProvider initialLocale='en'>
+        <CMPProvider initialLocale={defaultLocale}>
           <GoogleAnalytics />
           <FacebookPixel />
           <WebVitals />

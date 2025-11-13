@@ -27,3 +27,4 @@ export function applyMetaConsent(preferences: ConsentPreferences): void {
   fbq('consent', shouldGrant ? 'grant' : 'revoke');
 }
 
+

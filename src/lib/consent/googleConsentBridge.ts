@@ -76,3 +76,4 @@ export function applyGoogleConsent(preferences: ConsentPreferences): void {
   window.gtag?.('consent', 'update', payload);
 }
 
+

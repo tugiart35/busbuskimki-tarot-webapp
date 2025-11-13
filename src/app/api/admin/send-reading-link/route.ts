@@ -49,7 +49,7 @@ export async function POST(request: NextRequest) {
       to: customerEmail,
       subject: '🔮 Size Özel Tarot Okuma Daveti',
       html: emailHtml,
-      text: `Merhaba ${customerName || 'Değerli Müşterimiz'},\n\nSize özel bir tarot okuması hazırladık. Okumaya başlamak için aşağıdaki linke tıklayın:\n\n${readingLink}\n\nBu link ${session?.expires_at ? new Date(session.expires_at).toLocaleString('tr-TR') : 'kısa süre içinde'} geçerliliğini yitirecektir.\n\nSevgiler,\nTarotNumeroloji Ekibi`,
+      text: `Merhaba ${customerName || 'Değerli Müşterimiz'},\n\nSize özel bir tarot okuması hazırladık. Okumaya başlamak için aşağıdaki linke tıklayın:\n\n${readingLink}\n\nBu link ${session?.expires_at ? new Date(session.expires_at).toLocaleString('tr-TR') : 'kısa süre içinde'} geçerliliğini yitirecektir.\n\nSevgiler,\Büşbüşkimki...`,
     });
 
     if (!emailSent) {

@@ -1,5 +1,21 @@
 const withNextIntl = require('next-intl/plugin')('./src/lib/i18n/config.ts');
 
+const requiredEnvVars =
+  process.env.NODE_ENV === 'production'
+    ? ['NEXT_PUBLIC_FB_PIXEL_ID']
+    : [];
+
+if (requiredEnvVars.length > 0) {
+  const missing = requiredEnvVars.filter(name => !process.env[name]);
+  if (missing.length > 0) {
+    throw new Error(
+      `Missing required environment variable(s) for production build: ${missing.join(
+        ', '
+      )}`
+    );
+  }
+}
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   typescript: {

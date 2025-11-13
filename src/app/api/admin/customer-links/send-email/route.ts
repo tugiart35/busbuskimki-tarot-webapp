@@ -125,7 +125,7 @@ export async function POST(request: NextRequest) {
         customerLink.expiry_date
           ? `Bu link ${new Date(customerLink.expiry_date).toLocaleString('tr-TR')} tarihine kadar geçerlidir.`
           : 'Bu link süresiz geçerlidir.'
-      }\n\nSevgiler,\nTarotNumeroloji Ekibi`,
+      }\n\nSevgiler,\Büşbüşkimki`,
     });
 
     if (!emailSent) {

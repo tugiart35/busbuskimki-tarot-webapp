@@ -27,3 +27,4 @@ export interface ConsentLogPayload {
   timestamp: string;
 }
 
+
