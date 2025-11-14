@@ -44,6 +44,7 @@ export async function POST(request: NextRequest) {
       formPayload,
       communicationMethod,
       personalInfo,
+      partnerInfo,
       consent,
       metaPixel: metaPixelPayload,
     } = body;
@@ -316,6 +317,7 @@ export async function POST(request: NextRequest) {
       sendMetaLeadEvent({
         pixel: metaPixel,
         personalInfo,
+        partnerInfo,
         communicationMethod,
         clientIp,
         userAgent,

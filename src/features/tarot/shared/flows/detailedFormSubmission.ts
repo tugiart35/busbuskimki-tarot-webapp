@@ -169,6 +169,11 @@ export function createDetailedFormSubmission({
       }
 
       if (metaLeadRef.current) {
+        const shouldIncludePartnerInfo =
+          config.requiresPartnerInfo ||
+          (config.isSingleCard && hasPartner) ||
+          (partnerInfoSpreads.includes(config.spreadId) && hasPartner);
+
         const contentName = translate(dataKeys.spreadName);
         metaLeadRef.current.contentName = contentName;
 
@@ -181,6 +186,17 @@ export function createDetailedFormSubmission({
             communication_method: communicationMethod,
             spread_id: config.spreadId,
             locale: config.translationNamespace,
+            relationship_status: personalInfo.relationshipStatus || undefined,
+            lead_country: personalInfo.countryCode || undefined,
+            birth_date_known: !personalInfo.birthDateUnknown,
+            partner_name:
+              shouldIncludePartnerInfo && partnerInfo.name
+                ? partnerInfo.name
+                : undefined,
+            partner_birth_date_provided:
+              shouldIncludePartnerInfo &&
+              !partnerInfo.birthDateUnknown &&
+              !!partnerInfo.birthDate,
           },
         });
       }
@@ -203,6 +219,10 @@ export function createDetailedFormSubmission({
             communicationMethod,
             userQuestions: questions,
           };
+          const shouldIncludePartnerInfo =
+            config.requiresPartnerInfo ||
+            (config.isSingleCard && hasPartner) ||
+            (partnerInfoSpreads.includes(config.spreadId) && hasPartner);
 
           const saveResponse = await fetch(
             '/api/reading-sessions/save-reading',
@@ -221,6 +241,7 @@ export function createDetailedFormSubmission({
                 formPayload,
                 communicationMethod,
                 personalInfo,
+                partnerInfo: shouldIncludePartnerInfo ? partnerInfo : undefined,
                 consent: buildConsentSnapshot(),
                 metaPixel: metaLeadRef.current
                   ? {

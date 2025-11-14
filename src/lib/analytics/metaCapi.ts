@@ -16,11 +16,21 @@ interface MetaLeadPersonalInfo {
   email?: string;
   phone?: string;
   countryCode?: string;
+  birthDate?: string;
+  birthDateUnknown?: boolean;
+  relationshipStatus?: string;
+}
+
+interface MetaLeadPartnerInfo {
+  name?: string;
+  birthDate?: string;
+  birthDateUnknown?: boolean;
 }
 
 interface SendMetaLeadEventOptions {
   pixel: MetaPixelPayload;
   personalInfo?: MetaLeadPersonalInfo | null;
+  partnerInfo?: MetaLeadPartnerInfo | null;
   communicationMethod?: 'email' | 'whatsapp';
   clientIp?: string | null;
   userAgent?: string | null;
@@ -37,6 +47,7 @@ const META_API_VERSION = 'v18.0';
 export async function sendMetaLeadEvent({
   pixel,
   personalInfo,
+  partnerInfo,
   communicationMethod,
   clientIp,
   userAgent,
@@ -58,6 +69,12 @@ export async function sendMetaLeadEvent({
     const phoneHash = hashPhoneForMeta(personalInfo?.phone);
     const firstNameHash = hashForMeta(personalInfo?.name);
     const lastNameHash = hashForMeta(personalInfo?.surname);
+    const birthDateValue =
+      personalInfo?.birthDate && !personalInfo.birthDateUnknown
+        ? personalInfo.birthDate.replace(/\D/g, '')
+        : undefined;
+    const birthDateHash = hashForMeta(birthDateValue);
+    const countryHash = hashForMeta(personalInfo?.countryCode);
 
     const userData: Record<string, unknown> = {};
 
@@ -75,6 +92,14 @@ export async function sendMetaLeadEvent({
 
     if (lastNameHash) {
       userData.ln = lastNameHash;
+    }
+
+    if (birthDateHash) {
+      userData.db = birthDateHash;
+    }
+
+    if (countryHash) {
+      userData.country = countryHash;
     }
 
     if (pixel.fbp) {
@@ -98,7 +123,20 @@ export async function sendMetaLeadEvent({
       value: DEFAULT_VALUE,
       content_name: pixel.contentName || DEFAULT_CONTENT_NAME,
       content_category: communicationMethod,
+      relationship_status: personalInfo?.relationshipStatus,
     };
+
+    if (partnerInfo?.name) {
+      customData.partner_name = partnerInfo.name;
+    }
+
+    if (
+      partnerInfo?.birthDate &&
+      !partnerInfo.birthDateUnknown &&
+      partnerInfo.birthDate.trim()
+    ) {
+      customData.partner_birth_date = partnerInfo.birthDate;
+    }
 
     const payload: Record<string, unknown> = {
       data: [
