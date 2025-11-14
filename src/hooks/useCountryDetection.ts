@@ -6,6 +6,51 @@ interface CountryInfo {
   phoneCode: string;
 }
 
+const DEFAULT_COUNTRY: CountryInfo = {
+  country: 'Turkey',
+  countryCode: 'TR',
+  phoneCode: '+90',
+};
+
+const SERVICE_TIMEOUT_MS = 5000;
+
+const parseCountryResponse = (countryData: any): CountryInfo | null => {
+  if (!countryData || typeof countryData !== 'object') {
+    return null;
+  }
+
+  const rawCode =
+    countryData.country_code ||
+    countryData.countryCode ||
+    countryData.country ||
+    countryData.iso_code ||
+    countryData.countryCode2;
+
+  if (!rawCode || typeof rawCode !== 'string') {
+    return null;
+  }
+
+  const countryCode = rawCode.toUpperCase();
+  const phoneCode = countryPhoneCodes[countryCode];
+
+  if (!phoneCode) {
+    return null;
+  }
+
+  const countryName =
+    countryData.country ||
+    countryData.country_name ||
+    countryData.countryName ||
+    countryData.regionName ||
+    countryCode;
+
+  return {
+    country: typeof countryName === 'string' ? countryName : countryCode,
+    countryCode,
+    phoneCode,
+  };
+};
+
 // Ülke kodları mapping
 const countryPhoneCodes: Record<string, string> = {
   TR: '+90',
@@ -102,27 +147,98 @@ export const useCountryDetection = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (typeof window === 'undefined') {
+      setCountryInfo(DEFAULT_COUNTRY);
+      setIsLoading(false);
+      return;
+    }
+
+    let isMounted = true;
+
+    const persistCountryInfo = (info: CountryInfo) => {
+      if (!isMounted) {
+        return;
+      }
+
+      setCountryInfo(info);
+
+      try {
+        window.localStorage.setItem('detectedCountry', JSON.stringify(info));
+        window.localStorage.setItem(
+          'detectedCountryTime',
+          Date.now().toString()
+        );
+      } catch (storageError) {
+        console.warn('Country detection storage write failed', storageError);
+      }
+    };
+
+    const readCachedCountry = (): CountryInfo | null => {
+      try {
+        const cachedCountry = window.localStorage.getItem('detectedCountry');
+        const cacheTime = window.localStorage.getItem('detectedCountryTime');
+
+        if (!cachedCountry || !cacheTime) {
+          return null;
+        }
+
+        const cacheAge = Date.now() - parseInt(cacheTime, 10);
+        if (Number.isNaN(cacheAge) || cacheAge >= 24 * 60 * 60 * 1000) {
+          return null;
+        }
+
+        const parsed = JSON.parse(cachedCountry);
+        return parseCountryResponse(parsed);
+      } catch (storageError) {
+        console.warn('Country detection storage read failed', storageError);
+        return null;
+      }
+    };
+
+    const fetchCountryData = async (service: string) => {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), SERVICE_TIMEOUT_MS);
+
+      try {
+        const response = await fetch(service, {
+          headers: {
+            Accept: 'application/json',
+          },
+          signal: controller.signal,
+        });
+
+        if (!response.ok) {
+          return null;
+        }
+
+        const data = await response.json();
+        return parseCountryResponse(data);
+      } catch (err) {
+        if ((err as DOMException)?.name !== 'AbortError') {
+          console.warn(`Country detection service failed: ${service}`, err);
+        }
+        return null;
+      } finally {
+        clearTimeout(timeoutId);
+      }
+    };
+
     const detectCountry = async () => {
       try {
+        if (!isMounted) {
+          return;
+        }
+
         setIsLoading(true);
         setError(null);
 
-        // İlk olarak localStorage'dan kontrol et
-        const cachedCountry = localStorage.getItem('detectedCountry');
-        const cacheTime = localStorage.getItem('detectedCountryTime');
-
-        if (cachedCountry && cacheTime) {
-          const cacheAge = Date.now() - parseInt(cacheTime);
-          // Cache 24 saat geçerli
-          if (cacheAge < 24 * 60 * 60 * 1000) {
-            const country = JSON.parse(cachedCountry);
-            setCountryInfo(country);
-            setIsLoading(false);
-            return;
-          }
+        const cachedCountry = readCachedCountry();
+        if (cachedCountry) {
+          persistCountryInfo(cachedCountry);
+          setIsLoading(false);
+          return;
         }
 
-        // Birden fazla servis dene
         const services = [
           'https://ipapi.co/json/',
           'https://ipinfo.io/json',
@@ -130,88 +246,32 @@ export const useCountryDetection = () => {
           'https://ip-api.com/json/',
         ];
 
-        let countryData: any = null;
+        let detectedCountry: CountryInfo | null = null;
 
         for (const service of services) {
-          try {
-            const response = await fetch(service, {
-              timeout: 5000,
-              headers: {
-                Accept: 'application/json',
-              },
-            } as any);
-
-            if (response.ok) {
-              countryData = await response.json();
-              break;
-            }
-          } catch (err) {
-            console.warn(`Country detection service failed: ${service}`, err);
-            continue;
+          detectedCountry = await fetchCountryData(service);
+          if (detectedCountry) {
+            break;
           }
         }
 
-        if (countryData) {
-          let countryCode = '';
-          let countryName = '';
-
-          // Farklı servislerin response formatlarını handle et
-          if (countryData.country_code) {
-            countryCode = countryData.country_code.toUpperCase();
-            countryName = countryData.country || countryData.country_name || '';
-          } else if (countryData.country) {
-            countryCode = countryData.country.toUpperCase();
-            countryName = countryData.country_name || '';
-          }
-
-          if (countryCode && countryPhoneCodes[countryCode]) {
-            const phoneCode = countryPhoneCodes[countryCode];
-            const result = {
-              country: countryName,
-              countryCode: countryCode,
-              phoneCode: phoneCode || '+90', // Varsayılan Türkiye kodu
-            };
-
-            setCountryInfo(result);
-
-            // Cache'e kaydet
-            localStorage.setItem('detectedCountry', JSON.stringify(result));
-            localStorage.setItem('detectedCountryTime', Date.now().toString());
-          } else {
-            // Varsayılan olarak Türkiye
-            const defaultResult = {
-              country: 'Turkey',
-              countryCode: 'TR',
-              phoneCode: '+90',
-            };
-            setCountryInfo(defaultResult);
-          }
-        } else {
-          // Varsayılan olarak Türkiye
-          const defaultResult = {
-            country: 'Turkey',
-            countryCode: 'TR',
-            phoneCode: '+90',
-          };
-          setCountryInfo(defaultResult);
-        }
+        persistCountryInfo(detectedCountry ?? DEFAULT_COUNTRY);
       } catch (err) {
         console.error('Country detection error:', err);
         setError('Ülke tespit edilemedi');
-
-        // Hata durumunda varsayılan olarak Türkiye
-        const defaultResult = {
-          country: 'Turkey',
-          countryCode: 'TR',
-          phoneCode: '+90',
-        };
-        setCountryInfo(defaultResult);
+        persistCountryInfo(DEFAULT_COUNTRY);
       } finally {
-        setIsLoading(false);
+        if (isMounted) {
+          setIsLoading(false);
+        }
       }
     };
 
     detectCountry();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   return {

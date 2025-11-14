@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Script from 'next/script';
 import { useConsent } from '@/hooks/useConsent';
+import { applyMetaConsent } from '@/lib/consent/metaConsentBridge';
 
 const FB_PIXEL_ID = process.env.NEXT_PUBLIC_FB_PIXEL_ID ?? '';
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
@@ -67,6 +68,9 @@ export function FacebookPixel() {
           strategy='afterInteractive'
           onLoad={() => {
             setIsScriptLoaded(true);
+            if (consentAllowsMeta) {
+              applyMetaConsent(preferences);
+            }
           }}
           dangerouslySetInnerHTML={{
             __html: `
@@ -78,7 +82,10 @@ export function FacebookPixel() {
               t.src=v;s=b.getElementsByTagName(e)[0];
               s.parentNode.insertBefore(t,s)}(window, document,'script',
               'https://connect.facebook.net/en_US/fbevents.js');
-              fbq('init', '${FB_PIXEL_ID}');
+              if (!f.__metaPixelInitialized) {
+                fbq('init', '${FB_PIXEL_ID}');
+                f.__metaPixelInitialized = true;
+              }
             `,
           }}
         />
