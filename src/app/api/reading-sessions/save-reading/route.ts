@@ -314,14 +314,16 @@ export async function POST(request: NextRequest) {
       const clientIp = extractClientIp(request);
       const userAgent = request.headers.get('user-agent') || null;
 
-      sendMetaLeadEvent({
-        pixel: metaPixel,
-        personalInfo,
-        partnerInfo,
-        communicationMethod,
-        clientIp,
-        userAgent,
-      }).catch(error => {
+      try {
+        await sendMetaLeadEvent({
+          pixel: metaPixel,
+          personalInfo,
+          partnerInfo,
+          communicationMethod,
+          clientIp,
+          userAgent,
+        });
+      } catch (error) {
         logger.warn('Meta CAPI lead event gönderilemedi', error, {
           action: 'meta_capi_lead_event',
           resource: 'readings',
@@ -331,7 +333,7 @@ export async function POST(request: NextRequest) {
             token: `${tokenHash.slice(0, TOKEN_HASH_PREVIEW_LENGTH)}...`,
           },
         });
-      });
+      }
     } else if (metaPixel?.eventId && !consentAllowsMeta) {
       logger.info('Meta CAPI skipped due to missing consent', {
         action: 'meta_capi_lead_event_skipped',

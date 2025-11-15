@@ -121,7 +121,7 @@ export function LanguageSelector({
       {/* Modern Glassmorphism Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className='flex items-center gap-3 px-4 py-2.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/15 transition-all duration-300 group shadow-lg hover:shadow-xl'
+        className='flex items-center justify-between sm:justify-start gap-3 px-4 py-2.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/15 transition-all duration-300 group shadow-lg hover:shadow-xl w-full sm:w-auto'
         aria-label='Dil seç'
       >
         <span className='text-lg filter drop-shadow-sm'>

@@ -222,13 +222,18 @@ export function useTarotFormState({
     const errors: { [key: string]: string } = {};
     let hasError = false;
 
-    // Name validation
     if (!personalInfo.name.trim() || personalInfo.name.trim().length < 3) {
       errors.name = t(validationKeys.nameMinLength);
       hasError = true;
     }
 
-    // Surname validation - Kaldırıldı, artık formda surname alanı yok
+    if (
+      !personalInfo.surname.trim() ||
+      personalInfo.surname.trim().length < 3
+    ) {
+      errors.surname = t(validationKeys.surnameMinLength);
+      hasError = true;
+    }
 
     // Birth date validation - Eğer "bilmiyorum" seçilmediyse zorunlu
     if (!personalInfo.birthDateUnknown && !personalInfo.birthDate) {

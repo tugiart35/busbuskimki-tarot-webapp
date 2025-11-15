@@ -82,10 +82,13 @@ export function FacebookPixel() {
               t.src=v;s=b.getElementsByTagName(e)[0];
               s.parentNode.insertBefore(t,s)}(window, document,'script',
               'https://connect.facebook.net/en_US/fbevents.js');
-              if (!f.__metaPixelInitialized) {
-                fbq('init', '${FB_PIXEL_ID}');
-                f.__metaPixelInitialized = true;
-              }
+              (function(){
+                const w = window;
+                if (!w.__metaPixelInitialized && typeof w.fbq === 'function') {
+                  w.fbq('init', '${FB_PIXEL_ID}');
+                  w.__metaPixelInitialized = true;
+                }
+              })();
             `,
           }}
         />
@@ -101,4 +104,3 @@ export function FacebookPixel() {
     </>
   );
 }
-

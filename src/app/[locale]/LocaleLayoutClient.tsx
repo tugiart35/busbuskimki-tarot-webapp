@@ -81,7 +81,7 @@ export function LocaleLayoutClient({
       {/* Modern Glassmorphism Header */}
       <header className='fixed top-0 left-0 right-0 z-50 bg-white/5 backdrop-blur-2xl border-b border-white/10 shadow-2xl'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-          <div className='flex items-center justify-between h-16'>
+          <div className='flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between py-4 sm:py-0 min-h-[64px]'>
             {/* Modern Logo */}
             <Link
               href={`/${locale}`}
@@ -95,25 +95,25 @@ export function LocaleLayoutClient({
                   ✨
                 </div>
               </div>
-              <span className='text-xl font-bold tracking-tight bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent'>
+              <span className='text-lg sm:text-xl font-bold tracking-tight bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent'>
                 Büşbüşkimki
               </span>
             </Link>
 
             {/* Modern Right Section */}
-            <div className='flex items-center gap-4'>
+            <div className='flex flex-wrap items-center gap-3 w-full sm:w-auto justify-between sm:justify-end'>
               {/* Language Selector */}
-              <LanguageSelector locale={locale} />
+              <LanguageSelector locale={locale} className='w-full sm:w-auto' />
 
               {/* Modern Auth Section */}
               {isAuthenticated ? (
-                <div className='flex items-center gap-3'>
+                <div className='flex items-center gap-3 w-full sm:w-auto justify-end'>
                   <div className='hidden sm:block text-sm text-white/70 font-medium'>
                     {user?.email}
                   </div>
                   <Link
                     href={`/${locale}/dashboard`}
-                    className='px-5 py-2.5 bg-white/10 hover:bg-white/20 text-white text-sm font-semibold rounded-xl transition-all duration-300 hover:scale-105 backdrop-blur-sm border border-white/20 hover:border-white/30 shadow-lg hover:shadow-xl'
+                    className='w-full sm:w-auto text-center px-5 py-2.5 bg-white/10 hover:bg-white/20 text-white text-sm font-semibold rounded-xl transition-all duration-300 hover:scale-105 backdrop-blur-sm border border-white/20 hover:border-white/30 shadow-lg hover:shadow-xl'
                   >
                     {translate('auth.dashboard', 'Panel')}
                   </Link>
@@ -121,7 +121,7 @@ export function LocaleLayoutClient({
               ) : (
                 <Link
                   href={`/${locale}/auth`}
-                  className='px-6 py-2.5 bg-gradient-to-r from-white to-white/90 hover:from-white/90 hover:to-white text-black text-sm font-semibold rounded-xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl'
+                  className='w-full sm:w-auto text-center px-6 py-2.5 bg-gradient-to-r from-white to-white/90 hover:from-white/90 hover:to-white text-black text-sm font-semibold rounded-xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl'
                 >
                   {translate('auth.signIn', 'Giriş')}
                 </Link>
@@ -135,7 +135,7 @@ export function LocaleLayoutClient({
       <DisclaimerBanner locale={locale as 'tr' | 'en' | 'sr'} />
 
       {/* Main Content */}
-      <main className='pt-16'>{children}</main>
+      <main className='pt-24 sm:pt-20'>{children}</main>
 
       {/* Age Verification Modal */}
       <AgeVerificationModal locale={locale as 'tr' | 'en' | 'sr'} />

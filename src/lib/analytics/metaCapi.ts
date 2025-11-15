@@ -8,6 +8,7 @@ export interface MetaPixelPayload {
   fbp?: string | null;
   fbc?: string | null;
   contentName?: string;
+  customData?: Record<string, unknown>;
 }
 
 interface MetaLeadPersonalInfo {
@@ -121,10 +122,20 @@ export async function sendMetaLeadEvent({
     const customData: Record<string, unknown> = {
       currency: DEFAULT_CURRENCY,
       value: DEFAULT_VALUE,
-      content_name: pixel.contentName || DEFAULT_CONTENT_NAME,
-      content_category: communicationMethod,
-      relationship_status: personalInfo?.relationshipStatus,
+      ...(pixel.customData || {}),
     };
+
+    if (customData['content_name'] === undefined) {
+      customData['content_name'] = pixel.contentName || DEFAULT_CONTENT_NAME;
+    }
+
+    if (customData['content_category'] === undefined) {
+      customData['content_category'] = communicationMethod;
+    }
+
+    if (customData['relationship_status'] === undefined) {
+      customData['relationship_status'] = personalInfo?.relationshipStatus;
+    }
 
     if (partnerInfo?.name) {
       customData.partner_name = partnerInfo.name;

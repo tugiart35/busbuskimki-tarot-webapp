@@ -3,49 +3,26 @@
 import React, { useCallback, useMemo, useEffect } from 'react';
 import { useTranslations } from '@/hooks/useTranslations';
 import { useCountryDetection } from '@/hooks/useCountryDetection';
+import { useConsent } from '@/hooks/useConsent';
+import type {
+  PersonalInfo,
+  PartnerInfo,
+  Questions,
+  FormErrors,
+} from '../hooks/useTarotFormState';
 import { TarotConfig } from '../types/tarot-config.types';
 import { getThemeClasses } from './theme-utils';
+import { QuestionSection } from './QuestionSection';
 
 export interface BaseTarotFormProps {
   config: TarotConfig;
   isOpen: boolean;
   onClose: () => void;
-  personalInfo: {
-    name: string;
-    surname: string;
-    birthDate: string;
-    birthDateUnknown: boolean;
-    relationshipStatus: string;
-    email: string;
-    phone: string;
-    countryCode?: string;
-  };
-  partnerInfo?: {
-    name: string;
-    birthDate: string;
-    birthDateUnknown: boolean;
-  };
+  personalInfo: PersonalInfo;
+  partnerInfo?: PartnerInfo;
   communicationMethod: 'email' | 'whatsapp';
-  questions: {
-    concern: string;
-    understanding: string;
-    emotional: string;
-  };
-  formErrors: {
-    name: string;
-    surname: string;
-    birthDate: string;
-    relationshipStatus: string;
-    email: string;
-    phone: string;
-    countryCode: string;
-    concern: string;
-    understanding: string;
-    emotional: string;
-    partnerName?: string;
-    partnerBirthDate?: string;
-    general: string;
-  };
+  questions: Questions;
+  formErrors: FormErrors;
   isSaving: boolean;
   onUpdatePersonalInfo: (
     _field:
@@ -173,6 +150,30 @@ export default function BaseTarotForm({
     [t]
   );
 
+  const consent = useConsent();
+  const consentReady = consent.ready;
+  const marketingAllowed =
+    consent.preferences.marketing || consent.preferences.advertising;
+  const consentBlocked = !consentReady || !marketingAllowed;
+
+  const consentMessage = useMemo(() => {
+    if (!consentReady) {
+      return translate(
+        `${config.translationNamespace}.messages.consentPending`,
+        'Lütfen gizlilik tercihini seçin.'
+      );
+    }
+
+    if (!marketingAllowed) {
+      return translate(
+        `${config.translationNamespace}.messages.consentRequired`,
+        'Devam etmek için pazarlama izni vermelisiniz.'
+      );
+    }
+
+    return null;
+  }, [consentReady, marketingAllowed, translate, config.translationNamespace]);
+
   const handleClose = useCallback(() => {
     const hasUserInput =
       personalInfo.name ||
@@ -261,26 +262,55 @@ export default function BaseTarotForm({
 
       <div className='flex-1 overflow-y-auto px-6 py-4'>
         <div className='space-y-4'>
-          <div>
-            <label
-              className={`block text-sm font-medium ${themeClasses.labelText} mb-2`}
-            >
-              {translate(formKeys.firstName)} *
-            </label>
-            <input
-              type='text'
-              value={personalInfo.name}
-              onChange={event =>
-                onUpdatePersonalInfo('name', event.target.value)
-              }
-              placeholder={getPlaceholder(placeholders.firstName)}
-              className={`w-full px-4 py-3 bg-slate-800/80 border ${
-                formErrors.name ? 'border-red-500' : themeClasses.inputBorder
-              } rounded-lg text-white placeholder-gray-400 focus:outline-none ${themeClasses.focusRing} transition-all`}
-            />
-            {formErrors.name && (
-              <p className='text-red-400 text-xs mt-1'>{formErrors.name}</p>
-            )}
+          <div className='space-y-4 md:grid md:grid-cols-2 md:gap-4 md:space-y-0'>
+            <div>
+              <label
+                className={`block text-sm font-medium ${themeClasses.labelText} mb-2`}
+              >
+                {translate(formKeys.firstName)} *
+              </label>
+              <input
+                type='text'
+                value={personalInfo.name}
+                onChange={event =>
+                  onUpdatePersonalInfo('name', event.target.value)
+                }
+                placeholder={getPlaceholder(placeholders.firstName)}
+                className={`w-full px-4 py-3 bg-slate-800/80 border ${
+                  formErrors.name ? 'border-red-500' : themeClasses.inputBorder
+                } rounded-lg text-white placeholder-gray-400 focus:outline-none ${themeClasses.focusRing} transition-all`}
+              />
+              {formErrors.name && (
+                <p className='text-red-400 text-xs mt-1'>{formErrors.name}</p>
+              )}
+            </div>
+            <div>
+              <label
+                className={`block text-sm font-medium ${themeClasses.labelText} mb-2`}
+              >
+                {translate(formKeys.lastName || 'common.lastName')} *
+              </label>
+              <input
+                type='text'
+                value={personalInfo.surname}
+                onChange={event =>
+                  onUpdatePersonalInfo('surname', event.target.value)
+                }
+                placeholder={getPlaceholder(
+                  placeholders.lastName ?? formKeys.placeholders?.lastName
+                )}
+                className={`w-full px-4 py-3 bg-slate-800/80 border ${
+                  formErrors.surname
+                    ? 'border-red-500'
+                    : themeClasses.inputBorder
+                } rounded-lg text-white placeholder-gray-400 focus:outline-none ${themeClasses.focusRing} transition-all`}
+              />
+              {formErrors.surname && (
+                <p className='text-red-400 text-xs mt-1'>
+                  {formErrors.surname}
+                </p>
+              )}
+            </div>
           </div>
 
           <div>
@@ -386,12 +416,10 @@ export default function BaseTarotForm({
             )}
           </div>
 
-          {/* Partner bilgisi - Checkbox işaretliyse göster */}
           {shouldShowPartnerSection && (
             <div
               className={`space-y-4 pt-4 border-t ${themeClasses.sectionBorder}`}
             >
-              {/* Checkbox göster */}
               {shouldShowPartnerToggle && (
                 <div className='flex items-center mb-4'>
                   <input
@@ -410,7 +438,6 @@ export default function BaseTarotForm({
                 </div>
               )}
 
-              {/* Partner bilgisi alanları - sadece checkbox işaretliyse göster */}
               {hasPartner && (
                 <>
                   <h3
@@ -500,7 +527,6 @@ export default function BaseTarotForm({
             </div>
           )}
 
-          {/* İletişim Tercihi - Minimal Tasarım */}
           <div className='space-y-4'>
             <label
               className={`block text-sm font-medium ${themeClasses.labelText} mb-3`}
@@ -509,7 +535,6 @@ export default function BaseTarotForm({
             </label>
 
             <div className='grid grid-cols-1 gap-3'>
-              {/* E-posta Seçeneği */}
               <button
                 type='button'
                 onClick={() => onUpdateCommunicationMethod('email')}
@@ -564,7 +589,6 @@ export default function BaseTarotForm({
                 </div>
               </button>
 
-              {/* WhatsApp Seçeneği */}
               <button
                 type='button'
                 onClick={() => onUpdateCommunicationMethod('whatsapp')}
@@ -620,7 +644,6 @@ export default function BaseTarotForm({
             </div>
           </div>
 
-          {/* E-posta Alanı - Minimal Tasarım */}
           {communicationMethod === 'email' && (
             <div className='space-y-3 animate-in slide-in-from-top-2 duration-300'>
               <label
@@ -664,7 +687,6 @@ export default function BaseTarotForm({
             </div>
           )}
 
-          {/* Telefon Alanı - Minimal Tasarım */}
           {communicationMethod === 'whatsapp' && (
             <div className='space-y-3 animate-in slide-in-from-top-2 duration-300'>
               <label
@@ -827,130 +849,18 @@ export default function BaseTarotForm({
             <h3 className={`${themeClasses.titleText} text-base font-semibold`}>
               {translate(formKeys.questions)}
             </h3>
-
-            {isSingleCard ? (
-              // Single card için tek soru
-              <div>
-                <label
-                  className={`block text-sm font-medium ${themeClasses.labelText} mb-2`}
-                >
-                  {translate(
-                    formKeys.mainQuestion ||
-                      'spreads.singleCard.form.mainQuestion'
-                  )}
-                  <span className='text-red-400'> *</span>
-                </label>
-                <textarea
-                  value={questions.concern}
-                  onChange={event =>
-                    onUpdateQuestion('concern', event.target.value)
-                  }
-                  placeholder={getPlaceholder(
-                    placeholders.mainQuestion ||
-                      formKeys.mainQuestionPlaceholder ||
-                      'spreads.singleCard.form.mainQuestionPlaceholder'
-                  )}
-                  rows={4}
-                  className={`w-full px-4 py-3 bg-slate-800/80 border ${
-                    formErrors.concern
-                      ? 'border-red-500'
-                      : themeClasses.inputBorder
-                  } rounded-lg text-white placeholder-gray-400 focus:outline-none ${themeClasses.focusRing} transition-all resize-none`}
-                />
-                {formErrors.concern && (
-                  <p className='text-red-400 text-xs mt-1'>
-                    {formErrors.concern}
-                  </p>
-                )}
-              </div>
-            ) : (
-              // Normal spread için 3 soru
-              <>
-                <div>
-                  <label
-                    className={`block text-sm font-medium ${themeClasses.labelText} mb-2`}
-                  >
-                    {questionLabels?.concern ||
-                      translate(formKeys.concernQuestion)}
-                    <span className='text-red-400'> *</span>
-                  </label>
-                  <textarea
-                    value={questions.concern}
-                    onChange={event =>
-                      onUpdateQuestion('concern', event.target.value)
-                    }
-                    placeholder={getPlaceholder(placeholders.concernQuestion)}
-                    rows={3}
-                    className={`w-full px-4 py-3 bg-slate-800/80 border ${
-                      formErrors.concern
-                        ? 'border-red-500'
-                        : themeClasses.inputBorder
-                    } rounded-lg text-white placeholder-gray-400 focus:outline-none ${themeClasses.focusRing} transition-all resize-none`}
-                  />
-                  {formErrors.concern && (
-                    <p className='text-red-400 text-xs mt-1'>
-                      {formErrors.concern}
-                    </p>
-                  )}
-                </div>
-
-                <div>
-                  <label
-                    className={`block text-sm font-medium ${themeClasses.labelText} mb-2`}
-                  >
-                    {questionLabels?.understanding ||
-                      translate(formKeys.understandingQuestion)}
-                  </label>
-                  <textarea
-                    value={questions.understanding}
-                    onChange={event =>
-                      onUpdateQuestion('understanding', event.target.value)
-                    }
-                    placeholder={getPlaceholder(
-                      placeholders.understandingQuestion
-                    )}
-                    rows={3}
-                    className={`w-full px-4 py-3 bg-slate-800/80 border ${
-                      formErrors.understanding
-                        ? 'border-red-500'
-                        : themeClasses.inputBorder
-                    } rounded-lg text-white placeholder-gray-400 focus:outline-none ${themeClasses.focusRing} transition-all resize-none`}
-                  />
-                  {formErrors.understanding && (
-                    <p className='text-red-400 text-xs mt-1'>
-                      {formErrors.understanding}
-                    </p>
-                  )}
-                </div>
-
-                <div>
-                  <label
-                    className={`block text-sm font-medium ${themeClasses.labelText} mb-2`}
-                  >
-                    {questionLabels?.emotional ||
-                      translate(formKeys.emotionalQuestion)}
-                  </label>
-                  <textarea
-                    value={questions.emotional}
-                    onChange={event =>
-                      onUpdateQuestion('emotional', event.target.value)
-                    }
-                    placeholder={getPlaceholder(placeholders.emotionalQuestion)}
-                    rows={3}
-                    className={`w-full px-4 py-3 bg-slate-800/80 border ${
-                      formErrors.emotional
-                        ? 'border-red-500'
-                        : themeClasses.inputBorder
-                    } rounded-lg text-white placeholder-gray-400 focus:outline-none ${themeClasses.focusRing} transition-all resize-none`}
-                  />
-                  {formErrors.emotional && (
-                    <p className='text-red-400 text-xs mt-1'>
-                      {formErrors.emotional}
-                    </p>
-                  )}
-                </div>
-              </>
-            )}
+            <QuestionSection
+              isSingleCard={isSingleCard}
+              formKeys={formKeys}
+              questionLabels={questionLabels}
+              themeClasses={themeClasses}
+              questions={questions}
+              formErrors={formErrors}
+              placeholders={placeholders}
+              getPlaceholder={getPlaceholder}
+              translate={translate}
+              onUpdateQuestion={onUpdateQuestion}
+            />
           </div>
 
           {formErrors.general && (
@@ -966,7 +876,7 @@ export default function BaseTarotForm({
       >
         <button
           onClick={onSaveForm}
-          disabled={isSaving}
+          disabled={isSaving || consentBlocked}
           className={`w-full ${themeClasses.buttonBg} ${themeClasses.buttonHover} text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed shadow-lg hover:shadow-xl text-base`}
         >
           {isSaving ? (
@@ -981,6 +891,11 @@ export default function BaseTarotForm({
             )
           )}
         </button>
+        {consentMessage ? (
+          <p className='text-xs text-amber-300 text-center mt-3'>
+            {consentMessage}
+          </p>
+        ) : null}
       </div>
     </div>
   );

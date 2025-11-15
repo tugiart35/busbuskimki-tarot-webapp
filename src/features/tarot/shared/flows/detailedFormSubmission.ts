@@ -87,6 +87,7 @@ export interface MetaLeadContext {
   fbc: string | null;
   eventSourceUrl?: string;
   contentName?: string;
+  customData?: Record<string, unknown>;
 }
 
 const META_LEAD_DEFAULT_CURRENCY = 'TRY';
@@ -176,32 +177,78 @@ export function createDetailedFormSubmission({
 
         const contentName = translate(dataKeys.spreadName);
         metaLeadRef.current.contentName = contentName;
+        const serviceType =
+          config.spreadId || config.translationNamespace || 'unknown_service';
+        const baseCustomData: Record<string, unknown> = {
+          communication_method: communicationMethod,
+          spread_id: config.spreadId,
+          service_type: serviceType,
+          locale: config.translationNamespace,
+          relationship_status: personalInfo.relationshipStatus || undefined,
+          lead_country: personalInfo.countryCode || undefined,
+          birth_date_known: !personalInfo.birthDateUnknown,
+          partner_name:
+            shouldIncludePartnerInfo && partnerInfo.name
+              ? partnerInfo.name
+              : undefined,
+          partner_birth_date_provided:
+            shouldIncludePartnerInfo &&
+            !partnerInfo.birthDateUnknown &&
+            !!partnerInfo.birthDate,
+        };
+        metaLeadRef.current.customData = baseCustomData;
 
         trackMetaLeadEvent({
           eventId: metaLeadRef.current.eventId,
           contentName,
           value: META_LEAD_DEFAULT_VALUE,
           currency: META_LEAD_DEFAULT_CURRENCY,
-          customData: {
-            communication_method: communicationMethod,
-            spread_id: config.spreadId,
-            locale: config.translationNamespace,
-            relationship_status: personalInfo.relationshipStatus || undefined,
-            lead_country: personalInfo.countryCode || undefined,
-            birth_date_known: !personalInfo.birthDateUnknown,
-            partner_name:
-              shouldIncludePartnerInfo && partnerInfo.name
-                ? partnerInfo.name
-                : undefined,
-            partner_birth_date_provided:
-              shouldIncludePartnerInfo &&
-              !partnerInfo.birthDateUnknown &&
-              !!partnerInfo.birthDate,
-          },
+          customData: baseCustomData,
         });
       }
     } finally {
       setSaving(false);
+    }
+  };
+
+  const sendMetaLeadForAuthenticatedUser = async () => {
+    if (!metaLeadRef.current) {
+      return;
+    }
+
+    const shouldIncludePartnerInfo =
+      config.requiresPartnerInfo ||
+      (config.isSingleCard && hasPartner) ||
+      (partnerInfoSpreads.includes(config.spreadId) && hasPartner);
+
+    try {
+      const response = await fetch('/api/meta/lead', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          metaPixel: {
+            eventId: metaLeadRef.current.eventId,
+            eventTime: metaLeadRef.current.eventTime,
+            fbp: metaLeadRef.current.fbp,
+            fbc: metaLeadRef.current.fbc,
+            eventSourceUrl: metaLeadRef.current.eventSourceUrl,
+            contentName: metaLeadRef.current.contentName,
+            customData: metaLeadRef.current.customData,
+          },
+          personalInfo,
+          partnerInfo: shouldIncludePartnerInfo ? partnerInfo : undefined,
+          communicationMethod,
+          consent: buildConsentSnapshot(),
+        }),
+      });
+
+      if (!response.ok) {
+        console.warn('Meta CAPI lead endpoint responded with error');
+      }
+    } catch (error) {
+      console.warn('Meta CAPI lead endpoint failed', error);
     }
   };
 
@@ -251,6 +298,7 @@ export function createDetailedFormSubmission({
                       fbc: metaLeadRef.current.fbc,
                       eventSourceUrl: metaLeadRef.current.eventSourceUrl,
                       contentName: metaLeadRef.current.contentName,
+                      customData: metaLeadRef.current.customData,
                     }
                   : undefined,
               }),
@@ -388,6 +436,10 @@ export function createDetailedFormSubmission({
         }).catch(() => {
           // Admin bildirimi başarısız olsa bile devam et
         });
+
+        if (metaLeadRef.current) {
+          await sendMetaLeadForAuthenticatedUser();
+        }
       }
 
       metaLeadRef.current = null;
