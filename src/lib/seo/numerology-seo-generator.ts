@@ -33,7 +33,7 @@ const numerologyPageSeoData: Record<
   }
 > = {
   tr: {
-    title: 'Ücretsiz Numeroloji Analizi - Yaşam Yolu Hesaplama | BüşBüşKimKi',
+    title: 'Ücretsiz Numeroloji Analizi - Yaşam Yolu Hesaplama | Büşbüşkimki',
     description:
       'Ücretsiz numeroloji analizi ile yaşam yolunuzu, kader sayınızı ve kişilik özelliklerinizi keşfedin. 9 farklı numeroloji hesaplaması, detaylı analizler ve kişisel rehberlik.',
     keywords: [
@@ -83,7 +83,7 @@ const numerologyPageSeoData: Record<
     ],
   },
   en: {
-    title: 'Free Numerology Analysis - Life Path Calculation | BüşBüşKimKi',
+    title: 'Free Numerology Analysis - Life Path Calculation | Büşbüşkimki',
     description:
       'Discover your life path, destiny number and personality traits with free numerology analysis. 9 different numerology calculations, detailed analyses and personal guidance.',
     keywords: [
@@ -134,7 +134,7 @@ const numerologyPageSeoData: Record<
   },
   sr: {
     title:
-      'Besplatna Numerološka Analiza - Izračun Životnog Puta | BüşBüşKimKi',
+      'Besplatna Numerološka Analiza - Izračun Životnog Puta | Büşbüşkimki',
     description:
       'Otkrijte svoj životni put, broj sudbine i osobine ličnosti sa besplatnom numerološkom analizom. 9 različitih numeroloških izračuna, detaljne analize i lično vođstvo.',
     keywords: [
@@ -217,7 +217,7 @@ export function generateNumerologyPageMetadata(locale: string): Metadata {
       title: data!.title,
       description: data!.description,
       url: `${baseUrl}${data!.canonicalPath}`,
-      siteName: 'BüşBüşKimKi',
+      siteName: 'Büşbüşkimki',
       images: [
         {
           url: data!.ogImage,
@@ -363,7 +363,7 @@ function buildNumerologyServiceSchema(locale: string): ServiceSchema {
     description: serviceDescriptions[localeKey] || serviceDescriptions.en,
     provider: {
       '@type': 'Organization',
-      name: 'BüşBüşKimKi Tarot Okuyucusu',
+      name: 'Büşbüşkimki Tarot Okuyucusu',
       url: base,
     },
     serviceType: 'Personal Services',

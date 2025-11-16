@@ -79,41 +79,47 @@ export function LocaleLayoutClient({
   return (
     <div className='min-h-screen bg-gradient-to-br from-slate-950 via-black to-slate-900 text-white'>
       {/* Modern Glassmorphism Header */}
-      <header className='fixed top-0 left-0 right-0 z-50 bg-white/5 backdrop-blur-2xl border-b border-white/10 shadow-2xl'>
+      <header
+        className='fixed top-0 left-0 right-0 z-50 bg-white/5 backdrop-blur-sm lg:backdrop-blur-2xl border-b border-white/10 shadow lg:shadow-2xl'
+        role='banner'
+        style={{ paddingTop: 'env(safe-area-inset-top)' }}
+      >
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-          <div className='flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between py-4 sm:py-0 min-h-[64px]'>
+          <div className='flex items-center justify-between gap-2 py-1.5 min-h-[44px]'>
             {/* Modern Logo */}
             <Link
               href={`/${locale}`}
-              className='flex items-center gap-3 text-white hover:text-white/90 transition-all duration-300 group'
+              className='flex items-center gap-3 text-white hover:text-white/90 transition-all duration-300 group touch-manipulation'
+              aria-label='Go to homepage'
             >
               <div className='relative'>
-                <div className='text-2xl group-hover:scale-110 transition-transform duration-300 filter drop-shadow-lg'>
+                <div className='text-lg sm:text-2xl group-hover:scale-110 transition-transform duration-300 filter drop-shadow'>
                   🔮
                 </div>
                 <div className='absolute inset-0 text-2xl opacity-0 group-hover:opacity-30 blur-sm transition-opacity duration-300'>
                   ✨
                 </div>
               </div>
-              <span className='text-lg sm:text-xl font-bold tracking-tight bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent'>
+              <span className='inline text-sm sm:text-xl font-bold tracking-tight bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent whitespace-nowrap truncate max-w-[120px] sm:max-w-none'>
                 Büşbüşkimki
               </span>
             </Link>
 
             {/* Modern Right Section */}
-            <div className='flex flex-wrap items-center gap-3 w-full sm:w-auto justify-between sm:justify-end'>
+            <div className='flex items-center justify-end gap-2 sm:gap-3 w-full sm:w-auto flex-nowrap'>
               {/* Language Selector */}
-              <LanguageSelector locale={locale} className='w-full sm:w-auto' />
+              <LanguageSelector locale={locale} className='' compact />
 
               {/* Modern Auth Section */}
               {isAuthenticated ? (
-                <div className='flex items-center gap-3 w-full sm:w-auto justify-end'>
+                <div className='flex items-center gap-2 sm:gap-3 justify-end'>
                   <div className='hidden sm:block text-sm text-white/70 font-medium'>
                     {user?.email}
                   </div>
                   <Link
                     href={`/${locale}/dashboard`}
-                    className='w-full sm:w-auto text-center px-5 py-2.5 bg-white/10 hover:bg-white/20 text-white text-sm font-semibold rounded-xl transition-all duration-300 hover:scale-105 backdrop-blur-sm border border-white/20 hover:border-white/30 shadow-lg hover:shadow-xl'
+                    className='text-center px-3 py-2 bg-white/10 hover:bg-white/15 text-white text-sm font-semibold rounded-lg transition-all duration-300 hover:scale-[1.02] backdrop-blur-0 sm:backdrop-blur-sm border border-white/15 hover:border-white/25 shadow sm:shadow-md touch-manipulation whitespace-nowrap'
+                    aria-label='Open dashboard'
                   >
                     {translate('auth.dashboard', 'Panel')}
                   </Link>
@@ -121,7 +127,8 @@ export function LocaleLayoutClient({
               ) : (
                 <Link
                   href={`/${locale}/auth`}
-                  className='w-full sm:w-auto text-center px-6 py-2.5 bg-gradient-to-r from-white to-white/90 hover:from-white/90 hover:to-white text-black text-sm font-semibold rounded-xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl'
+                  className='block text-center px-3 py-2 bg-gradient-to-r from-white to-white/90 hover:from-white/90 hover:to-white text-black text-sm font-semibold rounded-lg transition-all duration-300 hover:scale-[1.02] shadow sm:shadow-md touch-manipulation whitespace-nowrap'
+                  aria-label='Sign in'
                 >
                   {translate('auth.signIn', 'Giriş')}
                 </Link>
@@ -135,7 +142,7 @@ export function LocaleLayoutClient({
       <DisclaimerBanner locale={locale as 'tr' | 'en' | 'sr'} />
 
       {/* Main Content */}
-      <main className='pt-24 sm:pt-20'>{children}</main>
+      <main className='pt-12 sm:pt-20'>{children}</main>
 
       {/* Age Verification Modal */}
       <AgeVerificationModal locale={locale as 'tr' | 'en' | 'sr'} />

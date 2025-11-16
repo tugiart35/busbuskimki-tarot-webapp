@@ -85,10 +85,10 @@ export function ExpertCommentary({
               <div>
                 <p className='text-purple-100 text-sm font-medium uppercase tracking-wide'>
                   {locale === 'tr'
-                    ? 'BÜŞBÜŞKIMKI YORUMU'
+                    ? 'Büşbüşkimki YORUMU'
                     : locale === 'en'
-                      ? 'BÜŞBÜŞKIMKI COMMENTARY'
-                      : 'BÜŞBÜŞKIMKI KOMENTAR'}
+                      ? 'Büşbüşkimki COMMENTARY'
+                      : 'Büşbüşkimki KOMENTAR'}
                 </p>
                 <p className='text-white text-xs'>
                   {locale === 'tr'

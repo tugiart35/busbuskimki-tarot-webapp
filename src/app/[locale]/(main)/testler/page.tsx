@@ -140,12 +140,12 @@ export default async function TestlerPage({ params }: PageProps) {
           : 'sr',
     isPartOf: {
       '@type': 'WebSite',
-      name: 'BüşBüşKimKi',
+      name: 'Büşbüşkimki',
       url: baseUrl,
     },
     publisher: {
       '@type': 'Organization',
-      name: 'BüşBüşKimKi',
+      name: 'Büşbüşkimki',
       url: baseUrl,
     },
     author: {

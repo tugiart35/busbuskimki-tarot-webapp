@@ -7,11 +7,13 @@ import { getCardAlternateUrls } from '@/lib/i18n/card-url-mapper';
 interface LanguageSelectorProps {
   locale: string;
   className?: string;
+  compact?: boolean;
 }
 
 export function LanguageSelector({
   locale,
   className = '',
+  compact = false,
 }: LanguageSelectorProps) {
   const router = useRouter();
   const pathname = usePathname();
@@ -109,9 +111,14 @@ export function LanguageSelector({
 
   if (!mounted) {
     return (
-      <div className={`flex items-center gap-2 ${className}`}>
-        <span className='text-lg'>🇹🇷</span>
-        <span className='text-sm font-medium text-white/80'>TR</span>
+      <div
+        className={`flex items-center gap-2 ${className}`}
+        aria-label='Selected language'
+      >
+        <span className='text-lg'>{currentLanguage?.flag}</span>
+        <span className='text-sm font-medium text-white/80'>
+          {(currentLanguage?.code ?? '').toUpperCase()}
+        </span>
       </div>
     );
   }
@@ -121,17 +128,22 @@ export function LanguageSelector({
       {/* Modern Glassmorphism Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className='flex items-center justify-between sm:justify-start gap-3 px-4 py-2.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/15 transition-all duration-300 group shadow-lg hover:shadow-xl w-full sm:w-auto'
+        type='button'
+        className='flex items-center justify-between sm:justify-start gap-2 px-3 py-2 sm:px-4 sm:py-2 rounded-lg bg-white/10 backdrop-blur-0 sm:backdrop-blur-md lg:backdrop-blur-xl border border-white/15 hover:bg-white/15 transition-all duration-300 group shadow sm:shadow-md touch-manipulation h-9 sm:h-9'
         aria-label='Dil seç'
+        aria-haspopup='listbox'
+        aria-expanded={isOpen}
       >
-        <span className='text-lg filter drop-shadow-sm'>
+        <span className='text-base sm:text-lg filter drop-shadow-sm'>
           {currentLanguage?.flag}
         </span>
-        <span className='text-sm font-semibold text-white/95 group-hover:text-white transition-colors duration-300'>
+        <span
+          className={`${compact ? 'hidden sm:inline' : ''} text-xs sm:text-sm font-semibold text-white/95 group-hover:text-white transition-colors duration-300 select-none`}
+        >
           {currentLanguage?.code.toUpperCase()}
         </span>
         <svg
-          className={`w-4 h-4 text-white/70 transition-all duration-300 ${isOpen ? 'rotate-180 text-white' : 'group-hover:text-white/90'}`}
+          className={`w-3.5 h-3.5 sm:w-4 sm:h-4 text-white/70 transition-transform duration-300 ${isOpen ? 'rotate-180 text-white' : 'group-hover:text-white/90'}`}
           fill='none'
           stroke='currentColor'
           viewBox='0 0 24 24'
@@ -149,16 +161,16 @@ export function LanguageSelector({
       {isOpen && (
         <>
           <div
-            className='fixed inset-0 z-40 bg-black/20 backdrop-blur-sm'
+            className='fixed inset-0 z-50 bg-black/20 backdrop-blur-sm'
             onClick={() => setIsOpen(false)}
           />
 
-          <div className='absolute right-0 top-full mt-3 z-50 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl min-w-[160px] overflow-hidden animate-in slide-in-from-top-2 duration-200'>
+          <div className='absolute right-0 top-full mt-3 z-60 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-xl sm:shadow-2xl min-w-[180px] overflow-hidden animate-in slide-in-from-top-2 duration-200'>
             {languages.map((language, index) => (
               <button
                 key={language.code}
                 onClick={() => handleLanguageChange(language.code)}
-                className={`w-full px-4 py-3.5 text-left hover:bg-white/10 transition-all duration-200 flex items-center gap-3 group ${
+                className={`w-full px-4 py-3.5 text-left hover:bg-white/10 transition-all duration-200 flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-white/30 ${
                   language.code === locale
                     ? 'bg-white/15 text-white border-l-2 border-white/30'
                     : 'text-white/80 hover:text-white hover:translate-x-1'
@@ -166,6 +178,8 @@ export function LanguageSelector({
                 style={{
                   animationDelay: `${index * 50}ms`,
                 }}
+                role='option'
+                aria-selected={language.code === locale}
               >
                 <span className='text-base filter drop-shadow-sm group-hover:scale-110 transition-transform duration-200'>
                   {language.flag}

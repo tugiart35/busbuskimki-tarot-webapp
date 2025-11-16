@@ -123,7 +123,7 @@ export function generateOrganizationSchema(): OrganizationSchema {
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'BüşBüşKimKi Tarot Okuyucusu',
+    name: 'Büşbüşkimki Tarot Okuyucusu',
     description:
       'Profesyonel tarot okuma ve numeroloji hizmetleri. Aşk, kariyer ve yaşam rehberliği için kişiselleştirilmiş içgörüler alın.',
     url: baseUrl,
@@ -155,13 +155,13 @@ export function generateWebSiteSchema(): WebSiteSchema {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'BüşBüşKimKi Tarot Okuyucusu',
+    name: 'Büşbüşkimki Tarot Okuyucusu',
     url: baseUrl,
     description:
       'Profesyonel tarot okuma ve numeroloji hizmetleri. Aşk, kariyer ve yaşam rehberliği için kişiselleştirilmiş içgörüler alın.',
     publisher: {
       '@type': 'Organization',
-      name: 'BüşBüşKimKi Tarot Okuyucusu',
+      name: 'Büşbüşkimki Tarot Okuyucusu',
     },
     potentialAction: {
       '@type': 'SearchAction',
@@ -186,7 +186,7 @@ export function generateServiceSchema(): ServiceSchema {
       'Aşk, kariyer ve yaşam rehberliği için profesyonel tarot okuma ve numeroloji hizmetleri.',
     provider: {
       '@type': 'Organization',
-      name: 'BüşBüşKimKi Tarot Okuyucusu',
+      name: 'Büşbüşkimki Tarot Okuyucusu',
       url: baseUrl,
     },
     serviceType: 'Personal Services',
@@ -408,7 +408,7 @@ export function generateProductSchema(product: {
     sku: product.sku || `TAROT-${Date.now()}`,
     brand: {
       '@type': 'Brand',
-      name: 'BüşBüşKimKi',
+      name: 'Büşbüşkimki',
     },
     offers: {
       '@type': 'Offer',
@@ -423,7 +423,7 @@ export function generateProductSchema(product: {
       availability: 'https://schema.org/InStock',
       seller: {
         '@type': 'Organization',
-        name: 'BüşBüşKimKi',
+        name: 'Büşbüşkimki',
       },
     },
     aggregateRating: {
@@ -450,7 +450,7 @@ export function generateAggregateRatingSchema(ratings: {
     '@type': 'AggregateRating',
     itemReviewed: {
       '@type': 'Service',
-      name: 'BüşBüşKimKi Tarot Okuma Hizmetleri',
+      name: 'Büşbüşkimki Tarot Okuma Hizmetleri',
       description: 'Profesyonel tarot ve numeroloji hizmetleri',
     },
     ratingValue: ratings.ratingValue,
@@ -474,7 +474,7 @@ export function generateReviewSchema(review: {
     '@type': 'Review',
     itemReviewed: {
       '@type': 'Service',
-      name: 'BüşBüşKimKi Tarot Okuma',
+      name: 'Büşbüşkimki Tarot Okuma',
     },
     author: {
       '@type': 'Person',
@@ -516,12 +516,12 @@ export function generateArticleSchema(article: {
     dateModified: article.dateModified,
     author: {
       '@type': 'Organization',
-      name: article.authorName || 'BüşBüşKimKi',
+      name: article.authorName || 'Büşbüşkimki',
       url: baseUrl,
     },
     publisher: {
       '@type': 'Organization',
-      name: 'BüşBüşKimKi',
+      name: 'Büşbüşkimki',
       logo: {
         '@type': 'ImageObject',
         url: `${baseUrl}/icons/icon-512x512.png`,
@@ -593,7 +593,7 @@ export function generateVideoSchema(video: {
     embedUrl: video.contentUrl,
     publisher: {
       '@type': 'Organization',
-      name: 'BüşBüşKimKi',
+      name: 'Büşbüşkimki',
       logo: {
         '@type': 'ImageObject',
         url: `${baseUrl}/icons/icon-512x512.png`,
@@ -631,7 +631,7 @@ export function generateEventSchema(event: {
     },
     organizer: {
       '@type': 'Organization',
-      name: 'BüşBüşKimKi',
+      name: 'Büşbüşkimki',
       url: baseUrl,
     },
     offers: event.price

@@ -20,6 +20,12 @@ interface MetaLeadPersonalInfo {
   birthDate?: string;
   birthDateUnknown?: boolean;
   relationshipStatus?: string;
+  // Newly added optional fields for improved CAPI matching
+  externalId?: string;
+  gender?: string;
+  city?: string;
+  state?: string;
+  zip?: string;
 }
 
 interface MetaLeadPartnerInfo {
@@ -76,6 +82,11 @@ export async function sendMetaLeadEvent({
         : undefined;
     const birthDateHash = hashForMeta(birthDateValue);
     const countryHash = hashForMeta(personalInfo?.countryCode);
+    const externalIdHash = hashForMeta(personalInfo?.externalId);
+    const genderHash = hashForMeta(personalInfo?.gender);
+    const cityHash = hashForMeta(personalInfo?.city);
+    const stateHash = hashForMeta(personalInfo?.state);
+    const zipHash = hashForMeta(personalInfo?.zip);
 
     const userData: Record<string, unknown> = {};
 
@@ -101,6 +112,26 @@ export async function sendMetaLeadEvent({
 
     if (countryHash) {
       userData.country = countryHash;
+    }
+
+    if (externalIdHash) {
+      (userData as any).external_id = [externalIdHash];
+    }
+
+    if (genderHash) {
+      (userData as any).ge = genderHash;
+    }
+
+    if (cityHash) {
+      (userData as any).ct = cityHash;
+    }
+
+    if (stateHash) {
+      (userData as any).st = stateHash;
+    }
+
+    if (zipHash) {
+      (userData as any).zp = zipHash;
     }
 
     if (pixel.fbp) {

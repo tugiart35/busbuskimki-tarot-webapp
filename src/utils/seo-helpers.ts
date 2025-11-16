@@ -191,10 +191,10 @@ export function generateBackgroundAltText(
  */
 export function generateLogoAltText(locale: 'tr' | 'en' | 'sr' = 'tr'): string {
   return locale === 'tr'
-    ? 'BüşBüşKimKi - Profesyonel Tarot ve Numeroloji Logo'
+    ? 'Büşbüşkimki - Profesyonel Tarot ve Numeroloji Logo'
     : locale === 'en'
-      ? 'BüşBüşKimKi - Professional Tarot and Numerology Logo'
-      : 'BüşBüşKimKi - Profesionalna Tarot i Numerologija Logo';
+      ? 'Büşbüşkimki - Professional Tarot and Numerology Logo'
+      : 'Büşbüşkimki - Profesionalna Tarot i Numerologija Logo';
 }
 
 /**
@@ -219,10 +219,10 @@ export function generateOGImageAltText(
 ): string {
   const contextText =
     locale === 'tr'
-      ? 'BüşBüşKimKi - Profesyonel Tarot ve Numeroloji'
+      ? 'Büşbüşkimki - Profesyonel Tarot ve Numeroloji'
       : locale === 'en'
-        ? 'BüşBüşKimKi - Professional Tarot and Numerology'
-        : 'BüşBüşKimKi - Profesionalna Tarot i Numerologija';
+        ? 'Büşbüşkimki - Professional Tarot and Numerology'
+        : 'Büşbüşkimki - Profesionalna Tarot i Numerologija';
 
   return `${pageTitle} | ${contextText}`;
 }

@@ -36,9 +36,9 @@ const seoFriendlyPaths = {
 // Ana sayfa SEO bilgileri (seobilgileri.md'den alındı)
 const homepageSeoData = {
   tr: {
-    title: 'BüşBüşKimKi - Profesyonel Tarot ve Numeroloji Rehberliği',
+    title: 'Büşbüşkimki - Profesyonel Tarot ve Numeroloji Rehberliği',
     description:
-      'BüşBüşKimKi ile tarot ve numeroloji hizmetleri ile kişisel rehberlik, yaşam ipuçları ve sezgisel yorumlar keşfedin.',
+      'Büşbüşkimki ile tarot ve numeroloji hizmetleri ile kişisel rehberlik, yaşam ipuçları ve sezgisel yorumlar keşfedin.',
     keywords: [
       'tarot okuma',
       'numeroloji rehberi',
@@ -49,17 +49,17 @@ const homepageSeoData = {
       'numeroloji analiz',
       'kişisel gelişim',
     ],
-    ogTitle: 'BüşBüşKimKi - Profesyonel Tarot ve Numeroloji Rehberliği',
+    ogTitle: 'Büşbüşkimki - Profesyonel Tarot ve Numeroloji Rehberliği',
     ogDescription:
-      'BüşBüşKimKi ile hayatınıza rehberlik eden tarot ve numeroloji yorumlarını keşfedin ve kişisel gelişiminizi destekleyin.',
-    twitterTitle: 'BüşBüşKimKi - Profesyonel Tarot ve Numeroloji Rehberliği',
+      'Büşbüşkimki ile hayatınıza rehberlik eden tarot ve numeroloji yorumlarını keşfedin ve kişisel gelişiminizi destekleyin.',
+    twitterTitle: 'Büşbüşkimki - Profesyonel Tarot ve Numeroloji Rehberliği',
     twitterDescription:
-      'BüşBüşKimKi ile hayatınıza rehberlik eden tarot ve numeroloji yorumlarını keşfedin.',
+      'Büşbüşkimki ile hayatınıza rehberlik eden tarot ve numeroloji yorumlarını keşfedin.',
   },
   en: {
-    title: 'BüşBüşKimKi - Professional Tarot & Numerology Guidance',
+    title: 'Büşbüşkimki - Professional Tarot & Numerology Guidance',
     description:
-      "Discover personal guidance and intuitive insights with BüşBüşKimKi's professional tarot and numerology services.",
+      "Discover personal guidance and intuitive insights with Büşbüşkimki's professional tarot and numerology services.",
     keywords: [
       'tarot reading',
       'numerology guidance',
@@ -70,17 +70,17 @@ const homepageSeoData = {
       'numerology analysis',
       'personal development',
     ],
-    ogTitle: 'BüşBüşKimKi - Professional Tarot & Numerology Guidance',
+    ogTitle: 'Büşbüşkimki - Professional Tarot & Numerology Guidance',
     ogDescription:
-      'Explore tarot and numerology insights at BüşBüşKimKi to support your personal growth and life decisions.',
-    twitterTitle: 'BüşBüşKimKi - Professional Tarot & Numerology Guidance',
+      'Explore tarot and numerology insights at Büşbüşkimki to support your personal growth and life decisions.',
+    twitterTitle: 'Büşbüşkimki - Professional Tarot & Numerology Guidance',
     twitterDescription:
-      'Explore tarot and numerology insights at BüşBüşKimKi to support your personal growth.',
+      'Explore tarot and numerology insights at Büşbüşkimki to support your personal growth.',
   },
   sr: {
-    title: 'BüşBüşKimKi - Profesionalna Tarot i Numerologija',
+    title: 'Büşbüşkimki - Profesionalna Tarot i Numerologija',
     description:
-      'Otkrijte lično vođenje i intuitivne uvide uz profesionalne tarot i numerologijske usluge BüşBüşKimKi.',
+      'Otkrijte lično vođenje i intuitivne uvide uz profesionalne tarot i numerologijske usluge Büşbüşkimki.',
     keywords: [
       'tarot čitanje',
       'numerologija',
@@ -91,12 +91,12 @@ const homepageSeoData = {
       'numerološka analiza',
       'lični razvoj',
     ],
-    ogTitle: 'BüşBüşKimKi - Profesionalna Tarot i Numerologija',
+    ogTitle: 'Büşbüşkimki - Profesionalna Tarot i Numerologija',
     ogDescription:
-      'Istražite tarot i numerologiju uz BüşBüşKimKi i podržite lični razvoj i životne odluke.',
-    twitterTitle: 'BüşBüşKimKi - Profesionalna Tarot i Numerologija',
+      'Istražite tarot i numerologiju uz Büşbüşkimki i podržite lični razvoj i životne odluke.',
+    twitterTitle: 'Büşbüşkimki - Profesionalna Tarot i Numerologija',
     twitterDescription:
-      'Istražite tarot i numerologiju uz BüşBüşKimKi i podržite lični razvoj.',
+      'Istražite tarot i numerologiju uz Büşbüşkimki i podržite lični razvoj.',
   },
 };
 
@@ -132,13 +132,13 @@ export function generateHomepageMetadata(locale: string): Metadata {
       title: seoData.ogTitle,
       description: seoData.ogDescription,
       url: canonicalUrl,
-      siteName: 'BüşBüşKimKi',
+      siteName: 'Büşbüşkimki',
       images: [
         {
           url: 'https://busbuskimki.com/assets/logo/social-og.jpg',
           width: 1200,
           height: 630,
-          alt: 'BüşBüşKimKi',
+          alt: 'Büşbüşkimki',
         },
       ],
       type: 'website',
@@ -176,7 +176,7 @@ export function generateHomepageStructuredData(locale: string) {
     organization: {
       '@context': 'https://schema.org',
       '@type': 'Organization',
-      name: 'BüşBüşKimKi',
+      name: 'Büşbüşkimki',
       url: currentUrl,
       logo: 'https://busbuskimki.com/assets/logo/logo.png',
       sameAs: [
@@ -187,7 +187,7 @@ export function generateHomepageStructuredData(locale: string) {
     website: {
       '@context': 'https://schema.org',
       '@type': 'WebSite',
-      name: 'BüşBüşKimKi',
+      name: 'Büşbüşkimki',
       url: currentUrl,
       potentialAction: {
         '@type': 'SearchAction',
@@ -207,13 +207,13 @@ export function generateHomepageStructuredData(locale: string) {
       url: currentUrl,
       description:
         locale === 'tr'
-          ? 'BüşBüşKimKi, tarot ve numeroloji hizmetleri ile kişisel rehberlik ve sezgisel yorumlar sunar.'
+          ? 'Büşbüşkimki, tarot ve numeroloji hizmetleri ile kişisel rehberlik ve sezgisel yorumlar sunar.'
           : locale === 'en'
-            ? 'BüşBüşKimKi provides professional tarot and numerology services with personal guidance and intuitive insights.'
-            : 'BüşBüşKimKi pruža profesionalne usluge tarota i numerologije sa ličnim vođenjem i intuitivnim uvidima.',
+            ? 'Büşbüşkimki provides professional tarot and numerology services with personal guidance and intuitive insights.'
+            : 'Büşbüşkimki pruža profesionalne usluge tarota i numerologije sa ličnim vođenjem i intuitivnim uvidima.',
       provider: {
         '@type': 'Organization',
-        name: 'BüşBüşKimKi',
+        name: 'Büşbüşkimki',
       },
     },
     breadcrumb: {

@@ -251,7 +251,7 @@ export function generateSpreadMetadata(
     spread.color,
   ];
 
-  const title = `${currentLocale.title} | BüşBüşKimKi`;
+  const title = `${currentLocale.title} | Büşbüşkimki`;
   const description = currentLocale.description;
 
   return {
@@ -275,7 +275,7 @@ export function generateSpreadMetadata(
       title,
       description,
       url: `${baseUrl}/${locale}/tarotokumasi/${finalSpreadId}`,
-      siteName: 'BüşBüşKimKi',
+      siteName: 'Büşbüşkimki',
       images: [
         {
           url: `${baseUrl}/assets/spreads/${finalSpreadId}-og.jpg`,
@@ -310,9 +310,9 @@ export function generateSpreadMetadata(
     },
 
     // Additional metadata
-    authors: [{ name: 'BüşBüşKimKi' }],
-    creator: 'BüşBüşKimKi',
-    publisher: 'BüşBüşKimKi',
+    authors: [{ name: 'Büşbüşkimki' }],
+    creator: 'Büşbüşkimki',
+    publisher: 'Büşbüşkimki',
     category: 'Spirituality',
   };
 }
@@ -402,7 +402,7 @@ export function generateSpreadStructuredData(spreadId: string, locale: string) {
         description: currentLocale.description,
         provider: {
           '@type': 'Organization',
-          name: 'BüşBüşKimKi',
+          name: 'Büşbüşkimki',
           url: baseUrl,
         },
         serviceType: 'Tarot Reading',
@@ -421,7 +421,7 @@ export function generateSpreadStructuredData(spreadId: string, locale: string) {
       description: currentLocale.description,
       brand: {
         '@type': 'Brand',
-        name: 'BüşBüşKimKi',
+        name: 'Büşbüşkimki',
       },
       offers: {
         '@type': 'AggregateOffer',

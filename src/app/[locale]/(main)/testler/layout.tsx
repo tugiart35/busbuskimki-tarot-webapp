@@ -4,7 +4,7 @@ const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://busbuskimki.com';
 
 const testsSeoData = {
   tr: {
-    title: 'Psikolojik Testler: MBTI, Enneagram, Kokoloji | BüşBüşKimKi',
+    title: 'Psikolojik Testler: MBTI, Enneagram, Kokoloji | Büşbüşkimki',
     description:
       'MBTI, Enneagram, Big Five ve kokoloji testleri ile kendinizi keşfedin. Deniz Fırtınası kokoloji testi, İsim Enerjisi, Stres Testi ve daha fazlası ücretsiz!',
     keywords: [
@@ -21,7 +21,7 @@ const testsSeoData = {
     path: '/tr/testler',
   },
   en: {
-    title: 'Psychological Tests: MBTI, Enneagram, Kokology | BüşBüşKimKi',
+    title: 'Psychological Tests: MBTI, Enneagram, Kokology | Büşbüşkimki',
     description:
       'Discover yourself with MBTI, Enneagram, Big Five and Kokology quizzes. Sea Storm Kokology, Name Energy numerology, stress level test and more – all free!',
     keywords: [
@@ -37,7 +37,7 @@ const testsSeoData = {
     path: '/en/tests',
   },
   sr: {
-    title: 'Psihološki Testovi: MBTI, Eneagram, Kokologija | BüşBüşKimKi',
+    title: 'Psihološki Testovi: MBTI, Eneagram, Kokologija | Büşbüşkimki',
     description:
       'Otkrij sebe uz MBTI, Eneagram, Big Five i kokologija testove. Test Olujne Oluje, energija imena, test nivoa stresa i još mnogo toga – besplatno!',
     keywords: [
@@ -86,7 +86,7 @@ export async function generateMetadata({
       title: data.title,
       description: data.description,
       url: `${baseUrl}${data.path}`,
-      siteName: 'BüşBüşKimKi',
+      siteName: 'Büşbüşkimki',
       type: 'website',
       locale:
         resolvedLocale === 'tr'

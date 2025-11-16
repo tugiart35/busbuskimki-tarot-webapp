@@ -327,36 +327,36 @@ export function HomePageClient({
 
           {/* Modern Stats Section */}
           <section
-            className='max-w-5xl w-full mb-20'
+            className='max-w-5xl w-full mb-16'
             aria-label='İstatistiklerimiz'
           >
-            <h4 className='text-3xl md:text-4xl font-bold text-white mb-12 text-center'>
+            <h4 className='text-2xl md:text-4xl font-bold text-white mb-8 md:mb-12 text-center'>
               <span className='bg-gradient-to-r from-white via-white/90 to-white/80 bg-clip-text text-transparent'>
                 {t('homepage.stats.title')}
               </span>
             </h4>
-            <div className='grid grid-cols-3 gap-6 text-center'>
-              <div className='bg-white/5 backdrop-blur-xl border border-white/20 rounded-2xl p-8 hover:bg-white/10 hover:border-white/30 transition-all duration-500 shadow-xl hover:shadow-2xl'>
-                <div className='text-4xl font-bold text-white mb-3'>10K+</div>
-                <div className='text-white/70 text-sm font-medium'>
+            <div className='grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 text-center'>
+              <div className='bg-white/5 backdrop-blur-xl border border-white/20 rounded-2xl p-5 sm:p-8 hover:bg-white/10 hover:border-white/30 transition-all duration-500 shadow-lg sm:shadow-xl hover:shadow-2xl'>
+                <div className='text-3xl sm:text-4xl font-bold text-white mb-2 sm:mb-3'>10K+</div>
+                <div className='text-white/70 text-xs sm:text-sm font-medium'>
                   {t('homepage.stats.users')}
                 </div>
               </div>
-              <div className='bg-white/5 backdrop-blur-xl border border-white/20 rounded-2xl p-8 hover:bg-white/10 hover:border-white/30 transition-all duration-500 shadow-xl hover:shadow-2xl'>
-                <div className='text-4xl font-bold text-white mb-3'>
+              <div className='bg-white/5 backdrop-blur-xl border border-white/20 rounded-2xl p-5 sm:p-8 hover:bg-white/10 hover:border-white/30 transition-all duration-500 shadow-lg sm:shadow-xl hover:shadow-2xl'>
+                <div className='text-3xl sm:text-4xl font-bold text-white mb-2 sm:mb-3'>
                   {!mounted ? (
                     <div className='animate-pulse text-white/50'>...</div>
                   ) : (
                     initialReadings.toLocaleString('tr-TR')
                   )}
                 </div>
-                <div className='text-white/70 text-sm font-medium'>
+                <div className='text-white/70 text-xs sm:text-sm font-medium'>
                   {t('homepage.stats.readings')}
                 </div>
               </div>
-              <div className='bg-white/5 backdrop-blur-xl border border-white/20 rounded-2xl p-8 hover:bg-white/10 hover:border-white/30 transition-all duration-500 shadow-xl hover:shadow-2xl'>
-                <div className='text-4xl font-bold text-white mb-3'>94%</div>
-                <div className='text-white/70 text-sm font-medium'>
+              <div className='bg-white/5 backdrop-blur-xl border border-white/20 rounded-2xl p-5 sm:p-8 hover:bg-white/10 hover:border-white/30 transition-all duration-500 shadow-lg sm:shadow-xl hover:shadow-2xl'>
+                <div className='text-3xl sm:text-4xl font-bold text-white mb-2 sm:mb-3'>94%</div>
+                <div className='text-white/70 text-xs sm:text-sm font-medium'>
                   {t('homepage.stats.satisfaction')}
                 </div>
               </div>

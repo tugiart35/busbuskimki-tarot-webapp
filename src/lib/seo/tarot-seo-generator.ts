@@ -20,7 +20,7 @@ const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://busbuskimki.com';
 
 const tarotPageSeoData = {
   tr: {
-    title: 'BüşBüşKimKi - Tarot Okuması & Kişisel Açılımlar',
+    title: 'Büşbüşkimki - Tarot Okuması & Kişisel Açılımlar',
     description:
       'Ücretsiz ve ücretli tarot açılımlarıyla aşk, kariyer, para ve evlilik konularında rehberlik alın.',
     keywords: [
@@ -61,7 +61,7 @@ const tarotPageSeoData = {
     ],
   },
   en: {
-    title: 'BüşBüşKimKi - Tarot Readings & Personal Spreads',
+    title: 'Büşbüşkimki - Tarot Readings & Personal Spreads',
     description:
       'Get free and paid tarot spreads for love, career, money, marriage, and relationship guidance.',
     keywords: [
@@ -101,7 +101,7 @@ const tarotPageSeoData = {
     ],
   },
   sr: {
-    title: 'BüşBüşKimKi - Tarot Čitanje & Lični Rasporedi',
+    title: 'Büşbüşkimki - Tarot Čitanje & Lični Rasporedi',
     description:
       'Isprobajte besplatne i plaćene tarot rasporede za ljubav, karijeru, novac, brak i odnose.',
     keywords: [
@@ -165,7 +165,7 @@ export function generateTarotPageMetadata(locale: string): Metadata {
       title: data.title,
       description: data.description,
       url: `${baseUrl}${data.canonicalPath}`,
-      siteName: 'BüşBüşKimKi',
+      siteName: 'Büşbüşkimki',
       images: [
         {
           url: data.ogImage,
@@ -278,7 +278,7 @@ function buildTarotServiceSchema(locale: string): ServiceSchema {
       serviceDescriptions.en,
     provider: {
       '@type': 'Organization',
-      name: 'BüşBüşKimKi Tarot Okuyucusu',
+      name: 'Büşbüşkimki Tarot Okuyucusu',
       url: base,
     },
     serviceType: 'Personal Services',

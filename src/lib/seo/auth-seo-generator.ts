@@ -24,9 +24,9 @@ const authSeoData: Record<
   }
 > = {
   tr: {
-    title: 'Giriş — BüşBüşKimKi',
+    title: 'Giriş — Büşbüşkimki',
     description:
-      'BüşBüşKimKi hesabınıza güvenli şekilde giriş yapın. Tarot ve numeroloji hizmetlerinize erişim sağlayın.',
+      'Büşbüşkimki hesabınıza güvenli şekilde giriş yapın. Tarot ve numeroloji hizmetlerinize erişim sağlayın.',
     keywords: [
       'giriş yap',
       'hesap girişi',
@@ -62,9 +62,9 @@ const authSeoData: Record<
     ],
   },
   en: {
-    title: 'Sign In — BüşBüşKimKi',
+    title: 'Sign In — Büşbüşkimki',
     description:
-      'Sign in to your BüşBüşKimKi account securely. Access your tarot and numerology services.',
+      'Sign in to your Büşbüşkimki account securely. Access your tarot and numerology services.',
     keywords: [
       'sign in',
       'account login',
@@ -100,9 +100,9 @@ const authSeoData: Record<
     ],
   },
   sr: {
-    title: 'Пријава — BüşBüşKimKi',
+    title: 'Пријава — Büşbüşkimki',
     description:
-      'Пријавите се на свој BüşBüşKimKi налог сигурно. Приступите својим тарот и нумеролошким услугама.',
+      'Пријавите се на свој Büşbüşkimki налог сигурно. Приступите својим тарот и нумеролошким услугама.',
     keywords: [
       'пријава',
       'пријава на налог',
@@ -162,7 +162,7 @@ export function generateAuthPageMetadata(locale: string): Metadata {
       title: data!.title,
       description: data!.description,
       url: `${baseUrl}${data!.canonicalPath}`,
-      siteName: 'BüşBüşKimKi',
+      siteName: 'Büşbüşkimki',
       images: [
         {
           url: data!.ogImage,
