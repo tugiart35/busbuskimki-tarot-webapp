@@ -470,6 +470,8 @@
       "rateLimitExceeded": "Previše pokušaja. Molimo pokušajte kasnije.",
       "googleLogin": "Prijavi se sa Google",
       "googleRegister": "Registruj se sa Google",
+      "facebookLogin": "Prijavi se sa Facebook-om",
+      "facebookRegister": "Registruj se sa Facebook-om",
       "sendingEmail": "Slanje email-a...",
       "resendEmail": "Pošalji ponovo email",
       "passwordResetDescription": "Unesite svoju email adresu i poslaćemo vam link za resetovanje lozinke.",

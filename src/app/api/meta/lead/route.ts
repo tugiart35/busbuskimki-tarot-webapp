@@ -24,6 +24,10 @@ interface LeadRequestBody {
     birthDate?: string;
     birthDateUnknown?: boolean;
     relationshipStatus?: string;
+    externalId?: string;
+    city?: string;
+    state?: string;
+    zip?: string;
   } | null;
   partnerInfo?: {
     name?: string;

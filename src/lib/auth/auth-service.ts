@@ -208,6 +208,28 @@ export class AuthService {
   }
 
   /**
+   * Facebook ile OAuth girişi
+   */
+  static async signInWithFacebook(locale: string) {
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'facebook',
+        options: {
+          redirectTo: `${window.location.origin}/auth/callback?locale=${locale}`,
+        },
+      });
+
+      if (error) {
+        throw new AuthError(error.message, error);
+      }
+
+      return true;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  /**
    * Çıkış yapma
    */
   static async signOut() {

@@ -1,6 +1,9 @@
 import type { Dispatch, MutableRefObject, SetStateAction } from 'react';
 import { supabase } from '@/lib/supabase/client';
-import { getMetaCookieValues } from '@/lib/analytics/cookies';
+import {
+  ensureMetaClickId,
+  getMetaCookieValues,
+} from '@/lib/analytics/cookies';
 import {
   generateMetaEventId,
   trackMetaLeadEvent,
@@ -122,13 +125,14 @@ export function createDetailedFormSubmission({
       return null;
     }
 
+    const ensuredFbc = ensureMetaClickId();
     const { fbp, fbc } = getMetaCookieValues();
 
     return {
       eventId: generateMetaEventId(),
       eventTime: Math.floor(Date.now() / 1000),
       fbp,
-      fbc,
+      fbc: ensuredFbc || fbc,
       eventSourceUrl: window.location.href,
     };
   };
@@ -230,6 +234,10 @@ export function createDetailedFormSubmission({
       (config.isSingleCard && hasPartner) ||
       (partnerInfoSpreads.includes(config.spreadId) && hasPartner);
 
+    const personalInfoPayload = userId
+      ? { ...personalInfo, externalId: userId }
+      : personalInfo;
+
     try {
       const response = await fetch('/api/meta/lead', {
         method: 'POST',
@@ -246,7 +254,7 @@ export function createDetailedFormSubmission({
             contentName: metaLeadRef.current.contentName,
             customData: metaLeadRef.current.customData,
           },
-          personalInfo,
+          personalInfo: personalInfoPayload,
           partnerInfo: shouldIncludePartnerInfo ? partnerInfo : undefined,
           communicationMethod,
           consent: buildConsentSnapshot(),

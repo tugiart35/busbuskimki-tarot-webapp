@@ -99,6 +99,22 @@ export function useAuth() {
     [clearError]
   );
 
+  const signInWithFacebook = useCallback(
+    async (locale: string) => {
+      try {
+        setAuthLoading(true);
+        clearError();
+
+        await AuthService.signInWithFacebook(locale);
+      } catch (err) {
+        throw err;
+      } finally {
+        setAuthLoading(false);
+      }
+    },
+    [clearError]
+  );
+
   const resendConfirmation = useCallback(
     async (email: string) => {
       try {
@@ -127,6 +143,7 @@ export function useAuth() {
     signOut,
     resetPassword,
     signInWithGoogle,
+    signInWithFacebook,
     resendConfirmation,
     refreshSession,
     clearError,
