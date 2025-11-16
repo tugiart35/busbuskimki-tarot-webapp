@@ -1142,10 +1142,12 @@ export function createTarotReadingComponent({
           icon={config.icon}
           titleKey={modalKeys.infoTitle}
         >
-          <div className='space-y-4'>
+          <div className='space-y-3 sm:space-y-4 mobile-compact-sm'>
             {/* Yayılım hakkında bilgi */}
             <div className={themeStyles.infoPrimary.container}>
-              <h3 className={themeStyles.infoPrimary.title}>
+              <h3
+                className={`${themeStyles.infoPrimary.title} text-base sm:text-lg`}
+              >
                 {t(modalKeys.aboutSpread)}
               </h3>
               <p className='text-sm leading-relaxed'>
@@ -1153,23 +1155,13 @@ export function createTarotReadingComponent({
               </p>
             </div>
 
-            {/* Okuma tipi bilgisi */}
-            <div className={themeStyles.infoPrimary.container}>
-              <h3 className={themeStyles.infoPrimary.title}>
-                {selectedReadingType === READING_TYPES.DETAILED
-                  ? t(modalKeys.detailedReading)
-                  : t(modalKeys.writtenReading)}
-              </h3>
-              <p className='text-sm leading-relaxed'>
-                {selectedReadingType === READING_TYPES.DETAILED
-                  ? t(modalKeys.detailedReadingText)
-                  : t(modalKeys.writtenReadingText)}
-              </p>
-            </div>
+            {/* Okuma tipi bilgisi kaldırıldı: modal dikeyini küçültmek için bu bölüm gizlendi */}
 
             {/* Dikkat bilgisi */}
             <div className={themeStyles.infoSecondary.container}>
-              <h3 className={themeStyles.infoSecondary.title}>
+              <h3
+                className={`${themeStyles.infoSecondary.title} text-base sm:text-lg`}
+              >
                 {t(modalKeys.loveAttentionInfo)}
               </h3>
               <p className='text-sm leading-relaxed'>
@@ -1179,7 +1171,9 @@ export function createTarotReadingComponent({
 
             {/* Süreç adımları */}
             <div className={themeStyles.process.container}>
-              <h3 className={themeStyles.process.title}>
+              <h3
+                className={`${themeStyles.process.title} text-base sm:text-lg`}
+              >
                 {t(modalKeys.process)}
               </h3>
               <div className='space-y-2'>
@@ -1194,7 +1188,7 @@ export function createTarotReadingComponent({
                     className='flex items-center text-gray-300 text-sm'
                   >
                     <span
-                      className={`${themeStyles.process.stepNumber} w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold mr-3`}
+                      className={`${themeStyles.process.stepNumber} w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center text-[10px] sm:text-xs font-bold mr-3`}
                     >
                       {index + 1}
                     </span>
@@ -1309,7 +1303,14 @@ export function createTarotReadingComponent({
         {/* Okuma vurgu bölümü - seçilen pozisyonu gösterir */}
         {selectedReadingType &&
           currentPosition &&
-          currentPosition <= config.cardCount && (
+          currentPosition <= config.cardCount &&
+          // Single card açılımında bu bilgi kutusunu göstermeyelim
+          !(
+            config.isSingleCard ||
+            config.cardCount === 1 ||
+            config.spreadId === 'single-card' ||
+            config.spreadId === 'single-card-spread'
+          ) && (
             <div className='flex justify-center mb-4'>
               <div className={themeStyles.readingHighlight.container}>
                 <div className='flex items-center space-x-3'>

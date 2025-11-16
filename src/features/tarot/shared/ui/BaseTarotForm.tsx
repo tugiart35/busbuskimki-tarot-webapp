@@ -217,7 +217,7 @@ export default function BaseTarotForm({
 
   const modalClass =
     variant === 'modal'
-      ? 'bg-slate-900/95 border shadow-2xl w-full max-w-md max-h-[90vh]'
+      ? 'bg-slate-900/95 border shadow-2xl w-full max-w-sm sm:max-w-md max-h-[82vh] sm:max-h-[90vh]'
       : 'bg-slate-900/70 border w-full';
 
   const formContent = (
@@ -225,17 +225,17 @@ export default function BaseTarotForm({
       className={`${modalClass} ${themeClasses.border} rounded-2xl flex flex-col ${className}`}
     >
       <div
-        className={`flex items-center justify-between p-6 border-b ${themeClasses.headerBorder} flex-shrink-0`}
+        className={`flex items-center justify-between px-4 py-3 sm:p-6 border-b ${themeClasses.headerBorder} flex-shrink-0`}
       >
         <div className='flex items-center'>
           <div
-            className={`w-12 h-12 flex items-center justify-center ${themeClasses.iconBg} rounded-full mr-3 shadow-lg`}
+            className={`w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center ${themeClasses.iconBg} rounded-full mr-3 shadow-lg`}
           >
             <span className={`text-xl ${themeClasses.iconText}`}>
               {config.icon}
             </span>
           </div>
-          <h2 className={`${themeClasses.titleText} text-lg font-semibold`}>
+          <h2 className={`${themeClasses.titleText} text-base sm:text-lg font-semibold`}>
             {translate(formKeys.personalInfo)}
           </h2>
         </div>
@@ -260,7 +260,7 @@ export default function BaseTarotForm({
         </button>
       </div>
 
-      <div className='flex-1 overflow-y-auto px-6 py-4'>
+      <div className='flex-1 overflow-y-auto px-4 py-3 sm:px-6 sm:py-4'>
         <div className='space-y-4'>
           <div className='space-y-4 md:grid md:grid-cols-2 md:gap-4 md:space-y-0'>
             <div>
@@ -276,39 +276,12 @@ export default function BaseTarotForm({
                   onUpdatePersonalInfo('name', event.target.value)
                 }
                 placeholder={getPlaceholder(placeholders.firstName)}
-                className={`w-full px-4 py-3 bg-slate-800/80 border ${
+                className={`w-full px-3 py-2.5 bg-slate-800/80 border ${
                   formErrors.name ? 'border-red-500' : themeClasses.inputBorder
                 } rounded-lg text-white placeholder-gray-400 focus:outline-none ${themeClasses.focusRing} transition-all`}
               />
               {formErrors.name && (
                 <p className='text-red-400 text-xs mt-1'>{formErrors.name}</p>
-              )}
-            </div>
-            <div>
-              <label
-                className={`block text-sm font-medium ${themeClasses.labelText} mb-2`}
-              >
-                {translate(formKeys.lastName || 'common.lastName')} *
-              </label>
-              <input
-                type='text'
-                value={personalInfo.surname}
-                onChange={event =>
-                  onUpdatePersonalInfo('surname', event.target.value)
-                }
-                placeholder={getPlaceholder(
-                  placeholders.lastName ?? formKeys.placeholders?.lastName
-                )}
-                className={`w-full px-4 py-3 bg-slate-800/80 border ${
-                  formErrors.surname
-                    ? 'border-red-500'
-                    : themeClasses.inputBorder
-                } rounded-lg text-white placeholder-gray-400 focus:outline-none ${themeClasses.focusRing} transition-all`}
-              />
-              {formErrors.surname && (
-                <p className='text-red-400 text-xs mt-1'>
-                  {formErrors.surname}
-                </p>
               )}
             </div>
           </div>
@@ -327,7 +300,7 @@ export default function BaseTarotForm({
                   onUpdatePersonalInfo('birthDate', event.target.value)
                 }
                 disabled={personalInfo.birthDateUnknown}
-                className={`w-full px-4 py-3 bg-slate-800/80 border ${
+                className={`w-full px-3 py-2.5 h-11 text-sm appearance-none bg-slate-800/80 border ${
                   formErrors.birthDate
                     ? 'border-red-500'
                     : themeClasses.inputBorder
@@ -872,12 +845,13 @@ export default function BaseTarotForm({
       </div>
 
       <div
-        className={`p-6 border-t ${themeClasses.sectionBorder} flex-shrink-0`}
+        className={`px-4 py-4 sm:p-6 border-t ${themeClasses.sectionBorder} flex-shrink-0`}
+        style={{ paddingBottom: 'calc(1rem + env(safe-area-inset-bottom))' }}
       >
         <button
           onClick={onSaveForm}
           disabled={isSaving || consentBlocked}
-          className={`w-full ${themeClasses.buttonBg} ${themeClasses.buttonHover} text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed shadow-lg hover:shadow-xl text-base`}
+          className={`w-full ${themeClasses.buttonBg} ${themeClasses.buttonHover} text-white font-semibold py-3.5 px-5 rounded-xl transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed shadow-lg hover:shadow-xl text-base`}
         >
           {isSaving ? (
             <div className='flex items-center justify-center'>
@@ -906,7 +880,7 @@ export default function BaseTarotForm({
 
   return (
     <div
-      className='fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm p-4'
+      className='fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm p-3 sm:p-4'
       style={{ backgroundColor: 'rgba(0, 0, 0, 0.7)' }}
       onClick={event => {
         if (event.target === event.currentTarget) {

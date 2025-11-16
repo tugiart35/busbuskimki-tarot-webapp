@@ -208,6 +208,7 @@ export default function BaseTarotCanvas({
                   selectedReadingType === 'written') &&
                   detailedFormSaved)
               }
+              cardSize={isSingleCard ? 'large' : 'medium'}
               positionInfo={
                 (config.positionsInfo || [])[idx] ?? {
                   title: `Pozisyon ${position.id}`,

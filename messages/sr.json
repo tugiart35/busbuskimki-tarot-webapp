@@ -669,7 +669,10 @@
       "birthDateRequired": "Datum rođenja je obavezan.",
       "emailInvalid": "Molimo unesite važeću adresu e-pošte.",
       "nameMinLength": "Ime mora biti najmanje 3 znaka.",
+      "partnerNameRequired": "Potrebno je ime partnera.",
+      "partnerBirthDateRequired": "Potrebno je navesti datum rođenja partnera.",
       "questionMinLength": "Morate odgovoriti na ovo pitanje u najmanje 10 znakova.",
+      "relationshipStatusRequired": "Molimo odaberite status veze.",
       "surnameMinLength": "Prezime mora biti najmanje 3 znaka."
     },
     "meanings": {

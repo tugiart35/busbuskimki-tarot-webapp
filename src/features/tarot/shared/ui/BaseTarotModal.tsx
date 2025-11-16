@@ -24,7 +24,7 @@ export default function BaseTarotModal({
 
   return (
     <div
-      className='fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4'
+      className='fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-3 sm:p-4'
       onClick={e => {
         if (e.target === e.currentTarget) {
           onClose();
@@ -32,19 +32,21 @@ export default function BaseTarotModal({
       }}
     >
       <div
-        className={`bg-slate-900/95 border ${themeClasses.border} rounded-2xl shadow-2xl w-full ${maxWidthClass} max-h-[90vh] flex flex-col ${className}`}
+        className={`bg-slate-900/95 border ${themeClasses.border} rounded-2xl shadow-2xl w-full ${maxWidthClass} max-h-[80vh] md:max-h-[90vh] flex flex-col ${className}`}
       >
         {/* Modal Header */}
         <div
-          className={`flex items-center justify-between p-6 border-b ${themeClasses.headerBorder} flex-shrink-0`}
+          className={`flex items-center justify-between px-4 py-3 sm:p-6 border-b ${themeClasses.headerBorder} flex-shrink-0`}
         >
           <div className='flex items-center'>
             <div
-              className={`w-12 h-12 flex items-center justify-center ${themeClasses.iconBg} rounded-full mr-3 shadow-lg`}
+              className={`w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center ${themeClasses.iconBg} rounded-full mr-3 shadow-lg`}
             >
               <span className={`text-xl ${themeClasses.iconText}`}>{icon}</span>
             </div>
-            <h2 className={`${themeClasses.titleText} text-lg font-semibold`}>
+            <h2
+              className={`${themeClasses.titleText} text-base sm:text-lg font-semibold`}
+            >
               {t(titleKey)}
             </h2>
           </div>
@@ -70,7 +72,9 @@ export default function BaseTarotModal({
         </div>
 
         {/* Scrollable Content */}
-        <div className='flex-1 overflow-y-auto px-6 py-4'>{children}</div>
+        <div className='flex-1 overflow-y-auto px-4 py-3 sm:px-6 sm:py-4'>
+          {children}
+        </div>
       </div>
     </div>
   );

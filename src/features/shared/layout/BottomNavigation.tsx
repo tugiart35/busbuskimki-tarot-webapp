@@ -82,6 +82,12 @@ export default function BottomNavigation() {
 
   return (
     <LayoutErrorBoundary>
+      {/* Flow spacer to prevent content being hidden under the fixed nav on mobile */}
+      <div
+        aria-hidden
+        className='block md:hidden'
+        style={{ height: 'calc(4rem + env(safe-area-inset-bottom))' }}
+      />
       <nav
         className='fixed bottom-0 left-0 right-0 z-50 bg-slate-900/95 backdrop-blur-md border-t border-slate-700'
         role='navigation'

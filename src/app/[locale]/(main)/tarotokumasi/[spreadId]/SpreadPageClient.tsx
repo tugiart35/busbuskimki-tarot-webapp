@@ -803,42 +803,45 @@ function SpreadPageContent({
                 </div>
 
                 {/* What You'll Discover - Positions Preview */}
-                <div className='mt-6 sm:mt-8 p-5 sm:p-6 bg-gradient-to-r from-purple-900/30 to-pink-900/30 backdrop-blur-sm border border-purple-500/30 rounded-2xl'>
-                  <h3 className='text-sm sm:text-lg font-bold text-white mb-4 sm:mb-5 flex items-center gap-2'>
-                    <span className='text-xl sm:text-2xl'>🔮</span>
-                    Bu Açılımda Keşfedecekleriniz
-                  </h3>
+                {/* Token okumasında bu bölümü gizle */}
+                {!token && (
+                  <div className='mt-6 sm:mt-8 p-5 sm:p-6 bg-gradient-to-r from-purple-900/30 to-pink-900/30 backdrop-blur-sm border border-purple-500/30 rounded-2xl'>
+                    <h3 className='text-sm sm:text-lg font-bold text-white mb-4 sm:mb-5 flex items-center gap-2'>
+                      <span className='text-xl sm:text-2xl'>🔮</span>
+                      Bu Açılımda Keşfedecekleriniz
+                    </h3>
 
-                  <div className='grid sm:grid-cols-2 gap-3 sm:gap-4'>
-                    {currentSpread.positions.slice(0, 4).map((pos, idx) => (
-                      <div
-                        key={pos.id}
-                        className='flex items-start gap-3 p-3 sm:p-4 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 hover:border-purple-500/30 transition-all group'
-                      >
-                        <div className='flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center bg-gradient-to-br from-purple-500/30 to-pink-500/30 rounded-full text-white font-bold text-xs sm:text-sm border border-purple-500/50 group-hover:scale-110 transition-transform'>
-                          {idx + 1}
+                    <div className='grid sm:grid-cols-2 gap-3 sm:gap-4'>
+                      {currentSpread.positions.slice(0, 4).map((pos, idx) => (
+                        <div
+                          key={pos.id}
+                          className='flex items-start gap-3 p-3 sm:p-4 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 hover:border-purple-500/30 transition-all group'
+                        >
+                          <div className='flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center bg-gradient-to-br from-purple-500/30 to-pink-500/30 rounded-full text-white font-bold text-xs sm:text-sm border border-purple-500/50 group-hover:scale-110 transition-transform'>
+                            {idx + 1}
+                          </div>
+                          <div className='flex-1 min-w-0'>
+                            <h4 className='text-xs sm:text-sm font-semibold text-white mb-1 leading-tight group-hover:text-purple-300 transition-colors'>
+                              {t(pos.title)}
+                            </h4>
+                            <p className='text-xs text-gray-400 leading-relaxed line-clamp-2'>
+                              {t(pos.description)}
+                            </p>
+                          </div>
                         </div>
-                        <div className='flex-1 min-w-0'>
-                          <h4 className='text-xs sm:text-sm font-semibold text-white mb-1 leading-tight group-hover:text-purple-300 transition-colors'>
-                            {t(pos.title)}
-                          </h4>
-                          <p className='text-xs text-gray-400 leading-relaxed line-clamp-2'>
-                            {t(pos.description)}
-                          </p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {currentSpread.positions.length > 4 && (
-                    <div className='mt-4 text-center'>
-                      <p className='text-xs text-purple-300 font-medium'>
-                        + {currentSpread.positions.length - 4} pozisyon daha
-                        keşfedilecek...
-                      </p>
+                      ))}
                     </div>
-                  )}
-                </div>
+
+                    {currentSpread.positions.length > 4 && (
+                      <div className='mt-4 text-center'>
+                        <p className='text-xs text-purple-300 font-medium'>
+                          + {currentSpread.positions.length - 4} pozisyon daha
+                          keşfedilecek...
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           </div>

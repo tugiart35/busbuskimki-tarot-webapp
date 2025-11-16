@@ -1703,15 +1703,18 @@ export default function ReadingsPage() {
                   </p>
                 </div>
 
-                {/* Token Preview */}
-                {tokenReading.token_preview && (
-                  <div className='mb-4 p-2 bg-slate-800/50 rounded-lg'>
-                    <p className='text-slate-400 text-xs mb-1'>Token</p>
-                    <p className='text-white font-mono text-xs truncate'>
-                      {tokenReading.token_preview}
-                    </p>
-                  </div>
-                )}
+                {/* Token Preview - Aşk Açılımı'nda gösterilmez */}
+                {tokenReading.token_preview &&
+                  tokenReading.spread_key !== 'love' &&
+                  !tokenReading.spread_name?.toLowerCase().includes('aşk') &&
+                  !tokenReading.spread_name?.toLowerCase().includes('love') && (
+                    <div className='mb-4 p-2 bg-slate-800/50 rounded-lg'>
+                      <p className='text-slate-400 text-xs mb-1'>Token</p>
+                      <p className='text-white font-mono text-xs truncate'>
+                        {tokenReading.token_preview}
+                      </p>
+                    </div>
+                  )}
 
                 {/* Reading Link */}
                 {tokenReading.reading_link && (

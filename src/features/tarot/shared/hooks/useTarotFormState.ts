@@ -227,13 +227,7 @@ export function useTarotFormState({
       hasError = true;
     }
 
-    if (
-      !personalInfo.surname.trim() ||
-      personalInfo.surname.trim().length < 3
-    ) {
-      errors.surname = t(validationKeys.surnameMinLength);
-      hasError = true;
-    }
+    // Surname artık opsiyonel - validasyon dışı bırakıldı
 
     // Birth date validation - Eğer "bilmiyorum" seçilmediyse zorunlu
     if (!personalInfo.birthDateUnknown && !personalInfo.birthDate) {

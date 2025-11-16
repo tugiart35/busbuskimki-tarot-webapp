@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html class="dark" lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mystic Path - Tarot &amp; Numeroloji</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#7f13ec",
+            "background-light": "#f7f6f8",
+            "background-dark": "#191022",
+          },
+          fontFamily: {
+            "display": ["Space Grotesk"]
+          },
+          borderRadius: {
+            "DEFAULT": "1rem",
+            "lg": "2rem",
+            "xl": "3rem",
+            "full": "9999px"
+          },
+          animation: {
+            'spin-slow': 'spin 20s linear infinite',
+            'pulse-glow': 'pulse-glow 4s infinite ease-in-out',
+            'card-flow': 'card-flow 10s linear infinite',
+          },
+          keyframes: {
+            'pulse-glow': {
+                '0%, 100%': { boxShadow: '0 0 20px 5px rgba(127, 19, 236, 0.4), 0 0 40px 10px rgba(127, 19, 236, 0.2)' },
+                '50%': { boxShadow: '0 0 30px 10px rgba(127, 19, 236, 0.6), 0 0 60px 20px rgba(127, 19, 236, 0.3)' },
+            },
+            'card-flow': {
+              '0%': { transform: 'translateX(-100%) scale(0.8) rotate(-15deg)', opacity: 0 },
+              '25%': { transform: 'translateX(-20%) scale(1) rotate(5deg)', opacity: 1 },
+              '75%': { transform: 'translateX(20%) scale(1) rotate(-5deg)', opacity: 1 },
+              '100%': { transform: 'translateX(100%) scale(0.8) rotate(15deg)', opacity: 0 },
+            }
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+    }
+    .constellation {
+      position: absolute;
+      background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg%3E%3Ccircle cx='50' cy='50' r='1.5' fill='rgba(255,255,255,0.8)'/%3E%3C/g%3E%3C/svg%3E");
+      opacity: 0.1;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .hero-container:hover .constellation {
+        opacity: 0.5;
+        transform: scale(1.1);
+    }
+    .tooltip {
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+    .crystal-ball:hover .tooltip {
+        visibility: visible;
+        opacity: 1;
+    }
+    .card-flow-container .tarot-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card-flow-container:hover .tarot-card-1 {
+        transform: translateY(-20px) rotate(-8deg) scale(1.05);
+    }
+    .card-flow-container:hover .tarot-card-2 {
+        transform: translateY(-30px) rotate(2deg) scale(1.05);
+    }
+    .card-flow-container:hover .tarot-card-3 {
+        transform: translateY(-25px) rotate(10deg) scale(1.05);
+    }
+  </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<div class="px-4 sm:px-10 md:px-20 lg:px-40 flex flex-1 justify-center py-5">
+<div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-white/10 dark:border-b-[#362348] px-4 sm:px-10 py-3">
+<div class="flex items-center gap-4 text-white">
+<div class="size-6 text-primary">
+<svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"></path>
+</svg>
+</div>
+<h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Mystic Path</h2>
+</div>
+<div class="hidden md:flex flex-1 justify-end gap-8">
+<div class="flex items-center gap-9">
+<a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Ana Sayfa</a>
+<a class="text-white/70 text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Tarot</a>
+<a class="text-white/70 text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Numeroloji</a>
+<a class="text-white/70 text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Hakkımızda</a>
+</div>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary/80 transition-colors">
+<span class="truncate">Giriş Yap</span>
+</button>
+</div>
+<div class="md:hidden">
+<button class="text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</header>
+<main class="flex-1">
+<div class="relative hero-container flex flex-col justify-center items-center text-center p-4 min-h-[80vh] overflow-hidden rounded-lg bg-cover bg-center" style='background-image: linear-gradient(rgba(25, 16, 34, 0.6) 0%, rgba(25, 16, 34, 0.9) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuBe_fGgozqLwoh6FkVFseBixAx6PunwjN-mTEdFwJlCr8PL_9jgOFZPSBCYO-yFAqDU2BsIDzTQIE2FA2obXORQeyDifUHtioLbU0H1uE0DDCfj0Z0mz0HsvPP8jJmyK52sOnq1pscurjZIGCw3HJluerR2vUWjbFlwQ429iQ81qk3Ka0yKCcojmc6dhDRXSzuW1ttnPvsgZVCUHoYQref-kYXOo_rvNuzM12lHuhd4Bgn2bmtT43C7NM-_k9S4v2mvIkt3cR4PMIo2");'>
+<div class="constellation" style="top: 20%; left: 15%; width: 2px; height: 2px;"></div>
+<div class="constellation" style="top: 25%; left: 25%; width: 3px; height: 3px;"></div>
+<div class="constellation" style="top: 10%; left: 40%; width: 2px; height: 2px;"></div>
+<div class="constellation" style="top: 50%; left: 80%; width: 3px; height: 3px;"></div>
+<div class="constellation" style="top: 80%; left: 60%; width: 2px; height: 2px;"></div>
+<div class="constellation" style="top: 70%; left: 10%; width: 2px; height: 2px;"></div>
+<div class="constellation" style="top: 90%; left: 30%; width: 3px; height: 3px;"></div>
+<div class="constellation" style="top: 40%; left: 5%; width: 2px; height: 2px;"></div>
+<div class="constellation" style="top: 15%; left: 85%; width: 2px; height: 2px;"></div>
+<div class="constellation" style="top: 65%; left: 95%; width: 3px; height: 3px;"></div>
+<div class="absolute inset-0 flex flex-col items-center justify-center z-10 p-4">
+<div class="flex flex-col gap-6 md:gap-8 max-w-2xl">
+<h1 class="text-white text-4xl font-black leading-tight tracking-[-0.033em] md:text-6xl">Yıldızların Fısıltılarıyla Geleceğinizi Aydınlatın</h1>
+<h2 class="text-white/80 text-base font-normal leading-normal md:text-lg">Kozmik Enerjileri Keşfedin</h2>
+</div>
+<div class="crystal-ball group relative mt-10 md:mt-12 cursor-pointer">
+<div class="relative w-40 h-40 md:w-56 md:h-56">
+<div class="absolute inset-0 bg-primary/20 rounded-full animate-pulse-glow"></div>
+<div class="absolute inset-2 bg-background-dark rounded-full flex items-center justify-center">
+<div class="w-[90%] h-[90%] bg-black/30 rounded-full backdrop-blur-sm flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 animate-spin-slow bg-gradient-to-tr from-primary/50 via-transparent to-primary/30"></div>
+<div class="relative flex items-center justify-center space-x-6 text-primary z-10">
+<span class="material-symbols-outlined text-4xl md:text-5xl opacity-80" title="Tarot Okuması">style</span>
+<span class="material-symbols-outlined text-4xl md:text-5xl opacity-80" title="Numeroloji Analizi">pin</span>
+</div>
+</div>
+</div>
+</div>
+<div class="tooltip absolute bottom-full mb-3 w-64 p-3 bg-white/10 dark:bg-[#261933]/80 backdrop-blur-md rounded-lg border border-white/10 text-white text-sm text-center transform -translate-x-1/2 left-1/2">
+<p class="font-bold">Kartların rehberliği ve sayıların gizemiyle potansiyelinizi ortaya çıkarın.</p>
+</div>
+</div>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-5 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/80 transition-all duration-300 shadow-lg shadow-primary/40 hover:shadow-xl hover:shadow-primary/60 mt-10 md:mt-12">
+<span class="truncate">Yolculuğa Başla</span>
+</button>
+</div>
+<div class="absolute bottom-6 right-6 z-10 flex flex-col items-end gap-4">
+<div class="card-flow-container relative w-32 h-20 group">
+<div class="tarot-card tarot-card-1 absolute w-12 h-20 bg-primary/20 border-2 border-primary/50 rounded-lg shadow-lg" style="left: 20%; top: 0; transform: rotate(-8deg);"></div>
+<div class="tarot-card tarot-card-2 absolute w-12 h-20 bg-primary/30 border-2 border-primary/50 rounded-lg shadow-lg" style="left: 40%; top: 0; transform: rotate(2deg);"></div>
+<div class="tarot-card tarot-card-3 absolute w-12 h-20 bg-primary/40 border-2 border-primary/50 rounded-lg shadow-lg" style="left: 60%; top: 0; transform: rotate(10deg);"></div>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-10 px-4 py-10 @container">
+<div class="flex flex-col gap-4 text-center items-center">
+<h1 class="text-white tracking-light text-[32px] font-bold leading-tight @[480px]:text-4xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em] max-w-[720px]">Mistik Sanatları Keşfedin</h1>
+<p class="text-white/70 text-base font-normal leading-normal max-w-[720px]">Binlerce yıllık bilgeliği modern teknolojiyle birleştirerek, evrenin size özel mesajlarını anlamanıza yardımcı oluyoruz.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-0">
+<div class="flex flex-1 gap-4 rounded-lg border border-white/10 dark:border-[#4d3267] bg-primary/10 dark:bg-[#261933] p-6 flex-col items-center text-center">
+<div class="text-primary" data-icon="Cards">
+<span class="material-symbols-outlined" style="font-size: 36px;">style</span>
+</div>
+<div class="flex flex-col gap-1">
+<h2 class="text-white text-lg font-bold leading-tight">Tarot Okuması</h2>
+<p class="text-white/70 dark:text-[#ad92c9] text-sm font-normal leading-normal">Kartların rehberliğinde içsel yolculuğunuza çıkın ve potansiyelinizi ortaya çıkarın.</p>
+</div>
+</div>
+<div class="flex flex-1 gap-4 rounded-lg border border-white/10 dark:border-[#4d3267] bg-primary/10 dark:bg-[#261933] p-6 flex-col items-center text-center">
+<div class="text-primary" data-icon="NumberSeven">
+<span class="material-symbols-outlined" style="font-size: 36px;">pin</span>
+</div>
+<div class="flex flex-col gap-1">
+<h2 class="text-white text-lg font-bold leading-tight">Numeroloji Analizi</h2>
+<p class="text-white/70 dark:text-[#ad92c9] text-sm font-normal leading-normal">Sayıların gizemli dünyasında kaderinizin şifrelerini çözün ve yaşam yolunuzu aydınlatın.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="@container">
+<div class="flex flex-col justify-end gap-6 px-4 py-10 @[480px]:gap-8 @[480px]:px-10 @[480px]:py-20 bg-primary/10 dark:bg-transparent rounded-lg">
+<div class="flex flex-col gap-2 text-center items-center">
+<h1 class="text-white tracking-light text-[32px] font-bold leading-tight @[480px]:text-4xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em] max-w-[720px]">Kozmik Rehberliğe Hazır mısınız?</h1>
+<p class="text-white/80 text-base font-normal leading-normal max-w-[720px]">Kişisel tarot ve numeroloji raporlarınızla geleceğe dair ipuçlarını bugün keşfedin.</p>
+</div>
+<div class="flex flex-1 justify-center">
+<div class="flex justify-center">
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em] grow hover:bg-primary/80 transition-colors">
+<span class="truncate">Hemen Başla</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer class="flex flex-col gap-8 px-5 py-10 text-center @container border-t border-solid border-white/10 dark:border-b-[#362348] mt-20">
+<div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-4 @[480px]:flex-row @[480px]:justify-center">
+<a class="text-white/70 dark:text-[#ad92c9] text-sm font-normal leading-normal hover:text-primary transition-colors" href="#">Gizlilik Politikası</a>
+<a class="text-white/70 dark:text-[#ad92c9] text-sm font-normal leading-normal hover:text-primary transition-colors" href="#">Kullanım Şartları</a>
+<a class="text-white/70 dark:text-[#ad92c9] text-sm font-normal leading-normal hover:text-primary transition-colors" href="#">İletişim</a>
+</div>
+<div class="flex flex-wrap justify-center gap-6">
+<a href="#">
+<div class="text-white/70 dark:text-[#ad92c9] hover:text-primary transition-colors" data-icon="InstagramLogo">
+<svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+<path clip-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.012-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.08 2.525c.636-.247 1.363-.416 2.427-.465C9.53 2.013 9.884 2 12.315 2zm-1.002 6.363a4.638 4.638 0 11-9.276 0 4.638 4.638 0 019.276 0zM12 15.117c-1.747 0-3.167-1.42-3.167-3.167s1.42-3.167 3.167-3.167 3.167 1.42 3.167 3.167-1.42 3.167-3.167 3.167zm5.55-6.573a1.149 1.149 0 11-2.298 0 1.149 1.149 0 012.298 0z" fill-rule="evenodd"></path>
+</svg>
+</div>
+</a>
+<a href="#">
+<div class="text-white/70 dark:text-[#ad92c9] hover:text-primary transition-colors" data-icon="TwitterLogo">
+<svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+<path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
+</svg>
+</div>
+</a>
+<a href="#">
+<div class="text-white/70 dark:text-[#ad92c9] hover:text-primary transition-colors" data-icon="FacebookLogo">
+<svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+<path clip-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" fill-rule="evenodd"></path>
+</svg>
+</div>
+</a>
+</div>
+<p class="text-white/70 dark:text-[#ad92c9] text-sm font-normal leading-normal">© 2024 Mystic Path. Tüm hakları saklıdır.</p>
+</footer>
+</div>
+</div>
+</div>
+</div>
+</body></html>

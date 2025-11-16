@@ -137,6 +137,15 @@ export function createDetailedFormSubmission({
     if (!validateDetailedForm()) {
       return;
     }
+    
+    // Token okumasında kredi onay modalı gösterme, direkt kaydet
+    // Çünkü token okumasında kredi düşmüyoruz
+    if (sessionToken) {
+      saveDetailedForm();
+      return;
+    }
+    
+    // Normal akışta kredi onay modalını göster
     setModalStates(prev => ({ ...prev, showCreditConfirm: true }));
   };
 

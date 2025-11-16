@@ -187,6 +187,61 @@ export default function BaseCardPosition({
 
   const colors = colorSchemes[colorScheme];
 
+  // Badge tema renkleri - kartın temasına uyumlu
+  const badgeThemes = {
+    default: {
+      bg: 'bg-white/10 backdrop-blur-md',
+      border: 'border-white/20',
+      text: 'text-white',
+      icon: 'text-white/90',
+      hover: 'group-hover:bg-white/15 group-hover:border-white/30',
+    },
+    amber: {
+      bg: 'bg-amber-500/20 backdrop-blur-md',
+      border: 'border-amber-400/30',
+      text: 'text-amber-100',
+      icon: 'text-amber-200',
+      hover: 'group-hover:bg-amber-500/25 group-hover:border-amber-400/40',
+    },
+    blue: {
+      bg: 'bg-cyan-500/20 backdrop-blur-md',
+      border: 'border-cyan-400/30',
+      text: 'text-cyan-100',
+      icon: 'text-cyan-200',
+      hover: 'group-hover:bg-cyan-500/25 group-hover:border-cyan-400/40',
+    },
+    purple: {
+      bg: 'bg-pink-500/20 backdrop-blur-md',
+      border: 'border-pink-400/30',
+      text: 'text-pink-100',
+      icon: 'text-pink-200',
+      hover: 'group-hover:bg-pink-500/25 group-hover:border-pink-400/40',
+    },
+    pink: {
+      bg: 'bg-rose-500/20 backdrop-blur-md',
+      border: 'border-rose-400/30',
+      text: 'text-rose-100',
+      icon: 'text-rose-200',
+      hover: 'group-hover:bg-rose-500/25 group-hover:border-rose-400/40',
+    },
+    green: {
+      bg: 'bg-emerald-500/20 backdrop-blur-md',
+      border: 'border-emerald-400/30',
+      text: 'text-emerald-100',
+      icon: 'text-emerald-200',
+      hover: 'group-hover:bg-emerald-500/25 group-hover:border-emerald-400/40',
+    },
+    emerald: {
+      bg: 'bg-green-500/20 backdrop-blur-md',
+      border: 'border-green-400/30',
+      text: 'text-green-100',
+      icon: 'text-green-200',
+      hover: 'group-hover:bg-green-500/25 group-hover:border-green-400/40',
+    },
+  };
+
+  const badgeTheme = badgeThemes[colorScheme];
+
   // Kart boyutlarını tanımla (geçerli Tailwind ölçüleriyle)
   const cardSizes = {
     // base: 48x72px, sm: 64x96px, md: 80x128px
@@ -218,7 +273,7 @@ export default function BaseCardPosition({
         className={`
         ${cardSizes[cardSize]}
         border-2 rounded-xl flex flex-col items-center justify-center
-        transition-all duration-500 ${canSelect ? 'hover:scale-110 hover:z-40' : 'opacity-75'} relative
+        transition-all duration-500 ${canSelect ? 'hover:scale-110 hover:z-40 group' : 'opacity-75'} relative
         shadow-xl shadow-black/60
         ${
           isNextPosition
@@ -241,6 +296,38 @@ export default function BaseCardPosition({
         >
           {position.id}
         </div>
+
+        {/* Detay için tıklayın ipucu - Modern glassmorphism badge */}
+        {hasCard && _card && (
+          <div
+            className={`absolute -bottom-1.5 -right-1.5 ${badgeTheme.bg} ${badgeTheme.border} border rounded-full flex items-center justify-center z-20 shadow-lg ${badgeTheme.hover} transition-all duration-300 pointer-events-none opacity-80 sm:opacity-0 sm:group-hover:opacity-100 scale-90 sm:group-hover:scale-100`}
+            style={{
+              backdropFilter: 'blur(12px)',
+              WebkitBackdropFilter: 'blur(12px)',
+            }}
+          >
+            <div className='flex items-center gap-1.5 px-2.5 py-1'>
+              <svg
+                className={`w-3.5 h-3.5 ${badgeTheme.icon}`}
+                fill='none'
+                stroke='currentColor'
+                strokeWidth={2.5}
+                viewBox='0 0 24 24'
+              >
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  d='M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
+                />
+              </svg>
+              <span
+                className={`${badgeTheme.text} text-[10px] xs:text-[11px] font-medium whitespace-nowrap hidden xs:inline`}
+              >
+                Detay
+              </span>
+            </div>
+          </div>
+        )}
 
         {/* Kart İçeriği */}
         {hasCard && _card ? (
