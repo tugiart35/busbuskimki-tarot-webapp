@@ -22,7 +22,7 @@ interface TrendingCardsWidgetProps {
 
 export function TrendingCardsWidget({
   locale,
-  limit = 6,
+  limit = 3,
 }: TrendingCardsWidgetProps) {
   const { t } = useTranslations();
   const [trendingCards, setTrendingCards] = useState<TrendingCard[]>([]);
@@ -98,14 +98,17 @@ export function TrendingCardsWidget({
 
   if (isLoading) {
     return (
-      <div className='py-12 px-4 bg-gradient-to-br from-purple-50 to-indigo-50'>
+      <div className='py-8 px-4'>
         <div className='max-w-7xl mx-auto'>
           <div className='animate-pulse space-y-4'>
             <div className='h-8 bg-gray-300 rounded w-1/3 mx-auto'></div>
             <div className='h-4 bg-gray-200 rounded w-1/2 mx-auto'></div>
-            <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mt-8'>
-              {[1, 2, 3, 4, 5, 6].map(i => (
-                <div key={i} className='bg-white rounded-xl h-64'></div>
+            <div className='flex justify-center gap-4 mt-8'>
+              {[1, 2, 3, 4].map(i => (
+                <div
+                  key={i}
+                  className='bg-white rounded-lg h-80 w-48 flex-shrink-0'
+                ></div>
               ))}
             </div>
           </div>
@@ -120,32 +123,26 @@ export function TrendingCardsWidget({
   }
 
   return (
-    <section className='py-16 px-4 bg-gradient-to-br from-purple-50 via-indigo-50 to-pink-50'>
+    <section className='py-1 px-1'>
       <div className='max-w-7xl mx-auto'>
         {/* Header */}
-        <div className='text-center mb-12'>
-          <div className='inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white text-sm font-semibold mb-4'>
+        <div className='text-center mb-2'>
+          <div className='inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white text-sm font-semibold mb-2'>
             🔥 {t('widgets.trendingCards.badge')}
           </div>
-          <h2 className='text-3xl lg:text-4xl font-bold text-gray-900 mb-4'>
-            {t('widgets.trendingCards.title')}
-          </h2>
-          <p className='text-lg text-gray-600 max-w-2xl mx-auto'>
-            {t('widgets.trendingCards.subtitle')}
-          </p>
         </div>
 
-        {/* Trending Cards Grid */}
-        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6'>
-          {trendingCards.map((card, index) => (
+        {/* Trending Cards - Simple Row */}
+        <div className='flex justify-center gap-2 overflow-x-auto pb-2 scrollbar-hide px-2'>
+          {trendingCards.slice(0, 3).map((card, index) => (
             <Link
               key={card.id}
               href={card.url}
-              className='group relative bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-transparent hover:border-purple-400 transform hover:-translate-y-2'
+              className='bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow w-28 sm:w-40 md:w-48 flex-shrink-0'
             >
               {/* Ranking Badge */}
-              <div className='absolute top-3 left-3 z-10'>
-                <span className='bg-gradient-to-br from-yellow-400 to-orange-500 text-white text-xs font-bold px-2.5 py-1 rounded-full shadow-lg'>
+              <div className='absolute top-1 left-1 z-10'>
+                <span className='bg-gradient-to-br from-yellow-400 to-orange-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full'>
                   #{index + 1}
                 </span>
               </div>
@@ -154,25 +151,24 @@ export function TrendingCardsWidget({
               <div className='relative aspect-[2/3] overflow-hidden'>
                 <Image
                   src={card.imageUrl}
-                  alt={`${card.name} - ${t('widgets.trendingCards.imageAlt')}`}
+                  alt={card.name}
                   fill
-                  className='object-cover group-hover:scale-110 transition-transform duration-500'
+                  className='object-cover'
                   loading='lazy'
                 />
-                <div className='absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300'></div>
               </div>
 
               {/* Card Info */}
-              <div className='p-4'>
-                <h3 className='font-bold text-gray-900 text-sm mb-3 group-hover:text-purple-600 transition-colors duration-200 line-clamp-2'>
+              <div className='p-2'>
+                <h3 className='font-bold text-gray-900 text-xs mb-1.5 line-clamp-2'>
                   {card.name}
                 </h3>
 
                 {/* Stats */}
-                <div className='flex items-center justify-between text-xs text-gray-500'>
-                  <div className='flex items-center gap-1'>
+                <div className='flex items-center justify-between text-[10px] text-gray-500'>
+                  <div className='flex items-center gap-0.5'>
                     <svg
-                      className='w-4 h-4'
+                      className='w-3 h-3'
                       fill='none'
                       stroke='currentColor'
                       viewBox='0 0 24 24'
@@ -192,9 +188,9 @@ export function TrendingCardsWidget({
                     </svg>
                     <span>{card.views}</span>
                   </div>
-                  <div className='flex items-center gap-1'>
+                  <div className='flex items-center gap-0.5'>
                     <svg
-                      className='w-4 h-4 text-pink-500'
+                      className='w-3 h-3 text-pink-500'
                       fill='currentColor'
                       viewBox='0 0 24 24'
                     >
@@ -204,16 +200,13 @@ export function TrendingCardsWidget({
                   </div>
                 </div>
               </div>
-
-              {/* Hover Effect */}
-              <div className='absolute inset-0 bg-gradient-to-r from-purple-600/5 to-pink-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none'></div>
             </Link>
           ))}
         </div>
 
-        {/* View All Link */}
-        <div className='text-center mt-8'>
-          <p className='text-sm text-gray-500'>
+        {/* Footer Info */}
+        <div className='text-center mt-2'>
+          <p className='text-xs text-gray-500'>
             💡 {t('widgets.trendingCards.sortInfo')}
           </p>
         </div>

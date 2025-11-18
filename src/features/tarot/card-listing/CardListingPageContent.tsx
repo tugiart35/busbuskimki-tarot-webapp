@@ -4,12 +4,10 @@ import Image from 'next/image';
 import { getCardName as getLocalizedCardName } from '@/lib/tarot/card-names';
 import { generateCardAltText } from '@/utils/seo-helpers';
 import {
-  TrendingCardsWidget,
   PageReactions,
   CardStatsWidget,
   GeneralComments,
 } from '@/components/shared/ClientWidgets';
-import { TarotCardDrawing } from '@/components/TarotCardDrawing';
 import {
   CARD_LISTING_TRANSLATIONS,
   FAQ_ENTRIES,
@@ -87,12 +85,6 @@ export function CardListingPageContent({
           </div>
         </div>
       </div>
-
-      <div className='mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8'>
-        <TarotCardDrawing locale={locale} theme='light' />
-      </div>
-
-      <TrendingCardsWidget locale={locale} limit={6} />
 
       <div className='mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8'>
         <section className='mb-20'>

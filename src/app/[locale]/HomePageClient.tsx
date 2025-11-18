@@ -41,6 +41,7 @@ import FastDeliveryInfoCard from '@/features/tarot/components/FastDeliveryInfoCa
 import { READING_TYPES } from '@/types/tarot';
 import { GlassCard } from '@/components/GlassCard';
 import { TarotCardDrawing } from '@/components/TarotCardDrawing';
+import { TrendingCardsWidget } from '@/components/shared/ClientWidgets';
 import { motion } from 'framer-motion';
 import { Sparkles, TrendingUp, Brain, Star } from 'lucide-react';
 
@@ -270,6 +271,13 @@ export function HomePageClient({
                 );
               })}
             </div>
+          </div>
+        </section>
+
+        {/* Trending Cards Section - Haftanın Kartları */}
+        <section className='px-4 sm:px-6 lg:px-8 py-8 sm:py-12'>
+          <div className='max-w-7xl mx-auto'>
+            <TrendingCardsWidget locale={locale as 'tr' | 'en' | 'sr'} limit={6} />
           </div>
         </section>
 
