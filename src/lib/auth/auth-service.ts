@@ -124,31 +124,12 @@ export class AuthService {
         throw new AuthError(error.message, error, error.status?.toString());
       }
 
-      // Kullanıcı başarıyla oluşturulduysa profile oluştur
-      if (data.user) {
-        try {
-          const { createOrUpdateProfile } = await import(
-            '@/lib/utils/profile-utils'
-          );
-
-          const profileResult = await createOrUpdateProfile({
-            userId: data.user.id,
-            firstName: userData.name,
-            lastName: userData.surname,
-            email: userData.email,
-            birthDate: userData.birthDate,
-            gender: userData.gender,
-          });
-
-          if (!profileResult.success) {
-            console.error('Profile oluşturulamadı:', profileResult.error);
-            // Profile oluşturulamasa bile auth işlemi başarılı sayılır
-          }
-        } catch (profileError) {
-          console.error('Profile oluşturma hatası:', profileError);
-          // Profile hatası auth işlemini etkilemez
-        }
-      }
+      // NOT: Profile oluşturma işlemi database trigger (handle_new_user) tarafından
+      // otomatik olarak yapılıyor. Client-side'dan manuel deneme yapılmıyor çünkü:
+      // 1. Kullanıcı henüz tam authenticate olmamış olabilir
+      // 2. RLS politikaları bu durumda çalışmayabilir
+      // 3. Trigger SECURITY DEFINER ile çalıştığı için RLS'i bypass ediyor
+      // Profile bilgileri user_metadata'dan trigger tarafından otomatik alınıyor
 
       return data;
     } catch (error) {
@@ -212,10 +193,20 @@ export class AuthService {
    */
   static async signInWithFacebook(locale: string) {
     try {
+      // Locale'i cookie'ye kaydet (callback route'da okumak için)
+      if (typeof document !== 'undefined') {
+        document.cookie = `oauth_locale=${locale}; path=/; max-age=600; SameSite=Lax`;
+      }
+
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'facebook',
         options: {
-          redirectTo: `${window.location.origin}/auth/callback?locale=${locale}`,
+          redirectTo: `${window.location.origin}/auth/callback`,
+          scopes: 'email',
+          queryParams: {
+            access_type: 'offline',
+            prompt: 'consent',
+          },
         },
       });
 

@@ -465,6 +465,7 @@
       "signingIn": "Prijavljivanje...",
       "loginSuccess": "Prijava uspešna!",
       "emailConfirmationRequired": "Morate potvrditi svoju email adresu",
+      "emailConfirmationSent": "Registracija uspešna! Link za potvrdu je poslat na vašu email adresu. Molimo proverite vašu email poštu.",
       "signingUp": "Registracija...",
       "registerSuccess": "Registracija uspešna! Dobrodošli!",
       "rateLimitExceeded": "Previše pokušaja. Molimo pokušajte kasnije.",

@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+// deno-lint-ignore-file no-console
 /*
  * EMAIL NOTIFICATIONS - EDGE FUNCTION
  *
@@ -8,7 +10,16 @@
  */
 
 import 'jsr:@supabase/functions-js/edge-runtime.d.ts';
-import { createClient } from 'jsr:@supabase/supabase-js@2';
+// @ts-ignore - ESM import for Deno runtime
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+
+// Deno global types
+declare const Deno: {
+  env: {
+    get(_key: string): string | undefined;
+  };
+  serve: (_handler: (_req: Request) => Response | Promise<Response>) => void;
+};
 
 // Environment variables
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL')!;
@@ -32,12 +43,53 @@ type NotificationType =
   | 'welcome'
   | 'package_purchased';
 
+// Welcome email translations
+const welcomeEmailTranslations = {
+  tr: {
+    subject: 'Tarot Uygulamasına Hoş Geldiniz! 🌟',
+    greeting: 'Hoş Geldiniz!',
+    hello: 'Merhaba',
+    thankYou:
+      'BüşbüşkimkiTarot uygulamasına kaydolduğunuz için teşekkürler! Size {credits} ücretsiz kredi hediye ettik.',
+    getStarted: 'Başlamak için:',
+    step1: 'Uygulamaya giriş yapın',
+    step2: 'İlk tarot okumanızı yapın',
+    step3: 'Sonuçlarınızı keşfedin',
+    buttonText: 'Uygulamaya Git',
+  },
+  en: {
+    subject: 'Welcome to Tarot App! 🌟',
+    greeting: 'Welcome!',
+    hello: 'Hello',
+    thankYou:
+      'Thank you for signing up to BüşbüşkimkiTarot! We have gifted you {credits} free credits.',
+    getStarted: 'To get started:',
+    step1: 'Log in to the app',
+    step2: 'Do your first tarot reading',
+    step3: 'Discover your results',
+    buttonText: 'Go to App',
+  },
+  sr: {
+    subject: 'Dobrodošli u Tarot Aplikaciju! 🌟',
+    greeting: 'Dobrodošli!',
+    hello: 'Zdravo',
+    thankYou:
+      'Hvala vam što ste se prijavili na BüşbüşkimkiTarot! Poklonili smo vam {credits} besplatnih kredita.',
+    getStarted: 'Da biste počeli:',
+    step1: 'Prijavite se u aplikaciju',
+    step2: 'Uradite svoje prvo tarot čitanje',
+    step3: 'Otkrijte svoje rezultate',
+    buttonText: 'Idi na Aplikaciju',
+  },
+};
+
 /**
  * Generate email template
  */
 function generateEmailTemplate(
   type: NotificationType,
-  data: any
+  data: any,
+  locale: string = 'tr' // Locale parametresi eklendi
 ): EmailTemplate {
   switch (type) {
     case 'reading_completed':
@@ -110,37 +162,48 @@ function generateEmailTemplate(
       };
 
     case 'welcome':
+      // Locale'e göre çevirileri al (varsayılan: tr)
+      const welcomeT =
+        welcomeEmailTranslations[
+          locale as keyof typeof welcomeEmailTranslations
+        ] || welcomeEmailTranslations.tr;
+
+      const thankYouText = welcomeT.thankYou.replace(
+        '{credits}',
+        data.initialCredits.toString()
+      );
+
       return {
-        subject: 'Tarot Uygulamasına Hoş Geldiniz! 🌟',
+        subject: welcomeT.subject,
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-            <h2 style="color: #8B5CF6;">🌟 Hoş Geldiniz!</h2>
-            <p>Merhaba ${data.displayName},</p>
-            <p>BüşbüşkimkiTarot uygulamasına kaydolduğunuz için teşekkürler! Size ${data.initialCredits} ücretsiz kredi hediye ettik.</p>
+            <h2 style="color: #8B5CF6;">🌟 ${welcomeT.greeting}</h2>
+            <p>${welcomeT.hello} ${data.displayName},</p>
+            <p>${thankYouText}</p>
             <div style="background-color: #F3F4F6; padding: 20px; border-radius: 8px; margin: 20px 0;">
-              <h3 style="color: #374151;">Başlamak için:</h3>
+              <h3 style="color: #374151;">${welcomeT.getStarted}</h3>
               <ol>
-                <li>Uygulamaya giriş yapın</li>
-                <li>İlk tarot okumanızı yapın</li>
-                <li>Sonuçlarınızı keşfedin</li>
+                <li>${welcomeT.step1}</li>
+                <li>${welcomeT.step2}</li>
+                <li>${welcomeT.step3}</li>
               </ol>
             </div>
-            <a href="${data.appUrl}" style="background-color: #8B5CF6; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block;">Uygulamaya Git</a>
+            <a href="${data.appUrl}" style="background-color: #8B5CF6; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block;">${welcomeT.buttonText}</a>
           </div>
         `,
         text: `
-          Hoş Geldiniz!
+          ${welcomeT.greeting}
           
-          Merhaba ${data.displayName},
+          ${welcomeT.hello} ${data.displayName},
           
-          Tarot uygulamasına kaydolduğunuz için teşekkürler! Size ${data.initialCredits} ücretsiz kredi hediye ettik.
+          ${thankYouText}
           
-          Başlamak için:
-          1. Uygulamaya giriş yapın
-          2. İlk tarot okumanızı yapın
-          3. Sonuçlarınızı keşfedin
+          ${welcomeT.getStarted}
+          1. ${welcomeT.step1}
+          2. ${welcomeT.step2}
+          3. ${welcomeT.step3}
           
-          Uygulamaya gitmek için: ${data.appUrl}
+          ${welcomeT.buttonText}: ${data.appUrl}
         `,
       };
 
@@ -331,6 +394,70 @@ async function sendLowCreditsWarning(userId: string): Promise<boolean> {
 }
 
 /**
+ * Send welcome email
+ */
+async function sendWelcomeEmail(
+  userId: string,
+  data: {
+    displayName: string;
+    initialCredits: number;
+    appUrl: string;
+    locale?: string;
+  }
+): Promise<boolean> {
+  try {
+    // Get user data
+    const { data: profile, error: profileError } = await supabase
+      .from('profiles')
+      .select('email, display_name')
+      .eq('id', userId) // profiles tablosunda id kullanılıyor
+      .single();
+
+    if (profileError || !profile) {
+      console.error('Error fetching profile:', profileError);
+      return false;
+    }
+
+    // Locale'i belirle (varsayılan: tr)
+    const locale = data.locale || 'tr';
+
+    // Generate email template with locale
+    const template = generateEmailTemplate(
+      'welcome',
+      {
+        displayName: data.displayName || profile.display_name,
+        initialCredits: data.initialCredits,
+        appUrl: data.appUrl,
+      },
+      locale
+    );
+
+    // Send email
+    const success = await sendEmail(profile.email, template);
+
+    if (success) {
+      // Log the notification
+      await supabase.rpc('log_audit_event', {
+        p_user_id: userId,
+        p_action: 'email_notification_sent',
+        p_resource_type: 'profile',
+        p_resource_id: userId,
+        p_details: {
+          type: 'welcome',
+          email: profile.email,
+          locale: locale,
+        },
+      });
+    }
+
+    return success;
+  } catch (error) {
+    console.error('Error sending welcome email:', error);
+    return false;
+  }
+}
+
+/**
  * Main handler function
  */
 Deno.serve(async (req: Request) => {
@@ -358,6 +485,10 @@ Deno.serve(async (req: Request) => {
 
       case 'low_credits':
         success = await sendLowCreditsWarning(userId);
+        break;
+
+      case 'welcome':
+        success = await sendWelcomeEmail(userId, data);
         break;
 
       default:

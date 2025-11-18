@@ -21,7 +21,7 @@
  */
 
 import { supabase } from '@/lib/supabase/client';
-import type { User } from '@supabase/supabase-js';
+import type { User, SupabaseClient } from '@supabase/supabase-js';
 
 // Profil oluşturma için gerekli veri türü
 export interface CreateProfileData {
@@ -97,15 +97,19 @@ export function prepareProfileData(data: CreateProfileData) {
 
 /**
  * Supabase'de profil oluşturur veya günceller
+ * @param data - Profil verisi
+ * @param supabaseClient - Opsiyonel: Server-side client
  */
 export async function createOrUpdateProfile(
-  data: CreateProfileData
+  data: CreateProfileData,
+  supabaseClient?: SupabaseClient
 ): Promise<CreateProfileResult> {
   try {
+    const client = supabaseClient || supabase;
     const profileData = prepareProfileData(data);
 
     // Önce mevcut profile'ı kontrol et
-    const { data: existingProfile, error: fetchError } = await supabase
+    const { data: existingProfile, error: fetchError } = await client
       .from('profiles')
       .select('id')
       .eq('id', data.userId)
@@ -122,7 +126,7 @@ export async function createOrUpdateProfile(
     let result;
     if (existingProfile) {
       // Mevcut profile'ı güncelle
-      result = await supabase
+      result = await client
         .from('profiles')
         .update({
           email: profileData.email,
@@ -141,7 +145,7 @@ export async function createOrUpdateProfile(
         .single();
     } else {
       // Yeni profile oluştur
-      result = await supabase
+      result = await client
         .from('profiles')
         .insert(profileData)
         .select()
@@ -149,6 +153,7 @@ export async function createOrUpdateProfile(
     }
 
     if (result.error) {
+      // eslint-disable-next-line no-console
       console.error('Profile işlemi hatası:', result.error);
       return {
         success: false,
@@ -161,6 +166,7 @@ export async function createOrUpdateProfile(
       profile: result.data,
     };
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error('Profile oluşturma/güncelleme hatası:', error);
     return {
       success: false,
@@ -171,13 +177,19 @@ export async function createOrUpdateProfile(
 
 /**
  * Mevcut profili kontrol eder ve yoksa oluşturur
+ * @param user - Supabase User objesi
+ * @param supabaseClient - Opsiyonel: Server-side client (callback route için)
  */
 export async function ensureProfileExists(
-  user: User
+  user: User,
+  supabaseClient?: SupabaseClient
 ): Promise<CreateProfileResult> {
   try {
+    // Server-side client varsa onu kullan, yoksa browser client'ı kullan
+    const client = supabaseClient || supabase;
+
     // Önce mevcut profili kontrol et
-    const { data: existingProfile, error: fetchError } = await supabase
+    const { data: existingProfile, error: fetchError } = await client
       .from('profiles')
       .select('*')
       .eq('id', user.id)
@@ -189,7 +201,7 @@ export async function ensureProfileExists(
         userId: user.id,
         firstName: user.user_metadata?.first_name,
         lastName: user.user_metadata?.last_name,
-        fullName: user.user_metadata?.full_name, // Geriye uyumluluk
+        fullName: user.user_metadata?.full_name,
         email: user.email || undefined,
         birthDate: user.user_metadata?.birth_date,
         gender: user.user_metadata?.gender,
@@ -197,7 +209,7 @@ export async function ensureProfileExists(
         timezone: user.user_metadata?.timezone,
       };
 
-      return await createOrUpdateProfile(createData);
+      return await createOrUpdateProfile(createData, supabaseClient);
     }
 
     if (fetchError) {

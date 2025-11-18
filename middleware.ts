@@ -17,6 +17,15 @@ const intlMiddleware = createMiddleware({
 export default async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // Facebook/Supabase OAuth callback ve data deletion endpoint'leri
+  // locale prefix olmadan çalışmak zorunda; next-intl redirect etmesin
+  if (
+    pathname.startsWith('/auth/callback') ||
+    pathname.startsWith('/data-deletion')
+  ) {
+    return NextResponse.next();
+  }
+
   // 🤖 AI BOT TRACKING - LLMO/GEO Analytics
   const userAgent = request.headers.get('user-agent') || '';
   const aiBots = [

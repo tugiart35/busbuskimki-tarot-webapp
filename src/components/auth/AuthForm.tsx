@@ -23,6 +23,9 @@ import {
 } from '@/lib/auth/auth-validation';
 import Toast from '@/features/shared/ui/Toast';
 
+// Feature flag: Facebook login - onay bekleniyor
+const ENABLE_FACEBOOK_LOGIN = false;
+
 interface AuthFormProps {
   locale: string;
   initialError: string | null;
@@ -235,19 +238,34 @@ function AuthForm({ locale, initialError, next }: AuthFormProps) {
         } else {
           setLoadingStep(t('auth.page.signingUp'));
 
-          await signUp(formData as RegisterFormData);
+          const signUpResult = await signUp(formData as RegisterFormData);
 
-          showToast(t('auth.page.registerSuccess'), 'info');
+          // Email confirmation gerekip gerekmediğini kontrol et
+          // Session null ise email confirmation gerekiyor demektir
+          if (signUpResult && !signUpResult.session) {
+            // Email confirmation gerekiyor
+            const confirmationMessage = t('auth.page.emailConfirmationSent');
+            setMessage(confirmationMessage);
+            setShowResendEmail(true);
+            setPendingEmail(formData.email);
+            showToast(confirmationMessage, 'info');
+          } else {
+            // Email confirmation gerekmiyor, direkt giriş yapıldı
+            showToast(t('auth.page.registerSuccess'), 'info');
+          }
 
-          // Switch to login mode and clear form
+          // Switch to login mode and clear form (password'ü temizle)
           setTimeout(() => {
             setIsLogin(true);
-            setFormData({
-              email: '',
+            setFormData(prev => ({
+              ...prev,
               password: '',
               rememberMe: false,
-            });
-            setMessage('');
+            }));
+            // Email confirmation mesajı varsa message'ı temizleme
+            if (signUpResult && signUpResult.session) {
+              setMessage('');
+            }
           }, 2000);
         }
       } catch (error: unknown) {
@@ -979,27 +997,30 @@ function AuthForm({ locale, initialError, next }: AuthFormProps) {
           </button>
         </div>
 
-        <div className='mt-4'>
-          <button
-            type='button'
-            onClick={handleFacebookLogin}
-            disabled={loading || authLoading}
-            className='w-full inline-flex justify-center py-4 px-4 border border-lavender/30 rounded-xl shadow-sm bg-gradient-to-r from-white/90 to-gray-100/90 text-sm font-semibold text-lavender hover:from-gray-200/90 hover:to-gray-300/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold disabled:opacity-50 transition-all duration-300 hover:shadow-lg transform hover:scale-105 active:scale-95 relative overflow-hidden'
-            aria-label={`Facebook ile ${isLogin ? 'giriş yap' : 'kayıt ol'}`}
-          >
-            <svg
-              className='w-5 h-5 mr-2'
-              viewBox='0 0 24 24'
-              fill='currentColor'
-              aria-hidden='true'
+        {/* Facebook Login - Gizli (onay bekleniyor) */}
+        {ENABLE_FACEBOOK_LOGIN && (
+          <div className='mt-4'>
+            <button
+              type='button'
+              onClick={handleFacebookLogin}
+              disabled={loading || authLoading}
+              className='w-full inline-flex justify-center py-4 px-4 border border-lavender/30 rounded-xl shadow-sm bg-gradient-to-r from-white/90 to-gray-100/90 text-sm font-semibold text-lavender hover:from-gray-200/90 hover:to-gray-300/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold disabled:opacity-50 transition-all duration-300 hover:shadow-lg transform hover:scale-105 active:scale-95 relative overflow-hidden'
+              aria-label={`Facebook ile ${isLogin ? 'giriş yap' : 'kayıt ol'}`}
             >
-              <path d='M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z' />
-            </svg>
-            {isLogin
-              ? t('auth.page.facebookLogin')
-              : t('auth.page.facebookRegister')}
-          </button>
-        </div>
+              <svg
+                className='w-5 h-5 mr-2'
+                viewBox='0 0 24 24'
+                fill='currentColor'
+                aria-hidden='true'
+              >
+                <path d='M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z' />
+              </svg>
+              {isLogin
+                ? t('auth.page.facebookLogin')
+                : t('auth.page.facebookRegister')}
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Password Reset Modal */}
