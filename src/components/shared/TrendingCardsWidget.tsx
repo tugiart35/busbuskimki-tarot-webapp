@@ -65,7 +65,6 @@ export function TrendingCardsWidget({
             .map((stat: any) => {
               const metadata = getCardMetadataBySlug(stat.card_slug);
               if (!metadata) {
-                console.warn(`Metadata not found for slug: ${stat.card_slug}`);
                 return null;
               }
 
@@ -85,7 +84,6 @@ export function TrendingCardsWidget({
           throw new Error(result.error || 'Failed to load trending cards');
         }
       } catch (err) {
-        console.error('Error loading trending cards:', err);
         setError('Failed to load trending cards');
         setTrendingCards([]); // Hata durumunda boş liste
       } finally {

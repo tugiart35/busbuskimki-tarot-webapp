@@ -138,13 +138,14 @@ export function useTarotDeck(): TarotCard[] {
         'Ten',
       ];
       const numberName =
-        card.number >= 1 && card.number <= 10 ? numberNames[card.number] : '';
+        card.number >= 1 && card.number <= 10
+          ? (numberNames[card.number] ?? '')
+          : '';
 
       // Card key oluştur (getCardName için)
       const cardKey = card.court
         ? `${card.court}-of-cups`
         : `${numberName.toLowerCase()}-of-cups`;
-      
       const cardNameEn = getCardName(cardKey, 'en');
       const cardNameTr = getCardName(cardKey, 'tr');
 
@@ -201,13 +202,14 @@ export function useTarotDeck(): TarotCard[] {
         'Ten',
       ];
       const numberName =
-        card.number >= 1 && card.number <= 10 ? numberNames[card.number] : '';
+        card.number >= 1 && card.number <= 10
+          ? (numberNames[card.number] ?? '')
+          : '';
 
       // Card key oluştur (getCardName için)
       const cardKey = card.court
         ? `${card.court}-of-wands`
         : `${numberName.toLowerCase()}-of-wands`;
-      
       const cardNameEn = getCardName(cardKey, 'en');
       const cardNameTr = getCardName(cardKey, 'tr');
 
@@ -264,13 +266,14 @@ export function useTarotDeck(): TarotCard[] {
         'Ten',
       ];
       const numberName =
-        card.number >= 1 && card.number <= 10 ? numberNames[card.number] : '';
+        card.number >= 1 && card.number <= 10
+          ? (numberNames[card.number] ?? '')
+          : '';
 
       // Card key oluştur (getCardName için)
       const cardKey = card.court
         ? `${card.court}-of-swords`
         : `${numberName.toLowerCase()}-of-swords`;
-      
       const cardNameEn = getCardName(cardKey, 'en');
       const cardNameTr = getCardName(cardKey, 'tr');
 
@@ -327,13 +330,14 @@ export function useTarotDeck(): TarotCard[] {
         'Ten',
       ];
       const numberName =
-        card.number >= 1 && card.number <= 10 ? numberNames[card.number] : '';
+        card.number >= 1 && card.number <= 10
+          ? (numberNames[card.number] ?? '')
+          : '';
 
       // Card key oluştur (getCardName için)
       const cardKey = card.court
         ? `${card.court}-of-pentacles`
         : `${numberName.toLowerCase()}-of-pentacles`;
-      
       const cardNameEn = getCardName(cardKey, 'en');
       const cardNameTr = getCardName(cardKey, 'tr');
 

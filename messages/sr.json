@@ -66438,7 +66438,84 @@
     "ui": {
       "results": {
         "title": "Rezultati",
-        "detailedAnalysis": "Detaljna analiza vašeg testa"
+        "detailedAnalysis": "Detaljna analiza vašeg testa",
+        "mbti": {
+          "traits": "Osobine",
+          "careers": "Pogodne Karijere"
+        },
+        "bigFive": {
+          "title": "Big Five Profil Ličnosti",
+          "subtitle": "Analiza vaših 5 osnovnih dimenzija ličnosti",
+          "score": "poena",
+          "traits": "Osobine",
+          "tips": "Savet",
+          "personalizedTips": "Personalizovani Saveti",
+          "tipTexts": {
+            "opennessHigh": "Vaša otvorenost je visoka: uključite se više u kreativne projekte, postavite ciljeve učenja.",
+            "conscientiousnessLow": "Vaša savest je niska: planirajte male zadatke sa vremenskim blokovima, smanjite odlaganje.",
+            "extraversionLow": "Vaša ekstraverzija je niska: planirajte mala i značajna okupljanja dok čuvate svoju društvenu energiju.",
+            "agreeablenessLow": "Vaša ugodnost je niska: vežbajte slušanje povratnih informacija bez osuđivanja.",
+            "neuroticismHigh": "Vaša neurotičnost je visoka: kreirajte rutine disanja/meditacije, obratite pažnju na higijenu spavanja.",
+            "balancedProfile": "Uravnotežen profil: ojačajte svoje snage, negujte oblasti razvoja sa mikro ciljevima."
+          }
+        },
+        "enneagram": {
+          "coreMotivation": "Osnovna Motivacija",
+          "coreFear": "Osnovni Strah",
+          "lightSide": "Svetle Strane",
+          "shadowSide": "Tamne Strane",
+          "wing": "Sekundarna Tendenca (Krilo)",
+          "scientificSource": "Naučni Izvor",
+          "scientificNote": "Ovaj test se zasniva na istraživanjima Enneagram Instituta i literaturi psihologije ličnosti. Enneagram sistem je naučno validan alat korišćen za ličnu svest i razvoj."
+        },
+        "friendEnergy": {
+          "superPowers": "Vaše Super Moći",
+          "funFacts": "Zabavne Činjenice",
+          "secondaryEnergy": "Vaša Sekundarna Energija",
+          "shareTitle": "Podelite sa Prijateljima!",
+          "shareHint": "Neka i vaši prijatelji otkriju! 🎊"
+        },
+        "loveVibration": {
+          "loveStyle": "Vaš Stil Ljubavi",
+          "superPowers": "Vaše Super Moći Ljubavi",
+          "planetEnergies": "Vaše Planetarne Energije",
+          "compatibility": "Kompatibilnost",
+          "astrologicalInsight": "Astrološki Uvid",
+          "source": "Izvor"
+        },
+        "stress": {
+          "score": "Poen",
+          "scoreRange": "Opseg Poena",
+          "visualization": "Vizuelizacija Nivoa Stresa",
+          "meditationTips": "Personalizovane Preporuke za Meditaciju",
+          "wellnessAdvice": "Opšte Preporuke za Zdravlje",
+          "scientificInfo": "Naučne Informacije o Testu",
+          "scientificNote": "Ovaj test se zasniva na DASS21 (Depression Anxiety Stress Scales) skali stresa. To je naučni alat za procenu razvijen od strane Lovibond & Lovibond (1995) i široko korišćen.",
+          "source": "Izvor: Lovibond, S. H., & Lovibond, P. F. (1995). Manual for the Depression Anxiety Stress Scales (2nd ed.). Sydney: Psychology Foundation.",
+          "disclaimer": "⚠️ Ovaj test je samo u informativne svrhe i ne zamenjuje profesionalnu psihološku procenu. Ako vaši simptomi stresa ozbiljno utiču na vaš svakodnevni život, molimo konsultujte zdravstvenog stručnjaka.",
+          "levels": {
+            "low": "Nizak (0-15)",
+            "moderate": "Umeren (16-30)",
+            "high": "Visok (31-45)",
+            "veryHigh": "Veoma Visok (46-60)"
+          }
+        },
+        "nameTarot": {
+          "nameValue": "Vrednost Imena",
+          "finalNumber": "Konačni Broj",
+          "theme": "Tema Karte",
+          "keywords": "Ključne Reči",
+          "advice": "Savet",
+          "astrology": "Astrologija",
+          "element": "Element",
+          "numerology": "Numerološki Kalkulacija",
+          "calculation": "Kalkulacija",
+          "pythagorasNote": "Pitagorina Numerologija: Svako slovo nosi specifičnu numeričku vibraciju. Zbir slova vašeg imena formira vašu numerološku energiju."
+        }
+      },
+      "buttons": {
+        "cancelTest": "Otkaži Test",
+        "backToTests": "← Nazad na Testove"
       }
     },
     "tests": {

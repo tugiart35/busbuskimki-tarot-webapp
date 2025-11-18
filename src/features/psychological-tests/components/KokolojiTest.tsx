@@ -101,6 +101,7 @@ export default function KokolojiTest() {
 
       return () => clearTimeout(timeoutId);
     }
+    return undefined;
   }, [currentTest]);
 
   const handleAnswer = (answer: string) => {
@@ -588,7 +589,7 @@ export default function KokolojiTest() {
                     <div className='bg-white/5 rounded-lg p-4 border border-white/10'>
                       <p className='text-sm text-purple-300'>
                         <strong>
-                          💫 {t('psychTests.results.enneagram.wing')}:
+                          💫 {t('psychTests.ui.results.enneagram.wing')}:
                         </strong>{' '}
                         {enneagramTypes[
                           lastResult.result
@@ -603,9 +604,9 @@ export default function KokolojiTest() {
               <div className='bg-blue-500/10 rounded-lg p-4 border border-blue-500/30'>
                 <p className='text-xs text-blue-200'>
                   <strong>
-                    📚 {t('psychTests.results.enneagram.scientificSource')}:
+                    📚 {t('psychTests.ui.results.enneagram.scientificSource')}:
                   </strong>{' '}
-                  {t('psychTests.results.enneagram.scientificNote')}
+                  {t('psychTests.ui.results.enneagram.scientificNote')}
                 </p>
               </div>
             </div>
