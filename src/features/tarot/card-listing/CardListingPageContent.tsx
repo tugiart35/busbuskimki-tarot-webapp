@@ -4,12 +4,12 @@ import Image from 'next/image';
 import { getCardName as getLocalizedCardName } from '@/lib/tarot/card-names';
 import { generateCardAltText } from '@/utils/seo-helpers';
 import {
-  DailyCardWidget,
   TrendingCardsWidget,
   PageReactions,
   CardStatsWidget,
   GeneralComments,
 } from '@/components/shared/ClientWidgets';
+import { TarotCardDrawing } from '@/components/TarotCardDrawing';
 import {
   CARD_LISTING_TRANSLATIONS,
   FAQ_ENTRIES,
@@ -47,7 +47,7 @@ export function CardListingPageContent({
   const description =
     metadata.description ||
     (locale === 'tr'
-      ? 'Tarot kartlarının anlamlarını ve ters yorumlarını Büsbüşkimki uzmanlarıyla keşfet.'
+      ? 'Tarot kartlarının anlamlarını ve ters yorumlarını Büsbüşkimki ile keşfet.'
       : locale === 'en'
         ? 'Explore tarot card meanings and reversed interpretations with the Büsbüşkimki editorial team.'
         : 'Otkrij značenja tarot karata uz urednički tim Büsbüşkimki platforme.');
@@ -78,42 +78,18 @@ export function CardListingPageContent({
         <div className='absolute inset-0'>
           <div className='absolute top-0 left-0 h-full w-full bg-gradient-to-br from-transparent via-transparent to-black/30' />
         </div>
-        <div className='relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8'>
-          <div className='text-center'>
-            <div className='inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-2 backdrop-blur-sm mb-6'>
-              <span className='text-sm font-medium text-white/90'>
-                {translations.cardsCount}
-              </span>
-            </div>
-            <h1 className='mb-6 text-5xl font-bold text-transparent bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text md:text-7xl'>
-              {translations.title}
-            </h1>
-            <p className='mx-auto mb-8 max-w-4xl text-xl leading-relaxed text-white/90 md:text-2xl'>
+        <div className='relative mx-auto max-w-7xl px-4 py-3 sm:px-4 lg:px-4'>
+          <div className='text-center space-y-6'>
+            {/* Subtitle */}
+            <p className='mx-auto max-w-3xl text-base sm:text-lg text-white/90 leading-relaxed mb-2'>
               {translations.subtitle}
             </p>
-            <div className='flex flex-wrap justify-center gap-3 text-sm'>
-              <div className='rounded-full border border-white/20 bg-white/15 px-4 py-2 backdrop-blur-sm'>
-                <span className='font-medium text-white'>
-                  {translations.totalCards}
-                </span>
-              </div>
-              <div className='rounded-full border border-white/20 bg-white/15 px-4 py-2 backdrop-blur-sm'>
-                <span className='font-medium text-white'>
-                  {translations.majorArcanaCount}
-                </span>
-              </div>
-              <div className='rounded-full border border-white/20 bg-white/15 px-4 py-2 backdrop-blur-sm'>
-                <span className='font-medium text-white'>
-                  {translations.minorArcanaCount}
-                </span>
-              </div>
-            </div>
           </div>
         </div>
       </div>
 
       <div className='mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8'>
-        <DailyCardWidget locale={locale} />
+        <TarotCardDrawing locale={locale} theme='light' />
       </div>
 
       <TrendingCardsWidget locale={locale} limit={6} />
@@ -162,6 +138,7 @@ export function CardListingPageContent({
                       { includeContext: true, context: 'gallery' }
                     )}
                     fill
+                    sizes='(max-width: 768px) 50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 25vw, 16vw'
                     className='object-cover transition-transform duration-700 group-hover:scale-110'
                   />
                   <div className='absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-gradient-to-t from-black/60 via-transparent to-transparent' />
@@ -211,88 +188,94 @@ export function CardListingPageContent({
             </p>
           </div>
 
-          {(['Cups', 'Pentacles', 'Swords', 'Wands'] as MinorArcanaCard['suit'][]).map(
-            suit => {
-              const suitCards = MINOR_ARCANA_CARDS.filter(
-                card => card.suit === suit
-              );
+          {(
+            [
+              'Cups',
+              'Pentacles',
+              'Swords',
+              'Wands',
+            ] as MinorArcanaCard['suit'][]
+          ).map(suit => {
+            const suitCards = MINOR_ARCANA_CARDS.filter(
+              card => card.suit === suit
+            );
 
-              return (
-                <div key={suit} className='mb-16'>
-                  <div className='mb-8 text-center'>
-                    <div className='mb-4 inline-flex items-center rounded-full border border-gray-300 bg-gradient-to-r from-gray-100 to-gray-200 px-6 py-3'>
-                      <span className='mr-3 text-2xl'>
-                        {suit === 'Cups'
-                          ? '💧'
-                          : suit === 'Pentacles'
-                            ? '💰'
-                            : suit === 'Swords'
-                              ? '⚔️'
-                              : '🔥'}
-                      </span>
-                      <h3 className='text-2xl font-bold text-gray-900'>
-                        {SUIT_LABELS[locale][suit]}
-                      </h3>
-                    </div>
-                  </div>
-
-                  <div className='grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7'>
-                    {suitCards.map(card => (
-                      <Link
-                        key={card.key}
-                        href={getCardUrl(locale, card.key)}
-                        className='group transform overflow-hidden rounded-xl border border-gray-100 bg-white shadow-md transition-all duration-400 hover:-translate-y-1 hover:scale-105 hover:border-blue-300 hover:shadow-xl'
-                      >
-                        <div className='relative aspect-[2/3] overflow-hidden'>
-                          <Image
-                            src={getCardImagePath(card.key)}
-                            alt={generateCardAltText(
-                              {
-                                ...(locale === 'tr' && {
-                                  nameTr: getLocalizedCardName(card.key, locale),
-                                }),
-                                ...(locale === 'en' && {
-                                  nameEn: getLocalizedCardName(card.key, locale),
-                                }),
-                                ...(locale === 'sr' && {
-                                  nameSr: getLocalizedCardName(card.key, locale),
-                                }),
-                                type: 'minor',
-                              },
-                              locale,
-                              { includeContext: true, context: 'gallery' }
-                            )}
-                            fill
-                            className='object-cover transition-transform duration-500 group-hover:scale-110'
-                          />
-                          <div className='absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-gradient-to-t from-black/40 via-transparent to-transparent' />
-                          <div className='absolute left-2 top-2'>
-                            <span
-                              className={`rounded-full bg-gradient-to-r ${SUIT_COLORS[suit]} px-2.5 py-1 text-xs font-bold text-white shadow-md`}
-                            >
-                              {card.number}
-                            </span>
-                          </div>
-                          <div className='absolute inset-x-2 bottom-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100'>
-                            <div className='rounded-lg bg-white/90 p-2 backdrop-blur-sm'>
-                              <p className='text-center text-xs font-medium text-gray-800'>
-                                {translations.viewCard}
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                        <div className='p-3'>
-                          <h3 className='text-sm font-bold text-gray-900 transition-colors duration-300 line-clamp-2 group-hover:text-blue-600'>
-                            {getLocalizedCardName(card.key, locale)}
-                          </h3>
-                        </div>
-                      </Link>
-                    ))}
+            return (
+              <div key={suit} className='mb-16'>
+                <div className='mb-8 text-center'>
+                  <div className='mb-4 inline-flex items-center rounded-full border border-gray-300 bg-gradient-to-r from-gray-100 to-gray-200 px-6 py-3'>
+                    <span className='mr-3 text-2xl'>
+                      {suit === 'Cups'
+                        ? '💧'
+                        : suit === 'Pentacles'
+                          ? '💰'
+                          : suit === 'Swords'
+                            ? '⚔️'
+                            : '🔥'}
+                    </span>
+                    <h3 className='text-2xl font-bold text-gray-900'>
+                      {SUIT_LABELS[locale][suit]}
+                    </h3>
                   </div>
                 </div>
-              );
-            }
-          )}
+
+                <div className='grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7'>
+                  {suitCards.map(card => (
+                    <Link
+                      key={card.key}
+                      href={getCardUrl(locale, card.key)}
+                      className='group transform overflow-hidden rounded-xl border border-gray-100 bg-white shadow-md transition-all duration-400 hover:-translate-y-1 hover:scale-105 hover:border-blue-300 hover:shadow-xl'
+                    >
+                      <div className='relative aspect-[2/3] overflow-hidden'>
+                        <Image
+                          src={getCardImagePath(card.key)}
+                          alt={generateCardAltText(
+                            {
+                              ...(locale === 'tr' && {
+                                nameTr: getLocalizedCardName(card.key, locale),
+                              }),
+                              ...(locale === 'en' && {
+                                nameEn: getLocalizedCardName(card.key, locale),
+                              }),
+                              ...(locale === 'sr' && {
+                                nameSr: getLocalizedCardName(card.key, locale),
+                              }),
+                              type: 'minor',
+                            },
+                            locale,
+                            { includeContext: true, context: 'gallery' }
+                          )}
+                          fill
+                          sizes='(max-width: 768px) 50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 25vw, 14vw'
+                          className='object-cover transition-transform duration-500 group-hover:scale-110'
+                        />
+                        <div className='absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-gradient-to-t from-black/40 via-transparent to-transparent' />
+                        <div className='absolute left-2 top-2'>
+                          <span
+                            className={`rounded-full bg-gradient-to-r ${SUIT_COLORS[suit]} px-2.5 py-1 text-xs font-bold text-white shadow-md`}
+                          >
+                            {card.number}
+                          </span>
+                        </div>
+                        <div className='absolute inset-x-2 bottom-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100'>
+                          <div className='rounded-lg bg-white/90 p-2 backdrop-blur-sm'>
+                            <p className='text-center text-xs font-medium text-gray-800'>
+                              {translations.viewCard}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className='p-3'>
+                        <h3 className='text-sm font-bold text-gray-900 transition-colors duration-300 line-clamp-2 group-hover:text-blue-600'>
+                          {getLocalizedCardName(card.key, locale)}
+                        </h3>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
         </section>
 
         <section className='mb-20'>
@@ -367,7 +350,9 @@ export function CardListingPageContent({
               <p className='text-lg font-semibold text-gray-900'>
                 {translations.expertName}
               </p>
-              <p className='text-sm text-purple-700'>{translations.expertRole}</p>
+              <p className='text-sm text-purple-700'>
+                {translations.expertRole}
+              </p>
               <p className='mt-4 text-sm leading-relaxed text-gray-700'>
                 {translations.expertBio}
               </p>
@@ -437,7 +422,9 @@ export function CardListingPageContent({
         <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
           <div className='mb-12 text-center'>
             <div className='inline-flex items-center rounded-full border border-emerald-200 bg-gradient-to-r from-emerald-100 to-teal-100 px-4 py-2'>
-              <span className='text-sm font-semibold text-emerald-700'>FAQ</span>
+              <span className='text-sm font-semibold text-emerald-700'>
+                FAQ
+              </span>
             </div>
             <h2 className='mt-4 text-3xl font-bold text-gray-900 md:text-4xl'>
               {locale === 'tr'
@@ -475,4 +462,3 @@ export function CardListingPageContent({
     </div>
   );
 }
-

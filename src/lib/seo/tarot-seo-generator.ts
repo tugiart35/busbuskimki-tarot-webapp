@@ -20,7 +20,7 @@ const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://busbuskimki.com';
 
 const tarotPageSeoData = {
   tr: {
-    title: 'Büşbüşkimki - Tarot Okuması & Kişisel Açılımlar',
+    title: 'Büşbüşkimki - Tarot & Kişisel Açılımlar',
     description:
       'Ücretsiz ve ücretli tarot açılımlarıyla aşk, kariyer, para ve evlilik konularında rehberlik alın.',
     keywords: [

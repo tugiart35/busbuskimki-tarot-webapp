@@ -1203,6 +1203,19 @@ export class CardData {
     const cardId = this.getCardIdFromSlug(slug, locale);
     const relatedCards = BlogCardService.getRelatedCards(cardId, locale, 4);
 
+    // Debug: context.celtic_cross.future kontrolü
+    if (blogCard.context?.celtic_cross?.future) {
+      logger.info(
+        `Celtic Cross future found for ${slug}:`,
+        blogCard.context.celtic_cross.future.substring(0, 50)
+      );
+    } else {
+      logger.warn(
+        `Celtic Cross future NOT found for ${slug}. Context keys:`,
+        Object.keys(blogCard.context || {})
+      );
+    }
+
     const additionalImages = this.mapImageGallery(blogCard.image_gallery);
     const cardCombinations = this.mapCardCombinations(blogCard, locale);
     const affirmations = this.mapAffirmations(blogCard, locale);

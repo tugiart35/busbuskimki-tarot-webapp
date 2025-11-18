@@ -36,8 +36,8 @@ import { AdminDetectionService } from '@/lib/services/admin-detection-service';
 import { AuthErrorService } from '@/lib/services/auth-error-service';
 import { logger } from '@/lib/logger';
 
-// Feature flag: Facebook login - onay bekleniyor
-const ENABLE_FACEBOOK_LOGIN = false;
+// Feature flag: Facebook login - aktif
+const ENABLE_FACEBOOK_LOGIN = true;
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);

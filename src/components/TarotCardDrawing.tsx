@@ -16,6 +16,7 @@ import { getCardName } from '@/lib/tarot/card-names';
 
 interface TarotCardDrawingProps {
   locale: string;
+  theme?: 'dark' | 'light';
 }
 
 // Kart isminden cardKey oluşturma fonksiyonu (CardMapping formatına uygun)
@@ -66,8 +67,12 @@ function getCardKeyFromName(cardName: string): string {
   return cardName.toLowerCase().replace(/\s+/g, '-');
 }
 
-export function TarotCardDrawing({ locale }: TarotCardDrawingProps) {
-  const { t, locale: currentLocale } = useTranslations();
+export function TarotCardDrawing({
+  locale,
+  theme = 'dark',
+}: TarotCardDrawingProps) {
+  const { t } = useTranslations();
+  const isLight = theme === 'light';
   const allCards = useTarotDeck();
   const [selectedCard, setSelectedCard] = useState<(typeof allCards)[0] | null>(
     null
@@ -98,6 +103,7 @@ export function TarotCardDrawing({ locale }: TarotCardDrawingProps) {
 
         // Debug log (development only)
         if (process.env.NODE_ENV === 'development') {
+          // eslint-disable-next-line no-console
           console.log('🔍 Card Debug:', {
             cardName: selectedCard.name,
             cardKey,
@@ -140,6 +146,7 @@ export function TarotCardDrawing({ locale }: TarotCardDrawingProps) {
 
         // Debug log (development only)
         if (process.env.NODE_ENV === 'development') {
+          // eslint-disable-next-line no-console
           console.log('🔍 Slug Debug:', {
             slug,
             cardKey,
@@ -154,6 +161,7 @@ export function TarotCardDrawing({ locale }: TarotCardDrawingProps) {
 
         // Debug log (development only)
         if (process.env.NODE_ENV === 'development') {
+          // eslint-disable-next-line no-console
           console.log('🔍 CardPageData Debug:', {
             slug,
             found: !!cardPageData,
@@ -275,7 +283,11 @@ export function TarotCardDrawing({ locale }: TarotCardDrawingProps) {
             className='flex flex-col items-center gap-6 sm:gap-8'
           >
             <div className='text-center max-w-md mx-auto mb-2 sm:mb-4'>
-              <p className='text-gray-300 text-sm sm:text-base'>
+              <p
+                className={`text-sm sm:text-base ${
+                  isLight ? 'text-gray-700' : 'text-gray-300'
+                }`}
+              >
                 {t(
                   'tarotCardDrawing.instruction',
                   'Focus on your question and select a card to reveal your guidance for today'
@@ -298,32 +310,64 @@ export function TarotCardDrawing({ locale }: TarotCardDrawingProps) {
                     whileTap={{ scale: 0.95 }}
                     className={`
                     relative w-20 h-32 sm:w-24 sm:h-36 rounded-xl
-                    backdrop-blur-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20
-                    border-2 border-purple-400/30
-                    shadow-xl shadow-purple-500/20
+                    ${
+                      isLight
+                        ? 'bg-gradient-to-br from-purple-100 to-pink-100 border-2 border-purple-300 shadow-lg shadow-purple-200/50 hover:border-purple-400 hover:shadow-purple-300/70'
+                        : 'backdrop-blur-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 border-2 border-purple-400/30 shadow-xl shadow-purple-500/20 hover:border-purple-400/50 hover:shadow-purple-500/40'
+                    }
                     transition-all duration-300
-                    ${isRevealing ? 'opacity-50 cursor-not-allowed' : 'hover:border-purple-400/50 hover:shadow-purple-500/40 cursor-pointer'}
+                    ${isRevealing ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
                   `}
                   >
                     {/* Card back design */}
                     <div className='absolute inset-0 flex items-center justify-center'>
-                      <div className='text-2xl sm:text-3xl opacity-60'>🔮</div>
+                      <div
+                        className={`text-2xl sm:text-3xl ${
+                          isLight ? 'opacity-40' : 'opacity-60'
+                        }`}
+                      >
+                        🔮
+                      </div>
                     </div>
-                    <div className='absolute inset-0 rounded-xl bg-gradient-to-br from-purple-600/10 to-pink-600/10' />
+                    <div
+                      className={`absolute inset-0 rounded-xl ${
+                        isLight
+                          ? 'bg-gradient-to-br from-purple-50/50 to-pink-50/50'
+                          : 'bg-gradient-to-br from-purple-600/10 to-pink-600/10'
+                      }`}
+                    />
 
                     {/* Decorative pattern */}
-                    <div className='absolute inset-1 rounded-lg border border-purple-400/20' />
-                    <div className='absolute inset-2 rounded-md border border-pink-400/10' />
+                    <div
+                      className={`absolute inset-1 rounded-lg border ${
+                        isLight
+                          ? 'border-purple-200/40'
+                          : 'border-purple-400/20'
+                      }`}
+                    />
+                    <div
+                      className={`absolute inset-2 rounded-md border ${
+                        isLight ? 'border-pink-200/30' : 'border-pink-400/10'
+                      }`}
+                    />
                   </motion.button>
                 ))
               ) : (
                 <div className='flex items-center justify-center py-8'>
-                  <Loader2 className='w-6 h-6 animate-spin text-purple-400' />
+                  <Loader2
+                    className={`w-6 h-6 animate-spin ${
+                      isLight ? 'text-purple-600' : 'text-purple-400'
+                    }`}
+                  />
                 </div>
               )}
             </div>
 
-            <p className='text-purple-300 text-sm animate-pulse'>
+            <p
+              className={`text-sm animate-pulse ${
+                isLight ? 'text-purple-600' : 'text-purple-300'
+              }`}
+            >
               {t('aklindakiKisi.page.hero.title', '✨ Tap any card ✨')}
             </p>
           </motion.div>
@@ -342,9 +386,21 @@ export function TarotCardDrawing({ locale }: TarotCardDrawingProps) {
               transition={{ duration: 0.6 }}
               className='relative'
             >
-              <div className='relative w-48 h-72 sm:w-56 sm:h-80 rounded-2xl overflow-hidden shadow-2xl shadow-purple-500/40'>
+              <div
+                className={`relative w-48 h-72 sm:w-56 sm:h-80 rounded-2xl overflow-hidden ${
+                  isLight
+                    ? 'shadow-2xl shadow-purple-300/30'
+                    : 'shadow-2xl shadow-purple-500/40'
+                }`}
+              >
                 {/* Glow effect */}
-                <div className='absolute inset-0 rounded-2xl bg-gradient-to-br from-purple-400/20 to-pink-400/20 blur-xl z-0' />
+                <div
+                  className={`absolute inset-0 rounded-2xl bg-gradient-to-br blur-xl z-0 ${
+                    isLight
+                      ? 'from-purple-200/30 to-pink-200/30'
+                      : 'from-purple-400/20 to-pink-400/20'
+                  }`}
+                />
 
                 {/* Card Image */}
                 <div className='relative z-10 w-full h-full'>
@@ -365,12 +421,17 @@ export function TarotCardDrawing({ locale }: TarotCardDrawingProps) {
               </div>
 
               {/* Card name - Kartın altında */}
-              <h3 className='text-lg sm:text-xl text-center font-semibold mt-4 bg-gradient-to-r from-purple-200 to-pink-200 bg-clip-text text-transparent'>
-                {locale === 'tr' 
-                  ? (selectedCard.nameTr || selectedCard.name)
-                  : locale === 'sr'
-                  ? getCardName(getCardKeyFromName(selectedCard.name), 'sr')
-                  : selectedCard.name}
+              <h3
+                className={`text-lg sm:text-xl text-center font-semibold mt-4 bg-gradient-to-r bg-clip-text text-transparent ${
+                  isLight
+                    ? 'from-purple-600 to-pink-600'
+                    : 'from-purple-200 to-pink-200'
+                }`}
+              >
+                {getCardName(
+                  getCardKeyFromName(selectedCard.name),
+                  locale as 'tr' | 'en' | 'sr'
+                )}
               </h3>
 
               {/* Sparkle effects around card */}
@@ -399,17 +460,29 @@ export function TarotCardDrawing({ locale }: TarotCardDrawingProps) {
             >
               {isLoadingMeanings ? (
                 <div className='flex items-center justify-center gap-3 py-8'>
-                  <Loader2 className='w-6 h-6 animate-spin text-purple-400' />
-                  <span className='text-gray-300'>
+                  <Loader2
+                    className={`w-6 h-6 animate-spin ${
+                      isLight ? 'text-purple-600' : 'text-purple-400'
+                    }`}
+                  />
+                  <span className={isLight ? 'text-gray-700' : 'text-gray-300'}>
                     {t('tarotCardDrawing.loading', 'Loading card meanings...')}
                   </span>
                 </div>
               ) : error ? (
                 <div className='text-center py-8'>
-                  <p className='text-red-400 mb-4'>{error}</p>
+                  <p
+                    className={`mb-4 ${isLight ? 'text-red-600' : 'text-red-400'}`}
+                  >
+                    {error}
+                  </p>
                   <button
                     onClick={handleReset}
-                    className='px-6 py-3 rounded-xl backdrop-blur-md bg-white/10 border border-white/20 hover:bg-white/20 transition-all text-sm font-medium'
+                    className={`px-6 py-3 rounded-xl transition-all text-sm font-medium ${
+                      isLight
+                        ? 'bg-white border border-gray-300 hover:bg-gray-50 text-gray-900 shadow-md'
+                        : 'backdrop-blur-md bg-white/10 border border-white/20 hover:bg-white/20 text-white'
+                    }`}
                   >
                     {t('tarotCardDrawing.drawAnother', 'Draw Another Card')}
                   </button>
@@ -418,31 +491,73 @@ export function TarotCardDrawing({ locale }: TarotCardDrawingProps) {
                 <div className='space-y-6'>
                   {/* Future (Celtic Cross) - Öncelikli */}
                   {cardData.future ? (
-                    <div className='backdrop-blur-md bg-white/5 border border-white/10 rounded-xl p-6'>
-                      <h4 className='text-lg font-semibold text-yellow-300 mb-3'>
+                    <div
+                      className={`rounded-xl p-6 ${
+                        isLight
+                          ? 'bg-white border border-gray-200 shadow-md'
+                          : 'backdrop-blur-md bg-white/5 border border-white/10'
+                      }`}
+                    >
+                      <h4
+                        className={`text-lg font-semibold mb-3 ${
+                          isLight ? 'text-amber-600' : 'text-yellow-300'
+                        }`}
+                      >
                         {t('tarotCardDrawing.future', 'Future')}
                       </h4>
-                      <p className='text-gray-300 text-sm sm:text-base leading-relaxed'>
+                      <p
+                        className={`text-sm sm:text-base leading-relaxed ${
+                          isLight ? 'text-gray-700' : 'text-gray-300'
+                        }`}
+                      >
                         {cardData.future}
                       </p>
                     </div>
                   ) : cardData.uprightGeneral ? (
                     // Future yoksa Upright Meaning göster
-                    <div className='backdrop-blur-md bg-white/5 border border-white/10 rounded-xl p-6'>
-                      <h4 className='text-lg font-semibold text-purple-300 mb-3'>
+                    <div
+                      className={`rounded-xl p-6 ${
+                        isLight
+                          ? 'bg-white border border-gray-200 shadow-md'
+                          : 'backdrop-blur-md bg-white/5 border border-white/10'
+                      }`}
+                    >
+                      <h4
+                        className={`text-lg font-semibold mb-3 ${
+                          isLight ? 'text-purple-600' : 'text-purple-300'
+                        }`}
+                      >
                         {t('tarotCardDrawing.meaning', 'Card Meaning')}
                       </h4>
-                      <p className='text-gray-300 text-sm sm:text-base leading-relaxed'>
+                      <p
+                        className={`text-sm sm:text-base leading-relaxed ${
+                          isLight ? 'text-gray-700' : 'text-gray-300'
+                        }`}
+                      >
                         {cardData.uprightGeneral}
                       </p>
                     </div>
                   ) : cardData.shortDescription ? (
                     // Upright meaning yoksa short_description göster
-                    <div className='backdrop-blur-md bg-white/5 border border-white/10 rounded-xl p-6'>
-                      <h4 className='text-lg font-semibold text-purple-300 mb-3'>
+                    <div
+                      className={`rounded-xl p-6 ${
+                        isLight
+                          ? 'bg-white border border-gray-200 shadow-md'
+                          : 'backdrop-blur-md bg-white/5 border border-white/10'
+                      }`}
+                    >
+                      <h4
+                        className={`text-lg font-semibold mb-3 ${
+                          isLight ? 'text-purple-600' : 'text-purple-300'
+                        }`}
+                      >
                         {t('tarotCardDrawing.meaning', 'Card Meaning')}
                       </h4>
-                      <p className='text-gray-300 text-sm sm:text-base leading-relaxed'>
+                      <p
+                        className={`text-sm sm:text-base leading-relaxed ${
+                          isLight ? 'text-gray-700' : 'text-gray-300'
+                        }`}
+                      >
                         {cardData.shortDescription}
                       </p>
                     </div>
@@ -460,7 +575,11 @@ export function TarotCardDrawing({ locale }: TarotCardDrawingProps) {
                 </Link>
                 <button
                   onClick={handleReset}
-                  className='px-6 py-3 rounded-xl backdrop-blur-md bg-white/10 border border-white/20 hover:bg-white/20 transition-all text-sm font-medium'
+                  className={`px-6 py-3 rounded-xl transition-all text-sm font-medium ${
+                    isLight
+                      ? 'bg-white border border-gray-300 hover:bg-gray-50 text-gray-900 shadow-md'
+                      : 'backdrop-blur-md bg-white/10 border border-white/20 hover:bg-white/20 text-white'
+                  }`}
                 >
                   {t('tarotCardDrawing.drawAnother', 'Draw Another Card')}
                 </button>

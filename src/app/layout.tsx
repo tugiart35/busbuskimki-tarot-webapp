@@ -117,14 +117,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <link rel='preconnect' href='https://pagead2.googlesyndication.com' />
         <link rel='dns-prefetch' href='//connect.facebook.net' />
 
-        {/* Preload critical assets */}
-        <link
-          rel='preload'
-          href='/icons/icon.svg'
-          as='image'
-          type='image/svg+xml'
-        />
-        <link rel='preload' href='/favicon.ico' as='image' />
+        {/* Preload removed: favicon and icon.svg are already loaded via HeadTags */}
       </head>
       <body
         className='h-full overflow-x-hidden antialiased'

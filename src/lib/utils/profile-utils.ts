@@ -1,25 +1,3 @@
-/*
- * DOSYA ANALİZİ - PROFILE UTILS
- *
- * BAĞLANTILI DOSYALAR:
- * - src/app/[locale]/auth/page.tsx (Kayıt ol profil oluşturma)
- * - src/app/[locale]/dashboard/page.tsx (Dashboard profil oluşturma)
- * - src/lib/supabase/client.ts (Supabase bağlantısı)
- *
- * DOSYA AMACI:
- * Profil oluşturma ve yönetimi için ortak utility fonksiyonları.
- * Tutarlı profil yönetimi sağlar.
- *
- * ÖNEMLİ DEĞİŞİKLİK:
- * - Kredi ataması kaldırıldı (credit_balance: 0)
- * - Yeni kullanıcılar artık 0 kredi ile başlar
- *
- * KULLANIM DURUMU:
- * - GEREKLİ: Profil yönetimi standardizasyonu için
- * - GÜVENLİ: Production'a hazır
- * - TUTARLI: Tüm modüllerde aynı mantık
- */
-
 import { supabase } from '@/lib/supabase/client';
 import type { User, SupabaseClient } from '@supabase/supabase-js';
 

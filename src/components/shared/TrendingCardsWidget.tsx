@@ -39,6 +39,24 @@ export function TrendingCardsWidget({
         const response = await fetch(
           `/api/engagement/trending-cards?limit=${limit}`
         );
+
+        if (!response.ok) {
+          // 404 veya diğer hata durumları
+          if (response.status === 404) {
+            // API endpoint bulunamadı, boş liste döndür
+            setTrendingCards([]);
+            return;
+          }
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const contentType = response.headers.get('content-type');
+        if (!contentType || !contentType.includes('application/json')) {
+          // JSON değil, muhtemelen HTML (404 sayfası)
+          setTrendingCards([]);
+          return;
+        }
+
         const result = await response.json();
 
         if (result.success && result.data) {

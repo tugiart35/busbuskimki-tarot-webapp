@@ -1,5 +1,7 @@
 // Aklındaki Kişi Kart Çekme Sistemi - Utility Functions
 
+import { DrawnCard } from '@/types/aklindaki-kisi.types';
+
 /**
  * Kartları görsel olarak karıştır (Fisher-Yates shuffle)
  */
@@ -80,4 +82,93 @@ export function getCardImagePath(cardNumber: number): string {
  */
 export function getBackImagePath(): string {
   return '/cards/aklindakikisi/Back.webp';
+}
+
+/**
+ * Yerel saat diliminde bugünün tarihini al (YYYY-MM-DD formatında)
+ */
+export function getTodayInTimezone(timezone: string = 'UTC'): string {
+  const now = new Date();
+  const todayStr = now.toLocaleString('en-US', {
+    timeZone: timezone,
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  });
+
+  // Format: MM/DD/YYYY -> YYYY-MM-DD
+  const parts = todayStr.split('/');
+  if (parts.length === 3) {
+    const [month, day, year] = parts;
+    if (month && day && year) {
+      return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+    }
+  }
+
+  // Fallback
+  return now.toISOString().split('T')[0]!;
+}
+
+/**
+ * ISO timestamp'ten yerel saat diliminde tarih çıkar (YYYY-MM-DD)
+ */
+export function getDateFromTimestamp(
+  timestamp: string,
+  timezone: string = 'UTC'
+): string {
+  const date = new Date(timestamp);
+  const dateStr = date.toLocaleString('en-US', {
+    timeZone: timezone,
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  });
+
+  const parts = dateStr.split('/');
+  if (parts.length === 3) {
+    const [month, day, year] = parts;
+    if (month && day && year) {
+      return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+    }
+  }
+
+  return date.toISOString().split('T')[0]!;
+}
+
+/**
+ * Gece yarısı kontrolü ile geçerli kartları filtrele
+ * Yerel saat diliminde bugün çekilen kartlar geçerli, diğerleri kapanır
+ */
+export function filterValidDrawnCardsByMidnight(
+  drawnCards: DrawnCard[] | null | undefined,
+  timezone: string = 'UTC'
+): DrawnCard[] {
+  if (!drawnCards || !Array.isArray(drawnCards)) {
+    return [];
+  }
+
+  const today = getTodayInTimezone(timezone);
+
+  return drawnCards.filter(drawnCard => {
+    // Eski format (number[]) desteği - migration sırasında geçiş için
+    if (typeof drawnCard === 'number') {
+      return false;
+    }
+
+    // Yeni format (DrawnCard) kontrolü
+    if (
+      drawnCard &&
+      typeof drawnCard === 'object' &&
+      'cardNumber' in drawnCard &&
+      'drawnAt' in drawnCard
+    ) {
+      // drawnAt'ten tarih hesapla
+      const cardDate = getDateFromTimestamp(drawnCard.drawnAt, timezone);
+
+      // Bugün çekilen kartlar geçerli
+      return cardDate === today;
+    }
+
+    return false;
+  });
 }

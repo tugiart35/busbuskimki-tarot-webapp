@@ -50,7 +50,7 @@ import { useTranslations } from '@/hooks/useTranslations';
 
 export default function BottomNavigation() {
   const pathname = usePathname();
-  const { navigationItems, handleNavigationClick } = useNavigation();
+  const { navigationItems, handleNavigationClick, currentLocale } = useNavigation();
   const { trackUserInteraction } = usePerformanceMonitoring();
   const { t } = useTranslations();
 
@@ -60,7 +60,9 @@ export default function BottomNavigation() {
     e.stopPropagation();
 
     const profileItem = navigationItems.find(
-      item => item.name === 'Profil' || item.name === 'Giriş Yap'
+      item =>
+        item.href === `/${currentLocale}/dashboard` ||
+        item.href === `/${currentLocale}/auth`
     );
     if (profileItem) {
       trackUserInteraction(profileItem.name, 'click');
@@ -73,7 +75,9 @@ export default function BottomNavigation() {
     e.preventDefault();
     e.stopPropagation();
 
-    const pakizeItem = navigationItems.find(item => item.name === 'Pakize');
+    const pakizeItem = navigationItems.find(
+      item => item.href === `/${currentLocale}/pakize`
+    );
     if (pakizeItem) {
       trackUserInteraction(pakizeItem.name, 'click');
       handleNavigationClick(pakizeItem);
@@ -91,7 +95,7 @@ export default function BottomNavigation() {
       <nav
         className='fixed bottom-0 left-0 right-0 z-50 bg-slate-900/95 backdrop-blur-md border-t border-slate-700'
         role='navigation'
-        aria-label='Ana navigasyon menüsü'
+        aria-label={t('navigation.ariaLabel.main', 'Ana Navigasyon')}
       >
         <div className='flex items-center justify-around h-16 px-1'>
           {navigationItems.map(item => {
@@ -102,8 +106,9 @@ export default function BottomNavigation() {
 
             // Profil/Auth/Pakize sekmesi için özel tıklama işlemi
             const isProfileOrAuth =
-              item.name === 'Profil' || item.name === 'Giriş Yap';
-            const isPakize = item.name === 'Pakize';
+              item.href === `/${currentLocale}/dashboard` ||
+              item.href === `/${currentLocale}/auth`;
+            const isPakize = item.href === `/${currentLocale}/pakize`;
 
             if (isProfileOrAuth) {
               return (
@@ -162,7 +167,7 @@ export default function BottomNavigation() {
                 transition-all duration-300 min-w-0 flex-1
                 ${isActive ? 'text-amber-400' : 'text-gray-500 hover:text-gray-300'}
               `}
-                aria-label={`${item.name} sayfasına git`}
+                aria-label={`${item.name} ${t('navigation.menu.goToPage', 'sayfasına git')}`}
                 aria-current={isActive ? 'page' : undefined}
                 role='menuitem'
               >

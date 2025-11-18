@@ -40,6 +40,9 @@ export default function AklindakiKisiPage() {
   const [emailError, setEmailError] = useState<string | null>(null);
   const [validatingEmail, setValidatingEmail] = useState(false);
 
+  // Kullanıcının yerel saat dilimini al
+  const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
   const formatCountdown = useCallback(
     (milliseconds: number): string => {
       const totalSeconds = Math.floor(milliseconds / 1000);
@@ -49,24 +52,18 @@ export default function AklindakiKisiPage() {
       const seconds = totalSeconds % 60;
 
       if (days > 0) {
-        return t(
-          'aklindakiKisi.page.countdown.daysHoursMinutes',
-          {
-            days,
-            hours,
-            minutes,
-          }
-        );
+        return t('aklindakiKisi.page.countdown.daysHoursMinutes', {
+          days,
+          hours,
+          minutes,
+        });
       }
       if (hours > 0) {
-        return t(
-          'aklindakiKisi.page.countdown.hoursMinutesSeconds',
-          {
-            hours,
-            minutes,
-            seconds,
-          }
-        );
+        return t('aklindakiKisi.page.countdown.hoursMinutesSeconds', {
+          hours,
+          minutes,
+          seconds,
+        });
       }
       if (minutes > 0) {
         return t('aklindakiKisi.page.countdown.minutesSeconds', {
@@ -116,11 +113,10 @@ export default function AklindakiKisiPage() {
 
     const validateToken = async () => {
       try {
-        // Token hexadecimal, URL-safe, encode etmeye gerek yok
-        // emailParam zaten decode edilmiş geliyor, tekrar encode ediyoruz
+        // Timezone parametresini ekle
         const url = emailParam
-          ? `/api/aklindaki-kisi/validate?token=${token}&email=${encodeURIComponent(emailParam)}`
-          : `/api/aklindaki-kisi/validate?token=${token}`;
+          ? `/api/aklindaki-kisi/validate?token=${token}&email=${encodeURIComponent(emailParam)}&timezone=${encodeURIComponent(userTimezone)}`
+          : `/api/aklindaki-kisi/validate?token=${token}&timezone=${encodeURIComponent(userTimezone)}`;
 
         const response = await fetch(url);
         const data: ValidateTokenResponse = await response.json();
@@ -135,9 +131,7 @@ export default function AklindakiKisiPage() {
 
         // IP limiti kontrolü
         if (data.ipLimitReached) {
-          setError(
-            t('aklindakiKisi.page.errors.deviceLimit')
-          );
+          setError(t('aklindakiKisi.page.errors.deviceLimit'));
           setTokenValid(false);
           setLoading(false);
           return;
@@ -189,7 +183,6 @@ export default function AklindakiKisiPage() {
 
         setLoading(false);
       } catch (err) {
-        console.error('Token validation error:', err);
         setError(t('aklindakiKisi.page.errors.tokenValidation'));
         setTokenValid(false);
         setLoading(false);
@@ -197,7 +190,7 @@ export default function AklindakiKisiPage() {
     };
 
     validateToken();
-  }, [emailParam, t, token]);
+  }, [emailParam, t, token, userTimezone]);
 
   // E-posta doğrulama
   const handleEmailSubmit = async (e: React.FormEvent) => {
@@ -227,9 +220,7 @@ export default function AklindakiKisiPage() {
 
       // IP limiti kontrolü
       if (data.ipLimitReached) {
-        setEmailError(
-          t('aklindakiKisi.page.errors.deviceLimit')
-        );
+        setEmailError(t('aklindakiKisi.page.errors.deviceLimit'));
         setValidatingEmail(false);
         return;
       }
@@ -287,7 +278,10 @@ export default function AklindakiKisiPage() {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ token }),
+          body: JSON.stringify({
+            token,
+            timezone: userTimezone, // Timezone bilgisini gönder
+          }),
         });
 
         const data: DrawCardResponse = await response.json();
@@ -295,13 +289,9 @@ export default function AklindakiKisiPage() {
         if (!response.ok || !data.success) {
           if (data.dailyLimitReached) {
             setDailyLimitReached(true);
-            setError(
-              t('aklindakiKisi.page.errors.dailyLimit')
-            );
+            setError(t('aklindakiKisi.page.errors.dailyLimit'));
           } else {
-            setError(
-              data.error || t('aklindakiKisi.page.errors.cardDraw')
-            );
+            setError(data.error || t('aklindakiKisi.page.errors.cardDraw'));
           }
           setDrawingCard(false);
           return;
@@ -364,7 +354,15 @@ export default function AklindakiKisiPage() {
         setDrawingCard(false);
       }
     },
-    [token, cards, dailyLimitReached, drawingCard, flippedCards, t]
+    [
+      token,
+      cards,
+      dailyLimitReached,
+      drawingCard,
+      flippedCards,
+      t,
+      userTimezone,
+    ]
   );
 
   if (loading) {
@@ -591,7 +589,9 @@ export default function AklindakiKisiPage() {
                 {isFlipped ? (
                   <Image
                     src={getCardImagePath(cardNumber)}
-                    alt={t('aklindakiKisi.page.card.alt', { number: cardNumber })}
+                    alt={t('aklindakiKisi.page.card.alt', {
+                      number: cardNumber,
+                    })}
                     fill
                     className='object-cover'
                     priority={false}
@@ -636,7 +636,9 @@ export default function AklindakiKisiPage() {
             <div className='relative w-full aspect-[9/16] max-h-[85vh]'>
               <Image
                 src={getCardImagePath(fullscreenCard)}
-                alt={t('aklindakiKisi.page.card.alt', { number: fullscreenCard })}
+                alt={t('aklindakiKisi.page.card.alt', {
+                  number: fullscreenCard,
+                })}
                 fill
                 className='object-contain'
                 priority={true}
@@ -649,9 +651,7 @@ export default function AklindakiKisiPage() {
 
       {/* Footer / Ritual Text */}
       <footer className='text-center text-[#4B5563] mb-12 max-w-2xl px-6 leading-relaxed'>
-        <p>
-          {t('aklindakiKisi.page.footer.note')}
-        </p>
+        <p>{t('aklindakiKisi.page.footer.note')}</p>
       </footer>
     </div>
   );

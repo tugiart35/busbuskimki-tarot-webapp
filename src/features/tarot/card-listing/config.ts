@@ -30,7 +30,8 @@ export const FAQ_ENTRIES: Record<SupportedLocale, FAQEntry[]> = {
         'Klasik Rider–Waite destesi 78 karttan oluşur: 22 Major Arcana kartı yaşamın büyük temalarını temsil eder, 56 Minor Arcana kartı ise günlük hayatınızın ritmini ve kararlarını anlatır. Büsbüşkimki ekibi her kartın anlamını hem düz hem ters pozisyonda ayrı ayrı yorumlar.',
     },
     {
-      question: 'Bu kart yorumları profesyonel tarot uzmanları tarafından mı hazırlanıyor?',
+      question:
+        'Bu kart yorumları profesyonel tarot uzmanları tarafından mı hazırlanıyor?',
       answer:
         'Evet. İçeriklerimiz 12+ yıllık tarot tecrübesi olan Mina Kaya tarafından yazılıyor ve psikoloji danışmanı Dr. Selin Yüzbaşıoğlu tarafından kontrol ediliyor. Her metin üç aşamalı editoryal süreçten geçiyor ve yılda en az dört kez güncelleniyor.',
     },
@@ -42,12 +43,14 @@ export const FAQ_ENTRIES: Record<SupportedLocale, FAQEntry[]> = {
   ],
   en: [
     {
-      question: 'How many cards are in a tarot deck and how are they organised?',
+      question:
+        'How many cards are in a tarot deck and how are they organised?',
       answer:
         'A classic Rider–Waite deck includes 78 cards: 22 Major Arcana that map out pivotal life lessons and 56 Minor Arcana that reflect everyday situations. Our editorial team documents upright and reversed meanings for every card to support accurate readings.',
     },
     {
-      question: 'Who writes and fact-checks the tarot interpretations on this page?',
+      question:
+        'Who writes and fact-checks the tarot interpretations on this page?',
       answer:
         'All articles are authored by Mina Kaya, a senior tarot reader with 12+ years of practice, and fact-checked by counselling psychologist Dr. Selin Yüzbaşıoğlu. Each update passes a three-step editorial workflow before publication.',
     },
@@ -121,7 +124,7 @@ export const CARD_LISTING_TRANSLATIONS: Record<
   tr: {
     title: 'Tarot Kartları',
     subtitle:
-      'Tüm 78 tarot kartının detaylı anlamları, ters yorumları ve uzman tavsiyeleri',
+      '78 tarot kartının anlamları, ters yorumları, semboller, kombinasyonlar ve günlük pratiklerle tam rehber.',
     majorArcana: 'Major Arcana (22 Kart)',
     minorArcana: 'Minor Arcana (56 Kart)',
     majorArcanaDescription:
@@ -171,7 +174,7 @@ export const CARD_LISTING_TRANSLATIONS: Record<
   en: {
     title: 'Tarot Cards',
     subtitle:
-      'Detailed upright and reversed meanings for all 78 tarot cards, curated by experts',
+      'A complete guide to the meanings of all 78 tarot cards, their reversed interpretations, symbols, combinations, and daily practices.',
     majorArcana: 'Major Arcana (22 Cards)',
     minorArcana: 'Minor Arcana (56 Cards)',
     majorArcanaDescription:
@@ -221,7 +224,7 @@ export const CARD_LISTING_TRANSLATIONS: Record<
   sr: {
     title: 'Tarot Karte',
     subtitle:
-      'Detaljna značenja, obrnuta tumačenja i praktični saveti za svih 78 tarot karata',
+      'Potpuni vodič kroz 78 tarot karata: značenja, obrnuta tumačenja, simbole, kombinacije i svakodnevne rituale.',
     majorArcana: 'Major Arcana (22 Karte)',
     minorArcana: 'Minor Arcana (56 Karata)',
     majorArcanaDescription:
@@ -238,7 +241,8 @@ export const CARD_LISTING_TRANSLATIONS: Record<
     drawCardsDescription:
       'Pokreni besplatno tarot čitanje za ljubav, karijeru i svakodnevne odluke uz jasno vođstvo.',
     drawCardsButton: 'Započni Čitanje',
-    pageReactionsTitle: 'Koliko su ti ova tumačenja Major Arcana karata pomogla?',
+    pageReactionsTitle:
+      'Koliko su ti ova tumačenja Major Arcana karata pomogla?',
     popularSectionLabel: 'Najpopularnije',
     popularSectionTitle: 'Najgledanije Karte',
     popularSectionSubtitle:
@@ -366,7 +370,3 @@ export function getLocaleForParams(
 
   return enforcedLocale;
 }
-
-
-
-

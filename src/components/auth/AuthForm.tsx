@@ -9,6 +9,8 @@
 
 import { useState, useEffect, useCallback, memo } from 'react';
 import { useRouter } from 'next/navigation';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Mail, Lock, User, Eye, EyeOff, Key, Star, Shield } from 'lucide-react';
 import { useTranslations } from '@/hooks/useTranslations';
 import { useToast } from '@/hooks/useToast';
 import { useAuth } from '@/hooks/auth/useAuth';
@@ -23,8 +25,8 @@ import {
 } from '@/lib/auth/auth-validation';
 import Toast from '@/features/shared/ui/Toast';
 
-// Feature flag: Facebook login - onay bekleniyor
-const ENABLE_FACEBOOK_LOGIN = false;
+// Feature flag: Facebook login - aktif
+// const ENABLE_FACEBOOK_LOGIN = true;
 
 interface AuthFormProps {
   locale: string;
@@ -52,12 +54,15 @@ function AuthForm({ locale, initialError, next }: AuthFormProps) {
   const [loading, setLoading] = useState(false);
   const [loadingStep, setLoadingStep] = useState('');
   const [showPasswordReset, setShowPasswordReset] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [rateLimitError, setRateLimitError] = useState<string | null>(null);
   const [retryAfter, setRetryAfter] = useState<number | null>(null);
 
   const [message, setMessage] = useState('');
   const [showResendEmail, setShowResendEmail] = useState(false);
   const [pendingEmail, setPendingEmail] = useState('');
+  const [isMounted, setIsMounted] = useState(false);
 
   // Form states
   const [formData, setFormData] = useState<LoginFormData | RegisterFormData>({
@@ -89,6 +94,11 @@ function AuthForm({ locale, initialError, next }: AuthFormProps) {
     };
     loadEmail();
   }, [loadSavedEmail]);
+
+  // Client-side only mount check (prevents hydration mismatch)
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Clear errors when switching modes
   useEffect(() => {
@@ -434,610 +444,997 @@ function AuthForm({ locale, initialError, next }: AuthFormProps) {
     [errors]
   );
 
-  // Switch between login/register - memoized
-  const toggleMode = useCallback(() => {
-    setIsLogin(!isLogin);
-    setErrors({});
-    setMessage('');
+  // Switch between login/register - now handled directly in onClick handlers
+  // const toggleMode = useCallback(() => {
+  //   setIsLogin(!isLogin);
+  //   setErrors({});
+  //   setMessage('');
 
-    if (isLogin) {
-      // Switching to register - add required fields
-      setFormData({
-        email: formData.email,
-        password: '',
-        confirmPassword: '',
-        name: '',
-        surname: '',
-        birthDate: '',
-        gender: 'male' as const,
-        rememberMe: false,
-      });
-    } else {
-      // Switching to login - remove extra fields
-      setFormData({
-        email: formData.email,
-        password: '',
-        rememberMe: false,
-      });
-    }
-  }, [isLogin, formData.email]);
+  //   if (isLogin) {
+  //     // Switching to register - add required fields
+  //     setFormData({
+  //       email: formData.email,
+  //       password: '',
+  //       confirmPassword: '',
+  //       name: '',
+  //       surname: '',
+  //       birthDate: '',
+  //       gender: 'male' as const,
+  //       rememberMe: false,
+  //     });
+  //   } else {
+  //     // Switching to login - remove extra fields
+  //     setFormData({
+  //       email: formData.email,
+  //       password: '',
+  //       rememberMe: false,
+  //     });
+  //   }
+  // }, [isLogin, formData.email]);
 
   return (
-    <>
-      {/* Rate Limit Warning */}
-      {rateLimitError && (
-        <div className='mb-6 p-4 bg-orange-100 border border-orange-300 rounded-xl'>
-          <div className='flex items-center gap-3'>
-            <div className='text-orange-600 text-xl'>⏰</div>
-            <div className='flex-1'>
-              <p className='text-orange-800 font-medium'>{rateLimitError}</p>
-              {retryAfter && (
-                <p className='text-orange-700 text-sm mt-1'>
-                  {t('auth.page.retryAfter').replace(
-                    '{seconds}',
-                    retryAfter.toString()
-                  )}
-                </p>
-              )}
-            </div>
-          </div>
+    <div className='min-h-screen bg-gradient-to-br from-slate-950 via-indigo-950 to-slate-900 text-white relative overflow-hidden'>
+      {/* Mystical background elements - Client-side only to prevent hydration mismatch */}
+      {isMounted && (
+        <div className='fixed inset-0 overflow-hidden pointer-events-none'>
+          {/* Constellation stars */}
+          {[...Array(30)].map((_, i) => {
+            // Use index-based seed for consistent positioning
+            const seed = i * 137.508; // Golden angle for better distribution
+            const left = (Math.sin(seed) * 0.5 + 0.5) * 100;
+            const top = (Math.cos(seed) * 0.5 + 0.5) * 100;
+            const duration = 4 + (i % 3);
+            const delay = (i % 3) * 0.5;
+
+            return (
+              <motion.div
+                key={`star-${i}`}
+                className='absolute w-0.5 h-0.5 bg-amber-200 rounded-full'
+                style={{
+                  left: `${left}%`,
+                  top: `${top}%`,
+                }}
+                animate={{
+                  opacity: [0.2, 0.8, 0.2],
+                  scale: [1, 1.5, 1],
+                }}
+                transition={{
+                  duration,
+                  repeat: Infinity,
+                  delay,
+                }}
+              />
+            );
+          })}
+
+          {/* Floating particles */}
+          {[...Array(10)].map((_, i) => {
+            // Use index-based seed for consistent positioning
+            const seed = i * 97.5; // Different seed for particles
+            const left = (Math.sin(seed) * 0.5 + 0.5) * 100;
+            const top = (Math.cos(seed) * 0.5 + 0.5) * 100;
+            const duration = 8 + (i % 4);
+            const delay = (i % 5) * 0.3;
+
+            return (
+              <motion.div
+                key={`particle-${i}`}
+                className='absolute w-1 h-1 bg-amber-400/30 rounded-full blur-sm'
+                style={{
+                  left: `${left}%`,
+                  top: `${top}%`,
+                }}
+                animate={{
+                  y: [0, -100, 0],
+                  opacity: [0, 0.5, 0],
+                }}
+                transition={{
+                  duration,
+                  repeat: Infinity,
+                  delay,
+                }}
+              />
+            );
+          })}
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className='space-y-4'>
-        {/* Email Input */}
-        <div className='relative mb-6'>
-          {/* Mystical input container */}
-          <div className='relative'>
-            {/* Input glow effect */}
-            <div className='absolute inset-0 bg-gradient-to-r from-gold/10 via-lavender/10 to-purple-400/10 rounded-xl blur-sm opacity-0 transition-opacity duration-300 group-hover:opacity-100'></div>
+      {/* Subtle arcana symbols in background - Static, no hydration issue */}
+      <div className='fixed inset-0 overflow-hidden pointer-events-none'>
+        <div className='absolute top-20 left-20 opacity-5 text-6xl'>☽</div>
+        <div className='absolute top-40 right-32 opacity-5 text-6xl'>☉</div>
+        <div className='absolute bottom-32 left-40 opacity-5 text-6xl'>✦</div>
+        <div className='absolute bottom-20 right-20 opacity-5 text-6xl'>⚹</div>
+      </div>
 
-            {/* Input icon */}
-            <div className='absolute left-4 top-1/2 transform -translate-y-1/2 text-lavender/60'>
-              ✉️
-            </div>
+      {/* Warm ambient glow */}
+      <div className='fixed inset-0 pointer-events-none'>
+        <div className='absolute top-1/4 left-1/4 w-96 h-96 bg-amber-600/10 rounded-full blur-3xl' />
+        <div className='absolute bottom-1/3 right-1/3 w-96 h-96 bg-orange-600/10 rounded-full blur-3xl' />
+      </div>
 
-            <input
-              type='email'
-              placeholder={t('auth.page.emailPlaceholder')}
-              value={formData.email}
-              onChange={e => handleInputChange('email', e.target.value)}
-              className={`w-full pl-12 pr-4 py-4 rounded-xl bg-gradient-to-r from-white/90 to-gray-100/90 border text-black placeholder-black/70 focus:outline-none focus:ring-2 focus:ring-gold/40 focus:border-gold transition-all duration-300 hover:from-gray-200/90 hover:to-gray-300/90 group relative z-10 ${
-                errors.email
-                  ? 'border-red-500 focus:ring-red-500/40'
-                  : 'border-lavender/30 focus:border-gold'
-              }`}
-              aria-label='E-posta adresi'
-              aria-describedby={errors.email ? 'email-error' : undefined}
-              aria-invalid={!!errors.email}
-            />
-
-            {/* Mystical border animation */}
-            <div
-              className={`absolute inset-0 rounded-xl border-2 transition-all duration-300 pointer-events-none ${
-                errors.email ? 'border-red-500/50' : 'border-gold/20'
-              }`}
-            ></div>
-          </div>
-
-          {errors.email && (
-            <p
-              id='email-error'
-              className='text-red-400 text-sm mt-2 flex items-center gap-1'
-              role='alert'
-            >
-              <span>⚠️</span>
-              {errors.email}
-            </p>
-          )}
-        </div>
-
-        {/* Registration Fields */}
-        {!isLogin && (
-          <>
-            {/* Name Input */}
-            <div className='relative mb-6'>
-              {/* Mystical input container */}
-              <div className='relative'>
-                {/* Input glow effect */}
-                <div className='absolute inset-0 bg-gradient-to-r from-gold/10 via-lavender/10 to-purple-400/10 rounded-xl blur-sm opacity-0 transition-opacity duration-300 group-hover:opacity-100'></div>
-
-                {/* Input icon */}
-                <div className='absolute left-4 top-1/2 transform -translate-y-1/2 text-lavender/60'>
-                  👤
-                </div>
-
-                <input
-                  type='text'
-                  placeholder={t('auth.page.namePlaceholder')}
-                  value={(formData as RegisterFormData).name || ''}
-                  onChange={e => handleInputChange('name', e.target.value)}
-                  className={`w-full pl-12 pr-4 py-4 rounded-xl bg-gradient-to-r from-white/90 to-gray-100/90 border text-black placeholder-black/70 focus:outline-none focus:ring-2 focus:ring-gold/40 focus:border-gold transition-all duration-300 hover:from-gray-200/90 hover:to-gray-300/90 group relative z-10 ${
-                    errors.name
-                      ? 'border-red-500 focus:ring-red-500/40'
-                      : 'border-lavender/30 focus:border-gold'
-                  }`}
-                  aria-label='Ad'
-                  aria-describedby={errors.name ? 'name-error' : undefined}
-                  aria-invalid={!!errors.name}
-                />
-
-                {/* Mystical border animation */}
-                <div
-                  className={`absolute inset-0 rounded-xl border-2 transition-all duration-300 pointer-events-none ${
-                    errors.name ? 'border-red-500/50' : 'border-gold/20'
-                  }`}
-                ></div>
-              </div>
-
-              {errors.name && (
-                <p
-                  id='name-error'
-                  className='text-red-400 text-sm mt-2 flex items-center gap-1'
-                  role='alert'
-                >
-                  <span>⚠️</span>
-                  {errors.name}
-                </p>
-              )}
-            </div>
-
-            {/* Surname Input */}
-            <div className='relative mb-6'>
-              {/* Mystical input container */}
-              <div className='relative'>
-                {/* Input glow effect */}
-                <div className='absolute inset-0 bg-gradient-to-r from-gold/10 via-lavender/10 to-purple-400/10 rounded-xl blur-sm opacity-0 transition-opacity duration-300 group-hover:opacity-100'></div>
-
-                {/* Input icon */}
-                <div className='absolute left-4 top-1/2 transform -translate-y-1/2 text-lavender/60'>
-                  👥
-                </div>
-
-                <input
-                  type='text'
-                  placeholder={t('auth.page.surnamePlaceholder')}
-                  value={(formData as RegisterFormData).surname || ''}
-                  onChange={e => handleInputChange('surname', e.target.value)}
-                  className={`w-full pl-12 pr-4 py-4 rounded-xl bg-gradient-to-r from-white/90 to-gray-100/90 border text-black placeholder-black/70 focus:outline-none focus:ring-2 focus:ring-gold/40 focus:border-gold transition-all duration-300 hover:from-gray-200/90 hover:to-gray-300/90 group relative z-10 ${
-                    errors.surname
-                      ? 'border-red-500 focus:ring-red-500/40'
-                      : 'border-lavender/30 focus:border-gold'
-                  }`}
-                  aria-label='Soyad'
-                  aria-describedby={
-                    errors.surname ? 'surname-error' : undefined
-                  }
-                  aria-invalid={!!errors.surname}
-                />
-
-                {/* Mystical border animation */}
-                <div
-                  className={`absolute inset-0 rounded-xl border-2 transition-all duration-300 pointer-events-none ${
-                    errors.surname ? 'border-red-500/50' : 'border-gold/20'
-                  }`}
-                ></div>
-              </div>
-
-              {errors.surname && (
-                <p
-                  id='surname-error'
-                  className='text-red-400 text-sm mt-2 flex items-center gap-1'
-                  role='alert'
-                >
-                  <span>⚠️</span>
-                  {errors.surname}
-                </p>
-              )}
-            </div>
-
-            {/* Birth Date Input */}
-            <div className='relative mb-6'>
-              {/* Mystical input container */}
-              <div className='relative'>
-                {/* Input glow effect */}
-                <div className='absolute inset-0 bg-gradient-to-r from-gold/10 via-lavender/10 to-purple-400/10 rounded-xl blur-sm opacity-0 transition-opacity duration-300 group-hover:opacity-100'></div>
-
-                {/* Input icon */}
-                <div className='absolute left-4 top-1/2 transform -translate-y-1/2 text-lavender/60'>
-                  🎂
-                </div>
-
-                <input
-                  type='date'
-                  value={(formData as RegisterFormData).birthDate || ''}
-                  onChange={e => handleInputChange('birthDate', e.target.value)}
-                  className={`w-full pl-12 pr-4 py-4 rounded-xl bg-gradient-to-r from-white/90 to-gray-100/90 border text-black focus:outline-none focus:ring-2 focus:ring-gold/40 focus:border-gold transition-all duration-300 hover:from-gray-200/90 hover:to-gray-300/90 group relative z-10 ${
-                    errors.birthDate
-                      ? 'border-red-500 focus:ring-red-500/40'
-                      : 'border-lavender/30 focus:border-gold'
-                  }`}
-                  aria-label='Doğum tarihi'
-                  aria-describedby={
-                    errors.birthDate ? 'birthdate-error' : undefined
-                  }
-                  aria-invalid={!!errors.birthDate}
-                />
-
-                {/* Mystical border animation */}
-                <div
-                  className={`absolute inset-0 rounded-xl border-2 transition-all duration-300 pointer-events-none ${
-                    errors.birthDate ? 'border-red-500/50' : 'border-gold/20'
-                  }`}
-                ></div>
-              </div>
-
-              {errors.birthDate && (
-                <p
-                  id='birthdate-error'
-                  className='text-red-400 text-sm mt-2 flex items-center gap-1'
-                  role='alert'
-                >
-                  <span>⚠️</span>
-                  {errors.birthDate}
-                </p>
-              )}
-            </div>
-
-            {/* Gender Select */}
-            <div className='relative mb-6'>
-              {/* Mystical input container */}
-              <div className='relative'>
-                {/* Input glow effect */}
-                <div className='absolute inset-0 bg-gradient-to-r from-gold/10 via-lavender/10 to-purple-400/10 rounded-xl blur-sm opacity-0 transition-opacity duration-300 group-hover:opacity-100'></div>
-
-                {/* Input icon */}
-                <div className='absolute left-4 top-1/2 transform -translate-y-1/2 text-lavender/60'>
-                  ⚧
-                </div>
-
-                <select
-                  value={(formData as RegisterFormData).gender || ''}
-                  onChange={e =>
-                    handleInputChange(
-                      'gender',
-                      e.target.value as
-                        | 'male'
-                        | 'female'
-                        | 'other'
-                        | 'prefer_not_to_say'
-                    )
-                  }
-                  className={`w-full pl-12 pr-4 py-4 rounded-xl bg-gradient-to-r from-white/90 to-gray-100/90 border text-black focus:outline-none focus:ring-2 focus:ring-gold/40 focus:border-gold transition-all duration-300 hover:from-gray-200/90 hover:to-gray-300/90 group relative z-10 ${
-                    errors.gender
-                      ? 'border-red-500 focus:ring-red-500/40'
-                      : 'border-lavender/30 focus:border-gold'
-                  }`}
-                  aria-label='Cinsiyet'
-                  aria-describedby={errors.gender ? 'gender-error' : undefined}
-                  aria-invalid={!!errors.gender}
-                >
-                  <option value='' className='bg-white text-black'>
-                    {t('auth.page.genderSelect')}
-                  </option>
-                  <option value='male' className='bg-white text-black'>
-                    {t('auth.page.genderMale')}
-                  </option>
-                  <option value='female' className='bg-white text-black'>
-                    {t('auth.page.genderFemale')}
-                  </option>
-                  <option value='other' className='bg-white text-black'>
-                    {t('auth.page.genderOther')}
-                  </option>
-                  <option
-                    value='prefer_not_to_say'
-                    className='bg-white text-black'
-                  >
-                    {t('auth.page.genderPreferNotToSay')}
-                  </option>
-                </select>
-
-                {/* Mystical border animation */}
-                <div
-                  className={`absolute inset-0 rounded-xl border-2 transition-all duration-300 pointer-events-none ${
-                    errors.gender ? 'border-red-500/50' : 'border-gold/20'
-                  }`}
-                ></div>
-              </div>
-
-              {errors.gender && (
-                <p
-                  id='gender-error'
-                  className='text-red-400 text-sm mt-2 flex items-center gap-1'
-                  role='alert'
-                >
-                  <span>⚠️</span>
-                  {errors.gender}
-                </p>
-              )}
-            </div>
-          </>
-        )}
-
-        {/* Password Input */}
-        <div className='relative mb-6'>
-          {/* Mystical input container */}
-          <div className='relative'>
-            {/* Input glow effect */}
-            <div className='absolute inset-0 bg-gradient-to-r from-gold/10 via-lavender/10 to-purple-400/10 rounded-xl blur-sm opacity-0 transition-opacity duration-300 group-hover:opacity-100'></div>
-
-            {/* Input icon */}
-            <div className='absolute left-4 top-1/2 transform -translate-y-1/2 text-lavender/60'>
-              🔒
-            </div>
-
-            <input
-              type='password'
-              placeholder={t('auth.page.passwordPlaceholder')}
-              value={formData.password}
-              onChange={e => handleInputChange('password', e.target.value)}
-              className={`w-full pl-12 pr-4 py-4 rounded-xl bg-gradient-to-r from-white/90 to-gray-100/90 border text-black placeholder-black/70 focus:outline-none focus:ring-2 focus:ring-gold/40 focus:border-gold transition-all duration-300 hover:from-gray-200/90 hover:to-gray-300/90 group relative z-10 ${
-                errors.password
-                  ? 'border-red-500 focus:ring-red-500/40'
-                  : 'border-lavender/30 focus:border-gold'
-              }`}
-              aria-label='Şifre'
-              aria-describedby={errors.password ? 'password-error' : undefined}
-              aria-invalid={!!errors.password}
-            />
-
-            {/* Mystical border animation */}
-            <div
-              className={`absolute inset-0 rounded-xl border-2 transition-all duration-300 pointer-events-none ${
-                errors.password ? 'border-red-500/50' : 'border-gold/20'
-              }`}
-            ></div>
-          </div>
-
-          {errors.password && (
-            <p
-              id='password-error'
-              className='text-red-400 text-sm mt-2 flex items-center gap-1'
-              role='alert'
-            >
-              <span>⚠️</span>
-              {errors.password}
-            </p>
-          )}
-        </div>
-
-        {/* Remember Me & Forgot Password */}
-        {isLogin && (
-          <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4'>
-            <label className='flex items-center gap-3 text-black text-sm cursor-pointer group'>
-              <div className='relative'>
-                <input
-                  type='checkbox'
-                  checked={
-                    isLogin
-                      ? (formData as LoginFormData).rememberMe || false
-                      : false
-                  }
-                  onChange={e => {
-                    if (isLogin) {
-                      handleInputChange('rememberMe', e.target.checked);
-                    }
-                  }}
-                  className='sr-only'
-                  aria-label='Beni hatırla'
-                />
-                <div className='w-5 h-5 bg-white border-2 border-gray-300 rounded-md flex items-center justify-center transition-all duration-200 group-hover:border-blue-400 group-hover:shadow-sm'>
-                  {isLogin && (formData as LoginFormData).rememberMe && (
-                    <svg
-                      className='w-3 h-3 text-blue-600'
-                      fill='currentColor'
-                      viewBox='0 0 20 20'
-                    >
-                      <path
-                        fillRule='evenodd'
-                        d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z'
-                        clipRule='evenodd'
-                      />
-                    </svg>
-                  )}
-                </div>
-              </div>
-              <span className='font-medium text-gray-700 group-hover:text-gray-900 transition-colors duration-200'>
-                {t('auth.page.rememberMe')}
-              </span>
-            </label>
-
-            {/* Şifremi Unuttum Butonu */}
-            <button
-              type='button'
-              onClick={() => setShowPasswordReset(true)}
-              className='bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-3 py-1.5 rounded text-xs font-medium transition-all duration-300 shadow-sm hover:shadow-md transform hover:scale-105 active:scale-95'
-              aria-label={t('auth.page.forgotPassword')}
-            >
-              {t('auth.page.forgotPassword')}
-            </button>
-          </div>
-        )}
-
-        {/* Confirm Password - Registration only */}
-        {!isLogin && (
-          <div className='relative mb-6'>
-            {/* Mystical input container */}
+      <div className='container mx-auto px-4 py-12 min-h-screen flex items-center justify-center'>
+        <div className='w-full max-w-6xl grid lg:grid-cols-2 gap-12 items-center'>
+          {/* Left side: Tarot Altar Illustration */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            className='hidden lg:block relative'
+          >
             <div className='relative'>
-              {/* Input glow effect */}
-              <div className='absolute inset-0 bg-gradient-to-r from-gold/10 via-lavender/10 to-purple-400/10 rounded-xl blur-sm opacity-0 transition-opacity duration-300 group-hover:opacity-100'></div>
+              {/* Mystical scene */}
+              <div className='space-y-8'>
+                {/* Moon and stars header */}
+                <div className='text-center space-y-4'>
+                  <motion.div
+                    animate={{ rotate: [0, 360] }}
+                    transition={{
+                      duration: 120,
+                      repeat: Infinity,
+                      ease: 'linear',
+                    }}
+                    className='inline-block text-7xl'
+                  >
+                    ☽
+                  </motion.div>
+                  <div className='flex justify-center gap-4 text-3xl'>
+                    <motion.span
+                      animate={{ y: [0, -10, 0] }}
+                      transition={{ duration: 3, repeat: Infinity }}
+                    >
+                      ✦
+                    </motion.span>
+                    <motion.span
+                      animate={{ y: [0, -10, 0] }}
+                      transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
+                    >
+                      ✧
+                    </motion.span>
+                    <motion.span
+                      animate={{ y: [0, -10, 0] }}
+                      transition={{ duration: 3, repeat: Infinity, delay: 1 }}
+                    >
+                      ✦
+                    </motion.span>
+                  </div>
+                </div>
 
-              {/* Input icon */}
-              <div className='absolute left-4 top-1/2 transform -translate-y-1/2 text-lavender/60'>
-                🔐
+                {/* Tarot cards spread */}
+                <div className='flex justify-center gap-4'>
+                  {['🃏', '🎴', '🂠'].map((card, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: i * 0.2 }}
+                      whileHover={{ y: -10, scale: 1.05 }}
+                      className='w-24 h-36 bg-gradient-to-br from-amber-900/40 to-orange-950/40 border-2 border-amber-700/40 rounded-lg flex items-center justify-center text-4xl backdrop-blur-sm shadow-2xl shadow-amber-900/20'
+                    >
+                      {card}
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* Numerology symbols */}
+                <div className='flex justify-center gap-6 text-amber-400/60 text-2xl'>
+                  <motion.span
+                    animate={{ opacity: [0.4, 1, 0.4] }}
+                    transition={{ duration: 3, repeat: Infinity }}
+                  >
+                    I
+                  </motion.span>
+                  <motion.span
+                    animate={{ opacity: [0.4, 1, 0.4] }}
+                    transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
+                  >
+                    II
+                  </motion.span>
+                  <motion.span
+                    animate={{ opacity: [0.4, 1, 0.4] }}
+                    transition={{ duration: 3, repeat: Infinity, delay: 1 }}
+                  >
+                    III
+                  </motion.span>
+                  <motion.span
+                    animate={{ opacity: [0.4, 1, 0.4] }}
+                    transition={{ duration: 3, repeat: Infinity, delay: 1.5 }}
+                  >
+                    VII
+                  </motion.span>
+                  <motion.span
+                    animate={{ opacity: [0.4, 1, 0.4] }}
+                    transition={{ duration: 3, repeat: Infinity, delay: 2 }}
+                  >
+                    IX
+                  </motion.span>
+                </div>
+
+                {/* Candle glow effect */}
+                <div className='flex justify-center gap-12'>
+                  <motion.div
+                    animate={{
+                      boxShadow: [
+                        '0 0 20px rgba(251, 191, 36, 0.3)',
+                        '0 0 40px rgba(251, 191, 36, 0.5)',
+                        '0 0 20px rgba(251, 191, 36, 0.3)',
+                      ],
+                    }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                    className='text-4xl'
+                  >
+                    🕯️
+                  </motion.div>
+                  <motion.div
+                    animate={{
+                      boxShadow: [
+                        '0 0 20px rgba(251, 191, 36, 0.3)',
+                        '0 0 40px rgba(251, 191, 36, 0.5)',
+                        '0 0 20px rgba(251, 191, 36, 0.3)',
+                      ],
+                    }}
+                    transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+                    className='text-4xl'
+                  >
+                    🕯️
+                  </motion.div>
+                </div>
+
+                {/* Mystical quote */}
+                <p className='text-center text-amber-200/60 italic text-sm max-w-md mx-auto'>
+                  {t('auth.page.mysticalQuote')}
+                </p>
               </div>
 
-              <input
-                type='password'
-                placeholder={t('auth.page.confirmPasswordPlaceholder')}
-                value={(formData as RegisterFormData).confirmPassword || ''}
-                onChange={e =>
-                  handleInputChange('confirmPassword', e.target.value)
-                }
-                className={`w-full pl-12 pr-4 py-4 rounded-xl bg-gradient-to-r from-white/90 to-gray-100/90 border text-black placeholder-black/70 focus:outline-none focus:ring-2 focus:ring-gold/40 focus:border-gold transition-all duration-300 hover:from-gray-200/90 hover:to-gray-300/90 group relative z-10 ${
-                  errors.confirmPassword
-                    ? 'border-red-500 focus:ring-red-500/40'
-                    : 'border-lavender/30 focus:border-gold'
-                }`}
-                aria-label='Şifre onayı'
-                aria-describedby={
-                  errors.confirmPassword ? 'confirm-password-error' : undefined
-                }
-                aria-invalid={!!errors.confirmPassword}
-              />
-
-              {/* Mystical border animation */}
-              <div
-                className={`absolute inset-0 rounded-xl border-2 transition-all duration-300 pointer-events-none ${
-                  errors.confirmPassword
-                    ? 'border-red-500/50'
-                    : 'border-gold/20'
-                }`}
-              ></div>
+              {/* Decorative corner elements */}
+              <div className='absolute -top-4 -left-4 text-amber-600/30 text-2xl'>
+                ✧
+              </div>
+              <div className='absolute -top-4 -right-4 text-amber-600/30 text-2xl'>
+                ✧
+              </div>
+              <div className='absolute -bottom-4 -left-4 text-amber-600/30 text-2xl'>
+                ✧
+              </div>
+              <div className='absolute -bottom-4 -right-4 text-amber-600/30 text-2xl'>
+                ✧
+              </div>
             </div>
+          </motion.div>
 
-            {errors.confirmPassword && (
-              <p
-                id='confirm-password-error'
-                className='text-red-400 text-sm mt-2 flex items-center gap-1'
-                role='alert'
-              >
-                <span>⚠️</span>
-                {errors.confirmPassword}
-              </p>
-            )}
-          </div>
-        )}
-
-        {/* Mystical Submit Button */}
-        <div className='relative mb-6'>
-          {/* Button glow effect */}
-          <div className='absolute inset-0 bg-gradient-to-r from-gold/20 via-lavender/20 to-purple-400/20 rounded-xl blur-md opacity-0 transition-opacity duration-300 hover:opacity-100'></div>
-
-          <button
-            type='submit'
-            disabled={loading || authLoading || !!rateLimitError}
-            className='relative w-full bg-gradient-to-r from-gold via-yellow-400 to-amber-400 hover:from-gold/90 hover:via-yellow-500 hover:to-amber-500 text-night py-4 rounded-xl font-bold transition-all duration-300 disabled:opacity-50 shadow-lg hover:shadow-xl hover:shadow-gold/30 transform hover:scale-105 active:scale-95 overflow-hidden'
-            aria-label={isLogin ? 'Giriş yap' : 'Kayıt ol'}
+          {/* Right side: Tarot Card Form */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className='relative'
           >
-            {/* Mystical shimmer effect */}
-            <div className='absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 transform translate-x-[-100%] hover:translate-x-[100%] transition-transform duration-1000'></div>
+            {/* Tarot card frame */}
+            <div className='relative'>
+              {/* Shimmer border animation */}
+              <motion.div
+                className='absolute inset-0 rounded-3xl'
+                style={{
+                  background:
+                    'linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.3), transparent)',
+                }}
+                animate={{
+                  x: ['-100%', '200%'],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  repeatDelay: 2,
+                }}
+              />
 
-            {loading ? (
-              <div className='flex items-center justify-center gap-3 relative z-10'>
-                <div className='animate-spin w-5 h-5 border-2 border-night/30 border-t-night rounded-full'></div>
-                <span>{loadingStep || t('auth.page.processing')}</span>
-              </div>
-            ) : (
-              <span className='relative z-10 flex items-center justify-center gap-2'>
-                {isLogin
-                  ? t('auth.page.loginButton')
-                  : t('auth.page.registerButton')}
-              </span>
-            )}
-          </button>
-        </div>
-      </form>
+              {/* Main card */}
+              <div className='relative bg-gradient-to-br from-slate-900/90 to-indigo-950/90 backdrop-blur-xl border-2 border-amber-700/40 rounded-3xl p-8 sm:p-10 shadow-2xl'>
+                {/* Decorative corner ornaments */}
+                <div className='absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-amber-600/50 rounded-tl-lg' />
+                <div className='absolute top-4 right-4 w-8 h-8 border-r-2 border-t-2 border-amber-600/50 rounded-tr-lg' />
+                <div className='absolute bottom-4 left-4 w-8 h-8 border-l-2 border-b-2 border-amber-600/50 rounded-bl-lg' />
+                <div className='absolute bottom-4 right-4 w-8 h-8 border-r-2 border-b-2 border-amber-600/50 rounded-br-lg' />
 
-      {/* Social Login */}
-      <div className='mt-6'>
-        <div className='relative my-8'>
-          {/* Mystical divider */}
-          <div className='absolute inset-0 flex items-center'>
-            <div className='w-full h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent'></div>
-          </div>
+                {/* Mobile illustration banner */}
+                <div className='lg:hidden mb-8 text-center space-y-4'>
+                  <div className='text-5xl'>☽</div>
+                  <div className='flex justify-center gap-3'>
+                    {['🃏', '🎴', '🂠'].map((card, i) => (
+                      <div key={i} className='text-2xl'>
+                        {card}
+                      </div>
+                    ))}
+                  </div>
+                </div>
 
-          {/* Mystical orb in center */}
-          <div className='relative flex justify-center'>
-            <div className='px-6 py-3 bg-gradient-to-r from-slate-800/90 to-purple-900/30 backdrop-blur-sm rounded-full border border-lavender/30 shadow-lg'>
-              <div className='flex items-center gap-3'>
-                <div className='w-2 h-2 bg-gold rounded-full animate-pulse'></div>
-                <span className='text-lavender/90 font-semibold text-sm'>
-                  ✨ veya ✨
-                </span>
-                <div className='w-2 h-2 bg-lavender rounded-full animate-pulse delay-500'></div>
+                {/* Brand header */}
+                <div className='text-center mb-8'>
+                  <div className='flex items-center justify-center gap-3 mb-3'>
+                    <span className='text-3xl'>🔮</span>
+                    <h1
+                      id='auth-title'
+                      className='text-2xl tracking-wider text-amber-50'
+                    >
+                      {t('auth.page.brandName')}
+                    </h1>
+                  </div>
+                  <p
+                    id='auth-description'
+                    className='text-amber-200/70 text-sm'
+                  >
+                    {t('auth.page.welcomeMessage')}
+                  </p>
+                </div>
+
+                {/* Rate Limit Warning */}
+                {rateLimitError && (
+                  <div className='mb-6 p-4 bg-orange-500/20 border border-orange-500/30 rounded-xl'>
+                    <div className='flex items-center gap-3'>
+                      <div className='text-orange-400 text-xl'>⏰</div>
+                      <div className='flex-1'>
+                        <p className='text-orange-300 font-medium'>
+                          {rateLimitError}
+                        </p>
+                        {retryAfter && (
+                          <p className='text-orange-400/80 text-sm mt-1'>
+                            {t('auth.page.retryAfter').replace(
+                              '{seconds}',
+                              retryAfter.toString()
+                            )}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Mode tabs with symbols */}
+                <div className='flex gap-3 mb-8 p-1.5 bg-slate-950/50 rounded-xl border border-amber-900/20'>
+                  <button
+                    onClick={() => setIsLogin(true)}
+                    className={`flex-1 py-2.5 rounded-lg transition-all text-sm flex items-center justify-center gap-2 ${
+                      isLogin
+                        ? 'bg-gradient-to-r from-amber-700 to-orange-700 shadow-lg shadow-amber-900/30 text-white'
+                        : 'text-amber-300/60 hover:text-amber-200'
+                    }`}
+                  >
+                    <Key className='w-4 h-4' />
+                    <span>{t('auth.page.loginButton', 'Giriş Yap')}</span>
+                  </button>
+                  <button
+                    onClick={() => setIsLogin(false)}
+                    className={`flex-1 py-2.5 rounded-lg transition-all text-sm flex items-center justify-center gap-2 ${
+                      !isLogin
+                        ? 'bg-gradient-to-r from-amber-700 to-orange-700 shadow-lg shadow-amber-900/30 text-white'
+                        : 'text-amber-300/60 hover:text-amber-200'
+                    }`}
+                  >
+                    <Star className='w-4 h-4' />
+                    <span>{t('auth.page.registerButton', 'Kayıt Ol')}</span>
+                  </button>
+                </div>
+
+                {/* Form */}
+                <form onSubmit={handleSubmit} className='space-y-5'>
+                  {/* Registration Fields - Name, Surname (Ad, Soyad) */}
+                  {!isLogin && (
+                    <>
+                      {/* Name Input */}
+                      <AnimatePresence mode='wait'>
+                        <motion.div
+                          key='name-field'
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                        >
+                          <label className='block text-sm text-amber-200/80 mb-2'>
+                            {t('auth.page.firstName', 'Ad')}
+                          </label>
+                          <div className='relative'>
+                            <User className='absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-amber-600/60' />
+                            <input
+                              type='text'
+                              value={(formData as RegisterFormData).name || ''}
+                              onChange={e =>
+                                handleInputChange('name', e.target.value)
+                              }
+                              placeholder={t('auth.page.firstName', 'Ad')}
+                              className={`w-full pl-11 pr-4 py-3 bg-slate-950/50 border rounded-xl focus:border-amber-600/60 focus:outline-none focus:ring-2 focus:ring-amber-900/20 transition-all placeholder:text-slate-500 text-amber-50 ${
+                                errors.name
+                                  ? 'border-red-500/50'
+                                  : 'border-amber-900/30'
+                              }`}
+                              aria-label={t('auth.page.firstName', 'Ad')}
+                              aria-describedby={
+                                errors.name ? 'name-error' : undefined
+                              }
+                              aria-invalid={!!errors.name}
+                            />
+                          </div>
+                          {errors.name && (
+                            <p
+                              className='text-red-400 text-xs mt-1'
+                              id='name-error'
+                              role='alert'
+                            >
+                              {errors.name}
+                            </p>
+                          )}
+                        </motion.div>
+                      </AnimatePresence>
+
+                      {/* Surname Input */}
+                      <AnimatePresence mode='wait'>
+                        <motion.div
+                          key='surname-field'
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                        >
+                          <label className='block text-sm text-amber-200/80 mb-2'>
+                            {t('auth.page.lastName', 'Soyad')}
+                          </label>
+                          <div className='relative'>
+                            <User className='absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-amber-600/60' />
+                            <input
+                              type='text'
+                              value={
+                                (formData as RegisterFormData).surname || ''
+                              }
+                              onChange={e =>
+                                handleInputChange('surname', e.target.value)
+                              }
+                              placeholder={t('auth.page.lastName', 'Soyad')}
+                              className={`w-full pl-11 pr-4 py-3 bg-slate-950/50 border rounded-xl focus:border-amber-600/60 focus:outline-none focus:ring-2 focus:ring-amber-900/20 transition-all placeholder:text-slate-500 text-amber-50 ${
+                                errors.surname
+                                  ? 'border-red-500/50'
+                                  : 'border-amber-900/30'
+                              }`}
+                              aria-label={t('auth.page.lastName', 'Soyad')}
+                              aria-describedby={
+                                errors.surname ? 'surname-error' : undefined
+                              }
+                              aria-invalid={!!errors.surname}
+                            />
+                          </div>
+                          {errors.surname && (
+                            <p
+                              className='text-red-400 text-xs mt-1'
+                              id='surname-error'
+                              role='alert'
+                            >
+                              {errors.surname}
+                            </p>
+                          )}
+                        </motion.div>
+                      </AnimatePresence>
+                    </>
+                  )}
+
+                  {/* Email */}
+                  <div>
+                    <label className='block text-sm text-amber-200/80 mb-2'>
+                      {t('auth.page.email', 'E-posta')}
+                    </label>
+                    <div className='relative'>
+                      <Mail className='absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-amber-600/60' />
+                      <input
+                        type='email'
+                        value={formData.email}
+                        onChange={e =>
+                          handleInputChange('email', e.target.value)
+                        }
+                        placeholder={t('auth.page.emailPlaceholder')}
+                        className={`w-full pl-11 pr-4 py-3 bg-slate-950/50 border rounded-xl focus:border-amber-600/60 focus:outline-none focus:ring-2 focus:ring-amber-900/20 transition-all placeholder:text-slate-500 text-amber-50 ${
+                          errors.email
+                            ? 'border-red-500/50'
+                            : 'border-amber-900/30'
+                        }`}
+                        aria-label={t('auth.page.email', 'E-posta')}
+                        aria-describedby={
+                          errors.email ? 'email-error' : undefined
+                        }
+                        aria-invalid={!!errors.email}
+                      />
+                    </div>
+                    {errors.email && (
+                      <p
+                        className='text-red-400 text-xs mt-1'
+                        id='email-error'
+                        role='alert'
+                      >
+                        {errors.email}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Registration Fields - Birth Date, Gender */}
+                  {!isLogin && (
+                    <>
+                      {/* Birth Date Input */}
+                      <AnimatePresence mode='wait'>
+                        <motion.div
+                          key='birthdate-field'
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                        >
+                          <label className='block text-sm text-amber-200/80 mb-2'>
+                            {t('auth.page.birthDate', 'Doğum Tarihi')}
+                          </label>
+                          <div className='relative'>
+                            <input
+                              type='date'
+                              value={
+                                (formData as RegisterFormData).birthDate || ''
+                              }
+                              onChange={e =>
+                                handleInputChange('birthDate', e.target.value)
+                              }
+                              className={`w-full pl-4 pr-4 py-3 bg-slate-950/50 border rounded-xl focus:border-amber-600/60 focus:outline-none focus:ring-2 focus:ring-amber-900/20 transition-all text-amber-50 ${
+                                errors.birthDate
+                                  ? 'border-red-500/50'
+                                  : 'border-amber-900/30'
+                              }`}
+                              aria-label={t(
+                                'auth.page.birthDate',
+                                'Doğum Tarihi'
+                              )}
+                              aria-describedby={
+                                errors.birthDate ? 'birthdate-error' : undefined
+                              }
+                              aria-invalid={!!errors.birthDate}
+                            />
+                          </div>
+                          {errors.birthDate && (
+                            <p
+                              className='text-red-400 text-xs mt-1'
+                              id='birthdate-error'
+                              role='alert'
+                            >
+                              {errors.birthDate}
+                            </p>
+                          )}
+                        </motion.div>
+                      </AnimatePresence>
+
+                      {/* Gender Select */}
+                      <AnimatePresence mode='wait'>
+                        <motion.div
+                          key='gender-field'
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                        >
+                          <label className='block text-sm text-amber-200/80 mb-2'>
+                            {t('auth.page.gender', 'Cinsiyet')}
+                          </label>
+                          <div className='relative'>
+                            <select
+                              value={
+                                (formData as RegisterFormData).gender || ''
+                              }
+                              onChange={e =>
+                                handleInputChange(
+                                  'gender',
+                                  e.target.value as
+                                    | 'male'
+                                    | 'female'
+                                    | 'other'
+                                    | 'prefer_not_to_say'
+                                )
+                              }
+                              className={`w-full pl-4 pr-4 py-3 bg-slate-950/50 border rounded-xl focus:border-amber-600/60 focus:outline-none focus:ring-2 focus:ring-amber-900/20 transition-all text-amber-50 ${
+                                errors.gender
+                                  ? 'border-red-500/50'
+                                  : 'border-amber-900/30'
+                              }`}
+                              aria-label={t('auth.page.gender', 'Cinsiyet')}
+                              aria-describedby={
+                                errors.gender ? 'gender-error' : undefined
+                              }
+                              aria-invalid={!!errors.gender}
+                            >
+                              <option
+                                value=''
+                                className='bg-slate-950 text-amber-50'
+                              >
+                                {t('auth.page.gender', 'Cinsiyet')}
+                              </option>
+                              <option
+                                value='male'
+                                className='bg-slate-950 text-amber-50'
+                              >
+                                {t('auth.page.genderMale', 'Erkek')}
+                              </option>
+                              <option
+                                value='female'
+                                className='bg-slate-950 text-amber-50'
+                              >
+                                {t('auth.page.genderFemale', 'Kadın')}
+                              </option>
+                              <option
+                                value='other'
+                                className='bg-slate-950 text-amber-50'
+                              >
+                                {t('auth.page.genderOther', 'Diğer')}
+                              </option>
+                              <option
+                                value='prefer_not_to_say'
+                                className='bg-slate-950 text-amber-50'
+                              >
+                                {t(
+                                  'auth.page.genderPreferNotToSay',
+                                  'Belirtmek istemiyorum'
+                                )}
+                              </option>
+                            </select>
+                          </div>
+                          {errors.gender && (
+                            <p
+                              className='text-red-400 text-xs mt-1'
+                              id='gender-error'
+                              role='alert'
+                            >
+                              {errors.gender}
+                            </p>
+                          )}
+                        </motion.div>
+                      </AnimatePresence>
+                    </>
+                  )}
+
+                  {/* Password */}
+                  <div>
+                    <label className='block text-sm text-amber-200/80 mb-2'>
+                      {t('auth.page.password', 'Şifre')}
+                    </label>
+                    <div className='relative'>
+                      <Lock className='absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-amber-600/60' />
+                      <input
+                        type={showPassword ? 'text' : 'password'}
+                        value={formData.password}
+                        onChange={e =>
+                          handleInputChange('password', e.target.value)
+                        }
+                        placeholder={t(
+                          'auth.page.passwordPlaceholder',
+                          'Şifreniz'
+                        )}
+                        className={`w-full pl-11 pr-11 py-3 bg-slate-950/50 border rounded-xl focus:border-amber-600/60 focus:outline-none focus:ring-2 focus:ring-amber-900/20 transition-all placeholder:text-slate-500 text-amber-50 ${
+                          errors.password
+                            ? 'border-red-500/50'
+                            : 'border-amber-900/30'
+                        }`}
+                        aria-label={t('auth.page.password', 'Şifre')}
+                        aria-describedby={
+                          errors.password ? 'password-error' : undefined
+                        }
+                        aria-invalid={!!errors.password}
+                      />
+                      <button
+                        type='button'
+                        onClick={() => setShowPassword(!showPassword)}
+                        className='absolute right-3 top-1/2 -translate-y-1/2 text-amber-600/60 hover:text-amber-500'
+                        aria-label={
+                          showPassword
+                            ? t('auth.page.hidePassword', 'Şifreyi gizle')
+                            : t('auth.page.showPassword', 'Şifreyi göster')
+                        }
+                      >
+                        {showPassword ? (
+                          <EyeOff className='w-5 h-5' />
+                        ) : (
+                          <Eye className='w-5 h-5' />
+                        )}
+                      </button>
+                    </div>
+                    {errors.password && (
+                      <p
+                        className='text-red-400 text-xs mt-1'
+                        id='password-error'
+                        role='alert'
+                      >
+                        {errors.password}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Confirm Password */}
+                  <AnimatePresence mode='wait'>
+                    {!isLogin && (
+                      <motion.div
+                        key='confirm-password'
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                      >
+                        <label className='block text-sm text-amber-200/80 mb-2'>
+                          {t('auth.page.confirmPassword', 'Şifre Onayı')}
+                        </label>
+                        <div className='relative'>
+                          <Lock className='absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-amber-600/60' />
+                          <input
+                            type={showConfirmPassword ? 'text' : 'password'}
+                            value={
+                              (formData as RegisterFormData).confirmPassword ||
+                              ''
+                            }
+                            onChange={e =>
+                              handleInputChange(
+                                'confirmPassword',
+                                e.target.value
+                              )
+                            }
+                            placeholder={t(
+                              'auth.page.confirmPasswordPlaceholder'
+                            )}
+                            className={`w-full pl-11 pr-11 py-3 bg-slate-950/50 border rounded-xl focus:border-amber-600/60 focus:outline-none focus:ring-2 focus:ring-amber-900/20 transition-all placeholder:text-slate-500 text-amber-50 ${
+                              errors.confirmPassword
+                                ? 'border-red-500/50'
+                                : 'border-amber-900/30'
+                            }`}
+                            aria-label={t(
+                              'auth.page.confirmPassword',
+                              'Şifre Onayı'
+                            )}
+                            aria-describedby={
+                              errors.confirmPassword
+                                ? 'confirm-password-error'
+                                : undefined
+                            }
+                            aria-invalid={!!errors.confirmPassword}
+                          />
+                          <button
+                            type='button'
+                            onClick={() =>
+                              setShowConfirmPassword(!showConfirmPassword)
+                            }
+                            className='absolute right-3 top-1/2 -translate-y-1/2 text-amber-600/60 hover:text-amber-500'
+                            aria-label={
+                              showConfirmPassword
+                                ? t('auth.page.hidePassword', 'Şifreyi gizle')
+                                : t('auth.page.showPassword', 'Şifreyi göster')
+                            }
+                          >
+                            {showConfirmPassword ? (
+                              <EyeOff className='w-5 h-5' />
+                            ) : (
+                              <Eye className='w-5 h-5' />
+                            )}
+                          </button>
+                        </div>
+                        {errors.confirmPassword && (
+                          <p
+                            className='text-red-400 text-xs mt-1'
+                            id='confirm-password-error'
+                            role='alert'
+                          >
+                            {errors.confirmPassword}
+                          </p>
+                        )}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  {/* Remember Me & Forgot Password */}
+                  {isLogin && (
+                    <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3'>
+                      <label className='flex items-center gap-3 text-amber-200/80 text-sm cursor-pointer'>
+                        <input
+                          type='checkbox'
+                          checked={
+                            (formData as LoginFormData).rememberMe || false
+                          }
+                          onChange={e =>
+                            handleInputChange('rememberMe', e.target.checked)
+                          }
+                          className='w-4 h-4 rounded border-amber-900/30 bg-slate-950/50 text-amber-600 focus:ring-amber-600/60'
+                        />
+                        <span>{t('auth.page.rememberMe')}</span>
+                      </label>
+                      <button
+                        type='button'
+                        onClick={() => setShowPasswordReset(true)}
+                        className='text-sm text-amber-400 hover:text-amber-300 transition-colors'
+                      >
+                        {t('auth.page.forgotPassword')}
+                      </button>
+                    </div>
+                  )}
+
+                  {/* Submit Button */}
+                  <motion.button
+                    type='submit'
+                    disabled={loading || authLoading || !!rateLimitError}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className='w-full py-3.5 rounded-xl bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 transition-all shadow-lg shadow-amber-900/40 hover:shadow-amber-900/60 relative overflow-hidden group disabled:opacity-50 disabled:cursor-not-allowed'
+                  >
+                    {loading ? (
+                      <div className='flex items-center justify-center gap-3 relative z-10'>
+                        <div className='animate-spin w-5 h-5 border-2 border-white/30 border-t-white rounded-full'></div>
+                        <span>
+                          {loadingStep ||
+                            t('auth.page.processing', 'İşleniyor...')}
+                        </span>
+                      </div>
+                    ) : (
+                      <span className='relative z-10 text-white'>
+                        {isLogin
+                          ? t('auth.page.loginButton', 'Giriş Yap')
+                          : t('auth.page.registerButton', 'Kayıt Ol')}
+                      </span>
+                    )}
+                    <motion.div
+                      className='absolute inset-0 bg-gradient-to-r from-amber-400/30 to-orange-400/30'
+                      initial={{ x: '-100%' }}
+                      whileHover={{ x: '100%' }}
+                      transition={{ duration: 0.6 }}
+                    />
+                  </motion.button>
+
+                  {/* Social Login - Google */}
+                  <div className='mt-6'>
+                    <div className='relative my-6'>
+                      {/* Divider */}
+                      <div className='absolute inset-0 flex items-center'>
+                        <div className='w-full h-px bg-gradient-to-r from-transparent via-amber-900/30 to-transparent'></div>
+                      </div>
+                      {/* Center text */}
+                      <div className='relative flex justify-center'>
+                        <div className='px-4 py-2 bg-slate-950/50 backdrop-blur-sm rounded-full border border-amber-900/20'>
+                          <span className='text-amber-300/70 text-xs'>
+                            {t('auth.page.or')}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <button
+                      type='button'
+                      onClick={handleGoogleLogin}
+                      disabled={loading || authLoading}
+                      className='w-full py-3.5 rounded-xl bg-white/10 backdrop-blur-md border border-amber-900/30 text-amber-200 hover:bg-white/20 transition-all shadow-lg hover:shadow-amber-900/30 disabled:opacity-50 flex items-center justify-center gap-3'
+                    >
+                      <svg
+                        className='w-5 h-5'
+                        viewBox='0 0 24 24'
+                        fill='currentColor'
+                      >
+                        <path d='M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z' />
+                        <path d='M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z' />
+                        <path d='M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z' />
+                        <path d='M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z' />
+                      </svg>
+                      <span>
+                        {isLogin
+                          ? t('auth.page.googleLogin', 'Google ile Giriş Yap')
+                          : t(
+                              'auth.page.googleRegister',
+                              'Google ile Kayıt Ol'
+                            )}
+                      </span>
+                    </button>
+
+                    {/* Facebook Login Button */}
+                    <button
+                      type='button'
+                      onClick={handleFacebookLogin}
+                      disabled={loading || authLoading}
+                      className='w-full py-3.5 rounded-xl bg-[#1877F2]/10 backdrop-blur-md border border-[#1877F2]/30 text-amber-200 hover:bg-[#1877F2]/20 transition-all shadow-lg hover:shadow-[#1877F2]/30 disabled:opacity-50 flex items-center justify-center gap-3 mt-3'
+                    >
+                      <svg
+                        className='w-5 h-5'
+                        viewBox='0 0 24 24'
+                        fill='#1877F2'
+                      >
+                        <path d='M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z' />
+                      </svg>
+                      <span>
+                        {isLogin
+                          ? t(
+                              'auth.page.facebookLogin',
+                              'Facebook ile Giriş Yap'
+                            )
+                          : t(
+                              'auth.page.facebookRegister',
+                              'Facebook ile Kayıt Ol'
+                            )}
+                      </span>
+                    </button>
+                  </div>
+
+                  {/* Switch mode */}
+                  <div className='text-center text-sm mt-6'>
+                    {isLogin ? (
+                      <p className='text-amber-300/70'>
+                        {t('auth.page.newHere')}{' '}
+                        <button
+                          type='button'
+                          onClick={() => setIsLogin(false)}
+                          className='text-amber-400 hover:text-amber-300 transition-colors'
+                        >
+                          {t('auth.page.switchToRegister')}
+                        </button>
+                      </p>
+                    ) : (
+                      <p className='text-amber-300/70'>
+                        {(() => {
+                          const switchText = t('auth.page.switchToLogin');
+                          // "Zaten hesabınız var mı? Giriş yapın" formatını parse et
+                          if (switchText.includes('?')) {
+                            const parts = switchText.split('?');
+                            const question = (parts[0] || '').trim();
+                            const action = (
+                              parts[1] || t('auth.page.loginButton')
+                            ).trim();
+                            return (
+                              <>
+                                {question}?{' '}
+                                <button
+                                  type='button'
+                                  onClick={() => setIsLogin(true)}
+                                  className='text-amber-400 hover:text-amber-300 transition-colors'
+                                >
+                                  {action}
+                                </button>
+                              </>
+                            );
+                          }
+                          // Fallback: Eğer "?" yoksa, direkt metni göster ve buton ekle
+                          return (
+                            <>
+                              {switchText}{' '}
+                              <button
+                                type='button'
+                                onClick={() => setIsLogin(true)}
+                                className='text-amber-400 hover:text-amber-300 transition-colors'
+                              >
+                                {t('auth.page.loginButton')}
+                              </button>
+                            </>
+                          );
+                        })()}
+                      </p>
+                    )}
+                  </div>
+                </form>
+
+                {/* Sacred privacy note */}
+                <div className='mt-8 pt-6 border-t border-amber-900/30'>
+                  <div className='flex items-start gap-3 text-xs text-amber-300/60'>
+                    <Shield className='w-4 h-4 text-amber-600/60 mt-0.5 flex-shrink-0' />
+                    <p>{t('auth.page.privacyNote')}</p>
+                  </div>
+                </div>
+
+                {/* Message Display */}
+                {message && !showResendEmail && (
+                  <div
+                    className={`mt-6 p-4 rounded-lg text-center ${
+                      message.includes('başarılı') ||
+                      message.includes('gönderildi') ||
+                      message.includes('success')
+                        ? 'bg-green-500/20 text-green-300'
+                        : 'bg-red-500/20 text-red-300'
+                    }`}
+                    role='alert'
+                  >
+                    {message}
+                  </div>
+                )}
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
-
-        <div className='mt-6'>
-          <button
-            type='button'
-            onClick={handleGoogleLogin}
-            disabled={loading || authLoading}
-            className='w-full inline-flex justify-center py-4 px-4 border border-lavender/30 rounded-xl shadow-sm bg-gradient-to-r from-white/90 to-gray-100/90 text-sm font-semibold text-lavender hover:from-gray-200/90 hover:to-gray-300/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold disabled:opacity-50 transition-all duration-300 hover:shadow-lg transform hover:scale-105 active:scale-95 relative overflow-hidden'
-            aria-label={`Google ile ${isLogin ? 'giriş yap' : 'kayıt ol'}`}
-          >
-            <svg
-              className='w-5 h-5 mr-2'
-              viewBox='0 0 24 24'
-              aria-hidden='true'
-            >
-              <path
-                fill='currentColor'
-                d='M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z'
-              />
-              <path
-                fill='currentColor'
-                d='M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z'
-              />
-              <path
-                fill='currentColor'
-                d='M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z'
-              />
-              <path
-                fill='currentColor'
-                d='M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z'
-              />
-            </svg>
-            {isLogin
-              ? t('auth.page.googleLogin')
-              : t('auth.page.googleRegister')}
-          </button>
-        </div>
-
-        {/* Facebook Login - Gizli (onay bekleniyor) */}
-        {ENABLE_FACEBOOK_LOGIN && (
-          <div className='mt-4'>
-            <button
-              type='button'
-              onClick={handleFacebookLogin}
-              disabled={loading || authLoading}
-              className='w-full inline-flex justify-center py-4 px-4 border border-lavender/30 rounded-xl shadow-sm bg-gradient-to-r from-white/90 to-gray-100/90 text-sm font-semibold text-lavender hover:from-gray-200/90 hover:to-gray-300/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold disabled:opacity-50 transition-all duration-300 hover:shadow-lg transform hover:scale-105 active:scale-95 relative overflow-hidden'
-              aria-label={`Facebook ile ${isLogin ? 'giriş yap' : 'kayıt ol'}`}
-            >
-              <svg
-                className='w-5 h-5 mr-2'
-                viewBox='0 0 24 24'
-                fill='currentColor'
-                aria-hidden='true'
-              >
-                <path d='M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z' />
-              </svg>
-              {isLogin
-                ? t('auth.page.facebookLogin')
-                : t('auth.page.facebookRegister')}
-            </button>
-          </div>
-        )}
       </div>
 
       {/* Password Reset Modal */}
       {showPasswordReset && (
         <div
           className='fixed top-0 left-0 w-full h-full bg-black/70 z-[99999] flex items-center justify-center p-4'
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100vw',
-            height: '100vh',
-            zIndex: 99999,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
           onClick={e => {
             if (e.target === e.currentTarget) {
               setShowPasswordReset(false);
@@ -1046,22 +1443,12 @@ function AuthForm({ locale, initialError, next }: AuthFormProps) {
             }
           }}
         >
-          <div
-            className='bg-white text-black p-6 rounded-xl max-w-md w-full shadow-2xl'
-            style={{
-              backgroundColor: 'white',
-              color: 'black',
-              padding: '24px',
-              borderRadius: '12px',
-              maxWidth: '400px',
-              width: '100%',
-            }}
-          >
+          <div className='bg-gradient-to-br from-slate-900/95 to-indigo-950/95 backdrop-blur-xl border-2 border-amber-700/40 rounded-3xl p-6 max-w-md w-full shadow-2xl text-white'>
             <div className='text-center mb-6'>
-              <h2 className='text-xl font-semibold text-gray-800 mb-2'>
+              <h2 className='text-xl font-semibold text-amber-50 mb-2'>
                 {t('auth.page.passwordResetTitle')}
               </h2>
-              <p className='text-gray-600 text-sm'>
+              <p className='text-amber-200/70 text-sm'>
                 {t('auth.page.passwordResetDescription')}
               </p>
             </div>
@@ -1073,16 +1460,12 @@ function AuthForm({ locale, initialError, next }: AuthFormProps) {
                   name='resetEmail'
                   placeholder={t('auth.page.emailPlaceholder')}
                   defaultValue={formData.email || ''}
-                  className='w-full p-3 rounded-lg border border-gray-300 text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gold/40 focus:border-gold transition-all duration-300'
-                  aria-label='Şifre sıfırlama e-posta adresi'
+                  className='w-full p-3 rounded-xl border border-amber-900/30 bg-slate-950/50 text-amber-50 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-900/20 focus:border-amber-600/60 transition-all'
+                  aria-label={t('auth.page.emailLabel', 'Email')}
                   required
                 />
                 {errors.email && (
-                  <p
-                    className='text-red-500 text-sm mt-1 flex items-center gap-1'
-                    role='alert'
-                  >
-                    <span>⚠️</span>
+                  <p className='text-red-400 text-sm mt-1' role='alert'>
                     {errors.email}
                   </p>
                 )}
@@ -1092,8 +1475,7 @@ function AuthForm({ locale, initialError, next }: AuthFormProps) {
                 <button
                   type='submit'
                   disabled={loading}
-                  className='flex-1 bg-gradient-to-r from-gold to-amber-400 hover:from-gold/90 hover:to-amber-500 text-white py-3 rounded-lg font-semibold transition-all duration-300 disabled:opacity-50 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95'
-                  aria-label='Şifre sıfırlama e-postası gönder'
+                  className='flex-1 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white py-3 rounded-xl font-semibold transition-all disabled:opacity-50 shadow-lg hover:shadow-amber-900/40'
                 >
                   {loading ? (
                     <div className='flex items-center justify-center gap-2'>
@@ -1112,8 +1494,7 @@ function AuthForm({ locale, initialError, next }: AuthFormProps) {
                     setErrors({});
                     setMessage('');
                   }}
-                  className='px-4 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-semibold transition-all duration-300 shadow hover:shadow-md transform hover:scale-105 active:scale-95'
-                  aria-label={t('auth.page.cancel')}
+                  className='px-4 py-3 bg-slate-800/50 hover:bg-slate-700/50 text-amber-200 rounded-xl font-semibold transition-all border border-amber-900/30'
                 >
                   {t('auth.page.cancel')}
                 </button>
@@ -1123,35 +1504,10 @@ function AuthForm({ locale, initialError, next }: AuthFormProps) {
         </div>
       )}
 
-      {/* Message Display */}
-      {message && !showResendEmail && (
-        <div
-          className={`p-4 rounded-lg text-center ${
-            message.includes('başarılı') || message.includes('gönderildi')
-              ? 'bg-green-500/20 text-green-300'
-              : 'bg-red-500/20 text-red-300'
-          }`}
-          role='alert'
-        >
-          {message}
-        </div>
-      )}
-
       {/* Resend Email Modal */}
       {showResendEmail && (
         <div
           className='fixed top-0 left-0 w-full h-full bg-black/70 z-[99999] flex items-center justify-center p-4'
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100vw',
-            height: '100vh',
-            zIndex: 99999,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
           onClick={e => {
             if (e.target === e.currentTarget) {
               setShowResendEmail(false);
@@ -1160,27 +1516,16 @@ function AuthForm({ locale, initialError, next }: AuthFormProps) {
             }
           }}
         >
-          <div
-            className='bg-white text-black p-6 rounded-xl max-w-md w-full shadow-2xl'
-            style={{
-              backgroundColor: 'white',
-              color: 'black',
-              padding: '24px',
-              borderRadius: '12px',
-              maxWidth: '448px',
-              width: '100%',
-              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
-            }}
-          >
+          <div className='bg-gradient-to-br from-slate-900/95 to-indigo-950/95 backdrop-blur-xl border-2 border-amber-700/40 rounded-3xl p-6 max-w-md w-full shadow-2xl text-white'>
             <div className='mb-6'>
-              <h3 className='text-xl font-bold text-gray-900 mb-2'>
+              <h3 className='text-xl font-bold text-amber-50 mb-2'>
                 {t('auth.page.emailConfirmationTitle')}
               </h3>
-              <p className='text-gray-600 text-sm'>
+              <p className='text-amber-200/70 text-sm'>
                 {t('auth.page.emailConfirmationRequired')}
               </p>
-              <p className='text-gray-500 text-xs mt-2'>
-                E-posta: {pendingEmail}
+              <p className='text-amber-300/60 text-xs mt-2'>
+                {t('auth.page.emailLabel', 'Email')}: {pendingEmail}
               </p>
             </div>
 
@@ -1191,8 +1536,7 @@ function AuthForm({ locale, initialError, next }: AuthFormProps) {
                   handleResendEmail();
                 }}
                 disabled={loading}
-                className='flex-1 px-4 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 disabled:from-blue-400 disabled:to-blue-500 text-white rounded-lg font-semibold transition-all duration-300 shadow hover:shadow-md transform hover:scale-105 active:scale-95'
-                aria-label={t('auth.page.resendEmail')}
+                className='flex-1 px-4 py-3 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 disabled:opacity-50 text-white rounded-xl font-semibold transition-all shadow-lg hover:shadow-amber-900/40'
               >
                 {loading && loadingStep.includes(t('auth.page.sendingEmail'))
                   ? loadingStep
@@ -1206,8 +1550,7 @@ function AuthForm({ locale, initialError, next }: AuthFormProps) {
                   setPendingEmail('');
                   setMessage('');
                 }}
-                className='px-4 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-semibold transition-all duration-300 shadow hover:shadow-md transform hover:scale-105 active:scale-95'
-                aria-label={t('auth.page.cancel')}
+                className='px-4 py-3 bg-slate-800/50 hover:bg-slate-700/50 text-amber-200 rounded-xl font-semibold transition-all border border-amber-900/30'
               >
                 {t('auth.page.cancel')}
               </button>
@@ -1216,36 +1559,11 @@ function AuthForm({ locale, initialError, next }: AuthFormProps) {
         </div>
       )}
 
-      {/* Mystical Mode Toggle */}
-      <div className='text-center mt-8'>
-        <div className='relative'>
-          {/* Mystical glow effect */}
-          <div className='absolute inset-0 bg-gradient-to-r from-gold/5 via-lavender/5 to-purple-400/5 rounded-xl blur-sm opacity-0 transition-opacity duration-300 hover:opacity-100'></div>
-
-          <button
-            type='button'
-            onClick={toggleMode}
-            className='relative text-lavender hover:text-gold transition-all duration-300 text-sm font-semibold px-6 py-3 rounded-xl hover:bg-gradient-to-r hover:from-lavender/10 hover:to-purple-400/10 hover:shadow-lg transform hover:scale-105 border border-lavender/20 hover:border-gold/30'
-            aria-label={
-              isLogin
-                ? t('auth.page.switchToRegister')
-                : t('auth.page.switchToLogin')
-            }
-          >
-            <span className='flex items-center gap-2'>
-              {isLogin
-                ? t('auth.page.switchToRegister')
-                : t('auth.page.switchToLogin')}
-            </span>
-          </button>
-        </div>
-      </div>
-
       {/* Toast Notification */}
       {toast && (
         <Toast message={toast.message} type={toast.type} onClose={hideToast} />
       )}
-    </>
+    </div>
   );
 }
 

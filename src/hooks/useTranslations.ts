@@ -108,12 +108,13 @@ export function useTranslations() {
 
         return result;
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error('Translation error:', error);
         return typeof variables === 'string' ? variables : key;
       }
     },
-    [currentLocale, currentMessages]
+    [currentLocale, currentMessages, fallbackMessages]
   );
 
-  return { t };
+  return { t, locale: currentLocale }; // locale'i de döndür
 }

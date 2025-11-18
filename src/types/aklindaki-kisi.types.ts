@@ -43,6 +43,7 @@ export interface AllCard {
 // API Request/Response Types
 export interface DrawCardRequest {
   token: string;
+  timezone?: string;
 }
 
 export interface DrawCardResponse {

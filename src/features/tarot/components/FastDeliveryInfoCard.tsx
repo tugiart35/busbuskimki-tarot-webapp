@@ -272,30 +272,84 @@ export default function FastDeliveryInfoCard({
 
   const texts = content[locale];
 
+  // Mobilde çalışma saatlerini kısalt (sadece saat aralığı)
+  const workHoursShort = `${workHours.start.split(':')[0]}-${workHours.end.split(':')[0]}`;
+  const workHoursFull = texts.workHoursText(workHours.start, workHours.end);
+
+  // Mobilde zaman kalan kısmını kısalt
+  const getShortTimeRemaining = (time: string) => {
+    // "2 saat 34 dakika" -> "2h 34m" veya "34 dakika" -> "34m"
+    if (locale === 'tr') {
+      return time
+        .replace(/\s*saat\s*/g, 's ')
+        .replace(/\s*dakika\s*/g, 'd')
+        .replace(/\s*kaldı\s*/g, '');
+    } else if (locale === 'en') {
+      return time.replace(/\s*remaining\s*/g, '');
+    } else {
+      return time.replace(/\s*preostalo\s*/g, '');
+    }
+  };
+
   return (
     <div
       className={`transition-all duration-500 ease-out ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
       } ${className}`}
     >
-      <div className='inline-flex items-center gap-2 px-3 py-2 bg-purple-900/30 backdrop-blur-sm border border-purple-500/30 rounded-lg text-xs'>
-        <Zap className='w-3.5 h-3.5 text-yellow-400' />
-        <span className='text-gray-300'>
-          <span className='font-semibold text-yellow-300'>
+      <div className='inline-flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-1 sm:py-2.5 rounded-lg sm:rounded-xl backdrop-blur-md bg-indigo-950/40 border border-white/10 shadow-lg max-w-full'>
+        {/* Sarı şimşek ikonu */}
+        <Zap className='w-3 h-3 sm:w-4 sm:h-4 text-yellow-400 flex-shrink-0' />
+
+        <span className='text-[10px] sm:text-sm text-gray-300 flex items-center gap-1 sm:gap-2 flex-nowrap min-w-0'>
+          {/* 2-4 saat içinde hazır - Sarı renkte */}
+          <span className='font-medium text-yellow-300 whitespace-nowrap flex-shrink-0'>
             {texts.deliveryTimeHighlight}
           </span>
-          {' • '}
+
+          {/* Nokta ayırıcı */}
+          <span className='text-gray-500 flex-shrink-0 hidden sm:inline'>
+            •
+          </span>
+          <span className='text-gray-500 flex-shrink-0 text-[8px] sm:hidden'>
+            •
+          </span>
+
+          {/* Şu Anda Aktif - Açık teal renkte, yarı saydam arka plan ile */}
           {isActive ? (
-            <span className='text-green-300'>
-              {texts.currentlyActive}
-              {timeUntilClose && ` ${texts.timeRemaining(timeUntilClose)}`}
+            <span className='inline-flex items-center gap-0.5 sm:gap-1.5 flex-nowrap flex-shrink-0'>
+              <span className='px-1 sm:px-2 py-0.5 rounded-md bg-cyan-500/20 text-cyan-300 font-medium whitespace-nowrap text-[10px] sm:text-sm'>
+                {texts.currentlyActive}
+              </span>
+              {timeUntilClose && (
+                <span className='text-cyan-300 whitespace-nowrap text-[10px] sm:text-sm flex-shrink-0'>
+                  <span className='hidden sm:inline'>
+                    {texts.timeRemaining(timeUntilClose)}
+                  </span>
+                  <span className='sm:hidden'>
+                    ({getShortTimeRemaining(timeUntilClose)})
+                  </span>
+                </span>
+              )}
             </span>
           ) : (
-            <span className='text-gray-400'>{texts.currentlyInactive}</span>
+            <span className='text-gray-400 whitespace-nowrap text-[10px] sm:text-sm flex-shrink-0'>
+              {texts.currentlyInactive}
+            </span>
           )}
-          {' • '}
-          <span className='text-gray-400'>
-            {texts.workHoursText(workHours.start, workHours.end)}
+
+          {/* Nokta ayırıcı */}
+          <span className='text-gray-500 flex-shrink-0 hidden sm:inline'>
+            •
+          </span>
+          <span className='text-gray-500 flex-shrink-0 text-[8px] sm:hidden'>
+            •
+          </span>
+
+          {/* Çalışma saatleri - Mobilde kısaltılmış, desktop'ta tam */}
+          <span className='text-cyan-300 whitespace-nowrap text-[10px] sm:text-sm flex-shrink-0'>
+            <span className='sm:hidden'>{workHoursShort}</span>
+            <span className='hidden sm:inline'>{workHoursFull}</span>
           </span>
         </span>
       </div>

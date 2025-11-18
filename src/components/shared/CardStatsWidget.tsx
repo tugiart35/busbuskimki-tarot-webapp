@@ -34,13 +34,43 @@ export default function CardStatsWidget({
     const loadStats = async () => {
       try {
         const response = await fetch(`/api/engagement/cards/${slug}/stats`);
+
+        if (!response.ok) {
+          // 404 veya diğer hata durumları - default değerleri kullan
+          if (response.status === 404) {
+            setStats({
+              view_count: 0,
+              reaction_count: 0,
+              comment_count: 0,
+            });
+            return;
+          }
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const contentType = response.headers.get('content-type');
+        if (!contentType || !contentType.includes('application/json')) {
+          // JSON değil, muhtemelen HTML (404 sayfası) - default değerleri kullan
+          setStats({
+            view_count: 0,
+            reaction_count: 0,
+            comment_count: 0,
+          });
+          return;
+        }
+
         const result = await response.json();
 
         if (result.success) {
           setStats(result.data);
         }
       } catch (error) {
-        console.error('Error loading stats:', error);
+        // Hata durumunda default değerleri kullan
+        setStats({
+          view_count: 0,
+          reaction_count: 0,
+          comment_count: 0,
+        });
       } finally {
         setLoading(false);
       }
@@ -51,13 +81,18 @@ export default function CardStatsWidget({
     // Increment view count
     const incrementView = async () => {
       try {
-        await fetch(`/api/engagement/cards/${slug}/stats`, {
+        const response = await fetch(`/api/engagement/cards/${slug}/stats`, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ action: 'increment_view' }),
         });
+
+        // 404 veya diğer hataları sessizce ignore et
+        if (!response.ok) {
+          return;
+        }
       } catch (error) {
-        console.error('Error incrementing view:', error);
+        // Hataları sessizce ignore et - istatistikler kritik değil
       }
     };
 

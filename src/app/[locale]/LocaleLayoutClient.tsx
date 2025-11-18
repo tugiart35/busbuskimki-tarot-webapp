@@ -28,10 +28,11 @@ Kullanım durumu:
 
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
+import { ChevronDown, User } from 'lucide-react';
 import { useAuth } from '@/hooks/auth/useAuth';
-import { LanguageSelector } from '@/features/shared/layout/LanguageSelector';
 import { useTranslations } from '@/hooks/useTranslations';
 import {
   WebVitals,
@@ -54,10 +55,21 @@ export function LocaleLayoutClient({
   children,
   locale,
 }: LocaleLayoutClientProps) {
+  const router = useRouter();
+  const pathname = usePathname();
   const { user } = useAuth();
   const { t } = useTranslations();
-  const isAuthenticated = !!user;
   const setConsentLocale = useConsentLocaleSetter();
+  const [isLangOpen, setIsLangOpen] = useState(false);
+
+  const languages = [
+    { code: 'tr', flag: '🇹🇷', label: 'TR' },
+    { code: 'en', flag: '🇬🇧', label: 'EN' },
+    { code: 'sr', flag: '🇷🇸', label: 'SR' },
+  ];
+
+  const currentLang =
+    languages.find(lang => lang.code === locale) || languages[0];
 
   // Performance monitoring
   useWebVitals();
@@ -76,73 +88,146 @@ export function LocaleLayoutClient({
     setConsentLocale(locale as 'tr' | 'en' | 'sr');
   }, [locale, setConsentLocale]);
 
+  const handleLanguageChange = (newLocale: string) => {
+    // Mevcut path'i locale olmadan al
+    let pathWithoutLocale = pathname;
+
+    // Eğer pathname locale ile başlıyorsa, onu kaldır
+    if (pathname.startsWith(`/${locale}/`)) {
+      pathWithoutLocale = pathname.substring(`/${locale}`.length);
+    } else if (pathname === `/${locale}`) {
+      pathWithoutLocale = '/';
+    }
+
+    // Path mapping - bazı sayfalar için normalize et
+    const pageMapping: Record<string, string> = {
+      '/': '/',
+      '/tarotokumasi': '/tarotokumasi',
+      '/numeroloji': '/numeroloji',
+      '/dashboard': '/dashboard',
+      '/panel': '/dashboard',
+      '/auth': '/auth',
+      '/giris': '/auth',
+      '/login': '/auth',
+      '/prijava': '/auth',
+      '/testler': '/testler',
+      // Kart sayfaları (locale-specific)
+      '/kartlar':
+        newLocale === 'tr'
+          ? '/kartlar'
+          : newLocale === 'en'
+            ? '/cards'
+            : '/kartice',
+      '/cards':
+        newLocale === 'tr'
+          ? '/kartlar'
+          : newLocale === 'en'
+            ? '/cards'
+            : '/kartice',
+      '/kartice':
+        newLocale === 'tr'
+          ? '/kartlar'
+          : newLocale === 'en'
+            ? '/cards'
+            : '/kartice',
+    };
+
+    // Path mapping uygula
+    const normalizedPath = pageMapping[pathWithoutLocale] || pathWithoutLocale;
+    const newPath =
+      normalizedPath === '/'
+        ? `/${newLocale}`
+        : `/${newLocale}${normalizedPath}`;
+
+    // Cookie'yi güncelle
+    document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000; SameSite=Lax`;
+
+    // Router ile yönlendir
+    router.push(newPath);
+    setIsLangOpen(false);
+  };
+
   return (
-    <div className='min-h-screen bg-gradient-to-br from-slate-950 via-black to-slate-900 text-white'>
-      {/* Modern Glassmorphism Header */}
-      <header
-        className='fixed top-0 left-0 right-0 z-50 bg-white/5 backdrop-blur-sm lg:backdrop-blur-2xl border-b border-white/10 shadow lg:shadow-2xl'
-        role='banner'
-        style={{ paddingTop: 'env(safe-area-inset-top)' }}
-      >
+    <div className='min-h-screen bg-gradient-to-br from-indigo-950 via-purple-950 to-slate-900 text-white'>
+      {/* Navigation Header - Figma design */}
+      <nav className='sticky top-0 z-50 backdrop-blur-md bg-indigo-950/30 border-b border-white/10'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-          <div className='flex items-center justify-between gap-2 py-1.5 min-h-[44px]'>
-            {/* Modern Logo */}
-            <Link
-              href={`/${locale}`}
-              className='flex items-center gap-3 text-white hover:text-white/90 transition-all duration-300 group touch-manipulation'
-              aria-label='Go to homepage'
-            >
-              <div className='relative'>
-                <div className='text-lg sm:text-2xl group-hover:scale-110 transition-transform duration-300 filter drop-shadow'>
-                  🔮
-                </div>
-                <div className='absolute inset-0 text-2xl opacity-0 group-hover:opacity-30 blur-sm transition-opacity duration-300'>
-                  ✨
-                </div>
-              </div>
-              <span className='inline text-sm sm:text-xl font-bold tracking-tight bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent whitespace-nowrap truncate max-w-[120px] sm:max-w-none'>
-                Büşbüşkimki
-              </span>
+          <div className='flex items-center justify-between h-16'>
+            {/* Brand */}
+            <Link href={`/${locale}`} className='flex items-center gap-2'>
+              <span className='text-xl'>🔮</span>
+              <span className='tracking-wide font-medium'>Büşbüşkimki</span>
             </Link>
 
-            {/* Modern Right Section */}
-            <div className='flex items-center justify-end gap-2 sm:gap-3 w-full sm:w-auto flex-nowrap'>
-              {/* Language Selector */}
-              <LanguageSelector locale={locale} className='' compact />
+            {/* Right side */}
+            <div className='flex items-center gap-3 sm:gap-4'>
+              {/* Language selector */}
+              <div className='relative'>
+                <button
+                  onClick={() => setIsLangOpen(!isLangOpen)}
+                  className='flex items-center gap-1 px-2 py-1 rounded-lg hover:bg-white/10 transition-colors'
+                >
+                  <span className='text-sm'>
+                    {`${currentLang?.flag || '🌐'} ${currentLang?.label || locale.toUpperCase()}`}
+                  </span>
+                  <ChevronDown className='w-3 h-3' />
+                </button>
 
-              {/* Modern Auth Section */}
-              {isAuthenticated ? (
-                <div className='flex items-center gap-2 sm:gap-3 justify-end'>
-                  <div className='hidden sm:block text-sm text-white/70 font-medium'>
-                    {user?.email}
+                {isLangOpen && (
+                  <div className='absolute right-0 mt-2 w-24 backdrop-blur-lg bg-indigo-950/80 border border-white/20 rounded-lg shadow-lg overflow-hidden z-50'>
+                    {languages.map(lang => (
+                      <button
+                        key={lang.code}
+                        onClick={() => handleLanguageChange(lang.code)}
+                        className='w-full px-3 py-2 text-sm hover:bg-white/10 transition-colors flex items-center gap-2'
+                      >
+                        <span>{lang.flag}</span>
+                        <span>{lang.label}</span>
+                      </button>
+                    ))}
                   </div>
-                  <Link
-                    href={`/${locale}/dashboard`}
-                    className='text-center px-3 py-2 bg-white/10 hover:bg-white/15 text-white text-sm font-semibold rounded-lg transition-all duration-300 hover:scale-[1.02] backdrop-blur-0 sm:backdrop-blur-sm border border-white/15 hover:border-white/25 shadow sm:shadow-md touch-manipulation whitespace-nowrap'
-                    aria-label='Open dashboard'
-                  >
-                    {translate('auth.dashboard', 'Panel')}
-                  </Link>
-                </div>
+                )}
+              </div>
+
+              {/* User email or Login button */}
+              {user ? (
+                <Link
+                  href={`/${locale}/dashboard`}
+                  className='hidden sm:flex items-center gap-2 px-3 py-1 rounded-lg bg-white/5 hover:bg-white/10 transition-colors'
+                >
+                  <User className='w-4 h-4 opacity-60' />
+                  <span className='text-sm opacity-80'>
+                    {user.email?.split('@')[0] || 'User'}
+                  </span>
+                </Link>
               ) : (
                 <Link
                   href={`/${locale}/auth`}
-                  className='block text-center px-3 py-2 bg-gradient-to-r from-white to-white/90 hover:from-white/90 hover:to-white text-black text-sm font-semibold rounded-lg transition-all duration-300 hover:scale-[1.02] shadow sm:shadow-md touch-manipulation whitespace-nowrap'
-                  aria-label='Sign in'
+                  className='px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 transition-all shadow-lg shadow-purple-500/20 text-sm font-medium'
                 >
-                  {translate('auth.signIn', 'Giriş')}
+                  {translate('common.login', 'Giriş Yap')}
+                </Link>
+              )}
+
+              {/* Panel button - only show if user is logged in */}
+              {user && (
+                <Link
+                  href={`/${locale}/dashboard`}
+                  className='px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 transition-all shadow-lg shadow-purple-500/20 text-sm font-medium'
+                >
+                  {translate('common.panel', 'Panel')}
                 </Link>
               )}
             </div>
           </div>
         </div>
-      </header>
+      </nav>
 
       {/* Disclaimer Banner */}
       <DisclaimerBanner locale={locale as 'tr' | 'en' | 'sr'} />
 
       {/* Main Content */}
-      <main className='pt-12 sm:pt-20'>{children}</main>
+      <main>{children}</main>
 
       {/* Age Verification Modal */}
       <AgeVerificationModal locale={locale as 'tr' | 'en' | 'sr'} />

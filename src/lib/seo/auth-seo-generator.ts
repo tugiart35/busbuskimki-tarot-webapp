@@ -100,41 +100,41 @@ const authSeoData: Record<
     ],
   },
   sr: {
-    title: 'Пријава — Büşbüşkimki',
+    title: 'Büşbüşkimki',
     description:
-      'Пријавите се на свој Büşbüşkimki налог сигурно. Приступите својим тарот и нумеролошким услугама.',
+      'Prijavite se na svoj Büşbüşkimki nalog sigurno. Pristupite svojim tarot i numerološkim uslugama.',
     keywords: [
-      'пријава',
-      'пријава на налог',
-      'корисничка пријава',
-      'сигурна пријава',
-      'тарот налог',
-      'нумеролошки налог',
-      'мистичко вођство',
-      'лични налог',
+      'prijava',
+      'prijava na nalog',
+      'korisnička prijava',
+      'sigurna prijava',
+      'tarot nalog',
+      'numerološki nalog',
+      'mističko vođstvo',
+      'lični nalog',
     ],
     canonicalPath: '/sr/auth',
     ogImage: '/assets/logo/social-og-auth.jpg',
     twitterImage: '/assets/logo/twitter-card-auth.jpg',
     breadcrumbs: [
       { name: 'Početna', url: `${baseUrl}/sr` },
-      { name: 'Пријава', url: `${baseUrl}/sr/auth` },
+      { name: 'Prijava', url: `${baseUrl}/sr/auth` },
     ],
     faq: [
       {
-        question: 'Како се могу пријавити на свој налог?',
+        question: 'Kako se mogu prijaviti na svoj nalog?',
         answer:
-          'Можете се сигурно пријавити користећи своју е-маил адресу и лозинку.',
+          'Možete se sigurno prijaviti koristeći svoju e-mail adresu i lozinku.',
       },
       {
-        question: 'Заборавио сам лозинку, шта да радим?',
+        question: 'Zaboravio sam lozinku, šta da radim?',
         answer:
-          'Можемо послати линк за ресетовање лозинке на вашу е-маил адресу.',
+          'Možemo poslati link za resetovanje lozinke na vašu e-mail adresu.',
       },
       {
-        question: 'Да ли је мој налог сигуран?',
+        question: 'Da li je moj nalog siguran?',
         answer:
-          'Сви ваши подаци су шифровани и безбедно чувани са сигурним везама.',
+          'Svi vaši podaci su šifrovani i bezbedno čuvani sa sigurnim vezama.',
       },
     ],
   },

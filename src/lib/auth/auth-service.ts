@@ -73,10 +73,12 @@ export class AuthService {
           const profileResult = await ensureProfileExists(data.user);
 
           if (!profileResult.success) {
+            // eslint-disable-next-line no-console
             console.warn('Profile kontrolü başarısız:', profileResult.error);
             // Profile sorunu giriş işlemini etkilemez
           }
         } catch (profileError) {
+          // eslint-disable-next-line no-console
           console.warn('Profile kontrol hatası:', profileError);
           // Profile hatası giriş işlemini etkilemez
         }
@@ -110,6 +112,7 @@ export class AuthService {
       });
 
       if (error) {
+        // eslint-disable-next-line no-console
         console.error('SignUp error:', error);
 
         // Rate limit hatası kontrolü - DEVRE DIŞI
@@ -133,6 +136,7 @@ export class AuthService {
 
       return data;
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('SignUp genel hatası:', error);
 
       // Hata tipine göre işlem
@@ -201,12 +205,13 @@ export class AuthService {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'facebook',
         options: {
-          redirectTo: `${window.location.origin}/auth/callback`,
+          redirectTo: `${window.location.origin}/auth/callback?locale=${locale}`,
           scopes: 'email',
-          queryParams: {
-            access_type: 'offline',
-            prompt: 'consent',
-          },
+          // ❌ KALDIRILDI: access_type ve prompt Google OAuth parametreleri
+          // queryParams: {
+          //   access_type: 'offline',
+          //   prompt: 'consent',
+          // },
         },
       });
 
@@ -294,12 +299,14 @@ export class AuthService {
       });
 
       if (error) {
+        // eslint-disable-next-line no-console
         console.error('Resend error:', error);
         throw new AuthError(error.message, error);
       }
 
       return true;
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('Resend confirmation catch block:', error);
       throw error;
     }

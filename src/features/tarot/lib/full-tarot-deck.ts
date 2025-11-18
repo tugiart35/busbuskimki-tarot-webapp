@@ -38,13 +38,14 @@ Gereklilik ve Kullanım Durumu:
 
 import type { TarotCard } from './a-tarot-helpers';
 import { useTranslations } from '../../../hooks/useTranslations';
+import { getCardName } from '@/lib/tarot/card-names'; // getCardName'i import et
 import { useMemo } from 'react';
 
 export type { TarotCard };
 
 // i18n destekli tarot destesi hook'u
 export function useTarotDeck(): TarotCard[] {
-  const { t } = useTranslations();
+  const { t, locale } = useTranslations(); // locale'i al
 
   return useMemo(() => {
     if (!t) {
@@ -54,36 +55,40 @@ export function useTarotDeck(): TarotCard[] {
     const deckArray: TarotCard[] = [];
 
     // Major Arcana (22 kart)
-    const majorArcanaNames = [
-      'The Fool',
-      'The Magician',
-      'The High Priestess',
-      'The Empress',
-      'The Emperor',
-      'The Hierophant',
-      'The Lovers',
-      'The Chariot',
-      'Strength',
-      'The Hermit',
-      'Wheel of Fortune',
-      'Justice',
-      'The Hanged Man',
-      'Death',
-      'Temperance',
-      'The Devil',
-      'The Tower',
-      'The Star',
-      'The Moon',
-      'The Sun',
+    const majorArcanaKeys = [
+      'the-fool',
+      'the-magician',
+      'the-high-priestess',
+      'the-empress',
+      'the-emperor',
+      'the-hierophant',
+      'the-lovers',
+      'the-chariot',
+      'strength',
+      'the-hermit',
+      'wheeloffortune',
+      'justice',
+      'the-hanged-man',
+      'death',
+      'temperance',
+      'the-devil',
+      'the-tower',
+      'the-star',
+      'the-moon',
+      'the-sun',
       'Judgement',
-      'The World',
+      'the-world',
     ];
 
     for (let i = 0; i <= 21; i++) {
+      const cardKey = majorArcanaKeys[i]!;
+      const cardName = getCardName(cardKey, locale as 'tr' | 'en' | 'sr');
+      const cardNameEn = getCardName(cardKey, 'en');
+
       deckArray.push({
         id: i,
-        name: majorArcanaNames[i] || `Card ${i}`,
-        nameTr: majorArcanaNames[i] || `Card ${i}`,
+        name: cardNameEn, // İngilizce isim (fallback için)
+        nameTr: locale === 'tr' ? cardName : getCardName(cardKey, 'tr'), // Türkçe isim
         suit: 'major' as const,
         number: i,
         meaning: {
@@ -337,7 +342,7 @@ export function useTarotDeck(): TarotCard[] {
     });
 
     return deckArray;
-  }, [t]);
+  }, [t, locale]); // locale'i dependency array'e ekle
 }
 
 // Geriye uyumluluk için eski export (deprecated - use useTarotDeck hook instead)

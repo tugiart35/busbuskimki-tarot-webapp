@@ -29,6 +29,7 @@ Geliştirme ve öneriler:
 import { useMemo } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useAuth } from '@/hooks/auth/useAuth';
+import { useTranslations } from '@/hooks/useTranslations';
 
 // Navigation item interface
 export interface NavigationItem {
@@ -63,29 +64,30 @@ const getSeoFriendlyPath = (path: string): string => {
 const getNavigationItems = (
   currentLocale: string,
   isAuthenticated: boolean,
-  isAdmin: boolean
+  isAdmin: boolean,
+  t: (key: string, fallback?: string) => string
 ): NavigationItem[] => {
   const baseItems: NavigationItem[] = [
     {
-      name: 'Tarot',
+      name: t('navigation.tarot', 'Tarot'),
       href: `/${currentLocale}/tarotokumasi`, // Gerçek route
       icon: '⭐',
       activeIcon: '⭐',
     },
     {
-      name: 'Numeroloji',
+      name: t('navigation.numerology', 'Numeroloji'),
       href: `/${currentLocale}/numeroloji`, // Gerçek route
       icon: '🔢',
       activeIcon: '🔢',
     },
     {
-      name: 'Kartlar',
+      name: t('navigation.cards', 'Kartlar'),
       href: `/${currentLocale}${currentLocale === 'tr' ? '/kartlar' : currentLocale === 'en' ? '/cards' : '/kartice'}`,
       icon: '🃏',
       activeIcon: '🃏',
     },
     {
-      name: 'Ana Sayfa',
+      name: t('navigation.home', 'Ana Sayfa'),
       href: `/${currentLocale}`, // Direkt locale (SEO alias yok)
       icon: '💛',
       activeIcon: '💛',
@@ -95,7 +97,7 @@ const getNavigationItems = (
   // Admin kontrolü - admin ise Pakize sekmesi ekle
   if (isAuthenticated && isAdmin) {
     baseItems.push({
-      name: 'Pakize',
+      name: t('navigation.pakize', 'Pakize'),
       href: `/${currentLocale}/pakize`,
       icon: '👑',
       activeIcon: '👑',
@@ -105,14 +107,14 @@ const getNavigationItems = (
   // Auth durumuna göre giriş/profil sekmesi ekle
   if (isAuthenticated) {
     baseItems.push({
-      name: 'Profil',
+      name: t('navigation.profile', 'Profil'),
       href: `/${currentLocale}/dashboard`, // Gerçek route
       icon: '👤',
       activeIcon: '👤',
     });
   } else {
     baseItems.push({
-      name: 'Giriş Yap',
+      name: t('navigation.auth', 'Giriş Yap'),
       href: `/${currentLocale}/auth`, // Gerçek route
       icon: '🔑',
       activeIcon: '🔑',
@@ -127,14 +129,15 @@ export function useNavigation() {
   const pathname = usePathname();
   const router = useRouter();
   const { isAuthenticated, isAdmin } = useAuth();
+  const { t } = useTranslations();
 
   // Mevcut locale'i pathname'den çıkar
   const currentLocale = pathname.split('/')[1] || 'tr';
 
   // Navigation items'ları memoize et
   const navigationItems = useMemo(
-    () => getNavigationItems(currentLocale, isAuthenticated, isAdmin),
-    [currentLocale, isAuthenticated, isAdmin]
+    () => getNavigationItems(currentLocale, isAuthenticated, isAdmin, t),
+    [currentLocale, isAuthenticated, isAdmin, t]
   );
 
   // Mevcut dili bul

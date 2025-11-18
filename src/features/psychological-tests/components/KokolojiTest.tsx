@@ -10,7 +10,8 @@
 
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import {
   getPsychologicalTests,
   getTestResult,
@@ -29,6 +30,7 @@ interface TestResult {
 
 export default function KokolojiTest() {
   const { t } = useTranslations();
+  const searchParams = useSearchParams();
   const [currentTest, setCurrentTest] = useState<string | null>(null);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<string[]>([]);
@@ -47,6 +49,22 @@ export default function KokolojiTest() {
     setAnswers([]);
     setShowResults(false);
   };
+
+  // URL'den test ID'sini oku ve testi başlat
+  useEffect(() => {
+    const testId = searchParams.get('test');
+    if (testId && !currentTest) {
+      // Test ID'si geçerli mi kontrol et
+      const testExists = psychologicalTests.find(test => test.id === testId);
+      if (testExists) {
+        setCurrentTest(testId);
+        setCurrentQuestion(0);
+        setAnswers([]);
+        setShowResults(false);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams]);
 
   const handleAnswer = (answer: string) => {
     const newAnswers = [...answers, answer];
