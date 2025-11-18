@@ -76,7 +76,7 @@ export const position3Meanings: Moneyposition3Meaning[] = [
     reversed:
       'Ters Başrahibe, gizlenmiş harcamalar veya şeffaf olmayan finansal kararları işaret eder.',
     keywords: ['sezgi', 'ölçü', 'giz', 'tasarruf', 'denge'],
-    context: 'Para kullanımında şeffaflık ve ölçülülük önem kazanır.',
+    context: 'Para kullanımında şeffaflık ve Denge önem kazanır.',
     group: 'Majör Arkana',
   },
   {
@@ -219,7 +219,7 @@ export const position3Meanings: Moneyposition3Meaning[] = [
     reversed:
       'Ters Denge, savurganlık ya da aşırı kısıtlama kaygısını işaret eder.',
     keywords: ['ölçü', 'denge', 'uyum', 'para', 'sabır'],
-    context: 'Para kullanımında ölçülülük ve denge ön planda.',
+    context: 'Para kullanımında Denge ve denge ön planda.',
     group: 'Majör Arkana',
   },
   {
@@ -1026,7 +1026,7 @@ export function getMoneyposition3Meaning(
     'Asılı Adam': 'The Hanged Man',
     Ölüm: 'Death',
     Ölçü: 'Temperance',
-    Ölçülülük: 'Temperance',
+    Denge: 'Temperance',
     Şeytan: 'The Devil',
     Kule: 'The Tower',
     Yıldız: 'The Star',

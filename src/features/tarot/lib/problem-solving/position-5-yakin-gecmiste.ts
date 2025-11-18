@@ -232,10 +232,10 @@ export const position5Meanings: ProblemSolvingPosition5Meaning[] = [
     card: 'Temperance',
     position: 5,
     upright:
-      'Denge, yakın geçmişte uyum aramış, sabır göstermiş veya ölçülülükle ilerlemiş olabilirsin.',
+      'Denge, yakın geçmişte uyum aramış, sabır göstermiş veya Dengele ilerlemiş olabilirsin.',
     reversed:
       'Ters Denge, yakın geçmişte aşırılıklar, dengesizlik ya da sabırsızlık yaşamış olabilirsin.',
-    keywords: ['denge', 'uyum', 'sabır', 'ölçülülük', 'dengeleyici'],
+    keywords: ['denge', 'uyum', 'sabır', 'Denge', 'dengeleyici'],
     context:
       'Yakın geçmişin, uyum ya da uyumsuzluk deneyimleriyle şekillenmiş olabilir.',
     group: 'Majör Arkana',

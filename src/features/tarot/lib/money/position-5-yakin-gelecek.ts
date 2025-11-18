@@ -228,7 +228,7 @@ export const position5Meanings: MoneyPosition5Meaning[] = [
     reversed:
       'Ters Denge, dengesizlik veya aşırılıklar sorumlulukları zorlaştırmıştır.',
     keywords: ['denge', 'ölçü', 'sorumluluk', 'uyum', 'sabır'],
-    context: 'Mali sorumluluklar ölçülülük ve denge arayışı ile yönetilmiştir.',
+    context: 'Mali sorumluluklar Denge ve denge arayışı ile yönetilmiştir.',
     group: 'Majör Arkana',
   },
   {
@@ -1090,7 +1090,7 @@ export function getMoneyPosition5Meaning(
     'Asılı Adam': 'The Hanged Man',
     Ölüm: 'Death',
     Ölçü: 'Temperance',
-    Ölçülülük: 'Temperance',
+    Denge: 'Temperance',
     Şeytan: 'The Devil',
     Kule: 'The Tower',
     Yıldız: 'The Star',

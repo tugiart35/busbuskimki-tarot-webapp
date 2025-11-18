@@ -246,7 +246,7 @@ export const position6Meanings: ProblemSolvingPosition6Meaning[] = [
       'Denge, yakın gelecekte uyum bulacak, sabırla ilerleyecek ve farklı unsurları dengelemeyi başaracaksın.',
     reversed:
       'Ters Denge, yakın gelecekte sabırsızlık, aşırılıklar ya da uyumsuzluk yaşayabilirsin.',
-    keywords: ['denge', 'uyum', 'sabır', 'ölçülülük', 'dengeleyici'],
+    keywords: ['denge', 'uyum', 'sabır', 'Denge', 'dengeleyici'],
     context: 'Yakın geleceğin, uyum ya da dengesizlikle şekillenecek.',
     group: 'Majör Arkana',
   },

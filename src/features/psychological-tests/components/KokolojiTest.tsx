@@ -44,10 +44,20 @@ export default function KokolojiTest() {
   const selectedTest = psychologicalTests.find(test => test.id === currentTest);
 
   const startTest = (testId: string) => {
+    // Önce scroll pozisyonunu sıfırla (instant)
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+
     setCurrentTest(testId);
     setCurrentQuestion(0);
     setAnswers([]);
     setShowResults(false);
+
+    // DOM güncellemesinden sonra tekrar scroll to top (smooth)
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
   };
 
   // URL'den test ID'sini oku ve testi başlat
@@ -57,14 +67,41 @@ export default function KokolojiTest() {
       // Test ID'si geçerli mi kontrol et
       const testExists = psychologicalTests.find(test => test.id === testId);
       if (testExists) {
+        // Önce scroll pozisyonunu sıfırla (instant)
+        window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+
         setCurrentTest(testId);
         setCurrentQuestion(0);
         setAnswers([]);
         setShowResults(false);
+
+        // DOM güncellemesinden sonra tekrar scroll to top
+        requestAnimationFrame(() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
+
+  // currentTest değiştiğinde scroll to top - daha güvenilir
+  useEffect(() => {
+    if (currentTest) {
+      // Önce instant scroll
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+
+      // Sonra smooth scroll (DOM güncellemesinden sonra)
+      const timeoutId = setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 0);
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [currentTest]);
 
   const handleAnswer = (answer: string) => {
     const newAnswers = [...answers, answer];
@@ -190,7 +227,7 @@ export default function KokolojiTest() {
 
   if (!currentTest) {
     return (
-      <div className='space-y-6'>
+      <div className='space-y-6' data-test-list>
         <div className='text-center mb-8'>
           <h2 className='text-2xl font-bold text-white mb-2'>
             🧠 {t('psychTests.page.title')}
@@ -237,7 +274,7 @@ export default function KokolojiTest() {
     }
 
     return (
-      <div className='space-y-6'>
+      <div className='space-y-6' data-test-content>
         <div className='text-center mb-6'>
           <h3 className='text-xl font-bold text-white mb-2'>
             {selectedTest.title} {t('psychTests.ui.results.title')}
@@ -1097,7 +1134,7 @@ export default function KokolojiTest() {
   // İsim Enerjisi Testi - Özel İsim Input Ekranı
   if (selectedTest && selectedTest.id === 'name-tarot' && !showResults) {
     return (
-      <div className='space-y-6'>
+      <div className='space-y-6' data-test-content>
         {/* Mistik Header */}
         <div className='text-center mb-8'>
           <div className='text-6xl mb-4 animate-pulse'>🔮</div>
@@ -1176,7 +1213,7 @@ export default function KokolojiTest() {
     }
 
     return (
-      <div className='space-y-6'>
+      <div className='space-y-6' data-test-content>
         <div className='text-center mb-6'>
           <h3 className='text-xl font-bold text-white mb-2'>
             {selectedTest.title}

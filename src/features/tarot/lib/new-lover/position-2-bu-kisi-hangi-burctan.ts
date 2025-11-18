@@ -1030,7 +1030,7 @@ export function getNewLoverposition2Meaning(
     'Asılı Adam': 'The Hanged Man',
     Ölüm: 'Death',
     Ölçü: 'Temperance',
-    Ölçülülük: 'Temperance',
+    Denge: 'Temperance',
     Şeytan: 'The Devil',
     Kule: 'The Tower',
     Yıldız: 'The Star',

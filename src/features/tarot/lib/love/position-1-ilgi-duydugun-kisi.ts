@@ -251,7 +251,7 @@ export const position1Meanings: LovePosition1Meaning[] = [
       'Bu kişi, hayatında dengeyi, uyumu ve ölçüyü bulmuş biridir. Farklı unsurları bir araya getirerek huzurlu bir sentez yaratır. İlişkilerde sabırlı, sakin ve uzlaşmacı bir tavrı vardır.',
     reversed:
       'Ters Temperance, bu kişinin hayatında dengesizlik, aşırılık veya çatışma yaşadığını gösterir. Sabırsız davranıyor ve içsel huzurunu kaybetmiş olabilir.',
-    keywords: ['denge', 'uyum', 'ölçülülük', 'sabır', 'sentez'],
+    keywords: ['denge', 'uyum', 'Denge', 'sabır', 'sentez'],
     context:
       'Bu kişi, hayatın farklı notalarını birleştirerek kendi huzur melodisini yaratan bir simyacı.',
     group: 'Majör Arkana',

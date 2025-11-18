@@ -212,9 +212,9 @@ export const position7Meanings: CareerPositionMeaning[] = [
     card: 'Temperance',
     position: 7,
     upright:
-      'Denge, kariyer yolculuğunun sonucunun uyum, sabır ve ölçülülükle başarıya ulaşmak olacağını gösterir.',
+      'Denge, kariyer yolculuğunun sonucunun uyum, sabır ve Dengele başarıya ulaşmak olacağını gösterir.',
     reversed: 'Ters Denge, aşırılıklar sonucun dengesini bozabilir.',
-    keywords: ['denge', 'uyum', 'sabır', 'ölçülülük', 'gelecek'],
+    keywords: ['denge', 'uyum', 'sabır', 'Denge', 'gelecek'],
     context: 'Sonuç, uyumlu ve dengeli adımlarla gelişim göstermek olacak.',
     group: 'Majör Arkana',
   },

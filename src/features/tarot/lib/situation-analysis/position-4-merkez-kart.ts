@@ -204,7 +204,7 @@ export const position4Meanings: SituationAnalysisPositionMeaning[] = [
     card: 'Temperance',
     position: 4,
     upright:
-      'Merkezde ölçülülük, sentez ve şifa karışımı var. Orta yol, sistemi uyumda tutar.',
+      'Merkezde Denge, sentez ve şifa karışımı var. Orta yol, sistemi uyumda tutar.',
     reversed:
       'Merkezde aşırılık veya uyumsuz karışımlar dengeyi bozuyor olabilir. Doz ayarı şart.',
     keywords: ['denge', 'sentez', 'şifa', 'sabır', 'uyum'],

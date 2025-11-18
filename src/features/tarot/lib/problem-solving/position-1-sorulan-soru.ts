@@ -229,10 +229,10 @@ export const position1Meanings: ProblemSolvingPosition1Meaning[] = [
     card: 'Temperance',
     position: 1,
     upright:
-      'Denge, sorunun merkezinde uyum arayışı, ölçülülük veya sabır ihtiyacı olabilir.',
+      'Denge, sorunun merkezinde uyum arayışı, Denge veya sabır ihtiyacı olabilir.',
     reversed:
       'Ters Denge, aşırılıklar veya uyumsuzluk problemin kaynağı olabilir.',
-    keywords: ['denge', 'uyum', 'sabır', 'ölçülülük', 'soru'],
+    keywords: ['denge', 'uyum', 'sabır', 'Denge', 'soru'],
     context: 'Sorunun merkezinde denge arayışı ve uyum sağlama isteği var.',
     group: 'Majör Arkana',
   },

@@ -206,7 +206,7 @@ export const position8Meanings: MarriagePositionMeaning[] = [
     upright:
       'Denge, uyumlu ve ölçülü bir iletişimin anlaşmayı kolaylaştıracağını gösterir. Orta yol güven verir.',
     reversed:
-      'Ters Denge, aşırılıklara kapılmanın iletişimi bozabileceğini işaret eder. Ölçülülük uyumu sağlar.',
+      'Ters Denge, aşırılıklara kapılmanın iletişimi bozabileceğini işaret eder. Denge uyumu sağlar.',
     keywords: ['denge', 'ölçü', 'uyum', 'orta yol'],
     context: 'Ölçülü dil uyumu getirir; aşırılık anlaşmayı zorlaştırır.',
     group: 'Majör Arkana',

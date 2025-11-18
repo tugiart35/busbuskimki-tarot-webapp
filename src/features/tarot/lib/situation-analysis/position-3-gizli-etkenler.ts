@@ -210,7 +210,7 @@ export const position3Meanings: SituationAnalysisPositionMeaning[] = [
     card: 'Temperance',
     position: 3,
     upright:
-      'Denge, ölçülülük ve karışımları doğru ayarlama becerisinin perde arkasından süreci yumuşattığını söyler. İçte şifa ritmi çalışır.',
+      'Denge, Denge ve karışımları doğru ayarlama becerisinin perde arkasından süreci yumuşattığını söyler. İçte şifa ritmi çalışır.',
     reversed:
       'Ters Denge, aşırılık, sabırsızlık ve uyumsuz karışımların gizli stres yarattığını gösterir. Doz aşımı netliği gölgeler.',
     keywords: ['ölçü', 'uyum', 'şifa', 'aşırılık', 'gizli gerilim'],

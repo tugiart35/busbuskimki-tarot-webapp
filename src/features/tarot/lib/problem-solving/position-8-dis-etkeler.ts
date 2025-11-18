@@ -231,7 +231,7 @@ export const position8Meanings: ProblemSolvingPosition8Meaning[] = [
       'Denge, dış etkiler sana uyum, sabır ve dengeleyici bir enerji sunuyor olabilir.',
     reversed:
       'Ters Denge, dış etkiler aşırılık, uyumsuzluk ya da sabırsızlık yaratabilir.',
-    keywords: ['denge', 'uyum', 'sabır', 'ölçülülük', 'dengeleyici'],
+    keywords: ['denge', 'uyum', 'sabır', 'Denge', 'dengeleyici'],
     context: 'Dış etkiler, uyum ya da uyumsuzluk yoluyla seni etkiliyor.',
     group: 'Majör Arkana',
   },

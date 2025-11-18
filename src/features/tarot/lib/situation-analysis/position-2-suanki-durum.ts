@@ -205,10 +205,10 @@ export const position2Meanings: SituationAnalysisPositionMeaning[] = [
     card: 'Temperance',
     position: 2,
     upright:
-      'Denge, şu anki durumda uyum, sabır ve ölçülülük enerjisini simgeler. Şu anda orta yolu bulmaya ve hayatınızı dengelemeye çalışıyorsunuz.\n\nBu kart, şu anki süreçte sabırlı olmanız ve uyumlu hareket etmeniz gerektiğini hatırlatır.',
+      'Denge, şu anki durumda uyum, sabır ve Denge enerjisini simgeler. Şu anda orta yolu bulmaya ve hayatınızı dengelemeye çalışıyorsunuz.\n\nBu kart, şu anki süreçte sabırlı olmanız ve uyumlu hareket etmeniz gerektiğini hatırlatır.',
     reversed:
       'Ters Denge, şu an aşırılık, uyumsuzluk veya sabırsızlık yaşadığınızı gösterir. Dengeyi bulmakta zorlanıyor olabilirsiniz.\n\nBu kart, şu anda yaşamınızdaki aşırılıkları dengelemeniz gerektiğini vurgular.',
-    keywords: ['denge', 'uyum', 'sabır', 'ölçülülük', 'şimdi'],
+    keywords: ['denge', 'uyum', 'sabır', 'Denge', 'şimdi'],
     context: 'Şu anki durumda denge veya uyumsuzluk etkisi.',
     group: 'Majör Arkana',
   },

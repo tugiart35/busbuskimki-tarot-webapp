@@ -232,7 +232,7 @@ export const position1Meanings: RelationshipAnalysisPosition1Meaning[] = [
     card: 'Temperance',
     position: 1,
     upright:
-      'Denge, ilişkinin mevcut durumda uyum ve ölçülülük arayışıyla ilerlediğini gösterir. Orta yol bulunmaya çalışılıyor. İpucu: Sabırlı karışımlar huzur getirir.',
+      'Denge, ilişkinin mevcut durumda uyum ve Denge arayışıyla ilerlediğini gösterir. Orta yol bulunmaya çalışılıyor. İpucu: Sabırlı karışımlar huzur getirir.',
     reversed:
       'Ters Denge, aşırılıklar ve uyum eksikliğinin mevcut durumda bağı zorladığını gösterir. Belirti: Ya hep ya hiç tavrı.',
     keywords: ['denge', 'uyum', 'sabır', 'sentez', 'ölçü'],
@@ -1118,7 +1118,7 @@ export function getRelationshipAnalysisPosition1Meaning(
     'Asılı Adam': 'The Hanged Man',
     Ölüm: 'Death',
     Ölçü: 'Temperance',
-    Ölçülülük: 'Temperance',
+    Denge: 'Temperance',
     Şeytan: 'The Devil',
     Kule: 'The Tower',
     Yıldız: 'The Star',

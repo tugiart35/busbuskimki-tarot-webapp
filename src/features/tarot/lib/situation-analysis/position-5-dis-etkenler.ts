@@ -403,7 +403,7 @@ export const position5Meanings: SituationAnalysisPositionMeaning[] = [
     reversed:
       'Ters Dokuz Kupa, aşırı övgü/şişkin beklentilerin dışarıda gerçeklikten kopuk bir tablo yaratabileceğini söyler.',
     keywords: ['takdir', 'tatmin', 'övgü', 'beklenti', 'gerçekçilik'],
-    context: 'Dış beğeni moral verir; ölçülülük gerekir.',
+    context: 'Dış beğeni moral verir; Denge gerekir.',
     group: 'Kupalar',
   },
   {

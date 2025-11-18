@@ -262,7 +262,7 @@ export const position2Meanings: LovePositionMeaning[] = [
       'Fiziksel ve duygusal enerjiler arasında mükemmel bir denge ve uyum var. Cinsellik, sakin, şefkatli ve iki ruhu birleştiren bir simya gibidir. Tutku ve sevgi harmanlanmıştır.',
     reversed:
       'Ters Temperance, cinsel enerjide bir dengesizlik, aşırılık veya uyumsuzluk olduğunu gösterir. Tutku ile sevgi bir araya gelemiyor, bu da tatminsizliğe yol açıyor.',
-    keywords: ['denge', 'uyum', 'simya', 'ölçülülük', 'şefkatli tutku'],
+    keywords: ['denge', 'uyum', 'simya', 'Denge', 'şefkatli tutku'],
     context:
       'Cinselliğiniz, iki farklı enerjinin mükemmel bir uyumla birleştiği şifalı bir iksir.',
     group: 'Majör Arkana',

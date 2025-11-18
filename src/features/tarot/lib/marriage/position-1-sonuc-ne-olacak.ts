@@ -213,10 +213,10 @@ export const position1Meanings: MarriagePositionMeaning[] = [
     card: 'Temperance',
     position: 1,
     upright:
-      'Evliliğiniz denge, uyum ve ölçülülük üzerine kurulacak. Sonuç; huzurlu ve sabırlı bir bağ olabilir.',
+      'Evliliğiniz denge, uyum ve Denge üzerine kurulacak. Sonuç; huzurlu ve sabırlı bir bağ olabilir.',
     reversed:
       'Aşırılıklar ya da sabırsızlık, evliliğin sonucunu zorlaştırabilir. Uyum kaybolabilir.',
-    keywords: ['denge', 'uyum', 'sabır', 'ölçülülük'],
+    keywords: ['denge', 'uyum', 'sabır', 'Denge'],
     context:
       'Sonuç; ölçülü ve dengeli bir evlilik. Ama uçlara kaçmak sorun olabilir.',
     group: 'Majör Arkana',

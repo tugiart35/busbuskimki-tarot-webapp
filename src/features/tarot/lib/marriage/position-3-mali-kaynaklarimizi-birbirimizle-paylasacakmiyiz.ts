@@ -214,7 +214,7 @@ export const position3Meanings: MarriagePositionMeaning[] = [
     card: 'Temperance',
     position: 3,
     upright:
-      'Denge, mali paylaşımda ölçülülük ve uyum getirir. Kaynakları ortak fayda için birleştirme gücü vardır.',
+      'Denge, mali paylaşımda Denge ve uyum getirir. Kaynakları ortak fayda için birleştirme gücü vardır.',
     reversed:
       'Ters Denge, mali konularda aşırılık veya uyumsuzlukları gösterir. Denge kurulmadığında sorunlar doğar.',
     keywords: ['denge', 'ölçü', 'uyum', 'paylaşım'],

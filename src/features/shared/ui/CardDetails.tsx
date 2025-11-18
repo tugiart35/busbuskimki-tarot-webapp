@@ -183,9 +183,7 @@ const CardDetails: React.FC<CardDetailsProps> = ({
           <h3 className='text-2xl font-light text-white tracking-wide'>
             {positionInfo.title}
           </h3>
-          <p className='text-gray-300 text-base leading-relaxed max-w-lg mx-auto font-light'>
-            {positionInfo.desc}
-          </p>
+         
         </div>
       )}
     </div>

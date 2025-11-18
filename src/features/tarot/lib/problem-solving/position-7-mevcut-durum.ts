@@ -242,7 +242,7 @@ export const position7Meanings: ProblemSolvingPosition7Meaning[] = [
       'Denge, şu anda sabırlı, uyumlu ve dengeleyici bir enerji içindesin. Aşırılıklardan uzak duruyorsun.',
     reversed:
       'Ters Denge, şu anda sabırsızlık, uyumsuzluk ya da aşırılıklar seni zorlayabilir.',
-    keywords: ['denge', 'uyum', 'sabır', 'ölçülülük', 'dengeleyici'],
+    keywords: ['denge', 'uyum', 'sabır', 'Denge', 'dengeleyici'],
     context: 'Mevcut durumun, uyum ya da dengesizlikle şekilleniyor.',
     group: 'Majör Arkana',
   },

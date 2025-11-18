@@ -33,7 +33,7 @@ export const MAJOR_ARCANA_NAMES: Record<Locale, CardNames> = {
     justice: 'Adalet',
     'the-hanged-man': 'Asılı Adam',
     death: 'Ölüm',
-    temperance: 'Ölçülülük',
+    temperance: 'Denge',
     'the-devil': 'Şeytan',
     'the-tower': 'Kule',
     'the-star': 'Yıldız',

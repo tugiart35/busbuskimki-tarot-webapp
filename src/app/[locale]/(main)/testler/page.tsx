@@ -14,9 +14,8 @@
   - E-E-A-T prensipleri
 */
 
-import { KokolojiTest } from '@/features/psychological-tests';
 import { DynamicBottomNavigation as BottomNavigation } from './DynamicTestComponents';
-import { getTranslations } from 'next-intl/server';
+import { TestlerPageClient } from './TestlerPageClient';
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://busbuskimki.com';
 
@@ -118,12 +117,6 @@ export default async function TestlerPage({ params }: PageProps) {
   const { locale } = await params;
   const resolvedLocale = resolveLocale(locale);
 
-  // Çevirileri al
-  const t = await getTranslations({
-    locale,
-    namespace: 'psychTests.page.scientificBasis',
-  });
-
   // Structured Data (Schema.org) - E-E-A-T için
   const pageContent = structuredContent[resolvedLocale];
   const structuredData = {
@@ -133,11 +126,7 @@ export default async function TestlerPage({ params }: PageProps) {
     description: pageContent.pageDescription,
     url: `${baseUrl}${localePaths[resolvedLocale]}`,
     inLanguage:
-      resolvedLocale === 'tr'
-        ? 'tr'
-        : resolvedLocale === 'en'
-          ? 'en'
-          : 'sr',
+      resolvedLocale === 'tr' ? 'tr' : resolvedLocale === 'en' ? 'en' : 'sr',
     isPartOf: {
       '@type': 'WebSite',
       name: 'Büşbüşkimki',
@@ -159,11 +148,7 @@ export default async function TestlerPage({ params }: PageProps) {
       description: test.description,
       isAccessibleForFree: true,
       inLanguage:
-        resolvedLocale === 'tr'
-          ? 'tr'
-          : resolvedLocale === 'en'
-            ? 'en'
-            : 'sr',
+        resolvedLocale === 'tr' ? 'tr' : resolvedLocale === 'en' ? 'en' : 'sr',
     })),
     breadcrumb: {
       '@type': 'BreadcrumbList',
@@ -199,52 +184,7 @@ export default async function TestlerPage({ params }: PageProps) {
 
       {/* Main Content */}
       <div className='relative z-10 container mx-auto px-4 py-12 max-w-4xl'>
-        <KokolojiTest />
-
-        {/* E-E-A-T: Authoritativeness - Kaynak Bilgisi */}
-        <div className='mt-12 bg-white/5 rounded-xl p-6 border border-white/10'>
-          <h2 className='text-xl font-bold text-white mb-4'>{t('title')}</h2>
-          <div className='space-y-3 text-sm text-white/70'>
-            <p>
-              <strong className='text-white'>MBTI:</strong> {t('mbti')}
-            </p>
-            <p>
-              <strong className='text-white'>Enneagram:</strong>{' '}
-              {t('enneagram')}
-            </p>
-            <p>
-              <strong className='text-white'>Big Five (OCEAN):</strong>{' '}
-              {t('bigFive')}
-            </p>
-            <p>
-              <strong className='text-white'>Deniz Fırtınası Testi:</strong>{' '}
-              {t('seaStorm')}
-            </p>
-            <p>
-              <strong className='text-white'>
-                İsim Enerjine Göre Tarot Kartın:
-              </strong>{' '}
-              {t('nameEnergy')}
-            </p>
-            <p>
-              <strong className='text-white'>Stres Düzeyi Testi:</strong>{' '}
-              {t('stressTest')}
-            </p>
-            <p>
-              <strong className='text-white'>
-                Aşk Enerjisi (Love Vibration):
-              </strong>{' '}
-              {t('loveVibration')}
-            </p>
-            <p>
-              <strong className='text-white'>Arkadaş Grubu Enerjisi:</strong>{' '}
-              {t('friendGroup')}
-            </p>
-            <p className='text-xs text-white/50 mt-4'>
-              <strong>Not:</strong> {t('disclaimer')}
-            </p>
-          </div>
-        </div>
+        <TestlerPageClient />
       </div>
 
       {/* Bottom Navigation */}

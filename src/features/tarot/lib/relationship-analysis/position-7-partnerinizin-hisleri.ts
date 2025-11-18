@@ -218,12 +218,12 @@ export const position7Meanings: RelationshipAnalysisPositionMeaning[] = [
     card: 'Temperance',
     position: 7,
     upright:
-      'İlişimin geleceğinde uyum, ölçülülük ve sabır öne çıkıyor. Orta yol güvenli bir alan yaratacak.',
+      'İlişimin geleceğinde uyum, Denge ve sabır öne çıkıyor. Orta yol güvenli bir alan yaratacak.',
     reversed:
       'Aşırılıklar veya sabırsızlık gelecekte dengeyi bozabilir. Uyum kaybolursa huzursuzluk artar.',
     keywords: ['denge', 'uyum', 'sabır', 'orta yol'],
     context:
-      'İlişimin geleceği ölçülülük ve uyum üzerine kurulacak. Ama uçlar tehlike olabilir.',
+      'İlişimin geleceği Denge ve uyum üzerine kurulacak. Ama uçlar tehlike olabilir.',
     group: 'Majör Arkana',
   },
   {

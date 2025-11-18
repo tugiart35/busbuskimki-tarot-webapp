@@ -209,7 +209,7 @@ export const position5Meanings: CareerPositionMeaning[] = [
       'Denge, ölçülü ve uyumlu yaklaşarak işinde yapıcı değişiklikler yapabilirsin.',
     reversed: 'Ters Denge, aşırılıklardan uzak durmak gelişim sağlar.',
     keywords: ['denge', 'uyum', 'sabır', 'ölçü', 'değişim'],
-    context: 'Kariyerinde değişim için uyum ve ölçülülük önemlidir.',
+    context: 'Kariyerinde değişim için uyum ve Denge önemlidir.',
     group: 'Majör Arkana',
   },
   {

@@ -232,7 +232,7 @@ export const position8Meanings: MoneyPosition8Meaning[] = [
       'Denge, uyum, sabır ve ölçülülüğün para kazanma becerilerini desteklediğini gösterir.',
     reversed:
       'Ters Denge, aşırılık, sabırsızlık ya da dengesiz kararların mali gelişimi zayıflatabileceğini işaret eder.',
-    keywords: ['denge', 'uyum', 'sabır', 'ölçülülük', 'huzur'],
+    keywords: ['denge', 'uyum', 'sabır', 'Denge', 'huzur'],
     context:
       'Para kazanma yeteneklerin denge ya da dengesizlikle bağlantılıdır.',
     group: 'Majör Arkana',
@@ -1109,7 +1109,7 @@ export function getMoneyPosition8Meaning(
     'Asılı Adam': 'The Hanged Man',
     Ölüm: 'Death',
     Ölçü: 'Temperance',
-    Ölçülülük: 'Temperance',
+    Denge: 'Temperance',
     Şeytan: 'The Devil',
     Kule: 'The Tower',
     Yıldız: 'The Star',

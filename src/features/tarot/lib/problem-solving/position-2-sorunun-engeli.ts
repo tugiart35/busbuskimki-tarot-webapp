@@ -227,7 +227,7 @@ export const position2Meanings: ProblemSolvingPosition2Meaning[] = [
       'Denge, engelin aşırılıklar, dengesizlik veya uyum eksikliği olabilir. Ölçülülüğü kaybettiğinde çözüm de zorlaşıyor.',
     reversed:
       'Ters Denge, sabırsızlık, aşırı uçlara gitmek veya uyumsuzluk problemin kaynağı olabilir.',
-    keywords: ['denge', 'uyum', 'sabır', 'ölçülülük', 'engel'],
+    keywords: ['denge', 'uyum', 'sabır', 'Denge', 'engel'],
     context: 'Engel, dengeyi kuramamak ve sabırsızlıktan doğuyor.',
     group: 'Majör Arkana',
   },

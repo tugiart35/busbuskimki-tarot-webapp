@@ -220,11 +220,11 @@ export const position6Meanings: MoneyPosition6Meaning[] = [
     card: 'Temperance',
     position: 6,
     upright:
-      'Denge, yeni mali planlarda ölçülülük, uyum ve sabırlı ilerlemeyi işaret eder.',
+      'Denge, yeni mali planlarda Denge, uyum ve sabırlı ilerlemeyi işaret eder.',
     reversed:
       'Ters Denge, mali planlarda aşırılıklar, sabırsızlık veya dengesiz yaklaşımı gösterebilir.',
     keywords: ['uyum', 'ölçü', 'denge', 'sabır', 'plan'],
-    context: 'Yeni mali planlarda denge ve ölçülülük ön plandadır.',
+    context: 'Yeni mali planlarda denge ve Denge ön plandadır.',
     group: 'Majör Arkana',
   },
   {
@@ -1047,7 +1047,7 @@ export function getMoneyPosition6Meaning(
     'Asılı Adam': 'The Hanged Man',
     Ölüm: 'Death',
     Ölçü: 'Temperance',
-    Ölçülülük: 'Temperance',
+    Denge: 'Temperance',
     Şeytan: 'The Devil',
     Kule: 'The Tower',
     Yıldız: 'The Star',

@@ -1327,9 +1327,6 @@ export function createTarotReadingComponent({
                     <div className={themeStyles.readingHighlight.title}>
                       {config.positionsInfo[currentPosition - 1]?.title ?? ''}
                     </div>
-                    <div className={themeStyles.readingHighlight.subtitle}>
-                      {config.positionsInfo[currentPosition - 1]?.desc ?? ''}
-                    </div>
                   </div>
                 </div>
               </div>

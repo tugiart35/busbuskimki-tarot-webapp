@@ -708,7 +708,7 @@ export const position6Meanings: MarriagePositionMeaning[] = [
       'Aile hızlı yargılar ve acele kararlarla hareket edebilir. Ancak siz sakin ve ölçülü durduğunuzda bu fırtına kısa sürede dağılabilir. Cesur ama sabırlı duruşunuz takdir toplayabilir.',
     reversed:
       'Ailenin aceleci ve saldırgan tavrı sizi köşeye sıkıştırabilir. Gerginlikler büyüyerek kabul şansını zayıflatabilir. Bu noktada mesafe koymak gerekebilir.',
-    keywords: ['acelecilik', 'karar', 'cesaret', 'fırtına', 'ölçülülük'],
+    keywords: ['acelecilik', 'karar', 'cesaret', 'fırtına', 'Denge'],
     context:
       'Aile hızlı yargılar verebilir. Sakin duruşunuz takdir toplayabilir.',
     group: 'Kılıçlar',

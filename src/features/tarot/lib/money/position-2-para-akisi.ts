@@ -219,11 +219,11 @@ export const position2Meanings: Moneyposition2Meaning[] = [
     card: 'Temperance',
     position: 2,
     upright:
-      'Denge, güvenliği ölçülülük ve uyumla aradığını gösterir. Orta yol sana huzur verir.',
+      'Denge, güvenliği Denge ve uyumla aradığını gösterir. Orta yol sana huzur verir.',
     reversed:
       'Ters Denge, aşırılıklar ve uyumsuzluk kaygısını işaret eder. Güvenlik arzusu, uçlarda kaybolabilir.',
     keywords: ['denge', 'uyum', 'güvenlik', 'sabır', 'ölçü'],
-    context: 'Güvenliği ölçülülük ve uyumla bulursun.',
+    context: 'Güvenliği Denge ve uyumla bulursun.',
     group: 'Majör Arkana',
   },
   {
@@ -1035,7 +1035,7 @@ export function getMoneyposition2Meaning(
     'Asılı Adam': 'The Hanged Man',
     Ölüm: 'Death',
     Ölçü: 'Temperance',
-    Ölçülülük: 'Temperance',
+    Denge: 'Temperance',
     Şeytan: 'The Devil',
     Kule: 'The Tower',
     Yıldız: 'The Star',

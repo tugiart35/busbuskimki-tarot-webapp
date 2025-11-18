@@ -236,10 +236,10 @@ export const position4Meanings: ProblemSolvingPosition4Meaning[] = [
     card: 'Temperance',
     position: 4,
     upright:
-      'Denge, potansiyelinin sabır, ölçülülük ve uyumla ilerlemek olduğunu gösterir.',
+      'Denge, potansiyelinin sabır, Denge ve uyumla ilerlemek olduğunu gösterir.',
     reversed:
       'Ters Denge, potansiyelini engelleyen aşırılıklar, sabırsızlık veya uyumsuzluk olabilir.',
-    keywords: ['denge', 'uyum', 'sabır', 'ölçülülük', 'potansiyel'],
+    keywords: ['denge', 'uyum', 'sabır', 'Denge', 'potansiyel'],
     context: 'En iyi potansiyelin, uyumlu ve sabırlı adımlar atmaktır.',
     group: 'Majör Arkana',
   },

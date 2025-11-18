@@ -140,14 +140,18 @@ export function useTarotDeck(): TarotCard[] {
       const numberName =
         card.number >= 1 && card.number <= 10 ? numberNames[card.number] : '';
 
+      // Card key oluştur (getCardName için)
+      const cardKey = card.court
+        ? `${card.court}-of-cups`
+        : `${numberName.toLowerCase()}-of-cups`;
+      
+      const cardNameEn = getCardName(cardKey, 'en');
+      const cardNameTr = getCardName(cardKey, 'tr');
+
       deckArray.push({
         id: card.id,
-        name: card.court
-          ? `${card.court.charAt(0).toUpperCase() + card.court.slice(1)} of Cups`
-          : `${numberName} of Cups`,
-        nameTr: card.court
-          ? `${card.court.charAt(0).toUpperCase() + card.court.slice(1)} of Cups`
-          : `${numberName} of Cups`,
+        name: cardNameEn,
+        nameTr: cardNameTr, // Türkçe isim
         suit: 'cups' as const,
         number: card.number,
         meaning: {
@@ -199,14 +203,18 @@ export function useTarotDeck(): TarotCard[] {
       const numberName =
         card.number >= 1 && card.number <= 10 ? numberNames[card.number] : '';
 
+      // Card key oluştur (getCardName için)
+      const cardKey = card.court
+        ? `${card.court}-of-wands`
+        : `${numberName.toLowerCase()}-of-wands`;
+      
+      const cardNameEn = getCardName(cardKey, 'en');
+      const cardNameTr = getCardName(cardKey, 'tr');
+
       deckArray.push({
         id: card.id,
-        name: card.court
-          ? `${card.court.charAt(0).toUpperCase() + card.court.slice(1)} of Wands`
-          : `${numberName} of Wands`,
-        nameTr: card.court
-          ? `${card.court.charAt(0).toUpperCase() + card.court.slice(1)} of Wands`
-          : `${numberName} of Wands`,
+        name: cardNameEn,
+        nameTr: cardNameTr, // Türkçe isim
         suit: 'wands' as const,
         number: card.number,
         meaning: {
@@ -258,14 +266,18 @@ export function useTarotDeck(): TarotCard[] {
       const numberName =
         card.number >= 1 && card.number <= 10 ? numberNames[card.number] : '';
 
+      // Card key oluştur (getCardName için)
+      const cardKey = card.court
+        ? `${card.court}-of-swords`
+        : `${numberName.toLowerCase()}-of-swords`;
+      
+      const cardNameEn = getCardName(cardKey, 'en');
+      const cardNameTr = getCardName(cardKey, 'tr');
+
       deckArray.push({
         id: card.id,
-        name: card.court
-          ? `${card.court.charAt(0).toUpperCase() + card.court.slice(1)} of Swords`
-          : `${numberName} of Swords`,
-        nameTr: card.court
-          ? `${card.court.charAt(0).toUpperCase() + card.court.slice(1)} of Swords`
-          : `${numberName} of Swords`,
+        name: cardNameEn,
+        nameTr: cardNameTr, // Türkçe isim
         suit: 'swords' as const,
         number: card.number,
         meaning: {
@@ -317,14 +329,18 @@ export function useTarotDeck(): TarotCard[] {
       const numberName =
         card.number >= 1 && card.number <= 10 ? numberNames[card.number] : '';
 
+      // Card key oluştur (getCardName için)
+      const cardKey = card.court
+        ? `${card.court}-of-pentacles`
+        : `${numberName.toLowerCase()}-of-pentacles`;
+      
+      const cardNameEn = getCardName(cardKey, 'en');
+      const cardNameTr = getCardName(cardKey, 'tr');
+
       deckArray.push({
         id: card.id,
-        name: card.court
-          ? `${card.court.charAt(0).toUpperCase() + card.court.slice(1)} of Pentacles`
-          : `${numberName} of Pentacles`,
-        nameTr: card.court
-          ? `${card.court.charAt(0).toUpperCase() + card.court.slice(1)} of Pentacles`
-          : `${numberName} of Pentacles`,
+        name: cardNameEn,
+        nameTr: cardNameTr, // Türkçe isim
         suit: 'pentacles' as const,
         number: card.number,
         meaning: {

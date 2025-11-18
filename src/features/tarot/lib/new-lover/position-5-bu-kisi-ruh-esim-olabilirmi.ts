@@ -219,10 +219,10 @@ export const position5Meanings: NewLoverposition5Meaning[] = [
     card: 'Temperance',
     position: 5,
     upright:
-      'Denge, ruh eşi bağının uyum, sabır ve ölçülülükle büyüyebileceğini gösterir.',
+      'Denge, ruh eşi bağının uyum, sabır ve Dengele büyüyebileceğini gösterir.',
     reversed:
       'Ters Denge, aşırılıklar veya sabırsızlık ruh eşi bağlantısını zorlayabilir.',
-    keywords: ['denge', 'uyum', 'sabır', 'ölçülülük', 'ruh eşi'],
+    keywords: ['denge', 'uyum', 'sabır', 'Denge', 'ruh eşi'],
     context: 'Denge ruh eşliğini destekler, aşırılık bağı sınar.',
     group: 'Majör Arkana',
   },
@@ -1037,7 +1037,7 @@ export function getNewLoverposition5Meaning(
     'Asılı Adam': 'The Hanged Man',
     Ölüm: 'Death',
     Ölçü: 'Temperance',
-    Ölçülülük: 'Temperance',
+    Denge: 'Temperance',
     Şeytan: 'The Devil',
     Kule: 'The Tower',
     Yıldız: 'The Star',

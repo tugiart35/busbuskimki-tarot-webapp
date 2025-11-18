@@ -214,7 +214,7 @@ export const position2Meanings: MarriagePositionMeaning[] = [
       'Dengenizi bulun, ölçülü olun. Beklerken sabır ve uyum sizi güçlendirir.',
     reversed:
       'Aşırılıklar ya da dengesizlik süreci zorlaştırır. Orta yolu seçin.',
-    keywords: ['denge', 'sabır', 'uyum', 'ölçülülük'],
+    keywords: ['denge', 'sabır', 'uyum', 'Denge'],
     context: 'Beklerken uyumlu ve ölçülü olmak faydalı. Bu sizi huzurlu kılar.',
     group: 'Majör Arkana',
   },

@@ -225,7 +225,7 @@ export const position7Meanings: MoneyPosition7Meaning[] = [
     card: 'Temperance',
     position: 7,
     upright:
-      'Denge, mali planlarda ölçülülük, uyum ve uzun vadeli istikrarı işaret eder.',
+      'Denge, mali planlarda Denge, uyum ve uzun vadeli istikrarı işaret eder.',
     reversed:
       'Ters Denge, aşırılıklar, dengesizlik ya da plansızlık riskini gösterir.',
     keywords: ['denge', 'ölçü', 'uyum', 'istikrar', 'sabır'],
@@ -1142,7 +1142,7 @@ export function getMoneyPosition7Meaning(
     'Asılı Adam': 'The Hanged Man',
     Ölüm: 'Death',
     Ölçü: 'Temperance',
-    Ölçülülük: 'Temperance',
+    Denge: 'Temperance',
     Şeytan: 'The Devil',
     Kule: 'The Tower',
     Yıldız: 'The Star',
