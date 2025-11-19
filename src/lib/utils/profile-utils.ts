@@ -155,6 +155,7 @@ export async function createOrUpdateProfile(
 
 /**
  * Mevcut profili kontrol eder ve yoksa oluşturur
+ * OAuth kullanıcıları için 15 kredi hediye eder
  * @param user - Supabase User objesi
  * @param supabaseClient - Opsiyonel: Server-side client (callback route için)
  */
@@ -174,7 +175,8 @@ export async function ensureProfileExists(
       .single();
 
     if (fetchError && fetchError.code === 'PGRST116') {
-      // Profil yoksa oluştur
+      // Profil yoksa oluştur - 15 kredi ile (OAuth kullanıcıları için)
+      // Trigger'ın çalışmasını beklemek yerine direkt 15 kredi ile oluşturuyoruz
       const createData: CreateProfileData = {
         userId: user.id,
         firstName: user.user_metadata?.first_name,
@@ -187,7 +189,60 @@ export async function ensureProfileExists(
         timezone: user.user_metadata?.timezone,
       };
 
-      return await createOrUpdateProfile(createData, supabaseClient);
+      const result = await createOrUpdateProfile(createData, supabaseClient);
+
+      // Eğer profil başarıyla oluşturulduysa, 15 kredi ekle ve transaction log oluştur
+      if (result.success && result.profile) {
+        const initialCredits = 15;
+        
+        // Profil 0 kredi ile oluşturulmuşsa, 15 kredi ekle
+        if (result.profile.credit_balance === 0) {
+          try {
+            // Kredi bakiyesini güncelle
+            const { error: updateError } = await client
+              .from('profiles')
+              .update({ credit_balance: initialCredits })
+              .eq('id', user.id);
+
+            if (updateError) {
+              console.error('Kredi güncelleme hatası:', updateError);
+            } else {
+              // Transaction log oluştur
+              const { error: txError } = await client
+                .from('transactions')
+                .insert({
+                  user_id: user.id,
+                  type: 'bonus',
+                  amount: initialCredits,
+                  delta_credits: initialCredits,
+                  description: 'Hoş geldin hediyesi - Kayıt bonusu',
+                  ref_type: 'welcome_bonus',
+                  ref_id: null,
+                });
+
+              if (txError) {
+                console.error('Transaction log hatası:', txError);
+              }
+
+              // Güncellenmiş profili al
+              const { data: updatedProfile } = await client
+                .from('profiles')
+                .select('*')
+                .eq('id', user.id)
+                .single();
+
+              if (updatedProfile) {
+                result.profile = updatedProfile;
+              }
+            }
+          } catch (creditError) {
+            console.error('Kredi ekleme hatası:', creditError);
+            // Hata olsa bile profil oluşturuldu, devam et
+          }
+        }
+      }
+
+      return result;
     }
 
     if (fetchError) {
@@ -195,6 +250,63 @@ export async function ensureProfileExists(
         success: false,
         error: fetchError.message,
       };
+    }
+
+    // Profil zaten varsa, eğer 0 kredisi varsa 15 kredi ekle (OAuth kullanıcıları için)
+    if (existingProfile && existingProfile.credit_balance === 0) {
+      // Welcome bonus transaction'ı var mı kontrol et
+      const { data: existingTx, error: txCheckError } = await client
+        .from('transactions')
+        .select('id')
+        .eq('user_id', user.id)
+        .eq('ref_type', 'welcome_bonus')
+        .limit(1)
+        .maybeSingle();
+
+      // Eğer welcome bonus transaction'ı yoksa, 15 kredi ekle
+      if (!existingTx && (!txCheckError || txCheckError.code === 'PGRST116')) {
+        try {
+          const initialCredits = 15;
+          
+          // Kredi bakiyesini güncelle
+          const { error: updateError } = await client
+            .from('profiles')
+            .update({ credit_balance: initialCredits })
+            .eq('id', user.id);
+
+          if (!updateError) {
+            // Transaction log oluştur
+            await client
+              .from('transactions')
+              .insert({
+                user_id: user.id,
+                type: 'bonus',
+                amount: initialCredits,
+                delta_credits: initialCredits,
+                description: 'Hoş geldin hediyesi - Kayıt bonusu',
+                ref_type: 'welcome_bonus',
+                ref_id: null,
+              });
+
+            // Güncellenmiş profili al
+            const { data: updatedProfile } = await client
+              .from('profiles')
+              .select('*')
+              .eq('id', user.id)
+              .single();
+
+            if (updatedProfile) {
+              return {
+                success: true,
+                profile: updatedProfile,
+              };
+            }
+          }
+        } catch (creditError) {
+          console.error('Kredi ekleme hatası:', creditError);
+          // Hata olsa bile mevcut profili döndür
+        }
+      }
     }
 
     return {

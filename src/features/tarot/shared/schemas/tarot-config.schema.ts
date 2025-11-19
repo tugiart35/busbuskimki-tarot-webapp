@@ -105,6 +105,7 @@ export const CanvasI18nKeysSchema = z.object({
 export const CreditKeysSchema = z.object({
   detailed: z.string().min(1),
   written: z.string().min(1),
+  simple: z.string().min(1).optional(),
 });
 
 /**

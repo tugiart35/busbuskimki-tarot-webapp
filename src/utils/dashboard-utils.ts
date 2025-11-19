@@ -322,8 +322,10 @@ export function getReadingFormat(
   }
 
   // Fallback: cost_credits'e göre belirle
-  if (costCredits) {
-    if (costCredits <= 50) {
+  if (costCredits !== undefined && costCredits !== null) {
+    if (costCredits === 1) {
+      return 'simple'; // Basit okumalar 1 kredi
+    } else if (costCredits <= 50) {
       return 'simple';
     } else if (costCredits >= 60 && costCredits <= 80) {
       return 'written'; // Genellikle yazılı okumalar
@@ -357,6 +359,14 @@ export function getReadingFormat(
     case 'MONEY_SPREAD_WRITTEN':
       return 'written'; // Yazılı okumalar
     case 'LOVE_SPREAD_SIMPLE':
+    case 'CAREER_SPREAD_SIMPLE':
+    case 'PROBLEM_SOLVING_SIMPLE':
+    case 'SITUATION_ANALYSIS_SIMPLE':
+    case 'RELATIONSHIP_ANALYSIS_SIMPLE':
+    case 'RELATIONSHIP_PROBLEMS_SIMPLE':
+    case 'MARRIAGE_SIMPLE':
+    case 'NEW_LOVER_SIMPLE':
+    case 'MONEY_SPREAD_SIMPLE':
     case 'THREE_CARD_SPREAD':
       return 'simple'; // Basit okumalar
     default:

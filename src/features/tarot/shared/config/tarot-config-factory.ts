@@ -626,6 +626,7 @@ export function createTarotConfig(
   const defaultCreditKeys: CreditKeys = {
     detailed: `${creditPrefix}_DETAILED`,
     written: `${creditPrefix}_WRITTEN`,
+    simple: `${creditPrefix}_SIMPLE`,
     ...customCreditKeys,
   };
 
