@@ -2,7 +2,7 @@
 info:
 ---
 Dosya Amacı:
-- Yeni Bir Sevgili açılımı tarot açılımında her pozisyon için kart anlamlarını birleştirir
+- Yaklaşan Aşk Uyumu tarot açılımında her pozisyon için kart anlamlarını birleştirir
 - Pozisyona, karta, anahtar kelimeye veya gruba göre anlam arama ve filtreleme fonksiyonları sunar
 - Pozisyon başlıkları, açıklamaları ve ilgili meta verileri içerir
 - i18n desteği ile 3 dilde (TR/EN/SR)
@@ -51,7 +51,7 @@ export interface NewLoverPositionMeaning {
   group: 'Majör Arkana' | 'Kupalar' | 'Kılıçlar' | 'Asalar' | 'Tılsımlar';
 }
 
-// Yeni Bir Sevgili açılımı pozisyon bilgileri
+// Yaklaşan Aşk Uyumu pozisyon bilgileri
 export const newLoverPositions = {
   1: {
     title: 'Yeni Bir Sevgili Yaklaşacak mı?',
@@ -62,12 +62,12 @@ export const newLoverPositions = {
   2: {
     title: 'Bu Kişi Nasıl Biri?',
     description:
-      'Yeni sevgilinizin kişilik özelliklerini ve karakterini gösterir',
-    question: 'Yeni sevgiliniz nasıl bir kişilik olacak?',
+      'Yaklaşan aşkınızın kişilik özelliklerini ve karakterini gösterir',
+    question: 'Yaklaşan aşkınız nasıl bir kişilik olacak?',
   },
   3: {
     title: 'Bu Kişiyle Uyumlu muyum?',
-    description: 'Yeni sevgilinizle uyumunuzu ve uyumluluğunuzu gösterir',
+    description: 'Yaklaşan aşkınızle uyumunuzu ve uyumluluğunuzu gösterir',
     question: 'Bu kişiyle ne kadar uyumlu olacaksınız?',
   },
   4: {
@@ -88,7 +88,7 @@ export const newLoverPositions = {
 };
 
 /**
- * Yeni Bir Sevgili açılımı pozisyon anlamları
+ * Yaklaşan Aşk Uyumu pozisyon anlamları
  * Her pozisyon için kart anlamlarını içerir
  */
 export const NEW_LOVER_POSITION_MEANINGS: Record<
@@ -104,7 +104,7 @@ export const NEW_LOVER_POSITION_MEANINGS: Record<
 };
 
 /**
- * Yeni Bir Sevgili açılımında belirli bir kartın belirli pozisyondaki anlamını döndürür
+ * Yaklaşan Aşk Uyumunda belirli bir kartın belirli pozisyondaki anlamını döndürür
  * @param card - Tarot kartı
  * @param position - Pozisyon numarası (1-6)
  * @param isReversed - Kart ters mi?
@@ -155,7 +155,7 @@ export function getNewLoverMeaningByCardAndPosition(
     upright: card.meaningTr.upright,
     reversed: card.meaningTr.reversed,
     keywords: card.keywordsTr || card.keywords || [],
-    context: `Yeni bir sevgili açılımında ${position}. pozisyon (${newLoverPositions[position as keyof typeof newLoverPositions]?.title}) için ${card.nameTr} kartının anlamı`,
+    context: `Yaklaşan Aşk Uyumunda ${position}. pozisyon (${newLoverPositions[position as keyof typeof newLoverPositions]?.title}) için ${card.nameTr} kartının anlamı`,
     group: getCardGroup(card),
   };
 
@@ -195,7 +195,7 @@ function getCardGroup(
 }
 
 /**
- * Yeni Bir Sevgili açılımı pozisyon anlamlarını al
+ * Yaklaşan Aşk Uyumu pozisyon anlamlarını al
  */
 export function getNewLoverPositionMeanings(
   position: number

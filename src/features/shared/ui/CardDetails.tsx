@@ -4,10 +4,10 @@ Bağlantılı dosyalar:
 - react: Temel React fonksiyonları için (gerekli)
 - @/features/tarot/lib/a-tarot-helpers: Tarot kartı tipi ve temel kart verileri için (gerekli)
 - ./BaseCardDetails: Ortak modal altyapısı ve görsel sunum için (gerekli)
-- @/features/tarot/lib/love/position-meanings-index: Aşk açılımında pozisyon bazlı anlamlar (gerekli)
+- @/features/tarot/lib/love/position-meanings-index: Aşk uyumunda pozisyon bazlı anlamlar (gerekli)
 - @/features/tarot/lib/career/position-meanings-index: Kariyer açılımında pozisyon bazlı anlamlar (gerekli)
-- @/features/tarot/lib/problem-solving/position-meanings-index: Problem çözme açılımında pozisyon bazlı anlamlar (gerekli)
-- @/features/tarot/lib/situation-analysis/position-meanings-index: Durum analizi açılımında pozisyon bazlı anlamlar (gerekli)
+- @/features/tarot/lib/problem-solving/position-meanings-index: Kelt  açılımında pozisyon bazlı anlamlar (gerekli)
+- @/features/tarot/lib/situation-analysis/position-meanings-index: Enerji Haritası açılımında pozisyon bazlı anlamlar (gerekli)
 - @/features/tarot/lib/relationship-analysis/position-meanings-index: İlişki analizi açılımında pozisyon bazlı anlamlar (gerekli)
 - BaseInterpretation.tsx: Kariyer anlamları için CardMeaningData interface'i ve fonksiyonları (gerekli)
 
@@ -20,7 +20,7 @@ Backend bağlantısı:
 Geliştirme ve öneriler:
 - BaseInterpretation.tsx'deki CardMeaningData interface'i ve fonksiyonları entegre edildi.
 - getCardMeaning, getMeaningText, getKeywords, getPositionSpecificInterpretation fonksiyonları ile esnek veri çekimi sağlanıyor.
-- showContext özelliği ile problem çözme açılımında context gösterimi destekleniyor.
+- showContext özelliği ile Kelt  açılımında context gösterimi destekleniyor.
 - renderCardImage ve renderContent fonksiyonları ile üst modal bileşenine özelleştirilebilir içerik sunuluyor.
 - themeSettings ile tüm açılım türlerine göre tema ve genişlik ayarları yönetiliyor.
 - Anahtar kelimeler ve anlamlar için fallback mekanizması mevcut, veri eksikliğinde hata alınmaz.
@@ -33,8 +33,8 @@ Kodun orunabilirliği, optimizasyonu, yeniden kullanılabilirliği ve güvenliğ
 
 Gereklilik ve Kullanım Durumu:
 - CardDetails: Gerekli, tüm tarot açılımlarında kart detay modalı olarak kullanılır.
-- getCardMeaning, getMeaningText, getKeywords, getPositionSpecificInterpretation: Gerekli, kariyer ve problem çözme anlamları için kullanılır.
-- showContext: Gerekli, problem çözme açılımında context gösterimi için kullanılır.
+- getCardMeaning, getMeaningText, getKeywords, getPositionSpecificInterpretation: Gerekli, kariyer ve Kelt  anlamları için kullanılır.
+- showContext: Gerekli, Kelt  açılımında context gösterimi için kullanılır.
 - renderCardImage, renderContent: Gerekli, modal içeriğini özelleştirmek için kullanılır.
 */
 
@@ -89,7 +89,7 @@ interface CardDetailsProps {
     _isReversed: boolean
   ) => string | { interpretation: string; context: string };
 
-  // CONTEXT GÖSTERİMİ İÇİN (Problem çözme açılımı için)
+  // CONTEXT GÖSTERİMİ İÇİN (Kelt  açılımı için)
   showContext?: boolean;
 
   // POZİSYON CONTEXT FONKSİYONU (lib/ dosyalarındaki context bilgileri için)
@@ -347,7 +347,7 @@ const CardDetails: React.FC<CardDetailsProps> = ({
         )
       : [];
 
-    // Context'i al (problem çözme açılımı için)
+    // Context'i al (Kelt  açılımı için)
     const cardMeaning = getCardMeaning ? getCardMeaning(cardParam) : null;
     const context = showContext ? cardMeaning?.context || '' : '';
 

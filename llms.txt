@@ -24,7 +24,7 @@
 
 ### Tarot Açılım Türleri
 
-1. **Aşk Açılımı (Love Spread)**
+1. **Aşk Uyumu (Love Spread)**
    - URL: /tr/tarotokumasi/love-spread
    - Kullanım: İlişki dinamikleri, duygusal durum, gelecek beklentileri
    - Kart sayısı: 5 kart
@@ -34,7 +34,7 @@
    - Kullanım: İş hayatı, profesyonel gelişim, fırsatlar
    - Kart sayısı: 5 kart
 
-3. **Durum Analizi (Situation Analysis)**
+3. **Enerji Haritası (Situation Analysis)**
    - URL: /tr/tarotokumasi/situation-analysis
    - Kullanım: Genel durum değerlendirmesi, geçmiş-şimdi-gelecek
    - Kart sayısı: 3 kart
@@ -44,7 +44,7 @@
    - Kullanım: Yeni bir ilişkinin potansiyeli
    - Kart sayısı: 7 kart
 
-5. **İlişki Sorunları (Relationship Problems)**
+5. **İlişki dönüşüm (Relationship Problems)**
    - URL: /tr/tarotokumasi/relationship-problems
    - Kullanım: Mevcut ilişki sorunlarının analizi
    - Kart sayısı: 6 kart
@@ -59,7 +59,7 @@
    - Anahtar kelimeler: Manifestasyon, yaratıcılık, güç, beceri
    - Genel anlam: İç potansiyeli dış dünyaya taşıma yeteneği
 
-2. **Yüksek Rahibe (The High Priestess)**: /tr/kartlar/yuksek-rahibe
+2. **Azize (The High Priestess)**: /tr/kartlar/yuksek-rahibe
    - Anahtar kelimeler: Sezgi, bilinçaltı, gizem, içsel bilgelik
    - Genel anlam: İçsel sesini dinleme ve bilinçaltı bilgiye erişim
 
@@ -71,7 +71,7 @@
    - Anahtar kelimeler: Otorite, yapı, kontrol, liderlik
    - Genel anlam: Düzen ve disiplin yoluyla güç
 
-5. **Başrahip (The Hierophant)**: /tr/kartlar/basrahip
+5. **Aziz (The Hierophant)**: /tr/kartlar/basrahip
    - Anahtar kelimeler: Gelenek, maneviyat, eğitim, inanç
    - Genel anlam: Manevi rehberlik ve geleneksel değerler
 
@@ -99,7 +99,7 @@
     - Anahtar kelimeler: Denge, hakikat, sebep-sonuç, adalet
     - Genel anlam: Objektif karar verme ve denge
 
-12. **Asılı Adam (The Hanged Man)**: /tr/kartlar/asili-adam
+12. **Asılan Adam (The Hanged Man)**: /tr/kartlar/asili-adam
     - Anahtar kelimeler: Perspektif, bırakma, duraklama, fedakarlık
     - Genel anlam: Farklı bakış açısı kazanma
 
@@ -131,7 +131,7 @@
     - Anahtar kelimeler: Sevinç, başarı, berraklık, pozitif enerji
     - Genel anlam: Mutluluk ve yaşam gücü
 
-20. **Yargı (Judgement)**: /tr/kartlar/yargi
+20. **Mahkeme (Judgement)**: /tr/kartlar/yargi
     - Anahtar kelimeler: Yargılama, yenilenme, çağrı, uyanış
     - Genel anlam: İçsel çağrı ve dönüşüm
 

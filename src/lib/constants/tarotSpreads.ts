@@ -2,7 +2,7 @@
 info:
 Bağlantılı dosyalar:
 - next/dynamic: Dinamik bileşen yükleme için (gerekli)
-- @/components/specific/tarot/Love-Spread/LoveTarot: Aşk açılımı ana bileşeni (gerekli)
+- @/components/specific/tarot/Love-Spread/LoveTarot: Aşk Uyumu ana bileşeni (gerekli)
 - @/lib/tarot/spreads/registry: Yeni modüler spread registry sistemi (modülerleştirme)
 
 Dosyanın amacı:
@@ -203,7 +203,7 @@ const careerPositions: TarotCardPosition[] = [
   },
 ];
 
-// Problem Solving spread pozisyonları
+// Celtics spread pozisyonları
 const problemSolvingPositions: TarotCardPosition[] = [
   {
     id: 1,
@@ -603,7 +603,7 @@ export const marriagePositions: TarotCardPosition[] = [
   },
 ];
 
-// Yeni Bir Sevgili açılımı pozisyonları
+// Yaklaşan Aşk Uyumu pozisyonları
 export const newLoverPositions: TarotCardPosition[] = [
   {
     id: 1,
@@ -759,65 +759,6 @@ export const tarotSpreads: TarotSpread[] = [
     },
   },
   {
-    id: 'career-spread',
-    name: 'spreads.career.name',
-    description: 'spreads.career.description',
-    cardCount: 7,
-    component: CareerReading,
-    icon: '💼',
-    color: 'blue',
-    positions: careerPositions,
-    layout: {
-      type: 'custom',
-      containerClass:
-        'relative w-full h-96 md:h-[500px] bg-gradient-to-br from-blue-800/50 to-green-800/50 rounded-xl border border-blue-700',
-      cardSize: 'medium',
-    },
-    prompts: {
-      systemPrompt: 'Sen deneyimli bir tarot okuyucusu ve kariyer uzmanısın...',
-    },
-  },
-  {
-    id: 'problem-solving-spread',
-    name: 'spreads.problemSolving.name',
-    description: 'spreads.problemSolving.description',
-    cardCount: 10,
-    component: ProblemSolvingReading,
-    icon: '🔍',
-    color: 'purple',
-    positions: problemSolvingPositions,
-    layout: {
-      type: 'custom',
-      containerClass:
-        'relative w-full h-[600px] md:h-[700px] bg-gradient-to-br from-purple-800/50 to-indigo-800/50 rounded-xl border border-purple-700',
-      cardSize: 'medium',
-    },
-    prompts: {
-      systemPrompt:
-        'Sen deneyimli bir tarot okuyucusu ve problem çözme uzmanısın...',
-    },
-  },
-  {
-    id: 'situation-analysis-spread',
-    name: 'spreads.situationAnalysis.name',
-    description: 'spreads.situationAnalysis.description',
-    cardCount: 7,
-    component: SituationAnalysisReading,
-    icon: '🔍',
-    color: 'green',
-    positions: situationAnalysisPositions,
-    layout: {
-      type: 'custom',
-      containerClass:
-        'relative w-full h-[500px] md:h-[600px] bg-gradient-to-br from-green-800/50 to-emerald-800/50 rounded-xl border border-green-700',
-      cardSize: 'medium',
-    },
-    prompts: {
-      systemPrompt:
-        'Sen deneyimli bir tarot okuyucusu ve durum analizi uzmanısın...',
-    },
-  },
-  {
     id: 'relationship-analysis-spread',
     name: 'spreads.relationshipAnalysis.name',
     description: 'spreads.relationshipAnalysis.description',
@@ -858,25 +799,6 @@ export const tarotSpreads: TarotSpread[] = [
     },
   },
   {
-    id: 'marriage-spread',
-    name: 'spreads.marriage.name',
-    description: 'spreads.marriage.description',
-    cardCount: 10,
-    component: MarriageReading,
-    icon: '💒',
-    color: 'pink',
-    positions: marriagePositions,
-    layout: {
-      type: 'custom',
-      containerClass:
-        'relative w-full h-[500px] md:h-[600px] bg-gradient-to-br from-pink-800/50 to-rose-800/50 rounded-xl border border-pink-700',
-      cardSize: 'medium',
-    },
-    prompts: {
-      systemPrompt: 'Sen deneyimli bir tarot okuyucusu ve evlilik uzmanısın...',
-    },
-  },
-  {
     id: 'new-lover-spread',
     name: 'spreads.newLover.name',
     description: 'spreads.newLover.description',
@@ -896,6 +818,64 @@ export const tarotSpreads: TarotSpread[] = [
     },
   },
   {
+    id: 'marriage-spread',
+    name: 'spreads.marriage.name',
+    description: 'spreads.marriage.description',
+    cardCount: 10,
+    component: MarriageReading,
+    icon: '💒',
+    color: 'pink',
+    positions: marriagePositions,
+    layout: {
+      type: 'custom',
+      containerClass:
+        'relative w-full h-[500px] md:h-[600px] bg-gradient-to-br from-pink-800/50 to-rose-800/50 rounded-xl border border-pink-700',
+      cardSize: 'medium',
+    },
+    prompts: {
+      systemPrompt: 'Sen deneyimli bir tarot okuyucusu ve evlilik uzmanısın...',
+    },
+  },
+  {
+    id: 'situation-analysis-spread',
+    name: 'spreads.situationAnalysis.name',
+    description: 'spreads.situationAnalysis.description',
+    cardCount: 7,
+    component: SituationAnalysisReading,
+    icon: '🔍',
+    color: 'green',
+    positions: situationAnalysisPositions,
+    layout: {
+      type: 'custom',
+      containerClass:
+        'relative w-full h-[500px] md:h-[600px] bg-gradient-to-br from-green-800/50 to-emerald-800/50 rounded-xl border border-green-700',
+      cardSize: 'medium',
+    },
+    prompts: {
+      systemPrompt:
+        'Sen deneyimli bir tarot okuyucusu ve Enerji Haritası uzmanısın...',
+    },
+  },
+  {
+    id: 'career-spread',
+    name: 'spreads.career.name',
+    description: 'spreads.career.description',
+    cardCount: 7,
+    component: CareerReading,
+    icon: '💼',
+    color: 'blue',
+    positions: careerPositions,
+    layout: {
+      type: 'custom',
+      containerClass:
+        'relative w-full h-96 md:h-[500px] bg-gradient-to-br from-blue-800/50 to-green-800/50 rounded-xl border border-blue-700',
+      cardSize: 'medium',
+    },
+    prompts: {
+      systemPrompt: 'Sen deneyimli bir tarot okuyucusu ve kariyer uzmanısın...',
+    },
+  },
+  {
     id: 'money-spread',
     name: 'spreads.money.name',
     description: 'spreads.money.description',
@@ -912,6 +892,26 @@ export const tarotSpreads: TarotSpread[] = [
     },
     prompts: {
       systemPrompt: 'Sen deneyimli bir tarot okuyucusu ve finans uzmanısın...',
+    },
+  },
+  {
+    id: 'problem-solving-spread',
+    name: 'spreads.problemSolving.name',
+    description: 'spreads.problemSolving.description',
+    cardCount: 10,
+    component: ProblemSolvingReading,
+    icon: '🔍',
+    color: 'purple',
+    positions: problemSolvingPositions,
+    layout: {
+      type: 'custom',
+      containerClass:
+        'relative w-full h-[600px] md:h-[700px] bg-gradient-to-br from-purple-800/50 to-indigo-800/50 rounded-xl border border-purple-700',
+      cardSize: 'medium',
+    },
+    prompts: {
+      systemPrompt:
+        'Sen deneyimli bir tarot okuyucusu ve Kelt  uzmanısın...',
     },
   },
   {

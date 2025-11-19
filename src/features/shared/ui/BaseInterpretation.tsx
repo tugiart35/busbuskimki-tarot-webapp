@@ -7,14 +7,14 @@ Dosya Amacı:
 - Pozisyon bazlı özel yorumları, anahtar kelimeleri ve context bilgilerini gösterir
 
 Bağlı Dosyalar:
-- LoveInterpretation.tsx (aşk açılımı için wrapper)
+- LoveInterpretation.tsx (Aşk Uyumu için wrapper)
 - CareerTarot.tsx (kariyer açılımı)
 - RelationshipAnalysisTarot.tsx (ilişki analizi açılımı)
 
 Önemli Özellikler:
 - Pozisyon özel yorum fonksiyonu desteği (getPositionSpecificInterpretation)
 - İlişki analizi, kariyer ve genel anlam desteği
-- Context gösterimi (problem çözme açılımı için)
+- Context gösterimi (Kelt  açılımı için)
 - Tema sistemi (7 farklı tema)
 
 Anlam Seçimi Öncelik Sırası:
@@ -23,7 +23,7 @@ Anlam Seçimi Öncelik Sırası:
 3. relationshipAnalysisMeaning (ilişki analizi)
 4. careerMeaning (kariyer açılımı)
 5. moneyMeaning (para açılımı)
-6. newLoverMeaning (yeni sevgili açılımı)
+6. newLoverMeaning (Yaklaşan Aşk Uyumu)
 7. marriageMeaning (evlilik açılımı)
 8. Genel kart anlamı (fallback)
 
@@ -83,7 +83,7 @@ export interface BaseInterpretationProps {
     _position: number
   ) => string | undefined;
 
-  // CONTEXT GÖSTERİMİ İÇİN (Problem çözme açılımı için)
+  // CONTEXT GÖSTERİMİ İÇİN (Kelt  açılımı için)
   showContext?: boolean;
 }
 
@@ -429,7 +429,7 @@ const BaseInterpretation = forwardRef<HTMLDivElement, BaseInterpretationProps>(
                   ? getKeywords(cardMeaning, card)
                   : [];
 
-            // Context'i al - önce position'dan, sonra lib/ dosyalarından, sonra problem çözme için
+            // Context'i al - önce position'dan, sonra lib/ dosyalarından, sonra Kelt  için
             const finalContext =
               positionContext ||
               (getPositionContext ? getPositionContext(card, idx + 1) : '') ||

@@ -2,7 +2,7 @@
 info:
 ---
 Dosya Amacı:
-- Problem Çözme açılımı için pozisyon bazlı kart anlamları
+- Kelt  açılımı için pozisyon bazlı kart anlamları
 - Her kartın her pozisyonda nasıl yorumlanacağını belirler
 - Pozisyon özel anlamlar + genel kart anlamlarını birleştirir
 - Kart ismi eşleştirmesi ve arama fonksiyonları içerir
@@ -73,7 +73,7 @@ import {
 import { getCardNameMappingSync } from '@/features/tarot/lib/love/card-name-mapping';
 
 /**
- * Problem Çözme açılımı için pozisyon bazlı anlam arayüzü
+ * Kelt  açılımı için pozisyon bazlı anlam arayüzü
  */
 export interface ProblemSolvingPositionMeaning {
   id: string;
@@ -86,7 +86,7 @@ export interface ProblemSolvingPositionMeaning {
   group: 'Majör Arkana' | 'Kupalar' | 'Kılıçlar' | 'Asalar' | 'Tılsımlar';
 }
 
-// Problem Çözme açılımı pozisyon bilgileri
+// Kelt  açılımı pozisyon bilgileri
 export const problemSolvingPositions = {
   1: {
     title: 'Mevcut Durum',
@@ -141,7 +141,7 @@ export const problemSolvingPositions = {
 };
 
 /**
- * Problem Çözme açılımında belirli bir kartın belirli pozisyondaki anlamını döndürür
+ * Kelt  açılımında belirli bir kartın belirli pozisyondaki anlamını döndürür
  * @param card - Tarot kartı
  * @param position - Pozisyon numarası (1-10)
  * @param isReversed - Kart ters mi?
@@ -227,7 +227,7 @@ export function getProblemSolvingMeaningByCardAndPosition(
     upright: card.meaningTr.upright,
     reversed: card.meaningTr.reversed,
     keywords: card.keywordsTr || card.keywords || [],
-    context: `Problem çözme açılımında ${position}. pozisyon (${problemSolvingPositions[position as keyof typeof problemSolvingPositions]?.title}) için ${card.nameTr} kartının anlamı`,
+    context: `Kelt  açılımında ${position}. pozisyon (${problemSolvingPositions[position as keyof typeof problemSolvingPositions]?.title}) için ${card.nameTr} kartının anlamı`,
     group: getCardGroup(card),
   };
 
@@ -415,7 +415,7 @@ export const getStatistics = () => {
 };
 
 /**
- * i18n destekli Problem Solving anlam fonksiyonu
+ * i18n destekli Celtics anlam fonksiyonu
  * @param cardName - Kart adı (örn: "The Fool")
  * @param position - Pozisyon numarası (1-10)
  * @param t - i18n translate fonksiyonu
@@ -517,7 +517,7 @@ export const getI18nProblemSolvingMeaningByCardAndPosition = (
         return originalMeaning.keywords;
       } catch (error) {
         console.error(
-          `[Problem Solving Position ${position}] Failed to parse keywords for ${cardName}:`,
+          `[Celtics Position ${position}] Failed to parse keywords for ${cardName}:`,
           error
         );
         return originalMeaning.keywords;

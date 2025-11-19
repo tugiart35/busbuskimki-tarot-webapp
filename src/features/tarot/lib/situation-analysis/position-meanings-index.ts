@@ -7,7 +7,7 @@ Bağlantılı dosyalar:
 - '@/lib/constants/tarotSpreads': Tarot açılım konfigürasyonları
 
 Dosyanın amacı:
-- Durum Analizi (Situation Analysis) Tarot açılımında her pozisyon için kart anlamlarını yönetir
+- Enerji Haritası (Situation Analysis) Tarot açılımında her pozisyon için kart anlamlarını yönetir
 - Pozisyona, karta, anahtar kelimeye göre anlam arama ve filtreleme fonksiyonları sunar
 - Pozisyon başlıkları, açıklamaları ve ilgili meta verileri içerir
 - i18n desteği ile çoklu dil desteği sağlar
@@ -130,7 +130,7 @@ function getCardGroup(
 }
 
 /**
- * Durum Analizi açılımında kartın pozisyonuna göre anlamını döndürür
+ * Enerji Haritası açılımında kartın pozisyonuna göre anlamını döndürür
  */
 export function getSituationAnalysisMeaningByCardAndPosition(
   card: TarotCard,
@@ -216,7 +216,7 @@ export function getSituationAnalysisMeaningByCardAndPosition(
     upright: card.meaningTr.upright,
     reversed: card.meaningTr.reversed,
     keywords: card.keywordsTr || card.keywords || [],
-    context: `Durum analizi açılımında ${position}. pozisyon (${situationAnalysisPositions[position as keyof typeof situationAnalysisPositions]?.title}) için ${card.nameTr} kartının anlamı`,
+    context: `Enerji Haritası açılımında ${position}. pozisyon (${situationAnalysisPositions[position as keyof typeof situationAnalysisPositions]?.title}) için ${card.nameTr} kartının anlamı`,
     group: getCardGroup(card),
   };
 

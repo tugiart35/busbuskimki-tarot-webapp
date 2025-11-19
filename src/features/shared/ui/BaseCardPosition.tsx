@@ -4,7 +4,7 @@ Bağlantılı dosyalar:
 - lib/tarot/a-tarot-helpers.ts: Tarot kartı tipi ve temel kart verileri için (gerekli)
 - components/specific/tarot/3cardtarot/CardPosition.tsx: 3 kart açılımı için özel pozisyon (gerekli, BaseCardPosition'ı özelleştirerek kullanır)
 - components/specific/tarot/hermit/CardPosition.tsx: Hermit açılımı için özel pozisyon (gerekli, BaseCardPosition'ı özelleştirerek kullanır)
-- components/specific/tarot/Love-Spread/CardPosition.tsx: Aşk açılımı için özel pozisyon (gerekli, BaseCardPosition'ı özelleştirerek kullanır)
+- components/specific/tarot/Love-Spread/CardPosition.tsx: Aşk Uyumu için özel pozisyon (gerekli, BaseCardPosition'ı özelleştirerek kullanır)
 - components/specific/tarot/CareerTarot/CardPosition.tsx: Kariyer açılımı için özel pozisyon (gerekli, BaseCardPosition'ı özelleştirerek kullanır)
 - Bu dosya, tarot açılımlarında kart pozisyonu için temel altyapı olarak kullanılır.
 

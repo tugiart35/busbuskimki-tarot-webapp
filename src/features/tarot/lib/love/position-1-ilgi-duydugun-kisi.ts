@@ -1,9 +1,9 @@
-// Bu dosya, Aşk açılımında Pozisyon 1 (İlgi Duyduğun Kişi) için özel kart anlamlarını içerir.
+// Bu dosya, Aşk uyumunda Pozisyon 1 (İlgi Duyduğun Kişi) için özel kart anlamlarını içerir.
 // Her kartın bu pozisyonda ne anlama geldiği tanımlanmıştır.
 // i18n desteği için güncellenmiştir.
 'use client';
 
-// Bu dosya, Aşk açılımında Pozisyon 1 (İlgi Duyduğun Kişi) için özel kart anlamlarını içerir.
+// Bu dosya, Aşk uyumunda Pozisyon 1 (İlgi Duyduğun Kişi) için özel kart anlamlarını içerir.
 
 import { useLoveTranslations } from './i18n-helper';
 

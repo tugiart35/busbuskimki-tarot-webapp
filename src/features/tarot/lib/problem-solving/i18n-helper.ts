@@ -5,7 +5,7 @@ Bağlantılı dosyalar:
 - ../../../../messages/*.json: Dil dosyaları için (gerekli)
 
 Dosyanın amacı:
-- Problem Solving tarot pozisyonları için i18n helper fonksiyonları
+- Celtics tarot pozisyonları için i18n helper fonksiyonları
 - Kart anlamlarını dil dosyalarından çekme
 - Fallback mekanizması ile güvenli çeviri
 
@@ -110,7 +110,7 @@ export const getCardContextKey = (
   return `problem-solving.meanings.${cardKey}.position${position}.context`;
 };
 
-// Problem Solving tarot için i18n hook'u
+// Celtics tarot için i18n hook'u
 export const useProblemSolvingTranslations = () => {
   const { t } = useTranslations();
 

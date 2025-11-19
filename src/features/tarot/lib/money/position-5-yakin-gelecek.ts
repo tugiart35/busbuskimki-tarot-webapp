@@ -2,7 +2,7 @@
 info:
 ---
 Dosya Amacı:
-- Problem Çözme açılımında 1. pozisyon (Mevcut Durum) için özel kart anlamları
+- Kelt  açılımında 1. pozisyon (Mevcut Durum) için özel kart anlamları
 - Her kartın bu pozisyonda nasıl yorumlanacağını belirler
 - Pozisyon özel anlamlar + genel kart anlamlarını birleştirir
 

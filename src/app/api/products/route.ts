@@ -50,9 +50,9 @@ const PRODUCTS: Product[] = [
   },
   {
     id: 'love-spread',
-    name: 'Aşk Açılımı (5 Kart)',
+    name: 'Aşk Uyumu (5 Kart)',
     description:
-      'İlişki dinamikleri ve duygusal durum analizi için özel tasarlanmış 5 kartlık açılım.',
+      'İlişki dinamikleri ve duygusal Enerji Haritası için özel tasarlanmış 5 kartlık açılım.',
     price: 149,
     currency: 'TRY',
     category: 'tarot-reading',
@@ -85,7 +85,7 @@ const PRODUCTS: Product[] = [
   },
   {
     id: 'situation-analysis',
-    name: 'Durum Analizi (3 Kart)',
+    name: 'Enerji Haritası (3 Kart)',
     description:
       'Genel durum değerlendirmesi için hızlı ve etkili 3 kartlık açılım.',
     price: 99,
@@ -93,7 +93,7 @@ const PRODUCTS: Product[] = [
     category: 'tarot-reading',
     availability: 'in_stock',
     url: 'https://busbuskimki.com/tr/tarotokumasi/situation-analysis',
-    features: ['Genel durum analizi', 'Hızlı sonuç', 'Pratik öneriler'],
+    features: ['Genel Enerji Haritası', 'Hızlı sonuç', 'Pratik öneriler'],
   },
   {
     id: 'new-lover',
@@ -114,7 +114,7 @@ const PRODUCTS: Product[] = [
   },
   {
     id: 'relationship-problems',
-    name: 'İlişki Sorunları Açılımı (6 Kart)',
+    name: 'İlişki Dönüşümü (6 Kart)',
     description:
       'Mevcut ilişki sorunlarını analiz eden ve çözüm önerileri sunan özel açılım.',
     price: 179,

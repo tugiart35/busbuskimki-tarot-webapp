@@ -252,12 +252,12 @@ export class TarotPositionMeaningGenerator implements PositionMeaningGenerator {
 
   private getSpreadTypeDescription(spreadType: string): string {
     const descriptions: Record<string, string> = {
-      love: 'aşk açılımında',
+      love: 'Aşk uyumunda',
       career: 'kariyer açılımında',
       money: 'para açılımında',
       relationshipAnalysis: 'ilişki analizi açılımında',
-      problemSolving: 'problem çözme açılımında',
-      situationAnalysis: 'durum analizi açılımında',
+      problemSolving: 'Kelt  açılımında',
+      situationAnalysis: 'Enerji Haritası açılımında',
       relationshipProblems: 'ilişki problemleri açılımında',
       marriage: 'evlilik açılımında',
     };

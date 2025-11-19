@@ -216,7 +216,7 @@ export default function BaseCardDetails({
   const positionContext =
     getPositionContext && position ? getPositionContext(card, position) : null;
 
-  // Context'i al (problem çözme açılımı için)
+  // Context'i al (Kelt  açılımı için)
   const cardMeaning = getCardMeaning ? getCardMeaning(card) : null;
   const context = cardMeaning?.context || '';
 

@@ -164,7 +164,7 @@ const MONEY_POSITIONS_LAYOUT: PositionLayout[] = [
   },
 ];
 
-// Problem Solving Spread Layout Data (CSS positions only)
+// Celtics Spread Layout Data (CSS positions only)
 
 const PROBLEM_SOLVING_POSITIONS_LAYOUT: PositionLayout[] = [
   {
@@ -802,7 +802,7 @@ export function createMoneyConfig(t?: (_key: string) => string): TarotConfig {
 }
 
 /**
- * Problem Solving spread için özel konfigürasyon
+ * Celtics spread için özel konfigürasyon
  * @param t - i18n translation function (optional)
  */
 export function createProblemSolvingConfig(
@@ -822,7 +822,7 @@ export function createProblemSolvingConfig(
     supabaseReadingType: 'problem-solving', // Veritabanında mevcut enum değeri
     creditKeyPrefix: 'PROBLEM_SOLVING',
     backgroundImage: '/new-lover.png',
-    backgroundAlt: 'Problem Solving Tarot Reading background',
+    backgroundAlt: 'Celtics Tarot Reading background',
     ...(t && { t }),
   });
 }

@@ -101,11 +101,11 @@ export function getReadingSEOConfig(
         ],
       },
       problem: {
-        title: 'Problem Çözme Tarot Okuma',
+        title: 'Kelt  Tarot Okuma',
         description:
           'Hayatınızdaki problemleri çözmek için detaylı tarot okuma. Çözüm yollarını keşfedin.',
         keywords: [
-          'problem çözme',
+          'Kelt ',
           'tarot rehberi',
           'yaşam koçluğu',
           'çözüm yolları',
@@ -139,11 +139,11 @@ export function getReadingSEOConfig(
         ],
       },
       problem: {
-        title: 'Problem Solving Tarot Reading',
+        title: 'Celtics Tarot Reading',
         description:
           'Detailed tarot reading to solve problems in your life. Discover solution paths.',
         keywords: [
-          'problem solving',
+          'Celtics',
           'tarot guidance',
           'life coaching',
           'solution paths',

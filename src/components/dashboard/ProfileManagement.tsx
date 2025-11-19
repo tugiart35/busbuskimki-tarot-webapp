@@ -41,10 +41,10 @@ export default function ProfileManagement({
             </div>
           </div>
           <h3 className='font-semibold text-text-celestial mb-2'>
-            {t('dashboard.profile', 'Profil Bilgileri')}
+            {t('dashboard.profile', 'Profil')}
           </h3>
           <p className='text-text-muted text-sm mb-4'>
-            {t('dashboard.editProfile', 'Kişisel bilgilerinizi güncelleyin')}
+            {t('dashboard.editProfile', 'Profili Düzenle')}
           </p>
         </button>
 
@@ -52,7 +52,7 @@ export default function ProfileManagement({
         <a
           href={routes.settings}
           className='card hover-lift p-6 group'
-          aria-label={t('dashboard.profile', 'Hesap Ayarları')}
+          aria-label={t('dashboard.settings', 'Hesap Ayarları')}
         >
           <div className='flex items-center justify-between mb-4'>
             <div className='p-3 bg-success/20 rounded-lg group-hover:bg-success/30 transition-colors'>
@@ -60,10 +60,10 @@ export default function ProfileManagement({
             </div>
           </div>
           <h3 className='font-semibold text-text-celestial mb-2'>
-            {t('dashboard.profile', 'Hesap Ayarları')}
+            {t('dashboard.settings', 'Ayarlar')}
           </h3>
           <p className='text-text-muted text-sm mb-4'>
-            {t('dashboard.settings', 'Güvenlik ve gizlilik ayarları')}
+            {t('dashboard.settings', 'Ayarlar')}
           </p>
         </a>
 
@@ -71,7 +71,7 @@ export default function ProfileManagement({
         <a
           href={routes.credits}
           className='card hover-lift p-6 group'
-          aria-label={t('dashboard.profile', 'Kredi Geçmişi')}
+          aria-label={t('dashboard.creditHistory.title', 'Kredi Geçmişi')}
         >
           <div className='flex items-center justify-between mb-4'>
             <div className='p-3 bg-warning/20 rounded-lg group-hover:bg-warning/30 transition-colors'>
@@ -79,12 +79,12 @@ export default function ProfileManagement({
             </div>
           </div>
           <h3 className='font-semibold text-text-celestial mb-2'>
-            {t('dashboard.profile', 'Kredi Geçmişi')}
+            {t('dashboard.creditHistory.title', 'Kredi Geçmişi')}
           </h3>
           <p className='text-text-muted text-sm mb-4'>
             {t(
               'dashboard.creditHistory.description',
-              'Tüm işlem geçmişinizi görün'
+              'Kredi alım, kullanım ve işlem geçmişinizi takip edin'
             )}
           </p>
         </a>

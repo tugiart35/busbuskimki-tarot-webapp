@@ -213,11 +213,11 @@ export function getMemberSince(dateString: string): string {
 export function getReadingTitle(readingType: string): string {
   switch (readingType) {
     case 'LOVE_SPREAD_DETAILED':
-      return 'Aşk Açılımı - Sesli Detaylı Okuma';
+      return 'Aşk Uyumu - Sesli Detaylı Okuma';
     case 'LOVE_SPREAD_WRITTEN':
-      return 'Aşk Açılımı - Yazılı Okuma';
+      return 'Aşk Uyumu - Yazılı Okuma';
     case 'LOVE_SPREAD_SIMPLE':
-      return 'Aşk Açılımı - Basit Okuma';
+      return 'Aşk Uyumu - Basit Okuma';
     case 'GENERAL_SPREAD':
       return 'Genel Açılım - Sesli Okuma';
     case 'THREE_CARD_SPREAD':
@@ -227,14 +227,14 @@ export function getReadingTitle(readingType: string): string {
     case 'NUMEROLOGY_READING':
       return 'Numeroloji Okuması';
     case 'PROBLEM_SOLVING_SPREAD':
-      return 'Problem Çözme Açılımı';
+      return 'Kelt  Açılımı';
     case 'SITUATION_ANALYSIS_SPREAD':
-      return 'Durum Analizi Açılımı';
+      return 'Enerji Haritası Açılımı';
     case 'RELATIONSHIP_ANALYSIS_SPREAD':
       return 'İlişki Analizi Açılımı';
     // Eski format desteği
     case 'love':
-      return 'Aşk Açılımı';
+      return 'Aşk Uyumu';
     case 'general':
       return 'Genel Açılım';
     case 'career':
@@ -242,19 +242,19 @@ export function getReadingTitle(readingType: string): string {
     case 'marriage':
       return 'Evlilik Açılımı';
     case 'new-lover':
-      return 'Yeni Sevgili Açılımı';
+      return 'Yaklaşan Aşk Uyumu';
     case 'relationship-analysis':
       return 'İlişki Analizi';
     case 'relationship-problems':
       return 'İlişki Problemleri';
     case 'problem-solving':
-      return 'Problem Çözme Açılımı';
+      return 'Kelt  Açılımı';
     case 'problem_solving':
-      return 'Problem Çözme Açılımı';
+      return 'Kelt  Açılımı';
     case 'money':
       return 'Para Açılımı';
     case 'situation-analysis':
-      return 'Durum Analizi';
+      return 'Enerji Haritası';
     case 'written':
       return 'Yazılı Açılım';
     case 'detailed':

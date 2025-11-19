@@ -185,13 +185,13 @@ export default function ReadingsPage({ params }: ReadingsPageProps) {
               // Çeviri başarısız olduysa reading_type'a göre başlık oluştur
               switch (reading.reading_type) {
                 case 'love':
-                  return t('readings.loveReading', 'Aşk Açılımı');
+                  return t('readings.loveReading', 'Aşk Uyumu');
                 case 'new-lover-spread':
-                  return t('readings.newLoverReading', 'Yeni Aşk Açılımı');
+                  return t('readings.newLoverReading', 'Yeni Aşk Uyumu');
                 case 'relationship-problems':
                   return t(
                     'readings.relationshipProblemsReading',
-                    'İlişki Sorunları Açılımı'
+                    'İlişki Dönüşümü'
                   );
                 case 'relationship-analysis':
                   return t(
@@ -213,12 +213,12 @@ export default function ReadingsPage({ params }: ReadingsPageProps) {
                 case 'situation-analysis':
                   return t(
                     'readings.situationAnalysisReading',
-                    'Durum Analizi Açılımı'
+                    'Enerji Haritası Açılımı'
                   );
                 case 'problem-solving':
                   return t(
                     'readings.problemSolvingReading',
-                    'Problem Çözme Açılımı'
+                    'Kelt  Açılımı'
                   );
                 default:
                   return (
@@ -270,12 +270,12 @@ export default function ReadingsPage({ params }: ReadingsPageProps) {
                 case 'problem-solving':
                   return t(
                     'readings.problemSolvingSpread',
-                    'Problem Çözme Yayılımı'
+                    'Kelt  Yayılımı'
                   );
                 case 'situation-analysis':
                   return t(
                     'readings.situationAnalysisSpread',
-                    'Durum Analizi Yayılımı'
+                    'Enerji Haritası Yayılımı'
                   );
                 default:
                   return (

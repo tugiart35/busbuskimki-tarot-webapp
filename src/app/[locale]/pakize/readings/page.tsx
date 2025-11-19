@@ -944,9 +944,9 @@ export default function ReadingsPage() {
       case 'numerology':
         return 'Numeroloji';
       case 'situation-analysis':
-        return 'Durum Analizi';
+        return 'Enerji Haritası';
       case 'problem-solving':
-        return 'Problem Çözme';
+        return 'Kelt ';
       case 'money-spread':
         return 'Para Yayılımı';
       case 'relationship-problems':
@@ -958,9 +958,9 @@ export default function ReadingsPage() {
       case 'marriage':
         return 'Evlilik';
       case 'situation-analysis':
-        return 'Durum Analizi';
+        return 'Enerji Haritası';
       case 'problem-solving':
-        return 'Problem Çözme';
+        return 'Kelt ';
       default:
         return type;
     }
@@ -1423,8 +1423,8 @@ export default function ReadingsPage() {
                 <option value='general'>🎯 Genel</option>
                 <option value='tarot'>✨ Tarot</option>
                 <option value='numerology'>⭐ Numeroloji</option>
-                <option value='situation-analysis'>📊 Durum Analizi</option>
-                <option value='problem-solving'>🔍 Problem Çözme</option>
+                <option value='situation-analysis'>📊 Enerji Haritası</option>
+                <option value='problem-solving'>🔍 Kelt </option>
               </select>
             </div>
 
@@ -1703,7 +1703,7 @@ export default function ReadingsPage() {
                   </p>
                 </div>
 
-                {/* Token Preview - Aşk Açılımı'nda gösterilmez */}
+                {/* Token Preview - Aşk Uyumu'nda gösterilmez */}
                 {tokenReading.token_preview &&
                   tokenReading.spread_key !== 'love' &&
                   !tokenReading.spread_name?.toLowerCase().includes('aşk') &&
@@ -2365,11 +2365,11 @@ export default function ReadingsPage() {
                                               emotional:
                                                 'Şu anda duygusal olarak nasıl hissediyorsunuz?',
                                               understanding:
-                                                'Bu aşk açılımı ile neyi anlamak istiyorsunuz?',
+                                                'Bu Aşk Uyumu ile neyi anlamak istiyorsunuz?',
                                               question1:
                                                 'Aşk hayatınızda sizi en çok endişelendiren konu nedir?',
                                               question2:
-                                                'Bu aşk açılımı ile neyi anlamak istiyorsunuz?',
+                                                'Bu Aşk Uyumu ile neyi anlamak istiyorsunuz?',
                                               question3:
                                                 'Şu anda duygusal olarak nasıl hissediyorsunuz?',
                                             };
@@ -2419,11 +2419,11 @@ export default function ReadingsPage() {
                                               emotional:
                                                 'Bu problem hakkında nasıl hissediyorsunuz?',
                                               understanding:
-                                                'Bu problem çözme açılımı ile neyi anlamak istiyorsunuz?',
+                                                'Bu Kelt  açılımı ile neyi anlamak istiyorsunuz?',
                                               question1:
                                                 'Hangi problemi çözmek istiyorsunuz?',
                                               question2:
-                                                'Bu problem çözme açılımı ile neyi anlamak istiyorsunuz?',
+                                                'Bu Kelt  açılımı ile neyi anlamak istiyorsunuz?',
                                               question3:
                                                 'Bu problem hakkında nasıl hissediyorsunuz?',
                                             };
@@ -2439,11 +2439,11 @@ export default function ReadingsPage() {
                                               emotional:
                                                 'Şu anki durumunuz hakkında nasıl hissediyorsunuz?',
                                               understanding:
-                                                'Bu durum analizi açılımı ile neyi anlamak istiyorsunuz?',
+                                                'Bu Enerji Haritası açılımı ile neyi anlamak istiyorsunuz?',
                                               question1:
                                                 'Mevcut durumunuzda sizi en çok endişelendiren konu nedir?',
                                               question2:
-                                                'Bu durum analizi açılımı ile neyi anlamak istiyorsunuz?',
+                                                'Bu Enerji Haritası açılımı ile neyi anlamak istiyorsunuz?',
                                               question3:
                                                 'Şu anki durumunuz hakkında nasıl hissediyorsunuz?',
                                             };
@@ -2515,11 +2515,11 @@ export default function ReadingsPage() {
                                               emotional:
                                                 'Yeni aşk hakkında nasıl hissediyorsunuz?',
                                               understanding:
-                                                'Bu yeni aşk açılımı ile neyi anlamak istiyorsunuz?',
+                                                'Bu yeni Aşk Uyumu ile neyi anlamak istiyorsunuz?',
                                               question1:
                                                 'Yeni aşk konusunda sizi en çok endişelendiren konu nedir?',
                                               question2:
-                                                'Bu yeni aşk açılımı ile neyi anlamak istiyorsunuz?',
+                                                'Bu yeni Aşk Uyumu ile neyi anlamak istiyorsunuz?',
                                               question3:
                                                 'Yeni aşk hakkında nasıl hissediyorsunuz?',
                                             };
@@ -2635,11 +2635,11 @@ export default function ReadingsPage() {
                                             emotional:
                                               'Şu anda duygusal olarak nasıl hissediyorsunuz?',
                                             understanding:
-                                              'Bu aşk açılımı ile neyi anlamak istiyorsunuz?',
+                                              'Bu Aşk Uyumu ile neyi anlamak istiyorsunuz?',
                                             question1:
                                               'Aşk hayatınızda sizi en çok endişelendiren konu nedir?',
                                             question2:
-                                              'Bu aşk açılımı ile neyi anlamak istiyorsunuz?',
+                                              'Bu Aşk Uyumu ile neyi anlamak istiyorsunuz?',
                                             question3:
                                               'Şu anda duygusal olarak nasıl hissediyorsunuz?',
                                           };
@@ -2689,11 +2689,11 @@ export default function ReadingsPage() {
                                             emotional:
                                               'Bu problem hakkında nasıl hissediyorsunuz?',
                                             understanding:
-                                              'Bu problem çözme açılımı ile neyi anlamak istiyorsunuz?',
+                                              'Bu Kelt  açılımı ile neyi anlamak istiyorsunuz?',
                                             question1:
                                               'Hangi problemi çözmek istiyorsunuz?',
                                             question2:
-                                              'Bu problem çözme açılımı ile neyi anlamak istiyorsunuz?',
+                                              'Bu Kelt  açılımı ile neyi anlamak istiyorsunuz?',
                                             question3:
                                               'Bu problem hakkında nasıl hissediyorsunuz?',
                                           };
@@ -2707,11 +2707,11 @@ export default function ReadingsPage() {
                                             emotional:
                                               'Şu anki durumunuz hakkında nasıl hissediyorsunuz?',
                                             understanding:
-                                              'Bu durum analizi açılımı ile neyi anlamak istiyorsunuz?',
+                                              'Bu Enerji Haritası açılımı ile neyi anlamak istiyorsunuz?',
                                             question1:
                                               'Mevcut durumunuzda sizi en çok endişelendiren konu nedir?',
                                             question2:
-                                              'Bu durum analizi açılımı ile neyi anlamak istiyorsunuz?',
+                                              'Bu Enerji Haritası açılımı ile neyi anlamak istiyorsunuz?',
                                             question3:
                                               'Şu anki durumunuz hakkında nasıl hissediyorsunuz?',
                                           };
@@ -2783,11 +2783,11 @@ export default function ReadingsPage() {
                                             emotional:
                                               'Yeni aşk hakkında nasıl hissediyorsunuz?',
                                             understanding:
-                                              'Bu yeni aşk açılımı ile neyi anlamak istiyorsunuz?',
+                                              'Bu yeni Aşk Uyumu ile neyi anlamak istiyorsunuz?',
                                             question1:
                                               'Yeni aşk konusunda sizi en çok endişelendiren konu nedir?',
                                             question2:
-                                              'Bu yeni aşk açılımı ile neyi anlamak istiyorsunuz?',
+                                              'Bu yeni Aşk Uyumu ile neyi anlamak istiyorsunuz?',
                                             question3:
                                               'Yeni aşk hakkında nasıl hissediyorsunuz?',
                                           };
@@ -2899,11 +2899,11 @@ export default function ReadingsPage() {
                                             emotional:
                                               'Şu anda duygusal olarak nasıl hissediyorsunuz?',
                                             understanding:
-                                              'Bu aşk açılımı ile neyi anlamak istiyorsunuz?',
+                                              'Bu Aşk Uyumu ile neyi anlamak istiyorsunuz?',
                                             question1:
                                               'Aşk hayatınızda sizi en çok endişelendiren konu nedir?',
                                             question2:
-                                              'Bu aşk açılımı ile neyi anlamak istiyorsunuz?',
+                                              'Bu Aşk Uyumu ile neyi anlamak istiyorsunuz?',
                                             question3:
                                               'Şu anda duygusal olarak nasıl hissediyorsunuz?',
                                           };
@@ -2953,11 +2953,11 @@ export default function ReadingsPage() {
                                             emotional:
                                               'Bu problem hakkında nasıl hissediyorsunuz?',
                                             understanding:
-                                              'Bu problem çözme açılımı ile neyi anlamak istiyorsunuz?',
+                                              'Bu Kelt  açılımı ile neyi anlamak istiyorsunuz?',
                                             question1:
                                               'Hangi problemi çözmek istiyorsunuz?',
                                             question2:
-                                              'Bu problem çözme açılımı ile neyi anlamak istiyorsunuz?',
+                                              'Bu Kelt  açılımı ile neyi anlamak istiyorsunuz?',
                                             question3:
                                               'Bu problem hakkında nasıl hissediyorsunuz?',
                                           };
@@ -2971,11 +2971,11 @@ export default function ReadingsPage() {
                                             emotional:
                                               'Şu anki durumunuz hakkında nasıl hissediyorsunuz?',
                                             understanding:
-                                              'Bu durum analizi açılımı ile neyi anlamak istiyorsunuz?',
+                                              'Bu Enerji Haritası açılımı ile neyi anlamak istiyorsunuz?',
                                             question1:
                                               'Mevcut durumunuzda sizi en çok endişelendiren konu nedir?',
                                             question2:
-                                              'Bu durum analizi açılımı ile neyi anlamak istiyorsunuz?',
+                                              'Bu Enerji Haritası açılımı ile neyi anlamak istiyorsunuz?',
                                             question3:
                                               'Şu anki durumunuz hakkında nasıl hissediyorsunuz?',
                                           };
@@ -3047,11 +3047,11 @@ export default function ReadingsPage() {
                                             emotional:
                                               'Yeni aşk hakkında nasıl hissediyorsunuz?',
                                             understanding:
-                                              'Bu yeni aşk açılımı ile neyi anlamak istiyorsunuz?',
+                                              'Bu yeni Aşk Uyumu ile neyi anlamak istiyorsunuz?',
                                             question1:
                                               'Yeni aşk konusunda sizi en çok endişelendiren konu nedir?',
                                             question2:
-                                              'Bu yeni aşk açılımı ile neyi anlamak istiyorsunuz?',
+                                              'Bu yeni Aşk Uyumu ile neyi anlamak istiyorsunuz?',
                                             question3:
                                               'Yeni aşk hakkında nasıl hissediyorsunuz?',
                                           };

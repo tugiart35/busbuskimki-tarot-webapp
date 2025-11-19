@@ -68,13 +68,13 @@ export const READING_CREDITS = {
 export const READING_CREDIT_CONFIGS = {
   LOVE_SPREAD_DETAILED: {
     cost: 80,
-    name: 'Aşk Açılımı (Detaylı)',
-    description: '4 kartlık detaylı aşk açılımı',
+    name: 'Aşk Uyumu (Detaylı)',
+    description: '4 kartlık detaylı Aşk Uyumu',
   },
   LOVE_SPREAD_WRITTEN: {
     cost: 70,
-    name: 'Aşk Açılımı (Yazılı)',
-    description: '4 kartlık yazılı aşk açılımı',
+    name: 'Aşk Uyumu (Yazılı)',
+    description: '4 kartlık yazılı Aşk Uyumu',
   },
   CAREER_SPREAD_DETAILED: {
     cost: 90,
@@ -88,23 +88,23 @@ export const READING_CREDIT_CONFIGS = {
   },
   PROBLEM_SOLVING_DETAILED: {
     cost: 130,
-    name: 'Problem Çözme Açılımı (Detaylı)',
-    description: '10 kartlık detaylı problem çözme açılımı',
+    name: 'Kelt  Açılımı (Detaylı)',
+    description: '10 kartlık detaylı Kelt  açılımı',
   },
   PROBLEM_SOLVING_WRITTEN: {
     cost: 120,
-    name: 'Problem Çözme Açılımı (Yazılı)',
-    description: '10 kartlık yazılı problem çözme açılımı',
+    name: 'Kelt  Açılımı (Yazılı)',
+    description: '10 kartlık yazılı Kelt  açılımı',
   },
   SITUATION_ANALYSIS_DETAILED: {
     cost: 100,
-    name: 'Durum Analizi Açılımı (Detaylı)',
-    description: '7 kartlık detaylı durum analizi açılımı',
+    name: 'Enerji Haritası Açılımı (Detaylı)',
+    description: '7 kartlık detaylı Enerji Haritası açılımı',
   },
   SITUATION_ANALYSIS_WRITTEN: {
     cost: 90,
-    name: 'Durum Analizi Açılımı (Yazılı)',
-    description: '7 kartlık yazılı durum analizi açılımı',
+    name: 'Enerji Haritası Açılımı (Yazılı)',
+    description: '7 kartlık yazılı Enerji Haritası açılımı',
   },
   RELATIONSHIP_ANALYSIS_DETAILED: {
     cost: 110,
@@ -118,12 +118,12 @@ export const READING_CREDIT_CONFIGS = {
   },
   RELATIONSHIP_PROBLEMS_DETAILED: {
     cost: 120,
-    name: 'İlişki Sorunları Açılımı (Detaylı)',
+    name: 'İlişki Dönüşümü (Detaylı)',
     description: '9 kartlık detaylı ilişki sorunları açılımı',
   },
   RELATIONSHIP_PROBLEMS_WRITTEN: {
     cost: 110,
-    name: 'İlişki Sorunları Açılımı (Yazılı)',
+    name: 'İlişki Dönüşümü (Yazılı)',
     description: '9 kartlık yazılı ilişki sorunları açılımı',
   },
   MARRIAGE_DETAILED: {
@@ -138,13 +138,13 @@ export const READING_CREDIT_CONFIGS = {
   },
   NEW_LOVER_DETAILED: {
     cost: 100,
-    name: 'Yeni Bir Sevgili Açılımı (Detaylı)',
-    description: '6 kartlık detaylı yeni sevgili açılımı',
+    name: 'Yaklaşan Aşk Uyumu (Detaylı)',
+    description: '6 kartlık detaylı Yaklaşan Aşk Uyumu',
   },
   NEW_LOVER_WRITTEN: {
     cost: 90,
-    name: 'Yeni Bir Sevgili Açılımı (Yazılı)',
-    description: '6 kartlık yazılı yeni sevgili açılımı',
+    name: 'Yaklaşan Aşk Uyumu (Yazılı)',
+    description: '6 kartlık yazılı Yaklaşan Aşk Uyumu',
   },
   MONEY_SPREAD_DETAILED: {
     cost: 90,

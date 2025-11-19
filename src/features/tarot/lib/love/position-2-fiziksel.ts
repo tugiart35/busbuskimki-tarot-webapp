@@ -1,4 +1,4 @@
-// Bu dosya, Aşk açılımında Pozisyon 2 (Fiziksel/Cinsel Bağlantı) için özel kart anlamlarını içerir.
+// Bu dosya, Aşk uyumunda Pozisyon 2 (Fiziksel/Cinsel Bağlantı) için özel kart anlamlarını içerir.
 // Her kartın bu pozisyonda ne anlama geldiği tanımlanmıştır.
 // i18n desteği için güncellenmiştir.
 'use client';

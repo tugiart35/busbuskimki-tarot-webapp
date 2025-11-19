@@ -27,7 +27,7 @@ export function getSpreadQuestionMap(
     return {
       concern: 'Aşk hayatınızda sizi en çok endişelendiren konu nedir?',
       emotional: 'Şu anda duygusal olarak nasıl hissediyorsunuz?',
-      understanding: 'Bu aşk açılımı ile neyi anlamak istiyorsunuz?',
+      understanding: 'Bu Aşk Uyumu ile neyi anlamak istiyorsunuz?',
     };
   } else if (type.includes('money') || type.includes('para')) {
     return {
@@ -49,13 +49,13 @@ export function getSpreadQuestionMap(
     return {
       concern: 'Hangi problemi çözmek istiyorsunuz?',
       emotional: 'Bu problem hakkında nasıl hissediyorsunuz?',
-      understanding: 'Bu problem çözme açılımı ile neyi anlamak istiyorsunuz?',
+      understanding: 'Bu Kelt  açılımı ile neyi anlamak istiyorsunuz?',
     };
   } else if (type.includes('situation-analysis') || type.includes('durum')) {
     return {
       concern: 'Mevcut durumunuzda sizi en çok endişelendiren konu nedir?',
       emotional: 'Şu anki durumunuz hakkında nasıl hissediyorsunuz?',
-      understanding: 'Bu durum analizi açılımı ile neyi anlamak istiyorsunuz?',
+      understanding: 'Bu Enerji Haritası açılımı ile neyi anlamak istiyorsunuz?',
     };
   } else if (type.includes('marriage') || type.includes('evlilik')) {
     return {
@@ -76,7 +76,7 @@ export function getSpreadQuestionMap(
     return {
       concern: 'Yeni aşk hayatınızda sizi en çok endişelendiren konu nedir?',
       emotional: 'Yeni aşk konusunda nasıl hissediyorsunuz?',
-      understanding: 'Bu yeni aşk açılımı ile neyi anlamak istiyorsunuz?',
+      understanding: 'Bu yeni Aşk Uyumu ile neyi anlamak istiyorsunuz?',
     };
   } else if (
     type.includes('relationship-problems') ||
@@ -84,7 +84,7 @@ export function getSpreadQuestionMap(
   ) {
     return {
       concern: 'İlişkinizdeki sorunlar hakkında ne düşünüyorsunuz?',
-      emotional: 'İlişki sorunları hakkında nasıl hissediyorsunuz?',
+      emotional: 'İlişki dönüşüm hakkında nasıl hissediyorsunuz?',
       understanding:
         'Bu ilişki sorunları açılımı ile neyi anlamak istiyorsunuz?',
     };

@@ -16,7 +16,7 @@ Bağlantılı dosyalar:
 - position-9-bu-iliski-surecek-mi.ts: 9. pozisyon anlamları
 
 Dosyanın amacı:
-- İlişki Sorunları (Relationship Problems) Tarot açılımında her pozisyon için kart anlamlarını yönetir
+- İlişki dönüşüm (Relationship Problems) Tarot açılımında her pozisyon için kart anlamlarını yönetir
 - Pozisyona, karta, anahtar kelimeye göre anlam arama ve filtreleme fonksiyonları sunar
 - Pozisyon başlıkları, açıklamaları ve ilgili meta verileri içerir
 - i18n desteği ile çoklu dil desteği sağlar
@@ -149,7 +149,7 @@ function getCardGroup(
 }
 
 /**
- * İlişki Sorunları açılımında kartın pozisyonuna göre anlamını döndürür
+ * İlişki dönüşüm açılımında kartın pozisyonuna göre anlamını döndürür
  */
 export function getRelationshipProblemsMeaningByCardAndPosition(
   card: TarotCard,
@@ -242,7 +242,7 @@ export function getRelationshipProblemsMeaningByCardAndPosition(
     upright: card.meaningTr.upright,
     reversed: card.meaningTr.reversed,
     keywords: card.keywordsTr || card.keywords || [],
-    context: `İlişki sorunları açılımında ${position}. pozisyon için ${card.nameTr} kartının anlamı`,
+    context: `İlişki dönüşüm açılımında ${position}. pozisyon için ${card.nameTr} kartının anlamı`,
     group: getCardGroup(card),
   };
 

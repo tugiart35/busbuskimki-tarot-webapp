@@ -1,7 +1,7 @@
 /**
  * New Lover Spread i18n Helper
  *
- * Bu dosya, Yeni Sevgili açılımı için i18n çevirilerini yönetir.
+ * Bu dosya, Yaklaşan Aşk Uyumu için i18n çevirilerini yönetir.
  *
  * Bağlı dosyalar:
  * - messages/tr.json (Türkçe çeviriler - "new-lover" key)

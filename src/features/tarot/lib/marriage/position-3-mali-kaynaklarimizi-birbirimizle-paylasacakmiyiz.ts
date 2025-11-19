@@ -5,7 +5,7 @@ Bağlantılı dosyalar:
 - '@/types/tarot': Tarot kartı tipi tanımları
 
 Dosyanın amacı:
-- Durum Analizi açılımında 1. pozisyon (Geçmiş ya da Sebepler) için 78 tarot kartının özel anlamlarını içerir
+- Enerji Haritası açılımında 1. pozisyon (Geçmiş ya da Sebepler) için 78 tarot kartının özel anlamlarını içerir
 - Her kart için upright ve reversed anlamları, anahtar kelimeler ve bağlam bilgileri sağlar
 - Pozisyon bazlı kart anlamları yönetimi
 

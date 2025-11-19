@@ -53,6 +53,7 @@ next-env.d.ts
 # IDE
 .vscode/
 .idea/
+*.code-workspace
 
 # firebase
 .firebase/
@@ -169,6 +170,10 @@ OKUMA_URET_ANALIZ_RAPORU.md
 PERFORMANCE_OPTIMIZATION_REPORT.md
 yapayzekaseo.md
 src/AccessibilityReport.md
+localhost.md
+llms.txt
+Anasayfa.html
+TODO-meta-pixel.md
 
 # Development SQL migrations (Supabase'de yönetiliyor)
 migrations/

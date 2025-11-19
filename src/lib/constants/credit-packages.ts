@@ -77,7 +77,7 @@ export const CREDIT_PACKAGES: Record<PackageType, CreditPackage> = {
     features: [
       '1-2 detaylı tarot okuması',
       'Numeroloji analizi',
-      'Aşk açılımı',
+      'Aşk Uyumu',
       '7 gün geçerlilik',
     ],
     icon: 'Coins',
@@ -98,7 +98,7 @@ export const CREDIT_PACKAGES: Record<PackageType, CreditPackage> = {
     features: [
       '5-6 detaylı tarot okuması',
       'Numeroloji analizi',
-      'Aşk açılımı',
+      'Aşk Uyumu',
       'Kariyer okuması',
       '30 gün geçerlilik',
       '%10 bonus kredi',
@@ -123,7 +123,7 @@ export const CREDIT_PACKAGES: Record<PackageType, CreditPackage> = {
     features: [
       '10+ detaylı tarot okuması',
       'Numeroloji analizi',
-      'Aşk açılımı',
+      'Aşk Uyumu',
       'Kariyer okuması',
       'Genel okuma',
       '60 gün geçerlilik',

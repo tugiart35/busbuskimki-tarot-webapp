@@ -262,13 +262,13 @@ export default function ReadingHistory({
       case 'general':
         return 'Genel';
       case 'situation-analysis':
-        return 'Durum Analizi';
+        return 'Enerji Haritası';
       case 'problem-solving':
-        return 'Problem Çözme';
+        return 'Kelt ';
       case 'situation-analysis':
-        return 'Durum Analizi';
+        return 'Enerji Haritası';
       case 'problem-solving':
-        return 'Problem Çözme';
+        return 'Kelt ';
       default:
         return type;
     }
@@ -334,8 +334,8 @@ export default function ReadingHistory({
               <option value='love'>Aşk</option>
               <option value='career'>Kariyer</option>
               <option value='general'>Genel</option>
-              <option value='situation-analysis'>📊 Durum Analizi</option>
-              <option value='problem-solving'>🔍 Problem Çözme</option>
+              <option value='situation-analysis'>📊 Enerji Haritası</option>
+              <option value='problem-solving'>🔍 Kelt </option>
             </select>
           </div>
         </div>

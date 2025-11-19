@@ -4,7 +4,7 @@ Bağlantılı dosyalar:
 - lib/tarot/a-tarot-helpers.ts: Tarot kartı tipi ve temel kart verileri için (gerekli)
 - components/specific/tarot/3cardtarot/CardGallery.tsx: 3 kart açılımı için özel galeri (gerekli, BaseCardGallery'yi özelleştirerek kullanır)
 - components/specific/tarot/hermit/CardGallery.tsx: Hermit açılımı için özel galeri (gerekli, BaseCardGallery'yi özelleştirerek kullanır)
-- components/specific/tarot/Love-Spread/CardGallery.tsx: Aşk açılımı için özel galeri (gerekli, BaseCardGallery'yi özelleştirerek kullanır)
+- components/specific/tarot/Love-Spread/CardGallery.tsx: Aşk Uyumu için özel galeri (gerekli, BaseCardGallery'yi özelleştirerek kullanır)
 - components/specific/tarot/CareerTarot/CardGallery.tsx: Kariyer açılımı için özel galeri (gerekli, BaseCardGallery'yi özelleştirerek kullanır)
 - Bu dosya, tarot açılımlarında kart seçimi için temel galeri altyapısı olarak kullanılır.
 

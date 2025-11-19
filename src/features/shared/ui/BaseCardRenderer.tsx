@@ -5,7 +5,7 @@ Bağlantılı dosyalar:
 - lib/tarot/a-tarot-helpers.ts: Tarot kartı tipi ve temel kart verileri için (gerekli)
 - components/specific/tarot/3cardtarot/ThreeCardRenderer.tsx: 3 kart açılımı için özel kart renderı (gerekli, BaseCardRenderer'ı özelleştirerek kullanır)
 - components/specific/tarot/hermit/CardRenderer.tsx: Hermit açılımı için özel kart renderı (gerekli, BaseCardRenderer'ı özelleştirerek kullanır)
-- components/specific/tarot/Love-Spread/LoveCardRenderer.tsx: Aşk açılımı için özel kart renderı (gerekli, BaseCardRenderer'ı özelleştirerek kullanır)
+- components/specific/tarot/Love-Spread/LoveCardRenderer.tsx: Aşk Uyumu için özel kart renderı (gerekli, BaseCardRenderer'ı özelleştirerek kullanır)
 - components/specific/tarot/CareerTarot/CareerCardRenderer.tsx: Kariyer açılımı için özel kart renderı (gerekli, BaseCardRenderer'ı özelleştirerek kullanır)
 - components/common/BaseCardGallery.tsx ve BaseCardPosition.tsx: Kart galeri ve pozisyon bileşenlerinde kart görseli için kullanılır (gerekli)
 

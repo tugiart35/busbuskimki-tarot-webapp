@@ -13,7 +13,7 @@ Dosyanın amacı:
 */
 'use client';
 
-// Bu dosya, Aşk açılımında tüm pozisyonlar için kart anlamlarını birleştirir.
+// Bu dosya, Aşk uyumunda tüm pozisyonlar için kart anlamlarını birleştirir.
 // Her pozisyon (1-4) için özel kart anlamlarını içerir ve kolay erişim sağlar.
 
 import {

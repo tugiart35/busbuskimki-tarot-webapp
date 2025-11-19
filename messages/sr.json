@@ -50,7 +50,7 @@
     "organization": "organizacija",
     "audience": "Publika",
     "numeroloji-analizi": "Analiza numerologije",
-    "ask-acilimi": "Ljubavna ekspanzija",
+    "ask-acilimi": "Ljubavna Usklađenost",
     "kariyer-okumasi": "čitanje u karijeri",
     "genel-okuma": "opšte čitanje",
     "oncelikli-destek": "Prioritetna podrška",
@@ -211,7 +211,7 @@
       "feature7Days": "7 dana validnost",
       "featureCareer": "čitanje u karijeri",
       "featureGeneral": "opšte čitanje",
-      "featureLove": "Ljubavna ekspanzija",
+      "featureLove": "Ljubavna Usklađenost",
       "featureNumerology": "Analiza numerologije",
       "featurePriority": "Prioritetna podrška",
       "instantActivation": "Odmah aktivan",
@@ -7516,7 +7516,7 @@
         "button": "Tarot čitanje",
         "description": "Krenuti na put u misteriozni svet karata. Istražite svoju prošlost, sadašnjost i budućnost.",
         "features": [
-          "Ljubavna ekspanzija",
+          "Ljubavna Usklađenost",
           "Uputstvo za karijere",
           "Svakodnevno uputstvo",
           "Detaljna interpretacija"
@@ -7586,7 +7586,7 @@
         "button": "Tarot čitanje",
         "description": "Krenuti na put u misteriozni svet karata. Istražite svoju prošlost, sadašnjost i budućnost.",
         "features": [
-          "Ljubavna ekspanzija",
+          "Ljubavna Usklađenost",
           "Uputstvo za karijere",
           "Svakodnevno uputstvo",
           "Detaljna interpretacija"
@@ -7621,8 +7621,8 @@
     "context": "Kontekst:",
     "dearClient": "Poštovani klijent,",
     "loveLifeSummary": "Ljubavni život Rezime:",
-    "loveReading": "Ljubavna ekspanzija",
-    "loveReadingDetailed": "Ljubavna ekspanzija - Detaljno lično čitanje",
+    "loveReading": "Ljubavna Usklađenost",
+    "loveReadingDetailed": "Ljubavna Usklađenost - Detaljno lično čitanje",
     "placeholder": "Napišite svoje pitanje ...",
     "title": "Tumačenje Tarota"
   },
@@ -7641,11 +7641,11 @@
     },
     "data": {
       "badgeText": "Lova",
-      "detailedTitle": "Ljubavna ekspanzija - Detaljno lično čitanje",
+      "detailedTitle": "Ljubavna Usklađenost - Detaljno lično čitanje",
       "interpretationTitle": "Komentar ljubavi Ekpansion",
       "simpleTitle": "Ljubavno objašnjenje - Jednostavno čitanje",
-      "spreadName": "Ljubavna ekspanzija",
-      "spreadTitle": "Ljubavna ekspanzija"
+      "spreadName": "Ljubavna Usklađenost",
+      "spreadTitle": "Ljubavna Usklađenost"
     },
     "form": {
       "birthDate": "Datum rođenja",
@@ -10178,7 +10178,7 @@
       "formUnsavedWarning": "Obrazac je ispunjen, ali nije sačuvan. Jeste li sigurni da želite da prestanete? Vaši nespremljeni podaci će se izgubiti.",
       "loginRequired": "Morate se prijaviti za ovaj proces.",
       "readingSaveError": "Došlo je do greške prilikom čuvanja čitanja.",
-      "readingSavedSuccess": "Vaša ljubavna ekspanzija je uspešno snimljena!"
+      "readingSavedSuccess": "Vaša Ljubavna Usklađenost je uspešno snimljena!"
     },
     "modals": {
       "aboutSpread": "O otvaranju",
@@ -10228,7 +10228,7 @@
       }
     }
   },
-  "marriage": {
+  "Marriage": {
     "credit": {
       "cancel": "Otkazati",
       "confirm": "Potvrditi",
@@ -10238,7 +10238,7 @@
     },
     "data": {
       "badgeText": "Komentari kartice samo su u informativne svrhe. Čitanje je detaljno da vam pomogne.",
-      "detailedTitle": "Proširenje braka - Detaljno lično čitanje",
+      "detailedTitle": "Potencijal za Brak - Detaljno lično čitanje",
       "interpretationTitle": "Komentar za ekspanziju braka",
       "spreadName": "Otvaranje braka"
     },
@@ -15341,7 +15341,7 @@
         "feature7Days": "7 dana validnost",
         "featureCareer": "čitanje u karijeri",
         "featureGeneral": "opšte čitanje",
-        "featureLove": "Ljubavna ekspanzija",
+        "featureLove": "Ljubavna Usklađenost",
         "featureNumerology": "Analiza numerologije",
         "featurePriority": "Prioritetna podrška",
         "instantActivation": "Odmah aktivan",
@@ -15479,7 +15479,7 @@
     },
     "readings": {
       "loveReadingDetailed": "Ljubavni objašnjenje - detaljno čitanje naglas",
-      "loveReadingWritten": "Ljubavna ekspanzija - Pismeno čitanje",
+      "loveReadingWritten": "Ljubavna Usklađenost - Pismeno čitanje",
       "marriageReading": "Otvaranje braka",
       "readingSaveError": "Došlo je do greške prilikom čuvanja čitanja.",
       "readingSavedSuccess": "Vaše čitanje je uspešno sačuvano!",
@@ -15514,7 +15514,7 @@
       "badgeText": "Novac",
       "detailedTitle": "Objašnjenje novca - Detaljno lično čitanje",
       "interpretationTitle": "Tumačenje objašnjenja novca",
-      "spreadName": "Proširenje valute"
+      "spreadName": "Novac"
     },
     "form": {
       "birthDate": "Datum rođenja",
@@ -19531,9 +19531,9 @@
     },
     "data": {
       "badgeText": "Nova ljubav",
-      "detailedTitle": "Nova ljubavna ekspanzija - Detaljno lično čitanje",
+      "detailedTitle": "Nova Ljubavna Usklađenost - Detaljno lično čitanje",
       "interpretationTitle": "Tumačenje nove ljubavne ekspanzije",
-      "spreadName": "Nova ljubavna ekspanzija"
+      "spreadName": "Nova Ljubavna Usklađenost"
     },
     "description": "Specijalna 6-kartica širi se za novi ljubavni odnos",
     "form": {
@@ -19616,7 +19616,7 @@
       "writtenReading": "Pismeno čitanje",
       "writtenReadingText": "Ako želite, biće isporučeno kao detaljan pisani izveštaj; Možete ga sačuvati i ponovo pročitati."
     },
-    "title": "Otvaranje novog ljubavnika"
+    "title": "Nadolazeća Ljubav"
   },
   "numerology": {
     "birthdayMeanings": [
@@ -20509,10 +20509,10 @@
         "upright": "Ravno"
       },
       "dearClient": "Poštovani klijent,",
-      "defaultTitle": "Progrevanje problema",
+      "defaultTitle": "Celtic Širenje",
       "detailedReadingTitle": "Proširenje za rešavanje problema - Detaljno lično čitanje",
       "detailedTitle": "Proširenje za rešavanje problema - Detaljno lično čitanje",
-      "interpretationTitle": "Progrevanje problema",
+      "interpretationTitle": "Celtic Širenje",
       "readingFormats": {
         "detailed": "Audio",
         "simple": "Jednostavan",
@@ -20523,7 +20523,7 @@
       "simpleReadingCounter": "Jednostavno čitanje - samo metar",
       "simpleTitle": "Jednostavno čitanje",
       "spreadName": "Rešavanje problema",
-      "spreadTitle": "Progrevanje problema",
+      "spreadTitle": "Celtic Širenje",
       "upright": "Ravno"
     },
     "errors": {
@@ -20710,8 +20710,8 @@
     "interpretation": "Mistična interpretacija",
     "interpretationDesc": "Značenje i smernice Tarot kartica",
     "lastName": "Prezime",
-    "loveSpread": "Ljubavna ekspanzija",
-    "loveSpreadName": "Ljubavna ekspanzija",
+    "loveSpread": "Ljubavna Usklađenost",
+    "loveSpreadName": "Ljubavna Usklađenost",
     "mysticNotes": "PDF ovog čitanja možete preuzeti da biste sačuvali svoje lične beleške.",
     "mysticReading": "Tarot čitanje",
     "noInterpretation": "Još nije pripremljen komentari za ovu karticu.",
@@ -20760,7 +20760,7 @@
     "loveReading": "Ljubavno čitanje",
     "loveReadingDetailed": "Ljubavni objašnjenje - detaljno čitanje naglas",
     "loveReadingSimple": "Ljubavno objašnjenje - Jednostavno čitanje",
-    "loveReadingWritten": "Ljubavna ekspanzija - Pismeno čitanje",
+    "loveReadingWritten": "Ljubavna Usklađenost - Pismeno čitanje",
     "loveReadings": "Ljubavna čitanja",
     "loveSpread": "Ljubav se širila",
     "myReadings": "Moja čitanja",
@@ -20770,7 +20770,7 @@
     "numerologyAnalysis": "Analiza numerologije",
     "numerologyReading": "Numerološko čitanje",
     "preparing": "Vaše mistično iskustvo se priprema ...",
-    "problemSolvingReading": "Progrevanje problema",
+    "problemSolvingReading": "Celtic Širenje",
     "problemSolvingSpread": "Rešavanje problema",
     "relationshipAnalysisReading": "Analiza stanja",
     "relationshipAnalysisSpread": "Raspored analize odnosa",
@@ -20799,9 +20799,9 @@
         "reversed": "Nasuprot",
         "upright": "Ravno"
       },
-      "defaultTitle": "Ekspanzija analize odnosa",
-      "detailedReadingTitle": "Ekspanzija analize odnosa - detaljno lično čitanje",
-      "detailedTitle": "Ekspanzija analize odnosa - detaljno lično čitanje",
+      "defaultTitle": "Analiza Veze",
+      "detailedReadingTitle": "Analiza Veze - detaljno lično čitanje",
+      "detailedTitle": "Analiza Veze - detaljno lično čitanje",
       "interpretationTitle": "Analiza odnosa Komentar proširenja",
       "readingFormats": {
         "detailed": "Audio",
@@ -20810,8 +20810,8 @@
       },
       "simpleInterpretation": "Jednostavno čitanje - samo metar",
       "simpleTitle": "Jednostavno čitanje",
-      "spreadName": "Ekspanzija analize odnosa",
-      "spreadTitle": "Ekspanzija analize odnosa"
+      "spreadName": "Analiza Veze",
+      "spreadTitle": "Analiza Veze"
     },
     "form": {
       "birthDate": "Datum rođenja",
@@ -20873,7 +20873,7 @@
       "step2": "Izaberite 7 kartica po redu",
       "step3": "Pročitajte značenja kartica",
       "step4": "Spremite svoje čitanje i primite ga putem e-maila",
-      "successMessage": "Vaša ekspanzija analize odnosa je zabeležena i detaljno analizirana. Možete da vidite svoje rezultate sa korisničkog panela.",
+      "successMessage": "Vaša Analiza Veze je zabeležena i detaljno analizirana. Možete da vidite svoje rezultate sa korisničkog panela.",
       "successTitle": "Čitanje je uspešno sačuvano!",
       "whatsappCommunication": "Vhatsapp",
       "writtenReading": "Pismeno čitanje",
@@ -20887,10 +20887,10 @@
         "reversed": "Nasuprot",
         "upright": "Ravno"
       },
-      "defaultTitle": "Problemi sa vezama Objašnjenje",
-      "detailedReadingTitle": "Problemi sa vezama Objašnjenje - detaljno lično čitanje",
-      "detailedTitle": "Problemi sa vezama Objašnjenje - detaljno lično čitanje",
-      "interpretationTitle": "Problemi sa vezama Objašnjenje",
+      "defaultTitle": "Transformacija Veze",
+      "detailedReadingTitle": "Transformacija Veze - detaljno lično čitanje",
+      "detailedTitle": "Transformacija Veze - detaljno lično čitanje",
+      "interpretationTitle": "Transformacija Veze",
       "readingFormats": {
         "detailed": "Audio",
         "simple": "Jednostavan",
@@ -20898,8 +20898,8 @@
       },
       "simpleInterpretation": "Jednostavno čitanje - samo metar",
       "simpleTitle": "Jednostavno čitanje",
-      "spreadName": "Problemi sa vezama Objašnjenje",
-      "spreadTitle": "Problemi sa vezama Objašnjenje"
+      "spreadName": "Transformacija Veze",
+      "spreadTitle": "Transformacija Veze"
     },
     "form": {
       "birthDate": "Datum rođenja",
@@ -21219,7 +21219,7 @@
     },
     "love": {
       "description": "Specijalna 4-kartica širi se za pitanja ljubavi i odnosa",
-      "name": "Ljubavna ekspanzija",
+      "name": "Ljubavna Usklađenost",
       "positions": {
         "1": {
           "description": "Osoba o kojoj pitate",
@@ -21239,9 +21239,9 @@
         }
       }
     },
-    "marriage": {
+    "Marriage": {
       "description": "Specijalna 10-kartica širi se za brak i pronalaženje supružnika",
-      "name": "Proširenje braka",
+      "name": "Potencijal za Brak",
       "positions": {
         "1": {
           "description": "To pokazuje opšti rezultat vašeg procesa braka i kako će to napredovati.",
@@ -21287,7 +21287,7 @@
     },
     "money": {
       "description": "Piramida sa 8 kartica širi se za finansijsku situaciju i novčana pitanja",
-      "name": "Proširenje valute",
+      "name": "Novac",
       "positions": {
         "1": {
           "description": "Da li se brineš zbog novca?",
@@ -21443,7 +21443,7 @@
     },
     "newLover": {
       "description": "Specijalna 6-kartica širi se za novi ljubavni odnos",
-      "name": "Otvaranje novog ljubavnika",
+      "name": "Nadolazeća Ljubav",
       "positions": {
         "1": {
           "description": "Pokazuje vaš budući odnosni potencijal",
@@ -21476,7 +21476,7 @@
         "detailedTitle": "Proširenje za rešavanje problema - Detaljno lično čitanje"
       },
       "description": "Detaljna ekspanzija sa 10 kartica za analizu problema i rešenje",
-      "name": "Progrevanje problema",
+      "name": "Celtic Širenje",
       "positions": {
         "1": {
           "description": "Glavno pitanje ili pitanje koje predstavlja osnovu širenja",
@@ -21522,10 +21522,10 @@
     },
     "relationshipAnalysis": {
       "data": {
-        "detailedTitle": "Ekspanzija analize odnosa - detaljno lično čitanje"
+        "detailedTitle": "Analiza Veze - detaljno lično čitanje"
       },
       "description": "Specijalna 7-kartica širi se za analizu odnosa i procenu",
-      "name": "Ekspanzija analize odnosa",
+      "name": "Analiza Veze",
       "positions": {
         "1": {
           "description": "Pruža informacije o trenutnim uslovima odnosa, njegova trenutna situacija i atmosferu stvorene bilo kakvim problemima.",
@@ -21559,10 +21559,10 @@
     },
     "relationshipProblems": {
       "data": {
-        "detailedTitle": "Problemi sa vezama Objašnjenje - detaljno lično čitanje"
+        "detailedTitle": "Transformacija Veze - detaljno lično čitanje"
       },
       "description": "Specijalna 9-kartica širi se za analizu i rešenje problema odnosa",
-      "name": "Problemi sa vezama Objašnjenje",
+      "name": "Transformacija Veze",
       "positions": {
         "1": {
           "description": "To ukazuje na unutrašnje kontradikcije i sukobe u vašem odnosu. Pomaže vam da shvatite koje probleme se ne slažete i zašto ste u sukobu.",
@@ -21604,7 +21604,7 @@
     },
     "situationAnalysis": {
       "description": "Specijalna 7-kartica širi se za analizu i procenu stanja",
-      "name": "Objašnjenje analize stanja",
+      "name": "Mapa Energije",
       "positions": {
         "1": {
           "description": "Razlozi za situaciju, zašto se ovakva situacija sada dešava, a sve greške su navedene na ovoj kartici.",
@@ -21754,7 +21754,7 @@
     "reading": "Čitanje",
     "relationshipAnalysis": {
       "data": {
-        "detailedTitle": "Ekspanzija analize odnosa - detaljno lično čitanje",
+        "detailedTitle": "Analiza Veze - detaljno lično čitanje",
         "messages": {
           "detailedDescription": "Glasovno komentar Specijalno za vas",
           "detailedSelected": "Pročitajte odabrano naglas",
@@ -21768,7 +21768,7 @@
     },
     "relationshipProblems": {
       "data": {
-        "detailedTitle": "Problemi sa vezama Objašnjenje - detaljno lično čitanje",
+        "detailedTitle": "Transformacija Veze - detaljno lično čitanje",
         "messages": {
           "detailedDescription": "Glasovno komentar Specijalno za vas",
           "detailedSelected": "Pročitajte odabrano naglas",
@@ -30507,7 +30507,7 @@
         "title": "Brz pristup",
         "tarotReading": "Tarot se širi",
         "numerology": "Analiza numerologije",
-        "loveReading": "Ljubavna ekspanzija",
+        "loveReading": "Ljubavna Usklađenost",
         "careerReading": "Širenje u karijeri"
       },
       "legal": {
@@ -65783,7 +65783,7 @@
       "title": "Brz pristup",
       "tarotReading": "Tarot se širi",
       "numerology": "Analiza numerologije",
-      "loveReading": "Ljubavna ekspanzija",
+      "loveReading": "Ljubavna Usklađenost",
       "careerReading": "Širenje u karijeri"
     },
     "legal": {

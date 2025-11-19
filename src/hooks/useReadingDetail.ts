@@ -137,7 +137,7 @@ function normalizeReadingType(
   if (
     source.includes('situation-Analysis') ||
     source.includes('situationAnalysis') ||
-    source.includes('durum analizi') ||
+    source.includes('Enerji Haritası') ||
     readingType === 'situation-analysis' ||
     readingType === 'SITUATION_ANALYSIS_SPREAD' ||
     spreadName === 'situation-analysis' ||
@@ -157,11 +157,11 @@ function normalizeReadingType(
     return 'newLover';
   }
 
-  // Problem Solving
+  // Celtics
   if (
     source.includes('problem-solving') ||
     source.includes('problemsolving') ||
-    source.includes('problem çözme') ||
+    source.includes('Kelt ') ||
     readingType === 'problem-solving' ||
     spreadName === 'problem-solving'
   ) {

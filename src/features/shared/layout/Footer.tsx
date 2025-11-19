@@ -93,7 +93,7 @@ const Footer = () => {
                     className='group flex items-center text-sm text-gray-300 hover:text-white transition-all duration-300 hover:translate-x-1'
                   >
                     <FaChevronRight className='w-3 h-3 mr-2 text-purple-400 group-hover:text-purple-300 transition-colors' />
-                    {t('footer.quickAccess.loveReading', 'Aşk Açılımı')}
+                    {t('footer.quickAccess.loveReading', 'Aşk Uyumu')}
                   </Link>
                 </li>
                 <li>

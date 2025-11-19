@@ -91,17 +91,17 @@ export default function TarotSpreadSelector({
         <div className='md:hidden'>
           {/* Scroll indicator - shows there are more items */}
           {spreads.length > 2 && (
-            <div className='flex justify-center mb-3'>
-              <div className='flex items-center gap-2 text-gray-400 text-xs'>
+            <div className='flex justify-center mb-2'>
+              <div className='flex items-center gap-1.5 text-gray-400 text-[10px]'>
                 <span>{t('tarotSpreadSelector.scrollHint')}</span>
-                <div className='flex gap-1'>
-                  <div className='w-1 h-1 bg-purple-400 rounded-full animate-pulse'></div>
+                <div className='flex gap-0.5'>
+                  <div className='w-0.5 h-0.5 bg-purple-400 rounded-full animate-pulse'></div>
                   <div
-                    className='w-1 h-1 bg-purple-400 rounded-full animate-pulse'
+                    className='w-0.5 h-0.5 bg-purple-400 rounded-full animate-pulse'
                     style={{ animationDelay: '0.2s' }}
                   ></div>
                   <div
-                    className='w-1 h-1 bg-purple-400 rounded-full animate-pulse'
+                    className='w-0.5 h-0.5 bg-purple-400 rounded-full animate-pulse'
                     style={{ animationDelay: '0.4s' }}
                   ></div>
                 </div>
@@ -112,10 +112,10 @@ export default function TarotSpreadSelector({
           <div className='relative'>
             {/* Fade effect on right edge to indicate scrollable content */}
             {spreads.length > 2 && (
-              <div className='absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-gray-900 to-transparent z-10 pointer-events-none'></div>
+              <div className='absolute right-0 top-0 bottom-0 w-6 bg-gradient-to-l from-gray-900 to-transparent z-10 pointer-events-none'></div>
             )}
 
-            <div className='flex gap-3 overflow-x-auto pb-2 scrollbar-hide scroll-smooth'>
+            <div className='flex gap-2 overflow-x-auto pb-1.5 scrollbar-hide scroll-smooth -mx-1 px-1'>
               {spreads.map(spread => (
                 <button
                   key={spread.id}
@@ -125,17 +125,17 @@ export default function TarotSpreadSelector({
                     e.stopPropagation();
                     onSpreadSelect(spread.id);
                   }}
-                  className={`flex-shrink-0 flex items-center gap-2 px-4 py-3 rounded-xl font-medium transition-all duration-300 ${
+                  className={`flex-shrink-0 flex items-center gap-1.5 px-3 py-2 rounded-lg font-medium transition-all duration-300 ${
                     selectedSpread === spread.id
-                      ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg'
-                      : 'bg-white/10 text-gray-300 hover:bg-white/20'
+                      ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-md'
+                      : 'bg-white/10 text-gray-300 active:bg-white/20'
                   }`}
                 >
-                  <span className='text-lg'>{spread.icon}</span>
-                  <span className='text-sm whitespace-nowrap'>
+                  <span className='text-base leading-none'>{spread.icon}</span>
+                  <span className='text-xs whitespace-nowrap font-medium'>
                     {t(spread.name)}
                   </span>
-                  <span className='text-xs bg-white/20 px-2 py-1 rounded-full'>
+                  <span className='text-[10px] bg-white/20 px-1.5 py-0.5 rounded-full leading-none font-semibold'>
                     {spread.cardCount}
                   </span>
                 </button>
@@ -144,13 +144,13 @@ export default function TarotSpreadSelector({
 
             {/* Scroll dots indicator */}
             {spreads.length > 2 && (
-              <div className='flex justify-center mt-3 gap-1'>
+              <div className='flex justify-center mt-2 gap-1'>
                 {Array.from(
                   { length: Math.ceil(spreads.length / 2) },
                   (_, i) => (
                     <div
                       key={i}
-                      className='w-2 h-2 rounded-full bg-gray-600 opacity-50'
+                      className='w-1.5 h-1.5 rounded-full bg-gray-600 opacity-50'
                     ></div>
                   )
                 )}
@@ -163,39 +163,39 @@ export default function TarotSpreadSelector({
       {/* Enhanced Selected Spread Info */}
       {selectedSpread && showDescription && (
         <div className='text-center'>
-          <br />
+          <br className='hidden md:block' />
 
           {/* Açılım Açıklaması */}
-          <div className='max-w-4xl mx-auto mb-6'>
-            <div className='bg-gradient-to-r from-purple-900/30 to-pink-900/30 backdrop-blur-sm border border-purple-500/20 rounded-2xl p-6'>
-              <h3 className='text-lg font-semibold text-purple-300 mb-3 flex items-center justify-center gap-2'>
-                <span className='text-2xl'>🔮</span>
+          <div className='max-w-4xl mx-auto mb-4 md:mb-6'>
+            <div className='bg-gradient-to-r from-purple-900/30 to-pink-900/30 backdrop-blur-sm border border-purple-500/20 rounded-xl md:rounded-2xl p-4 md:p-6'>
+              <h3 className='text-sm md:text-lg font-semibold text-purple-300 mb-2 md:mb-3 flex items-center justify-center gap-1.5 md:gap-2'>
+                <span className='text-lg md:text-2xl'>🔮</span>
                 {t('tarotSpreadSelector.spreadMeaning')}
               </h3>
-              <p className='text-gray-200 leading-relaxed text-base'>
+              <p className='text-gray-200 leading-relaxed text-sm md:text-base'>
                 {t(
                   spreads.find(s => s.id === selectedSpread)?.description || ''
                 )}
               </p>
 
               {/* Açılım Pozisyonları */}
-              <div className='mt-4 pt-4 border-t border-purple-500/20'>
-                <h4 className='text-sm font-medium text-purple-300 mb-3'>
+              <div className='mt-3 md:mt-4 pt-3 md:pt-4 border-t border-purple-500/20'>
+                <h4 className='text-xs md:text-sm font-medium text-purple-300 mb-2 md:mb-3'>
                   📋 {t('tarotSpreadSelector.spreadPositions')}
                 </h4>
-                <div className='grid grid-cols-1 md:grid-cols-2 gap-2 text-sm'>
+                <div className='grid grid-cols-1 md:grid-cols-2 gap-1.5 md:gap-2 text-xs md:text-sm'>
                   {spreads
                     .find(s => s.id === selectedSpread)
                     ?.positions.slice(0, showAllPositions ? undefined : 4)
                     .map((position, index) => (
                       <div
                         key={position.id}
-                        className='flex items-start gap-2 text-gray-300'
+                        className='flex items-start gap-1.5 md:gap-2 text-gray-300'
                       >
-                        <span className='text-purple-400 font-medium min-w-[20px]'>
+                        <span className='text-purple-400 font-medium min-w-[18px] md:min-w-[20px] text-xs'>
                           {index + 1}.
                         </span>
-                        <span className='text-xs'>{t(position.title)}</span>
+                        <span className='text-[11px] md:text-xs leading-tight'>{t(position.title)}</span>
                       </div>
                     ))}
                   {spreads.find(s => s.id === selectedSpread)?.positions
@@ -209,7 +209,7 @@ export default function TarotSpreadSelector({
                           e.stopPropagation();
                           setShowAllPositions(!showAllPositions);
                         }}
-                        className='text-xs text-purple-400 hover:text-purple-300 col-span-full text-center mt-2 transition-colors duration-200 cursor-pointer underline decoration-dotted underline-offset-2'
+                        className='text-[10px] md:text-xs text-purple-400 hover:text-purple-300 col-span-full text-center mt-1.5 md:mt-2 transition-colors duration-200 cursor-pointer underline decoration-dotted underline-offset-2'
                       >
                         {showAllPositions
                           ? t('tarotSpreadSelector.showLess')

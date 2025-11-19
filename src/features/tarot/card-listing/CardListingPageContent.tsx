@@ -102,7 +102,7 @@ export function CardListingPageContent({
             </p>
           </div>
 
-          <div className='grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6'>
+          <div className='grid grid-cols-3 gap-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6'>
             {MAJOR_ARCANA_CARDS.map(card => (
               <Link
                 key={card.key}
@@ -211,7 +211,7 @@ export function CardListingPageContent({
                   </div>
                 </div>
 
-                <div className='grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7'>
+                <div className='grid grid-cols-4 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7'>
                   {suitCards.map(card => (
                     <Link
                       key={card.key}

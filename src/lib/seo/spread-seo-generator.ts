@@ -54,12 +54,12 @@ const spreadSeoData: Record<
   },
   'problem-solving-spread': {
     tr: {
-      title: 'Problem Çözme Tarot Açılımı',
+      title: 'Kelt  Tarot Açılımı',
       description:
-        '10 kartlık detaylı problem çözme açılımı. Karşılaştığınız zorluklar için çözüm yolları keşfedin.',
+        '10 kartlık detaylı Kelt  açılımı. Karşılaştığınız zorluklar için çözüm yolları keşfedin.',
     },
     en: {
-      title: 'Problem Solving Tarot Spread',
+      title: 'Celtics Tarot Spread',
       description:
         'Detailed 10-card problem-solving spread. Discover solutions to your challenges.',
     },
@@ -70,9 +70,9 @@ const spreadSeoData: Record<
   },
   'situation-analysis-spread': {
     tr: {
-      title: 'Durum Analizi Tarot Açılımı',
+      title: 'Enerji Haritası Tarot Açılımı',
       description:
-        '7 kartlık kapsamlı durum analizi. Mevcut durumunuzu tüm yönleriyle anlayın.',
+        '7 kartlık kapsamlı Enerji Haritası. Mevcut durumunuzu tüm yönleriyle anlayın.',
     },
     en: {
       title: 'Situation Analysis Tarot Spread',
@@ -102,7 +102,7 @@ const spreadSeoData: Record<
   },
   'relationship-problems-spread': {
     tr: {
-      title: 'İlişki Sorunları Tarot Açılımı',
+      title: 'İlişki dönüşüm Tarot Açılımı',
       description:
         '9 kartlık ilişki sorunları açılımı. Zorlukları aşın ve çözüm yolları bulun.',
     },
@@ -136,7 +136,7 @@ const spreadSeoData: Record<
     tr: {
       title: 'Yeni Aşk Tarot Açılımı',
       description:
-        '6 kartlık yeni aşk açılımı. Yeni bir ilişki için içgörüler ve rehberlik.',
+        '6 kartlık yeni Aşk Uyumu. Yeni bir ilişki için içgörüler ve rehberlik.',
     },
     en: {
       title: 'New Love Tarot Spread',
