@@ -68550,5 +68550,33 @@
     "future": "Dnevna Tarot Karta",
     "instruction": "Fokusirajte se na svoje pitanje i izaberite kartu koja će otkriti vaše smernice za danas",
     "drawAnother": "Izvući Drugu Kartu"
+  },
+  "earnCredit": {
+    "modal": {
+      "title": "Zaradite Kredit",
+      "description": "Potreban vam je 1 kredit za jednostavno čitanje. Možete zaraditi 1 kredit završavanjem jedne od opcija ispod.",
+      "close": "Zatvori",
+      "referral": {
+        "title": "Pozovite Prijatelja",
+        "description": "Pozovite svog prijatelja, zaradite 1 kredit kada se registruje!",
+        "linkLabel": "Vaš Referalni Link",
+        "copyButton": "Kopiraj",
+        "shareButton": "Podeli",
+        "copied": "Link je kopiran!",
+        "copyError": "Kopiranje linka nije uspelo",
+        "success": "Vaš prijatelj se registrovao! Zaradili ste 1 kredit.",
+        "howItWorks": "Kako Funkcioniše?",
+        "howItWorksText": "Podelite svoj link, kada se vaš prijatelj registruje automatski zaradite 1 kredit."
+      },
+      "ad": {
+        "title": "Pogledajte Reklamu",
+        "description": "Pogledajte reklamu da zaradite 1 kredit!",
+        "watching": "Gledanje reklame...",
+        "watchTime": "Preostalo {{seconds}} sekundi",
+        "success": "Reklama je pogledana! Zaradili ste 1 kredit.",
+        "error": "Učitavanje reklame nije uspelo. Molimo pokušajte ponovo.",
+        "noConsent": "Molimo ažurirajte svoje postavke kolačića da biste videli reklame."
+      }
+    }
   }
 }

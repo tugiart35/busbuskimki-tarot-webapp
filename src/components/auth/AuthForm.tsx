@@ -333,7 +333,10 @@ function AuthForm({ locale, initialError, next }: AuthFormProps) {
       setMessage('');
       setErrors({});
 
-      await signInWithGoogle(locale);
+      // Check for referral code in URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const referralCode = urlParams.get('ref');
+      await signInWithGoogle(locale, referralCode || undefined);
     } catch (error: unknown) {
       const errorMessage = getAuthErrorMessage(error as Error, locale);
       showToast(errorMessage, 'error');
@@ -352,7 +355,10 @@ function AuthForm({ locale, initialError, next }: AuthFormProps) {
       setMessage('');
       setErrors({});
 
-      await signInWithFacebook(locale);
+      // Check for referral code in URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const referralCode = urlParams.get('ref');
+      await signInWithFacebook(locale, referralCode || undefined);
     } catch (error: unknown) {
       const errorMessage = getAuthErrorMessage(error as Error, locale);
       showToast(errorMessage, 'error');

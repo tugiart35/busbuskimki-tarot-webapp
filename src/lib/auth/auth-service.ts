@@ -95,17 +95,29 @@ export class AuthService {
    */
   static async signUp(userData: RegisterFormData) {
     try {
+      // Check for referral code in URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const referralCode = urlParams.get('ref');
+
+      // Prepare user metadata
+      const userMetadata: Record<string, any> = {
+        first_name: userData.name,
+        last_name: userData.surname,
+        birth_date: userData.birthDate,
+        gender: userData.gender,
+      };
+
+      // Add referral code if present
+      if (referralCode) {
+        userMetadata.referral_code = referralCode;
+      }
+
       // Supabase auth signup işlemi
       const { data, error } = await supabase.auth.signUp({
         email: userData.email,
         password: userData.password,
         options: {
-          data: {
-            first_name: userData.name,
-            last_name: userData.surname,
-            birth_date: userData.birthDate,
-            gender: userData.gender,
-          },
+          data: userMetadata,
           // Email confirmation için callback URL'i ayarla
           emailRedirectTo: `${window.location.origin}/auth/callback`,
         },
@@ -173,8 +185,13 @@ export class AuthService {
   /**
    * Google ile OAuth girişi
    */
-  static async signInWithGoogle(locale: string) {
+  static async signInWithGoogle(locale: string, referralCode?: string) {
     try {
+      // Store referral code in cookie if present (for OAuth callback)
+      if (referralCode && typeof document !== 'undefined') {
+        document.cookie = `oauth_referral_code=${referralCode}; path=/; max-age=600; SameSite=Lax`;
+      }
+
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
@@ -195,11 +212,15 @@ export class AuthService {
   /**
    * Facebook ile OAuth girişi
    */
-  static async signInWithFacebook(locale: string) {
+  static async signInWithFacebook(locale: string, referralCode?: string) {
     try {
       // Locale'i cookie'ye kaydet (callback route'da okumak için)
       if (typeof document !== 'undefined') {
         document.cookie = `oauth_locale=${locale}; path=/; max-age=600; SameSite=Lax`;
+        // Store referral code in cookie if present
+        if (referralCode) {
+          document.cookie = `oauth_referral_code=${referralCode}; path=/; max-age=600; SameSite=Lax`;
+        }
       }
 
       const { error } = await supabase.auth.signInWithOAuth({

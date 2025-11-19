@@ -84,12 +84,12 @@ export function useAuth() {
   );
 
   const signInWithGoogle = useCallback(
-    async (locale: string) => {
+    async (locale: string, referralCode?: string) => {
       try {
         setAuthLoading(true);
         clearError();
 
-        await AuthService.signInWithGoogle(locale);
+        await AuthService.signInWithGoogle(locale, referralCode);
       } catch (err) {
         throw err;
       } finally {
@@ -100,12 +100,12 @@ export function useAuth() {
   );
 
   const signInWithFacebook = useCallback(
-    async (locale: string) => {
+    async (locale: string, referralCode?: string) => {
       try {
         setAuthLoading(true);
         clearError();
 
-        await AuthService.signInWithFacebook(locale);
+        await AuthService.signInWithFacebook(locale, referralCode);
       } catch (err) {
         throw err;
       } finally {

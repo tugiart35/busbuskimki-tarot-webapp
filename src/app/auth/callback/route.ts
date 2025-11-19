@@ -140,8 +140,9 @@ export async function GET(request: NextRequest) {
         return AuthErrorService.handleCallbackError(error, locale);
       }
 
-      // OAuth locale'i cookie'den oku (eğer varsa)
+      // OAuth locale ve referral code'u cookie'den oku (eğer varsa)
       let oauthLocale = locale;
+      let referralCode: string | null = null;
       const cookieHeader = request.headers.get('cookie');
       if (cookieHeader) {
         const cookies = cookieHeader.split(';').reduce(
@@ -164,12 +165,62 @@ export async function GET(request: NextRequest) {
             sameSite: 'lax',
           });
         }
+
+        if (cookies.oauth_referral_code) {
+          referralCode = cookies.oauth_referral_code;
+          // Cookie'yi temizle (tek kullanımlık)
+          cookieStore.set('oauth_referral_code', '', {
+            path: '/',
+            maxAge: 0,
+            sameSite: 'lax',
+          });
+        }
       }
 
       // Kullanıcı bilgilerini al
       const {
         data: { user },
       } = await supabase.auth.getUser();
+
+      // OAuth referral code'u user metadata'ya ekle (eğer yeni kullanıcıysa ve referral code varsa)
+      // Bu, handle_new_user() trigger'ının referral bonus vermesini sağlar
+      if (user && referralCode && user.created_at) {
+        const userCreatedAt = new Date(user.created_at);
+        const now = new Date();
+        const timeDiff = now.getTime() - userCreatedAt.getTime();
+        const minutesDiff = timeDiff / (1000 * 60);
+
+        // Eğer kullanıcı son 5 dakika içinde oluşturulmuşsa ve metadata'da referral_code yoksa ekle
+        if (minutesDiff < 5 && !user.user_metadata?.referral_code) {
+          try {
+            await supabase.auth.updateUser({
+              data: {
+                ...user.user_metadata,
+                referral_code: referralCode,
+              },
+            });
+            logger.info('Referral code added to user metadata', {
+              action: 'referral_code_metadata_added',
+              resource: 'auth',
+              metadata: {
+                userId: user.id,
+                referralCode,
+              },
+            });
+          } catch (updateError) {
+            // Metadata güncelleme hatası kritik değil, callback route'da manuel işlenecek
+            logger.warn('Failed to update user metadata with referral code', {
+              action: 'referral_code_metadata_update_failed',
+              resource: 'auth',
+              metadata: {
+                userId: user.id,
+                referralCode,
+                error: updateError,
+              },
+            });
+          }
+        }
+      }
 
       if (user) {
         // Facebook login kontrolü - feature flag kapalıysa reddet
@@ -246,6 +297,97 @@ export async function GET(request: NextRequest) {
               profileId: profileResult.profile?.id,
             },
           });
+
+          // Handle referral code for OAuth users (fallback - trigger should handle it)
+          // Check if user was just created (within last 5 minutes) and referral code exists
+          // This is a fallback in case the trigger didn't process the referral
+          if (referralCode && user.created_at) {
+            const userCreatedAt = new Date(user.created_at);
+            const now = new Date();
+            const timeDiff = now.getTime() - userCreatedAt.getTime();
+            const minutesDiff = timeDiff / (1000 * 60);
+
+            // If user was created in last 5 minutes, check if referral bonus was given
+            if (minutesDiff < 5) {
+              try {
+                // Get referrer's profile ID
+                const { data: referrerProfile } = await supabase
+                  .from('profiles')
+                  .select('id')
+                  .eq('referral_code', referralCode)
+                  .single();
+
+                if (referrerProfile) {
+                  // Check if referral bonus already given (by trigger or previous callback)
+                  const { data: existingTx } = await supabase
+                    .from('transactions')
+                    .select('id')
+                    .eq('user_id', referrerProfile.id)
+                    .eq('ref_type', 'referral_bonus')
+                    .eq('ref_id', user.id)
+                    .maybeSingle();
+
+                  // Only grant bonus if it wasn't already given
+                  if (!existingTx) {
+                    // Get current balance and add 1 credit to referrer
+                    const { data: currentProfile } = await supabase
+                      .from('profiles')
+                      .select('credit_balance')
+                      .eq('id', referrerProfile.id)
+                      .single();
+
+                    if (currentProfile) {
+                      await supabase
+                        .from('profiles')
+                        .update({ credit_balance: (currentProfile.credit_balance || 0) + 1 })
+                        .eq('id', referrerProfile.id);
+
+                      // Log referral bonus transaction
+                      await supabase.from('transactions').insert({
+                        user_id: referrerProfile.id,
+                        type: 'bonus',
+                        amount: 1,
+                        delta_credits: 1,
+                        description: 'Referral bonusu - Arkadaşınız kayıt oldu',
+                        ref_type: 'referral_bonus',
+                        ref_id: user.id,
+                      });
+
+                      logger.info('Referral bonus granted (fallback)', {
+                        action: 'referral_bonus_granted_fallback',
+                        resource: 'profiles',
+                        metadata: {
+                          referrerId: referrerProfile.id,
+                          newUserId: user.id,
+                          referralCode,
+                        },
+                      });
+                    }
+                  } else {
+                    logger.info('Referral bonus already granted', {
+                      action: 'referral_bonus_already_exists',
+                      resource: 'profiles',
+                      metadata: {
+                        referrerId: referrerProfile.id,
+                        newUserId: user.id,
+                        referralCode,
+                      },
+                    });
+                  }
+                }
+              } catch (referralError) {
+                // Log error but don't fail the callback
+                logger.error('Error handling referral bonus', referralError, {
+                  action: 'referral_bonus_error',
+                  resource: 'profiles',
+                  metadata: {
+                    userId: user.id,
+                    referralCode,
+                  },
+                });
+              }
+            }
+          }
 
           // Welcome email gönder (sadece yeni kullanıcılar için)
           if (profileResult.profile) {

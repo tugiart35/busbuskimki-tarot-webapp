@@ -47,11 +47,12 @@ Yapılan değişiklikler:
 
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { CreditStatus } from '@/lib/constants/reading-credits';
 import { useTranslations } from '@/hooks/useTranslations';
 import { useAuth } from '@/hooks/auth/useAuth';
 import { useReadingCredits } from '@/hooks/useReadingCredits';
+import EarnCreditModal from './EarnCreditModal';
 import { getTheme, type Theme } from '@/lib/theme/theme-config';
 // import CreditInfoModal from './CreditInfoModal'; // Archived
 
@@ -198,6 +199,9 @@ export default function BaseReadingTypeSelector({
 
   const simpleCredits = useReadingCredits(simpleReadingType);
 
+  // Earn credit modal state
+  const [showEarnCreditModal, setShowEarnCreditModal] = useState(false);
+
   // Modal state'leri
   // const [showCreditInfoModal, setShowCreditInfoModal] = useState(false); // Archived with CreditInfoModal
   // const [pendingReadingType, setPendingReadingType] = useState<string | null>(null); // Archived with CreditInfoModal
@@ -254,10 +258,8 @@ export default function BaseReadingTypeSelector({
     if (type === readingTypes.SIMPLE) {
       // Basit okuma için kredi kontrolü
       if (!simpleCredits.creditStatus.hasEnoughCredits) {
-        // Kredi yetersiz - kredi bilgi modalını aç
-        if (_onCreditInfoClick) {
-          _onCreditInfoClick();
-        }
+        // Kredi yetersiz - kredi kazanma modalını aç
+        setShowEarnCreditModal(true);
         return;
       }
       // Kredi yeterli - okuma türünü seç ve akışa devam et
@@ -303,12 +305,17 @@ export default function BaseReadingTypeSelector({
         {/* Basit Okuma - Sadece authenticated kullanıcılar için */}
         <button
           type='button'
-          onClick={e => handleReadingTypeClick(readingTypes.SIMPLE, e)}
-          disabled={
-            disabled ||
-            !isAuthenticated ||
-            !simpleCredits.creditStatus.hasEnoughCredits
-          }
+          onClick={e => {
+            // Kredi yetersizse modal aç, yoksa normal akışa devam et
+            if (isAuthenticated && !simpleCredits.creditStatus.hasEnoughCredits) {
+              e.preventDefault();
+              e.stopPropagation();
+              setShowEarnCreditModal(true);
+              return;
+            }
+            handleReadingTypeClick(readingTypes.SIMPLE, e);
+          }}
+          disabled={disabled || !isAuthenticated}
           className={`px-2 sm:px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all duration-150 focus:outline-none focus:ring-2 ${currentTheme.simpleButton.focus} disabled:opacity-50 disabled:cursor-not-allowed
             ${
               selectedType === readingTypes.SIMPLE
@@ -317,6 +324,10 @@ export default function BaseReadingTypeSelector({
                     !simpleCredits.creditStatus.hasEnoughCredits
                   ? currentTheme.detailedButton.disabled
                   : currentTheme.simpleButton.unselected
+            } ${
+              isAuthenticated && !simpleCredits.creditStatus.hasEnoughCredits
+                ? 'cursor-pointer hover:opacity-80'
+                : ''
             }`}
           title={
             !isAuthenticated
@@ -464,13 +475,16 @@ export default function BaseReadingTypeSelector({
         {isAuthenticated && (
           <div className='flex flex-col gap-1 text-xs'>
             {!simpleCredits.creditStatus.hasEnoughCredits && (
-              <span className={`${currentTheme.messages.adminRequired}`}>
-                💳{' '}
-                {t('reading.messages.simpleReadingCreditsRequired', {
-                  count: simpleCredits.creditStatus.requiredCredits,
-                  defaultValue: `Basit okuma için ${simpleCredits.creditStatus.requiredCredits} kredi gerekli`,
-                })}
-              </span>
+              <div className='flex flex-col items-center gap-2 mt-2'>
+               
+                <button
+                  type='button'
+                  onClick={() => setShowEarnCreditModal(true)}
+                  className='px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl text-sm animate-pulse'
+                >
+                  💰 Kredi Kazan
+                </button>
+              </div>
             )}
             {!detailedCredits.creditStatus.hasEnoughCredits && (
               <span className={`${currentTheme.messages.adminRequired}`}>
@@ -513,6 +527,20 @@ export default function BaseReadingTypeSelector({
           theme={theme}
         />
       )} */}
+
+      {/* Earn Credit Modal */}
+      {showEarnCreditModal && (
+        <EarnCreditModal
+          isOpen={showEarnCreditModal}
+          onClose={() => setShowEarnCreditModal(false)}
+          onCreditEarned={async () => {
+            // Refresh credit status
+            await simpleCredits.checkCredits();
+            setShowEarnCreditModal(false);
+          }}
+          theme={(theme === 'default' ? 'purple' : theme) as 'purple' | 'pink' | 'blue' | 'green'}
+        />
+      )}
     </div>
   );
 }
