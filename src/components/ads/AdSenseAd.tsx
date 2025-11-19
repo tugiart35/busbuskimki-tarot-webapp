@@ -29,6 +29,11 @@ export default function AdSenseAd({
   layout,
   layoutKey,
 }: AdSenseAdProps) {
+  // AdSense deaktif kontrolü - tekrar aktif etmek için NEXT_PUBLIC_ADSENSE_ENABLED=true yapın
+  if (process.env.NEXT_PUBLIC_ADSENSE_ENABLED === 'false') {
+    return null;
+  }
+
   const adRef = useRef<HTMLModElement>(null);
   const [adLoaded, setAdLoaded] = useState(false);
   const [hasConsent, setHasConsent] = useState(false);

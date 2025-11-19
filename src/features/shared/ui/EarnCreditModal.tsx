@@ -383,20 +383,30 @@ export default function EarnCreditModal({
                   ref={adContainerRef}
                   className='bg-slate-800/50 border border-slate-700 rounded-lg p-4 min-h-[250px] flex items-center justify-center'
                 >
-                  {!adLoaded && !adError && (
-                    <div className='text-center'>
-                      <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-purple-500 mx-auto mb-2'></div>
+                  {process.env.NEXT_PUBLIC_ADSENSE_ENABLED !== 'false' ? (
+                    <>
+                      {!adLoaded && !adError && (
+                        <div className='text-center'>
+                          <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-purple-500 mx-auto mb-2'></div>
+                          <p className='text-gray-400 text-sm'>
+                            {t('earnCredit.modal.ad.watching')}
+                          </p>
+                        </div>
+                      )}
+                      <AdSenseAd
+                        slot={process.env.NEXT_PUBLIC_ADSENSE_CREDIT_SLOT || '4872873137'}
+                        format='rectangle'
+                        responsive={true}
+                        className='w-full'
+                      />
+                    </>
+                  ) : (
+                    <div className='text-center p-4'>
                       <p className='text-gray-400 text-sm'>
-                        {t('earnCredit.modal.ad.watching')}
+                        {t('earnCredit.modal.ad.description')}
                       </p>
                     </div>
                   )}
-                  <AdSenseAd
-                    slot={process.env.NEXT_PUBLIC_ADSENSE_CREDIT_SLOT || '4872873137'}
-                    format='rectangle'
-                    responsive={true}
-                    className='w-full'
-                  />
                 </div>
 
                 {isWatching && watchTime > 0 && (

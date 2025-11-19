@@ -284,6 +284,11 @@ export class AdSenseLoadMonitor {
  * AdSense için güvenli render kontrolü
  */
 export function canRenderAd(): boolean {
+  // AdSense deaktif kontrolü - tekrar aktif etmek için NEXT_PUBLIC_ADSENSE_ENABLED=true yapın
+  if (process.env.NEXT_PUBLIC_ADSENSE_ENABLED === 'false') {
+    return false;
+  }
+
   const env = validateAdEnvironment();
 
   if (!env.isValid) {

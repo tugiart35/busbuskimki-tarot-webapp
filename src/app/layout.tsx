@@ -98,13 +98,18 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           content={process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION || ''}
         />
 
-        {/* Google AdSense - YENİ KOD */}
-        <script
-          async
-          defer
-          src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1429338163231803'
-          crossOrigin='anonymous'
-        />
+        {/* Google AdSense - DEAKTİF EDİLDİ (tekrar aktif etmek için NEXT_PUBLIC_ADSENSE_ENABLED=true yapın veya değişkeni kaldırın) */}
+        {process.env.NEXT_PUBLIC_ADSENSE_ENABLED !== 'false' && (
+          <>
+            <script
+              async
+              defer
+              src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1429338163231803'
+              crossOrigin='anonymous'
+            />
+            <link rel='preconnect' href='https://pagead2.googlesyndication.com' />
+          </>
+        )}
 
         {/* Performance Optimization: Preconnect (daha hızlı DNS + TLS) */}
         <link rel='preconnect' href='https://fonts.googleapis.com' />
@@ -114,7 +119,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           crossOrigin='anonymous'
         />
         <link rel='preconnect' href='https://www.google-analytics.com' />
-        <link rel='preconnect' href='https://pagead2.googlesyndication.com' />
         <link rel='dns-prefetch' href='//connect.facebook.net' />
 
         {/* Preload removed: favicon and icon.svg are already loaded via HeadTags */}

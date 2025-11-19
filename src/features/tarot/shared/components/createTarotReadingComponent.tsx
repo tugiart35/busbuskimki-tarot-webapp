@@ -632,7 +632,7 @@ export function createTarotReadingComponent({
       config.creditKeys?.detailed as any
     );
     const writtenCredits = useReadingCredits(config.creditKeys?.written as any);
-    
+
     // Simple okuma için kredi kontrolü - reading type'a göre belirle
     const simpleReadingTypeKey = useMemo(() => {
       if (config.creditKeys?.simple) {
@@ -640,17 +640,33 @@ export function createTarotReadingComponent({
       }
       // Fallback: reading type'a göre simple okuma tipini belirle
       const readingType = config.supabaseReadingType?.toUpperCase() || '';
-      if (readingType.includes('PROBLEM_SOLVING')) return 'PROBLEM_SOLVING_SIMPLE';
-      if (readingType.includes('CAREER')) return 'CAREER_SPREAD_SIMPLE';
-      if (readingType.includes('SITUATION_ANALYSIS')) return 'SITUATION_ANALYSIS_SIMPLE';
-      if (readingType.includes('RELATIONSHIP_ANALYSIS')) return 'RELATIONSHIP_ANALYSIS_SIMPLE';
-      if (readingType.includes('RELATIONSHIP_PROBLEMS')) return 'RELATIONSHIP_PROBLEMS_SIMPLE';
-      if (readingType.includes('MARRIAGE')) return 'MARRIAGE_SIMPLE';
-      if (readingType.includes('NEW_LOVER')) return 'NEW_LOVER_SIMPLE';
-      if (readingType.includes('MONEY')) return 'MONEY_SPREAD_SIMPLE';
+      if (readingType.includes('PROBLEM_SOLVING')) {
+        return 'PROBLEM_SOLVING_SIMPLE';
+      }
+      if (readingType.includes('CAREER')) {
+        return 'CAREER_SPREAD_SIMPLE';
+      }
+      if (readingType.includes('SITUATION_ANALYSIS')) {
+        return 'SITUATION_ANALYSIS_SIMPLE';
+      }
+      if (readingType.includes('RELATIONSHIP_ANALYSIS')) {
+        return 'RELATIONSHIP_ANALYSIS_SIMPLE';
+      }
+      if (readingType.includes('RELATIONSHIP_PROBLEMS')) {
+        return 'RELATIONSHIP_PROBLEMS_SIMPLE';
+      }
+      if (readingType.includes('MARRIAGE')) {
+        return 'MARRIAGE_SIMPLE';
+      }
+      if (readingType.includes('NEW_LOVER')) {
+        return 'NEW_LOVER_SIMPLE';
+      }
+      if (readingType.includes('MONEY')) {
+        return 'MONEY_SPREAD_SIMPLE';
+      }
       return 'LOVE_SPREAD_SIMPLE';
     }, [config.creditKeys?.simple, config.supabaseReadingType]);
-    
+
     const simpleCredits = useReadingCredits(simpleReadingTypeKey as any);
 
     // Tarot okuma akışı hook'u - tüm state ve fonksiyonları yönetir
@@ -718,6 +734,10 @@ export function createTarotReadingComponent({
 
     // Başlangıç zamanı - okuma süresini hesaplamak için
     const [startTime] = useState(() => Date.now());
+
+    // Basit okumada kredi düşüldü mü kontrolü
+    const [simpleReadingCreditDeducted, setSimpleReadingCreditDeducted] =
+      useState(false);
 
     // initialReadingType varsa otomatik olarak okuma tipini seç ve info modalını göster
     useEffect(() => {
@@ -866,6 +886,135 @@ export function createTarotReadingComponent({
       t,
     ]);
 
+    // Basit okumada tüm kartlar seçildiğinde otomatik kredi düşme
+    useEffect(() => {
+      // Sadece basit okuma için ve tüm kartlar seçildiğinde
+      const allCardsSelected =
+        selectedCards.filter(card => card !== null).length === config.cardCount;
+      if (
+        selectedReadingType === READING_TYPES.SIMPLE &&
+        user &&
+        allCardsSelected &&
+        !isSavingReading &&
+        !simpleReadingCreditDeducted
+      ) {
+        // Kredi düşme işlemini yap
+        const deductCreditForSimpleReading = async () => {
+          // Kredi kontrolü
+          if (!simpleCredits.creditStatus.hasEnoughCredits) {
+            showToast(
+              t('reading.messages.insufficientCreditsDetail', {
+                count: simpleCredits.creditStatus.requiredCredits,
+                defaultValue: `Yetersiz kredi. ${simpleCredits.creditStatus.requiredCredits} kredi gerekli.`,
+              }),
+              'error'
+            );
+            return;
+          }
+
+          // Kredi düşme işlemi - fn_create_reading_with_debit kullanarak
+          try {
+            const serializedCards = selectedCards
+              .filter((card): card is TarotCard => card !== null)
+              .map((card, index) => ({
+                id: card.id,
+                name: card.name,
+                nameTr: card.nameTr,
+                isReversed: isReversed[index],
+              }));
+
+            const duration = Date.now() - startTime;
+
+            const simpleReadingData = {
+              userId: user.id,
+              readingType: config.supabaseReadingType,
+              status: 'completed',
+              title: t(dataKeys.simpleTitle),
+              interpretation: t(dataKeys.simpleInterpretation),
+              cards: {
+                selectedCards: serializedCards,
+                positions: config.positionsInfo.map(position => ({
+                  id: position.id,
+                  title: position.title,
+                  description: position.desc,
+                })),
+              },
+              questions: {
+                type: 'simple',
+                userQuestion: userQuestion || null,
+              },
+              cost_credits: simpleCredits.creditStatus.requiredCredits,
+              metadata: {
+                platform: 'web',
+                duration,
+                readingFormat: 'simple',
+                readingFormatTr: t(dataKeys.readingFormats.simple),
+                userAgent:
+                  typeof navigator !== 'undefined' ? navigator.userAgent : '',
+              },
+              timestamp: new Date().toISOString(),
+              spread_name: t(dataKeys.spreadName),
+            };
+
+            const { data: rpcResult, error: rpcError } = await supabase.rpc(
+              'fn_create_reading_with_debit',
+              {
+                p_user_id: user.id,
+                p_reading_type: config.supabaseReadingType,
+                p_spread_name: t(dataKeys.spreadName),
+                p_title: t(dataKeys.simpleTitle),
+                p_interpretation: t(dataKeys.simpleInterpretation),
+                p_cards: simpleReadingData.cards,
+                p_questions: simpleReadingData.questions,
+                p_cost_credits: simpleCredits.creditStatus.requiredCredits,
+                p_metadata: simpleReadingData.metadata,
+                p_idempotency_key: `reading_${user.id}_${simpleReadingData.timestamp}`,
+              }
+            );
+
+            if (rpcError) {
+              throw rpcError;
+            }
+
+            if (rpcResult?.id) {
+              // Kredi başarıyla düştü, state'i güncelle
+              setSimpleReadingCreditDeducted(true);
+              // Kredi durumunu güncelle
+              await simpleCredits.checkCredits();
+            }
+          } catch (error) {
+            // eslint-disable-next-line no-console
+            console.error('Simple reading credit deduction error:', error);
+            showToast(
+              error instanceof Error
+                ? error.message
+                : t('reading.messages.creditDeductionError', {
+                    defaultValue: 'Kredi düşürülürken bir hata oluştu.',
+                  }),
+              'error'
+            );
+          }
+        };
+
+        deductCreditForSimpleReading();
+      }
+    }, [
+      selectedReadingType,
+      selectedCards,
+      config.cardCount,
+      user,
+      isSavingReading,
+      simpleReadingCreditDeducted,
+      simpleCredits,
+      isReversed,
+      startTime,
+      userQuestion,
+      config,
+      dataKeys,
+      t,
+      showToast,
+    ]);
+
     const {
       handleSaveDetailedFormClick,
       closeInfoModal,
@@ -954,7 +1103,7 @@ export function createTarotReadingComponent({
           config.spreadId === 'single-card' ||
           config.spreadId === 'single-card-spread';
 
-        // Basit okuma işlemi - authentication ve kredi kontrolü gerekli
+        // Basit okuma işlemi - kredi zaten useEffect'te düşmüş, sadece yönlendirme yap
         if (selectedReadingType === READING_TYPES.SIMPLE) {
           // Authentication kontrolü
           if (!user) {
@@ -968,107 +1117,26 @@ export function createTarotReadingComponent({
             return;
           }
 
-          // Kredi kontrolü
-          if (!simpleCredits.creditStatus.hasEnoughCredits) {
-            showToast(
-              t('reading.messages.insufficientCreditsDetail', {
-                count: simpleCredits.creditStatus.requiredCredits,
-                defaultValue: `Yetersiz kredi. ${simpleCredits.creditStatus.requiredCredits} kredi gerekli.`,
-              }),
-              'error'
-            );
+          // Kredi zaten useEffect'te düşmüş olmalı, sadece yönlendirme yap
+          if (simpleReadingCreditDeducted) {
+            showToast(t(messages.simpleReadingCompleted), 'success');
+            try {
+              router.push(`/${locale}/dashboard`);
+            } catch {
+              window.location.href = `/${locale}/dashboard`;
+            }
             setSavingReading(false);
             return;
           }
 
-          // Seçilen kartları serialize et
-          const serializedCards = selectedCards
-            .filter((card): card is TarotCard => card !== null)
-            .map((card, index) => ({
-              id: card.id,
-              name: card.name,
-              nameTr: card.nameTr,
-              isReversed: isReversed[index],
-            }));
-
-          // Okuma süresini hesapla
-          const duration = Date.now() - startTime;
-
-          // Simple okuma verisi oluştur - yazılı/sesli okumalar gibi tam veri
-          const simpleReadingData = {
-            userId: user.id,
-            readingType: config.supabaseReadingType,
-            status: 'completed',
-            title: t(dataKeys.simpleTitle),
-            interpretation: t(dataKeys.simpleInterpretation),
-            cards: {
-              selectedCards: serializedCards,
-              positions: config.positionsInfo.map(position => ({
-                id: position.id,
-                title: position.title,
-                description: position.desc,
-              })),
-            },
-            questions: {
-              type: 'simple',
-              userQuestion: userQuestion || null,
-            },
-            cost_credits: simpleCredits.creditStatus.requiredCredits, // 1 kredi
-            metadata: {
-              platform: 'web',
-              duration,
-              readingFormat: 'simple',
-              readingFormatTr: t(dataKeys.readingFormats.simple),
-              userAgent:
-                typeof navigator !== 'undefined' ? navigator.userAgent : '',
-            },
-            timestamp: new Date().toISOString(),
-            spread_name: t(dataKeys.spreadName),
-          };
-
-          // fn_create_reading_with_debit ile kaydet (kredi kesintisi için)
-          try {
-            const { data: rpcResult, error: rpcError } = await supabase.rpc(
-              'fn_create_reading_with_debit',
-              {
-                p_user_id: user.id,
-                p_reading_type: config.supabaseReadingType,
-                p_spread_name: t(dataKeys.spreadName),
-                p_title: t(dataKeys.simpleTitle),
-                p_interpretation: t(dataKeys.simpleInterpretation),
-                p_cards: simpleReadingData.cards,
-                p_questions: simpleReadingData.questions,
-                p_cost_credits: simpleCredits.creditStatus.requiredCredits,
-                p_metadata: simpleReadingData.metadata,
-                p_idempotency_key: `reading_${user.id}_${simpleReadingData.timestamp}`,
-              }
-            );
-
-            if (rpcError) {
-              throw rpcError;
-            }
-
-            if (rpcResult?.id) {
-              showToast(t(messages.simpleReadingCompleted), 'success');
-              try {
-                router.push(`/${locale}/dashboard`);
-              } catch {
-                window.location.href = `/${locale}/dashboard`;
-              }
-            } else {
-              throw new Error('Okuma kaydedilemedi');
-            }
-          } catch (error) {
-            console.error('Simple reading save error:', error);
-            showToast(
-              error instanceof Error
-                ? error.message
-                : t(messages.readingSaveError),
-              'error'
-            );
-          } finally {
-            setSavingReading(false);
-          }
+          // Eğer kredi düşmemişse (edge case), hata göster
+          showToast(
+            t('reading.messages.creditNotDeducted', {
+              defaultValue: 'Kredi düşürülmedi. Lütfen tekrar deneyin.',
+            }),
+            'error'
+          );
+          setSavingReading(false);
           return;
         }
 
@@ -1647,6 +1715,7 @@ export function createTarotReadingComponent({
                 onSaveReading={handleSaveReading}
                 isSavingReading={isSavingReading}
                 showSaveButton={
+                  selectedReadingType === READING_TYPES.SIMPLE ||
                   selectedReadingType === READING_TYPES.DETAILED ||
                   selectedReadingType === READING_TYPES.WRITTEN
                 }
