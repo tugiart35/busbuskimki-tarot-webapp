@@ -41,11 +41,6 @@ const structuredContent = {
           'Kriz anında hangi arketiple hareket ettiğinizi keşfetmek için kokoloji (projektif psikoloji) metodu.',
       },
       {
-        name: 'İsim Enerjisi Analizi',
-        description:
-          'Pythagoras numerolojisi ile isminizdeki titreşimleri hesaplayın ve tarot kartınızla eşleştirin.',
-      },
-      {
         name: 'Stres Düzeyi Testi',
         description:
           'DASS21 temelli değerlendirme ile stres seviyenizi ölçün ve meditasyon önerileri alın.',
@@ -65,11 +60,6 @@ const structuredContent = {
           'Explore your crisis archetype using the kokology (projective psychology) method.',
       },
       {
-        name: 'Name Energy Analysis',
-        description:
-          'Calculate the numerical vibration of your name with Pythagorean numerology and match it with a tarot archetype.',
-      },
-      {
         name: 'Stress Level Quiz',
         description:
           'Assess your stress level with the DASS21-based scale and receive meditation suggestions.',
@@ -87,11 +77,6 @@ const structuredContent = {
         name: 'Test Olujne Oluje (Kokologija)',
         description:
           'Kokologija – projektivna psihologija – pomaže da otkrijete kako reagujete u kriznim situacijama.',
-      },
-      {
-        name: 'Analiza Energije Imena',
-        description:
-          'Izračunajte vibracije svog imena pomoću Pitagorine numerologije i povežite ih sa tarot simbolikom.',
       },
       {
         name: 'Test Nivoa Stresa',

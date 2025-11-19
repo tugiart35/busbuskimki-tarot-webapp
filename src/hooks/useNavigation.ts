@@ -64,21 +64,20 @@ const getSeoFriendlyPath = (path: string): string => {
 const getNavigationItems = (
   currentLocale: string,
   isAuthenticated: boolean,
-  isAdmin: boolean,
   t: (key: string, fallback?: string) => string
 ): NavigationItem[] => {
   const baseItems: NavigationItem[] = [
+    {
+      name: t('navigation.home', 'Ana Sayfa'),
+      href: `/${currentLocale}`, // Direkt locale (SEO alias yok)
+      icon: '💛',
+      activeIcon: '💛',
+    },
     {
       name: t('navigation.tarot', 'Tarot'),
       href: `/${currentLocale}/tarotokumasi`, // Gerçek route
       icon: '⭐',
       activeIcon: '⭐',
-    },
-    {
-      name: t('navigation.numerology', 'Numeroloji'),
-      href: `/${currentLocale}/numeroloji`, // Gerçek route
-      icon: '🔢',
-      activeIcon: '🔢',
     },
     {
       name: t('navigation.cards', 'Kartlar'),
@@ -87,22 +86,12 @@ const getNavigationItems = (
       activeIcon: '🃏',
     },
     {
-      name: t('navigation.home', 'Ana Sayfa'),
-      href: `/${currentLocale}`, // Direkt locale (SEO alias yok)
-      icon: '💛',
-      activeIcon: '💛',
+      name: t('navigation.numerology', 'Numeroloji'),
+      href: `/${currentLocale}/numeroloji`, // Gerçek route
+      icon: '🔢',
+      activeIcon: '🔢',
     },
   ];
-
-  // Admin kontrolü - admin ise Pakize sekmesi ekle
-  if (isAuthenticated && isAdmin) {
-    baseItems.push({
-      name: t('navigation.pakize', 'Pakize'),
-      href: `/${currentLocale}/pakize`,
-      icon: '👑',
-      activeIcon: '👑',
-    });
-  }
 
   // Auth durumuna göre giriş/profil sekmesi ekle
   if (isAuthenticated) {
@@ -128,7 +117,7 @@ const getNavigationItems = (
 export function useNavigation() {
   const pathname = usePathname();
   const router = useRouter();
-  const { isAuthenticated, isAdmin } = useAuth();
+  const { isAuthenticated } = useAuth();
   const { t } = useTranslations();
 
   // Mevcut locale'i pathname'den çıkar
@@ -136,8 +125,8 @@ export function useNavigation() {
 
   // Navigation items'ları memoize et
   const navigationItems = useMemo(
-    () => getNavigationItems(currentLocale, isAuthenticated, isAdmin, t),
-    [currentLocale, isAuthenticated, isAdmin, t]
+    () => getNavigationItems(currentLocale, isAuthenticated, t),
+    [currentLocale, isAuthenticated, t]
   );
 
   // Mevcut dili bul

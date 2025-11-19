@@ -8,6 +8,103 @@
   - MBTI, Aşk Dili, Stres, Yaratıcılık ve Kariyer testlerini kapsar
 */
 
+import { getLocaleMessages } from '@/lib/i18n/messages';
+
+// Nested key'leri çözmek için helper fonksiyon (array ve object desteği ile)
+function getNestedValueFromMessages(
+  t: (_key: string) => string,
+  key: string
+): unknown {
+  try {
+    // Nested value'yu direkt messages objesinden al
+    function getNested(obj: Record<string, unknown>, path: string): unknown {
+      return path.split('.').reduce((current: unknown, keyPart: string) => {
+        return current &&
+          typeof current === 'object' &&
+          current !== null &&
+          keyPart in current
+          ? (current as Record<string, unknown>)[keyPart]
+          : null;
+      }, obj);
+    }
+    
+    // Önce t() fonksiyonunu çağır
+    const translated = t(key);
+    
+    // Eğer key'in kendisi döndüyse (yani bulunamadıysa), messages'dan direkt al
+    if (translated === key) {
+      // Tüm locale'leri dene (tr, en, sr)
+      const locales: Array<'tr' | 'en' | 'sr'> = ['tr', 'en', 'sr'];
+      for (const locale of locales) {
+        const messages = getLocaleMessages(locale);
+        const value = getNested(messages, key);
+        if (value !== null && value !== undefined) {
+          return value;
+        }
+      }
+      return null;
+    }
+    
+    // String döndüyse, JSON parse etmeyi dene (eğer JSON string ise)
+    if (typeof translated === 'string') {
+      // Eğer string key'in kendisi değilse ve JSON gibi görünüyorsa parse et
+      if (translated !== key && (translated.startsWith('[') || translated.startsWith('{'))) {
+        try {
+          return JSON.parse(translated);
+        } catch {
+          // Parse edilemezse, direkt messages'dan al
+          const locales: Array<'tr' | 'en' | 'sr'> = ['tr', 'en', 'sr'];
+          for (const locale of locales) {
+            const messages = getLocaleMessages(locale);
+            const value = getNested(messages, key);
+            if (value !== null && value !== undefined) {
+              return value;
+            }
+          }
+          return translated;
+        }
+      }
+      // Normal string ise direkt messages'dan al
+      const locales: Array<'tr' | 'en' | 'sr'> = ['tr', 'en', 'sr'];
+      for (const locale of locales) {
+        const messages = getLocaleMessages(locale);
+        const value = getNested(messages, key);
+        if (value !== null && value !== undefined) {
+          return value;
+        }
+      }
+      return translated;
+    }
+    
+    return translated;
+  } catch {
+    // Hata durumunda direkt messages'dan al
+    try {
+      function getNested(obj: Record<string, unknown>, path: string): unknown {
+        return path.split('.').reduce((current: unknown, keyPart: string) => {
+          return current &&
+            typeof current === 'object' &&
+            current !== null &&
+            keyPart in current
+            ? (current as Record<string, unknown>)[keyPart]
+            : null;
+        }, obj);
+      }
+      const locales: Array<'tr' | 'en' | 'sr'> = ['tr', 'en', 'sr'];
+      for (const locale of locales) {
+        const messages = getLocaleMessages(locale);
+        const value = getNested(messages, key);
+        if (value !== null && value !== undefined) {
+          return value;
+        }
+      }
+    } catch {
+      // ignore
+    }
+    return null;
+  }
+}
+
 export interface TestQuestion {
   text: string;
   answers: {
@@ -42,134 +139,134 @@ export interface PsychologicalTest {
 // MBTI Kişilik Tipleri ve Açıklamaları - Helper Fonksiyon
 export const getMBTITypes = (t: (_key: string) => string) => ({
   INTJ: {
-    title: t('psychTests.results.mbti.types.INTJ.title'),
-    description: t('psychTests.results.mbti.types.INTJ.description'),
-    traits: t('psychTests.results.mbti.types.INTJ.traits'),
-    career: t('psychTests.results.mbti.types.INTJ.career'),
+    title: t('psychTests.tests.results.mbti.types.INTJ.title'),
+    description: t('psychTests.tests.results.mbti.types.INTJ.description'),
+    traits: t('psychTests.tests.results.mbti.types.INTJ.traits'),
+    career: t('psychTests.tests.results.mbti.types.INTJ.career'),
   },
   INTP: {
-    title: t('psychTests.results.mbti.types.INTP.title'),
-    description: t('psychTests.results.mbti.types.INTP.description'),
-    traits: t('psychTests.results.mbti.types.INTP.traits'),
-    career: t('psychTests.results.mbti.types.INTP.career'),
+    title: t('psychTests.tests.results.mbti.types.INTP.title'),
+    description: t('psychTests.tests.results.mbti.types.INTP.description'),
+    traits: t('psychTests.tests.results.mbti.types.INTP.traits'),
+    career: t('psychTests.tests.results.mbti.types.INTP.career'),
   },
   ENTJ: {
-    title: t('psychTests.results.mbti.types.ENTJ.title'),
-    description: t('psychTests.results.mbti.types.ENTJ.description'),
-    traits: t('psychTests.results.mbti.types.ENTJ.traits'),
-    career: t('psychTests.results.mbti.types.ENTJ.career'),
+    title: t('psychTests.tests.results.mbti.types.ENTJ.title'),
+    description: t('psychTests.tests.results.mbti.types.ENTJ.description'),
+    traits: t('psychTests.tests.results.mbti.types.ENTJ.traits'),
+    career: t('psychTests.tests.results.mbti.types.ENTJ.career'),
   },
   ENTP: {
-    title: t('psychTests.results.mbti.types.ENTP.title'),
-    description: t('psychTests.results.mbti.types.ENTP.description'),
-    traits: t('psychTests.results.mbti.types.ENTP.traits'),
-    career: t('psychTests.results.mbti.types.ENTP.career'),
+    title: t('psychTests.tests.results.mbti.types.ENTP.title'),
+    description: t('psychTests.tests.results.mbti.types.ENTP.description'),
+    traits: t('psychTests.tests.results.mbti.types.ENTP.traits'),
+    career: t('psychTests.tests.results.mbti.types.ENTP.career'),
   },
   INFJ: {
-    title: t('psychTests.results.mbti.types.INFJ.title'),
-    description: t('psychTests.results.mbti.types.INFJ.description'),
-    traits: t('psychTests.results.mbti.types.INFJ.traits'),
-    career: t('psychTests.results.mbti.types.INFJ.career'),
+    title: t('psychTests.tests.results.mbti.types.INFJ.title'),
+    description: t('psychTests.tests.results.mbti.types.INFJ.description'),
+    traits: t('psychTests.tests.results.mbti.types.INFJ.traits'),
+    career: t('psychTests.tests.results.mbti.types.INFJ.career'),
   },
   INFP: {
-    title: t('psychTests.results.mbti.types.INFP.title'),
-    description: t('psychTests.results.mbti.types.INFP.description'),
-    traits: t('psychTests.results.mbti.types.INFP.traits'),
-    career: t('psychTests.results.mbti.types.INFP.career'),
+    title: t('psychTests.tests.results.mbti.types.INFP.title'),
+    description: t('psychTests.tests.results.mbti.types.INFP.description'),
+    traits: t('psychTests.tests.results.mbti.types.INFP.traits'),
+    career: t('psychTests.tests.results.mbti.types.INFP.career'),
   },
   ENFJ: {
-    title: t('psychTests.results.mbti.types.ENFJ.title'),
-    description: t('psychTests.results.mbti.types.ENFJ.description'),
-    traits: t('psychTests.results.mbti.types.ENFJ.traits'),
-    career: t('psychTests.results.mbti.types.ENFJ.career'),
+    title: t('psychTests.tests.results.mbti.types.ENFJ.title'),
+    description: t('psychTests.tests.results.mbti.types.ENFJ.description'),
+    traits: t('psychTests.tests.results.mbti.types.ENFJ.traits'),
+    career: t('psychTests.tests.results.mbti.types.ENFJ.career'),
   },
   ENFP: {
-    title: t('psychTests.results.mbti.types.ENFP.title'),
-    description: t('psychTests.results.mbti.types.ENFP.description'),
-    traits: t('psychTests.results.mbti.types.ENFP.traits'),
-    career: t('psychTests.results.mbti.types.ENFP.career'),
+    title: t('psychTests.tests.results.mbti.types.ENFP.title'),
+    description: t('psychTests.tests.results.mbti.types.ENFP.description'),
+    traits: t('psychTests.tests.results.mbti.types.ENFP.traits'),
+    career: t('psychTests.tests.results.mbti.types.ENFP.career'),
   },
   ISTJ: {
-    title: t('psychTests.results.mbti.types.ISTJ.title'),
-    description: t('psychTests.results.mbti.types.ISTJ.description'),
-    traits: t('psychTests.results.mbti.types.ISTJ.traits'),
-    career: t('psychTests.results.mbti.types.ISTJ.career'),
+    title: t('psychTests.tests.results.mbti.types.ISTJ.title'),
+    description: t('psychTests.tests.results.mbti.types.ISTJ.description'),
+    traits: t('psychTests.tests.results.mbti.types.ISTJ.traits'),
+    career: t('psychTests.tests.results.mbti.types.ISTJ.career'),
   },
   ISFJ: {
-    title: t('psychTests.results.mbti.types.ISFJ.title'),
-    description: t('psychTests.results.mbti.types.ISFJ.description'),
-    traits: t('psychTests.results.mbti.types.ISFJ.traits'),
-    career: t('psychTests.results.mbti.types.ISFJ.career'),
+    title: t('psychTests.tests.results.mbti.types.ISFJ.title'),
+    description: t('psychTests.tests.results.mbti.types.ISFJ.description'),
+    traits: t('psychTests.tests.results.mbti.types.ISFJ.traits'),
+    career: t('psychTests.tests.results.mbti.types.ISFJ.career'),
   },
   ESTJ: {
-    title: t('psychTests.results.mbti.types.ESTJ.title'),
-    description: t('psychTests.results.mbti.types.ESTJ.description'),
-    traits: t('psychTests.results.mbti.types.ESTJ.traits'),
-    career: t('psychTests.results.mbti.types.ESTJ.career'),
+    title: t('psychTests.tests.results.mbti.types.ESTJ.title'),
+    description: t('psychTests.tests.results.mbti.types.ESTJ.description'),
+    traits: t('psychTests.tests.results.mbti.types.ESTJ.traits'),
+    career: t('psychTests.tests.results.mbti.types.ESTJ.career'),
   },
   ESFJ: {
-    title: t('psychTests.results.mbti.types.ESFJ.title'),
-    description: t('psychTests.results.mbti.types.ESFJ.description'),
-    traits: t('psychTests.results.mbti.types.ESFJ.traits'),
-    career: t('psychTests.results.mbti.types.ESFJ.career'),
+    title: t('psychTests.tests.results.mbti.types.ESFJ.title'),
+    description: t('psychTests.tests.results.mbti.types.ESFJ.description'),
+    traits: t('psychTests.tests.results.mbti.types.ESFJ.traits'),
+    career: t('psychTests.tests.results.mbti.types.ESFJ.career'),
   },
   ISTP: {
-    title: t('psychTests.results.mbti.types.ISTP.title'),
-    description: t('psychTests.results.mbti.types.ISTP.description'),
-    traits: t('psychTests.results.mbti.types.ISTP.traits'),
-    career: t('psychTests.results.mbti.types.ISTP.career'),
+    title: t('psychTests.tests.results.mbti.types.ISTP.title'),
+    description: t('psychTests.tests.results.mbti.types.ISTP.description'),
+    traits: t('psychTests.tests.results.mbti.types.ISTP.traits'),
+    career: t('psychTests.tests.results.mbti.types.ISTP.career'),
   },
   ISFP: {
-    title: t('psychTests.results.mbti.types.ISFP.title'),
-    description: t('psychTests.results.mbti.types.ISFP.description'),
-    traits: t('psychTests.results.mbti.types.ISFP.traits'),
-    career: t('psychTests.results.mbti.types.ISFP.career'),
+    title: t('psychTests.tests.results.mbti.types.ISFP.title'),
+    description: t('psychTests.tests.results.mbti.types.ISFP.description'),
+    traits: t('psychTests.tests.results.mbti.types.ISFP.traits'),
+    career: t('psychTests.tests.results.mbti.types.ISFP.career'),
   },
   ESTP: {
-    title: t('psychTests.results.mbti.types.ESTP.title'),
-    description: t('psychTests.results.mbti.types.ESTP.description'),
-    traits: t('psychTests.results.mbti.types.ESTP.traits'),
-    career: t('psychTests.results.mbti.types.ESTP.career'),
+    title: t('psychTests.tests.results.mbti.types.ESTP.title'),
+    description: t('psychTests.tests.results.mbti.types.ESTP.description'),
+    traits: t('psychTests.tests.results.mbti.types.ESTP.traits'),
+    career: t('psychTests.tests.results.mbti.types.ESTP.career'),
   },
   ESFP: {
-    title: t('psychTests.results.mbti.types.ESFP.title'),
-    description: t('psychTests.results.mbti.types.ESFP.description'),
-    traits: t('psychTests.results.mbti.types.ESFP.traits'),
-    career: t('psychTests.results.mbti.types.ESFP.career'),
+    title: t('psychTests.tests.results.mbti.types.ESFP.title'),
+    description: t('psychTests.tests.results.mbti.types.ESFP.description'),
+    traits: t('psychTests.tests.results.mbti.types.ESFP.traits'),
+    career: t('psychTests.tests.results.mbti.types.ESFP.career'),
   },
 });
 
 // Aşk Dili Tipleri - Helper Fonksiyon
 export const getLoveLanguages = (t: (_key: string) => string) => ({
   words: {
-    title: t('psychTests.results.loveLanguages.words.title'),
-    description: t('psychTests.results.loveLanguages.words.description'),
-    traits: t('psychTests.results.loveLanguages.words.traits'),
-    tips: t('psychTests.results.loveLanguages.words.tips'),
+    title: t('psychTests.tests.results.loveLanguages.words.title'),
+    description: t('psychTests.tests.results.loveLanguages.words.description'),
+    traits: t('psychTests.tests.results.loveLanguages.words.traits'),
+    tips: t('psychTests.tests.results.loveLanguages.words.tips'),
   },
   acts: {
-    title: t('psychTests.results.loveLanguages.acts.title'),
-    description: t('psychTests.results.loveLanguages.acts.description'),
-    traits: t('psychTests.results.loveLanguages.acts.traits'),
-    tips: t('psychTests.results.loveLanguages.acts.tips'),
+    title: t('psychTests.tests.results.loveLanguages.acts.title'),
+    description: t('psychTests.tests.results.loveLanguages.acts.description'),
+    traits: t('psychTests.tests.results.loveLanguages.acts.traits'),
+    tips: t('psychTests.tests.results.loveLanguages.acts.tips'),
   },
   gifts: {
-    title: t('psychTests.results.loveLanguages.gifts.title'),
-    description: t('psychTests.results.loveLanguages.gifts.description'),
-    traits: t('psychTests.results.loveLanguages.gifts.traits'),
-    tips: t('psychTests.results.loveLanguages.gifts.tips'),
+    title: t('psychTests.tests.results.loveLanguages.gifts.title'),
+    description: t('psychTests.tests.results.loveLanguages.gifts.description'),
+    traits: t('psychTests.tests.results.loveLanguages.gifts.traits'),
+    tips: t('psychTests.tests.results.loveLanguages.gifts.tips'),
   },
   time: {
-    title: t('psychTests.results.loveLanguages.time.title'),
-    description: t('psychTests.results.loveLanguages.time.description'),
-    traits: t('psychTests.results.loveLanguages.time.traits'),
-    tips: t('psychTests.results.loveLanguages.time.tips'),
+    title: t('psychTests.tests.results.loveLanguages.time.title'),
+    description: t('psychTests.tests.results.loveLanguages.time.description'),
+    traits: t('psychTests.tests.results.loveLanguages.time.traits'),
+    tips: t('psychTests.tests.results.loveLanguages.time.tips'),
   },
   touch: {
-    title: t('psychTests.results.loveLanguages.touch.title'),
-    description: t('psychTests.results.loveLanguages.touch.description'),
-    traits: t('psychTests.results.loveLanguages.touch.traits'),
-    tips: t('psychTests.results.loveLanguages.touch.tips'),
+    title: t('psychTests.tests.results.loveLanguages.touch.title'),
+    description: t('psychTests.tests.results.loveLanguages.touch.description'),
+    traits: t('psychTests.tests.results.loveLanguages.touch.traits'),
+    tips: t('psychTests.tests.results.loveLanguages.touch.tips'),
   },
 });
 
@@ -394,53 +491,75 @@ const getNameTarotCards = (t: (_key: string) => string) => ({
 // Kaynak: Lovibond & Lovibond (1995) DASS21, Harvard Medical School stres yönetimi araştırmaları
 export const getStressProfiles = (t: (_key: string) => string) => ({
   low: {
-    level: t('psychTests.results.stress.profiles.low.level'),
-    emoji: t('psychTests.results.stress.profiles.low.emoji'),
-    scoreRange: t('psychTests.results.stress.profiles.low.scoreRange'),
-    description: t('psychTests.results.stress.profiles.low.description'),
-    message: t('psychTests.results.stress.profiles.low.message'),
-    meditationTips: JSON.parse(
-      t('psychTests.results.stress.profiles.low.meditationTips') || '[]'
-    ) as string[],
-    wellnessAdvice: t('psychTests.results.stress.profiles.low.wellnessAdvice'),
+    level: t('psychTests.tests.results.stress.profiles.low.level'),
+    emoji: t('psychTests.tests.results.stress.profiles.low.emoji'),
+    scoreRange: t('psychTests.tests.results.stress.profiles.low.scoreRange'),
+    description: t('psychTests.tests.results.stress.profiles.low.description'),
+    message: t('psychTests.tests.results.stress.profiles.low.message'),
+    meditationTips: (() => {
+      try {
+        return JSON.parse(
+          t('psychTests.tests.results.stress.profiles.low.meditationTips') || '[]'
+        ) as string[];
+      } catch {
+        return [];
+      }
+    })(),
+    wellnessAdvice: t('psychTests.tests.results.stress.profiles.low.wellnessAdvice'),
   },
   moderate: {
-    level: t('psychTests.results.stress.profiles.moderate.level'),
-    emoji: t('psychTests.results.stress.profiles.moderate.emoji'),
-    scoreRange: t('psychTests.results.stress.profiles.moderate.scoreRange'),
-    description: t('psychTests.results.stress.profiles.moderate.description'),
-    message: t('psychTests.results.stress.profiles.moderate.message'),
-    meditationTips: JSON.parse(
-      t('psychTests.results.stress.profiles.moderate.meditationTips') || '[]'
-    ) as string[],
-    wellnessAdvice: t(
-      'psychTests.results.stress.profiles.moderate.wellnessAdvice'
-    ),
+    level: t('psychTests.tests.results.stress.profiles.moderate.level'),
+    emoji: t('psychTests.tests.results.stress.profiles.moderate.emoji'),
+    scoreRange: t('psychTests.tests.results.stress.profiles.moderate.scoreRange'),
+    description: t('psychTests.tests.results.stress.profiles.moderate.description'),
+    message: t('psychTests.tests.results.stress.profiles.moderate.message'),
+    meditationTips: (() => {
+      try {
+        return JSON.parse(
+          t('psychTests.tests.results.stress.profiles.moderate.meditationTips') || '[]'
+        ) as string[];
+      } catch {
+        return [];
+      }
+    })(),
+    wellnessAdvice: t('psychTests.tests.results.stress.profiles.moderate.wellnessAdvice'),
   },
   high: {
-    level: t('psychTests.results.stress.profiles.high.level'),
-    emoji: t('psychTests.results.stress.profiles.high.emoji'),
-    scoreRange: t('psychTests.results.stress.profiles.high.scoreRange'),
-    description: t('psychTests.results.stress.profiles.high.description'),
-    message: t('psychTests.results.stress.profiles.high.message'),
-    meditationTips: JSON.parse(
-      t('psychTests.results.stress.profiles.high.meditationTips') || '[]'
-    ) as string[],
-    wellnessAdvice: t('psychTests.results.stress.profiles.high.wellnessAdvice'),
+    level: t('psychTests.tests.results.stress.profiles.high.level'),
+    emoji: t('psychTests.tests.results.stress.profiles.high.emoji'),
+    scoreRange: t('psychTests.tests.results.stress.profiles.high.scoreRange'),
+    description: t('psychTests.tests.results.stress.profiles.high.description'),
+    message: t('psychTests.tests.results.stress.profiles.high.message'),
+    meditationTips: (() => {
+      try {
+        return JSON.parse(
+          t('psychTests.tests.results.stress.profiles.high.meditationTips') || '[]'
+        ) as string[];
+      } catch {
+        return [];
+      }
+    })(),
+    wellnessAdvice: t('psychTests.tests.results.stress.profiles.high.wellnessAdvice'),
   },
   veryHigh: {
-    level: t('psychTests.results.stress.profiles.veryHigh.level'),
-    emoji: t('psychTests.results.stress.profiles.veryHigh.emoji'),
-    scoreRange: t('psychTests.results.stress.profiles.veryHigh.scoreRange'),
-    description: t('psychTests.results.stress.profiles.veryHigh.description'),
-    message: t('psychTests.results.stress.profiles.veryHigh.message'),
-    meditationTips: JSON.parse(
-      t('psychTests.results.stress.profiles.veryHigh.meditationTips') || '[]'
-    ) as string[],
+    level: t('psychTests.tests.results.stress.profiles.veryHigh.level'),
+    emoji: t('psychTests.tests.results.stress.profiles.veryHigh.emoji'),
+    scoreRange: t('psychTests.tests.results.stress.profiles.veryHigh.scoreRange'),
+    description: t('psychTests.tests.results.stress.profiles.veryHigh.description'),
+    message: t('psychTests.tests.results.stress.profiles.veryHigh.message'),
+    meditationTips: (() => {
+      try {
+        return JSON.parse(
+          t('psychTests.tests.results.stress.profiles.veryHigh.meditationTips') || '[]'
+        ) as string[];
+      } catch {
+        return [];
+      }
+    })(),
     wellnessAdvice: t(
-      'psychTests.results.stress.profiles.veryHigh.wellnessAdvice'
+      'psychTests.tests.results.stress.profiles.veryHigh.wellnessAdvice'
     ),
-    urgentNote: t('psychTests.results.stress.profiles.veryHigh.urgentNote'),
+    urgentNote: t('psychTests.tests.results.stress.profiles.veryHigh.urgentNote'),
   },
 });
 
@@ -449,261 +568,339 @@ export const getStressProfiles = (t: (_key: string) => string) => ({
 // Kaynak: Klasik astroloji ve modern kişilik psikolojisi sentezi
 export const getLoveVibrationProfiles = (t: (_key: string) => string) => ({
   venusHarmony: {
-    name: t('psychTests.results.loveVibration.profiles.venusHarmony.name'),
-    title: t('psychTests.results.loveVibration.profiles.venusHarmony.title'),
-    emoji: t('psychTests.results.loveVibration.profiles.venusHarmony.emoji'),
-    planet: t('psychTests.results.loveVibration.profiles.venusHarmony.planet'),
+    name: t('psychTests.tests.results.loveVibration.profiles.venusHarmony.name'),
+    title: t('psychTests.tests.results.loveVibration.profiles.venusHarmony.title'),
+    emoji: t('psychTests.tests.results.loveVibration.profiles.venusHarmony.emoji'),
+    planet: t('psychTests.tests.results.loveVibration.profiles.venusHarmony.planet'),
     element: t(
-      'psychTests.results.loveVibration.profiles.venusHarmony.element'
+      'psychTests.tests.results.loveVibration.profiles.venusHarmony.element'
     ),
     tarotCard: t(
-      'psychTests.results.loveVibration.profiles.venusHarmony.tarotCard'
+      'psychTests.tests.results.loveVibration.profiles.venusHarmony.tarotCard'
     ),
     tagline: t(
-      'psychTests.results.loveVibration.profiles.venusHarmony.tagline'
+      'psychTests.tests.results.loveVibration.profiles.venusHarmony.tagline'
     ),
     description: t(
-      'psychTests.results.loveVibration.profiles.venusHarmony.description'
+      'psychTests.tests.results.loveVibration.profiles.venusHarmony.description'
     ),
     loveStyle: t(
-      'psychTests.results.loveVibration.profiles.venusHarmony.loveStyle'
+      'psychTests.tests.results.loveVibration.profiles.venusHarmony.loveStyle'
     ),
-    strengths: JSON.parse(
-      t('psychTests.results.loveVibration.profiles.venusHarmony.strengths') ||
-        '[]'
-    ) as string[],
+    strengths: (() => {
+      try {
+        const value = getNestedValueFromMessages(t, 'psychTests.tests.results.loveVibration.profiles.venusHarmony.strengths');
+        if (Array.isArray(value)) {
+          return value as string[];
+        }
+        if (typeof value === 'string') {
+          return JSON.parse(value || '[]') as string[];
+        }
+        return [];
+      } catch {
+        return [];
+      }
+    })(),
     compatibility: t(
-      'psychTests.results.loveVibration.profiles.venusHarmony.compatibility'
+      'psychTests.tests.results.loveVibration.profiles.venusHarmony.compatibility'
     ),
     astrologicalInsight: t(
-      'psychTests.results.loveVibration.profiles.venusHarmony.astrologicalInsight'
+      'psychTests.tests.results.loveVibration.profiles.venusHarmony.astrologicalInsight'
     ),
   },
   marsPassion: {
-    name: t('psychTests.results.loveVibration.profiles.marsPassion.name'),
-    title: t('psychTests.results.loveVibration.profiles.marsPassion.title'),
-    emoji: t('psychTests.results.loveVibration.profiles.marsPassion.emoji'),
-    planet: t('psychTests.results.loveVibration.profiles.marsPassion.planet'),
-    element: t('psychTests.results.loveVibration.profiles.marsPassion.element'),
+    name: t('psychTests.tests.results.loveVibration.profiles.marsPassion.name'),
+    title: t('psychTests.tests.results.loveVibration.profiles.marsPassion.title'),
+    emoji: t('psychTests.tests.results.loveVibration.profiles.marsPassion.emoji'),
+    planet: t('psychTests.tests.results.loveVibration.profiles.marsPassion.planet'),
+    element: t('psychTests.tests.results.loveVibration.profiles.marsPassion.element'),
     tarotCard: t(
-      'psychTests.results.loveVibration.profiles.marsPassion.tarotCard'
+      'psychTests.tests.results.loveVibration.profiles.marsPassion.tarotCard'
     ),
-    tagline: t('psychTests.results.loveVibration.profiles.marsPassion.tagline'),
+    tagline: t('psychTests.tests.results.loveVibration.profiles.marsPassion.tagline'),
     description: t(
-      'psychTests.results.loveVibration.profiles.marsPassion.description'
+      'psychTests.tests.results.loveVibration.profiles.marsPassion.description'
     ),
     loveStyle: t(
-      'psychTests.results.loveVibration.profiles.marsPassion.loveStyle'
+      'psychTests.tests.results.loveVibration.profiles.marsPassion.loveStyle'
     ),
-    strengths: JSON.parse(
-      t('psychTests.results.loveVibration.profiles.marsPassion.strengths') ||
-        '[]'
-    ) as string[],
+    strengths: (() => {
+      try {
+        const value = getNestedValueFromMessages(t, 'psychTests.tests.results.loveVibration.profiles.marsPassion.strengths');
+        if (Array.isArray(value)) {
+          return value as string[];
+        }
+        if (typeof value === 'string') {
+          return JSON.parse(value || '[]') as string[];
+        }
+        return [];
+      } catch {
+        return [];
+      }
+    })(),
     compatibility: t(
-      'psychTests.results.loveVibration.profiles.marsPassion.compatibility'
+      'psychTests.tests.results.loveVibration.profiles.marsPassion.compatibility'
     ),
     astrologicalInsight: t(
-      'psychTests.results.loveVibration.profiles.marsPassion.astrologicalInsight'
+      'psychTests.tests.results.loveVibration.profiles.marsPassion.astrologicalInsight'
     ),
   },
   mercuryCommunication: {
     name: t(
-      'psychTests.results.loveVibration.profiles.mercuryCommunication.name'
+      'psychTests.tests.results.loveVibration.profiles.mercuryCommunication.name'
     ),
     title: t(
-      'psychTests.results.loveVibration.profiles.mercuryCommunication.title'
+      'psychTests.tests.results.loveVibration.profiles.mercuryCommunication.title'
     ),
     emoji: t(
-      'psychTests.results.loveVibration.profiles.mercuryCommunication.emoji'
+      'psychTests.tests.results.loveVibration.profiles.mercuryCommunication.emoji'
     ),
     planet: t(
-      'psychTests.results.loveVibration.profiles.mercuryCommunication.planet'
+      'psychTests.tests.results.loveVibration.profiles.mercuryCommunication.planet'
     ),
     element: t(
-      'psychTests.results.loveVibration.profiles.mercuryCommunication.element'
+      'psychTests.tests.results.loveVibration.profiles.mercuryCommunication.element'
     ),
     tarotCard: t(
-      'psychTests.results.loveVibration.profiles.mercuryCommunication.tarotCard'
+      'psychTests.tests.results.loveVibration.profiles.mercuryCommunication.tarotCard'
     ),
     tagline: t(
-      'psychTests.results.loveVibration.profiles.mercuryCommunication.tagline'
+      'psychTests.tests.results.loveVibration.profiles.mercuryCommunication.tagline'
     ),
     description: t(
-      'psychTests.results.loveVibration.profiles.mercuryCommunication.description'
+      'psychTests.tests.results.loveVibration.profiles.mercuryCommunication.description'
     ),
     loveStyle: t(
-      'psychTests.results.loveVibration.profiles.mercuryCommunication.loveStyle'
+      'psychTests.tests.results.loveVibration.profiles.mercuryCommunication.loveStyle'
     ),
-    strengths: JSON.parse(
-      t(
-        'psychTests.results.loveVibration.profiles.mercuryCommunication.strengths'
-      ) || '[]'
-    ) as string[],
+    strengths: (() => {
+      try {
+        const value = getNestedValueFromMessages(t, 'psychTests.tests.results.loveVibration.profiles.mercuryCommunication.strengths');
+        if (Array.isArray(value)) {
+          return value as string[];
+        }
+        if (typeof value === 'string') {
+          return JSON.parse(value || '[]') as string[];
+        }
+        return [];
+      } catch {
+        return [];
+      }
+    })(),
     compatibility: t(
-      'psychTests.results.loveVibration.profiles.mercuryCommunication.compatibility'
+      'psychTests.tests.results.loveVibration.profiles.mercuryCommunication.compatibility'
     ),
     astrologicalInsight: t(
-      'psychTests.results.loveVibration.profiles.mercuryCommunication.astrologicalInsight'
+      'psychTests.tests.results.loveVibration.profiles.mercuryCommunication.astrologicalInsight'
     ),
   },
   venusMarsMix: {
-    name: t('psychTests.results.loveVibration.profiles.venusMarsMix.name'),
-    title: t('psychTests.results.loveVibration.profiles.venusMarsMix.title'),
-    emoji: t('psychTests.results.loveVibration.profiles.venusMarsMix.emoji'),
-    planet: t('psychTests.results.loveVibration.profiles.venusMarsMix.planet'),
+    name: t('psychTests.tests.results.loveVibration.profiles.venusMarsMix.name'),
+    title: t('psychTests.tests.results.loveVibration.profiles.venusMarsMix.title'),
+    emoji: t('psychTests.tests.results.loveVibration.profiles.venusMarsMix.emoji'),
+    planet: t('psychTests.tests.results.loveVibration.profiles.venusMarsMix.planet'),
     element: t(
-      'psychTests.results.loveVibration.profiles.venusMarsMix.element'
+      'psychTests.tests.results.loveVibration.profiles.venusMarsMix.element'
     ),
     tarotCard: t(
-      'psychTests.results.loveVibration.profiles.venusMarsMix.tarotCard'
+      'psychTests.tests.results.loveVibration.profiles.venusMarsMix.tarotCard'
     ),
     tagline: t(
-      'psychTests.results.loveVibration.profiles.venusMarsMix.tagline'
+      'psychTests.tests.results.loveVibration.profiles.venusMarsMix.tagline'
     ),
     description: t(
-      'psychTests.results.loveVibration.profiles.venusMarsMix.description'
+      'psychTests.tests.results.loveVibration.profiles.venusMarsMix.description'
     ),
     loveStyle: t(
-      'psychTests.results.loveVibration.profiles.venusMarsMix.loveStyle'
+      'psychTests.tests.results.loveVibration.profiles.venusMarsMix.loveStyle'
     ),
-    strengths: JSON.parse(
-      t('psychTests.results.loveVibration.profiles.venusMarsMix.strengths') ||
-        '[]'
-    ) as string[],
+    strengths: (() => {
+      try {
+        const value = getNestedValueFromMessages(t, 'psychTests.tests.results.loveVibration.profiles.venusMarsMix.strengths');
+        if (Array.isArray(value)) {
+          return value as string[];
+        }
+        if (typeof value === 'string') {
+          return JSON.parse(value || '[]') as string[];
+        }
+        return [];
+      } catch {
+        return [];
+      }
+    })(),
     compatibility: t(
-      'psychTests.results.loveVibration.profiles.venusMarsMix.compatibility'
+      'psychTests.tests.results.loveVibration.profiles.venusMarsMix.compatibility'
     ),
     astrologicalInsight: t(
-      'psychTests.results.loveVibration.profiles.venusMarsMix.astrologicalInsight'
+      'psychTests.tests.results.loveVibration.profiles.venusMarsMix.astrologicalInsight'
     ),
   },
   mercuryVenusMix: {
-    name: t('psychTests.results.loveVibration.profiles.mercuryVenusMix.name'),
-    title: t('psychTests.results.loveVibration.profiles.mercuryVenusMix.title'),
-    emoji: t('psychTests.results.loveVibration.profiles.mercuryVenusMix.emoji'),
+    name: t('psychTests.tests.results.loveVibration.profiles.mercuryVenusMix.name'),
+    title: t('psychTests.tests.results.loveVibration.profiles.mercuryVenusMix.title'),
+    emoji: t('psychTests.tests.results.loveVibration.profiles.mercuryVenusMix.emoji'),
     planet: t(
-      'psychTests.results.loveVibration.profiles.mercuryVenusMix.planet'
+      'psychTests.tests.results.loveVibration.profiles.mercuryVenusMix.planet'
     ),
     element: t(
-      'psychTests.results.loveVibration.profiles.mercuryVenusMix.element'
+      'psychTests.tests.results.loveVibration.profiles.mercuryVenusMix.element'
     ),
     tarotCard: t(
-      'psychTests.results.loveVibration.profiles.mercuryVenusMix.tarotCard'
+      'psychTests.tests.results.loveVibration.profiles.mercuryVenusMix.tarotCard'
     ),
     tagline: t(
-      'psychTests.results.loveVibration.profiles.mercuryVenusMix.tagline'
+      'psychTests.tests.results.loveVibration.profiles.mercuryVenusMix.tagline'
     ),
     description: t(
-      'psychTests.results.loveVibration.profiles.mercuryVenusMix.description'
+      'psychTests.tests.results.loveVibration.profiles.mercuryVenusMix.description'
     ),
     loveStyle: t(
-      'psychTests.results.loveVibration.profiles.mercuryVenusMix.loveStyle'
+      'psychTests.tests.results.loveVibration.profiles.mercuryVenusMix.loveStyle'
     ),
-    strengths: JSON.parse(
-      t(
-        'psychTests.results.loveVibration.profiles.mercuryVenusMix.strengths'
-      ) || '[]'
-    ) as string[],
+    strengths: (() => {
+      try {
+        const value = getNestedValueFromMessages(t, 'psychTests.tests.results.loveVibration.profiles.mercuryVenusMix.strengths');
+        if (Array.isArray(value)) {
+          return value as string[];
+        }
+        if (typeof value === 'string') {
+          return JSON.parse(value || '[]') as string[];
+        }
+        return [];
+      } catch {
+        return [];
+      }
+    })(),
     compatibility: t(
-      'psychTests.results.loveVibration.profiles.mercuryVenusMix.compatibility'
+      'psychTests.tests.results.loveVibration.profiles.mercuryVenusMix.compatibility'
     ),
     astrologicalInsight: t(
-      'psychTests.results.loveVibration.profiles.mercuryVenusMix.astrologicalInsight'
+      'psychTests.tests.results.loveVibration.profiles.mercuryVenusMix.astrologicalInsight'
     ),
   },
   marsMercuryMix: {
-    name: t('psychTests.results.loveVibration.profiles.marsMercuryMix.name'),
-    title: t('psychTests.results.loveVibration.profiles.marsMercuryMix.title'),
-    emoji: t('psychTests.results.loveVibration.profiles.marsMercuryMix.emoji'),
+    name: t('psychTests.tests.results.loveVibration.profiles.marsMercuryMix.name'),
+    title: t('psychTests.tests.results.loveVibration.profiles.marsMercuryMix.title'),
+    emoji: t('psychTests.tests.results.loveVibration.profiles.marsMercuryMix.emoji'),
     planet: t(
-      'psychTests.results.loveVibration.profiles.marsMercuryMix.planet'
+      'psychTests.tests.results.loveVibration.profiles.marsMercuryMix.planet'
     ),
     element: t(
-      'psychTests.results.loveVibration.profiles.marsMercuryMix.element'
+      'psychTests.tests.results.loveVibration.profiles.marsMercuryMix.element'
     ),
     tarotCard: t(
-      'psychTests.results.loveVibration.profiles.marsMercuryMix.tarotCard'
+      'psychTests.tests.results.loveVibration.profiles.marsMercuryMix.tarotCard'
     ),
     tagline: t(
-      'psychTests.results.loveVibration.profiles.marsMercuryMix.tagline'
+      'psychTests.tests.results.loveVibration.profiles.marsMercuryMix.tagline'
     ),
     description: t(
-      'psychTests.results.loveVibration.profiles.marsMercuryMix.description'
+      'psychTests.tests.results.loveVibration.profiles.marsMercuryMix.description'
     ),
     loveStyle: t(
-      'psychTests.results.loveVibration.profiles.marsMercuryMix.loveStyle'
+      'psychTests.tests.results.loveVibration.profiles.marsMercuryMix.loveStyle'
     ),
-    strengths: JSON.parse(
-      t('psychTests.results.loveVibration.profiles.marsMercuryMix.strengths') ||
-        '[]'
-    ) as string[],
+    strengths: (() => {
+      try {
+        const value = getNestedValueFromMessages(t, 'psychTests.tests.results.loveVibration.profiles.marsMercuryMix.strengths');
+        if (Array.isArray(value)) {
+          return value as string[];
+        }
+        if (typeof value === 'string') {
+          return JSON.parse(value || '[]') as string[];
+        }
+        return [];
+      } catch {
+        return [];
+      }
+    })(),
     compatibility: t(
-      'psychTests.results.loveVibration.profiles.marsMercuryMix.compatibility'
+      'psychTests.tests.results.loveVibration.profiles.marsMercuryMix.compatibility'
     ),
     astrologicalInsight: t(
-      'psychTests.results.loveVibration.profiles.marsMercuryMix.astrologicalInsight'
+      'psychTests.tests.results.loveVibration.profiles.marsMercuryMix.astrologicalInsight'
     ),
   },
   tripleHarmony: {
-    name: t('psychTests.results.loveVibration.profiles.tripleHarmony.name'),
-    title: t('psychTests.results.loveVibration.profiles.tripleHarmony.title'),
-    emoji: t('psychTests.results.loveVibration.profiles.tripleHarmony.emoji'),
-    planet: t('psychTests.results.loveVibration.profiles.tripleHarmony.planet'),
+    name: t('psychTests.tests.results.loveVibration.profiles.tripleHarmony.name'),
+    title: t('psychTests.tests.results.loveVibration.profiles.tripleHarmony.title'),
+    emoji: t('psychTests.tests.results.loveVibration.profiles.tripleHarmony.emoji'),
+    planet: t('psychTests.tests.results.loveVibration.profiles.tripleHarmony.planet'),
     element: t(
-      'psychTests.results.loveVibration.profiles.tripleHarmony.element'
+      'psychTests.tests.results.loveVibration.profiles.tripleHarmony.element'
     ),
     tarotCard: t(
-      'psychTests.results.loveVibration.profiles.tripleHarmony.tarotCard'
+      'psychTests.tests.results.loveVibration.profiles.tripleHarmony.tarotCard'
     ),
     tagline: t(
-      'psychTests.results.loveVibration.profiles.tripleHarmony.tagline'
+      'psychTests.tests.results.loveVibration.profiles.tripleHarmony.tagline'
     ),
     description: t(
-      'psychTests.results.loveVibration.profiles.tripleHarmony.description'
+      'psychTests.tests.results.loveVibration.profiles.tripleHarmony.description'
     ),
     loveStyle: t(
-      'psychTests.results.loveVibration.profiles.tripleHarmony.loveStyle'
+      'psychTests.tests.results.loveVibration.profiles.tripleHarmony.loveStyle'
     ),
-    strengths: JSON.parse(
-      t('psychTests.results.loveVibration.profiles.tripleHarmony.strengths') ||
-        '[]'
-    ) as string[],
+    strengths: (() => {
+      try {
+        const value = getNestedValueFromMessages(t, 'psychTests.tests.results.loveVibration.profiles.tripleHarmony.strengths');
+        if (Array.isArray(value)) {
+          return value as string[];
+        }
+        if (typeof value === 'string') {
+          return JSON.parse(value || '[]') as string[];
+        }
+        return [];
+      } catch {
+        return [];
+      }
+    })(),
     compatibility: t(
-      'psychTests.results.loveVibration.profiles.tripleHarmony.compatibility'
+      'psychTests.tests.results.loveVibration.profiles.tripleHarmony.compatibility'
     ),
     astrologicalInsight: t(
-      'psychTests.results.loveVibration.profiles.tripleHarmony.astrologicalInsight'
+      'psychTests.tests.results.loveVibration.profiles.tripleHarmony.astrologicalInsight'
     ),
   },
   moonIntuition: {
-    name: t('psychTests.results.loveVibration.profiles.moonIntuition.name'),
-    title: t('psychTests.results.loveVibration.profiles.moonIntuition.title'),
-    emoji: t('psychTests.results.loveVibration.profiles.moonIntuition.emoji'),
-    planet: t('psychTests.results.loveVibration.profiles.moonIntuition.planet'),
+    name: t('psychTests.tests.results.loveVibration.profiles.moonIntuition.name'),
+    title: t('psychTests.tests.results.loveVibration.profiles.moonIntuition.title'),
+    emoji: t('psychTests.tests.results.loveVibration.profiles.moonIntuition.emoji'),
+    planet: t('psychTests.tests.results.loveVibration.profiles.moonIntuition.planet'),
     element: t(
-      'psychTests.results.loveVibration.profiles.moonIntuition.element'
+      'psychTests.tests.results.loveVibration.profiles.moonIntuition.element'
     ),
     tarotCard: t(
-      'psychTests.results.loveVibration.profiles.moonIntuition.tarotCard'
+      'psychTests.tests.results.loveVibration.profiles.moonIntuition.tarotCard'
     ),
     tagline: t(
-      'psychTests.results.loveVibration.profiles.moonIntuition.tagline'
+      'psychTests.tests.results.loveVibration.profiles.moonIntuition.tagline'
     ),
     description: t(
-      'psychTests.results.loveVibration.profiles.moonIntuition.description'
+      'psychTests.tests.results.loveVibration.profiles.moonIntuition.description'
     ),
     loveStyle: t(
-      'psychTests.results.loveVibration.profiles.moonIntuition.loveStyle'
+      'psychTests.tests.results.loveVibration.profiles.moonIntuition.loveStyle'
     ),
-    strengths: JSON.parse(
-      t('psychTests.results.loveVibration.profiles.moonIntuition.strengths') ||
-        '[]'
-    ) as string[],
+    strengths: (() => {
+      try {
+        const value = getNestedValueFromMessages(t, 'psychTests.tests.results.loveVibration.profiles.moonIntuition.strengths');
+        if (Array.isArray(value)) {
+          return value as string[];
+        }
+        if (typeof value === 'string') {
+          return JSON.parse(value || '[]') as string[];
+        }
+        return [];
+      } catch {
+        return [];
+      }
+    })(),
     compatibility: t(
-      'psychTests.results.loveVibration.profiles.moonIntuition.compatibility'
+      'psychTests.tests.results.loveVibration.profiles.moonIntuition.compatibility'
     ),
     astrologicalInsight: t(
-      'psychTests.results.loveVibration.profiles.moonIntuition.astrologicalInsight'
+      'psychTests.tests.results.loveVibration.profiles.moonIntuition.astrologicalInsight'
     ),
   },
 });
@@ -712,197 +909,414 @@ export const getLoveVibrationProfiles = (t: (_key: string) => string) => ({
 // Sosyal psikoloji ve grup dinamikleri araştırmalarına dayalı, eğlenceli kişilik rolleri
 export const getFriendEnergyRoles = (t: (_key: string) => string) => ({
   wiseMentor: {
-    name: t('psychTests.results.friendEnergy.roles.wiseMentor.name'),
-    title: t('psychTests.results.friendEnergy.roles.wiseMentor.title'),
-    emoji: t('psychTests.results.friendEnergy.roles.wiseMentor.emoji'),
-    tagline: t('psychTests.results.friendEnergy.roles.wiseMentor.tagline'),
+    name: t('psychTests.tests.results.friendEnergy.roles.wiseMentor.name'),
+    title: t('psychTests.tests.results.friendEnergy.roles.wiseMentor.title'),
+    emoji: t('psychTests.tests.results.friendEnergy.roles.wiseMentor.emoji'),
+    tagline: t('psychTests.tests.results.friendEnergy.roles.wiseMentor.tagline'),
     description: t(
-      'psychTests.results.friendEnergy.roles.wiseMentor.description'
+      'psychTests.tests.results.friendEnergy.roles.wiseMentor.description'
     ),
     socialRole: t(
-      'psychTests.results.friendEnergy.roles.wiseMentor.socialRole'
+      'psychTests.tests.results.friendEnergy.roles.wiseMentor.socialRole'
     ),
-    strengths: JSON.parse(
-      t('psychTests.results.friendEnergy.roles.wiseMentor.strengths') || '[]'
-    ) as string[],
-    funFacts: JSON.parse(
-      t('psychTests.results.friendEnergy.roles.wiseMentor.funFacts') || '[]'
-    ) as string[],
-    shareText: t('psychTests.results.friendEnergy.roles.wiseMentor.shareText'),
+    strengths: (() => {
+      try {
+        const value = getNestedValueFromMessages(t, 'psychTests.tests.results.friendEnergy.roles.wiseMentor.strengths');
+        if (Array.isArray(value)) {
+          return value as string[];
+        }
+        if (typeof value === 'string') {
+          return JSON.parse(value || '[]') as string[];
+        }
+        return [];
+      } catch {
+        return [];
+      }
+    })(),
+    funFacts: (() => {
+      try {
+        const value = getNestedValueFromMessages(t, 'psychTests.tests.results.friendEnergy.roles.wiseMentor.funFacts');
+        if (Array.isArray(value)) {
+          return value as string[];
+        }
+        if (typeof value === 'string') {
+          return JSON.parse(value || '[]') as string[];
+        }
+        return [];
+      } catch {
+        return [];
+      }
+    })(),
+    shareText: t('psychTests.tests.results.friendEnergy.roles.wiseMentor.shareText'),
   },
   dramaQueen: {
-    name: t('psychTests.results.friendEnergy.roles.dramaQueen.name'),
-    title: t('psychTests.results.friendEnergy.roles.dramaQueen.title'),
-    emoji: t('psychTests.results.friendEnergy.roles.dramaQueen.emoji'),
-    tagline: t('psychTests.results.friendEnergy.roles.dramaQueen.tagline'),
+    name: t('psychTests.tests.results.friendEnergy.roles.dramaQueen.name'),
+    title: t('psychTests.tests.results.friendEnergy.roles.dramaQueen.title'),
+    emoji: t('psychTests.tests.results.friendEnergy.roles.dramaQueen.emoji'),
+    tagline: t('psychTests.tests.results.friendEnergy.roles.dramaQueen.tagline'),
     description: t(
-      'psychTests.results.friendEnergy.roles.dramaQueen.description'
+      'psychTests.tests.results.friendEnergy.roles.dramaQueen.description'
     ),
     socialRole: t(
-      'psychTests.results.friendEnergy.roles.dramaQueen.socialRole'
+      'psychTests.tests.results.friendEnergy.roles.dramaQueen.socialRole'
     ),
-    strengths: JSON.parse(
-      t('psychTests.results.friendEnergy.roles.dramaQueen.strengths') || '[]'
-    ) as string[],
-    funFacts: JSON.parse(
-      t('psychTests.results.friendEnergy.roles.dramaQueen.funFacts') || '[]'
-    ) as string[],
-    shareText: t('psychTests.results.friendEnergy.roles.dramaQueen.shareText'),
+    strengths: (() => {
+      try {
+        const value = getNestedValueFromMessages(t, 'psychTests.tests.results.friendEnergy.roles.dramaQueen.strengths');
+        if (Array.isArray(value)) {
+          return value as string[];
+        }
+        if (typeof value === 'string') {
+          return JSON.parse(value || '[]') as string[];
+        }
+        return [];
+      } catch {
+        return [];
+      }
+    })(),
+    funFacts: (() => {
+      try {
+        const value = getNestedValueFromMessages(t, 'psychTests.tests.results.friendEnergy.roles.dramaQueen.funFacts');
+        if (Array.isArray(value)) {
+          return value as string[];
+        }
+        if (typeof value === 'string') {
+          return JSON.parse(value || '[]') as string[];
+        }
+        return [];
+      } catch {
+        return [];
+      }
+    })(),
+    shareText: t('psychTests.tests.results.friendEnergy.roles.dramaQueen.shareText'),
   },
   spontaneousExplorer: {
-    name: t('psychTests.results.friendEnergy.roles.spontaneousExplorer.name'),
-    title: t('psychTests.results.friendEnergy.roles.spontaneousExplorer.title'),
-    emoji: t('psychTests.results.friendEnergy.roles.spontaneousExplorer.emoji'),
+    name: t('psychTests.tests.results.friendEnergy.roles.spontaneousExplorer.name'),
+    title: t('psychTests.tests.results.friendEnergy.roles.spontaneousExplorer.title'),
+    emoji: t('psychTests.tests.results.friendEnergy.roles.spontaneousExplorer.emoji'),
     tagline: t(
-      'psychTests.results.friendEnergy.roles.spontaneousExplorer.tagline'
+      'psychTests.tests.results.friendEnergy.roles.spontaneousExplorer.tagline'
     ),
     description: t(
-      'psychTests.results.friendEnergy.roles.spontaneousExplorer.description'
+      'psychTests.tests.results.friendEnergy.roles.spontaneousExplorer.description'
     ),
     socialRole: t(
-      'psychTests.results.friendEnergy.roles.spontaneousExplorer.socialRole'
+      'psychTests.tests.results.friendEnergy.roles.spontaneousExplorer.socialRole'
     ),
-    strengths: JSON.parse(
-      t(
-        'psychTests.results.friendEnergy.roles.spontaneousExplorer.strengths'
-      ) || '[]'
-    ) as string[],
-    funFacts: JSON.parse(
-      t('psychTests.results.friendEnergy.roles.spontaneousExplorer.funFacts') ||
-        '[]'
-    ) as string[],
+    strengths: (() => {
+      try {
+        const value = getNestedValueFromMessages(t, 'psychTests.tests.results.friendEnergy.roles.spontaneousExplorer.strengths');
+        if (Array.isArray(value)) {
+          return value as string[];
+        }
+        if (typeof value === 'string') {
+          return JSON.parse(value || '[]') as string[];
+        }
+        return [];
+      } catch {
+        return [];
+      }
+    })(),
+    funFacts: (() => {
+      try {
+        const value = getNestedValueFromMessages(t, 'psychTests.tests.results.friendEnergy.roles.spontaneousExplorer.funFacts');
+        if (Array.isArray(value)) {
+          return value as string[];
+        }
+        if (typeof value === 'string') {
+          return JSON.parse(value || '[]') as string[];
+        }
+        return [];
+      } catch {
+        return [];
+      }
+    })(),
     shareText: t(
-      'psychTests.results.friendEnergy.roles.spontaneousExplorer.shareText'
+      'psychTests.tests.results.friendEnergy.roles.spontaneousExplorer.shareText'
     ),
   },
   momFriend: {
-    name: t('psychTests.results.friendEnergy.roles.momFriend.name'),
-    title: t('psychTests.results.friendEnergy.roles.momFriend.title'),
-    emoji: t('psychTests.results.friendEnergy.roles.momFriend.emoji'),
-    tagline: t('psychTests.results.friendEnergy.roles.momFriend.tagline'),
+    name: t('psychTests.tests.results.friendEnergy.roles.momFriend.name'),
+    title: t('psychTests.tests.results.friendEnergy.roles.momFriend.title'),
+    emoji: t('psychTests.tests.results.friendEnergy.roles.momFriend.emoji'),
+    tagline: t('psychTests.tests.results.friendEnergy.roles.momFriend.tagline'),
     description: t(
-      'psychTests.results.friendEnergy.roles.momFriend.description'
+      'psychTests.tests.results.friendEnergy.roles.momFriend.description'
     ),
-    socialRole: t('psychTests.results.friendEnergy.roles.momFriend.socialRole'),
-    strengths: JSON.parse(
-      t('psychTests.results.friendEnergy.roles.momFriend.strengths') || '[]'
-    ) as string[],
-    funFacts: JSON.parse(
-      t('psychTests.results.friendEnergy.roles.momFriend.funFacts') || '[]'
-    ) as string[],
-    shareText: t('psychTests.results.friendEnergy.roles.momFriend.shareText'),
+    socialRole: t('psychTests.tests.results.friendEnergy.roles.momFriend.socialRole'),
+    strengths: (() => {
+      try {
+        const value = getNestedValueFromMessages(t, 'psychTests.tests.results.friendEnergy.roles.momFriend.strengths');
+        if (Array.isArray(value)) {
+          return value as string[];
+        }
+        if (typeof value === 'string') {
+          return JSON.parse(value || '[]') as string[];
+        }
+        return [];
+      } catch {
+        return [];
+      }
+    })(),
+    funFacts: (() => {
+      try {
+        const value = getNestedValueFromMessages(t, 'psychTests.tests.results.friendEnergy.roles.momFriend.funFacts');
+        if (Array.isArray(value)) {
+          return value as string[];
+        }
+        if (typeof value === 'string') {
+          return JSON.parse(value || '[]') as string[];
+        }
+        return [];
+      } catch {
+        return [];
+      }
+    })(),
+    shareText: t('psychTests.tests.results.friendEnergy.roles.momFriend.shareText'),
   },
   partyStarter: {
-    name: t('psychTests.results.friendEnergy.roles.partyStarter.name'),
-    title: t('psychTests.results.friendEnergy.roles.partyStarter.title'),
-    emoji: t('psychTests.results.friendEnergy.roles.partyStarter.emoji'),
-    tagline: t('psychTests.results.friendEnergy.roles.partyStarter.tagline'),
+    name: t('psychTests.tests.results.friendEnergy.roles.partyStarter.name'),
+    title: t('psychTests.tests.results.friendEnergy.roles.partyStarter.title'),
+    emoji: t('psychTests.tests.results.friendEnergy.roles.partyStarter.emoji'),
+    tagline: t('psychTests.tests.results.friendEnergy.roles.partyStarter.tagline'),
     description: t(
-      'psychTests.results.friendEnergy.roles.partyStarter.description'
+      'psychTests.tests.results.friendEnergy.roles.partyStarter.description'
     ),
     socialRole: t(
-      'psychTests.results.friendEnergy.roles.partyStarter.socialRole'
+      'psychTests.tests.results.friendEnergy.roles.partyStarter.socialRole'
     ),
-    strengths: JSON.parse(
-      t('psychTests.results.friendEnergy.roles.partyStarter.strengths') || '[]'
-    ) as string[],
-    funFacts: JSON.parse(
-      t('psychTests.results.friendEnergy.roles.partyStarter.funFacts') || '[]'
-    ) as string[],
+    strengths: (() => {
+      try {
+        const value = getNestedValueFromMessages(t, 'psychTests.tests.results.friendEnergy.roles.partyStarter.strengths');
+        if (Array.isArray(value)) {
+          return value as string[];
+        }
+        if (typeof value === 'string') {
+          return JSON.parse(value || '[]') as string[];
+        }
+        return [];
+      } catch {
+        return [];
+      }
+    })(),
+    funFacts: (() => {
+      try {
+        const value = getNestedValueFromMessages(t, 'psychTests.tests.results.friendEnergy.roles.partyStarter.funFacts');
+        if (Array.isArray(value)) {
+          return value as string[];
+        }
+        if (typeof value === 'string') {
+          return JSON.parse(value || '[]') as string[];
+        }
+        return [];
+      } catch {
+        return [];
+      }
+    })(),
     shareText: t(
-      'psychTests.results.friendEnergy.roles.partyStarter.shareText'
+      'psychTests.tests.results.friendEnergy.roles.partyStarter.shareText'
     ),
   },
   quietPower: {
-    name: t('psychTests.results.friendEnergy.roles.quietPower.name'),
-    title: t('psychTests.results.friendEnergy.roles.quietPower.title'),
-    emoji: t('psychTests.results.friendEnergy.roles.quietPower.emoji'),
-    tagline: t('psychTests.results.friendEnergy.roles.quietPower.tagline'),
+    name: t('psychTests.tests.results.friendEnergy.roles.quietPower.name'),
+    title: t('psychTests.tests.results.friendEnergy.roles.quietPower.title'),
+    emoji: t('psychTests.tests.results.friendEnergy.roles.quietPower.emoji'),
+    tagline: t('psychTests.tests.results.friendEnergy.roles.quietPower.tagline'),
     description: t(
-      'psychTests.results.friendEnergy.roles.quietPower.description'
+      'psychTests.tests.results.friendEnergy.roles.quietPower.description'
     ),
     socialRole: t(
-      'psychTests.results.friendEnergy.roles.quietPower.socialRole'
+      'psychTests.tests.results.friendEnergy.roles.quietPower.socialRole'
     ),
-    strengths: JSON.parse(
-      t('psychTests.results.friendEnergy.roles.quietPower.strengths') || '[]'
-    ) as string[],
-    funFacts: JSON.parse(
-      t('psychTests.results.friendEnergy.roles.quietPower.funFacts') || '[]'
-    ) as string[],
-    shareText: t('psychTests.results.friendEnergy.roles.quietPower.shareText'),
+    strengths: (() => {
+      try {
+        const value = getNestedValueFromMessages(t, 'psychTests.tests.results.friendEnergy.roles.quietPower.strengths');
+        if (Array.isArray(value)) {
+          return value as string[];
+        }
+        if (typeof value === 'string') {
+          return JSON.parse(value || '[]') as string[];
+        }
+        return [];
+      } catch {
+        return [];
+      }
+    })(),
+    funFacts: (() => {
+      try {
+        const value = getNestedValueFromMessages(t, 'psychTests.tests.results.friendEnergy.roles.quietPower.funFacts');
+        if (Array.isArray(value)) {
+          return value as string[];
+        }
+        if (typeof value === 'string') {
+          return JSON.parse(value || '[]') as string[];
+        }
+        return [];
+      } catch {
+        return [];
+      }
+    })(),
+    shareText: t('psychTests.tests.results.friendEnergy.roles.quietPower.shareText'),
   },
   comedian: {
-    name: t('psychTests.results.friendEnergy.roles.comedian.name'),
-    title: t('psychTests.results.friendEnergy.roles.comedian.title'),
-    emoji: t('psychTests.results.friendEnergy.roles.comedian.emoji'),
-    tagline: t('psychTests.results.friendEnergy.roles.comedian.tagline'),
+    name: t('psychTests.tests.results.friendEnergy.roles.comedian.name'),
+    title: t('psychTests.tests.results.friendEnergy.roles.comedian.title'),
+    emoji: t('psychTests.tests.results.friendEnergy.roles.comedian.emoji'),
+    tagline: t('psychTests.tests.results.friendEnergy.roles.comedian.tagline'),
     description: t(
-      'psychTests.results.friendEnergy.roles.comedian.description'
+      'psychTests.tests.results.friendEnergy.roles.comedian.description'
     ),
-    socialRole: t('psychTests.results.friendEnergy.roles.comedian.socialRole'),
-    strengths: JSON.parse(
-      t('psychTests.results.friendEnergy.roles.comedian.strengths') || '[]'
-    ) as string[],
-    funFacts: JSON.parse(
-      t('psychTests.results.friendEnergy.roles.comedian.funFacts') || '[]'
-    ) as string[],
-    shareText: t('psychTests.results.friendEnergy.roles.comedian.shareText'),
+    socialRole: t('psychTests.tests.results.friendEnergy.roles.comedian.socialRole'),
+    strengths: (() => {
+      try {
+        const value = getNestedValueFromMessages(t, 'psychTests.tests.results.friendEnergy.roles.comedian.strengths');
+        if (Array.isArray(value)) {
+          return value as string[];
+        }
+        if (typeof value === 'string') {
+          return JSON.parse(value || '[]') as string[];
+        }
+        return [];
+      } catch {
+        return [];
+      }
+    })(),
+    funFacts: (() => {
+      try {
+        const value = getNestedValueFromMessages(t, 'psychTests.tests.results.friendEnergy.roles.comedian.funFacts');
+        if (Array.isArray(value)) {
+          return value as string[];
+        }
+        if (typeof value === 'string') {
+          return JSON.parse(value || '[]') as string[];
+        }
+        return [];
+      } catch {
+        return [];
+      }
+    })(),
+    shareText: t('psychTests.tests.results.friendEnergy.roles.comedian.shareText'),
   },
   therapist: {
-    name: t('psychTests.results.friendEnergy.roles.therapist.name'),
-    title: t('psychTests.results.friendEnergy.roles.therapist.title'),
-    emoji: t('psychTests.results.friendEnergy.roles.therapist.emoji'),
-    tagline: t('psychTests.results.friendEnergy.roles.therapist.tagline'),
+    name: t('psychTests.tests.results.friendEnergy.roles.therapist.name'),
+    title: t('psychTests.tests.results.friendEnergy.roles.therapist.title'),
+    emoji: t('psychTests.tests.results.friendEnergy.roles.therapist.emoji'),
+    tagline: t('psychTests.tests.results.friendEnergy.roles.therapist.tagline'),
     description: t(
-      'psychTests.results.friendEnergy.roles.therapist.description'
+      'psychTests.tests.results.friendEnergy.roles.therapist.description'
     ),
-    socialRole: t('psychTests.results.friendEnergy.roles.therapist.socialRole'),
-    strengths: JSON.parse(
-      t('psychTests.results.friendEnergy.roles.therapist.strengths') || '[]'
-    ) as string[],
-    funFacts: JSON.parse(
-      t('psychTests.results.friendEnergy.roles.therapist.funFacts') || '[]'
-    ) as string[],
-    shareText: t('psychTests.results.friendEnergy.roles.therapist.shareText'),
+    socialRole: t('psychTests.tests.results.friendEnergy.roles.therapist.socialRole'),
+    strengths: (() => {
+      try {
+        const value = getNestedValueFromMessages(t, 'psychTests.tests.results.friendEnergy.roles.therapist.strengths');
+        if (Array.isArray(value)) {
+          return value as string[];
+        }
+        if (typeof value === 'string') {
+          return JSON.parse(value || '[]') as string[];
+        }
+        return [];
+      } catch {
+        return [];
+      }
+    })(),
+    funFacts: (() => {
+      try {
+        const value = getNestedValueFromMessages(t, 'psychTests.tests.results.friendEnergy.roles.therapist.funFacts');
+        if (Array.isArray(value)) {
+          return value as string[];
+        }
+        if (typeof value === 'string') {
+          return JSON.parse(value || '[]') as string[];
+        }
+        return [];
+      } catch {
+        return [];
+      }
+    })(),
+    shareText: t('psychTests.tests.results.friendEnergy.roles.therapist.shareText'),
   },
   adventurer: {
-    name: t('psychTests.results.friendEnergy.roles.adventurer.name'),
-    title: t('psychTests.results.friendEnergy.roles.adventurer.title'),
-    emoji: t('psychTests.results.friendEnergy.roles.adventurer.emoji'),
-    tagline: t('psychTests.results.friendEnergy.roles.adventurer.tagline'),
+    name: t('psychTests.tests.results.friendEnergy.roles.adventurer.name'),
+    title: t('psychTests.tests.results.friendEnergy.roles.adventurer.title'),
+    emoji: t('psychTests.tests.results.friendEnergy.roles.adventurer.emoji'),
+    tagline: t('psychTests.tests.results.friendEnergy.roles.adventurer.tagline'),
     description: t(
-      'psychTests.results.friendEnergy.roles.adventurer.description'
+      'psychTests.tests.results.friendEnergy.roles.adventurer.description'
     ),
     socialRole: t(
-      'psychTests.results.friendEnergy.roles.adventurer.socialRole'
+      'psychTests.tests.results.friendEnergy.roles.adventurer.socialRole'
     ),
-    strengths: JSON.parse(
-      t('psychTests.results.friendEnergy.roles.adventurer.strengths') || '[]'
-    ) as string[],
-    funFacts: JSON.parse(
-      t('psychTests.results.friendEnergy.roles.adventurer.funFacts') || '[]'
-    ) as string[],
-    shareText: t('psychTests.results.friendEnergy.roles.adventurer.shareText'),
+    strengths: (() => {
+      try {
+        const value = getNestedValueFromMessages(t, 'psychTests.tests.results.friendEnergy.roles.adventurer.strengths');
+        if (Array.isArray(value)) {
+          return value as string[];
+        }
+        if (typeof value === 'string') {
+          return JSON.parse(value || '[]') as string[];
+        }
+        return [];
+      } catch {
+        return [];
+      }
+    })(),
+    funFacts: (() => {
+      try {
+        const value = getNestedValueFromMessages(t, 'psychTests.tests.results.friendEnergy.roles.adventurer.funFacts');
+        if (Array.isArray(value)) {
+          return value as string[];
+        }
+        if (typeof value === 'string') {
+          return JSON.parse(value || '[]') as string[];
+        }
+        return [];
+      } catch {
+        return [];
+      }
+    })(),
+    shareText: t('psychTests.tests.results.friendEnergy.roles.adventurer.shareText'),
   },
   peacekeeper: {
-    name: t('psychTests.results.friendEnergy.roles.peacekeeper.name'),
-    title: t('psychTests.results.friendEnergy.roles.peacekeeper.title'),
-    emoji: t('psychTests.results.friendEnergy.roles.peacekeeper.emoji'),
-    tagline: t('psychTests.results.friendEnergy.roles.peacekeeper.tagline'),
+    name: t('psychTests.tests.results.friendEnergy.roles.peacekeeper.name'),
+    title: t('psychTests.tests.results.friendEnergy.roles.peacekeeper.title'),
+    emoji: t('psychTests.tests.results.friendEnergy.roles.peacekeeper.emoji'),
+    tagline: t('psychTests.tests.results.friendEnergy.roles.peacekeeper.tagline'),
     description: t(
-      'psychTests.results.friendEnergy.roles.peacekeeper.description'
+      'psychTests.tests.results.friendEnergy.roles.peacekeeper.description'
     ),
     socialRole: t(
-      'psychTests.results.friendEnergy.roles.peacekeeper.socialRole'
+      'psychTests.tests.results.friendEnergy.roles.peacekeeper.socialRole'
     ),
-    strengths: JSON.parse(
-      t('psychTests.results.friendEnergy.roles.peacekeeper.strengths') || '[]'
-    ) as string[],
-    funFacts: JSON.parse(
-      t('psychTests.results.friendEnergy.roles.peacekeeper.funFacts') || '[]'
-    ) as string[],
-    shareText: t('psychTests.results.friendEnergy.roles.peacekeeper.shareText'),
+    strengths: (() => {
+      try {
+        const value = getNestedValueFromMessages(t, 'psychTests.tests.results.friendEnergy.roles.peacekeeper.strengths');
+        if (Array.isArray(value)) {
+          return value as string[];
+        }
+        if (typeof value === 'string') {
+          return JSON.parse(value || '[]') as string[];
+        }
+        return [];
+      } catch {
+        return [];
+      }
+    })(),
+    funFacts: (() => {
+      try {
+        const value = getNestedValueFromMessages(t, 'psychTests.tests.results.friendEnergy.roles.peacekeeper.funFacts');
+        if (Array.isArray(value)) {
+          return value as string[];
+        }
+        if (typeof value === 'string') {
+          return JSON.parse(value || '[]') as string[];
+        }
+        return [];
+      } catch {
+        return [];
+      }
+    })(),
+    shareText: t('psychTests.tests.results.friendEnergy.roles.peacekeeper.shareText'),
   },
 });
 
@@ -910,218 +1324,218 @@ export const getFriendEnergyRoles = (t: (_key: string) => string) => ({
 // Kaynak: Enneagram Institute ve bilimsel kişilik psikolojisi literatürü
 export const getEnneagramTypes = (t: (_key: string) => string) => ({
   type1: {
-    name: t('psychTests.results.enneagram.types.type1.name'),
-    title: t('psychTests.results.enneagram.types.type1.title'),
-    subtitle: t('psychTests.results.enneagram.types.type1.subtitle'),
-    description: t('psychTests.results.enneagram.types.type1.description'),
+    name: t('psychTests.tests.results.enneagram.types.type1.name'),
+    title: t('psychTests.tests.results.enneagram.types.type1.title'),
+    subtitle: t('psychTests.tests.results.enneagram.types.type1.subtitle'),
+    description: t('psychTests.tests.results.enneagram.types.type1.description'),
     coreMotivation: t(
-      'psychTests.results.enneagram.types.type1.coreMotivation'
+      'psychTests.tests.results.enneagram.types.type1.coreMotivation'
     ),
-    coreFear: t('psychTests.results.enneagram.types.type1.coreFear'),
+    coreFear: t('psychTests.tests.results.enneagram.types.type1.coreFear'),
     lightSide: {
-      title: t('psychTests.results.enneagram.types.type1.lightSide.title'),
-      traits: t('psychTests.results.enneagram.types.type1.lightSide.traits'),
+      title: t('psychTests.tests.results.enneagram.types.type1.lightSide.title'),
+      traits: t('psychTests.tests.results.enneagram.types.type1.lightSide.traits'),
       description: t(
-        'psychTests.results.enneagram.types.type1.lightSide.description'
+        'psychTests.tests.results.enneagram.types.type1.lightSide.description'
       ),
     },
     shadowSide: {
-      title: t('psychTests.results.enneagram.types.type1.shadowSide.title'),
-      traits: t('psychTests.results.enneagram.types.type1.shadowSide.traits'),
+      title: t('psychTests.tests.results.enneagram.types.type1.shadowSide.title'),
+      traits: t('psychTests.tests.results.enneagram.types.type1.shadowSide.traits'),
       description: t(
-        'psychTests.results.enneagram.types.type1.shadowSide.description'
+        'psychTests.tests.results.enneagram.types.type1.shadowSide.description'
       ),
     },
   },
   type2: {
-    name: t('psychTests.results.enneagram.types.type2.name'),
-    title: t('psychTests.results.enneagram.types.type2.title'),
-    subtitle: t('psychTests.results.enneagram.types.type2.subtitle'),
-    description: t('psychTests.results.enneagram.types.type2.description'),
+    name: t('psychTests.tests.results.enneagram.types.type2.name'),
+    title: t('psychTests.tests.results.enneagram.types.type2.title'),
+    subtitle: t('psychTests.tests.results.enneagram.types.type2.subtitle'),
+    description: t('psychTests.tests.results.enneagram.types.type2.description'),
     coreMotivation: t(
-      'psychTests.results.enneagram.types.type2.coreMotivation'
+      'psychTests.tests.results.enneagram.types.type2.coreMotivation'
     ),
-    coreFear: t('psychTests.results.enneagram.types.type2.coreFear'),
+    coreFear: t('psychTests.tests.results.enneagram.types.type2.coreFear'),
     lightSide: {
-      title: t('psychTests.results.enneagram.types.type2.lightSide.title'),
-      traits: t('psychTests.results.enneagram.types.type2.lightSide.traits'),
+      title: t('psychTests.tests.results.enneagram.types.type2.lightSide.title'),
+      traits: t('psychTests.tests.results.enneagram.types.type2.lightSide.traits'),
       description: t(
-        'psychTests.results.enneagram.types.type2.lightSide.description'
+        'psychTests.tests.results.enneagram.types.type2.lightSide.description'
       ),
     },
     shadowSide: {
-      title: t('psychTests.results.enneagram.types.type2.shadowSide.title'),
-      traits: t('psychTests.results.enneagram.types.type2.shadowSide.traits'),
+      title: t('psychTests.tests.results.enneagram.types.type2.shadowSide.title'),
+      traits: t('psychTests.tests.results.enneagram.types.type2.shadowSide.traits'),
       description: t(
-        'psychTests.results.enneagram.types.type2.shadowSide.description'
+        'psychTests.tests.results.enneagram.types.type2.shadowSide.description'
       ),
     },
   },
   type3: {
-    name: t('psychTests.results.enneagram.types.type3.name'),
-    title: t('psychTests.results.enneagram.types.type3.title'),
-    subtitle: t('psychTests.results.enneagram.types.type3.subtitle'),
-    description: t('psychTests.results.enneagram.types.type3.description'),
+    name: t('psychTests.tests.results.enneagram.types.type3.name'),
+    title: t('psychTests.tests.results.enneagram.types.type3.title'),
+    subtitle: t('psychTests.tests.results.enneagram.types.type3.subtitle'),
+    description: t('psychTests.tests.results.enneagram.types.type3.description'),
     coreMotivation: t(
-      'psychTests.results.enneagram.types.type3.coreMotivation'
+      'psychTests.tests.results.enneagram.types.type3.coreMotivation'
     ),
-    coreFear: t('psychTests.results.enneagram.types.type3.coreFear'),
+    coreFear: t('psychTests.tests.results.enneagram.types.type3.coreFear'),
     lightSide: {
-      title: t('psychTests.results.enneagram.types.type3.lightSide.title'),
-      traits: t('psychTests.results.enneagram.types.type3.lightSide.traits'),
+      title: t('psychTests.tests.results.enneagram.types.type3.lightSide.title'),
+      traits: t('psychTests.tests.results.enneagram.types.type3.lightSide.traits'),
       description: t(
-        'psychTests.results.enneagram.types.type3.lightSide.description'
+        'psychTests.tests.results.enneagram.types.type3.lightSide.description'
       ),
     },
     shadowSide: {
-      title: t('psychTests.results.enneagram.types.type3.shadowSide.title'),
-      traits: t('psychTests.results.enneagram.types.type3.shadowSide.traits'),
+      title: t('psychTests.tests.results.enneagram.types.type3.shadowSide.title'),
+      traits: t('psychTests.tests.results.enneagram.types.type3.shadowSide.traits'),
       description: t(
-        'psychTests.results.enneagram.types.type3.shadowSide.description'
+        'psychTests.tests.results.enneagram.types.type3.shadowSide.description'
       ),
     },
   },
   type4: {
-    name: t('psychTests.results.enneagram.types.type4.name'),
-    title: t('psychTests.results.enneagram.types.type4.title'),
-    subtitle: t('psychTests.results.enneagram.types.type4.subtitle'),
-    description: t('psychTests.results.enneagram.types.type4.description'),
+    name: t('psychTests.tests.results.enneagram.types.type4.name'),
+    title: t('psychTests.tests.results.enneagram.types.type4.title'),
+    subtitle: t('psychTests.tests.results.enneagram.types.type4.subtitle'),
+    description: t('psychTests.tests.results.enneagram.types.type4.description'),
     coreMotivation: t(
-      'psychTests.results.enneagram.types.type4.coreMotivation'
+      'psychTests.tests.results.enneagram.types.type4.coreMotivation'
     ),
-    coreFear: t('psychTests.results.enneagram.types.type4.coreFear'),
+    coreFear: t('psychTests.tests.results.enneagram.types.type4.coreFear'),
     lightSide: {
-      title: t('psychTests.results.enneagram.types.type4.lightSide.title'),
-      traits: t('psychTests.results.enneagram.types.type4.lightSide.traits'),
+      title: t('psychTests.tests.results.enneagram.types.type4.lightSide.title'),
+      traits: t('psychTests.tests.results.enneagram.types.type4.lightSide.traits'),
       description: t(
-        'psychTests.results.enneagram.types.type4.lightSide.description'
+        'psychTests.tests.results.enneagram.types.type4.lightSide.description'
       ),
     },
     shadowSide: {
-      title: t('psychTests.results.enneagram.types.type4.shadowSide.title'),
-      traits: t('psychTests.results.enneagram.types.type4.shadowSide.traits'),
+      title: t('psychTests.tests.results.enneagram.types.type4.shadowSide.title'),
+      traits: t('psychTests.tests.results.enneagram.types.type4.shadowSide.traits'),
       description: t(
-        'psychTests.results.enneagram.types.type4.shadowSide.description'
+        'psychTests.tests.results.enneagram.types.type4.shadowSide.description'
       ),
     },
   },
   type5: {
-    name: t('psychTests.results.enneagram.types.type5.name'),
-    title: t('psychTests.results.enneagram.types.type5.title'),
-    subtitle: t('psychTests.results.enneagram.types.type5.subtitle'),
-    description: t('psychTests.results.enneagram.types.type5.description'),
+    name: t('psychTests.tests.results.enneagram.types.type5.name'),
+    title: t('psychTests.tests.results.enneagram.types.type5.title'),
+    subtitle: t('psychTests.tests.results.enneagram.types.type5.subtitle'),
+    description: t('psychTests.tests.results.enneagram.types.type5.description'),
     coreMotivation: t(
-      'psychTests.results.enneagram.types.type5.coreMotivation'
+      'psychTests.tests.results.enneagram.types.type5.coreMotivation'
     ),
-    coreFear: t('psychTests.results.enneagram.types.type5.coreFear'),
+    coreFear: t('psychTests.tests.results.enneagram.types.type5.coreFear'),
     lightSide: {
-      title: t('psychTests.results.enneagram.types.type5.lightSide.title'),
-      traits: t('psychTests.results.enneagram.types.type5.lightSide.traits'),
+      title: t('psychTests.tests.results.enneagram.types.type5.lightSide.title'),
+      traits: t('psychTests.tests.results.enneagram.types.type5.lightSide.traits'),
       description: t(
-        'psychTests.results.enneagram.types.type5.lightSide.description'
+        'psychTests.tests.results.enneagram.types.type5.lightSide.description'
       ),
     },
     shadowSide: {
-      title: t('psychTests.results.enneagram.types.type5.shadowSide.title'),
-      traits: t('psychTests.results.enneagram.types.type5.shadowSide.traits'),
+      title: t('psychTests.tests.results.enneagram.types.type5.shadowSide.title'),
+      traits: t('psychTests.tests.results.enneagram.types.type5.shadowSide.traits'),
       description: t(
-        'psychTests.results.enneagram.types.type5.shadowSide.description'
+        'psychTests.tests.results.enneagram.types.type5.shadowSide.description'
       ),
     },
   },
   type6: {
-    name: t('psychTests.results.enneagram.types.type6.name'),
-    title: t('psychTests.results.enneagram.types.type6.title'),
-    subtitle: t('psychTests.results.enneagram.types.type6.subtitle'),
-    description: t('psychTests.results.enneagram.types.type6.description'),
+    name: t('psychTests.tests.results.enneagram.types.type6.name'),
+    title: t('psychTests.tests.results.enneagram.types.type6.title'),
+    subtitle: t('psychTests.tests.results.enneagram.types.type6.subtitle'),
+    description: t('psychTests.tests.results.enneagram.types.type6.description'),
     coreMotivation: t(
-      'psychTests.results.enneagram.types.type6.coreMotivation'
+      'psychTests.tests.results.enneagram.types.type6.coreMotivation'
     ),
-    coreFear: t('psychTests.results.enneagram.types.type6.coreFear'),
+    coreFear: t('psychTests.tests.results.enneagram.types.type6.coreFear'),
     lightSide: {
-      title: t('psychTests.results.enneagram.types.type6.lightSide.title'),
-      traits: t('psychTests.results.enneagram.types.type6.lightSide.traits'),
+      title: t('psychTests.tests.results.enneagram.types.type6.lightSide.title'),
+      traits: t('psychTests.tests.results.enneagram.types.type6.lightSide.traits'),
       description: t(
-        'psychTests.results.enneagram.types.type6.lightSide.description'
+        'psychTests.tests.results.enneagram.types.type6.lightSide.description'
       ),
     },
     shadowSide: {
-      title: t('psychTests.results.enneagram.types.type6.shadowSide.title'),
-      traits: t('psychTests.results.enneagram.types.type6.shadowSide.traits'),
+      title: t('psychTests.tests.results.enneagram.types.type6.shadowSide.title'),
+      traits: t('psychTests.tests.results.enneagram.types.type6.shadowSide.traits'),
       description: t(
-        'psychTests.results.enneagram.types.type6.shadowSide.description'
+        'psychTests.tests.results.enneagram.types.type6.shadowSide.description'
       ),
     },
   },
   type7: {
-    name: t('psychTests.results.enneagram.types.type7.name'),
-    title: t('psychTests.results.enneagram.types.type7.title'),
-    subtitle: t('psychTests.results.enneagram.types.type7.subtitle'),
-    description: t('psychTests.results.enneagram.types.type7.description'),
+    name: t('psychTests.tests.results.enneagram.types.type7.name'),
+    title: t('psychTests.tests.results.enneagram.types.type7.title'),
+    subtitle: t('psychTests.tests.results.enneagram.types.type7.subtitle'),
+    description: t('psychTests.tests.results.enneagram.types.type7.description'),
     coreMotivation: t(
-      'psychTests.results.enneagram.types.type7.coreMotivation'
+      'psychTests.tests.results.enneagram.types.type7.coreMotivation'
     ),
-    coreFear: t('psychTests.results.enneagram.types.type7.coreFear'),
+    coreFear: t('psychTests.tests.results.enneagram.types.type7.coreFear'),
     lightSide: {
-      title: t('psychTests.results.enneagram.types.type7.lightSide.title'),
-      traits: t('psychTests.results.enneagram.types.type7.lightSide.traits'),
+      title: t('psychTests.tests.results.enneagram.types.type7.lightSide.title'),
+      traits: t('psychTests.tests.results.enneagram.types.type7.lightSide.traits'),
       description: t(
-        'psychTests.results.enneagram.types.type7.lightSide.description'
+        'psychTests.tests.results.enneagram.types.type7.lightSide.description'
       ),
     },
     shadowSide: {
-      title: t('psychTests.results.enneagram.types.type7.shadowSide.title'),
-      traits: t('psychTests.results.enneagram.types.type7.shadowSide.traits'),
+      title: t('psychTests.tests.results.enneagram.types.type7.shadowSide.title'),
+      traits: t('psychTests.tests.results.enneagram.types.type7.shadowSide.traits'),
       description: t(
-        'psychTests.results.enneagram.types.type7.shadowSide.description'
+        'psychTests.tests.results.enneagram.types.type7.shadowSide.description'
       ),
     },
   },
   type8: {
-    name: t('psychTests.results.enneagram.types.type8.name'),
-    title: t('psychTests.results.enneagram.types.type8.title'),
-    subtitle: t('psychTests.results.enneagram.types.type8.subtitle'),
-    description: t('psychTests.results.enneagram.types.type8.description'),
+    name: t('psychTests.tests.results.enneagram.types.type8.name'),
+    title: t('psychTests.tests.results.enneagram.types.type8.title'),
+    subtitle: t('psychTests.tests.results.enneagram.types.type8.subtitle'),
+    description: t('psychTests.tests.results.enneagram.types.type8.description'),
     coreMotivation: t(
-      'psychTests.results.enneagram.types.type8.coreMotivation'
+      'psychTests.tests.results.enneagram.types.type8.coreMotivation'
     ),
-    coreFear: t('psychTests.results.enneagram.types.type8.coreFear'),
+    coreFear: t('psychTests.tests.results.enneagram.types.type8.coreFear'),
     lightSide: {
-      title: t('psychTests.results.enneagram.types.type8.lightSide.title'),
-      traits: t('psychTests.results.enneagram.types.type8.lightSide.traits'),
+      title: t('psychTests.tests.results.enneagram.types.type8.lightSide.title'),
+      traits: t('psychTests.tests.results.enneagram.types.type8.lightSide.traits'),
       description: t(
-        'psychTests.results.enneagram.types.type8.lightSide.description'
+        'psychTests.tests.results.enneagram.types.type8.lightSide.description'
       ),
     },
     shadowSide: {
-      title: t('psychTests.results.enneagram.types.type8.shadowSide.title'),
-      traits: t('psychTests.results.enneagram.types.type8.shadowSide.traits'),
+      title: t('psychTests.tests.results.enneagram.types.type8.shadowSide.title'),
+      traits: t('psychTests.tests.results.enneagram.types.type8.shadowSide.traits'),
       description: t(
-        'psychTests.results.enneagram.types.type8.shadowSide.description'
+        'psychTests.tests.results.enneagram.types.type8.shadowSide.description'
       ),
     },
   },
   type9: {
-    name: t('psychTests.results.enneagram.types.type9.name'),
-    title: t('psychTests.results.enneagram.types.type9.title'),
-    subtitle: t('psychTests.results.enneagram.types.type9.subtitle'),
-    description: t('psychTests.results.enneagram.types.type9.description'),
+    name: t('psychTests.tests.results.enneagram.types.type9.name'),
+    title: t('psychTests.tests.results.enneagram.types.type9.title'),
+    subtitle: t('psychTests.tests.results.enneagram.types.type9.subtitle'),
+    description: t('psychTests.tests.results.enneagram.types.type9.description'),
     coreMotivation: t(
-      'psychTests.results.enneagram.types.type9.coreMotivation'
+      'psychTests.tests.results.enneagram.types.type9.coreMotivation'
     ),
-    coreFear: t('psychTests.results.enneagram.types.type9.coreFear'),
+    coreFear: t('psychTests.tests.results.enneagram.types.type9.coreFear'),
     lightSide: {
-      title: t('psychTests.results.enneagram.types.type9.lightSide.title'),
-      traits: t('psychTests.results.enneagram.types.type9.lightSide.traits'),
+      title: t('psychTests.tests.results.enneagram.types.type9.lightSide.title'),
+      traits: t('psychTests.tests.results.enneagram.types.type9.lightSide.traits'),
       description: t(
-        'psychTests.results.enneagram.types.type9.lightSide.description'
+        'psychTests.tests.results.enneagram.types.type9.lightSide.description'
       ),
     },
     shadowSide: {
-      title: t('psychTests.results.enneagram.types.type9.shadowSide.title'),
-      traits: t('psychTests.results.enneagram.types.type9.shadowSide.traits'),
+      title: t('psychTests.tests.results.enneagram.types.type9.shadowSide.title'),
+      traits: t('psychTests.tests.results.enneagram.types.type9.shadowSide.traits'),
       description: t(
-        'psychTests.results.enneagram.types.type9.shadowSide.description'
+        'psychTests.tests.results.enneagram.types.type9.shadowSide.description'
       ),
     },
   },
@@ -1131,164 +1545,164 @@ export const getEnneagramTypes = (t: (_key: string) => string) => ({
 export const getBigFiveTraits = (t: (_key: string) => string) => ({
   openness: {
     high: {
-      title: t('psychTests.results.bigFive.dimensions.openness.high.title'),
+      title: t('psychTests.tests.results.bigFive.dimensions.openness.high.title'),
       description: t(
-        'psychTests.results.bigFive.dimensions.openness.high.description'
+        'psychTests.tests.results.bigFive.dimensions.openness.high.description'
       ),
-      traits: t('psychTests.results.bigFive.dimensions.openness.high.traits'),
+      traits: t('psychTests.tests.results.bigFive.dimensions.openness.high.traits'),
     },
     medium: {
-      title: t('psychTests.results.bigFive.dimensions.openness.medium.title'),
+      title: t('psychTests.tests.results.bigFive.dimensions.openness.medium.title'),
       description: t(
-        'psychTests.results.bigFive.dimensions.openness.medium.description'
+        'psychTests.tests.results.bigFive.dimensions.openness.medium.description'
       ),
-      traits: t('psychTests.results.bigFive.dimensions.openness.medium.traits'),
+      traits: t('psychTests.tests.results.bigFive.dimensions.openness.medium.traits'),
     },
     low: {
-      title: t('psychTests.results.bigFive.dimensions.openness.low.title'),
+      title: t('psychTests.tests.results.bigFive.dimensions.openness.low.title'),
       description: t(
-        'psychTests.results.bigFive.dimensions.openness.low.description'
+        'psychTests.tests.results.bigFive.dimensions.openness.low.description'
       ),
-      traits: t('psychTests.results.bigFive.dimensions.openness.low.traits'),
+      traits: t('psychTests.tests.results.bigFive.dimensions.openness.low.traits'),
     },
   },
   conscientiousness: {
     high: {
       title: t(
-        'psychTests.results.bigFive.dimensions.conscientiousness.high.title'
+        'psychTests.tests.results.bigFive.dimensions.conscientiousness.high.title'
       ),
       description: t(
-        'psychTests.results.bigFive.dimensions.conscientiousness.high.description'
+        'psychTests.tests.results.bigFive.dimensions.conscientiousness.high.description'
       ),
       traits: t(
-        'psychTests.results.bigFive.dimensions.conscientiousness.high.traits'
+        'psychTests.tests.results.bigFive.dimensions.conscientiousness.high.traits'
       ),
     },
     medium: {
       title: t(
-        'psychTests.results.bigFive.dimensions.conscientiousness.medium.title'
+        'psychTests.tests.results.bigFive.dimensions.conscientiousness.medium.title'
       ),
       description: t(
-        'psychTests.results.bigFive.dimensions.conscientiousness.medium.description'
+        'psychTests.tests.results.bigFive.dimensions.conscientiousness.medium.description'
       ),
       traits: t(
-        'psychTests.results.bigFive.dimensions.conscientiousness.medium.traits'
+        'psychTests.tests.results.bigFive.dimensions.conscientiousness.medium.traits'
       ),
     },
     low: {
       title: t(
-        'psychTests.results.bigFive.dimensions.conscientiousness.low.title'
+        'psychTests.tests.results.bigFive.dimensions.conscientiousness.low.title'
       ),
       description: t(
-        'psychTests.results.bigFive.dimensions.conscientiousness.low.description'
+        'psychTests.tests.results.bigFive.dimensions.conscientiousness.low.description'
       ),
       traits: t(
-        'psychTests.results.bigFive.dimensions.conscientiousness.low.traits'
+        'psychTests.tests.results.bigFive.dimensions.conscientiousness.low.traits'
       ),
     },
   },
   extraversion: {
     high: {
-      title: t('psychTests.results.bigFive.dimensions.extraversion.high.title'),
+      title: t('psychTests.tests.results.bigFive.dimensions.extraversion.high.title'),
       description: t(
-        'psychTests.results.bigFive.dimensions.extraversion.high.description'
+        'psychTests.tests.results.bigFive.dimensions.extraversion.high.description'
       ),
       traits: t(
-        'psychTests.results.bigFive.dimensions.extraversion.high.traits'
+        'psychTests.tests.results.bigFive.dimensions.extraversion.high.traits'
       ),
     },
     medium: {
       title: t(
-        'psychTests.results.bigFive.dimensions.extraversion.medium.title'
+        'psychTests.tests.results.bigFive.dimensions.extraversion.medium.title'
       ),
       description: t(
-        'psychTests.results.bigFive.dimensions.extraversion.medium.description'
+        'psychTests.tests.results.bigFive.dimensions.extraversion.medium.description'
       ),
       traits: t(
-        'psychTests.results.bigFive.dimensions.extraversion.medium.traits'
+        'psychTests.tests.results.bigFive.dimensions.extraversion.medium.traits'
       ),
     },
     low: {
-      title: t('psychTests.results.bigFive.dimensions.extraversion.low.title'),
+      title: t('psychTests.tests.results.bigFive.dimensions.extraversion.low.title'),
       description: t(
-        'psychTests.results.bigFive.dimensions.extraversion.low.description'
+        'psychTests.tests.results.bigFive.dimensions.extraversion.low.description'
       ),
       traits: t(
-        'psychTests.results.bigFive.dimensions.extraversion.low.traits'
+        'psychTests.tests.results.bigFive.dimensions.extraversion.low.traits'
       ),
     },
   },
   agreeableness: {
     high: {
       title: t(
-        'psychTests.results.bigFive.dimensions.agreeableness.high.title'
+        'psychTests.tests.results.bigFive.dimensions.agreeableness.high.title'
       ),
       description: t(
-        'psychTests.results.bigFive.dimensions.agreeableness.high.description'
+        'psychTests.tests.results.bigFive.dimensions.agreeableness.high.description'
       ),
       traits: t(
-        'psychTests.results.bigFive.dimensions.agreeableness.high.traits'
+        'psychTests.tests.results.bigFive.dimensions.agreeableness.high.traits'
       ),
     },
     medium: {
       title: t(
-        'psychTests.results.bigFive.dimensions.agreeableness.medium.title'
+        'psychTests.tests.results.bigFive.dimensions.agreeableness.medium.title'
       ),
       description: t(
-        'psychTests.results.bigFive.dimensions.agreeableness.medium.description'
+        'psychTests.tests.results.bigFive.dimensions.agreeableness.medium.description'
       ),
       traits: t(
-        'psychTests.results.bigFive.dimensions.agreeableness.medium.traits'
+        'psychTests.tests.results.bigFive.dimensions.agreeableness.medium.traits'
       ),
     },
     low: {
-      title: t('psychTests.results.bigFive.dimensions.agreeableness.low.title'),
+      title: t('psychTests.tests.results.bigFive.dimensions.agreeableness.low.title'),
       description: t(
-        'psychTests.results.bigFive.dimensions.agreeableness.low.description'
+        'psychTests.tests.results.bigFive.dimensions.agreeableness.low.description'
       ),
       traits: t(
-        'psychTests.results.bigFive.dimensions.agreeableness.low.traits'
+        'psychTests.tests.results.bigFive.dimensions.agreeableness.low.traits'
       ),
     },
   },
   neuroticism: {
     high: {
-      title: t('psychTests.results.bigFive.dimensions.neuroticism.high.title'),
+      title: t('psychTests.tests.results.bigFive.dimensions.neuroticism.high.title'),
       description: t(
-        'psychTests.results.bigFive.dimensions.neuroticism.high.description'
+        'psychTests.tests.results.bigFive.dimensions.neuroticism.high.description'
       ),
       traits: t(
-        'psychTests.results.bigFive.dimensions.neuroticism.high.traits'
+        'psychTests.tests.results.bigFive.dimensions.neuroticism.high.traits'
       ),
-      tips: t('psychTests.results.bigFive.dimensions.neuroticism.high.tips'),
+      tips: t('psychTests.tests.results.bigFive.dimensions.neuroticism.high.tips'),
     },
     medium: {
       title: t(
-        'psychTests.results.bigFive.dimensions.neuroticism.medium.title'
+        'psychTests.tests.results.bigFive.dimensions.neuroticism.medium.title'
       ),
       description: t(
-        'psychTests.results.bigFive.dimensions.neuroticism.medium.description'
+        'psychTests.tests.results.bigFive.dimensions.neuroticism.medium.description'
       ),
       traits: t(
-        'psychTests.results.bigFive.dimensions.neuroticism.medium.traits'
+        'psychTests.tests.results.bigFive.dimensions.neuroticism.medium.traits'
       ),
     },
     low: {
-      title: t('psychTests.results.bigFive.dimensions.neuroticism.low.title'),
+      title: t('psychTests.tests.results.bigFive.dimensions.neuroticism.low.title'),
       description: t(
-        'psychTests.results.bigFive.dimensions.neuroticism.low.description'
+        'psychTests.tests.results.bigFive.dimensions.neuroticism.low.description'
       ),
-      traits: t('psychTests.results.bigFive.dimensions.neuroticism.low.traits'),
+      traits: t('psychTests.tests.results.bigFive.dimensions.neuroticism.low.traits'),
     },
   },
   dimensionNames: {
-    openness: t('psychTests.results.bigFive.dimensionNames.openness'),
+    openness: t('psychTests.tests.results.bigFive.dimensionNames.openness'),
     conscientiousness: t(
-      'psychTests.results.bigFive.dimensionNames.conscientiousness'
+      'psychTests.tests.results.bigFive.dimensionNames.conscientiousness'
     ),
-    extraversion: t('psychTests.results.bigFive.dimensionNames.extraversion'),
-    agreeableness: t('psychTests.results.bigFive.dimensionNames.agreeableness'),
-    neuroticism: t('psychTests.results.bigFive.dimensionNames.neuroticism'),
+    extraversion: t('psychTests.tests.results.bigFive.dimensionNames.extraversion'),
+    agreeableness: t('psychTests.tests.results.bigFive.dimensionNames.agreeableness'),
+    neuroticism: t('psychTests.tests.results.bigFive.dimensionNames.neuroticism'),
   },
 });
 
@@ -1777,7 +2191,7 @@ const getStressTest = (t: (_key: string) => string): PsychologicalTest => {
 };
 
 // İsim Enerjine Göre Tarot Kartın - i18n destekli helper fonksiyon
-const getNameTarotTest = (t: (_key: string) => string): PsychologicalTest => ({
+export const getNameTarotTest = (t: (_key: string) => string): PsychologicalTest => ({
   id: 'name-tarot',
   title: t('psychTests.tests.nameTarot.title'),
   description: t('psychTests.tests.nameTarot.description'),
@@ -1819,9 +2233,6 @@ export const getPsychologicalTests = (
 
   // 8. Stres Düzeyi Testi - i18n destekli
   getStressTest(t),
-
-  // 9. İsim Enerjine Göre Tarot Kartın - i18n destekli
-  getNameTarotTest(t),
 ];
 
 // Test sonuçlarını hesaplama fonksiyonları

@@ -18,6 +18,11 @@ import {
   calculateNameTarotResult,
   getEnneagramTypes,
   getFriendEnergyRoles,
+  getMBTITypes,
+  getBigFiveTraits,
+  getStressProfiles,
+  getLoveVibrationProfiles,
+  getNameTarotTest,
 } from '../lib/kokolojiData';
 import { useTranslations } from '@/hooks/useTranslations';
 
@@ -41,7 +46,13 @@ export default function KokolojiTest() {
   // i18n destekli test listesi - memoized for performance
   const psychologicalTests = useMemo(() => getPsychologicalTests(t), [t]);
 
-  const selectedTest = psychologicalTests.find(test => test.id === currentTest);
+  // İsim Enerjisi testi listeden çıkarıldığı için özel kontrol
+  const selectedTest = useMemo(() => {
+    if (currentTest === 'name-tarot') {
+      return getNameTarotTest(t);
+    }
+    return psychologicalTests.find(test => test.id === currentTest);
+  }, [currentTest, psychologicalTests, t]);
 
   const startTest = (testId: string) => {
     // Önce scroll pozisyonunu sıfırla (instant)
@@ -64,8 +75,8 @@ export default function KokolojiTest() {
   useEffect(() => {
     const testId = searchParams.get('test');
     if (testId && !currentTest) {
-      // Test ID'si geçerli mi kontrol et
-      const testExists = psychologicalTests.find(test => test.id === testId);
+      // Test ID'si geçerli mi kontrol et (name-tarot özel durum)
+      const testExists = testId === 'name-tarot' || psychologicalTests.find(test => test.id === testId);
       if (testExists) {
         // Önce scroll pozisyonunu sıfırla (instant)
         window.scrollTo(0, 0);
@@ -112,7 +123,161 @@ export default function KokolojiTest() {
       setCurrentQuestion(currentQuestion + 1);
     } else {
       // Test tamamlandı
-      const result = getTestResult(selectedTest!.id, newAnswers);
+      let result = getTestResult(selectedTest!.id, newAnswers);
+      // MBTI testi için detayları ekle
+      if (selectedTest!.id === 'mbti' && result?.type) {
+        const mbtiTypes = getMBTITypes(t);
+        const mbtiDetails = mbtiTypes[result.type as keyof typeof mbtiTypes];
+        if (mbtiDetails) {
+          result = {
+            ...result,
+            title: mbtiDetails.title,
+            description: mbtiDetails.description,
+            traits: mbtiDetails.traits,
+            career: mbtiDetails.career,
+          };
+        }
+      }
+      // Big Five testi için detayları ekle
+      if (selectedTest!.id === 'big-five' && result) {
+        const bigFiveTraits = getBigFiveTraits(t);
+        const dimensionKeys = [
+          'openness',
+          'conscientiousness',
+          'extraversion',
+          'agreeableness',
+          'neuroticism',
+        ] as const;
+        dimensionKeys.forEach(dimension => {
+          if (result[dimension] && result[dimension].level) {
+            const dimensionTraits = bigFiveTraits[dimension] as {
+              high: {
+                title: string;
+                description: string;
+                traits: string;
+                tips?: string;
+              };
+              medium: {
+                title: string;
+                description: string;
+                traits: string;
+                tips?: string;
+              };
+              low: {
+                title: string;
+                description: string;
+                traits: string;
+                tips?: string;
+              };
+            };
+            const level = result[dimension].level as 'high' | 'medium' | 'low';
+            const levelData = dimensionTraits[level];
+            if (levelData) {
+              result[dimension] = {
+                ...result[dimension],
+                title: levelData.title,
+                description: levelData.description,
+                traits: levelData.traits,
+                ...(levelData.tips && { tips: levelData.tips }),
+              };
+            }
+          }
+        });
+      }
+      // Enneagram testi için detayları ekle
+      if (selectedTest!.id === 'enneagram' && result?.dominantType) {
+        const enneagramTypes = getEnneagramTypes(t);
+        const enneagramDetails =
+          enneagramTypes[result.dominantType as keyof typeof enneagramTypes];
+        if (enneagramDetails) {
+          result = {
+            ...result,
+            name: enneagramDetails.name,
+            title: enneagramDetails.title,
+            subtitle: enneagramDetails.subtitle,
+            description: enneagramDetails.description,
+            coreMotivation: enneagramDetails.coreMotivation,
+            coreFear: enneagramDetails.coreFear,
+            lightSide: enneagramDetails.lightSide,
+            shadowSide: enneagramDetails.shadowSide,
+          };
+        }
+      }
+      // Friend Energy testi için detayları ekle
+      if (selectedTest!.id === 'friend-energy' && result?.dominantRole) {
+        const friendEnergyRoles = getFriendEnergyRoles(t);
+        const friendEnergyDetails =
+          friendEnergyRoles[
+            result.dominantRole as keyof typeof friendEnergyRoles
+          ];
+        if (friendEnergyDetails) {
+          result = {
+            ...result,
+            emoji: friendEnergyDetails.emoji,
+            name: friendEnergyDetails.name,
+            title: friendEnergyDetails.title,
+            tagline: friendEnergyDetails.tagline,
+            description: friendEnergyDetails.description,
+            socialRole: friendEnergyDetails.socialRole,
+            strengths: Array.isArray(friendEnergyDetails.strengths) ? friendEnergyDetails.strengths : [],
+            funFacts: Array.isArray(friendEnergyDetails.funFacts) ? friendEnergyDetails.funFacts : [],
+            shareText: friendEnergyDetails.shareText,
+          };
+        }
+      }
+      // Stress testi için detayları ekle
+      if (selectedTest!.id === 'stress' && result?.profileKey) {
+        const stressProfiles = getStressProfiles(t);
+        const stressDetails = stressProfiles[
+          result.profileKey as keyof typeof stressProfiles
+        ] as {
+          level: string;
+          emoji: string;
+          scoreRange: string;
+          description: string;
+          message: string;
+          meditationTips: string[];
+          wellnessAdvice: string;
+          urgentNote?: string;
+        };
+        if (stressDetails) {
+          result = {
+            ...result,
+            emoji: stressDetails.emoji,
+            level: stressDetails.level,
+            scoreRange: stressDetails.scoreRange,
+            description: stressDetails.description,
+            message: stressDetails.message,
+            meditationTips: stressDetails.meditationTips,
+            wellnessAdvice: stressDetails.wellnessAdvice,
+            ...(stressDetails.urgentNote && {
+              urgentNote: stressDetails.urgentNote,
+            }),
+          };
+        }
+      }
+      // Love Vibration testi için detayları ekle
+      if (selectedTest!.id === 'love-vibration' && result?.profileKey) {
+        const loveVibrationProfiles = getLoveVibrationProfiles(t);
+        const loveVibrationDetails = loveVibrationProfiles[result.profileKey as keyof typeof loveVibrationProfiles];
+        if (loveVibrationDetails) {
+          result = {
+            ...result,
+            emoji: loveVibrationDetails.emoji,
+            name: loveVibrationDetails.name,
+            title: loveVibrationDetails.title,
+            tagline: loveVibrationDetails.tagline,
+            description: loveVibrationDetails.description,
+            planet: loveVibrationDetails.planet,
+            element: loveVibrationDetails.element,
+            tarotCard: loveVibrationDetails.tarotCard,
+            loveStyle: loveVibrationDetails.loveStyle,
+            strengths: Array.isArray(loveVibrationDetails.strengths) ? loveVibrationDetails.strengths : [],
+            compatibility: loveVibrationDetails.compatibility,
+            astrologicalInsight: loveVibrationDetails.astrologicalInsight,
+          };
+        }
+      }
       const interpretation = generateInterpretation(
         selectedTest!,
         newAnswers,
@@ -443,62 +608,73 @@ export default function KokolojiTest() {
               </div>
 
               {/* Her boyut için kart */}
-              {Object.entries(lastResult.result).map(
-                ([key, value]: [string, any]) => {
-                  const dimensionNames: Record<string, string> = {
-                    openness: 'Açıklık',
-                    conscientiousness: 'Sorumluluk',
-                    extraversion: 'Dışa Dönüklük',
-                    agreeableness: 'Uyumluluk',
-                    neuroticism: 'Duygusal Denge',
-                  };
-
-                  return (
-                    <div
-                      key={key}
-                      className='bg-white/5 rounded-lg p-6 border border-white/10'
-                    >
-                      <div className='flex items-center justify-between mb-4'>
-                        <div>
-                          <div className='text-xs text-purple-300 mb-1'>
-                            {dimensionNames[key]}
-                          </div>
-                          <h5 className='text-lg font-bold text-white'>
-                            {value.title}
-                          </h5>
-                        </div>
-                        <div className='text-2xl font-bold text-purple-300'>
-                          {value.score}/25
-                        </div>
-                      </div>
-
-                      {/* Progress bar */}
-                      <div className='w-full bg-white/10 rounded-full h-3 mb-4'>
-                        <div
-                          className={`h-3 rounded-full transition-all duration-500 ${
-                            value.level === 'high'
-                              ? 'bg-green-500'
-                              : value.level === 'medium'
-                                ? 'bg-yellow-500'
-                                : 'bg-blue-500'
-                          }`}
-                          style={{ width: `${(value.score / 25) * 100}%` }}
-                        />
-                      </div>
-
-                      <p className='text-gray-300 mb-2'>{value.description}</p>
-                      <p className='text-sm text-purple-200'>
-                        <strong>Özellikler:</strong> {value.traits}
-                      </p>
-                      {value.tips && (
-                        <p className='text-sm text-yellow-200 mt-2'>
-                          <strong>💡 İpucu:</strong> {value.tips}
-                        </p>
-                      )}
-                    </div>
-                  );
+              {(
+                [
+                  'openness',
+                  'conscientiousness',
+                  'extraversion',
+                  'agreeableness',
+                  'neuroticism',
+                ] as const
+              ).map(dimension => {
+                const value = lastResult.result[dimension];
+                if (!value) {
+                  return null;
                 }
-              )}
+
+                const dimensionNames: Record<string, string> = {
+                  openness: 'Açıklık',
+                  conscientiousness: 'Sorumluluk',
+                  extraversion: 'Dışa Dönüklük',
+                  agreeableness: 'Uyumluluk',
+                  neuroticism: 'Duygusal Denge',
+                };
+
+                return (
+                  <div
+                    key={dimension}
+                    className='bg-white/5 rounded-lg p-6 border border-white/10'
+                  >
+                    <div className='flex items-center justify-between mb-4'>
+                      <div>
+                        <div className='text-xs text-purple-300 mb-1'>
+                          {dimensionNames[dimension]}
+                        </div>
+                        <h5 className='text-lg font-bold text-white'>
+                          {value.title}
+                        </h5>
+                      </div>
+                      <div className='text-2xl font-bold text-purple-300'>
+                        {value.score}/25
+                      </div>
+                    </div>
+
+                    {/* Progress bar */}
+                    <div className='w-full bg-white/10 rounded-full h-3 mb-4'>
+                      <div
+                        className={`h-3 rounded-full transition-all duration-500 ${
+                          value.level === 'high'
+                            ? 'bg-green-500'
+                            : value.level === 'medium'
+                              ? 'bg-yellow-500'
+                              : 'bg-blue-500'
+                        }`}
+                        style={{ width: `${(value.score / 25) * 100}%` }}
+                      />
+                    </div>
+
+                    <p className='text-gray-300 mb-2'>{value.description}</p>
+                    <p className='text-sm text-purple-200'>
+                      <strong>Özellikler:</strong> {value.traits}
+                    </p>
+                    {value.tips && (
+                      <p className='text-sm text-yellow-200 mt-2'>
+                        <strong>💡 İpucu:</strong> {value.tips}
+                      </p>
+                    )}
+                  </div>
+                );
+              })}
 
               {/* Kişiselleştirilmiş İpuçları */}
               {lastResult.result.personalizedTips && (
@@ -639,7 +815,7 @@ export default function KokolojiTest() {
                   ✨ Süper Güçlerin
                 </h5>
                 <div className='grid grid-cols-2 gap-3'>
-                  {lastResult.result.strengths.map(
+                  {(lastResult.result.strengths || []).map(
                     (strength: string, index: number) => (
                       <div
                         key={index}
@@ -660,15 +836,19 @@ export default function KokolojiTest() {
                   🎉 Eğlenceli Gerçekler
                 </h5>
                 <div className='space-y-3'>
-                  {lastResult.result.funFacts.map(
-                    (fact: string, index: number) => (
-                      <div key={index} className='flex items-start gap-3'>
-                        <span className='text-lg'>{fact.split(' ')[0]}</span>
-                        <p className='text-gray-200 text-sm flex-1'>
-                          {fact.substring(fact.indexOf(' ') + 1)}
-                        </p>
-                      </div>
-                    )
+                  {(lastResult.result.funFacts || []).map(
+                    (fact: string, index: number) => {
+                      const firstWord = fact.split(' ')[0] || '';
+                      const restOfText = fact.indexOf(' ') > -1 ? fact.substring(fact.indexOf(' ') + 1) : fact;
+                      return (
+                        <div key={index} className='flex items-start gap-3'>
+                          <span className='text-lg'>{firstWord}</span>
+                          <p className='text-gray-200 text-sm flex-1'>
+                            {restOfText}
+                          </p>
+                        </div>
+                      );
+                    }
                   )}
                 </div>
               </div>
@@ -821,7 +1001,7 @@ export default function KokolojiTest() {
                   ✨ Aşk Süper Güçlerin
                 </h5>
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
-                  {lastResult.result.strengths.map(
+                  {(lastResult.result.strengths || []).map(
                     (strength: string, index: number) => (
                       <div
                         key={index}

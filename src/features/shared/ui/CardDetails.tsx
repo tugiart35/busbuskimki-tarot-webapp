@@ -183,7 +183,6 @@ const CardDetails: React.FC<CardDetailsProps> = ({
           <h3 className='text-2xl font-light text-white tracking-wide'>
             {positionInfo.title}
           </h3>
-         
         </div>
       )}
     </div>
