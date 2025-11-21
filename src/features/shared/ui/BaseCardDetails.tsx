@@ -45,6 +45,7 @@ import type { TarotCard } from '@/features/tarot/lib/a-tarot-helpers';
 import type { CardMeaningData } from '@/types/ui';
 import { ReactElement } from 'react';
 import { useFocusTrap } from '@/hooks/useFocusTrap';
+import { useTranslations } from '@/hooks/useTranslations';
 import Image from 'next/image';
 
 export interface BaseCardDetailsProps {
@@ -122,6 +123,7 @@ export default function BaseCardDetails({
   showContext = false,
 }: BaseCardDetailsProps) {
   const focusTrapRef = useFocusTrap(true);
+  const { t } = useTranslations();
 
   if (!card) {
     return null;
@@ -292,7 +294,7 @@ export default function BaseCardDetails({
         <button
           onClick={onClose}
           className={`absolute top-4 right-4 ${currentTheme.closeButton} transition-colors text-2xl font-bold z-10`}
-          aria-label='Kapat'
+          aria-label={t('messages.common.close')}
           data-close-modal
         >
           <svg
@@ -346,7 +348,7 @@ export default function BaseCardDetails({
               <p
                 className={`mt-2 text-sm font-semibold ${isReversed ? 'text-red-400' : 'text-green-400'}`}
               >
-                ({isReversed ? 'Ters' : 'Düz'})
+                ({isReversed ? t('cards.reversed') : t('cards.upright')})
               </p>
             )}
           </div>
@@ -373,7 +375,7 @@ export default function BaseCardDetails({
                             : 'bg-green-500/20 text-green-300'
                         }`}
                       >
-                        {isReversed ? 'Ters' : 'Düz'}
+                        {isReversed ? t('cards.reversed') : t('cards.upright')}
                       </span>
                     </div>
                     <div className='text-gray-300 text-sm leading-relaxed italic'>
@@ -392,7 +394,7 @@ export default function BaseCardDetails({
                           <span className='text-white text-sm'>💡</span>
                         </div>
                         <span className='text-blue-300 font-semibold text-sm uppercase tracking-wide'>
-                          Pozisyon Bağlamı
+                          {t('messages.common.positionContext')}
                         </span>
                       </div>
                       <div className='text-gray-200 text-sm leading-relaxed pl-2'>
@@ -420,7 +422,9 @@ export default function BaseCardDetails({
                           isReversed ? 'text-red-300' : 'text-green-300'
                         }`}
                       >
-                        {isReversed ? 'Ters Anlam' : 'Düz Anlam'}
+                        {isReversed
+                          ? t('cards.reversedMeaning').replace(':', '')
+                          : t('cards.uprightMeaning').replace(':', '')}
                       </span>
                     </div>
                     <div className='text-gray-100 text-base leading-relaxed pl-2'>
@@ -436,7 +440,7 @@ export default function BaseCardDetails({
                           <span className='text-white text-sm'>🔮</span>
                         </div>
                         <span className='text-purple-300 font-semibold text-sm uppercase tracking-wide'>
-                          Derin Bağlam
+                          {t('messages.common.deepContext')}
                         </span>
                       </div>
                       <div className='text-gray-200 text-sm leading-relaxed pl-2 italic'>
@@ -453,7 +457,7 @@ export default function BaseCardDetails({
                           <span className='text-white text-sm'>✨</span>
                         </div>
                         <span className='text-amber-300 font-semibold text-sm uppercase tracking-wide'>
-                          Anahtar Kelimeler
+                          {t('messages.common.keywords')}
                         </span>
                       </div>
                       <div className='flex flex-wrap gap-2'>

@@ -82,7 +82,7 @@ function SpreadPageContent({
         const data = await response.json();
 
         if (!response.ok) {
-          setTokenError(data.error || 'Token doğrulanamadı');
+          setTokenError(data.error || t('tarot.page.tokenValidationError'));
           setTokenErrorDetails(
             data.status === 'completed'
               ? {
@@ -109,7 +109,7 @@ function SpreadPageContent({
         setTokenValidating(false);
       } catch (error) {
         // Token doğrulama hatası
-        setTokenError('Token doğrulanırken bir hata oluştu');
+        setTokenError(t('tarot.page.tokenValidationFailed'));
         setTokenValidating(false);
       }
     };
@@ -150,7 +150,7 @@ function SpreadPageContent({
     return () => {
       clearInterval(pollInterval);
     };
-  }, [token, spreadId, tokenErrorDetails?.status]);
+  }, [token, spreadId, tokenErrorDetails?.status, t]);
 
   // Tamamlanmış okuma için reading'i çek
   useEffect(() => {
@@ -202,7 +202,7 @@ function SpreadPageContent({
           <div className='text-center'>
             <div className='animate-spin rounded-full h-12 w-12 sm:h-16 sm:w-16 border-b-2 border-purple-500 mx-auto mb-4'></div>
             <p className='text-gray-300 text-base sm:text-lg'>
-              Okuma linki doğrulanıyor...
+              {t('tarot.page.validatingToken')}
             </p>
           </div>
         </main>
@@ -222,7 +222,7 @@ function SpreadPageContent({
             <div className='text-center'>
               <div className='animate-spin rounded-full h-12 w-12 sm:h-16 sm:w-16 border-b-2 border-purple-500 mx-auto mb-4'></div>
               <p className='text-gray-300 text-base sm:text-lg'>
-                Okuma bilgileri yükleniyor...
+                {t('tarot.page.loadingReading')}
               </p>
             </div>
           </main>
@@ -305,12 +305,12 @@ function SpreadPageContent({
               <div className='text-center mb-8'>
                 <div className='text-6xl mb-4'>✅</div>
                 <h2 className='text-2xl sm:text-3xl font-bold text-white mb-2'>
-                  Okuma Tamamlandı
+                  {t('tarot.page.readingCompleted')}
                 </h2>
                 <p className='text-gray-400 text-sm sm:text-base'>
                   {isSingleCard
-                    ? 'Okumayı tamamladınız. 2-4 saat içinde okumanız size iletilecektir.'
-                    : 'Bu okuma zaten tamamlandı. Çekilen kartlarınız aşağıda.'}
+                    ? t('tarot.page.readingCompletedSingle')
+                    : t('tarot.page.readingCompletedMultiple')}
                 </p>
               </div>
 
@@ -331,7 +331,7 @@ function SpreadPageContent({
                       />
                       {cards[0].isReversed && (
                         <div className='absolute top-2 right-2 bg-red-500/80 text-white px-3 py-1 rounded-full text-xs font-bold'>
-                          Ters
+                          {t('tarot.page.reversed')}
                         </div>
                       )}
                     </div>
@@ -354,12 +354,12 @@ function SpreadPageContent({
                           'written' ? (
                             <>
                               <span>📝</span>
-                              <span>Yazılı</span>
+                              <span>{t('tarot.page.written')}</span>
                             </>
                           ) : (
                             <>
                               <span>🎵</span>
-                              <span>Sesli</span>
+                              <span>{t('tarot.page.audio')}</span>
                             </>
                           )}
                         </span>
@@ -384,7 +384,9 @@ function SpreadPageContent({
                                 : 'text-green-200'
                             }`}
                           >
-                            {cards[0].isReversed ? 'Ters Anlam' : 'Düz Anlam'}
+                            {cards[0].isReversed
+                              ? t('tarot.page.reversedMeaning')
+                              : t('tarot.page.uprightMeaning')}
                           </span>
                         </div>
                         <div className='text-white text-base leading-relaxed font-light'>
@@ -400,10 +402,10 @@ function SpreadPageContent({
                               return cards[0].isReversed
                                 ? cards[0].meaningTr?.reversed ||
                                     cards[0].meaning?.reversed ||
-                                    'Anlam bulunamadı'
+                                    t('tarot.common.meaningNotFound')
                                 : cards[0].meaningTr?.upright ||
                                     cards[0].meaning?.upright ||
-                                    'Anlam bulunamadı';
+                                    t('tarot.common.meaningNotFound');
                             }
                             return meaning;
                           })()}
@@ -577,9 +579,7 @@ function SpreadPageContent({
                       );
 
                       if (!meaning) {
-                        const fallback =
-                          t('tarot.common.meaningNotFound') ||
-                          'Anlam bulunamadı';
+                        const fallback = t('tarot.common.meaningNotFound');
                         return {
                           interpretation: fallback,
                           context: '',
@@ -622,7 +622,7 @@ function SpreadPageContent({
                           ) ||
                           t(`${spreadConfig.namespace}.data.spreadName`) ||
                           t(`spreads.${spreadConfig.namespace}.name`) ||
-                          'Tarot Yorumu'
+                          t('tarot.page.tarotInterpretation')
                         }
                         icon={spreadConfig.icon}
                         badgeText={
@@ -664,7 +664,9 @@ function SpreadPageContent({
                 })()
               ) : (
                 <div className='admin-glass rounded-2xl p-6 border border-slate-700/50 text-center'>
-                  <p className='text-gray-400'>Kart bilgileri bulunamadı.</p>
+                  <p className='text-gray-400'>
+                    {t('tarot.page.cardInfoNotFound')}
+                  </p>
                 </div>
               )}
 
@@ -673,7 +675,7 @@ function SpreadPageContent({
                   href={`/${locale}/tarotokumasi`}
                   className='inline-flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors'
                 >
-                  Tüm Açılımları Gör
+                  {t('tarot.page.viewAllSpreads')}
                 </Link>
               </div>
             </div>
@@ -693,7 +695,9 @@ function SpreadPageContent({
               </span>
             </div>
             <h2 className='text-xl sm:text-2xl font-bold text-white mb-4'>
-              {isCompleted ? 'Okuma Tamamlandı' : 'Hata'}
+              {isCompleted
+                ? t('tarot.page.readingCompleted')
+                : t('tarot.page.error')}
             </h2>
             <p className='text-gray-300 text-base sm:text-lg mb-2'>
               {tokenErrorDetails?.message || tokenError}
@@ -701,12 +705,11 @@ function SpreadPageContent({
             {isCompleted && (
               <div className='space-y-2'>
                 <p className='text-gray-400 text-sm'>
-                  Okumayı tamamladınız. 2-4 saat içinde okumanız size
-                  iletilecektir.
+                  {t('tarot.page.readingCompletedSingle')}
                 </p>
                 {spreadId === 'single-card-spread' && (
                   <p className='text-gray-500 text-xs'>
-                    Bu okuma linki artık kullanılamaz.
+                    {t('tarot.page.linkNoLongerAvailable')}
                   </p>
                 )}
               </div>
@@ -715,7 +718,7 @@ function SpreadPageContent({
               href={`/${locale}/tarotokumasi`}
               className='inline-flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors'
             >
-              Tüm Açılımları Gör
+              {t('tarot.page.viewAllSpreads')}
             </Link>
           </div>
         </main>
@@ -732,13 +735,13 @@ function SpreadPageContent({
               <span className='text-4xl sm:text-6xl'>🔮</span>
             </div>
             <p className='text-gray-300 text-base sm:text-lg mb-4'>
-              Açılım bulunamadı
+              {t('tarot.page.spreadNotFound')}
             </p>
             <Link
               href={`/${locale}/tarotokumasi`}
               className='inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors'
             >
-              Tüm Açılımları Gör
+              {t('tarot.page.viewAllSpreads')}
             </Link>
           </div>
         </main>
@@ -757,7 +760,7 @@ function SpreadPageContent({
                 href={`/${locale}`}
                 className='text-purple-400 hover:text-purple-300 transition-colors'
               >
-                Ana Sayfa
+                {t('tarot.page.home')}
               </Link>
             </li>
             <li className='text-gray-500'>›</li>
@@ -766,7 +769,7 @@ function SpreadPageContent({
                 href={`/${locale}/tarotokumasi`}
                 className='text-purple-400 hover:text-purple-300 transition-colors'
               >
-                Tarot
+                {t('tarot.page.tarot')}
               </Link>
             </li>
             <li className='text-gray-500'>›</li>
@@ -808,7 +811,7 @@ function SpreadPageContent({
                   <div className='mt-6 sm:mt-8 p-5 sm:p-6 bg-gradient-to-r from-purple-900/30 to-pink-900/30 backdrop-blur-sm border border-purple-500/30 rounded-2xl'>
                     <h3 className='text-sm sm:text-lg font-bold text-white mb-4 sm:mb-5 flex items-center gap-2'>
                       <span className='text-xl sm:text-2xl'>🔮</span>
-                      Bu Açılımda Keşfedecekleriniz
+                      {t('tarot.page.whatYouWillDiscover')}
                     </h3>
 
                     <div className='grid sm:grid-cols-2 gap-3 sm:gap-4'>
@@ -835,8 +838,8 @@ function SpreadPageContent({
                     {currentSpread.positions.length > 4 && (
                       <div className='mt-4 text-center'>
                         <p className='text-xs text-purple-300 font-medium'>
-                          + {currentSpread.positions.length - 4} pozisyon daha
-                          keşfedilecek...
+                          + {currentSpread.positions.length - 4}{' '}
+                          {t('tarot.page.morePositionsToDiscover')}
                         </p>
                       </div>
                     )}
@@ -895,13 +898,13 @@ function SpreadPageContent({
             <div className='max-w-6xl mx-auto mt-12 sm:mt-16'>
               <div className='flex flex-col sm:flex-row items-center justify-between mb-6 sm:mb-8 gap-4'>
                 <h2 className='text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent'>
-                  İlgili Açılımlar
+                  {t('tarot.page.relatedSpreads')}
                 </h2>
                 <Link
                   href={`/${locale}/tarotokumasi`}
                   className='inline-flex items-center gap-2 text-sm text-purple-400 hover:text-purple-300 transition-colors group'
                 >
-                  Tümünü Gör
+                  {t('tarot.page.viewAll')}
                   <svg
                     className='w-4 h-4 group-hover:translate-x-1 transition-transform'
                     fill='none'
@@ -941,7 +944,7 @@ function SpreadPageContent({
                               {t(spread.name)}
                             </h3>
                             <p className='text-xs sm:text-sm text-gray-400 mt-1'>
-                              {spread.cardCount} Kart
+                              {spread.cardCount} {t('tarot.page.card')}
                             </p>
                           </div>
                         </div>
@@ -951,7 +954,7 @@ function SpreadPageContent({
                         </p>
 
                         <div className='flex items-center gap-2 text-purple-400 text-xs sm:text-sm font-semibold'>
-                          Okumaya Başla
+                          {t('tarot.page.startReading')}
                           <svg
                             className='w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform'
                             fill='none'
@@ -992,7 +995,7 @@ function SpreadPageContent({
                   />
                 </svg>
                 <span className='text-white font-semibold text-sm sm:text-base'>
-                  Tüm Tarot Açılımları
+                  {t('tarot.page.allTarotSpreads')}
                 </span>
               </Link>
             </div>
@@ -1013,6 +1016,8 @@ export default function SpreadPageClient({
   locale: string;
   spreadId: string;
 }) {
+  const { t } = useTranslations();
+
   return (
     <Suspense
       fallback={
@@ -1021,7 +1026,7 @@ export default function SpreadPageClient({
             <div className='text-center'>
               <div className='animate-spin rounded-full h-12 w-12 sm:h-16 sm:w-16 border-b-2 border-purple-500 mx-auto mb-4'></div>
               <p className='text-gray-300 text-base sm:text-lg'>
-                Yükleniyor...
+                {t('tarot.page.loading')}
               </p>
             </div>
           </main>

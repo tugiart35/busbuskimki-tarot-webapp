@@ -75,15 +75,6 @@ export function LocaleLayoutClient({
   useWebVitals();
   usePerformanceBudget();
 
-  // Fallback çeviri fonksiyonu
-  const translate = (key: string, fallback: string) => {
-    try {
-      return t ? t(key, fallback) : fallback;
-    } catch (error) {
-      return fallback;
-    }
-  };
-
   useEffect(() => {
     setConsentLocale(locale as 'tr' | 'en' | 'sr');
   }, [locale, setConsentLocale]);
@@ -197,7 +188,7 @@ export function LocaleLayoutClient({
                 >
                   <User className='w-4 h-4 opacity-60' />
                   <span className='text-sm opacity-80'>
-                    {user.email?.split('@')[0] || 'User'}
+                    {user.email?.split('@')[0] || t('messages.common.user')}
                   </span>
                 </Link>
               ) : (
@@ -205,7 +196,7 @@ export function LocaleLayoutClient({
                   href={`/${locale}/auth`}
                   className='px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 transition-all shadow-lg shadow-purple-500/20 text-sm font-medium'
                 >
-                  {translate('common.login', 'Giriş Yap')}
+                  {t('messages.common.login')}
                 </Link>
               )}
 
@@ -215,7 +206,7 @@ export function LocaleLayoutClient({
                   href={`/${locale}/dashboard`}
                   className='px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 transition-all shadow-lg shadow-purple-500/20 text-sm font-medium'
                 >
-                  {translate('common.panel', 'Panel')}
+                  {t('messages.common.panel')}
                 </Link>
               )}
             </div>

@@ -165,10 +165,10 @@ const THEME_STYLES: Record<TarotTheme, SpreadThemeStyles> = {
     // Okuma vurgu bölümü - seçilen pozisyonu vurgulamak için
     readingHighlight: {
       container:
-        'bg-gradient-to-r from-pink-600/20 via-slate-500/30 to-green-500/20 border border-pink-500/50 rounded-2xl px-6 py-3 shadow-lg animate-pulse',
+        'bg-gradient-to-r from-pink-600/20 via-slate-500/30 to-green-500/20 border border-pink-500/50 rounded-lg px-2 py-1 sm:rounded-xl sm:px-4 sm:py-2 shadow-lg animate-pulse',
       iconBg: 'bg-pink-400/20',
       iconText: 'text-pink-300',
-      title: 'text-pink-200 font-bold text-lg',
+      title: 'text-pink-200 font-bold text-xs sm:text-base',
       subtitle: 'text-gray-300 text-xs',
     },
     // Tümünü temizle butonu - seçilen kartları sıfırlamak için
@@ -227,10 +227,10 @@ const THEME_STYLES: Record<TarotTheme, SpreadThemeStyles> = {
     },
     readingHighlight: {
       container:
-        'bg-gradient-to-r from-blue-600/20 via-slate-500/30 to-green-500/20 border border-blue-500/50 rounded-2xl px-6 py-3 shadow-lg animate-pulse',
+        'bg-gradient-to-r from-blue-600/20 via-slate-500/30 to-green-500/20 border border-blue-500/50 rounded-lg px-2 py-1 sm:rounded-xl sm:px-4 sm:py-2 shadow-lg animate-pulse',
       iconBg: 'bg-blue-400/20',
       iconText: 'text-blue-300',
-      title: 'text-blue-200 font-bold text-lg',
+      title: 'text-blue-200 font-bold text-xs sm:text-base',
       subtitle: 'text-gray-300 text-xs',
     },
     clearAllButton:
@@ -288,10 +288,10 @@ const THEME_STYLES: Record<TarotTheme, SpreadThemeStyles> = {
     },
     readingHighlight: {
       container:
-        'bg-gradient-to-r from-green-600/20 via-slate-500/30 to-emerald-500/20 border border-green-500/50 rounded-2xl px-6 py-3 shadow-lg animate-pulse',
+        'bg-gradient-to-r from-green-600/20 via-slate-500/30 to-emerald-500/20 border border-green-500/50 rounded-lg px-2 py-1 sm:rounded-xl sm:px-4 sm:py-2 shadow-lg animate-pulse',
       iconBg: 'bg-green-400/20',
       iconText: 'text-green-300',
-      title: 'text-green-200 font-bold text-lg',
+      title: 'text-green-200 font-bold text-xs sm:text-base',
       subtitle: 'text-gray-300 text-xs',
     },
     clearAllButton:
@@ -350,10 +350,10 @@ const THEME_STYLES: Record<TarotTheme, SpreadThemeStyles> = {
     },
     readingHighlight: {
       container:
-        'bg-gradient-to-r from-purple-600/20 via-slate-500/30 to-indigo-500/20 border border-purple-500/50 rounded-2xl px-6 py-3 shadow-lg animate-pulse',
+        'bg-gradient-to-r from-purple-600/20 via-slate-500/30 to-indigo-500/20 border border-purple-500/50 rounded-lg px-2 py-1 sm:rounded-xl sm:px-4 sm:py-2 shadow-lg animate-pulse',
       iconBg: 'bg-purple-400/20',
       iconText: 'text-purple-300',
-      title: 'text-purple-200 font-bold text-lg',
+      title: 'text-purple-200 font-bold text-xs sm:text-base',
       subtitle: 'text-gray-300 text-xs',
     },
     clearAllButton:
@@ -412,10 +412,10 @@ const THEME_STYLES: Record<TarotTheme, SpreadThemeStyles> = {
     },
     readingHighlight: {
       container:
-        'bg-gradient-to-r from-yellow-500/20 via-slate-500/30 to-amber-500/20 border border-yellow-500/50 rounded-2xl px-6 py-3 shadow-lg animate-pulse',
+        'bg-gradient-to-r from-yellow-500/20 via-slate-500/30 to-amber-500/20 border border-yellow-500/50 rounded-lg px-2 py-1 sm:rounded-xl sm:px-4 sm:py-2 shadow-lg animate-pulse',
       iconBg: 'bg-yellow-400/20',
       iconText: 'text-yellow-300',
-      title: 'text-yellow-200 font-bold text-lg',
+      title: 'text-yellow-200 font-bold text-xs sm:text-base',
       subtitle: 'text-gray-300 text-xs',
     },
     clearAllButton:
@@ -474,10 +474,10 @@ const THEME_STYLES: Record<TarotTheme, SpreadThemeStyles> = {
     },
     readingHighlight: {
       container:
-        'bg-gradient-to-r from-orange-600/20 via-slate-500/30 to-green-500/20 border border-orange-500/50 rounded-2xl px-6 py-3 shadow-lg animate-pulse',
+        'bg-gradient-to-r from-orange-600/20 via-slate-500/30 to-green-500/20 border border-orange-500/50 rounded-lg px-2 py-1 sm:rounded-xl sm:px-4 sm:py-2 shadow-lg animate-pulse',
       iconBg: 'bg-orange-400/20',
       iconText: 'text-orange-300',
-      title: 'text-orange-200 font-bold text-lg',
+      title: 'text-orange-200 font-bold text-xs sm:text-base',
       subtitle: 'text-gray-300 text-xs',
     },
     clearAllButton:
@@ -535,10 +535,10 @@ const THEME_STYLES: Record<TarotTheme, SpreadThemeStyles> = {
     },
     readingHighlight: {
       container:
-        'bg-gradient-to-r from-red-600/20 via-slate-500/30 to-rose-500/20 border border-red-500/50 rounded-2xl px-6 py-3 shadow-lg animate-pulse',
+        'bg-gradient-to-r from-red-600/20 via-slate-500/30 to-rose-500/20 border border-red-500/50 rounded-lg px-2 py-1 sm:rounded-xl sm:px-4 sm:py-2 shadow-lg animate-pulse',
       iconBg: 'bg-red-400/20',
       iconText: 'text-red-300',
-      title: 'text-red-200 font-bold text-lg',
+      title: 'text-red-200 font-bold text-xs sm:text-base',
       subtitle: 'text-gray-300 text-xs',
     },
     clearAllButton:
@@ -1491,12 +1491,12 @@ export function createTarotReadingComponent({
           ) && (
             <div className='flex justify-center mb-4'>
               <div className={themeStyles.readingHighlight.container}>
-                <div className='flex items-center space-x-3'>
+                <div className='flex items-center space-x-1 sm:space-x-2'>
                   <div
-                    className={`w-6 h-6 ${themeStyles.readingHighlight.iconBg} rounded-full flex items-center justify-center`}
+                    className={`w-4 h-4 sm:w-5 sm:h-5 ${themeStyles.readingHighlight.iconBg} rounded-full flex items-center justify-center`}
                   >
                     <span
-                      className={`${themeStyles.readingHighlight.iconText} text-sm`}
+                      className={`${themeStyles.readingHighlight.iconText} text-[10px] sm:text-xs`}
                     >
                       {interpretationEmoji}
                     </span>

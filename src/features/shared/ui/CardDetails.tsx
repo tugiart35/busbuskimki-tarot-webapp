@@ -368,7 +368,7 @@ const CardDetails: React.FC<CardDetailsProps> = ({
                 <div className='w-3 h-3 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full mt-1 flex-shrink-0 shadow-lg'></div>
                 <div className='flex-1'>
                   <h4 className='text-blue-200 font-light text-sm mb-3 tracking-wide uppercase'>
-                    Pozisyon Bağlamı
+                    {t('messages.common.positionContext')}
                   </h4>
                   <p className='text-gray-200 text-base leading-relaxed font-light'>
                     {positionContext}

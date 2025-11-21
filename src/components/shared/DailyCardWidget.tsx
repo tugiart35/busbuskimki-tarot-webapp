@@ -77,14 +77,28 @@ export function DailyCardWidget({ locale }: DailyCardWidgetProps) {
       const today = new Date().toISOString().split('T')[0]!;
 
       // Supabase'den bugünün kartını kontrol et
+      // .maybeSingle() kullan - sonuç yoksa null döner, hata değil (406 hatası önlenir)
       const { data, error } = await supabase
         .from('daily_cards')
         .select('*')
         .eq('user_id', user.id)
         .eq('date', today)
-        .single();
+        .maybeSingle();
 
-      if (data && !error) {
+      // PGRST116 (no rows returned) normal bir durum, hata değil
+      // Sadece gerçek hataları logla
+      if (error && error.code !== 'PGRST116') {
+        // Production'da sadece beklenmeyen hataları logla
+        if (process.env.NODE_ENV === 'development') {
+          console.error('Error checking daily card:', error);
+        }
+        // Production'da silent fail - kullanıcı deneyimini bozmaz
+        setIsLoading(false);
+        return;
+      }
+
+      // Data varsa set et
+      if (data) {
         setDailyCard({
           id: data.card_id,
           name: data.card_name,
@@ -96,7 +110,10 @@ export function DailyCardWidget({ locale }: DailyCardWidgetProps) {
         setHasDrawnToday(true);
       }
     } catch (error) {
-      console.error('Error checking daily card:', error);
+      // Unexpected errors - sadece development'ta logla
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Unexpected error checking daily card:', error);
+      }
     } finally {
       setIsLoading(false);
     }
@@ -167,13 +184,35 @@ export function DailyCardWidget({ locale }: DailyCardWidgetProps) {
       );
 
       if (error) {
-        console.error('Error saving daily card:', error);
+        // Production'da sadece development'ta logla
+        if (process.env.NODE_ENV === 'development') {
+          console.error('Error saving daily card:', error);
+        }
+        // Kullanıcıya hata mesajı göster (production'da da)
+        alert(
+          locale === 'tr'
+            ? 'Kart kaydedilirken bir hata oluştu. Lütfen tekrar deneyin.'
+            : locale === 'en'
+              ? 'An error occurred while saving the card. Please try again.'
+              : 'Došlo je do greške pri čuvanju karte. Molimo pokušajte ponovo.'
+        );
       } else {
         setDailyCard(card);
         setHasDrawnToday(true);
       }
     } catch (error) {
-      console.error('Error drawing card:', error);
+      // Unexpected errors - sadece development'ta logla
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Error drawing card:', error);
+      }
+      // Kullanıcıya hata mesajı göster
+      alert(
+        locale === 'tr'
+          ? 'Kart çekilirken bir hata oluştu. Lütfen tekrar deneyin.'
+          : locale === 'en'
+            ? 'An error occurred while drawing the card. Please try again.'
+            : 'Došlo je do greške pri izvlačenju karte. Molimo pokušajte ponovo.'
+      );
     } finally {
       setIsDrawing(false);
     }

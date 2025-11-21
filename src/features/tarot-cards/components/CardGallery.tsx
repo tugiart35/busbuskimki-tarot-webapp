@@ -121,12 +121,12 @@ export function CardGallery({ card, locale }: CardGalleryProps) {
                 className='group relative bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer'
                 onClick={() => handleImageClick(index)}
               >
-                <figure className='relative aspect-[4/5] overflow-hidden'>
+                <figure className='relative aspect-[9/16] overflow-hidden bg-gray-100'>
                   <Image
                     src={image.url}
                     alt={image.alt}
                     fill
-                    className='object-cover group-hover:scale-110 transition-transform duration-300'
+                    className='object-contain group-hover:scale-105 transition-transform duration-300'
                     loading='lazy'
                   />
 
@@ -247,7 +247,7 @@ export function CardGallery({ card, locale }: CardGalleryProps) {
             {card.additionalImages &&
               card.additionalImages[selectedImageIndex] && (
                 <>
-                  <div className='relative aspect-[4/5] w-full'>
+                  <div className='relative aspect-[9/16] w-full max-w-md mx-auto'>
                     <Image
                       src={card.additionalImages[selectedImageIndex].url}
                       alt={card.additionalImages[selectedImageIndex].alt}

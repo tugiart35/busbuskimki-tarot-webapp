@@ -156,7 +156,7 @@ export async function POST(request: NextRequest) {
       (process.env.NODE_ENV === 'development'
         ? 'http://localhost:3003'
         : process.env.NEXT_PUBLIC_SITE_URL || 'https://busbuskimki.com');
-    const locale = 'tr'; // Varsayılan locale, ileride dinamik yapılabilir
+    const locale = 'en'; // İngilizce locale - linkler İngilizce açılacak
     const readingLink = `${baseUrl}/${locale}/tarotokumasi/${spreadKey}?token=${token}`;
 
     // Event log kaydet

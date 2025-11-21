@@ -106,7 +106,7 @@ export async function POST(request: NextRequest) {
       process.env.NEXT_PUBLIC_READING_LINK_BASE_URL ||
       process.env.NEXT_PUBLIC_SITE_URL ||
       'https://www.busbuskimki.com';
-    const locale = 'tr';
+    const locale = 'en'; // İngilizce locale - linkler İngilizce açılacak
     const link = `${baseUrl}/${locale}/aklindaki-kisi?token=${customerLink.token}`;
 
     // E-posta şablonu oluştur

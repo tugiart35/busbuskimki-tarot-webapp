@@ -40,6 +40,7 @@ import Image from 'next/image';
 import type { TarotCard } from '@/types/tarot';
 import type { Theme, PositionInfo, CardMeaningData } from '@/types/ui';
 import { useTranslations } from '@/hooks/useTranslations';
+import { getCardName } from '@/lib/tarot/card-names';
 // useAuth kaldırıldı - login sistemi kaldırıldı
 // import { saveTarotReading } from '@/lib/services/reading-service'; // Service kaldırıldı
 
@@ -298,13 +299,59 @@ const BaseInterpretation = forwardRef<HTMLDivElement, BaseInterpretationProps>(
     },
     ref
   ) => {
-    const { t } = useTranslations();
+    const { t, locale } = useTranslations();
     const colors = getThemeColors(theme);
     // useAuth kaldırıldı - login sistemi kaldırıldı
 
     // Varsayılan değerleri i18n'den al
     const defaultTitle = title || t('interpretation.title');
     const defaultBadgeText = badgeText || t('interpretation.badge');
+
+    // Kart isminden key oluşturma fonksiyonu
+    const getCardKeyFromName = (cardName: string): string => {
+      // Major Arcana mapping
+      const majorArcanaNames: Record<string, string> = {
+        'The Fool': 'the-fool',
+        'The Magician': 'the-magician',
+        'The High Priestess': 'the-high-priestess',
+        'The Empress': 'the-empress',
+        'The Emperor': 'the-emperor',
+        'The Hierophant': 'the-hierophant',
+        'The Lovers': 'the-lovers',
+        'The Chariot': 'the-chariot',
+        Strength: 'strength',
+        'The Hermit': 'the-hermit',
+        'Wheel of Fortune': 'wheeloffortune',
+        Justice: 'justice',
+        'The Hanged Man': 'the-hanged-man',
+        Death: 'death',
+        Temperance: 'temperance',
+        'The Devil': 'the-devil',
+        'The Tower': 'the-tower',
+        'The Star': 'the-star',
+        'The Moon': 'the-moon',
+        'The Sun': 'the-sun',
+        Judgement: 'Judgement',
+        'The World': 'the-world',
+      };
+
+      if (majorArcanaNames[cardName]) {
+        return majorArcanaNames[cardName];
+      }
+
+      // Minor Arcana - "Ace of Cups" formatından key oluştur
+      const minorArcanaMatch = cardName.match(
+        /^(Ace|Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten|Page|Knight|Queen|King) of (Cups|Wands|Swords|Pentacles)$/i
+      );
+      if (minorArcanaMatch) {
+        const number = minorArcanaMatch[1]!.toLowerCase();
+        const suit = minorArcanaMatch[2]!.toLowerCase();
+        return `${number}-of-${suit}`;
+      }
+
+      // Fallback: lowercase ve boşlukları tire ile değiştir
+      return cardName.toLowerCase().replace(/\s+/g, '-');
+    };
 
     // Varsayılan fonksiyonlar kaldırıldı - kullanılmıyor
 
@@ -341,6 +388,11 @@ const BaseInterpretation = forwardRef<HTMLDivElement, BaseInterpretationProps>(
             if (!card || !positionsInfo[idx]) {
               return null;
             }
+
+            // i18n'den lokalize kart ismini al
+            const cardKey = getCardKeyFromName(card.name);
+            const localizedCardName =
+              getCardName(cardKey, locale as 'tr' | 'en' | 'sr') || card.nameTr;
 
             const positionInfo = positionsInfo[idx];
             const cardMeaning: CardMeaningData | null = getCardMeaning
@@ -454,7 +506,7 @@ const BaseInterpretation = forwardRef<HTMLDivElement, BaseInterpretationProps>(
                 <div className='flex-shrink-0'>
                   <Image
                     src={card.image || '/cards/CardBack.webp'}
-                    alt={card.nameTr}
+                    alt={localizedCardName}
                     width={88}
                     height={160}
                     className={`
@@ -471,7 +523,8 @@ const BaseInterpretation = forwardRef<HTMLDivElement, BaseInterpretationProps>(
                     <span
                       className={`text-xs ${colors.tagBg} ${colors.tagText} px-2 py-1 rounded font-bold`}
                     >
-                      {positionInfo?.title || `position ${idx + 1}`}
+                      {positionInfo?.title ||
+                        `${t('messages.common.position')} ${idx + 1}`}
                     </span>
                     <span className='text-xs text-gray-400'>
                       ({orientationText})
@@ -482,7 +535,7 @@ const BaseInterpretation = forwardRef<HTMLDivElement, BaseInterpretationProps>(
                   <div
                     className={`text-lg font-semibold ${colors.cardText} mb-1`}
                   >
-                    {card.nameTr}
+                    {localizedCardName}
                   </div>
 
                   {/* Anlam Başlığı */}

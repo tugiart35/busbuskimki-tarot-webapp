@@ -520,7 +520,7 @@ export default function AklindakiKisiAdminPage() {
                         process.env.NEXT_PUBLIC_READING_LINK_BASE_URL ||
                         process.env.NEXT_PUBLIC_SITE_URL ||
                         'https://www.busbuskimki.com';
-                      const locale = 'tr';
+                      const locale = 'en'; // İngilizce locale - linkler İngilizce açılacak
                       const fullLink = `${baseUrl}/${locale}/aklindaki-kisi?token=${link.token}`;
 
                       return (
