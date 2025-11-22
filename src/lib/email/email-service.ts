@@ -170,6 +170,11 @@ class EmailService {
     const phoneNumber = personalInfo.phone || 'Belirtilmemiş';
     const whatsapp = personalInfo.whatsapp || false;
 
+    // Partner bilgilerini al (varsa)
+    const partnerInfo = readingData.questions?.partnerInfo || null;
+    const hasPartnerInfo =
+      partnerInfo && (partnerInfo.name || partnerInfo.birthDate);
+
     // Okuma tarihini formatla
     const readingDate = new Date(readingData.created_at).toLocaleDateString(
       'tr-TR',
@@ -466,11 +471,22 @@ class EmailService {
       })
       .join('');
 
-    // Kullanıcı sorularını al
-    const userQuestions = readingData.questions?.questions || [];
-    const questionsList = userQuestions
-      .map((q: any, index: number) => `${index + 1}. ${q}`)
-      .join('<br>');
+    // Kullanıcı sorularını al - userQuestions bir obje (concern, emotional, mainQuestion, understanding)
+    const userQuestions = readingData.questions?.userQuestions || {};
+    const questionsList = Object.entries(userQuestions)
+      .filter(([_, value]) => value && String(value).trim() !== '')
+      .map(([key, value], index) => {
+        // Key'i Türkçe'ye çevir
+        const questionLabels: Record<string, string> = {
+          concern: 'Endişe/Şüphe',
+          emotional: 'Duygusal Durum',
+          mainQuestion: 'Ana Soru',
+          understanding: 'Anlama/Anlayış',
+        };
+        const label = questionLabels[key] || key;
+        return `<strong>${index + 1}. ${label}:</strong> ${String(value)}`;
+      })
+      .join('<br><br>');
 
     return `
       <!DOCTYPE html>
@@ -619,6 +635,40 @@ class EmailService {
                 <span class="info-value">${getCommunicationPreference()}</span>
               </div>
             </div>
+            
+            ${
+              hasPartnerInfo
+                ? `
+            <div class="section user-info" style="border-left-color: #ec4899;">
+              <h3>💕 PARTNER BİLGİLERİ</h3>
+              ${
+                partnerInfo?.name
+                  ? `
+              <div class="info-row">
+                <span class="info-label">Partner İsmi:</span> 
+                <span class="info-value">${partnerInfo.name}</span>
+              </div>
+              `
+                  : ''
+              }
+              ${
+                partnerInfo?.birthDate || partnerInfo?.birthDateUnknown
+                  ? `
+              <div class="info-row">
+                <span class="info-label">Partner Doğum Tarihi:</span> 
+                <span class="info-value">${
+                  partnerInfo.birthDateUnknown
+                    ? 'Bilinmiyor'
+                    : partnerInfo.birthDate || 'Belirtilmemiş'
+                }</span>
+              </div>
+              `
+                  : ''
+              }
+            </div>
+            `
+                : ''
+            }
             
             <div class="section reading-info">
               <h3>🔮 OKUMA DETAYLARI</h3>

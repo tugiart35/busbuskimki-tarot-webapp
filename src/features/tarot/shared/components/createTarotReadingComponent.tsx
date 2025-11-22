@@ -1077,11 +1077,20 @@ export function createTarotReadingComponent({
         const reversed = !!isReversed[index];
 
         if (card) {
+          // getCardMeaning string veya obje döndürebilir
+          const meaning = getCardMeaning(card, positionInfo.id, reversed);
+          const meaningText =
+            typeof meaning === 'object' && meaning !== null
+              ? meaning.interpretation
+              : typeof meaning === 'string'
+                ? meaning
+                : '';
+
           interpretation += `**${positionInfo.id}. ${positionInfo.title}: ${card.nameTr}** (${
             reversed
               ? t(dataKeys.cardDirections.reversed)
               : t(dataKeys.cardDirections.upright)
-          })\n*${positionInfo.desc}*\n${getCardMeaning(card, positionInfo.id, reversed)}\n\n`;
+          })\n*${positionInfo.desc}*\n${meaningText}\n\n`;
         }
       });
 
