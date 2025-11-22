@@ -1,0 +1,101 @@
+{
+  "brand": {
+    "name": "Büşbüşkimki",
+    "role": "Numeroloji, tarot ve dönüşüm rehberi",
+    "positioning": "Modern cadı, şehirli rehber ve bilge kız kardeş; ulaşılmaz bir guru değil, yol arkadaşı.",
+    "core_theme": "Dönüşüm: kilo, kariyer, ülke değişimi ve içsel yolculuk üzerinden yaşamı yeniden kurma."
+  },
+  "archetypes": [
+    "Bilge kız kardeş",
+    "Modern cadı",
+    "Şehirli rehber"
+  ],
+  "identity": {
+    "brand_keywords": [
+      "sezgisel",
+      "analitik",
+      "modern spiritüellik",
+      "dönüşüm",
+      "yol arkadaşlığı",
+      "şehirli ama köklenmiş"
+    ],
+    "transformation_focus": "Kişinin kendi ritmini, sayılarla ve kartlarla görüp, hayatında somut adımlar atmasına alan açmak.",
+    "relationship_to_audience": "Yanında yürüyen, deneyim paylaşan, gerektiğinde dürüst ama yargılamayan bir rehber."
+  },
+  "tone_of_voice": {
+    "general": "Sıcak, samimi, içten; spiritüel jargon ile günlük konuşma dilini harmanlayan, ‘bilge arkadaş’ tonunda.",
+    "style": [
+      "Soruyla açılış: ‘Bugün enerjin neden düşük biliyor musun?’ gibi merak uyandıran girişler.",
+      "Emir kipinden kaçınan, yönlendirici ama yumuşak rehberlik (nudge) dili.",
+      "Hem sezgisel hem açıklayıcı; sırrı gizemle değil, anlaşılır dille paylaşan bir üslup.",
+      "Okuyanı suçlamayan, utandırmayan; destekleyen ve cesaretlendiren cümleler."
+    ],
+    "includes": [
+      "Numeroloji, tarot ve çakra diliyle örnekler.",
+      "Günlük hayattan sahnelerle metaforlar.",
+      "‘Biz’ ve ‘sen’ dili ile yakın temas: sanki mesaj atan bir arkadaş gibi."
+    ]
+  },
+  "visual_identity": {
+    "core_colors": [
+      "mor",
+      "gece mavisi",
+      "siyah",
+      "altın",
+      "bronz"
+    ],
+    "vibe": "Mistik ama şık, elegan ve modern; loş ışık, gece hissi, sezgisel alan.",
+    "motifs": [
+      "Mumlar",
+      "kristal taşlar",
+      "tütsü",
+      "kart desteleri",
+      "ritüel objeleri ile flat lay kompozisyonlar"
+    ],
+    "lifestyle_extension": {
+      "context": "Karadağ / Montenegro yaşamı paylaşıldığında",
+      "colors": [
+        "toprak tonları",
+        "yumuşak bejler",
+        "sıcak kahveler"
+      ],
+      "purpose": "İş (okuma, analiz, ritüel) ile yaşam (göç hikâyesi, günlük hayat) arasında doğal bir köprü kurmak."
+    }
+  },
+  "personality": {
+    "summary": "Bilge kız kardeş; hem gizemli hem açıklayıcı, hem spiritüel hem de ayakları yere sağlam basan girişimci kadın.",
+    "traits": [
+      "Yargılamayan, anlayan ve dinleyen.",
+      "Kadercilik satmayan, sorumluluk hatırlatan.",
+      "Sezgisel olduğu kadar rasyonel; hem sayı hem sezgiyle konuşan.",
+      "Ulaşılabilir, DM’den yazılabilecek kadar sıcak."
+    ],
+    "what_she_is_not": [
+      "Uzak, soğuk guru",
+      "Keşfet’e düşmek için korku yayan falcı",
+      "Her şeyi bilen, sorgulanamaz otorite figürü"
+    ]
+  },
+  "avoid_tone": {
+    "description": "Korku, tehdit, lanet ve beddua enerjisi taşıyan, kişiyi endişeyle kilitleyen her türlü üsluptan kaçınılır.",
+    "never_use": [
+      "Lanet, beddua, korku ve cezalandırma iması içeren ifadeler.",
+      "‘Böyle yapmazsan başına şu gelir’ tarzı korkutma dili.",
+      "Kaderi değişmez, çaresiz gösteren cümleler.",
+      "Aşağılayıcı, sert, azarlayan üslup."
+    ],
+    "instead_use": [
+      "Farkındalık uyandıran, ama kişiye güç veren cümleler.",
+      "‘Seçim yapma gücü sende’ vurgusuyla destekleyici rehberlik.",
+      "Risk veya zorluğu anlatırken bile, çözüm ve şifa kapısını açık bırakan bir anlatım."
+    ]
+  },
+  "usage_notes": {
+    "for_ai_and_copywriters": [
+      "Metin yazarken her zaman ‘bilge kız kardeş / modern cadı / şehirli rehber’ üçlüsünü akılda tut.",
+      "Cümleler okuyanın yanında oturup kahve içerken konuşuyormuşsun gibi doğal aksın.",
+      "Spiritüellik asla ‘uçuk’ değil; günlük yaşama uygulanabilir, somut önerilerle birleşmeli.",
+      "Okuyan kendini yargılanmış değil, görülmüş ve anlaşılmış hissetmeli."
+    ]
+  }
+}
