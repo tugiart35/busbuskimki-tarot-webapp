@@ -29,8 +29,8 @@ export default function AdSenseAd({
   layout,
   layoutKey,
 }: AdSenseAdProps) {
-  // AdSense deaktif kontrolü - tekrar aktif etmek için NEXT_PUBLIC_ADSENSE_ENABLED=true yapın
-  if (process.env.NEXT_PUBLIC_ADSENSE_ENABLED === 'false') {
+  // AdSense deaktif kontrolü - sadece açıkça true ise aktif
+  if (process.env.NEXT_PUBLIC_ADSENSE_ENABLED !== 'true') {
     return null;
   }
 

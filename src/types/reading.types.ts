@@ -85,7 +85,8 @@ export interface Reading {
     | 'situationAnalysis'
     | 'newLover'
     | 'problemSolving'
-    | 'marriage';
+    | 'marriage'
+    | 'single-card';
   status: 'pending' | 'completed' | 'failed';
   creditCost: number;
   summary: {
@@ -130,7 +131,8 @@ export interface OptimizedReading {
     | 'situationAnalysis'
     | 'newLover'
     | 'problemSolving'
-    | 'marriage';
+    | 'marriage'
+    | 'single-card';
   status: 'pending' | 'completed' | 'failed';
   creditCost: number;
   title: string;

@@ -973,7 +973,7 @@ export function createSingleCardConfig(
     theme: 'purple',
     icon: '🎴',
     readingType: 'SINGLE_CARD_SPREAD',
-    supabaseReadingType: 'general', // Veritabanında mevcut enum değeri (single-card enum'da yok, general kullanıyoruz)
+    supabaseReadingType: 'single-card', // Veritabanında mevcut enum değeri
     creditKeyPrefix: 'SINGLE_CARD',
     backgroundImage: '/new-lover.png',
     backgroundAlt: 'Single Card Tarot Reading background',

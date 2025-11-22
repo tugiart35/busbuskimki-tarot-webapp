@@ -27,8 +27,9 @@ const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
 
-  // Source maps for better debugging and Lighthouse analysis
-  productionBrowserSourceMaps: true,
+  // Source maps disabled in production to reduce bundle size
+  // Enable only when debugging production issues
+  productionBrowserSourceMaps: false,
 
   // Transpile problematic packages for Next.js 15
   transpilePackages: ['react-icons', '@supabase/supabase-js', '@supabase/ssr'],
@@ -74,15 +75,44 @@ const nextConfig = {
       maxEntrypointSize: 10000000, // 10MB
     };
 
-    // Optimize chunks for better loading
+    // Optimize chunks for better loading and smaller bundle sizes
     if (!isServer) {
       config.optimization = {
         ...config.optimization,
         splitChunks: {
           chunks: 'all',
+          minSize: 20000, // 20KB minimum chunk size
+          maxSize: 244000, // 244KB maximum chunk size (forces splitting)
+          maxInitialRequests: 25,
+          maxAsyncRequests: 30,
           cacheGroups: {
             default: false,
             vendors: false,
+            // Separate heavy libraries into their own chunks
+            framerMotion: {
+              test: /[\\/]node_modules[\\/]framer-motion[\\/]/,
+              name: 'npm.framer-motion',
+              priority: 20,
+              reuseExistingChunk: true,
+            },
+            recharts: {
+              test: /[\\/]node_modules[\\/]recharts[\\/]/,
+              name: 'npm.recharts',
+              priority: 20,
+              reuseExistingChunk: true,
+            },
+            fingerprintjs: {
+              test: /[\\/]node_modules[\\/]@fingerprintjs[\\/]/,
+              name: 'npm.fingerprintjs',
+              priority: 20,
+              reuseExistingChunk: true,
+            },
+            supabase: {
+              test: /[\\/]node_modules[\\/]@supabase[\\/]/,
+              name: 'npm.supabase',
+              priority: 15,
+              reuseExistingChunk: true,
+            },
             // Separate translation files per locale into their own chunks
             // Her dil (tr, en, sr) ayrı chunk olacak
             messages: {
@@ -99,7 +129,7 @@ const nextConfig = {
               priority: 10,
               reuseExistingChunk: true,
             },
-            // Common libraries
+            // Common libraries - split by package
             lib: {
               test: /[\\/]node_modules[\\/]/,
               name(module) {
@@ -113,9 +143,11 @@ const nextConfig = {
                 if (!match || !match[1]) return 'npm.common';
 
                 const packageName = match[1].replace('@', '');
+                // Limit chunk names to prevent too many small chunks
                 return `npm.${packageName}`;
               },
               priority: 5,
+              minChunks: 1,
               reuseExistingChunk: true,
             },
           },

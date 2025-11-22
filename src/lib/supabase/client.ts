@@ -202,7 +202,8 @@ export interface Database {
             | 'situationAnalysis'
             | 'newLover'
             | 'problemSolving'
-            | 'marriage';
+            | 'marriage'
+            | 'single-card';
           spread_name: string;
           title: string;
           interpretation: string;
@@ -229,10 +230,11 @@ export interface Database {
             | 'situationAnalysis'
             | 'newLover'
             | 'problemSolving'
-            | 'marriage';
-          spread_name: string;
-          title: string;
-          interpretation: string;
+            | 'marriage'
+            | 'single-card';
+          spread_name?: string;
+          title?: string;
+          interpretation?: string;
           cards?: any;
           questions?: any;
           cost_credits?: number;
@@ -256,7 +258,8 @@ export interface Database {
             | 'situationAnalysis'
             | 'newLover'
             | 'problemSolving'
-            | 'marriage';
+            | 'marriage'
+            | 'single-card';
           spread_name?: string;
           title?: string;
           interpretation?: string;

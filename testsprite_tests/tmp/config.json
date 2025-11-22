@@ -1,0 +1,19 @@
+{
+  "status": "commited",
+  "type": "backend",
+  "scope": "codebase",
+  "localEndpoint": "http://localhost:3000",
+  "backendAuthType": "API key",
+  "backendApiKey": "sbp_d20ce89d09f9d7346066e44eed8011b5a3a96fc4",
+  "backendApiValue": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF0bG9rZGtjZXJqcmJydHBobHJoIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1ODE0ODA5NywiZXhwIjoyMDczNzI0MDk3fQ.Z9GuxWdEpsAhnz405LM7aVBmZNyJbZOnOdi8A3cMKWI",
+  "executionArgs": {
+    "projectName": "TaraTarot",
+    "projectPath": "/Users/tugi/Desktop/TaraTarot",
+    "testIds": [],
+    "additionalInstruction": "Server çalışıyor. Backend test kodları kullanıcı tarafından manuel olarak düzeltildi. Testleri mevcut test kodlarıyla çalıştır.",
+    "envs": {
+      "API_KEY": "sk-user-cdnEiZgd88TItu6pF4tpvJ5SkcFYxsJ1QxGKAFZBMDn6WVPzLQWjcA_7tsDl6k_mdy2aoskrZhvk9MbYgd7mrMontNVVeQY-gjVuI1vAvi3kb1JAqGtmcvIwyWc3cFkhOMM"
+    }
+  },
+  "proxy": "http://283de1d6-64bb-4473-a5ee-d81587e2a82e:I8QJK0WOpj3wr7JiMyK0RRge2YYkpiWc@tun.testsprite.com:8080"
+}

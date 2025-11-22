@@ -1,0 +1,52 @@
+[
+  {
+    "id": "TC001",
+    "title": "Products API - Get product catalog",
+    "description": "Test the products API endpoint to retrieve the product catalog for tarot readings, numerology, and premium packages."
+  },
+  {
+    "id": "TC002",
+    "title": "Cards API - Get cards by locale",
+    "description": "Test the cards API endpoint to retrieve tarot cards filtered by locale (tr, en, sr) with optional filters for arcana type and suit."
+  },
+  {
+    "id": "TC003",
+    "title": "Cards API - Get single card by slug",
+    "description": "Test the cards API endpoint to retrieve a single tarot card by slug and locale, including validation of locale and slug parameters."
+  },
+  {
+    "id": "TC004",
+    "title": "Reading Sessions - Save reading with token",
+    "description": "Test the reading sessions save-reading endpoint to save a tarot reading using a token (for unauthenticated users), including validation of token, reading data, and session status."
+  },
+  {
+    "id": "TC005",
+    "title": "Reading Sessions - Complete session",
+    "description": "Test the reading sessions complete endpoint to mark a session as completed, including token validation and reading_id association."
+  },
+  {
+    "id": "TC006",
+    "title": "Admin - Create reading session",
+    "description": "Test the admin reading sessions endpoint to create a new reading session for a customer, including email validation, spread key, and reading type validation."
+  },
+  {
+    "id": "TC007",
+    "title": "Admin - Rate limit check",
+    "description": "Test the admin login rate limit endpoint to verify rate limiting functionality for admin login attempts, including IP-based rate limiting."
+  },
+  {
+    "id": "TC008",
+    "title": "Payment Webhook - Shopier payment processing",
+    "description": "Test the Shopier payment webhook endpoint to process payment confirmations, including signature validation, duplicate payment detection, credit balance updates, and transaction logging."
+  },
+  {
+    "id": "TC009",
+    "title": "Engagement - Card reactions",
+    "description": "Test the card reactions API endpoint to add, update, and remove reactions on tarot cards, including fingerprint-based user tracking and reaction counting."
+  },
+  {
+    "id": "TC010",
+    "title": "Auth Check - Session validation",
+    "description": "Test the auth-check endpoint to validate user sessions and retrieve user role information, including both POST and GET methods."
+  }
+]

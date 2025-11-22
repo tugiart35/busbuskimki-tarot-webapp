@@ -1,0 +1,505 @@
+[
+  {
+    "id": "TC001",
+    "title": "User Registration with Email and Verification",
+    "description": "Verify that a user can successfully register using email and password, receive verification email, and verify the account.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to registration page"
+      },
+      {
+        "type": "action",
+        "description": "Enter valid email and secure password"
+      },
+      {
+        "type": "action",
+        "description": "Submit registration form"
+      },
+      {
+        "type": "assertion",
+        "description": "Check that verification email is sent"
+      },
+      {
+        "type": "action",
+        "description": "Open verification email and click verification link"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify user account status is updated to verified"
+      },
+      {
+        "type": "assertion",
+        "description": "User can log in with the registered credentials"
+      }
+    ]
+  },
+  {
+    "id": "TC002",
+    "title": "User Login with Email and Password",
+    "description": "Ensure users can log in with correct email and password credentials.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to login page"
+      },
+      {
+        "type": "action",
+        "description": "Input valid registered email and correct password"
+      },
+      {
+        "type": "action",
+        "description": "Click login button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify user is redirected to dashboard"
+      }
+    ]
+  },
+  {
+    "id": "TC003",
+    "title": "User Login with Google OAuth",
+    "description": "Verify that users can authenticate using Google OAuth and access the dashboard.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to login page"
+      },
+      {
+        "type": "action",
+        "description": "Click on 'Login with Google' button"
+      },
+      {
+        "type": "action",
+        "description": "Complete Google OAuth authentication flow"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify user is redirected to dashboard and authenticated"
+      }
+    ]
+  },
+  {
+    "id": "TC004",
+    "title": "Login Failure with Incorrect Credentials",
+    "description": "Check that login fails when incorrect email or password is entered.",
+    "category": "error handling",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to login page"
+      },
+      {
+        "type": "action",
+        "description": "Input invalid email or incorrect password"
+      },
+      {
+        "type": "action",
+        "description": "Click login button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify error message is shown and user remains on login page"
+      }
+    ]
+  },
+  {
+    "id": "TC005",
+    "title": "Perform Love Spread Tarot Reading with Simple Type",
+    "description": "Verify that user can successfully perform a Love Spread tarot reading with Simple reading type, correct credit deduction and results view.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Login to user account"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to Love Spread tarot reading page"
+      },
+      {
+        "type": "action",
+        "description": "Select Simple reading type (1 credit required)"
+      },
+      {
+        "type": "action",
+        "description": "Select required cards with orientations"
+      },
+      {
+        "type": "action",
+        "description": "Submit reading request"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify reading result is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify 1 credit is deducted from user credit balance"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify reading is saved under recent activity"
+      }
+    ]
+  },
+  {
+    "id": "TC006",
+    "title": "Perform Career Spread Tarot Reading with Detailed Type",
+    "description": "Check the workflow for performing a Career Spread tarot reading with Detailed reading type, verifying correct credit deduction and form handling.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Login to user account"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to Career Spread tarot reading page"
+      },
+      {
+        "type": "action",
+        "description": "Select Detailed reading type (3 credits required)"
+      },
+      {
+        "type": "action",
+        "description": "Fill out any additional required form data"
+      },
+      {
+        "type": "action",
+        "description": "Select required cards with orientations"
+      },
+      {
+        "type": "action",
+        "description": "Submit reading request"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify reading results are shown with detailed interpretation"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify 3 credits are deducted from user credit balance"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify reading is saved and visible in recent activity"
+      }
+    ]
+  },
+  {
+    "id": "TC007",
+    "title": "Perform Single Card Tarot Reading with Written Type and Credit Check",
+    "description": "Ensure Single Card reading with Written type (5 credits) correctly enforces credit availability and handles insufficient credits scenario.",
+    "category": "error handling",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Login to user account with fewer than 5 credits"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to Single Card tarot reading page"
+      },
+      {
+        "type": "action",
+        "description": "Select Written reading type (5 credits required)"
+      },
+      {
+        "type": "action",
+        "description": "Attempt to submit reading request"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify system prevents reading due to insufficient credits and shows relevant error"
+      },
+      {
+        "type": "action",
+        "description": "Add or purchase credits to reach 5 or more"
+      },
+      {
+        "type": "action",
+        "description": "Retry Single Card Written reading"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify reading completes successfully and 5 credits are deducted"
+      }
+    ]
+  },
+  {
+    "id": "TC008",
+    "title": "Credit Purchase Flow and Payment Confirmation via Shopier",
+    "description": "Validate the user credit purchase flow including Shopier payment gateway redirection, payment completion, webhook confirmation, and credit balance update.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Login to user account"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to credit packages section on dashboard"
+      },
+      {
+        "type": "action",
+        "description": "Select a credit package and initiate purchase"
+      },
+      {
+        "type": "action",
+        "description": "Redirect to Shopier payment gateway and complete payment successfully"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify webhook is received and payment confirmation is processed by the system"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify user credit balance is updated with purchased credits"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify user is redirected back to success page on platform"
+      }
+    ]
+  },
+  {
+    "id": "TC009",
+    "title": "Numerology Input and Interpretation Results",
+    "description": "Check numerology calculation feature with user inputs and verify correct interpretation results are displayed.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to numerology feature page"
+      },
+      {
+        "type": "action",
+        "description": "Input valid user data for numerology calculation"
+      },
+      {
+        "type": "action",
+        "description": "Submit data for processing"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify numerology calculation results and interpretations appear correctly"
+      }
+    ]
+  },
+  {
+    "id": "TC010",
+    "title": "Tarot Card Gallery and SEO Optimized Pages in Multiple Languages",
+    "description": "Ensure all 78 tarot card pages load correctly with detailed meanings, proper SEO tags, and support for Turkish, English, and Serbian locales.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate through tarot card gallery"
+      },
+      {
+        "type": "action",
+        "description": "Select different tarot cards and check content"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify card details and meanings are displayed correctly"
+      },
+      {
+        "type": "assertion",
+        "description": "Check that SEO tags (title, description) exist and are correct"
+      },
+      {
+        "type": "action",
+        "description": "Switch language locale between Turkish, English, and Serbian"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify tarot card content and UI text update appropriately with locale"
+      }
+    ]
+  },
+  {
+    "id": "TC011",
+    "title": "Dashboard Data Display Accuracy",
+    "description": "Validate user dashboard elements such as profile info, credit balance, recent readings, and statistics display correct and updated data.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Login to user account"
+      },
+      {
+        "type": "action",
+        "description": "Go to dashboard page"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify profile information matches user data"
+      },
+      {
+        "type": "assertion",
+        "description": "Check credit balance is accurate and reflects recent purchases and deductions"
+      },
+      {
+        "type": "assertion",
+        "description": "Ensure recent tarot reading activities are listed correctly"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify statistics cards display accurate user activity insights"
+      }
+    ]
+  },
+  {
+    "id": "TC012",
+    "title": "Admin Panel Access Control and Security Checks",
+    "description": "Ensure admin panel is accessible only to authorized admins, IP whitelist enforcement, rate limiting, and role-based access works correctly.",
+    "category": "security",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Attempt admin panel access from an unauthorized IP address"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify access is denied"
+      },
+      {
+        "type": "action",
+        "description": "Access admin panel from whitelisted IP with authorized admin credentials"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify admin panel loads successfully"
+      },
+      {
+        "type": "action",
+        "description": "Trigger multiple rapid requests to admin endpoints"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify rate limiting blocks excessive requests"
+      },
+      {
+        "type": "action",
+        "description": "Attempt admin panel access with non-admin user credentials"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify access is forbidden"
+      }
+    ]
+  },
+  {
+    "id": "TC013",
+    "title": "Locale-Based Routing and Multi-language UI Verification",
+    "description": "Check that selecting different language options changes UI text and routes correctly to locale-prefixed paths.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to homepage"
+      },
+      {
+        "type": "action",
+        "description": "Switch interface language to Turkish"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify UI text updates to Turkish and URL is prefixed with /tr"
+      },
+      {
+        "type": "action",
+        "description": "Switch interface language to English"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify UI text updates to English and URL updates with /en prefix"
+      },
+      {
+        "type": "action",
+        "description": "Switch interface language to Serbian"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify UI text updates to Serbian and URL updates with /sr prefix"
+      }
+    ]
+  },
+  {
+    "id": "TC014",
+    "title": "Atomic Credit Deduction Verification",
+    "description": "Validate that credit deduction per reading type is atomic and consistent, preventing negative balances even under concurrent reading requests.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Login with a user having sufficient credits"
+      },
+      {
+        "type": "action",
+        "description": "Simultaneously submit multiple tarot reading requests requiring credit deduction"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify that total credits deducted equal sum of required credits without allowing negative balance"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify all readings are either successfully saved or failed gracefully without partial credit deduction"
+      }
+    ]
+  },
+  {
+    "id": "TC015",
+    "title": "Responsive UI Layout Across Devices",
+    "description": "Check that the user interface displays correctly and is fully functional on mobile, tablet, and desktop screen sizes.",
+    "category": "ui",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Access the platform on a mobile device viewport size"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify UI elements are properly arranged, readable, and interactive"
+      },
+      {
+        "type": "action",
+        "description": "Access the platform on a tablet device viewport size"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify UI adapts to tablet layout correctly without overflow or clipping"
+      },
+      {
+        "type": "action",
+        "description": "Access the platform on a desktop viewport size"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify full feature visibility and responsiveness at desktop resolution"
+      }
+    ]
+  }
+]

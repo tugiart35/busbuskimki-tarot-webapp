@@ -62,7 +62,8 @@ export interface Reading {
     | 'situationAnalysis'
     | 'newLover'
     | 'problemSolving'
-    | 'marriage';
+    | 'marriage'
+    | 'single-card';
   summary?: string; // Okuma özeti (opsiyonel)
 }
 

@@ -98,8 +98,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           content={process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION || ''}
         />
 
-        {/* Google AdSense - DEAKTİF EDİLDİ (tekrar aktif etmek için NEXT_PUBLIC_ADSENSE_ENABLED=true yapın veya değişkeni kaldırın) */}
-        {process.env.NEXT_PUBLIC_ADSENSE_ENABLED !== 'false' && (
+        {/* Google AdSense - DEAKTİF EDİLDİ (tekrar aktif etmek için NEXT_PUBLIC_ADSENSE_ENABLED=true yapın) */}
+        {process.env.NEXT_PUBLIC_ADSENSE_ENABLED === 'true' && (
           <>
             <script
               async

@@ -282,10 +282,12 @@ export class AdSenseLoadMonitor {
 
 /**
  * AdSense için güvenli render kontrolü
+ * Default: false (reklamlar kapalı)
+ * Aktif etmek için NEXT_PUBLIC_ADSENSE_ENABLED=true yapın
  */
 export function canRenderAd(): boolean {
-  // AdSense deaktif kontrolü - tekrar aktif etmek için NEXT_PUBLIC_ADSENSE_ENABLED=true yapın
-  if (process.env.NEXT_PUBLIC_ADSENSE_ENABLED === 'false') {
+  // AdSense deaktif kontrolü - sadece açıkça true ise aktif
+  if (process.env.NEXT_PUBLIC_ADSENSE_ENABLED !== 'true') {
     return false;
   }
 
