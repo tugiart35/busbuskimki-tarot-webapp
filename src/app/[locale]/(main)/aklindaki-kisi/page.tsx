@@ -11,7 +11,7 @@ import {
   ValidateTokenResponse,
   DrawCardResponse,
 } from '@/types/aklindaki-kisi.types';
-import { Mail, ArrowRight, Clock, X } from 'lucide-react';
+import { Mail, ArrowRight, Clock, X, Info } from 'lucide-react';
 import Image from 'next/image';
 import { useTranslations } from '@/hooks/useTranslations';
 
@@ -31,6 +31,7 @@ export default function AklindakiKisiPage() {
   const [error, setError] = useState<string | null>(null);
   const [remainingCards, setRemainingCards] = useState<number | null>(null);
   const [drawingCard, setDrawingCard] = useState(false);
+  const [ipLimitReached, setIpLimitReached] = useState(false);
   const [resetCountdown, setResetCountdown] = useState<number | null>(null); // Toplam kalan süre (milisaniye) - 31 gün sonra sıfırlanır
   const [fullscreenCard, setFullscreenCard] = useState<number | null>(null); // Tam ekran gösterilecek kart numarası
 
@@ -132,6 +133,7 @@ export default function AklindakiKisiPage() {
         // IP limiti kontrolü
         if (data.ipLimitReached) {
           setError(t('aklindakiKisi.page.errors.deviceLimit'));
+          setIpLimitReached(true);
           setTokenValid(false);
           setLoading(false);
           return;
@@ -146,6 +148,7 @@ export default function AklindakiKisiPage() {
 
         setTokenValid(true);
         setRequiresEmail(false);
+        setIpLimitReached(false);
 
         // remainingCards bilgisini set et (eğer varsa)
         if (data.remainingCards !== undefined) {
@@ -221,6 +224,7 @@ export default function AklindakiKisiPage() {
       // IP limiti kontrolü
       if (data.ipLimitReached) {
         setEmailError(t('aklindakiKisi.page.errors.deviceLimit'));
+        setIpLimitReached(true);
         setValidatingEmail(false);
         return;
       }
@@ -231,6 +235,11 @@ export default function AklindakiKisiPage() {
         );
         setValidatingEmail(false);
         return;
+      }
+
+      // E-posta doğru, IP limiti kontrolü yoksa sıfırla
+      if (!data.ipLimitReached) {
+        setIpLimitReached(false);
       }
 
       // E-posta doğru, URL'yi güncelle ve sayfayı yenile
@@ -424,7 +433,14 @@ export default function AklindakiKisiPage() {
                 />
               </div>
               {emailError && (
-                <p className='mt-2 text-sm text-red-600'>{emailError}</p>
+                <div className='mt-2'>
+                  <p className='text-sm text-red-600'>{emailError}</p>
+                  {ipLimitReached && (
+                    <p className='text-xs mt-1 text-red-700'>
+                      {t('aklindakiKisi.page.errors.deviceLimitHint')}
+                    </p>
+                  )}
+                </div>
               )}
             </div>
 
@@ -516,6 +532,26 @@ export default function AklindakiKisiPage() {
         </div>
       </div>
 
+      {/* Bilgilendirme Mesajı - Günde 3 kart */}
+      <div className='w-full max-w-7xl px-6 mb-3'>
+        <div className='bg-gradient-to-r from-[#C9B26D]/10 via-[#D9CBA1]/10 to-[#C9B26D]/10 border border-[#D9CBA1]/30 rounded-lg px-4 py-2.5 sm:py-3 flex items-center gap-2 sm:gap-3 shadow-sm'>
+          <div className='flex-shrink-0'>
+            <div className='bg-gradient-to-br from-[#C9B26D]/20 to-[#B8A056]/20 rounded-full p-1.5 sm:p-2'>
+              <Info className='h-3.5 w-3.5 sm:h-4 sm:w-4 text-[#C9B26D]' />
+            </div>
+          </div>
+          <p className='text-xs sm:text-sm text-[#ffffff] leading-relaxed flex-1'>
+            <span className='font-medium text-[#4cb1a2]'>
+              {t('aklindakiKisi.page.info.dailyLimit.title', 'Günde 3 kart')}
+            </span>{' '}
+            {t(
+              'aklindakiKisi.page.info.dailyLimit.message',
+              'çekebilirsiniz. Her gün yeni bir şans sizi bekliyor ✨'
+            )}
+          </p>
+        </div>
+      </div>
+
       {/* Sıfırlanma Countdown - Küçük detay olarak göster */}
       {resetCountdown !== null && resetCountdown > 0 && (
         <div className='w-full max-w-7xl px-6 mb-4'>
@@ -535,7 +571,12 @@ export default function AklindakiKisiPage() {
       {error && (
         <div className='mb-6 px-6 max-w-2xl w-full'>
           <div className='bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg'>
-            {error}
+            <p className='font-medium mb-1'>{error}</p>
+            {ipLimitReached && (
+              <p className='text-sm mt-2 text-red-700'>
+                {t('aklindakiKisi.page.errors.deviceLimitHint')}
+              </p>
+            )}
           </div>
         </div>
       )}
@@ -626,10 +667,10 @@ export default function AklindakiKisiPage() {
             {/* Kapatma butonu */}
             <button
               onClick={() => setFullscreenCard(null)}
-              className='absolute top-4 right-4 z-10 bg-white/20 hover:bg-white/30 rounded-full p-2 transition-colors'
+              className='absolute top-3 right-3 sm:top-4 sm:right-4 z-50 flex items-center justify-center h-10 w-10 sm:h-11 sm:w-11 rounded-full bg-slate-900/85 border border-white/40 ring-2 ring-[#f5e9d7] shadow-[0_10px_28px_rgba(0,0,0,0.55)] backdrop-blur-md transition-all hover:bg-slate-900 active:scale-95'
               aria-label={t('aklindakiKisi.page.fullscreen.closeAria')}
             >
-              <X className='h-6 w-6 text-white' />
+              <X className='h-5 w-5 sm:h-6 sm:w-6 text-[#f5e9d7]' />
             </button>
 
             {/* Kart görseli - Desktop'ta daha büyük */}

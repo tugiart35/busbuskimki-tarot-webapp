@@ -386,3 +386,38 @@ export async function performSecurityCheck(request: Request): Promise<{
 
   return { passed: true };
 }
+
+/**
+ * Shopier OSB signature doğrulama
+ * Format: HMAC-SHA256(res + username, key)
+ * 
+ * @param res - Base64 encoded JSON string from Shopier OSB
+ * @param hash - HMAC-SHA256 signature from Shopier OSB
+ * @param username - OSB username from environment
+ * @param key - OSB key from environment
+ * @returns true if signature is valid, false otherwise
+ */
+export function verifyShopierOSBSignature(
+  res: string,
+  hash: string,
+  username: string,
+  key: string
+): boolean {
+  try {
+    // Shopier OSB signature format: HMAC-SHA256(res + username, key)
+    const message = res + username;
+    const expectedHash = crypto
+      .createHmac('sha256', key)
+      .update(message)
+      .digest('hex');
+
+    // Timing-safe comparison to prevent timing attacks
+    return crypto.timingSafeEqual(
+      Buffer.from(hash, 'hex'),
+      Buffer.from(expectedHash, 'hex')
+    );
+  } catch (error) {
+    console.error('OSB signature verification error:', error);
+    return false;
+  }
+}

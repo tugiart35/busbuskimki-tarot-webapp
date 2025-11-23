@@ -44,6 +44,7 @@ import { TarotCardDrawing } from '@/components/TarotCardDrawing';
 import { TrendingCardsWidget } from '@/components/shared/ClientWidgets';
 import { motion } from 'framer-motion';
 import { Sparkles, TrendingUp, Brain, Star } from 'lucide-react';
+import { WelcomeBonusBanner } from '@/components/homepage/WelcomeBonusBanner';
 
 interface HomePageClientProps {
   locale: string;
@@ -95,8 +96,13 @@ export function HomePageClient({
       </div>
 
       <main>
+        {/* Welcome Bonus Banner - Yeni üyelere 15 kredi hediye */}
+        <section className='relative pt-8 pb-2 sm:pt-12 sm:pb-4'>
+          <WelcomeBonusBanner locale={locale} />
+        </section>
+
         {/* Hero Section - Figma design */}
-        <section className='relative px-4 sm:px-6 lg:px-8 pt-8 pb-2 sm:pt-12 sm:pb-4'>
+        <section className='relative px-4 sm:px-6 lg:px-8 pt-4 pb-2 sm:pt-8 sm:pb-4'>
           <div className='max-w-4xl mx-auto text-center'>
             {/* Decorative elements */}
             <div

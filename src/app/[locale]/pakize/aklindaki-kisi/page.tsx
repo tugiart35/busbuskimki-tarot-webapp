@@ -14,6 +14,7 @@ import {
   XCircle,
   RefreshCw,
   ExternalLink,
+  ShoppingCart,
 } from 'lucide-react';
 import { useToast } from '@/hooks/useToast';
 import Toast from '@/features/shared/ui/Toast';
@@ -27,7 +28,9 @@ import {
 
 export default function AklindakiKisiAdminPage() {
   const { toast, showToast, hideToast } = useToast();
-  const [activeTab, setActiveTab] = useState<'create' | 'list'>('create');
+  const [activeTab, setActiveTab] = useState<'create' | 'list' | 'shopier'>(
+    'create'
+  );
 
   // Link oluşturma state
   const [customerEmail, setCustomerEmail] = useState('');
@@ -41,6 +44,11 @@ export default function AklindakiKisiAdminPage() {
   const [links, setLinks] = useState<LinkWithActivity[]>([]);
   const [linksLoading, setLinksLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+
+  // Shopier linkleri state
+  const [shopierLinks, setShopierLinks] = useState<LinkWithActivity[]>([]);
+  const [shopierLinksLoading, setShopierLinksLoading] = useState(false);
+  const [shopierSearchTerm, setShopierSearchTerm] = useState('');
 
   // Link listesini yükle
   const fetchLinks = useCallback(async () => {
@@ -63,12 +71,35 @@ export default function AklindakiKisiAdminPage() {
     }
   }, [showToast]);
 
+  // Shopier linklerini yükle
+  const fetchShopierLinks = useCallback(async () => {
+    setShopierLinksLoading(true);
+    try {
+      const response = await fetch('/api/admin/customer-links/shopier');
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        showToast(data.error || 'Shopier linkleri yüklenemedi', 'error');
+        setShopierLinksLoading(false);
+        return;
+      }
+
+      setShopierLinks(data.links || []);
+    } catch (error) {
+      showToast('Shopier linkleri yüklenirken bir hata oluştu', 'error');
+    } finally {
+      setShopierLinksLoading(false);
+    }
+  }, [showToast]);
+
   // Tab değiştiğinde linkleri yükle
   useEffect(() => {
     if (activeTab === 'list') {
       fetchLinks();
+    } else if (activeTab === 'shopier') {
+      fetchShopierLinks();
     }
-  }, [activeTab, fetchLinks]);
+  }, [activeTab, fetchLinks, fetchShopierLinks]);
 
   const handleCreateLink = async () => {
     if (!customerEmail.trim()) {
@@ -193,6 +224,19 @@ export default function AklindakiKisiAdminPage() {
     );
   });
 
+  // Filtrelenmiş Shopier linkleri
+  const filteredShopierLinks = shopierLinks.filter(link => {
+    if (!shopierSearchTerm) {
+      return true;
+    }
+    const search = shopierSearchTerm.toLowerCase();
+    return (
+      link.customer_email.toLowerCase().includes(search) ||
+      link.status.toLowerCase().includes(search) ||
+      link.token_preview?.toLowerCase().includes(search)
+    );
+  });
+
   // Status badge
   const getStatusBadge = (status: string, expiryDate?: string | null) => {
     let actualStatus = status;
@@ -246,6 +290,12 @@ export default function AklindakiKisiAdminPage() {
       name: 'Oluşturulan Linkler',
       icon: List,
       gradient: 'from-purple-500 to-indigo-600',
+    },
+    {
+      id: 'shopier' as const,
+      name: 'Shopier',
+      icon: ShoppingCart,
+      gradient: 'from-blue-500 to-cyan-600',
     },
   ];
 
@@ -309,7 +359,7 @@ export default function AklindakiKisiAdminPage() {
                     value={customerEmail}
                     onChange={e => setCustomerEmail(e.target.value)}
                     placeholder='ornek@email.com'
-                    className='w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent'
+                    className='w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent text-slate-900 placeholder:text-slate-400'
                     disabled={loading}
                   />
                 </div>
@@ -334,7 +384,7 @@ export default function AklindakiKisiAdminPage() {
                     onChange={e =>
                       setExpiresInDays(parseInt(e.target.value) || 0)
                     }
-                    className='w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent'
+                    className='w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent text-slate-900 placeholder:text-slate-400'
                     disabled={loading}
                   />
                   <p className='text-xs text-slate-500 mt-1'>
@@ -468,7 +518,7 @@ export default function AklindakiKisiAdminPage() {
                 placeholder='E-posta veya token ile ara...'
                 value={searchTerm}
                 onChange={e => setSearchTerm(e.target.value)}
-                className='w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent'
+                className='w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent text-slate-900 placeholder:text-slate-400'
               />
             </div>
 
@@ -520,7 +570,7 @@ export default function AklindakiKisiAdminPage() {
                         process.env.NEXT_PUBLIC_READING_LINK_BASE_URL ||
                         process.env.NEXT_PUBLIC_SITE_URL ||
                         'https://www.busbuskimki.com';
-                      const locale = 'en'; // İngilizce locale - linkler İngilizce açılacak
+                      const locale = 'tr'; // Türkçe locale - linkler Türkçe açılacak
                       const fullLink = `${baseUrl}/${locale}/aklindaki-kisi?token=${link.token}`;
 
                       return (
@@ -632,6 +682,226 @@ export default function AklindakiKisiAdminPage() {
                 </table>
               </div>
             )}
+          </div>
+        )}
+
+        {activeTab === 'shopier' && (
+          <div className='bg-white rounded-xl shadow-lg p-6'>
+            <div className='flex items-center justify-between mb-6'>
+              <div>
+                <h2 className='text-xl font-semibold text-slate-900'>
+                  Shopier Siparişleri
+                </h2>
+                <p className='text-sm text-slate-500 mt-1'>
+                  Shopier&apos;den gelen siparişler ve oluşturulan linkler
+                </p>
+              </div>
+              <button
+                onClick={fetchShopierLinks}
+                disabled={shopierLinksLoading}
+                className='flex items-center gap-2 px-4 py-2 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition-all disabled:opacity-50'
+              >
+                <RefreshCw
+                  className={`h-4 w-4 ${shopierLinksLoading ? 'animate-spin' : ''}`}
+                />
+                Yenile
+              </button>
+            </div>
+
+            {/* Search */}
+            <div className='mb-6'>
+              <input
+                type='text'
+                placeholder='E-posta veya token ile ara...'
+                value={shopierSearchTerm}
+                onChange={e => setShopierSearchTerm(e.target.value)}
+                className='w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-slate-900 placeholder:text-slate-400'
+              />
+            </div>
+
+            {/* Shopier Links Table */}
+            {shopierLinksLoading ? (
+              <div className='text-center py-12'>
+                <div className='animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4'></div>
+                <p className='text-slate-600'>Yükleniyor...</p>
+              </div>
+            ) : filteredShopierLinks.length === 0 ? (
+              <div className='text-center py-12'>
+                <ShoppingCart className='h-12 w-12 text-slate-400 mx-auto mb-4' />
+                <p className='text-slate-600'>
+                  {shopierSearchTerm
+                    ? 'Arama sonucu bulunamadı'
+                    : 'Henüz Shopier siparişi yok'}
+                </p>
+                <p className='text-sm text-slate-500 mt-2'>
+                  Shopier&apos;den sipariş geldiğinde burada görünecek
+                </p>
+              </div>
+            ) : (
+              <div className='overflow-x-auto'>
+                <table className='w-full'>
+                  <thead>
+                    <tr className='border-b border-slate-200'>
+                      <th className='text-left py-3 px-4 text-sm font-semibold text-slate-700'>
+                        Müşteri E-postası
+                      </th>
+                      <th className='text-left py-3 px-4 text-sm font-semibold text-slate-700'>
+                        Durum
+                      </th>
+                      <th className='text-left py-3 px-4 text-sm font-semibold text-slate-700'>
+                        Çekilen Kart
+                      </th>
+                      <th className='text-left py-3 px-4 text-sm font-semibold text-slate-700'>
+                        Son Çekim
+                      </th>
+                      <th className='text-left py-3 px-4 text-sm font-semibold text-slate-700'>
+                        Oluşturulma
+                      </th>
+                      <th className='text-left py-3 px-4 text-sm font-semibold text-slate-700'>
+                        Geçerlilik
+                      </th>
+                      <th className='text-right py-3 px-4 text-sm font-semibold text-slate-700'>
+                        İşlemler
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {filteredShopierLinks.map(link => {
+                      const baseUrl =
+                        process.env.NEXT_PUBLIC_READING_LINK_BASE_URL ||
+                        process.env.NEXT_PUBLIC_SITE_URL ||
+                        'https://www.busbuskimki.com';
+                      const locale = 'tr';
+                      const fullLink = `${baseUrl}/${locale}/aklindaki-kisi?token=${link.token}`;
+
+                      return (
+                        <tr
+                          key={link.id}
+                          className='border-b border-slate-100 hover:bg-slate-50 transition-colors'
+                        >
+                          <td className='py-4 px-4'>
+                            <div className='flex items-center gap-2'>
+                              <Mail className='h-4 w-4 text-slate-400' />
+                              <span className='text-sm text-slate-900'>
+                                {link.customer_email}
+                              </span>
+                            </div>
+                          </td>
+                          <td className='py-4 px-4'>
+                            {getStatusBadge(link.status, link.expiry_date)}
+                          </td>
+                          <td className='py-4 px-4'>
+                            <div className='flex items-center gap-2'>
+                              <span className='text-sm font-medium text-slate-900'>
+                                {link.totalCardsDrawn}/3
+                              </span>
+                              <span className='text-xs text-slate-500'>
+                                (bugün)
+                              </span>
+                            </div>
+                          </td>
+                          <td className='py-4 px-4'>
+                            {link.lastDrawDate ? (
+                              <div className='flex items-center gap-2'>
+                                <Clock className='h-4 w-4 text-slate-400' />
+                                <span className='text-sm text-slate-600'>
+                                  {new Date(link.lastDrawDate).toLocaleString(
+                                    'tr-TR',
+                                    {
+                                      day: '2-digit',
+                                      month: '2-digit',
+                                      year: 'numeric',
+                                      hour: '2-digit',
+                                      minute: '2-digit',
+                                    }
+                                  )}
+                                </span>
+                              </div>
+                            ) : (
+                              <span className='text-sm text-slate-400'>
+                                Henüz çekilmedi
+                              </span>
+                            )}
+                          </td>
+                          <td className='py-4 px-4'>
+                            <div className='flex items-center gap-2'>
+                              <Calendar className='h-4 w-4 text-slate-400' />
+                              <span className='text-sm text-slate-600'>
+                                {new Date(link.created_at).toLocaleDateString(
+                                  'tr-TR'
+                                )}
+                              </span>
+                            </div>
+                          </td>
+                          <td className='py-4 px-4'>
+                            {link.expiry_date ? (
+                              <span className='text-sm text-slate-600'>
+                                {new Date(link.expiry_date).toLocaleDateString(
+                                  'tr-TR'
+                                )}
+                              </span>
+                            ) : (
+                              <span className='text-sm text-green-600 font-medium'>
+                                Süresiz
+                              </span>
+                            )}
+                          </td>
+                          <td className='py-4 px-4'>
+                            <div className='flex items-center justify-end gap-2'>
+                              <button
+                                onClick={() => handleCopyLink(fullLink)}
+                                className='p-2 text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all'
+                                title='Linki kopyala'
+                              >
+                                <Copy className='h-4 w-4' />
+                              </button>
+                              <button
+                                onClick={() =>
+                                  handleSendEmail(link.id, link.customer_email)
+                                }
+                                disabled={sendingEmail}
+                                className='p-2 text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all disabled:opacity-50'
+                                title='E-posta gönder'
+                              >
+                                <Mail className='h-4 w-4' />
+                              </button>
+                              <a
+                                href={fullLink}
+                                target='_blank'
+                                rel='noopener noreferrer'
+                                className='p-2 text-slate-600 hover:text-green-600 hover:bg-green-50 rounded-lg transition-all'
+                                title='Linki aç'
+                              >
+                                <ExternalLink className='h-4 w-4' />
+                              </a>
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            )}
+
+            {/* Info Card */}
+            <div className='mt-6 bg-blue-50 border border-blue-200 rounded-xl p-6'>
+              <h3 className='text-lg font-semibold text-blue-900 mb-2'>
+                Shopier Entegrasyonu Hakkında
+              </h3>
+              <ul className='space-y-2 text-sm text-blue-800'>
+                <li>
+                  • Shopier&apos;den gelen siparişler otomatik olarak burada
+                  görüntülenir
+                </li>
+                <li>
+                  • Belirli ürünler için otomatik olarak aklındaki kişi linki
+                  oluşturulur
+                </li>
+                <li>• Müşterilere otomatik olarak email gönderilir</li>
+                <li>• Tüm linkler süresiz geçerlidir</li>
+              </ul>
+            </div>
           </div>
         )}
       </div>

@@ -268,3 +268,41 @@ export const createTestPayment = (
     bonusCredits: 0,
   };
 };
+
+// Shopier OSB (Otomatik Sipariş Bildirimi) veri yapısı
+export interface ShopierOSBData {
+  email: string;
+  orderid: string;
+  currency: number; // 0=TL, 1=USD, 2=EUR
+  price: number;
+  buyername: string;
+  buyersurname: string;
+  productid: string;
+  productlist: string;
+  chartdetails: string;
+  customernote: string;
+  istest: number; // 0=canlı, 1=test
+}
+
+/**
+ * Shopier OSB verisini parse et
+ * Base64 encoded JSON string'i decode edip parse eder
+ * 
+ * @param res - Base64 encoded JSON string from Shopier OSB
+ * @returns Parsed OSB data or null if parsing fails
+ */
+export function parseShopierOSBData(res: string): ShopierOSBData | null {
+  try {
+    // Base64 decode
+    const decoded = Buffer.from(res, 'base64').toString('utf-8');
+    
+    // JSON parse
+    const data = JSON.parse(decoded);
+    
+    // Type assertion
+    return data as ShopierOSBData;
+  } catch (error) {
+    console.error('Error parsing Shopier OSB data:', error);
+    return null;
+  }
+}

@@ -55,7 +55,8 @@ export function getSpreadQuestionMap(
     return {
       concern: 'Mevcut durumunuzda sizi en çok endişelendiren konu nedir?',
       emotional: 'Şu anki durumunuz hakkında nasıl hissediyorsunuz?',
-      understanding: 'Bu Enerji Haritası açılımı ile neyi anlamak istiyorsunuz?',
+      understanding:
+        'Bu Enerji Haritası açılımı ile neyi anlamak istiyorsunuz?',
     };
   } else if (type.includes('marriage') || type.includes('evlilik')) {
     return {
@@ -110,11 +111,3 @@ function getDefaultQuestions(): SpreadQuestionMap {
     understanding: 'Bu açılım ile neyi anlamak istiyorsunuz?',
   };
 }
-
-
-
-
-
-
-
-

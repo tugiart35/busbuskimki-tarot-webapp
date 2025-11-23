@@ -68666,6 +68666,7 @@
       "errors": {
         "tokenMissing": "Token nije pronađen. Molimo koristite važeći link.",
         "deviceLimit": "Ovaj link se može otvoriti na najviše 3 različita uređaja. Molimo koristite uređaj koji ste ranije koristili.",
+        "deviceLimitHint": "Molimo proverite svoje otvorene tabove. Otvaranje istog linka u različitim tabovima može dovesti do prekoračenja limita uređaja.",
         "tokenInvalid": "Token nije verifikovan.",
         "tokenValidation": "Došlo je do greške prilikom verifikacije tokena.",
         "dailyLimit": "Dostigli ste dnevni limit od 3 izvlačenja karata. Pokušajte ponovo kasnije.",
@@ -68706,6 +68707,12 @@
       },
       "footer": {
         "note": "Kad osetiš čežnju, kad te san odvede do njega ili kad tvoje srce želi da govori... ovaj špil je uz tebe."
+      },
+      "info": {
+        "dailyLimit": {
+          "title": "3 karte dnevno",
+          "message": "Možete izvući 3 karte dnevno. Svaki dan vas čeka nova šansa ✨"
+        }
       }
     }
   },
