@@ -505,14 +505,14 @@ export default function AklindakiKisiPage() {
 
       {/* Bilgilendirme Mesajı - Günde 3 kart */}
       <div className='w-full max-w-7xl px-6 mb-3'>
-        <div className='bg-gradient-to-r from-[#C9B26D]/10 via-[#D9CBA1]/10 to-[#C9B26D]/10 border border-[#D9CBA1]/30 rounded-lg px-4 py-2.5 sm:py-3 flex items-center gap-2 sm:gap-3 shadow-sm'>
+        <div className='bg-gradient-to-r from-purple-500/20 via-purple-600/20 to-purple-500/20 border border-purple-400/30 rounded-lg px-4 py-2.5 sm:py-3 flex items-center gap-2 sm:gap-3 shadow-sm'>
           <div className='flex-shrink-0'>
-            <div className='bg-gradient-to-br from-[#C9B26D]/20 to-[#B8A056]/20 rounded-full p-1.5 sm:p-2'>
-              <Info className='h-3.5 w-3.5 sm:h-4 sm:w-4 text-[#C9B26D]' />
+            <div className='bg-gradient-to-br from-purple-500/30 to-purple-600/30 rounded-full p-1.5 sm:p-2'>
+              <Info className='h-3.5 w-3.5 sm:h-4 sm:w-4 text-black' />
             </div>
           </div>
-          <p className='text-xs sm:text-sm text-[#ffffff] leading-relaxed flex-1'>
-            <span className='font-medium text-[#4cb1a2]'>
+          <p className='text-xs sm:text-sm text-[#4B5563] leading-relaxed flex-1'>
+            <span className='font-medium text-[#4B5563]'>
               {t('aklindakiKisi.page.info.dailyLimit.title', 'Günde 3 kart')}
             </span>{' '}
             {t(
@@ -657,7 +657,7 @@ export default function AklindakiKisiPage() {
       )}
 
       {/* Footer / Ritual Text */}
-      <footer className='text-center text-[#4B5563] mb-12 max-w-2xl px-6 leading-relaxed'>
+      <footer className='text-center text-[#454aeb] mb-12 max-w-2xl px-6 leading-relaxed'>
         <p>{t('aklindakiKisi.page.footer.note')}</p>
       </footer>
     </div>
