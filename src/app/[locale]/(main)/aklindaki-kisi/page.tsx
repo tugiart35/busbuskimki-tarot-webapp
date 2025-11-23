@@ -31,7 +31,6 @@ export default function AklindakiKisiPage() {
   const [error, setError] = useState<string | null>(null);
   const [remainingCards, setRemainingCards] = useState<number | null>(null);
   const [drawingCard, setDrawingCard] = useState(false);
-  const [ipLimitReached, setIpLimitReached] = useState(false);
   const [resetCountdown, setResetCountdown] = useState<number | null>(null); // Toplam kalan süre (milisaniye) - 31 gün sonra sıfırlanır
   const [fullscreenCard, setFullscreenCard] = useState<number | null>(null); // Tam ekran gösterilecek kart numarası
 
@@ -130,15 +129,6 @@ export default function AklindakiKisiPage() {
           return;
         }
 
-        // IP limiti kontrolü
-        if (data.ipLimitReached) {
-          setError(t('aklindakiKisi.page.errors.deviceLimit'));
-          setIpLimitReached(true);
-          setTokenValid(false);
-          setLoading(false);
-          return;
-        }
-
         if (!response.ok || !data.valid) {
           setError(data.error || t('aklindakiKisi.page.errors.tokenInvalid'));
           setTokenValid(false);
@@ -148,7 +138,6 @@ export default function AklindakiKisiPage() {
 
         setTokenValid(true);
         setRequiresEmail(false);
-        setIpLimitReached(false);
 
         // remainingCards bilgisini set et (eğer varsa)
         if (data.remainingCards !== undefined) {
@@ -221,25 +210,12 @@ export default function AklindakiKisiPage() {
       );
       const data: ValidateTokenResponse = await response.json();
 
-      // IP limiti kontrolü
-      if (data.ipLimitReached) {
-        setEmailError(t('aklindakiKisi.page.errors.deviceLimit'));
-        setIpLimitReached(true);
-        setValidatingEmail(false);
-        return;
-      }
-
       if (!response.ok || !data.valid) {
         setEmailError(
           data.error || t('aklindakiKisi.page.email.errors.validationFailed')
         );
         setValidatingEmail(false);
         return;
-      }
-
-      // E-posta doğru, IP limiti kontrolü yoksa sıfırla
-      if (!data.ipLimitReached) {
-        setIpLimitReached(false);
       }
 
       // E-posta doğru, URL'yi güncelle ve sayfayı yenile
@@ -435,11 +411,6 @@ export default function AklindakiKisiPage() {
               {emailError && (
                 <div className='mt-2'>
                   <p className='text-sm text-red-600'>{emailError}</p>
-                  {ipLimitReached && (
-                    <p className='text-xs mt-1 text-red-700'>
-                      {t('aklindakiKisi.page.errors.deviceLimitHint')}
-                    </p>
-                  )}
                 </div>
               )}
             </div>
@@ -572,11 +543,6 @@ export default function AklindakiKisiPage() {
         <div className='mb-6 px-6 max-w-2xl w-full'>
           <div className='bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg'>
             <p className='font-medium mb-1'>{error}</p>
-            {ipLimitReached && (
-              <p className='text-sm mt-2 text-red-700'>
-                {t('aklindakiKisi.page.errors.deviceLimitHint')}
-              </p>
-            )}
           </div>
         </div>
       )}

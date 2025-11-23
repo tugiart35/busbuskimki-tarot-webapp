@@ -111,3 +111,4 @@ function getDefaultQuestions(): SpreadQuestionMap {
     understanding: 'Bu açılım ile neyi anlamak istiyorsunuz?',
   };
 }
+

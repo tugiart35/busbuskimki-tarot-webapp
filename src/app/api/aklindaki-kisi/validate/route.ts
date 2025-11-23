@@ -3,7 +3,6 @@ import { createClient } from '@supabase/supabase-js';
 import crypto from 'crypto';
 import { logger } from '@/lib/logger';
 import { ValidateTokenResponse, DrawnCard } from '@/types/aklindaki-kisi.types';
-import { getClientIP, cleanIPAddress } from '@/lib/utils/ip-utils';
 
 // 24 saat geçen kartları filtrele
 function filterValidDrawnCards(
@@ -196,84 +195,7 @@ export async function GET(request: NextRequest) {
         );
       }
 
-      // E-posta doğru, IP kontrolü yap
-      const clientIP = cleanIPAddress(getClientIP(request));
-      const allowedIPs = (customerLink.allowed_ips as string[]) || [];
-
-      logger.info('IP kontrolü başladı', {
-        action: 'check_ip',
-        metadata: {
-          linkId: customerLink.id,
-          clientIP,
-          currentIPs: allowedIPs,
-          ipCount: allowedIPs.length,
-        },
-      });
-
-      // Eğer IP zaten listede değilse
-      if (!allowedIPs.includes(clientIP)) {
-        // Maksimum 3 IP kontrolü
-        if (allowedIPs.length >= 3) {
-          logger.warn('IP limiti aşıldı', {
-            action: 'ip_limit_reached',
-            metadata: {
-              linkId: customerLink.id,
-              clientIP,
-              currentIPs: allowedIPs,
-            },
-          });
-
-          return NextResponse.json<ValidateTokenResponse>(
-            {
-              valid: false,
-              error:
-                'Bu link maksimum 3 farklı cihazdan açılabilir. Lütfen daha önce kullandığınız bir cihazdan giriş yapın.',
-              ipLimitReached: true,
-            },
-            { status: 403 }
-          );
-        }
-
-        // Yeni IP'yi ekle
-        const updatedIPs = [...allowedIPs, clientIP];
-        const { error: updateError } = await supabaseAdmin
-          .from('customer_links')
-          .update({
-            allowed_ips: updatedIPs,
-            updated_at: new Date().toISOString(),
-          })
-          .eq('id', customerLink.id);
-
-        if (updateError) {
-          logger.error('IP güncelleme hatası', updateError, {
-            action: 'update_allowed_ips',
-            metadata: {
-              linkId: customerLink.id,
-              clientIP,
-            },
-          });
-          // Hata olsa bile devam et (IP kaydedilemese bile erişim izni ver)
-        } else {
-          logger.info('Yeni IP eklendi', {
-            action: 'add_ip',
-            metadata: {
-              linkId: customerLink.id,
-              newIP: clientIP,
-              totalIPs: updatedIPs.length,
-            },
-          });
-        }
-      } else {
-        logger.info('IP zaten kayıtlı', {
-          action: 'ip_already_exists',
-          metadata: {
-            linkId: customerLink.id,
-            clientIP,
-          },
-        });
-      }
-
-      // E-posta doğru, IP kontrolü geçti
+      // E-posta doğru, devam et
       // Card session'ı al ve remainingCards hesapla
       const customerEmail = customerLink.customer_email;
       const { data: cardSession } = await supabaseAdmin
