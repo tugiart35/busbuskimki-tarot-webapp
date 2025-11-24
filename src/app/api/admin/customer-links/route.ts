@@ -8,6 +8,10 @@ import {
   CreateCustomerLinkResponse,
   GetLinksResponse,
 } from '@/types/aklindaki-kisi.types';
+import {
+  getTodayInTimezone,
+  getDateFromTimestamp,
+} from '@/lib/aklindaki-kisi/utils';
 
 // GET - Link listesi
 export async function GET(request: NextRequest) {
@@ -90,6 +94,10 @@ export async function GET(request: NextRequest) {
       );
     }
 
+    // Türkiye timezone'u kullan
+    const timezone = 'Europe/Istanbul';
+    const today = getTodayInTimezone(timezone);
+
     // Her link için card_session bilgilerini al
     const linksWithActivity = await Promise.all(
       (links || []).map(async link => {
@@ -108,11 +116,34 @@ export async function GET(request: NextRequest) {
           }
         }
 
+        // Gece yarısı kontrolü - cards_drawn_today_count hesaplama
+        let totalCardsDrawn = 0;
+        if (cardSession) {
+          if (cardSession.last_draw_date) {
+            const lastDrawDate = new Date(cardSession.last_draw_date);
+            const lastDrawDateStr = getDateFromTimestamp(
+              lastDrawDate.toISOString(),
+              timezone
+            );
+
+            // Eğer son çekilen kart bugünden farklı bir günde çekildiyse, sayacı 0 yap
+            if (lastDrawDateStr !== today) {
+              totalCardsDrawn = 0;
+            } else {
+              // Bugün çekilen kartlar için, database'deki değeri kullan
+              totalCardsDrawn = cardSession.cards_drawn_today_count || 0;
+            }
+          } else {
+            // last_draw_date null ise, bugün hiç kart çekilmemiş
+            totalCardsDrawn = 0;
+          }
+        }
+
         return {
           ...link,
           status,
           cardSession: cardSession || null,
-          totalCardsDrawn: cardSession?.cards_drawn_today_count || 0,
+          totalCardsDrawn,
           lastDrawDate: cardSession?.last_draw_date || null,
         };
       })

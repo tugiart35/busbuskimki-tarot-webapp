@@ -5,6 +5,7 @@ import { logger } from '@/lib/logger';
 import { ValidateTokenResponse, DrawnCard } from '@/types/aklindaki-kisi.types';
 import {
   filterValidDrawnCardsByMidnight,
+  filterLast7DaysDrawnCards,
   getTodayInTimezone,
   getDateFromTimestamp,
 } from '@/lib/aklindaki-kisi/utils';
@@ -188,27 +189,35 @@ export async function GET(request: NextRequest) {
       if (cardSession) {
         const now = new Date();
 
-        // last_24_drawn_cards'ı parse et ve gece yarısı kontrolü ile filtrele
+        // last_24_drawn_cards'ı parse et
         const parsedDrawnCards = parseDrawnCards(
           cardSession.last_24_drawn_cards
         );
+
+        // Bugün çekilen kartları filtrele (günlük limit kontrolü için)
         const validDrawnCards = filterValidDrawnCardsByMidnight(
           parsedDrawnCards,
           timezone
         );
 
-        // Eğer gece yarısı geçen kartlar varsa, database'i güncelle
-        if (parsedDrawnCards.length !== validDrawnCards.length) {
+        // Son 7 günün kartlarını filtrele (kart seçimi için - aynı kartın 7 gün içinde tekrar çekilmesini engeller)
+        const last7DaysDrawnCards = filterLast7DaysDrawnCards(
+          parsedDrawnCards,
+          timezone
+        );
+
+        // Eğer 7 günden eski kartlar varsa, database'i güncelle (son 7 günün kartlarını tut)
+        if (parsedDrawnCards.length !== last7DaysDrawnCards.length) {
           await supabaseAdmin
             .from('card_sessions')
             .update({
-              last_24_drawn_cards: validDrawnCards,
+              last_24_drawn_cards: last7DaysDrawnCards,
               updated_at: now.toISOString(),
             })
             .eq('id', cardSession.id);
 
           // Session'ı güncelle
-          cardSession.last_24_drawn_cards = validDrawnCards as any;
+          cardSession.last_24_drawn_cards = last7DaysDrawnCards as any;
         }
 
         // Period kontrolü - 31 gün geçtiyse period_start_date, cards_drawn_today_count ve period_drawn_cards'ı sıfırla
@@ -290,6 +299,9 @@ export async function GET(request: NextRequest) {
         }
 
         // Gece yarısı kontrolü - cards_drawn_today_count sıfırlama
+        // validDrawnCards (bugün çekilen kartlar) kontrolü ile tutarlılık sağla
+        const today = getTodayInTimezone(timezone);
+        const todayDrawnCardsCount = validDrawnCards.length;
         const lastDrawDate = cardSession.last_draw_date
           ? new Date(cardSession.last_draw_date)
           : null;
@@ -298,7 +310,6 @@ export async function GET(request: NextRequest) {
 
         // Eğer son çekilen kart bugünden farklı bir günde çekildiyse, sayacı sıfırla
         if (lastDrawDate) {
-          const today = getTodayInTimezone(timezone);
           const lastDrawDateStr = getDateFromTimestamp(
             lastDrawDate.toISOString(),
             timezone
@@ -312,6 +323,38 @@ export async function GET(request: NextRequest) {
               .from('card_sessions')
               .update({
                 cards_drawn_today_count: 0,
+                updated_at: now.toISOString(),
+              })
+              .eq('id', cardSession.id);
+
+            // Session objesini de güncelle (sonraki kontroller için)
+            cardSession.cards_drawn_today_count = 0;
+          } else {
+            // Bugün çekilen kartlar varsa, sayacı bugün çekilen kart sayısına göre güncelle
+            // Bu, gece yarısı kontrolünden sonra tutarlılık sağlar
+            if (cardSession.cards_drawn_today_count !== todayDrawnCardsCount) {
+              cardsDrawnTodayCount = todayDrawnCardsCount;
+              cardSession.cards_drawn_today_count = todayDrawnCardsCount;
+              await supabaseAdmin
+                .from('card_sessions')
+                .update({
+                  cards_drawn_today_count: todayDrawnCardsCount,
+                  updated_at: now.toISOString(),
+                })
+                .eq('id', cardSession.id);
+            }
+          }
+        } else {
+          // last_draw_date null ise, bugün hiç kart çekilmemiş demektir
+          // cards_drawn_today_count 0 olmalı veya bugün çekilen kart sayısına eşit olmalı
+          if (cardSession.cards_drawn_today_count !== todayDrawnCardsCount) {
+            cardsDrawnTodayCount = todayDrawnCardsCount;
+            cardSession.cards_drawn_today_count = todayDrawnCardsCount;
+            // Database'e kaydet
+            await supabaseAdmin
+              .from('card_sessions')
+              .update({
+                cards_drawn_today_count: todayDrawnCardsCount,
                 updated_at: now.toISOString(),
               })
               .eq('id', cardSession.id);

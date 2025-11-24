@@ -15,6 +15,7 @@ import {
   RefreshCw,
   ExternalLink,
   ShoppingCart,
+  RotateCcw,
 } from 'lucide-react';
 import { useToast } from '@/hooks/useToast';
 import Toast from '@/features/shared/ui/Toast';
@@ -208,6 +209,34 @@ export default function AklindakiKisiAdminPage() {
       showToast('E-posta gönderilirken bir hata oluştu', 'error');
     } finally {
       setSendingEmail(false);
+    }
+  };
+
+  const handleResetDailyLimit = async (linkId: string, customerEmail: string) => {
+    try {
+      const response = await fetch(
+        `/api/admin/customer-links/${linkId}/reset-daily-limit`,
+        {
+          method: 'PATCH',
+        }
+      );
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        showToast('Günlük limit başarıyla sıfırlandı', 'success');
+        // Listeyi yenile
+        if (activeTab === 'list') {
+          fetchLinks();
+        } else if (activeTab === 'shopier') {
+          fetchShopierLinks();
+        }
+      } else {
+        showToast(data.error || 'Günlük limit sıfırlanamadı', 'error');
+      }
+    } catch (error) {
+      showToast('Bir hata oluştu', 'error');
+      console.error('Günlük limit sıfırlama hatası', error);
     }
   };
 
@@ -648,6 +677,15 @@ export default function AklindakiKisiAdminPage() {
                           <td className='py-4 px-4'>
                             <div className='flex items-center justify-end gap-2'>
                               <button
+                                onClick={() =>
+                                  handleResetDailyLimit(link.id, link.customer_email)
+                                }
+                                className='p-2 text-slate-600 hover:text-orange-600 hover:bg-orange-50 rounded-lg transition-all'
+                                title='Günlük kart çekme hakkını sıfırla'
+                              >
+                                <RotateCcw className='h-4 w-4' />
+                              </button>
+                              <button
                                 onClick={() => handleCopyLink(fullLink)}
                                 className='p-2 text-slate-600 hover:text-pink-600 hover:bg-pink-50 rounded-lg transition-all'
                                 title='Linki kopyala'
@@ -848,6 +886,15 @@ export default function AklindakiKisiAdminPage() {
                           </td>
                           <td className='py-4 px-4'>
                             <div className='flex items-center justify-end gap-2'>
+                              <button
+                                onClick={() =>
+                                  handleResetDailyLimit(link.id, link.customer_email)
+                                }
+                                className='p-2 text-slate-600 hover:text-orange-600 hover:bg-orange-50 rounded-lg transition-all'
+                                title='Günlük kart çekme hakkını sıfırla'
+                              >
+                                <RotateCcw className='h-4 w-4' />
+                              </button>
                               <button
                                 onClick={() => handleCopyLink(fullLink)}
                                 className='p-2 text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all'

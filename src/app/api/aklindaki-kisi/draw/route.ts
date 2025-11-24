@@ -7,7 +7,12 @@ import {
   DrawCardResponse,
   DrawnCard,
 } from '@/types/aklindaki-kisi.types';
-import { filterValidDrawnCardsByMidnight, getTodayInTimezone, getDateFromTimestamp } from '@/lib/aklindaki-kisi/utils';
+import {
+  filterValidDrawnCardsByMidnight,
+  filterLast7DaysDrawnCards,
+  getTodayInTimezone,
+  getDateFromTimestamp,
+} from '@/lib/aklindaki-kisi/utils';
 
 // last_24_drawn_cards'ı DrawnCard[] formatına çevir (JSONB'den geliyor)
 function parseDrawnCards(data: any): DrawnCard[] {
@@ -155,24 +160,32 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // last_24_drawn_cards'ı parse et ve gece yarısı kontrolü ile filtrele
+    // last_24_drawn_cards'ı parse et
     const parsedDrawnCards = parseDrawnCards(cardSession.last_24_drawn_cards);
+    
+    // Bugün çekilen kartları filtrele (günlük limit kontrolü için)
     const validDrawnCards = filterValidDrawnCardsByMidnight(
       parsedDrawnCards,
       userTimezone
     );
 
-    // Eğer gece yarısı geçen kartlar varsa, database'i güncelle
-    if (parsedDrawnCards.length !== validDrawnCards.length) {
+    // Son 7 günün kartlarını filtrele (kart seçimi için - aynı kartın 7 gün içinde tekrar çekilmesini engeller)
+    const last7DaysDrawnCards = filterLast7DaysDrawnCards(
+      parsedDrawnCards,
+      userTimezone
+    );
+
+    // Eğer 7 günden eski kartlar varsa, database'i güncelle (son 7 günün kartlarını tut)
+    if (parsedDrawnCards.length !== last7DaysDrawnCards.length) {
       await supabaseAdmin
         .from('card_sessions')
         .update({
-          last_24_drawn_cards: validDrawnCards,
+          last_24_drawn_cards: last7DaysDrawnCards,
           updated_at: now.toISOString(),
         })
         .eq('id', cardSession.id);
 
-      cardSession.last_24_drawn_cards = validDrawnCards as any;
+      cardSession.last_24_drawn_cards = last7DaysDrawnCards as any;
     }
 
     // period_drawn_cards'ı parse et (period başlangıcından beri çekilen tüm kartlar)
@@ -209,9 +222,12 @@ export async function POST(request: NextRequest) {
     }
 
     // Gece yarısı kontrolü - cards_drawn_today_count sıfırlama
+    // validDrawnCards (bugün çekilen kartlar) kontrolü ile tutarlılık sağla
+    const today = getTodayInTimezone(userTimezone);
+    const todayDrawnCardsCount = validDrawnCards.length;
+
     if (cardSession.last_draw_date) {
       const lastDrawDate = new Date(cardSession.last_draw_date);
-      const today = getTodayInTimezone(userTimezone);
       const lastDrawDateStr = getDateFromTimestamp(
         lastDrawDate.toISOString(),
         userTimezone
@@ -225,6 +241,33 @@ export async function POST(request: NextRequest) {
           .from('card_sessions')
           .update({
             cards_drawn_today_count: 0,
+            updated_at: now.toISOString(),
+          })
+          .eq('id', cardSession.id);
+      } else {
+        // Bugün çekilen kartlar varsa, sayacı bugün çekilen kart sayısına göre güncelle
+        // Bu, gece yarısı kontrolünden sonra tutarlılık sağlar
+        if (cardSession.cards_drawn_today_count !== todayDrawnCardsCount) {
+          cardSession.cards_drawn_today_count = todayDrawnCardsCount;
+          await supabaseAdmin
+            .from('card_sessions')
+            .update({
+              cards_drawn_today_count: todayDrawnCardsCount,
+              updated_at: now.toISOString(),
+            })
+            .eq('id', cardSession.id);
+        }
+      }
+    } else {
+      // last_draw_date null ise, bugün hiç kart çekilmemiş demektir
+      // cards_drawn_today_count 0 olmalı veya bugün çekilen kart sayısına eşit olmalı
+      if (cardSession.cards_drawn_today_count !== todayDrawnCardsCount) {
+        cardSession.cards_drawn_today_count = todayDrawnCardsCount;
+        // Database'e kaydet
+        await supabaseAdmin
+          .from('card_sessions')
+          .update({
+            cards_drawn_today_count: todayDrawnCardsCount,
             updated_at: now.toISOString(),
           })
           .eq('id', cardSession.id);
@@ -275,15 +318,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Bugün çekilen kartları filtrele
-    const todayDrawnCardNumbers = new Set(
-      validDrawnCards.map(drawnCard => drawnCard.cardNumber)
+    // Son 7 gün içinde çekilen kartları filtrele (aynı kartın 7 gün içinde tekrar çekilmesini engeller)
+    const last7DaysCardNumbers = new Set(
+      last7DaysDrawnCards.map(drawnCard => drawnCard.cardNumber)
     );
     const availableCards = allCards.filter(
-      card => !todayDrawnCardNumbers.has(card.card_number)
+      card => !last7DaysCardNumbers.has(card.card_number)
     );
 
-    // Eğer tüm kartlar bugün çekildiyse, listeyi sıfırla (gece yarısında otomatik kapanacak)
+    // Eğer tüm kartlar son 7 gün içinde çekildiyse, listeyi sıfırla (7 gün sonra otomatik kapanacak)
     const cardsToUse = availableCards.length > 0 ? availableCards : allCards;
 
     // Rastgele kart seç
@@ -296,9 +339,12 @@ export async function POST(request: NextRequest) {
       drawnAt: now.toISOString(),
     };
 
-    // FIFO mantığını kaldır - tüm geçerli kartları tut (44 kart limiti yok)
-    // Sadece bugün çekilen kartları tut
-    const newDrawnCards = [newDrawnCard, ...validDrawnCards];
+    // Yeni çekilen kartı son 7 günün kartlarına ekle
+    // Eğer aynı kart son 7 gün içinde çekildiyse, tekrar ekleme (unique kontrolü)
+    // last7DaysCardNumbers zaten yukarıda tanımlı, tekrar tanımlamaya gerek yok
+    const newDrawnCards = last7DaysCardNumbers.has(newDrawnCard.cardNumber)
+      ? last7DaysDrawnCards // Zaten var, değiştirme
+      : [newDrawnCard, ...last7DaysDrawnCards]; // Yeni kart, ekle
 
     // Period başlangıcından beri çekilen tüm kartlara yeni kartı ekle
     // Eğer aynı kart daha önce çekildiyse, sadece bir kez tut (unique)

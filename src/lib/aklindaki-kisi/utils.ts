@@ -172,3 +172,50 @@ export function filterValidDrawnCardsByMidnight(
     return false;
   });
 }
+
+/**
+ * Son 7 günün kartlarını filtrele (bugün dahil)
+ * Son 7 gün içinde çekilen kartlar geçerli, diğerleri kapanır
+ * Bu fonksiyon kart seçiminde kullanılır - aynı kartın 7 gün içinde tekrar çekilmesini engeller
+ */
+export function filterLast7DaysDrawnCards(
+  drawnCards: DrawnCard[] | null | undefined,
+  timezone: string = 'UTC'
+): DrawnCard[] {
+  if (!drawnCards || !Array.isArray(drawnCards)) {
+    return [];
+  }
+
+  const today = getTodayInTimezone(timezone);
+  const todayDate = new Date(today + 'T00:00:00');
+
+  // Son 7 günün tarihlerini hesapla (bugün dahil)
+  const last7DaysDates = Array.from({ length: 7 }, (_, i) => {
+    const date = new Date(todayDate);
+    date.setDate(date.getDate() - i);
+    return getDateFromTimestamp(date.toISOString(), timezone);
+  });
+
+  return drawnCards.filter(drawnCard => {
+    // Eski format (number[]) desteği
+    if (typeof drawnCard === 'number') {
+      return false;
+    }
+
+    // Yeni format (DrawnCard) kontrolü
+    if (
+      drawnCard &&
+      typeof drawnCard === 'object' &&
+      'cardNumber' in drawnCard &&
+      'drawnAt' in drawnCard
+    ) {
+      // drawnAt'ten tarih hesapla
+      const cardDate = getDateFromTimestamp(drawnCard.drawnAt, timezone);
+
+      // Son 7 gün içinde çekilen kartlar geçerli
+      return last7DaysDates.includes(cardDate);
+    }
+
+    return false;
+  });
+}

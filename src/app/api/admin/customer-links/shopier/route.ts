@@ -2,6 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { createServerClient } from '@supabase/ssr';
 import { logger } from '@/lib/logger';
+import {
+  getTodayInTimezone,
+  getDateFromTimestamp,
+} from '@/lib/aklindaki-kisi/utils';
 
 export interface ShopierLink {
   id: string;
@@ -106,6 +110,10 @@ export async function GET(request: NextRequest) {
       );
     }
 
+    // Türkiye timezone'u kullan
+    const timezone = 'Europe/Istanbul';
+    const today = getTodayInTimezone(timezone);
+
     // Her link için card_session bilgilerini al
     const linksWithActivity = await Promise.all(
       (links || []).map(async link => {
@@ -124,6 +132,29 @@ export async function GET(request: NextRequest) {
           }
         }
 
+        // Gece yarısı kontrolü - cards_drawn_today_count hesaplama
+        let totalCardsDrawn = 0;
+        if (cardSession) {
+          if (cardSession.last_draw_date) {
+            const lastDrawDate = new Date(cardSession.last_draw_date);
+            const lastDrawDateStr = getDateFromTimestamp(
+              lastDrawDate.toISOString(),
+              timezone
+            );
+
+            // Eğer son çekilen kart bugünden farklı bir günde çekildiyse, sayacı 0 yap
+            if (lastDrawDateStr !== today) {
+              totalCardsDrawn = 0;
+            } else {
+              // Bugün çekilen kartlar için, database'deki değeri kullan
+              totalCardsDrawn = cardSession.cards_drawn_today_count || 0;
+            }
+          } else {
+            // last_draw_date null ise, bugün hiç kart çekilmemiş
+            totalCardsDrawn = 0;
+          }
+        }
+
         return {
           id: link.id,
           customer_email: link.customer_email,
@@ -133,7 +164,7 @@ export async function GET(request: NextRequest) {
           expiry_date: link.expiry_date,
           created_at: link.created_at,
           cardSession: cardSession || null,
-          totalCardsDrawn: cardSession?.cards_drawn_today_count || 0,
+          totalCardsDrawn,
           lastDrawDate: cardSession?.last_draw_date || null,
         };
       })
