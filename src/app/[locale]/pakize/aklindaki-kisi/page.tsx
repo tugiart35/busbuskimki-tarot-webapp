@@ -212,7 +212,7 @@ export default function AklindakiKisiAdminPage() {
     }
   };
 
-  const handleResetDailyLimit = async (linkId: string, customerEmail: string) => {
+  const handleResetDailyLimit = async (linkId: string) => {
     try {
       const response = await fetch(
         `/api/admin/customer-links/${linkId}/reset-daily-limit`,
@@ -677,9 +677,7 @@ export default function AklindakiKisiAdminPage() {
                           <td className='py-4 px-4'>
                             <div className='flex items-center justify-end gap-2'>
                               <button
-                                onClick={() =>
-                                  handleResetDailyLimit(link.id, link.customer_email)
-                                }
+                                onClick={() => handleResetDailyLimit(link.id)}
                                 className='p-2 text-slate-600 hover:text-orange-600 hover:bg-orange-50 rounded-lg transition-all'
                                 title='Günlük kart çekme hakkını sıfırla'
                               >
@@ -887,9 +885,7 @@ export default function AklindakiKisiAdminPage() {
                           <td className='py-4 px-4'>
                             <div className='flex items-center justify-end gap-2'>
                               <button
-                                onClick={() =>
-                                  handleResetDailyLimit(link.id, link.customer_email)
-                                }
+                                onClick={() => handleResetDailyLimit(link.id)}
                                 className='p-2 text-slate-600 hover:text-orange-600 hover:bg-orange-50 rounded-lg transition-all'
                                 title='Günlük kart çekme hakkını sıfırla'
                               >

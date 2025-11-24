@@ -5,9 +5,11 @@ import { logger } from '@/lib/logger';
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id: linkId } = await params;
+
     // Supabase admin client
     const supabaseAdmin = createClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -61,8 +63,6 @@ export async function PATCH(
         { status: 403 }
       );
     }
-
-    const linkId = params.id;
 
     // Customer link'i bul
     const { data: customerLink, error: linkError } = await supabaseAdmin
