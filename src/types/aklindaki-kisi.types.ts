@@ -26,7 +26,8 @@ export interface CardSession {
   customer_email: string;
   last_draw_date?: string;
   cards_drawn_today_count: number;
-  last_24_drawn_cards: DrawnCard[]; // Kart numarası ve çekilme zamanı - 24 saat geçen kartlar otomatik kapanır
+  last_24_drawn_cards: DrawnCard[]; // Kart numarası ve çekilme zamanı - Bugün çekilen kartlar (gece yarısı sıfırlanır)
+  period_drawn_cards: DrawnCard[]; // Period başlangıcından beri çekilen tüm kartlar - 31 gün sonra sıfırlanır
   period_start_date?: string; // İlk kart çekildiğinde kaydedilen tarih - 30 gün sonra 1 günlük geri sayım başlar
   created_at: string;
   updated_at: string;
@@ -71,7 +72,7 @@ export interface ValidateTokenResponse {
   requiresEmail?: boolean; // E-posta girişi gerekiyor mu?
   ipLimitReached?: boolean; // IP limiti aşıldı mı? (Maksimum 3 farklı IP)
   remainingCards?: number; // Kalan kart hakkı (günlük limit)
-  openedCards?: number[]; // Açılan kart numaraları (last_24_drawn_cards'dan unique)
+  openedCards?: number[]; // Açılan kart numaraları (period_drawn_cards'dan unique - period sonuna kadar birikir)
   periodStartDate?: string; // İlk kart çekildiğinde kaydedilen tarih
   resetCountdown?: number; // Toplam kalan süre (milisaniye) - 31 gün sonra sıfırlanır
   periodDaysRemaining?: number; // 30 günlük aktif dönemden kalan gün sayısı

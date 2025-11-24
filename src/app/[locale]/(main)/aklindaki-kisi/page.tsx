@@ -40,8 +40,8 @@ export default function AklindakiKisiPage() {
   const [emailError, setEmailError] = useState<string | null>(null);
   const [validatingEmail, setValidatingEmail] = useState(false);
 
-  // Kullanıcının yerel saat dilimini al
-  const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  // Türkiye timezone'u kullan (Europe/Istanbul)
+  const userTimezone = 'Europe/Istanbul';
 
   const formatCountdown = useCallback(
     (milliseconds: number): string => {
@@ -152,14 +152,8 @@ export default function AklindakiKisiPage() {
         // Kartları initialize et (eğer henüz initialize edilmediyse)
         const allCardNumbers = Array.from({ length: 44 }, (_, i) => i + 2); // 2-45
 
-        // Açılan kartları state'e yükle (database'den gelen)
-        if (data.resetCountdown !== undefined && data.resetCountdown <= 0) {
-          // Süre dolmuş, kartları sıfırla
-          setFlippedCards(new Set());
-          // Kartları shuffle edilmiş olarak initialize et
-          const shuffled = shuffleCards(allCardNumbers);
-          setCards(shuffled);
-        } else if (data.openedCards && data.openedCards.length > 0) {
+        // Açılan kartları state'e yükle (database'den gelen openedCards'a göre)
+        if (data.openedCards && data.openedCards.length > 0) {
           // Açılan kartları flippedCards state'ine set et
           const openedCardsSet = new Set(data.openedCards);
           setFlippedCards(openedCardsSet);
@@ -171,6 +165,7 @@ export default function AklindakiKisiPage() {
           // Hiç açılan kart yok, tüm kartları shuffle et
           const shuffled = shuffleCards(allCardNumbers);
           setCards(shuffled);
+          setFlippedCards(new Set());
         }
 
         setLoading(false);
@@ -492,13 +487,13 @@ export default function AklindakiKisiPage() {
           / 44
         </div>
 
-        {/* Sağ: Kalan kart hakkı */}
+        {/* Sağ: Kullanılan kart hakkı (Kullanılan/Toplam formatında) */}
         <div className='text-sm text-[#6B7280]'>
           {t('aklindakiKisi.page.stats.remainingCards')}:{' '}
           <span className='font-semibold text-[#1F2A44]'>
-            {remainingCards === null
+            {remainingCards === null || remainingCards === undefined
               ? t('aklindakiKisi.page.stats.unlimited')
-              : (remainingCards ?? 3)}
+              : `${3 - remainingCards} / 3`}
           </span>
         </div>
       </div>
@@ -538,11 +533,29 @@ export default function AklindakiKisiPage() {
         </div>
       )}
 
-      {/* Error Message */}
-      {error && (
+      {/* Daily Limit Reached Banner - Yumuşak ve mobil uyumlu */}
+      {dailyLimitReached && (
+        <div className='w-full max-w-7xl px-6 mb-4'>
+          <div className='bg-gradient-to-r from-purple-500/20 via-purple-600/20 to-purple-500/20 border border-purple-400/30 rounded-lg px-4 py-2.5 sm:py-3 flex items-center gap-2 sm:gap-3 shadow-sm'>
+            <div className='flex-shrink-0'>
+              <div className='bg-gradient-to-br from-purple-500/30 to-purple-600/30 rounded-full p-1.5 sm:p-2'>
+                <Info className='h-3.5 w-3.5 sm:h-4 sm:w-4 text-[#4B5563]' />
+              </div>
+            </div>
+            <p className='text-xs sm:text-sm text-[#4B5563] leading-relaxed flex-1'>
+              <span className='font-medium text-[#4B5563]'>
+                {t('aklindakiKisi.page.errors.dailyLimit')}
+              </span>
+            </p>
+          </div>
+        </div>
+      )}
+
+      {/* Error Message - Diğer hatalar için */}
+      {error && !dailyLimitReached && (
         <div className='mb-6 px-6 max-w-2xl w-full'>
-          <div className='bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg'>
-            <p className='font-medium mb-1'>{error}</p>
+          <div className='bg-gradient-to-r from-purple-600 via-purple-700 to-purple-600 border border-purple-500/30 text-white px-6 py-4 rounded-xl shadow-lg'>
+            <p className='font-semibold text-base text-center'>{error}</p>
           </div>
         </div>
       )}

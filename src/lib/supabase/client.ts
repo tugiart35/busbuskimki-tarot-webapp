@@ -563,7 +563,8 @@ export interface Database {
           customer_email: string;
           last_draw_date?: string;
           cards_drawn_today_count: number;
-          last_24_drawn_cards: any; // JSONB - DrawnCard[] formatında
+          last_24_drawn_cards: any; // JSONB - DrawnCard[] formatında - Bugün çekilen kartlar
+          period_drawn_cards: any; // JSONB - DrawnCard[] formatında - Period başlangıcından beri çekilen tüm kartlar
           period_start_date?: string;
           created_at: string;
           updated_at: string;
@@ -574,6 +575,7 @@ export interface Database {
           last_draw_date?: string;
           cards_drawn_today_count?: number;
           last_24_drawn_cards?: any; // JSONB - DrawnCard[] formatında
+          period_drawn_cards?: any; // JSONB - DrawnCard[] formatında
           period_start_date?: string;
           created_at?: string;
           updated_at?: string;
@@ -584,6 +586,7 @@ export interface Database {
           last_draw_date?: string;
           cards_drawn_today_count?: number;
           last_24_drawn_cards?: any; // JSONB - DrawnCard[] formatında
+          period_drawn_cards?: any; // JSONB - DrawnCard[] formatında
           period_start_date?: string;
           created_at?: string;
           updated_at?: string;
