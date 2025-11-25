@@ -225,11 +225,6 @@ export async function GET(request: NextRequest) {
           ? new Date(cardSession.period_start_date)
           : null;
 
-        // period_drawn_cards'ı parse et (null veya undefined ise boş array)
-        const parsedPeriodDrawnCards = parseDrawnCards(
-          cardSession.period_drawn_cards ?? null
-        );
-
         // Eğer period_drawn_cards null veya undefined ise, database'e boş array olarak kaydet
         if (
           cardSession.period_drawn_cards === null ||
@@ -379,9 +374,10 @@ export async function GET(request: NextRequest) {
           ? undefined // Test token için sınırsız, undefined döndür
           : Math.max(0, dailyLimit - cardsDrawnTodayCount);
 
-        // Açılan kartları al (period başlangıcından beri çekilen tüm kartlar - unique)
-        // period_drawn_cards period sonuna kadar birikir, 31 gün sonra sıfırlanır
-        openedCards = parsedPeriodDrawnCards
+        // Açılan kartları al - SADECE BUGÜN ÇEKİLEN KARTLAR (gece yarısı kontrolü ile)
+        // validDrawnCards zaten bugün çekilen kartları içeriyor (filterValidDrawnCardsByMidnight ile filtrelenmiş)
+        // Bu sayede dün açılan kartlar (1 gün önce) gece yarısından sonra (Türkiye saatiyle 00:00) otomatik olarak kapanır
+        openedCards = validDrawnCards
           .map(drawnCard => drawnCard.cardNumber)
           .filter(
             (cardNumber, index, self) => self.indexOf(cardNumber) === index
