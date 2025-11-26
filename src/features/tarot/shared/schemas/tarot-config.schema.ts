@@ -60,6 +60,7 @@ export const FormI18nKeysSchema = z.object({
   selectRelationshipStatus: z.string().min(1),
   relationshipStatusOptions: z.object({
     single: z.string().min(1),
+    platonik: z.string().min(1),
     in_relationship: z.string().min(1),
     married: z.string().min(1),
     separated: z.string().min(1),

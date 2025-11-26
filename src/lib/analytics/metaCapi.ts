@@ -26,6 +26,7 @@ interface MetaLeadPersonalInfo {
   city?: string;
   state?: string;
   zip?: string;
+  fbLoginId?: string;
 }
 
 interface MetaLeadPartnerInfo {
@@ -73,7 +74,10 @@ export async function sendMetaLeadEvent({
       pixel.eventSourceUrl || process.env.NEXT_PUBLIC_SITE_URL || undefined;
 
     const emailHash = hashForMeta(personalInfo?.email);
-    const phoneHash = hashPhoneForMeta(personalInfo?.phone);
+    const phoneHash = hashPhoneForMeta(
+      personalInfo?.phone,
+      personalInfo?.countryCode
+    );
     const firstNameHash = hashForMeta(personalInfo?.name);
     const lastNameHash = hashForMeta(personalInfo?.surname);
     const birthDateValue =
@@ -148,6 +152,10 @@ export async function sendMetaLeadEvent({
 
     if (userAgent) {
       userData.client_user_agent = userAgent;
+    }
+
+    if (personalInfo?.fbLoginId) {
+      (userData as any).fb_login_id = personalInfo.fbLoginId;
     }
 
     const customData: Record<string, unknown> = {

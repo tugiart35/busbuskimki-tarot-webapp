@@ -31,9 +31,9 @@ export function getSpreadQuestionMap(
     };
   } else if (type.includes('money') || type.includes('para')) {
     return {
-      concern: 'Para konusunda sizi en çok endişelendiren durum nedir?',
-      emotional: 'Mali durumunuz hakkında nasıl hissediyorsunuz?',
-      understanding: 'Bu para açılımı ile neyi anlamak istiyorsunuz?',
+      concern: 'Şu anda para konusunda sizi en çok zorlayan ya da kaygılandıran durum nedir?',
+      emotional: 'Mali durumunuzu düşündüğünüzde kendinizi nasıl hissediyorsunuz? Para şu an sizin için hangi duyguyu temsil ediyor? (güvende / huzursuz / yetersiz / özgür vb.)',
+      understanding: 'Bu para açılımının, para ve gelecek planlarınızla ilgili hangi konuda size daha fazla netlik ve yön göstermesini istiyorsunuz?',
     };
   } else if (type.includes('career') || type.includes('kariyer')) {
     return {
@@ -47,9 +47,9 @@ export function getSpreadQuestionMap(
     type.includes('problem')
   ) {
     return {
-      concern: 'Hangi problemi çözmek istiyorsunuz?',
-      emotional: 'Bu problem hakkında nasıl hissediyorsunuz?',
-      understanding: 'Bu Kelt  açılımı ile neyi anlamak istiyorsunuz?',
+      concern: 'Bu Kelt açılımı için niyet ettiğiniz ana konu veya soru nedir? (ilişki, kariyer, para, aile, kişisel gelişim vb. kısaca yazabilirsiniz.)',
+      emotional: 'Bu konuyu düşündüğünüzde kendinizi nasıl hissediyorsunuz? Bu durum şu anda sizde en çok hangi duyguyu tetikliyor? (ör. kaygılı, umutlu, kararsız, yorgun, heyecanlı vb.)',
+      understanding: 'Bu Kelt açılımının size özellikle hangi konuda daha fazla netlik ve yön göstermesini istiyorsunuz? (geçmişte neyi anlamak, şu an neyi görmek, gelecekte hangi kararı netleştirmek vb.)',
     };
   } else if (type.includes('situation-analysis') || type.includes('durum')) {
     return {
@@ -60,9 +60,9 @@ export function getSpreadQuestionMap(
     };
   } else if (type.includes('marriage') || type.includes('evlilik')) {
     return {
-      concern: 'Evlilik konusunda sizi en çok endişelendiren konu nedir?',
-      emotional: 'Evlilik hakkında nasıl hissediyorsunuz?',
-      understanding: 'Bu evlilik açılımı ile neyi anlamak istiyorsunuz?',
+      concern: 'Evlilikle ilgili şu anda sizi en çok endişelendiren ya da kafanızı kurcalayan konu nedir? (örn. yalnız kalma korkusu, yanlış kişiyle evlenme, maddi konular, aile onayı vb.)',
+      emotional: 'Evlilik fikrini düşündüğünüzde kendinizi nasıl hissediyorsunuz? Bu konu sizde en çok hangi duyguları tetikliyor? (özlem, korku, umut, kararsızlık vb.)',
+      understanding: 'Bu evlilik potansiyeli açılımının size özellikle hangi alanlarda daha fazla netlik vermesini istiyorsunuz? (doğru eşi bulma, uyum, ailelerin yaklaşımı, maddi paylaşım, zamanlama vb.)',
     };
   } else if (
     type.includes('relationship-analysis') ||

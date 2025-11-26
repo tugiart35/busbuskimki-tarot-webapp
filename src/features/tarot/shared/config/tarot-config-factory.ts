@@ -480,6 +480,7 @@ const createFormI18nKeys = (spreadId: string): FormI18nKeys => ({
   selectRelationshipStatus: `${spreadId}.form.selectRelationshipStatus`,
   relationshipStatusOptions: {
     single: `${spreadId}.form.relationshipStatusOptions.single`,
+    platonik: `${spreadId}.form.relationshipStatusOptions.platonik`,
     in_relationship: `${spreadId}.form.relationshipStatusOptions.in_relationship`,
     married: `${spreadId}.form.relationshipStatusOptions.married`,
     separated: `${spreadId}.form.relationshipStatusOptions.separated`,

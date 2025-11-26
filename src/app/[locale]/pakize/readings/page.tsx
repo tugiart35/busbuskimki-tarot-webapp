@@ -2379,17 +2379,17 @@ export default function ReadingsPage() {
                                           ) {
                                             return {
                                               concern:
-                                                'Para konusunda sizi en çok endişelendiren durum nedir?',
+                                                'Şu anda para konusunda sizi en çok zorlayan ya da kaygılandıran durum nedir?',
                                               emotional:
-                                                'Mali durumunuz hakkında nasıl hissediyorsunuz?',
+                                                'Mali durumunuzu düşündüğünüzde kendinizi nasıl hissediyorsunuz? Para şu an sizin için hangi duyguyu temsil ediyor? (güvende / huzursuz / yetersiz / özgür vb.)',
                                               understanding:
-                                                'Bu para açılımı ile neyi anlamak istiyorsunuz?',
+                                                'Bu para açılımının, para ve gelecek planlarınızla ilgili hangi konuda size daha fazla netlik ve yön göstermesini istiyorsunuz?',
                                               question1:
-                                                'Para konusunda sizi en çok endişelendiren durum nedir?',
+                                                'Şu anda para konusunda sizi en çok zorlayan ya da kaygılandıran durum nedir?',
                                               question2:
-                                                'Bu para açılımı ile neyi anlamak istiyorsunuz?',
+                                                'Bu para açılımının, para ve gelecek planlarınızla ilgili hangi konuda size daha fazla netlik ve yön göstermesini istiyorsunuz?',
                                               question3:
-                                                'Mali durumunuz hakkında nasıl hissediyorsunuz?',
+                                                'Mali durumunuzu düşündüğünüzde kendinizi nasıl hissediyorsunuz? Para şu an sizin için hangi duyguyu temsil ediyor? (güvende / huzursuz / yetersiz / özgür vb.)',
                                             };
                                           } else if (
                                             type.includes('career') ||
@@ -2649,17 +2649,17 @@ export default function ReadingsPage() {
                                         ) {
                                           return {
                                             concern:
-                                              'Para konusunda sizi en çok endişelendiren durum nedir?',
+                                              'Şu anda para konusunda sizi en çok zorlayan ya da kaygılandıran durum nedir?',
                                             emotional:
-                                              'Mali durumunuz hakkında nasıl hissediyorsunuz?',
+                                              'Mali durumunuzu düşündüğünüzde kendinizi nasıl hissediyorsunuz? Para şu an sizin için hangi duyguyu temsil ediyor? (güvende / huzursuz / yetersiz / özgür vb.)',
                                             understanding:
-                                              'Bu para açılımı ile neyi anlamak istiyorsunuz?',
+                                              'Bu para açılımının, para ve gelecek planlarınızla ilgili hangi konuda size daha fazla netlik ve yön göstermesini istiyorsunuz?',
                                             question1:
-                                              'Para konusunda sizi en çok endişelendiren durum nedir?',
+                                              'Şu anda para konusunda sizi en çok zorlayan ya da kaygılandıran durum nedir?',
                                             question2:
-                                              'Bu para açılımı ile neyi anlamak istiyorsunuz?',
+                                              'Bu para açılımının, para ve gelecek planlarınızla ilgili hangi konuda size daha fazla netlik ve yön göstermesini istiyorsunuz?',
                                             question3:
-                                              'Mali durumunuz hakkında nasıl hissediyorsunuz?',
+                                              'Mali durumunuzu düşündüğünüzde kendinizi nasıl hissediyorsunuz? Para şu an sizin için hangi duyguyu temsil ediyor? (güvende / huzursuz / yetersiz / özgür vb.)',
                                           };
                                         } else if (
                                           type.includes('career') ||
@@ -2913,17 +2913,17 @@ export default function ReadingsPage() {
                                         ) {
                                           return {
                                             concern:
-                                              'Para konusunda sizi en çok endişelendiren durum nedir?',
+                                              'Şu anda para konusunda sizi en çok zorlayan ya da kaygılandıran durum nedir?',
                                             emotional:
-                                              'Mali durumunuz hakkında nasıl hissediyorsunuz?',
+                                              'Mali durumunuzu düşündüğünüzde kendinizi nasıl hissediyorsunuz? Para şu an sizin için hangi duyguyu temsil ediyor? (güvende / huzursuz / yetersiz / özgür vb.)',
                                             understanding:
-                                              'Bu para açılımı ile neyi anlamak istiyorsunuz?',
+                                              'Bu para açılımının, para ve gelecek planlarınızla ilgili hangi konuda size daha fazla netlik ve yön göstermesini istiyorsunuz?',
                                             question1:
-                                              'Para konusunda sizi en çok endişelendiren durum nedir?',
+                                              'Şu anda para konusunda sizi en çok zorlayan ya da kaygılandıran durum nedir?',
                                             question2:
-                                              'Bu para açılımı ile neyi anlamak istiyorsunuz?',
+                                              'Bu para açılımının, para ve gelecek planlarınızla ilgili hangi konuda size daha fazla netlik ve yön göstermesini istiyorsunuz?',
                                             question3:
-                                              'Mali durumunuz hakkında nasıl hissediyorsunuz?',
+                                              'Mali durumunuzu düşündüğünüzde kendinizi nasıl hissediyorsunuz? Para şu an sizin için hangi duyguyu temsil ediyor? (güvende / huzursuz / yetersiz / özgür vb.)',
                                           };
                                         } else if (
                                           type.includes('career') ||

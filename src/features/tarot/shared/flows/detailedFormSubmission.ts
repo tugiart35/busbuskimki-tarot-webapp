@@ -8,6 +8,7 @@ import {
   generateMetaEventId,
   trackMetaLeadEvent,
 } from '@/lib/analytics/metaPixel';
+import { getOrCreateExternalId } from '@/lib/analytics/externalId';
 import { getConsentState } from '@/lib/consent/store';
 import type { ConsentPreferences } from '@/lib/consent/types';
 import { READING_TYPES } from '@/types/tarot';
@@ -120,13 +121,31 @@ export function createDetailedFormSubmission({
   selectedReadingType,
   metaLeadRef,
 }: DetailedFormSubmissionDeps): DetailedFormSubmissionHandlers {
-  const buildMetaLeadContext = (): MetaLeadContext | null => {
+  const buildMetaLeadContext = async (): Promise<MetaLeadContext | null> => {
     if (typeof window === 'undefined') {
       return null;
     }
 
     const ensuredFbc = ensureMetaClickId();
-    const { fbp, fbc } = getMetaCookieValues();
+
+    // Try to get fbp cookie with retry logic
+    let fbp = getMetaCookieValues().fbp;
+
+    // If fbp is missing, wait briefly and retry (Meta Pixel may still be initializing)
+    if (!fbp) {
+      await new Promise(resolve => setTimeout(resolve, 200));
+      fbp = getMetaCookieValues().fbp;
+    }
+
+    // If still missing, generate a fallback fbp cookie
+    if (!fbp) {
+      fbp = `fb.1.${Date.now()}.${Math.random().toString(36).substring(2, 15)}`;
+      // Set cookie for future use (90 days like Meta's default)
+      const maxAgeSeconds = 60 * 60 * 24 * 90;
+      document.cookie = `_fbp=${fbp}; path=/; max-age=${maxAgeSeconds}; SameSite=Lax`;
+    }
+
+    const { fbc } = getMetaCookieValues();
 
     return {
       eventId: generateMetaEventId(),
@@ -141,14 +160,14 @@ export function createDetailedFormSubmission({
     if (!validateDetailedForm()) {
       return;
     }
-    
+
     // Token okumasında kredi onay modalı gösterme, direkt kaydet
     // Çünkü token okumasında kredi düşmüyoruz
     if (sessionToken) {
       saveDetailedForm();
       return;
     }
-    
+
     // Normal akışta kredi onay modalını göster
     setModalStates(prev => ({ ...prev, showCreditConfirm: true }));
   };
@@ -179,7 +198,7 @@ export function createDetailedFormSubmission({
       setModalStates(prev => ({ ...prev, showCreditConfirm: false }));
 
       if (!metaLeadRef.current) {
-        metaLeadRef.current = buildMetaLeadContext();
+        metaLeadRef.current = await buildMetaLeadContext();
       }
 
       if (metaLeadRef.current) {
@@ -234,9 +253,26 @@ export function createDetailedFormSubmission({
       (config.isSingleCard && hasPartner) ||
       (partnerInfoSpreads.includes(config.spreadId) && hasPartner);
 
-    const personalInfoPayload = userId
-      ? { ...personalInfo, externalId: userId }
-      : personalInfo;
+    // Fetch user metadata to get fb_login_id if available
+    let fbLoginId: string | undefined;
+    if (userId) {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user?.app_metadata?.provider === 'facebook' && user?.identities) {
+        const fbIdentity = user.identities.find((id: { provider: string; id: string }) => id.provider === 'facebook');
+        if (fbIdentity?.id) {
+          fbLoginId = fbIdentity.id;
+        }
+      }
+    }
+
+    // Get or create persistent external ID for all users (authenticated and guest)
+    const externalId = getOrCreateExternalId(userId);
+
+    const personalInfoPayload = {
+      ...personalInfo,
+      externalId,
+      fbLoginId,
+    };
 
     try {
       const response = await fetch('/api/meta/lead', {
@@ -276,8 +312,8 @@ export function createDetailedFormSubmission({
           const formPayload = {
             personalInfo,
             ...(config.requiresPartnerInfo ||
-            (config.isSingleCard && hasPartner) ||
-            (partnerInfoSpreads.includes(config.spreadId) && hasPartner)
+              (config.isSingleCard && hasPartner) ||
+              (partnerInfoSpreads.includes(config.spreadId) && hasPartner)
               ? { partnerInfo }
               : {}),
             communicationMethod,
@@ -309,14 +345,14 @@ export function createDetailedFormSubmission({
                 consent: buildConsentSnapshot(),
                 metaPixel: metaLeadRef.current
                   ? {
-                      eventId: metaLeadRef.current.eventId,
-                      eventTime: metaLeadRef.current.eventTime,
-                      fbp: metaLeadRef.current.fbp,
-                      fbc: metaLeadRef.current.fbc,
-                      eventSourceUrl: metaLeadRef.current.eventSourceUrl,
-                      contentName: metaLeadRef.current.contentName,
-                      customData: metaLeadRef.current.customData,
-                    }
+                    eventId: metaLeadRef.current.eventId,
+                    eventTime: metaLeadRef.current.eventTime,
+                    fbp: metaLeadRef.current.fbp,
+                    fbc: metaLeadRef.current.fbc,
+                    eventSourceUrl: metaLeadRef.current.eventSourceUrl,
+                    contentName: metaLeadRef.current.contentName,
+                    customData: metaLeadRef.current.customData,
+                  }
                   : undefined,
               }),
             }
@@ -412,8 +448,8 @@ export function createDetailedFormSubmission({
               const formPayload = {
                 personalInfo,
                 ...(config.requiresPartnerInfo ||
-                (config.isSingleCard && hasPartner) ||
-                (partnerInfoSpreads.includes(config.spreadId) && hasPartner)
+                  (config.isSingleCard && hasPartner) ||
+                  (partnerInfoSpreads.includes(config.spreadId) && hasPartner)
                   ? { partnerInfo }
                   : {}),
                 communicationMethod,
@@ -485,10 +521,10 @@ export function createDetailedFormSubmission({
 
 function buildConsentSnapshot():
   | {
-      consentId: string;
-      version?: number;
-      preferences: ConsentPreferences;
-    }
+    consentId: string;
+    version?: number;
+    preferences: ConsentPreferences;
+  }
   | undefined {
   if (typeof window === 'undefined') {
     return undefined;

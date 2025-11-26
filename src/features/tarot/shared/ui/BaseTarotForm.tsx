@@ -235,7 +235,9 @@ export default function BaseTarotForm({
               {config.icon}
             </span>
           </div>
-          <h2 className={`${themeClasses.titleText} text-base sm:text-lg font-semibold`}>
+          <h2
+            className={`${themeClasses.titleText} text-base sm:text-lg font-semibold`}
+          >
             {translate(formKeys.personalInfo)}
           </h2>
         </div>
@@ -360,6 +362,9 @@ export default function BaseTarotForm({
               </option>
               <option value='single'>
                 {translate(formKeys.relationshipStatusOptions.single)}
+              </option>
+              <option value='platonik'>
+                {translate(formKeys.relationshipStatusOptions.platonik)}
               </option>
               <option value='in_relationship'>
                 {translate(formKeys.relationshipStatusOptions.in_relationship)}

@@ -28,6 +28,7 @@ interface LeadRequestBody {
     city?: string;
     state?: string;
     zip?: string;
+    fbLoginId?: string;
   } | null;
   partnerInfo?: {
     name?: string;

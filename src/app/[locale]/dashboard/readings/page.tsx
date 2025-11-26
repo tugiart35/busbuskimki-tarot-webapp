@@ -216,10 +216,7 @@ export default function ReadingsPage({ params }: ReadingsPageProps) {
                     'Enerji Haritası Açılımı'
                   );
                 case 'problem-solving':
-                  return t(
-                    'readings.problemSolvingReading',
-                    'Kelt  Açılımı'
-                  );
+                  return t('readings.problemSolvingReading', 'Kelt  Açılımı');
                 default:
                   return (
                     reading.title || t('readings.mysticReading', 'Tarot Okuma')
@@ -268,10 +265,7 @@ export default function ReadingsPage({ params }: ReadingsPageProps) {
                 case 'numerology':
                   return t('readings.numerologyAnalysis', 'Numeroloji Analizi');
                 case 'problem-solving':
-                  return t(
-                    'readings.problemSolvingSpread',
-                    'Kelt  Yayılımı'
-                  );
+                  return t('readings.problemSolvingSpread', 'Kelt  Yayılımı');
                 case 'situation-analysis':
                   return t(
                     'readings.situationAnalysisSpread',
