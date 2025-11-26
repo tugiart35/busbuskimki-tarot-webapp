@@ -51,6 +51,18 @@ const FacebookPixel = dynamic(() =>
   )
 );
 
+const GoogleTagManager = dynamic(() =>
+  import('@/components/analytics/GoogleTagManager').then(
+    mod => mod.GoogleTagManager
+  )
+);
+
+const GoogleTagManagerNoscript = dynamic(() =>
+  import('@/components/analytics/GoogleTagManager').then(
+    mod => mod.GoogleTagManagerNoscript
+  )
+);
+
 // Optimize font loading with display swap and preload
 const inter = Inter({
   subsets: ['latin', 'latin-ext'], // Turkish characters support
@@ -128,6 +140,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         style={{ backgroundColor: APP_CONFIG.theme.backgroundColor }}
       >
         <CMPProvider initialLocale={defaultLocale}>
+          <GoogleTagManager />
+          <GoogleTagManagerNoscript />
           <GoogleAnalytics />
           <FacebookPixel />
           <WebVitals />

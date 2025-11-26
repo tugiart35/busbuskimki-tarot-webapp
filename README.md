@@ -547,3 +547,4 @@ Bu proje özel mülkiyettedir. Tüm hakları saklıdır.
 
 **TaraTarot** © 2024-2025
 
+
