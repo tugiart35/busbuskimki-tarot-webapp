@@ -395,7 +395,11 @@ export function calculatePinnaclesChallenges(
 }
 /**
  * Kişisel döngüler hesaplar
- * Yıllık, aylık, günlük enerji takvimi
+ * Yöntem:
+ * - personalYearRaw = birthMonth + birthDay + sumYearDigits(targetYear)
+ * - personalYear = reduceToSingleDigit(personalYearRaw)
+ * - personalMonth = reduceToSingleDigit(personalYear + targetMonth)
+ * - personalDay = reduceToSingleDigit(personalMonth + targetDay)
  */
 export function calculatePersonalCycles(
   birthDate: string,
@@ -405,26 +409,35 @@ export function calculatePersonalCycles(
   const normalizedLocale = locale?.toLowerCase?.().split('-')[0] ?? 'tr';
 
   const { month: birthMonth, day: birthDay } = extractDateParts(birthDate);
-  const { month: targetMonth, day: targetDay } = extractDateParts(targetDate);
+  const {
+    month: targetMonth,
+    day: targetDay,
+    year: targetYear,
+  } = extractDateParts(targetDate);
 
-  // Kişisel yıl
-  const personalYear = reduceToSingleDigit(
-    birthMonth + birthDay + sumDateDigits(targetDate)
-  );
+  // Hedef yılın rakamlarını toplayalım: 2025 -> 2+0+2+5 = 9
+  const sumYearDigits = (y: string | number) =>
+    String(y)
+      .replace(/\D/g, '')
+      .split('')
+      .reduce((s, ch) => s + Number(ch), 0);
 
-  // Kişisel ay
+  // İndirgeme fonksiyonu: master sayıları korumak istiyorsan burada değiştirebilirsin.
+  // Örnek: reduceToSingleDigit(38) => 11 (eğer master sayılara izin veriyorsan)
+  // veya reduceToSingleDigit(38) => 2 (tam tek basamak indirgeme isteniyorsa)
+  // Burada varsayılan: master sayılar (11,22) korunmazsa tek basamak verir.
+  // Senin mevcut helper'ına göre davranış farklıysa master kontrolünü aşağıda raw ile yapıyoruz.
+  const personalYearRaw = birthMonth + birthDay + sumYearDigits(targetYear);
+  const personalYear = reduceToSingleDigit(personalYearRaw);
+
   const personalMonth = reduceToSingleDigit(personalYear + targetMonth);
-
-  // Kişisel gün
   const personalDay = reduceToSingleDigit(personalMonth + targetDay);
 
-  // Kişisel yıl açıklamasını al
   const personalYearMeaning = getPersonalYearNumberMeaning(
     personalYear,
-    locale
+    normalizedLocale
   );
 
-  // Ana açıklama
   let description = 'Yıllık, aylık ve günlük enerji takviminizi gösterir.';
   const fallbackDescriptions: Record<string, string> = {
     en: 'Shows your annual, monthly, and daily energy calendar.',
@@ -432,7 +445,6 @@ export function calculatePersonalCycles(
   };
   description = fallbackDescriptions[normalizedLocale] || description;
 
-  // Kişisel yıl açıklaması varsa ekle
   if (personalYearMeaning) {
     const yearTitleMap: Record<string, string> = {
       tr: `**Kişisel Yıl ${personalYear}:**`,
@@ -443,9 +455,14 @@ export function calculatePersonalCycles(
     description += `\n\n${yearTitle}\n${personalYearMeaning}`;
   }
 
+  // Master sayı kontrolü: hem raw toplamı hem indirgenmiş sonucu kontrol et
+  const isMasterNumber =
+    MASTER_NUMBERS.includes(personalYearRaw as any) ||
+    MASTER_NUMBERS.includes(personalYear as any);
+
   return {
     number: personalYear,
-    isMasterNumber: MASTER_NUMBERS.includes(personalYear as any),
+    isMasterNumber,
     description,
     type: 'personal-cycles',
     personalYear,

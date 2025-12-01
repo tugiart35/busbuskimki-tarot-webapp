@@ -74,7 +74,8 @@
     "convert:cups": "node scripts/convert-cups-to-webp.js",
     "convert:pentacles": "node scripts/convert-pentacles-to-webp.js",
     "convert:swords": "node scripts/convert-swords-to-webp.js",
-    "convert:wands": "node scripts/convert-wands-to-webp.js"
+    "convert:wands": "node scripts/convert-wands-to-webp.js",
+    "convert:aklindaki-kisi": "node scripts/convert-aklindaki-kisi-to-webp.js"
   },
   "dependencies": {
     "@fingerprintjs/fingerprintjs": "^5.0.1",

@@ -47,12 +47,12 @@ Yapılan değişiklikler:
 
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { CreditStatus } from '@/lib/constants/reading-credits';
 import { useTranslations } from '@/hooks/useTranslations';
 import { useAuth } from '@/hooks/auth/useAuth';
 import { useReadingCredits } from '@/hooks/useReadingCredits';
-import EarnCreditModal from './EarnCreditModal';
+// EarnCreditModal artık basit okuma için kullanılmıyor (basit okuma ücretsiz)
 import { getTheme, type Theme } from '@/lib/theme/theme-config';
 // import CreditInfoModal from './CreditInfoModal'; // Archived
 
@@ -176,31 +176,7 @@ export default function BaseReadingTypeSelector({
   const detailedCredits = useReadingCredits(detailedReadingType);
   const writtenCredits = useReadingCredits(writtenReadingType);
 
-  // Simple okuma için kredi kontrolü - 1 kredi gerekiyor
-  const simpleReadingType =
-    readingType === 'PROBLEM_SOLVING_DETAILED'
-      ? 'PROBLEM_SOLVING_SIMPLE'
-      : readingType === 'CAREER_SPREAD_DETAILED'
-        ? 'CAREER_SPREAD_SIMPLE'
-        : readingType === 'SITUATION_ANALYSIS_DETAILED'
-          ? 'SITUATION_ANALYSIS_SIMPLE'
-          : readingType === 'RELATIONSHIP_ANALYSIS_DETAILED'
-            ? 'RELATIONSHIP_ANALYSIS_SIMPLE'
-            : readingType === 'RELATIONSHIP_PROBLEMS_DETAILED'
-              ? 'RELATIONSHIP_PROBLEMS_SIMPLE'
-              : readingType === 'MARRIAGE_DETAILED'
-                ? 'MARRIAGE_SIMPLE'
-                : readingType === 'NEW_LOVER_DETAILED'
-                  ? 'NEW_LOVER_SIMPLE'
-                  : readingType === 'MONEY_SPREAD' ||
-                      readingType === 'MONEY_SPREAD_DETAILED'
-                    ? 'MONEY_SPREAD_SIMPLE'
-                    : 'LOVE_SPREAD_SIMPLE';
-
-  const simpleCredits = useReadingCredits(simpleReadingType);
-
-  // Earn credit modal state
-  const [showEarnCreditModal, setShowEarnCreditModal] = useState(false);
+  // Basit okuma artık ücretsiz - kredi kontrolüne gerek yok
 
   // Modal state'leri
   // const [showCreditInfoModal, setShowCreditInfoModal] = useState(false); // Archived with CreditInfoModal
@@ -250,21 +226,18 @@ export default function BaseReadingTypeSelector({
       event.stopPropagation();
     }
 
-    // Kullanıcı giriş yapmamışsa butonları devre dışı bırak
-    if (!isAuthenticated) {
-      return;
-    }
-
     if (type === readingTypes.SIMPLE) {
-      // Basit okuma için kredi kontrolü
-      if (!simpleCredits.creditStatus.hasEnoughCredits) {
-        // Kredi yetersiz - kredi kazanma modalını aç
-        setShowEarnCreditModal(true);
+      // Basit okuma ücretsiz - authentication veya kredi kontrolü yok
+      // Direkt okuma türünü seç ve akışa devam et
+      onTypeSelect(type);
+    } else if (
+      type === readingTypes.DETAILED ||
+      type === readingTypes.WRITTEN
+    ) {
+      // Detaylı ve yazılı okumalar için authentication kontrolü
+      if (!isAuthenticated) {
         return;
       }
-      // Kredi yeterli - okuma türünü seç ve akışa devam et
-      onTypeSelect(type);
-    } else if (type === readingTypes.DETAILED || type === readingTypes.WRITTEN) {
       // Kredi kontrolü - sesli ve yazılı okumalar için
       if (
         type === readingTypes.DETAILED &&
@@ -302,42 +275,18 @@ export default function BaseReadingTypeSelector({
       <div
         className={`flex flex-wrap justify-center gap-2 sm:gap-3 sm:space-x-0 ${currentTheme.container} border rounded-xl px-2 sm:px-4 py-2 shadow-sm`}
       >
-        {/* Basit Okuma - Sadece authenticated kullanıcılar için */}
+        {/* Basit Okuma - Ücretsiz, herkes için açık */}
         <button
           type='button'
-          onClick={e => {
-            // Kredi yetersizse modal aç, yoksa normal akışa devam et
-            if (isAuthenticated && !simpleCredits.creditStatus.hasEnoughCredits) {
-              e.preventDefault();
-              e.stopPropagation();
-              setShowEarnCreditModal(true);
-              return;
-            }
-            handleReadingTypeClick(readingTypes.SIMPLE, e);
-          }}
-          disabled={disabled || !isAuthenticated}
+          onClick={e => handleReadingTypeClick(readingTypes.SIMPLE, e)}
+          disabled={disabled}
           className={`px-2 sm:px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all duration-150 focus:outline-none focus:ring-2 ${currentTheme.simpleButton.focus} disabled:opacity-50 disabled:cursor-not-allowed
             ${
               selectedType === readingTypes.SIMPLE
                 ? currentTheme.simpleButton.selected
-                : !isAuthenticated ||
-                    !simpleCredits.creditStatus.hasEnoughCredits
-                  ? currentTheme.detailedButton.disabled
-                  : currentTheme.simpleButton.unselected
-            } ${
-              isAuthenticated && !simpleCredits.creditStatus.hasEnoughCredits
-                ? 'cursor-pointer hover:opacity-80'
-                : ''
+                : currentTheme.simpleButton.unselected
             }`}
-          title={
-            !isAuthenticated
-              ? t('reading.messages.loginRequired')
-              : !simpleCredits.creditStatus.hasEnoughCredits
-                ? t('reading.messages.insufficientCreditsDetail', {
-                    count: simpleCredits.creditStatus.requiredCredits,
-                  })
-                : `${defaultSimpleText} - ${t('reading.messages.simpleDescription', 'Basit okuma')} (${simpleCredits.creditStatus.requiredCredits} ${t('reading.messages.creditsRequired')})`
-          }
+          title={`${defaultSimpleText} - ${t('reading.messages.simpleDescription', 'Basit okuma')} (Ücretsiz)`}
         >
           <span className='flex items-center space-x-1'>
             {disabled && selectedType === readingTypes.SIMPLE ? (
@@ -347,11 +296,9 @@ export default function BaseReadingTypeSelector({
             )}
             <span className='hidden sm:inline'>{defaultSimpleText}</span>
             <span className='sm:hidden'>{t('reading.types.simpleShort')}</span>
-            {isAuthenticated && (
-              <span className='text-xs opacity-75 ml-1'>
-                ({simpleCredits.creditStatus.requiredCredits})
-              </span>
-            )}
+            <span className='text-xs opacity-75 ml-1 text-green-500'>
+              (Ücretsiz)
+            </span>
           </span>
         </button>
 
@@ -469,23 +416,12 @@ export default function BaseReadingTypeSelector({
         )}
         {!isAuthenticated && (
           <span className={`text-xs ${currentTheme.messages.adminRequired}`}>
-            🔒 {t('reading.messages.loginRequired', 'Giriş yapın')}
+            🔒 {t('reading.messages.loginRequired', 'Giriş yapın')} (Detaylı ve
+            Yazılı okumalar için)
           </span>
         )}
         {isAuthenticated && (
           <div className='flex flex-col gap-1 text-xs'>
-            {!simpleCredits.creditStatus.hasEnoughCredits && (
-              <div className='flex flex-col items-center gap-2 mt-2'>
-               
-                <button
-                  type='button'
-                  onClick={() => setShowEarnCreditModal(true)}
-                  className='px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl text-sm animate-pulse'
-                >
-                  💰 Kredi Kazan
-                </button>
-              </div>
-            )}
             {!detailedCredits.creditStatus.hasEnoughCredits && (
               <span className={`${currentTheme.messages.adminRequired}`}>
                 💳{' '}
@@ -502,8 +438,7 @@ export default function BaseReadingTypeSelector({
                 })}
               </span>
             )}
-            {simpleCredits.creditStatus.hasEnoughCredits &&
-              detailedCredits.creditStatus.hasEnoughCredits &&
+            {detailedCredits.creditStatus.hasEnoughCredits &&
               writtenCredits.creditStatus.hasEnoughCredits && (
                 <span className='text-green-400'>
                   ✅ {t('reading.messages.allTypesAvailable')}
@@ -528,19 +463,7 @@ export default function BaseReadingTypeSelector({
         />
       )} */}
 
-      {/* Earn Credit Modal */}
-      {showEarnCreditModal && (
-        <EarnCreditModal
-          isOpen={showEarnCreditModal}
-          onClose={() => setShowEarnCreditModal(false)}
-          onCreditEarned={async () => {
-            // Refresh credit status
-            await simpleCredits.checkCredits();
-            setShowEarnCreditModal(false);
-          }}
-          theme={(theme === 'default' ? 'purple' : theme) as 'purple' | 'pink' | 'blue' | 'green'}
-        />
-      )}
+      {/* Earn Credit Modal - Artık sadece detaylı/yazılı okumalar için kullanılıyor */}
     </div>
   );
 }

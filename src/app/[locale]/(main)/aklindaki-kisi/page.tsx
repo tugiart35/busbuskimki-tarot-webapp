@@ -76,7 +76,7 @@ export default function AklindakiKisiPage() {
     [t]
   );
 
-  // Initialize cards (2-45, toplam 44 kart) - Token validation'dan sonra yapılacak
+  // Initialize cards (2-90, toplam 89 kart) - Token validation'dan sonra yapılacak
 
   // Reset countdown geri sayım (her saniye güncelle)
   useEffect(() => {
@@ -150,7 +150,7 @@ export default function AklindakiKisiPage() {
         }
 
         // Kartları initialize et (eğer henüz initialize edilmediyse)
-        const allCardNumbers = Array.from({ length: 44 }, (_, i) => i + 2); // 2-45
+        const allCardNumbers = Array.from({ length: 89 }, (_, i) => i + 2); // 2-90
 
         // Açılan kartları state'e yükle (database'den gelen openedCards'a göre)
         if (data.openedCards && data.openedCards.length > 0) {
@@ -484,7 +484,7 @@ export default function AklindakiKisiPage() {
           <span className='font-semibold text-[#1F2A44]'>
             {flippedCards.size}
           </span>{' '}
-          / 44
+          / 89
         </div>
 
         {/* Sağ: Kullanılan kart hakkı (Kullanılan/Toplam formatında) */}

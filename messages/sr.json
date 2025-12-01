@@ -21497,6 +21497,7 @@
         "selectRelationshipStatus": "Izaberite status veze",
         "relationshipStatusOptions": {
           "single": "Slobodan",
+          "platonik": "Platonski",
           "in_relationship": "U vezi",
           "married": "Oženjen/Udata",
           "separated": "Razdvojen",
