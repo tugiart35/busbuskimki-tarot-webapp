@@ -15,7 +15,14 @@ const intlMiddleware = createMiddleware({
 });
 
 export default async function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl;
+  const { pathname, search } = request.nextUrl;
+
+  // ✅ SEO FIX: Trailing slash redirect (canonical URL için kritik)
+  // Google'ın duplicate content algılamasını önler
+  if (pathname.endsWith('/') && pathname.length > 1) {
+    const newUrl = new URL(pathname.slice(0, -1) + search, request.url);
+    return NextResponse.redirect(newUrl, 301); // Permanent redirect
+  }
 
   // Facebook/Supabase OAuth callback ve data deletion endpoint'leri
   // locale prefix olmadan çalışmak zorunda; next-intl redirect etmesin

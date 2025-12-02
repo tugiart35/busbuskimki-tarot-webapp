@@ -25,6 +25,7 @@ Kullanım durumu:
 */
 
 import { MetadataRoute } from 'next';
+import { tarotSpreads } from '@/lib/constants/tarotSpreads'; // ✅ Import ekle
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://busbuskimki.com';
@@ -208,31 +209,36 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  // Tarot spreads (mevcut yapı korunuyor)
-  const tarotSpreads = [
-    { slug: 'love-spread', priority: 0.8 },
-    { slug: 'career-spread', priority: 0.7 },
-    { slug: 'situation-analysis', priority: 0.7 },
-    { slug: 'new-lover', priority: 0.6 },
-    { slug: 'relationship-problems', priority: 0.6 },
-  ];
+  // ✅ Otomatik spread generation - hidden olanlar hariç
+  // Source of truth: @/lib/constants/tarotSpreads
+  const visibleSpreads = tarotSpreads
+    .filter(spread => !spread.hidden)
+    .map(spread => ({
+      id: spread.id,
+      priority:
+        spread.id === 'love-spread'
+          ? 0.8
+          : spread.id === 'career-spread'
+            ? 0.7
+            : 0.6,
+    }));
 
   // Generate tarot spread pages (gerçek route'lar)
-  const spreadPages = tarotSpreads.flatMap(spread => [
+  const spreadPages = visibleSpreads.flatMap(spread => [
     {
-      url: `${baseUrl}/tr/tarotokumasi/${spread.slug}`,
+      url: `${baseUrl}/tr/tarotokumasi/${spread.id}`,
       lastModified: currentDate,
       changeFrequency: 'weekly' as const,
       priority: spread.priority,
     },
     {
-      url: `${baseUrl}/en/tarotokumasi/${spread.slug}`,
+      url: `${baseUrl}/en/tarotokumasi/${spread.id}`,
       lastModified: currentDate,
       changeFrequency: 'weekly' as const,
       priority: spread.priority,
     },
     {
-      url: `${baseUrl}/sr/tarotokumasi/${spread.slug}`,
+      url: `${baseUrl}/sr/tarotokumasi/${spread.id}`,
       lastModified: currentDate,
       changeFrequency: 'weekly' as const,
       priority: spread.priority,
@@ -249,7 +255,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       'imparator',
       'basrahip',
       'asiklar',
-      'savas-arabasi',
+      'wheel-of-fortune',
       'guc',
       'ermis',
       'kader-carki',
